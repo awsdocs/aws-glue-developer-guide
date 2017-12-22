@@ -1,0 +1,205 @@
+# GlueContext Class<a name="aws-glue-api-crawler-pyspark-extensions-glue-context"></a>
+
+Wraps the Apache SparkSQL [SQLContext](https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.SQLContext) object, and thereby provides mechanisms for interacting with the Apache Spark platform\.
+
+## Creating<a name="aws-glue-api-crawler-pyspark-extensions-glue-context-_creating"></a>
+
++ [\_\_init\_\_](#aws-glue-api-crawler-pyspark-extensions-glue-context-__init__)
+
++ [getSource](#aws-glue-api-crawler-pyspark-extensions-glue-context-get-source)
+
++ [create\_dynamic\_frame\_from\_rdd](#aws-glue-api-crawler-pyspark-extensions-glue-context-create_dynamic_frame_from_rdd)
+
++ [create\_dynamic\_frame\_from\_catalog](#aws-glue-api-crawler-pyspark-extensions-glue-context-create_dynamic_frame_from_catalog)
+
++ [create\_dynamic\_frame\_from\_options](#aws-glue-api-crawler-pyspark-extensions-glue-context-create_dynamic_frame_from_options)
+
+## \_\_init\_\_<a name="aws-glue-api-crawler-pyspark-extensions-glue-context-__init__"></a>
+
+**`__init__(sparkContext)`**
+
++ `sparkContext` – The Apache Spark context to use\.
+
+## getSource<a name="aws-glue-api-crawler-pyspark-extensions-glue-context-get-source"></a>
+
+**`getSource(connection_type, transformation_ctx = "", **options)`**
+
+Creates a `DataSource` object that can be used to read `DynamicFrames` from external sources\.
+
++ `connection_type` – The connection type to use, such as Amazon S3, Amazon Redshift, and JDBC\. Valid values include `s3`, `mysql`, `postgresql`, `redshift`, `sqlserver`, and `oracle`\.
+
++ `transformation_ctx` – The transformation context to use \(optional\)\.
+
++ `options` – A collection of optional name\-value pairs\.
+
+The following is an example of using `getSource`:
+
+```
+>>> data_source = context.getSource("file", paths=["/in/path"])
+>>> data_source.setFormat("json")
+>>> myFrame = data_source.getFrame()
+```
+
+## create\_dynamic\_frame\_from\_rdd<a name="aws-glue-api-crawler-pyspark-extensions-glue-context-create_dynamic_frame_from_rdd"></a>
+
+**`create_dynamic_frame_from_rdd(data, name, schema=None, sample_ratio=None, transformation_ctx="")`**
+
+Returns a `DynamicFrame` that is created from an Apache Spark Resilient Distributed Dataset \(RDD\)\.
+
++ `data` – The data source to use\.
+
++ `name` – The name of the data to use\.
+
++ `schema` – The schema to use \(optional\)\.
+
++ `sample_ratio` – The sample ratio to use \(optional\)\.
+
++ `transformation_ctx` – The transformation context to use \(optional\)\.
+
+## create\_dynamic\_frame\_from\_catalog<a name="aws-glue-api-crawler-pyspark-extensions-glue-context-create_dynamic_frame_from_catalog"></a>
+
+**`create_dynamic_frame_from_catalog(database, table_name, redshift_tmp_dir, transformation_ctx = "")`**
+
+Returns a `DynamicFrame` that is created using a catalog database and table name\.
+
++ `Database` – The database to read from\.
+
++ `table_name` – The name of the table to read from\.
+
++ `redshift_tmp_dir` – An Amazon Redshift temporary directory to use \(optional\)\.
+
++ `transformation_ctx` – The transformation context to use \(optional\)\.
+
+## create\_dynamic\_frame\_from\_options<a name="aws-glue-api-crawler-pyspark-extensions-glue-context-create_dynamic_frame_from_options"></a>
+
+**`create_dynamic_frame_from_options(connection_type, connection_options={}, format=None, format_options={}, transformation_ctx = "")`**
+
+Returns a `DynamicFrame` created with the specified connection and format\.
+
++ `connection_type` – The connection type, such as Amazon S3, Amazon Redshift, and JDBC\. Valid values include `s3`, `mysql`, `postgresql`, `redshift`, `sqlserver`, and `oracle`\.
+
++ `connection_options` – Connection options, such as path and database table \(optional\)\. For a `connection_type` of `s3`, an Amazon S3 path is defined\. For example, `connection_options = {"path": "s3://aws-glue-target/temp"}`\.
+
++ `format` – A format specification, such as JSON, CSV, or other format \(optional\)\. This is used for an Amazon S3 or tape connection that supports multiple formats\.
+
++ `format_options` – Format options, such as delimiter \(optional\)\.
+
++ `transformation_ctx` – The transformation context to use \(optional\)\.
+
+## Writing<a name="aws-glue-api-crawler-pyspark-extensions-glue-context-_writing"></a>
+
++ [getSink](#aws-glue-api-crawler-pyspark-extensions-glue-context-get-sink)
+
++ [write\_dynamic\_frame\_from\_options](#aws-glue-api-crawler-pyspark-extensions-glue-context-write_dynamic_frame_from_options)
+
++ [write\_from\_options](#aws-glue-api-crawler-pyspark-extensions-glue-context-write_from_options)
+
++ [write\_dynamic\_frame\_from\_catalog](#aws-glue-api-crawler-pyspark-extensions-glue-context-write_dynamic_frame_from_catalog)
+
++ [write\_dynamic\_frame\_from\_jdbc\_conf](#aws-glue-api-crawler-pyspark-extensions-glue-context-write_dynamic_frame_from_jdbc_conf)
+
++ [write\_from\_jdbc\_conf](#aws-glue-api-crawler-pyspark-extensions-glue-context-write_from_jdbc_conf)
+
+## getSink<a name="aws-glue-api-crawler-pyspark-extensions-glue-context-get-sink"></a>
+
+**`getSink(connection_type, transformation_ctx = "", **options)`**
+
+Gets a `DataSink` object that can be used to write `DynamicFrames` to external sources\.
+
++ `connection_type` – The connection type to use, such as Amazon S3, Amazon Redshift, and JDBC\. Valid values include `s3`, `mysql`, `postgresql`, `redshift`, `sqlserver`, and `oracle`\.
+
++ `transformation_ctx` – The transformation context to use \(optional\)\.
+
++ `options` – A collection of option name\-value pairs\.
+
+For example:
+
+```
+>>> data_sink = context.getSink("s3")
+>>> data_sink.setFormat("json"),
+>>> data_sink.writeFrame(myFrame)
+```
+
+## write\_dynamic\_frame\_from\_options<a name="aws-glue-api-crawler-pyspark-extensions-glue-context-write_dynamic_frame_from_options"></a>
+
+**`write_dynamic_frame_from_options(frame, connection_type, connection_options={}, format=None, format_options={}, transformation_ctx = "")`**
+
+Writes and returns a `DynamicFrame` using the specified connection and format\.
+
++ `frame` – The `DynamicFrame` to write\.
+
++ `connection_type` – The connection type, such as Amazon S3, Amazon Redshift, and JDBC\. Valid values include `s3`, `mysql`, `postgresql`, `redshift`, `sqlserver`, and `oracle`\.
+
++ `connection_options` – Connection options, such as path and database table \(optional\)\. For a `connection_type` of `s3`, an Amazon S3 path is defined\. For example, `connection_options = {"path": "s3://aws-glue-target/temp"}`\. 
+
++ `format` – A format specification such as JSON, CSV, or other format \(optional\)\. This is used for an Amazon S3 or tape connection that supports multiple formats\.
+
++ `format_options` – Format options, such as delimiter \(optional\)\.
+
++ `transformation_ctx` – A transformation context to use \(optional\)\.
+
+## write\_from\_options<a name="aws-glue-api-crawler-pyspark-extensions-glue-context-write_from_options"></a>
+
+**`write_from_options(frame_or_dfc, connection_type, connection_options={}, format={}, format_options={}, transformation_ctx = "")`**
+
+Writes and returns a `DynamicFrame` or `DynamicFrameCollection` that is created with the specified connection and format information\.
+
++ `frame_or_dfc` – The `DynamicFrame` or `DynamicFrameCollection` to write\.
+
++ `connection_type` – The connection type, such as Amazon S3, Amazon Redshift, and JDBC\. Valid values include `s3`, `mysql`, `postgresql`, `redshift`, `sqlserver`, and `oracle`\.
+
++ `connection_options` – Connection options, such as path and database table \(optional\)\. For a `connection_type` of `s3`, an Amazon S3 path is defined\. For example, `connection_options = {"path": "s3://aws-glue-target/temp"}`\. 
+
++ `format` – A format specification, such as JSON, CSV, or other format \(optional\)\. This is used for an Amazon S3 or tape connection that supports multiple formats\.
+
++ `format_options` – Format options, such as delimiter \(optional\)\.
+
++ `transformation_ctx` – A transformation context to use \(optional\)\.
+
+## write\_dynamic\_frame\_from\_catalog<a name="aws-glue-api-crawler-pyspark-extensions-glue-context-write_dynamic_frame_from_catalog"></a>
+
+**`write_dynamic_frame_from_catalog(frame, database, table_name, redshift_tmp_dir, transformation_ctx = "")`**
+
+Writes and returns a `DynamicFrame` using a catalog database and a table name\.
+
++ `frame` – The `DynamicFrame` to write\.
+
++ `Database` – The database to read from\.
+
++ `table_name` – The name of the table to read from\.
+
++ `redshift_tmp_dir` – An Amazon Redshift temporary directory to use \(optional\)\.
+
++ `transformation_ctx` – The transformation context to use \(optional\)\.
+
+## write\_dynamic\_frame\_from\_jdbc\_conf<a name="aws-glue-api-crawler-pyspark-extensions-glue-context-write_dynamic_frame_from_jdbc_conf"></a>
+
+**`write_dynamic_frame_from_jdbc_conf(frame, catalog_connection, connection_options={}, redshift_tmp_dir = "", transformation_ctx = "")`**
+
+Writes and returns a `DynamicFrame` using the specified JDBC connection information\.
+
++ `frame` – The `DynamicFrame` to write\.
+
++ `catalog_connection` – A catalog connection to use\.
+
++ `connection_options` – Connection options, such as path and database table \(optional\)\.
+
++ `redshift_tmp_dir` – An Amazon Redshift temporary directory to use \(optional\)\.
+
++ `transformation_ctx` – A transformation context to use \(optional\)\.
+
+## write\_from\_jdbc\_conf<a name="aws-glue-api-crawler-pyspark-extensions-glue-context-write_from_jdbc_conf"></a>
+
+**`write_from_jdbc_conf(frame_or_dfc, catalog_connection, connection_options={}, redshift_tmp_dir = "", transformation_ctx = "")`**
+
+Writes and returns a `DynamicFrame` or `DynamicFrameCollection` using the specified JDBC connection information\.
+
++ `frame_or_dfc` – The `DynamicFrame` or `DynamicFrameCollection` to write\.
+
++ `catalog_connection` – A catalog connection to use\.
+
++ `connection_options` – Connection options, such as path and database table \(optional\)\.
+
++ `redshift_tmp_dir` – An Amazon Redshift temporary directory to use \(optional\)\.
+
++ `transformation_ctx` – A transformation context to use \(optional\)\.

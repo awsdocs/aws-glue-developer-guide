@@ -1,0 +1,213 @@
+# Writing Custom Classifiers<a name="custom-classifier"></a>
+
+You can provide a custom classifier to classify your data using a grok pattern or an XML tag in AWS Glue\. A crawler calls a custom classifier\. If the classifier recognizes the data, it returns the classification and schema of the data to the crawler\. You might need to define a custom classifier if your data doesn't match any built\-in classifiers, or if you want to customize the tables that are created by the crawler\.
+
+ For more information about creating a classifier using the AWS Glue console, see [Working with Classifiers on the AWS Glue Console](console-classifiers.md)\. 
+
+AWS Glue runs custom classifiers before built\-in classifiers, in the order you specify\. When a crawler finds a classifier that matches the data, the classification string and schema are used in the definition of tables that are written to your AWS Glue Data Catalog\.
+
+## Writing Grok Custom Classifiers<a name="custom-classifier-grok"></a>
+
+Grok is a tool that is used to parse textual data given a matching pattern\. A grok pattern is a named set of regular expressions \(regex\) that are used to match data one line at a time\. AWS Glue uses grok patterns to infer the schema of your data\. When a grok pattern matches your data, AWS Glue uses the pattern to determine the structure of your data and map it into fields\.
+
+AWS Glue provides many built\-in patterns, or you can define your own\. You can create a grok pattern using built\-in patterns and custom patterns in your custom classifier definition\. You can tailor a grok pattern to classify custom text file formats\.
+
+The following is the basic syntax for the components of a grok pattern:
+
+```
+%{PATTERN:field-name}
+```
+
+Data that matches the named `PATTERN` is mapped to the `field-name` column in the schema, with a default data type of `string`\. Optionally, the data type for the field can be cast to `byte, boolean, double, short, int, long, or float` in the resulting schema\.
+
+```
+%{PATTERN:field-name:data-type}
+```
+
+For example, to cast a `num` field to an `int` data type, you can use this pattern: 
+
+```
+%{NUMBER:num:int}
+```
+
+Patterns can be composed of other patterns\. For example, you can have a pattern for a `SYSLOG` time stamp that is defined by patterns for month, day of the month, and time\.
+
+```
+SYSLOGTIMESTAMP %{MONTH}+%{MONTHDAY}%{TIME}
+```
+
+**Note**  
+Grok patterns can process only one line at a time\. Multiple\-line patterns are not supported\. Also, line breaks within a pattern are not supported\.
+
+### Custom Classifier Values in AWS Glue<a name="classifier-values"></a>
+
+When you define a grok classifier, you supply the following values to AWS Glue to create the custom classifier\.
+
+**Name**  
+Name of the classifier\.
+
+**Classification**  
+The text string that is written to describe the format of the data that is classified; for example, `special-logs`\.
+
+**Grok pattern**  
+The set of patterns that are applied to the data store to determine whether there is a match\. These patterns are from AWS Glue built\-in patterns and any custom patterns you define\.  
+The following is an example of a grok pattern:  
+
+```
+%{TIMESTAMP_ISO8601:timestamp} \[%{MESSAGEPREFIX:message_prefix}\] %{CRAWLERLOGLEVEL:loglevel} : %{GREEDYDATA:message}
+```
+When the data matches `TIMESTAMP_ISO8601`, a schema column `timestamp` is created\. The behavior is similar for the other named patterns in the example\.
+
+**Custom patterns**  
+Optional custom patterns that you define\. These patterns are referenced by the grok pattern that classifies your data\. You can reference these custom patterns in the grok pattern that is applied to your data\. Each custom component pattern must be on a separate line\.  [Regular expression \(regex\)](http://en.wikipedia.org/wiki/Regular_expression) syntax is used to define the pattern\.   
+The following is an example of using custom patterns:  
+
+```
+CRAWLERLOGLEVEL (BENCHMARK|ERROR|WARN|INFO|TRACE)
+MESSAGEPREFIX .*-.*-.*-.*-.*
+```
+The first custom named pattern, `CRAWLERLOGLEVEL`, is a match when the data matches one of the enumerated strings\. The second custom pattern, `MESSAGEPREFIX`, tries to match a message prefix string\.
+
+AWS Glue keeps track of the creation time, last update time, and version of your classifier\.
+
+### AWS Glue Built\-In Patterns<a name="classifier-builtin-patterns"></a>
+
+AWS Glue provides many common patterns that you can use to build a custom classifier\. You add a named pattern to the `grok pattern` in a classifier definition\.
+
+The following list consists of a line for each pattern\. In each line, the pattern name is followed its definition\.  [Regular expression \(regex\)](http://en.wikipedia.org/wiki/Regular_expression) syntax is used in defining the pattern\.
+
+```
+#AWS Glue Built-in patterns
+ USERNAME [a-zA-Z0-9._-]+
+ USER %{USERNAME:UNWANTED}
+ INT (?:[+-]?(?:[0-9]+))
+ BASE10NUM (?<![0-9.+-])(?>[+-]?(?:(?:[0-9]+(?:\.[0-9]+)?)|(?:\.[0-9]+)))
+ NUMBER (?:%{BASE10NUM:UNWANTED})
+ BASE16NUM (?<![0-9A-Fa-f])(?:[+-]?(?:0x)?(?:[0-9A-Fa-f]+))
+ BASE16FLOAT \b(?<![0-9A-Fa-f.])(?:[+-]?(?:0x)?(?:(?:[0-9A-Fa-f]+(?:\.[0-9A-Fa-f]*)?)|(?:\.[0-9A-Fa-f]+)))\b
+ BOOLEAN (?i)(true|false)
+ 
+ POSINT \b(?:[1-9][0-9]*)\b
+ NONNEGINT \b(?:[0-9]+)\b
+ WORD \b\w+\b
+ NOTSPACE \S+
+ SPACE \s*
+ DATA .*?
+ GREEDYDATA .*
+ #QUOTEDSTRING (?:(?<!\\)(?:"(?:\\.|[^\\"])*"|(?:'(?:\\.|[^\\'])*')|(?:`(?:\\.|[^\\`])*`)))
+ QUOTEDSTRING (?>(?<!\\)(?>"(?>\\.|[^\\"]+)+"|""|(?>'(?>\\.|[^\\']+)+')|''|(?>`(?>\\.|[^\\`]+)+`)|``))
+ UUID [A-Fa-f0-9]{8}-(?:[A-Fa-f0-9]{4}-){3}[A-Fa-f0-9]{12}
+ 
+ # Networking
+ MAC (?:%{CISCOMAC:UNWANTED}|%{WINDOWSMAC:UNWANTED}|%{COMMONMAC:UNWANTED})
+ CISCOMAC (?:(?:[A-Fa-f0-9]{4}\.){2}[A-Fa-f0-9]{4})
+ WINDOWSMAC (?:(?:[A-Fa-f0-9]{2}-){5}[A-Fa-f0-9]{2})
+ COMMONMAC (?:(?:[A-Fa-f0-9]{2}:){5}[A-Fa-f0-9]{2})
+ IPV6 ((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?
+ IPV4 (?<![0-9])(?:(?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})[.](?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})[.](?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})[.](?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2}))(?![0-9])
+ IP (?:%{IPV6:UNWANTED}|%{IPV4:UNWANTED})
+ HOSTNAME \b(?:[0-9A-Za-z][0-9A-Za-z-_]{0,62})(?:\.(?:[0-9A-Za-z][0-9A-Za-z-_]{0,62}))*(\.?|\b)
+ HOST %{HOSTNAME:UNWANTED}
+ IPORHOST (?:%{HOSTNAME:UNWANTED}|%{IP:UNWANTED})
+ HOSTPORT (?:%{IPORHOST}:%{POSINT:PORT})
+ 
+ # paths
+ PATH (?:%{UNIXPATH}|%{WINPATH})
+ UNIXPATH (?>/(?>[\w_%!$@:.,~-]+|\\.)*)+
+ #UNIXPATH (?<![\w\/])(?:/[^\/\s?*]*)+
+ TTY (?:/dev/(pts|tty([pq])?)(\w+)?/?(?:[0-9]+))
+ WINPATH (?>[A-Za-z]+:|\\)(?:\\[^\\?*]*)+
+ URIPROTO [A-Za-z]+(\+[A-Za-z+]+)?
+ URIHOST %{IPORHOST}(?::%{POSINT:port})?
+ # uripath comes loosely from RFC1738, but mostly from what Firefox
+ # doesn't turn into %XX
+ URIPATH (?:/[A-Za-z0-9$.+!*'(){},~:;=@#%_\-]*)+
+ #URIPARAM \?(?:[A-Za-z0-9]+(?:=(?:[^&]*))?(?:&(?:[A-Za-z0-9]+(?:=(?:[^&]*))?)?)*)?
+ URIPARAM \?[A-Za-z0-9$.+!*'|(){},~@#%&/=:;_?\-\[\]]*
+ URIPATHPARAM %{URIPATH}(?:%{URIPARAM})?
+ URI %{URIPROTO}://(?:%{USER}(?::[^@]*)?@)?(?:%{URIHOST})?(?:%{URIPATHPARAM})?
+ 
+ # Months: January, Feb, 3, 03, 12, December
+ MONTH \b(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\b
+ MONTHNUM (?:0?[1-9]|1[0-2])
+ MONTHNUM2 (?:0[1-9]|1[0-2])
+ MONTHDAY (?:(?:0[1-9])|(?:[12][0-9])|(?:3[01])|[1-9])
+ 
+ # Days: Monday, Tue, Thu, etc...
+ DAY (?:Mon(?:day)?|Tue(?:sday)?|Wed(?:nesday)?|Thu(?:rsday)?|Fri(?:day)?|Sat(?:urday)?|Sun(?:day)?)
+ 
+ # Years?
+ YEAR (?>\d\d){1,2}
+ # Time: HH:MM:SS
+ #TIME \d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?
+ # TIME %{POSINT<24}:%{POSINT<60}(?::%{POSINT<60}(?:\.%{POSINT})?)?
+ HOUR (?:2[0123]|[01]?[0-9])
+ MINUTE (?:[0-5][0-9])
+ # '60' is a leap second in most time standards and thus is valid.
+ SECOND (?:(?:[0-5]?[0-9]|60)(?:[:.,][0-9]+)?)
+ TIME (?!<[0-9])%{HOUR}:%{MINUTE}(?::%{SECOND})(?![0-9])
+ # datestamp is YYYY/MM/DD-HH:MM:SS.UUUU (or something like it)
+ DATE_US %{MONTHNUM}[/-]%{MONTHDAY}[/-]%{YEAR}
+ DATE_EU %{MONTHDAY}[./-]%{MONTHNUM}[./-]%{YEAR}
+ DATESTAMP_US %{DATE_US}[- ]%{TIME}
+ DATESTAMP_EU %{DATE_EU}[- ]%{TIME}
+ ISO8601_TIMEZONE (?:Z|[+-]%{HOUR}(?::?%{MINUTE}))
+ ISO8601_SECOND (?:%{SECOND}|60)
+ TIMESTAMP_ISO8601 %{YEAR}-%{MONTHNUM}-%{MONTHDAY}[T ]%{HOUR}:?%{MINUTE}(?::?%{SECOND})?%{ISO8601_TIMEZONE}?
+ TZ (?:[PMCE][SD]T|UTC)
+ DATESTAMP_RFC822 %{DAY} %{MONTH} %{MONTHDAY} %{YEAR} %{TIME} %{TZ}
+ DATESTAMP_RFC2822 %{DAY}, %{MONTHDAY} %{MONTH} %{YEAR} %{TIME} %{ISO8601_TIMEZONE}
+ DATESTAMP_OTHER %{DAY} %{MONTH} %{MONTHDAY} %{TIME} %{TZ} %{YEAR}
+ DATESTAMP_EVENTLOG %{YEAR}%{MONTHNUM2}%{MONTHDAY}%{HOUR}%{MINUTE}%{SECOND}
+ CISCOTIMESTAMP %{MONTH} %{MONTHDAY} %{TIME}
+ 
+ # Syslog Dates: Month Day HH:MM:SS
+ SYSLOGTIMESTAMP %{MONTH} +%{MONTHDAY} %{TIME}
+ PROG (?:[\w._/%-]+)
+ SYSLOGPROG %{PROG:program}(?:\[%{POSINT:pid}\])?
+ SYSLOGHOST %{IPORHOST}
+ SYSLOGFACILITY <%{NONNEGINT:facility}.%{NONNEGINT:priority}>
+ HTTPDATE %{MONTHDAY}/%{MONTH}/%{YEAR}:%{TIME} %{INT}
+ 
+ # Shortcuts
+ QS %{QUOTEDSTRING:UNWANTED}
+ 
+ # Log formats
+ SYSLOGBASE %{SYSLOGTIMESTAMP:timestamp} (?:%{SYSLOGFACILITY} )?%{SYSLOGHOST:logsource} %{SYSLOGPROG}:
+ 
+ MESSAGESLOG %{SYSLOGBASE} %{DATA}
+ 
+ COMMONAPACHELOG %{IPORHOST:clientip} %{USER:ident} %{USER:auth} \[%{HTTPDATE:timestamp}\] "(?:%{WORD:verb} %{NOTSPACE:request}(?: HTTP/%{NUMBER:httpversion})?|%{DATA:rawrequest})" %{NUMBER:response} (?:%{Bytes:bytes=%{NUMBER}|-})
+ COMBINEDAPACHELOG %{COMMONAPACHELOG} %{QS:referrer} %{QS:agent}
+ COMMONAPACHELOG_DATATYPED %{IPORHOST:clientip} %{USER:ident;boolean} %{USER:auth} \[%{HTTPDATE:timestamp;date;dd/MMM/yyyy:HH:mm:ss Z}\] "(?:%{WORD:verb;string} %{NOTSPACE:request}(?: HTTP/%{NUMBER:httpversion;float})?|%{DATA:rawrequest})" %{NUMBER:response;int} (?:%{NUMBER:bytes;long}|-)
+ 
+ 
+ # Log Levels
+ LOGLEVEL ([A|a]lert|ALERT|[T|t]race|TRACE|[D|d]ebug|DEBUG|[N|n]otice|NOTICE|[I|i]nfo|INFO|[W|w]arn?(?:ing)?|WARN?(?:ING)?|[E|e]rr?(?:or)?|ERR?(?:OR)?|[C|c]rit?(?:ical)?|CRIT?(?:ICAL)?|[F|f]atal|FATAL|[S|s]evere|SEVERE|EMERG(?:ENCY)?|[Ee]merg(?:ency)?)
+```
+
+## Writing XML Custom Classifiers<a name="custom-classifier-xml"></a>
+
+XML \(Extensible Markup Language\) defines the structure of a document with the use of tags in the file\. With an XML custom classifier, you can specify the tag name used to define a row\.
+
+### Custom Classifier Values in AWS Glue<a name="classifier-values-xml"></a>
+
+When you define an XML classifier, you supply the following values to AWS Glue to create the classifier\.
+
+**Name**  
+Name of the classifier\.
+
+**Row tag**  
+The XML tag name that defines a table row in the XML document, without angle brackets `< >`\. The name must comply with XML rules for a tag\.  
+The element containing the row data **cannot** be a self\-closing empty element\. For example:  
+
+```
+            <row att1=”xx” att2=”yy” />  
+```
+is not parsed by AWS Glue\. Empty elements can be written as follows:  
+
+```
+            <row att1=”xx” att2=”yy”> </row"> 
+```
+
+AWS Glue keeps track of the creation time, last update time, and version of your classifier\.
