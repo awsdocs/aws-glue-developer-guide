@@ -38,7 +38,7 @@ A development endpoint where a developer can remotely debug ETL scripts\.
 
 + `PublicAddress` – String\.
 
-  The public address used by this DevEndpoint\.
+  The public VPC address used by this DevEndpoint\.
 
 + `Status` – String\.
 
@@ -140,7 +140,7 @@ Creates a new DevEndpoint\.
 
   The subnet ID for the new DevEndpoint to use\.
 
-+ `PublicKey` – String\. Required\.
++ `PublicKey` – String\.
 
   The public key to use for authentication\.
 

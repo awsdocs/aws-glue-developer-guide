@@ -53,7 +53,7 @@ The business logic that is required to perform ETL work\. It is composed of a tr
 
 ### Script<a name="components-script"></a>
 
-Code that extracts data from sources, transforms it, and loads it into targets\. AWS Glue generates PySpark scripts\. PySpark is a Python dialect for ETL programming\.
+Code that extracts data from sources, transforms it, and loads it into targets\. AWS Glue generates PySpark or Scala scripts\. PySpark is a Python dialect for ETL programming\.
 
 ### Transform<a name="components-transform"></a>
 

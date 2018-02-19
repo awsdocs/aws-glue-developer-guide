@@ -99,6 +99,20 @@ If AWS Glue returns a connect timed out error, it might be because it is trying 
 
 + An Amazon S3 VPC endpoint can only route traffic to buckets within an AWS Region\. If you need to connect to buckets in other Regions, a possible workaround is to use a NAT gateway\. For more information, see [NAT Gateways](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html)\.
 
+## Error: Amazon S3 Access Denied<a name="error-s3-access-denied"></a>
+
+If AWS Glue returns an access denied error to an Amazon S3 bucket or object, it might be because the IAM role provided does not have a policy with permission to your data store\.
+
++ An ETL job must have access to an Amazon S3 data store used as a source or target\. A crawler must have access to an Amazon S3 data store that it crawls\. For more information, see [Step 2: Create an IAM Role for AWS Glue](create-an-iam-role.md)\.
+
+## Error: Amazon S3 Access Key ID Does Not Exist<a name="error-s3-accesskeyid-not-found"></a>
+
+If AWS Glue returns an access key ID does not exist error when running a job, it might be because of one of the following reasons:
+
++ An ETL job uses an IAM role to access data stores, confirm that the IAM role for your job was not deleted before the job started\.
+
++ An IAM role contains permissions to access your data stores, confirm that any attached Amazon S3 policy containing `s3:ListBucket` is correct\.
+
 ## Error: No Private DNS for Network Interface Found<a name="error-no-private-DNS"></a>
 
 If a job fails or a development endpoint fails to provision, it might be because of a problem in the network setup\.
@@ -115,6 +129,8 @@ If AWS Glue fails to successfully provision a development endpoint, it might be 
 
 + Check in the VPC console that your VPC uses a valid **DHCP option set**\. For more information, see [DHCP option sets](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_DHCP_Options.html)\. 
 
++ If after a few minutes, the development endpoint **Provisioning status** changes to `FAILED` and the failure reason is DNS related, for example, `Reverse dns resolution of ip 10.5.237.213 failed`, check your DNS setup\. For more information, see [Setting Up DNS in Your VPC](set-up-vpc-dns.md)\. 
+
 + If the cluster remains in the PROVISIONING state, contact AWS Support\.
 
 ## Error: Notebook Server CREATE\_FAILED<a name="error-notebook-server-ec2-instance-profile"></a>
@@ -123,9 +139,15 @@ If AWS Glue fails to create the notebook server for a development endpoint, it m
 
 + AWS Glue passes an IAM role to Amazon EC2 when it is setting up the notebook server\. The IAM role must have a trust relationship to Amazon EC2\.
 
-+ The IAM role must have an instance profile of the same name\. When you create the role with the IAM console, the instance profile with the same name is automatically created\. Check for an error in the log regarding an invalid instance profile name `iamInstanceProfile.name`\. For more information, see [Using Instance Profiles](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html)\. 
++ The IAM role must have an instance profile of the same name\. When you create the role for Amazon EC2 with the IAM console, the instance profile with the same name is automatically created\. Check for an error in the log regarding an invalid instance profile name `iamInstanceProfile.name`\. For more information, see [Using Instance Profiles](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html)\. 
 
 + Check that your role has permission to access `aws-glue*` buckets in the policy that you pass to create the notebook server\. 
+
+## Error: Local Notebook Fails to Start<a name="error-local-notebook-fails-to-start"></a>
+
+If your local notebook fails to start and reports errors that a directory or folder cannot be found, it might be because of one of the following problems: 
+
++ If you are running on Microsoft Windows, make sure that the `JAVA_HOME` environment variable points to the correct Java directory\. It's possible to update Java without updating this variable, and if it points to a folder that no longer exists, Zeppelin notebooks fail to start\.
 
 ## Error: Notebook Usage Errors<a name="error-notebook-usage-errors"></a>
 

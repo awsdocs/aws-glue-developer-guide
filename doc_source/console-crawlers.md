@@ -8,7 +8,7 @@ To add a crawler using the console:
 
 1. Choose **Add crawler**, and follow the instructions in the **Add crawler** wizard\.
 **Note**  
-To get step\-by\-step guidance for adding a crawler, see the **Add a crawler** tutorial in the console\. You can also use the **Add crawler** wizard to create and modify an IAM role that attaches a policy that includes permissions for your Amazon S3 data stores\.
+To get step\-by\-step guidance for adding a crawler, see the **Add crawler** tutorial link in the navigation pane on the AWS Glue console at [https://console\.aws\.amazon\.com/glue/](https://console.aws.amazon.com/glue/)\. You can also use the **Add crawler** wizard to create and modify an IAM role that attaches a policy that includes permissions for your Amazon S3 data stores\.
 
 For Amazon S3 data stores, an exclude pattern is relative to the include path\. For more information about glob patterns, see [Which Data Stores Can I Crawl?](add-crawler.md#crawler-data-stores)\.
 
@@ -21,7 +21,7 @@ To view the results of a crawler, find the crawler name in the list and choose t
 To see details of a crawler, choose the crawler name in the list\. Crawler details include the information you defined when you created the crawler with the **Add crawler** wizard\. When a crawler run completes, choose the **Tables** tab to see the tables that were created by your crawler in the database you specified\.
 
 **Note**  
-The crawler assumes the permissions of the **IAM role** that you specify when you define it\. This IAM role must have permissions to extract data from your data store and write to the Data Catalog\. The AWS Glue console lists only IAM roles that have attached a trust policy for the AWS Glue principal service\. For more information about providing roles for AWS Glue, see [Using Identity\-Based Policies \(IAM Policies\)](using-identity-based-policies.md)\.
+The crawler assumes the permissions of the **IAM role** that you specify when you define it\. This IAM role must have permissions to extract data from your data store and write to the Data Catalog\. The AWS Glue console lists only IAM roles that have attached a trust policy for the AWS Glue principal service\. From the console, you can also create an IAM role with an IAM policy to access Amazon S3 data stores accessed by the crawler\. For more information about providing roles for AWS Glue, see [Using Identity\-Based Policies \(IAM Policies\)](using-identity-based-policies.md)\.
 
 The following are some important properties and metrics about the last run of a crawler:
 

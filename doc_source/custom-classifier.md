@@ -192,7 +192,7 @@ XML \(Extensible Markup Language\) defines the structure of a document with the 
 
 ### Custom Classifier Values in AWS Glue<a name="classifier-values-xml"></a>
 
-When you define an XML classifier, you supply the following values to AWS Glue to create the classifier\.
+When you define an XML classifier, you supply the following values to AWS Glue to create the classifier\. The classification field of this classifier is set to `xml`\.
 
 **Name**  
 Name of the classifier\.
@@ -211,3 +211,268 @@ is not parsed by AWS Glue\. Empty elements can be written as follows:
 ```
 
 AWS Glue keeps track of the creation time, last update time, and version of your classifier\.
+
+## Writing JSON Custom Classifiers<a name="custom-classifier-json"></a>
+
+JSON \(JavaScript Object Notation\) is a data\-interchange format\. It defines data structures with name\-value pairs or an ordered list of values\. With a JSON custom classifier, you can specify the JSON path to a data structure which is used to define the the schema for your table\.
+
+### Custom Classifier Values in AWS Glue<a name="classifier-values-json"></a>
+
+When you define a JSON classifier, you supply the following values to AWS Glue to create the classifier\. The classification field of this classifier is set to `json`\.
+
+**Name**  
+Name of the classifier\.
+
+**JSON path**  
+A JSON path that points to an object which is used to define a table schema\. The JSON path can be written in dot notation or bracket notation\. The following operators are supported:      
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html)
+
+AWS Glue keeps track of the creation time, last update time, and version of your classifier\.
+
+**Example of Using a JSON Classifier To Pull Records From an Array**  
+Suppose your JSON data is an array of records\. For example the first few lines of your file might look like:  
+
+```
+[
+  {
+    "type": "constituency",
+    "id": "ocd-division\/country:us\/state:ak",
+    "name": "Alaska"
+  },
+  {
+    "type": "constituency",
+    "id": "ocd-division\/country:us\/state:al\/cd:1",
+    "name": "Alabama's 1st congressional district"
+  },
+  {
+    "type": "constituency",
+    "id": "ocd-division\/country:us\/state:al\/cd:2",
+    "name": "Alabama's 2nd congressional district"
+  },
+  {
+    "type": "constituency",
+    "id": "ocd-division\/country:us\/state:al\/cd:3",
+    "name": "Alabama's 3rd congressional district"
+  },
+  {
+    "type": "constituency",
+    "id": "ocd-division\/country:us\/state:al\/cd:4",
+    "name": "Alabama's 4th congressional district"
+  },
+  {
+    "type": "constituency",
+    "id": "ocd-division\/country:us\/state:al\/cd:5",
+    "name": "Alabama's 5th congressional district"
+  },
+  {
+    "type": "constituency",
+    "id": "ocd-division\/country:us\/state:al\/cd:6",
+    "name": "Alabama's 6th congressional district"
+  },
+  {
+    "type": "constituency",
+    "id": "ocd-division\/country:us\/state:al\/cd:7",
+    "name": "Alabama's 7th congressional district"
+  },
+  {
+    "type": "constituency",
+    "id": "ocd-division\/country:us\/state:ar\/cd:1",
+    "name": "Arkansas's 1st congressional district"
+  },
+  {
+    "type": "constituency",
+    "id": "ocd-division\/country:us\/state:ar\/cd:2",
+    "name": "Arkansas's 2nd congressional district"
+  },
+  {
+    "type": "constituency",
+    "id": "ocd-division\/country:us\/state:ar\/cd:3",
+    "name": "Arkansas's 3rd congressional district"
+  },
+  {
+    "type": "constituency",
+    "id": "ocd-division\/country:us\/state:ar\/cd:4",
+    "name": "Arkansas's 4th congressional district"
+  }
+]
+```
+When running a crawler using the built\-in JSON classifier, the entire file is used to define the schema\. Because you don’t specify a JSON path, the crawler will treat the data as one object, that is, just an array\. For example, the schema might look like:  
+
+```
+root
+|-- record: array
+```
+However, to create a schema that is based on each record in the JSON array, create a custom JSON classifier and specify the JSON path as `$[*]`\. When you specify this JSON path, the classifier interrogates all 12 records in the array to determine the schema\. The resulting schema contains separate fields for each object, similiar to this:  
+
+```
+root
+|-- type: string
+|-- id: string
+|-- name: string
+```
+
+**Example of Using a JSON Classifier To Only Examine Parts Of a File**  
+Suppose your JSON data follows the pattern of the example JSON file `s3://awsglue-datasets/examples/us-legislators/all/areas.json` drawn from [http://everypolitician\.org/](http://everypolitician.org/)\. Example objects in the JSON file look like:  
+
+```
+{
+  "type": "constituency",
+  "id": "ocd-division\/country:us\/state:ak",
+  "name": "Alaska"
+}
+{
+  "type": "constituency",
+  "identifiers": [
+    {
+      "scheme": "dmoz",
+      "identifier": "Regional\/North_America\/United_States\/Alaska\/"
+    },
+    {
+      "scheme": "freebase",
+      "identifier": "\/m\/0hjy"
+    },
+    {
+      "scheme": "fips",
+      "identifier": "US02"
+    },
+    {
+      "scheme": "quora",
+      "identifier": "Alaska-state"
+    },
+    {
+      "scheme": "britannica",
+      "identifier": "place\/Alaska"
+    },
+    {
+      "scheme": "wikidata",
+      "identifier": "Q797"
+    }
+  ],
+  "other_names": [
+    {
+      "lang": "en",
+      "note": "multilingual",
+      "name": "Alaska"
+    },
+    {
+      "lang": "fr",
+      "note": "multilingual",
+      "name": "Alaska"
+    },
+    {
+      "lang": "nov",
+      "note": "multilingual",
+      "name": "Alaska"
+    }
+  ],
+  "id": "ocd-division\/country:us\/state:ak",
+  "name": "Alaska"
+}
+```
+When running a crawler using the built\-in JSON classifier, the entire file is used to create the schema\. You might end up with a schema like this:  
+
+```
+root
+|-- type: string
+|-- id: string
+|-- name: string
+|-- identifiers: array
+|    |-- element: struct
+|    |    |-- scheme: string
+|    |    |-- identifier: string
+|-- other_names: array
+|    |-- element: struct
+|    |    |-- lang: string
+|    |    |-- note: string
+|    |    |-- name: string
+```
+However, to create a schema using just the "id" object, create a custom JSON classifier and specify the JSON path as `$.id`\. Then the schema is based on only the "id" field:  
+
+```
+root
+|-- record: string
+```
+The first few lines of data extracted with this schema looks like this:  
+
+```
+{"record": "ocd-division/country:us/state:ak"}
+{"record": "ocd-division/country:us/state:al/cd:1"}
+{"record": "ocd-division/country:us/state:al/cd:2"}
+{"record": "ocd-division/country:us/state:al/cd:3"}
+{"record": "ocd-division/country:us/state:al/cd:4"}
+{"record": "ocd-division/country:us/state:al/cd:5"}
+{"record": "ocd-division/country:us/state:al/cd:6"}
+{"record": "ocd-division/country:us/state:al/cd:7"}
+{"record": "ocd-division/country:us/state:ar/cd:1"}
+{"record": "ocd-division/country:us/state:ar/cd:2"}
+{"record": "ocd-division/country:us/state:ar/cd:3"}
+{"record": "ocd-division/country:us/state:ar/cd:4"}
+{"record": "ocd-division/country:us/state:as"}
+{"record": "ocd-division/country:us/state:az/cd:1"}
+{"record": "ocd-division/country:us/state:az/cd:2"}
+{"record": "ocd-division/country:us/state:az/cd:3"}
+{"record": "ocd-division/country:us/state:az/cd:4"}
+{"record": "ocd-division/country:us/state:az/cd:5"}
+{"record": "ocd-division/country:us/state:az/cd:6"}
+{"record": "ocd-division/country:us/state:az/cd:7"}
+```
+To create a schema based on a deeply nested object, such as "identifier", in the JSON file, you can create a custom JSON classifier and specify the JSON path as `$.identifiers[*].identifier`\. Although the schema is very simliar to the previous example, it is based on a different object in the JSON file\. The schema looks like:  
+
+```
+root
+|-- record: string
+```
+Listing the first few lines of data from the table shows that the schema is based on the data in the "identifier" object:  
+
+```
+{"record": "Regional/North_America/United_States/Alaska/"}
+{"record": "/m/0hjy"}
+{"record": "US02"}
+{"record": "5879092"}
+{"record": "4001016-8"}
+{"record": "destination/alaska"}
+{"record": "1116270"}
+{"record": "139487266"}
+{"record": "n79018447"}
+{"record": "01490999-8dec-4129-8254-eef6e80fadc3"}
+{"record": "Alaska-state"}
+{"record": "place/Alaska"}
+{"record": "Q797"}
+{"record": "Regional/North_America/United_States/Alabama/"}
+{"record": "/m/0gyh"}
+{"record": "US01"}
+{"record": "4829764"}
+{"record": "4084839-5"}
+{"record": "161950"}
+{"record": "131885589"}
+```
+To create a table based on another deeply nested object, such as the "name" field in the "other\_names" array in the JSON file, you can create a custom JSON classifier and specify the JSON path as `$.other_names[*].name`\. Although the schema is very simliar to the previous example, it is based on a different object in the JSON file\. The schema looks like:  
+
+```
+root
+|-- record: string
+```
+Listing the first few lines of data in the table shows that it is based on the data in the "name" object in the "other\_names" array:  
+
+```
+{"record": "Alaska"}
+{"record": "Alaska"}
+{"record": "Аляска"}
+{"record": "Alaska"}
+{"record": "Alaska"}
+{"record": "Alaska"}
+{"record": "Alaska"}
+{"record": "Alaska"}
+{"record": "Alaska"}
+{"record": "ألاسكا"}
+{"record": "ܐܠܐܣܟܐ"}
+{"record": "الاسكا"}
+{"record": "Alaska"}
+{"record": "Alyaska"}
+{"record": "Alaska"}
+{"record": "Alaska"}
+{"record": "Штат Аляска"}
+{"record": "Аляска"}
+{"record": "Alaska"}
+{"record": "আলাস্কা"}
+```

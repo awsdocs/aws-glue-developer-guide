@@ -2,6 +2,9 @@
 
 To run your extract, transform, and load \(ETL\) scripts with AWS Glue, you sometimes develop and test your scripts using a development endpoint\. When you set up a development endpoint, you specify a virtual private cloud \(VPC\), subnet, and security groups\. 
 
+**Note**  
+Make sure you set up your DNS environment for AWS Glue\. For more information, see [Setting Up DNS in Your VPC](set-up-vpc-dns.md)\. 
+
 ## Setting Up Your Network for a Development Endpoint<a name="setup-vpc-for-development-endpoint"></a>
 
  To enable AWS Glue to access required resources, add a row in your subnet route table to associate a prefix list for Amazon S3 to the VPC endpoint\. A prefix list ID is required for creating an outbound security group rule that allows traffic from a VPC to access an AWS service through a VPC endpoint\.  To ease connecting to a notebook server that is associated with this development endpoint, from your local machine, add a row to the route table to add an internet gateway ID\. For more information, see [VPC Endpoints](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-endpoints.html)\. Update the subnet routes table to be similar to the following table:  
@@ -34,8 +37,7 @@ To run your extract, transform, and load \(ETL\) scripts with AWS Glue, you some
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/glue/latest/dg/start-development-endpoint.html)
 
    The following shows an example of a self\-referencing inbound rule:  
-![\[Image showing an example of a self-referencing inbound
-                            rule.\]](http://docs.aws.amazon.com/glue/latest/dg/images/SetupSecurityGroup-Start.png)
+![\[Image showing an example of a self-referencing inbound rule.\]](http://docs.aws.amazon.com/glue/latest/dg/images/SetupSecurityGroup-Start.png)
 
 1. Add a rule to for outbound traffic also\. Either open outbound traffic to all ports, or create a self\-referencing rule of **Type** `All TCP`, **Protocol** is `TCP`, **Port Range** includes all ports, and whose **Source** is the same security group name as the **Group ID**\. 
 
@@ -64,6 +66,5 @@ When using a custom DNS, ensure that the custom DNS server is able to do forward
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/glue/latest/dg/start-development-endpoint.html)
 
-   The following shows an example of a self\-referencing inbound rule:  
-![\[Image showing an example of a self-referencing inbound
-                            rule.\]](http://docs.aws.amazon.com/glue/latest/dg/images/SetupSecurityGroupNotebook-Start.png)
+   The following shows an example of the inbound rules for the security group:  
+![\[Image showing an example of the inbound rules for the security group.\]](http://docs.aws.amazon.com/glue/latest/dg/images/SetupSecurityGroupNotebook-Start.png)

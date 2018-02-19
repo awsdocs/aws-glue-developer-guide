@@ -14,6 +14,8 @@ AWS Glue supports an extension of the PySpark Python dialect for scripting extra
 
 + [Using Python Libraries with AWS Glue](aws-glue-programming-python-libraries.md)
 
++ [Format Options for ETL Output in AWS Glue](aws-glue-programming-python-format.md)
+
 + [AWS Glue Python Code Samples](aws-glue-programming-python-samples.md)
 
 ## AWS Glue PySpark Extensions<a name="aws-glue-programming-python-extensions-list"></a>

@@ -1,6 +1,6 @@
 # AWS Glue Components<a name="components-overview"></a>
 
-AWS Glue provides a console and API operations to set up and manage your extract, transform, and load \(ETL\) workload\. You can use API operations through several language\-specific SDKs and the AWS Command Line Interface \(AWS CLI\)\. For information about using the AWS CLI, see [AWS Command Line Interface Reference](http://docs.aws.amazon.com/cli/latest/reference/)\.
+AWS Glue provides a console and API operations to set up and manage your extract, transform, and load \(ETL\) workload\. You can use API operations through several language\-specific SDKs and the AWS Command Line Interface \(AWS CLI\)\. For information about using the AWS CLI, see [AWS CLI Command Reference](http://docs.aws.amazon.com/cli/latest/reference/)\.
 
 AWS Glue uses the AWS Glue Data Catalog to store metadata about data sources, transforms, and targets\. The Data Catalog is a drop\-in replacement for the Apache Hive Metastore\. The AWS Glue Jobs system provides a managed infrastructure for defining, scheduling, and running ETL operations on your data\. For more information about the AWS Glue API, see [AWS Glue API](aws-glue-api.md)\.
 
@@ -38,7 +38,7 @@ For information about how to set up crawlers and classifiers, see [Cataloging Ta
 
 ## AWS Glue ETL Operations<a name="etl-script-intro"></a>
 
-Using the metadata in the Data Catalog, AWS Glue can autogenerate PySpark \(the Python API for Apache Spark\) scripts with AWS Glue extensions that you can use and modify to perform various ETL operations\. For example, you can extract, clean, and transform raw data, and then store the result in a different repository, where it can be queried and analyzed\. Such a script might convert a CSV file into a relational form and save it in Amazon Redshift\.
+Using the metadata in the Data Catalog, AWS Glue can autogenerate Scala or PySpark \(the Python API for Apache Spark\) scripts with AWS Glue extensions that you can use and modify to perform various ETL operations\. For example, you can extract, clean, and transform raw data, and then store the result in a different repository, where it can be queried and analyzed\. Such a script might convert a CSV file into a relational form and save it in Amazon Redshift\.
 
 For more information about how to use AWS Glue ETL capabilities, see [Programming ETL Scripts](aws-glue-programming.md)\.
 

@@ -6,9 +6,17 @@ If a job needs to run in your VPC subnet, AWS Glue  sets up [elastic network int
 
 All JDBC data stores that are accessed by the job must be available from the VPC subnet\. To access Amazon S3 from within your VPC, a VPC endpoint is required\. If your job needs to access both VPC resources and the public internet,  the VPC needs to have a Network Address Translation \(NAT\) gateway inside the VPC\.
 
+ A job or development endpoint can only access one VPC \(and subnet\) at a time\. If you need to access data stores in different VPCs, you have the following options: 
+
++ Use VPC peering to access the data stores\. For more about VPC peering, see [VPC Peering Basics](http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/vpc-peering-basics.html) 
+
++ Use an Amazon S3 bucket as an intermediary storage location\. Split the work into two jobs, with the Amazon S3 output of job 1 as the input to job 2\.
+
 For JDBC data stores, you create a connection in AWS Glue with the necessary properties to connect to your data stores\. For more information about the connection, see Adding a Connection to Your Data Store\.
+
+**Note**  
+Make sure you set up your DNS environment for AWS Glue\. For more information, see [Setting Up DNS in Your VPC](set-up-vpc-dns.md)\. 
 
 
 + [Amazon VPC Endpoints for Amazon S3](vpc-endpoints-s3.md)
 + [Setting Up a VPC to Connect to JDBC Data Stores](setup-vpc-for-glue-access.md)
-+ [Setting Up DNS in Your VPC](set-up-vpc-dns.md)

@@ -8,8 +8,6 @@ The schema of the table contains its structure\. You can also edit a schema to c
 
 The table's history is also maintained in the Data Catalog\. This history includes metrics that are gathered when a data store is updated by an extract, transform, and load \(ETL\) job\. You can find out the name of the job, when it ran, how many rows were added, and how long the job took to run\. The version of the schema that was used by an ETL job is also kept in the history\.
 
-The AWS Glue Data Catalog also tracks when a table is used as a source or target in an ETL job\. This can give you some insight into the lineage of your data\. It tells you which jobs read the table as input and which ones write to your table as a data target\.
-
 ## Table Partitions<a name="tables-partition"></a>
 
 An AWS Glue table definition of an Amazon Simple Storage Service \(Amazon S3\) folder can describe a partitioned table\. For example, to improve query performance, a partitioned table might separate monthly data into different files using the name of the month as a key\. In AWS Glue, table definitions include the partitioning key of a table\. When AWS Glue evaluates the data in Amazon S3 folders to catalog a table, it determines whether an individual table or a partitioned table is added\. 

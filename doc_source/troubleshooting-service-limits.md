@@ -11,7 +11,7 @@
 | Number of databases per account | 100 | 
 | Number of tables per database | 1000 | 
 | Number of partitions per table | 20,000 | 
-| Number of crawlers per account | 10 | 
+| Number of crawlers per account | 25 | 
 | Number of jobs per account | 25 | 
 | Number of triggers per account | 25 | 
 | Number of concurrent job runs per account | 30 | 

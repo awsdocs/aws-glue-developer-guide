@@ -3,7 +3,7 @@
 AWS Glue can create an environment for you to iteratively develop and test your extract, transform, and load \(ETL\) scripts\. You can develop your script in a notebook  and point to an AWS Glue endpoint to test it\. When you're satisfied with the results of your development process, you can create an ETL job that runs your script\. With this process, you can add functions and debug your script in an interactive manner\.
 
 **Note**  
-Your ETL scripts must target Python 2\.7, because AWS Glue development endpoints do not support Python 3 yet\.
+Your Python scripts must target Python 2\.7, because AWS Glue development endpoints do not support Python 3 yet\.
 
 ## Managing Your Development Environment<a name="dev-endpoint-actions"></a>
 

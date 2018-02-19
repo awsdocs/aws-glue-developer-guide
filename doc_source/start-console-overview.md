@@ -32,7 +32,7 @@ With AWS Glue, you store metadata in the AWS Glue Data Catalog\. You use this me
 
    + A trigger that is based on a cron schedule\.
 
-   + A trigger that is event\-based; for example, the completion of another job can start an AWS Glue job\.
+   + A trigger that is event\-based; for example, the successful completion of another job can start an AWS Glue job\.
 
    + A trigger that starts a job on demand\.
 

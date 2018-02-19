@@ -88,10 +88,10 @@ Provide a user name that has permission to access the JDBC data store\.
 Type the password for the user name that has access permission to the JDBC data store\.
 
 **VPC**  
-Choose the name of the virtual private cloud \(VPC\) that contains your data store\. The AWS Glue console lists all VPCs for your account\.
+Choose the name of the virtual private cloud \(VPC\) that contains your data store\. The AWS Glue console lists all VPCs for the current region\.
 
 **Subnet**  
-Choose the subnet within the VPC that contains your data store\. The AWS Glue console lists all subnets for the data store in your VPC\. The console automatically provides the Availability Zone that is required to connect your VPC\. 
+Choose the subnet within the VPC that contains your data store\. The AWS Glue console lists all subnets for the data store in your VPC\. 
 
 **Security groups**  
 Choose the security groups that are associated with your data store\. AWS Glue requires one or more security groups with an inbound source rule that allows AWS Glue to connect\. The AWS Glue console lists all security groups that are granted inbound access to your VPC\. AWS Glue associates these security groups with the elastic network interface that is attached to your VPC subnet\.

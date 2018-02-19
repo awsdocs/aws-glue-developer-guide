@@ -34,7 +34,7 @@ The `Database` object represents a logical grouping of tables that may reside in
 
 ## DatabaseInput Structure<a name="aws-glue-api-catalog-databases-DatabaseInput"></a>
 
-The structure used to create or updata a database\.
+The structure used to create or update a database\.
 
 **Fields**
 

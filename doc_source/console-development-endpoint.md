@@ -23,8 +23,11 @@ Address to connect to the development endpoint\.
 **Public key contents**  
 Current public SSH key associated with the development endpoint\.
 
-**SSH to REPL command**  
-You can open a terminal window on your computer \(laptop\) and type this command to interact with the development endpoint as a Read\-Eval\-Print Loop \(REPL\) shell\.
+**SSH to Python REPL**  
+You can open a terminal window on your computer \(laptop\) and type this command to interact with the development endpoint in as a Read\-Eval\-Print Loop \(REPL\) shell\.
+
+**SSH to Scala REPL**  
+You can open a terminal window on your computer \(laptop\) and type this command to interact with the development endpoint in as a Read\-Eval\-Print Loop \(REPL\) shell\.
 
 **SSH tunnel to remote interpreter**  
 You can open a terminal window on your computer \(laptop\) and type this command to open a tunnel to the development endpoint\. Then you can open your local Apache Zeppelin notebook and point to the development endpoint as a remote interpreter\. Once the interpreter is set up, all notes within the notebook can use it\.
@@ -80,12 +83,12 @@ The private key used to connect to the development endpoint associated with the 
 The user name that you use to access the Zeppelin notebook\.
 
 **Notebook password**  
-The password that you use to access the Zeppelin notebook\.
+The password that you use to access the Zeppelin notebook\. It must not contain characters interpreted by the operating environment, such as, quotes and backticks\. 
 
 **Notebook S3 path**  
 The location where the state of the notebook is stored\. The Amazon S3 path to the Zeppelin notebook must follow the format: `s3://bucket-name/username`\. Subfolders cannot be included in the path\.
 
-**Subnets**  
+**Subnet**  
 The available subnets that you can use with your notebook server\. An asterisk \(\*\) indicates that the subnet can be accessed from the internet\. The subnet must have an internet gateway \(igw\) in its route table so that it can be reached\. For more information, see [Setting Up Your Environment for Development Endpoints](start-development-endpoint.md)\.
 
 **Security groups**  

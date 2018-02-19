@@ -142,7 +142,7 @@ Defines a mapping\.
 
 ## CreateScript Action \(Python: create\_script\)<a name="aws-glue-api-etl-script-generation-CreateScript"></a>
 
-Transforms a directed acyclic graph \(DAG\) into a Python script\.
+Transforms a directed acyclic graph \(DAG\) into code\.
 
 **Request**
 
@@ -154,11 +154,19 @@ Transforms a directed acyclic graph \(DAG\) into a Python script\.
 
   A list of the edges in the DAG\.
 
++ `Language` – String \(valid values: `PYTHON` | `SCALA`\)\.
+
+  The programming language of the resulting code from the DAG\.
+
 **Response**
 
 + `PythonScript` – String\.
 
   The Python script generated from the DAG\.
+
++ `ScalaCode` – String\.
+
+  The Scala code generated from the DAG\.
 
 **Errors**
 
@@ -232,7 +240,7 @@ Creates mappings\.
 
 ## GetPlan Action \(Python: get\_plan\)<a name="aws-glue-api-etl-script-generation-GetPlan"></a>
 
-Gets a Python script to perform a specified mapping\.
+Gets code to perform a specified mapping\.
 
 **Request**
 
@@ -252,11 +260,19 @@ Gets a Python script to perform a specified mapping\.
 
   Parameters for the mapping\.
 
++ `Language` – String \(valid values: `PYTHON` | `SCALA`\)\.
+
+  The programming language of the code to perform the mapping\.
+
 **Response**
 
 + `PythonScript` – String\.
 
   A Python script to perform the mapping\.
+
++ `ScalaCode` – String\.
+
+  Scala code to perform the mapping\.
 
 **Errors**
 

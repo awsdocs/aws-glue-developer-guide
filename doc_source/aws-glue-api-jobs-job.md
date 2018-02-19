@@ -32,7 +32,7 @@ Specifies a job\.
 
 + `Role` – String\.
 
-  The name of the IAM role associated with this job\.
+  The name or ARN of the IAM role associated with this job\.
 
 + `CreatedOn` – Timestamp\.
 
@@ -122,7 +122,7 @@ Specifies information used to update an existing job\. Note that the previous jo
 
 + `Role` – String\.
 
-  The name of the IAM role associated with this job \(required\)\.
+  The name or ARN of the IAM role associated with this job \(required\)\.
 
 + `ExecutionProperty` – An ExecutionProperty object\.
 
@@ -186,7 +186,7 @@ Creates a new job\.
 
 + `Role` – String\. Required\.
 
-  The name of the IAM role associated with this job\.
+  The name or ARN of the IAM role associated with this job\.
 
 + `ExecutionProperty` – An ExecutionProperty object\.
 
@@ -217,6 +217,8 @@ Creates a new job\.
 + `AllocatedCapacity` – Number \(integer\)\.
 
   The number of AWS Glue data processing units \(DPUs\) to allocate to this Job\. From 2 to 100 DPUs can be allocated; the default is 10\. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory\. For more information, see the [AWS Glue pricing page](https://aws.amazon.com/glue/pricing/)\.
+
++ `Tags` – An array of *UTF\-8 string*–to–*UTF\-8 string* mappings\.
 
 **Response**
 

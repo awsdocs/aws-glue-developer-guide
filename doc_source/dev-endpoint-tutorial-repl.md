@@ -6,7 +6,7 @@ The tutorial assumes that you have already taken the steps outlined in [Tutorial
 
 1. In the AWS Glue console, choose **Dev endpoints** to navigate to the development endpoints list\. Choose the name of a development endpoint to open its details page\.
 
-1. Copy the SSH command labeled **SSH to REPL command**, and paste it into a text editor\. Replace the `<private-key.pem>` text with the path to the private\-key `.pem` file that corresponds to the public key that you used to create the development endpoint\. Use forward slashes rather than backslashes as delimiters in the path\.
+1. Copy the SSH command labeled **SSH to Python REPL**, and paste it into a text editor\. Replace the `<private-key.pem>` text with the path to the private\-key `.pem` file that corresponds to the public key that you used to create the development endpoint\. Use forward slashes rather than backslashes as delimiters in the path\.
 
 1. On your local computer, open a terminal window that can run SSH commands, and paste in the edited SSH command\. Run the command\. The output will look like this:
 

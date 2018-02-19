@@ -29,6 +29,3 @@ Along with your *account ID*, gather the following information for each of these
 + Job run ID in the form `jr_xxxxx`\.
 
   Logs from job runs are located in CloudWatch Logs under ` /aws-glue/jobs`\. 
-
-**When a local Zeppelin Notebook server fails to start:**  
-If you are running on Microsoft Windows, make sure that the `JAVA_HOME` environment variable points to the right Java directory\. It's possible to update Java without updating this variable, and if it points to a folder that no longer exists, Zeppelin fails to start\.

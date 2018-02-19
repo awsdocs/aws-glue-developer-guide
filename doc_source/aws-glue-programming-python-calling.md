@@ -75,7 +75,7 @@ The following example shows how call the AWS Glue APIs using Python, to create a
 
    ```
    myJob = glue.create_job(Name='sample', Role='Glue_DefaultRole',
-                             command={'Name': 'glueetl',
+                             Command={'Name': 'glueetl',
                                       'ScriptLocation': 's3://my_script_bucket/scripts/my_etl_script.py'})
    ```
 
@@ -88,7 +88,7 @@ The following example shows how call the AWS Glue APIs using Python, to create a
 1. Get the job status:
 
    ```
-   status = glue.get_job_run(JobName=myJob['Name'], runId=myNewJobRun['JobRunId'])
+   status = glue.get_job_run(JobName=myJob['Name'], RunId=myNewJobRun['JobRunId'])
    ```
 
 1. Print the current state of the job run:

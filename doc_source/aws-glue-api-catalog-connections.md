@@ -98,7 +98,7 @@ Specifies the physical requirements for a connection\.
 
 + `AvailabilityZone` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  The connection's availability zone\.
+  The connection's availability zone\. This field is deprecated and has no effect\.
 
 ## GetConnectionsFilter Structure<a name="aws-glue-api-catalog-connections-GetConnectionsFilter"></a>
 
@@ -180,6 +180,8 @@ Deletes a connection from the Data Catalog\.
 
 + `OperationTimeoutException`
 
++ `InvalidInputException`
+
 ## GetConnection Action \(Python: get\_connection\)<a name="aws-glue-api-catalog-connections-GetConnection"></a>
 
 Retrieves a connection definition from the Data Catalog\.
@@ -205,6 +207,8 @@ Retrieves a connection definition from the Data Catalog\.
 + `EntityNotFoundException`
 
 + `OperationTimeoutException`
+
++ `InvalidInputException`
 
 ## GetConnections Action \(Python: get\_connections\)<a name="aws-glue-api-catalog-connections-GetConnections"></a>
 
@@ -244,6 +248,8 @@ Retrieves a list of connection definitions from the Data Catalog\.
 
 + `OperationTimeoutException`
 
++ `InvalidInputException`
+
 ## UpdateConnection Action \(Python: update\_connection\)<a name="aws-glue-api-catalog-connections-UpdateConnection"></a>
 
 Updates a connection definition in the Data Catalog\.
@@ -274,6 +280,8 @@ Updates a connection definition in the Data Catalog\.
 
 + `OperationTimeoutException`
 
++ `InvalidInputException`
+
 ## BatchDeleteConnection Action \(Python: batch\_delete\_connection\)<a name="aws-glue-api-catalog-connections-BatchDeleteConnection"></a>
 
 Deletes a list of connection definitions from the Data Catalog\.
@@ -303,3 +311,5 @@ Deletes a list of connection definitions from the Data Catalog\.
 + `InternalServiceException`
 
 + `OperationTimeoutException`
+
++ `InvalidInputException`

@@ -1,8 +1,8 @@
 # What Is AWS Glue?<a name="what-is-glue"></a>
 
-AWS Glue is a fully managed ETL \(extract, transform, and load\) service that makes it simple and cost\-effective to categorize your data, clean it, enrich it, and move it reliably between various data stores\. AWS Glue consists of a central metadata repository known as the AWS Glue Data Catalog, an ETL engine that automatically generates Python code, and a flexible scheduler that handles dependency resolution, job monitoring, and retries\. AWS Glue is serverless, so there’s no infrastructure to set up or manage\.
+AWS Glue is a fully managed ETL \(extract, transform, and load\) service that makes it simple and cost\-effective to categorize your data, clean it, enrich it, and move it reliably between various data stores\. AWS Glue consists of a central metadata repository known as the AWS Glue Data Catalog, an ETL engine that automatically generates Python or Scala code, and a flexible scheduler that handles dependency resolution, job monitoring, and retries\. AWS Glue is serverless, so there’s no infrastructure to set up or manage\.
 
-Use the AWS Glue console to discover data, transform it, and make it available for search and querying\. The console calls the underlying services to orchestrate the work required to transform your data\. You can also use the AWS Glue API operations to interface with AWS Glue services\. Edit, debug, and test your Python and Apache Spark ETL code using a familiar development environment\.
+Use the AWS Glue console to discover data, transform it, and make it available for search and querying\. The console calls the underlying services to orchestrate the work required to transform your data\. You can also use the AWS Glue API operations to interface with AWS Glue services\. Edit, debug, and test your Python or Scala Apache Spark ETL code using a familiar development environment\.
 
 For pricing information, see [AWS Glue Pricing](https://aws.amazon.com/glue/pricing/)\.
 

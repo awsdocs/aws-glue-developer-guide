@@ -1,6 +1,6 @@
 # DropNullFields Class<a name="aws-glue-api-crawler-pyspark-transforms-DropNullFields"></a>
 
-Drops all null fields in this `DynamicFrame`\.
+Drops all null fields in a `DynamicFrame` whose type is `NullType`\. These are fields with missing or null values in every record in the `DynamicFrame` data set\.
 
 ## Methods<a name="aws-glue-api-crawler-pyspark-transforms-DropNullFields-_methods"></a>
 
@@ -22,13 +22,9 @@ Drops all null fields in this `DynamicFrame`\.
 
 ## \_\_call\_\_\(frame, transformation\_ctx = "", info = "", stageThreshold = 0, totalThreshold = 0\)<a name="aws-glue-api-crawler-pyspark-transforms-DropNullFields-__call__"></a>
 
-Drops all null fields in the specified AWS Glue\.
+Drops all null fields in a `DynamicFrame` whose type is `NullType`\. These are fields with missing or null values in every record in the `DynamicFrame` data set\.
 
 + `frame` – The `DynamicFrame` in which to drop null fields \(required\)\.
-
-+ `old_name` – Full path to the node to rename \(required\)\.
-
-+ `new_name` – New name, including full path \(required\)\.
 
 + `transformation_ctx` – A unique string that is used to identify state information \(optional\)\.
 

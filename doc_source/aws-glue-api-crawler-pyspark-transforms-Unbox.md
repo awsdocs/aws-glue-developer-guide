@@ -28,7 +28,7 @@ Unboxes a string field in a `DynamicFrame`\.
 
 + `path` – The full path to the `StringNode` to unbox \(required\)\.
 
-+ `format` – The file format; currently the only supported values are "avro" and "json" \(required\)\.
++ `format` – A format specification \(optional\)\. This is used for an Amazon Simple Storage Service \(Amazon S3\) or tape connection that supports multiple formats\. See [Format Options for ETL Output in AWS Glue](aws-glue-programming-python-format.md) for the formats that are supported\.
 
 + `transformation_ctx` – A unique string that is used to identify state information \(optional\)\.
 

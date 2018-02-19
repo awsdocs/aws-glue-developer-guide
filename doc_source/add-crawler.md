@@ -54,7 +54,9 @@ If the data store that is being crawled is a relational database, the output is 
 
 When evaluating what to include or exclude in a crawl, a crawler starts by evaluating the required include path\. For every data store you want to crawl, you must specify a single include path\.
 
-For Amazon S3 data stores, the syntax is `bucket-name/folder-name/file-name.ext`\. To crawl all objects in a bucket, you specify `%` for the `folder-name/file-name.ext` part of the include path\. For JDBC data stores, the syntax is `database-name/schema-name/table-name`\. For database engines such as MySQL that don't have a `schema-name`, you can use `database-name/table-name` instead\. A percent sign \(`%`\) following the `schema-name` or `database-name` part of the path acts as a wildcard\. For example, an include path of `MyDatabase/MySchema/%` includes all tables in database `MyDatabase` and schema `MySchema`\.
+For Amazon S3 data stores, the syntax is `bucket-name/folder-name/file-name.ext`\. To crawl all objects in a bucket, you specify `%` for the `folder-name/file-name.ext` part of the include path\.
+
+For JDBC data stores, the syntax is `database-name/schema-name/table-name`\. For database engines such as MySQL that don't have a `schema-name`, you can use `database-name/table-name` instead\. You can substitute the percent sign \(`%`\) for a schema or table in the include path to represent all schemas or all tables in a database\. You cannot substitute the percent sign \(`%`\) for database in the include path\.  For example, an include path of `MyDatabase/MySchema/%` includes all tables in database `MyDatabase` and schema `MySchema`\.
 
 You can then exclude objects from the crawl that your include path would otherwise include by specifying one or more Unix\-style `glob` exclude patterns\.
 
@@ -117,6 +119,16 @@ Given the include path `s3://mybucket/myfolder/`, the following are some sample 
 | departments/market\* | Excludes market\-us\.json, market\-emea\.json, and market\-ap\.json | 
 | \*\*\.csv | Excludes all objects below myfolder that have a name ending with \.csv | 
 | employees/\*\.csv | Excludes all \.csv files in the employees directory | 
+
+**Example of Excluding a Subset of Amazon S3 Partitions**  
+Suppose your data is partitioned by day so that each day in a year is in a separate Amazon S3 partition\. For January 2015, there are 31 partitions\. Now, to crawl data for only the first week of January, you need to exclude all partitions except days 1 through 7:  
+
+```
+ 2015/01/{[!0],0[8-9]}**, 2015/0[2-9]/**, 2015/1[0-2]/**    
+```
+Let's look at the parts of this glob pattern\. The first part, ` 2015/01/{[!0],0[8-9]}**`, excludes all days that don't begin with a "0" as well as day 08 and day 09 from month 01 in year 2015\. Notice "\*\*" is used as the suffix to the day number pattern and crosses folder boundries to lower level folders\. If "\*" is used, lower folder levels are not excluded\.  
+The second part, ` 2015/0[2-9]/**`, excludes days in months 02 to 09, in year 2015\.  
+The third part, `2015/1[0-2]/**`, excludes days in months 10, 11, and 12, in year 2015\.
 
 **Example of JDBC Exclude Patterns**  
 Suppose that you are crawling a JDBC database with the following schema structure:  

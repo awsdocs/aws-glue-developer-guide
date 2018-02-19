@@ -20,6 +20,8 @@
 
 + [TableError Structure](#aws-glue-api-catalog-tables-TableError)
 
++ [TableVersionError Structure](#aws-glue-api-catalog-tables-TableVersionError)
+
 ## Table Structure<a name="aws-glue-api-catalog-tables-Table"></a>
 
 Represents a collection of related data organized in columns and rows\.
@@ -294,6 +296,24 @@ An error record for table operations\.
 
   Detail about the error\.
 
+## TableVersionError Structure<a name="aws-glue-api-catalog-tables-TableVersionError"></a>
+
+An error record for table\-version operations\.
+
+**Fields**
+
++ `TableName` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the table in question\.
+
++ `VersionId` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The ID value of the version in question\.
+
++ `ErrorDetail` – An ErrorDetail object\.
+
+  Detail about the error\.
+
 ## Operations<a name="aws-glue-api-catalog-tables-actions"></a>
 
 + [CreateTable Action \(Python: create\_table\)](#aws-glue-api-catalog-tables-CreateTable)
@@ -308,7 +328,13 @@ An error record for table operations\.
 
 + [GetTables Action \(Python: get\_tables\)](#aws-glue-api-catalog-tables-GetTables)
 
++ [GetTableVersion Action \(Python: get\_table\_version\)](#aws-glue-api-catalog-tables-GetTableVersion)
+
 + [GetTableVersions Action \(Python: get\_table\_versions\)](#aws-glue-api-catalog-tables-GetTableVersions)
+
++ [DeleteTableVersion Action \(Python: delete\_table\_version\)](#aws-glue-api-catalog-tables-DeleteTableVersion)
+
++ [BatchDeleteTableVersion Action \(Python: batch\_delete\_table\_version\)](#aws-glue-api-catalog-tables-BatchDeleteTableVersion)
 
 ## CreateTable Action \(Python: create\_table\)<a name="aws-glue-api-catalog-tables-CreateTable"></a>
 
@@ -411,6 +437,10 @@ Updates a metadata table in the Data Catalog\.
 + `TableInput` – A TableInput object\. Required\.
 
   An updated `TableInput` object to define the metadata table in the catalog\.
+
++ `SkipArchive` – Boolean\.
+
+  By default, `UpdateTable` always creates an archived version of the table before updating it\. If `skipArchive` is set to true, however, `UpdateTable` does not create the archived version\.
 
 **Response**
 
@@ -576,6 +606,44 @@ Retrieves the definitions of some or all of the tables in a given `Database`\.
 
 + `InternalServiceException`
 
+## GetTableVersion Action \(Python: get\_table\_version\)<a name="aws-glue-api-catalog-tables-GetTableVersion"></a>
+
+Retrieves a specified version of a table\.
+
+**Request**
+
++ `CatalogId` – Catalog id string, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The ID of the Data Catalog where the tables reside\. If none is supplied, the AWS account ID is used by default\.
+
++ `DatabaseName` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
+
+  The database in the catalog in which the table resides\. For Hive compatibility, this name is entirely lowercase\.
+
++ `TableName` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
+
+  The name of the table\. For Hive compatibility, this name is entirely lowercase\.
+
++ `VersionId` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The ID value of the table version to be retrieved\.
+
+**Response**
+
++ `TableVersion` – A TableVersion object\.
+
+  The requested table version\.
+
+**Errors**
+
++ `EntityNotFoundException`
+
++ `InvalidInputException`
+
++ `InternalServiceException`
+
++ `OperationTimeoutException`
+
 ## GetTableVersions Action \(Python: get\_table\_versions\)<a name="aws-glue-api-catalog-tables-GetTableVersions"></a>
 
 Retrieves a list of strings that identify available versions of a specified table\.
@@ -611,6 +679,80 @@ Retrieves a list of strings that identify available versions of a specified tabl
 + `NextToken` – String\.
 
   A continuation token, if the list of available versions does not include the last one\.
+
+**Errors**
+
++ `EntityNotFoundException`
+
++ `InvalidInputException`
+
++ `InternalServiceException`
+
++ `OperationTimeoutException`
+
+## DeleteTableVersion Action \(Python: delete\_table\_version\)<a name="aws-glue-api-catalog-tables-DeleteTableVersion"></a>
+
+Deletes a specified version of a table\.
+
+**Request**
+
++ `CatalogId` – Catalog id string, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The ID of the Data Catalog where the tables reside\. If none is supplied, the AWS account ID is used by default\.
+
++ `DatabaseName` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
+
+  The database in the catalog in which the table resides\. For Hive compatibility, this name is entirely lowercase\.
+
++ `TableName` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
+
+  The name of the table\. For Hive compatibility, this name is entirely lowercase\.
+
++ `VersionId` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
+
+  The ID of the table version to be deleted\.
+
+**Response**
+
++ *No Response parameters\.*
+
+**Errors**
+
++ `EntityNotFoundException`
+
++ `InvalidInputException`
+
++ `InternalServiceException`
+
++ `OperationTimeoutException`
+
+## BatchDeleteTableVersion Action \(Python: batch\_delete\_table\_version\)<a name="aws-glue-api-catalog-tables-BatchDeleteTableVersion"></a>
+
+Deletes a specified batch of versions of a table\.
+
+**Request**
+
++ `CatalogId` – Catalog id string, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The ID of the Data Catalog where the tables reside\. If none is supplied, the AWS account ID is used by default\.
+
++ `DatabaseName` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
+
+  The database in the catalog in which the table resides\. For Hive compatibility, this name is entirely lowercase\.
+
++ `TableName` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
+
+  The name of the table\. For Hive compatibility, this name is entirely lowercase\.
+
++ `VersionIds` – An array of UTF\-8 strings\. Required\.
+
+  A list of the IDs of versions to be deleted\.
+
+**Response**
+
++ `Errors` – An array of [TableVersionError](#aws-glue-api-catalog-tables-TableVersionError)s\.
+
+  A list of errors encountered while trying to delete the specified table versions\.
 
 **Errors**
 

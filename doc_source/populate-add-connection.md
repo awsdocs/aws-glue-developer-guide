@@ -81,9 +81,6 @@ The subnet in the VPC that contains your data store\.
 **Security groups**  
 The security groups that are associated with your data store\. AWS Glue associates these security groups with the elastic network interface that is attached to your VPC subnet\.
 
-**Availability Zone**  
-If you're connecting using the API or the AWS Command Line Interface, the Availability Zone of the subnet\.
-
 For information about managing a VPC with Amazon Redshift, see [Managing Clusters in an Amazon Virtual Private Cloud \(VPC\)](http://docs.aws.amazon.com/redshift/latest/mgmt/managing-clusters-vpc.html)\.
 
 For information about managing a VPC with Amazon RDS, see [Working with an Amazon RDS DB Instance in a VPC](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html)\.

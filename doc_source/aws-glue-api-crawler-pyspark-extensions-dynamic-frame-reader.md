@@ -38,11 +38,21 @@ Reads a `DynamicFrame` using the specified connection and format\.
 
 + `connection_type` – The connection type\. Valid values include `s3`, `mysql`, `postgresql`, `redshift`, `sqlserver`, and `oracle`\.
 
-+ `connection_options` – Connection options, such as path and database table \(optional\)\. For a `connection_type` of `s3`, Amazon S3 paths are defined in an array\. For example, `connection_options = {"paths": [ "s3://mybucket/object_a", "s3://mybucket/object_b"]}`\.
++ `connection_options` – Connection options, such as path and database table \(optional\)\. For a `connection_type` of `s3`, Amazon S3 paths are defined in an array\.
 
-+ `format` – A format specification such as JSON, CSV, or other format \(optional\)\. This is used for an Amazon S3 or tape connection that supports multiple formats\.
+  ```
+  connection_options = {"paths": [ "s3://mybucket/object_a", "s3://mybucket/object_b"]}
+  ```
 
-+ `format_options` – Format options, such as delimiter \(optional\)\.
+  For JDBC connections, several properties must be defined\. Note that the database name must be part of the URL\. It can optionally be included in the connection options\.
+
+  ```
+  connection_options = {"url": "jdbc-url/database", "user": "username", "password": "password","dbtable": "table-name", "redshiftTmpDir": "s3-tempdir-path"} 
+  ```
+
++ `format` – A format specification \(optional\)\. This is used for an Amazon Simple Storage Service \(Amazon S3\) or tape connection that supports multiple formats\. See [Format Options for ETL Output in AWS Glue](aws-glue-programming-python-format.md) for the formats that are supported\.
+
++ `format_options` – Format options for the specified format\. See [Format Options for ETL Output in AWS Glue](aws-glue-programming-python-format.md) for the formats that are supported\.
 
 + `transformation_ctx` – The transformation context to use \(optional\)\.
 

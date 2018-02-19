@@ -36,6 +36,9 @@ MESSAGEPREFIX .*-.*-.*-.*-.*
 ```
 
 **Row tag**  
-For XML classifiers, this is the name of the XML tag name that defines a table row in the XML document\. Type the name without angle brackets `< >`\. The name must comply with XML rules for a tag\.
+For XML classifiers, this is the name of the XML tag that defines a table row in the XML document\. Type the name without angle brackets `< >`\. The name must comply with XML rules for a tag\.
+
+**JSON path**  
+For JSON classifiers, this is the JSON path to the object, array, or value that defines a row of the table being created\. Type the name in either dot or bracket JSON syntax using AWS Glue supported operators\. For more information, see the list of operators in [Writing JSON Custom Classifiers](custom-classifier.md#custom-classifier-json) 
 
 For more information, see [Writing Custom Classifiers](custom-classifier.md)

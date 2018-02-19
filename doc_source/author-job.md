@@ -29,4 +29,4 @@ The following describes the overall process of authoring jobs in AWS Glue:
 
 1. You specify how your job is invoked, either on demand, by a time\-based schedule, or by an event\. For more information, see [Triggering Jobs in AWS Glue](trigger-job.md)\.
 
-1. Based on your input, AWS Glue generates a PySpark script\. You can tailor the script based on your business needs\. For more information, see [Editing Scripts in AWS Glue](edit-script.md)\.
+1. Based on your input, AWS Glue generates a PySpark or Scala script\. You can tailor the script based on your business needs\. For more information, see [Editing Scripts in AWS Glue](edit-script.md)\.

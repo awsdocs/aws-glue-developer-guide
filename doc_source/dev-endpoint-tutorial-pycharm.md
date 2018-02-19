@@ -32,6 +32,9 @@ The tutorial assumes that you have already taken the steps outlined in [Tutorial
      # Print out information about this data
      print "Count:  ", persons_DyF.count()
      persons_DyF.printSchema()
+   
+   if __name__ == "__main__":
+   main()
    ```
 
 1. Download the AWS Glue Python library file, `PyGlue.zip`, from `https://s3.amazonaws.com/aws-glue-jes-prod-us-east-1-assets/etl/python/PyGlue.zip` to a convenient location on your local machine\.
@@ -45,8 +48,7 @@ The tutorial assumes that you have already taken the steps outlined in [Tutorial
    + Navigate to the location where you saved `PyGlue.zip`, select it, then choose **Apply**\.
 
     The **Settings** screen should look something like the following:  
-![\[The PyCharm Settings screen with PyGlue.zip added
-            as a content root.\]](http://docs.aws.amazon.com/glue/latest/dg/images/PyCharm_AddContentRoot.png)
+![\[The PyCharm Settings screen with PyGlue.zip added as a content root.\]](http://docs.aws.amazon.com/glue/latest/dg/images/PyCharm_AddContentRoot.png)
 
    Leave the **Settings** dialog box open after you choose **Apply**\.
 
@@ -60,7 +62,7 @@ The tutorial assumes that you have already taken the steps outlined in [Tutorial
 
    + Set the **User name** to `glue`\.
 
-   + Set the **Auth type** to **Key pair \(OpenSSH or Putty\)**\. Set the **Private key file** by browsing to the location where your development endpoints private key file is located\.
+   + Set the **Auth type** to **Key pair \(OpenSSH or Putty\)**\. Set the **Private key file** by browsing to the location where your development endpoint's private key file is located\. Note that PyCharm only supports DSA, RSA and ECDSA OpenSSH key types\. You can use an up\-to\-date version of `ssh-keygen` to generate a key\-pair type that PyCharm accepts\.
 
    + Choose **Test SFTP connection**, and allow the connection to be tested\. If the connection succeeds, choose **Apply**\.
 

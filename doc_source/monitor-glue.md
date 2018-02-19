@@ -8,7 +8,7 @@ The main objective of AWS Glue is to provide an easier way to extract and transf
 
 1. The job extracts data from your source\. If required, connection properties are used to access your source\.
 
-1. The job transforms your data using a script that you created and the values of any arguments\. The script contains the PySpark Python code that transforms your data\.
+1. The job transforms your data using a script that you created and the values of any arguments\. The script contains the Scala or PySpark Python code that transforms your data\.
 
 1. The transformed data is loaded to your data targets\. If required, connection properties are used to access the target\.
 

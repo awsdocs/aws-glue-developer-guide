@@ -8,6 +8,8 @@
 
 + [XMLClassifier Structure](#aws-glue-api-crawler-classifiers-XMLClassifier)
 
++ [JsonClassifier Structure](#aws-glue-api-crawler-classifiers-JsonClassifier)
+
 + [CreateGrokClassifierRequest Structure](#aws-glue-api-crawler-classifiers-CreateGrokClassifierRequest)
 
 + [UpdateGrokClassifierRequest Structure](#aws-glue-api-crawler-classifiers-UpdateGrokClassifierRequest)
@@ -16,11 +18,15 @@
 
 + [UpdateXMLClassifierRequest Structure](#aws-glue-api-crawler-classifiers-UpdateXMLClassifierRequest)
 
++ [CreateJsonClassifierRequest Structure](#aws-glue-api-crawler-classifiers-CreateJsonClassifierRequest)
+
++ [UpdateJsonClassifierRequest Structure](#aws-glue-api-crawler-classifiers-UpdateJsonClassifierRequest)
+
 ## Classifier Structure<a name="aws-glue-api-crawler-classifiers-Classifier"></a>
 
-Classifiers are written in Python and triggered during a crawl task\. You can write your own classifiers to best categorize your data sources and specify the appropriate schemas to use for them\. A classifier checks whether a given file is in a format it can handle, and if it is, the classifier creates a schema in the form of a `StructType` object that matches that data format\.
+Classifiers are triggered during a crawl task\. A classifier checks whether a given file is in a format it can handle, and if it is, the classifier creates a schema in the form of a `StructType` object that matches that data format\.
 
-A classifier can be either a `grok` classifier or an XML classifier, specified in one or the other field of the `Classifier` object\.
+You can use the standard classifiers that AWS Glue supplies, or you can write your own classifiers to best categorize your data sources and specify the appropriate schemas to use for them\. A classifier can be a `grok` classifier, an `XML` classifier, or a `JSON` classifier, as specified in one of the fields in the `Classifier` object\.
 
 **Fields**
 
@@ -31,6 +37,10 @@ A classifier can be either a `grok` classifier or an XML classifier, specified i
 + `XMLClassifier` – A XMLClassifier object\.
 
   An `XMLClassifier` object\.
+
++ `JsonClassifier` – A JsonClassifier object\.
+
+  A `JsonClassifier` object\.
 
 ## GrokClassifier Structure<a name="aws-glue-api-crawler-classifiers-GrokClassifier"></a>
 
@@ -95,6 +105,32 @@ A classifier for `XML` content\.
 + `RowTag` – String\.
 
   The XML tag designating the element that contains each record in an XML document being parsed\. Note that this cannot identify a self\-closing element \(closed by `/>`\)\. An empty row element that contains only attributes can be parsed as long as it ends with a closing tag \(for example, `<row item_a="A" item_b="B"></row>` is okay, but `<row item_a="A" item_b="B" />` is not\)\.
+
+## JsonClassifier Structure<a name="aws-glue-api-crawler-classifiers-JsonClassifier"></a>
+
+A classifier for `JSON` content\.
+
+**Fields**
+
++ `Name` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
+
+  The name of the classifier\.
+
++ `CreationTime` – Timestamp\.
+
+  The time this classifier was registered\.
+
++ `LastUpdated` – Timestamp\.
+
+  The time this classifier was last updated\.
+
++ `Version` – Number \(long\)\.
+
+  The version of this classifier\.
+
++ `JsonPath` – String\. Required\.
+
+  A `JsonPath` string defining the JSON data for the classifier to classify\. AWS Glue supports a subset of JsonPath, as described in [Writing JsonPath Custom Classifiers](https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json)\.
 
 ## CreateGrokClassifierRequest Structure<a name="aws-glue-api-crawler-classifiers-CreateGrokClassifierRequest"></a>
 
@@ -176,6 +212,34 @@ Specifies an XML classifier to be updated\.
 
   The XML tag designating the element that contains each record in an XML document being parsed\. Note that this cannot identify a self\-closing element \(closed by `/>`\)\. An empty row element that contains only attributes can be parsed as long as it ends with a closing tag \(for example, `<row item_a="A" item_b="B"></row>` is okay, but `<row item_a="A" item_b="B" />` is not\)\.
 
+## CreateJsonClassifierRequest Structure<a name="aws-glue-api-crawler-classifiers-CreateJsonClassifierRequest"></a>
+
+Specifies a JSON classifier for `CreateClassifier` to create\.
+
+**Fields**
+
++ `Name` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
+
+  The name of the classifier\.
+
++ `JsonPath` – String\. Required\.
+
+  A `JsonPath` string defining the JSON data for the classifier to classify\. AWS Glue supports a subset of JsonPath, as described in [Writing JsonPath Custom Classifiers](https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json)\.
+
+## UpdateJsonClassifierRequest Structure<a name="aws-glue-api-crawler-classifiers-UpdateJsonClassifierRequest"></a>
+
+Specifies a JSON classifier to be updated\.
+
+**Fields**
+
++ `Name` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
+
+  The name of the classifier\.
+
++ `JsonPath` – String\.
+
+  A `JsonPath` string defining the JSON data for the classifier to classify\. AWS Glue supports a subset of JsonPath, as described in [Writing JsonPath Custom Classifiers](https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json)\.
+
 ## Operations<a name="aws-glue-api-crawler-classifiers-actions"></a>
 
 + [CreateClassifier Action \(Python: create\_classifier\)](#aws-glue-api-crawler-classifiers-CreateClassifier)
@@ -190,7 +254,7 @@ Specifies an XML classifier to be updated\.
 
 ## CreateClassifier Action \(Python: create\_classifier\)<a name="aws-glue-api-crawler-classifiers-CreateClassifier"></a>
 
-Creates a classifier in the user's account\. This may be either a `GrokClassifier` or an `XMLClassifier`\.
+Creates a classifier in the user's account\. This may be a `GrokClassifier`, an `XMLClassifier`, or abbrev `JsonClassifier`, depending on which field of the request is present\.
 
 **Request**
 
@@ -201,6 +265,10 @@ Creates a classifier in the user's account\. This may be either a `GrokClassifie
 + `XMLClassifier` – A CreateXMLClassifierRequest object\.
 
   An `XMLClassifier` object specifying the classifier to create\.
+
++ `JsonClassifier` – A CreateJsonClassifierRequest object\.
+
+  A `JsonClassifier` object specifying the classifier to create\.
 
 **Response**
 
@@ -286,7 +354,7 @@ Lists all classifier objects in the Data Catalog\.
 
 ## UpdateClassifier Action \(Python: update\_classifier\)<a name="aws-glue-api-crawler-classifiers-UpdateClassifier"></a>
 
-Modifies an existing classifier \(either a `GrokClassifier` or an `XMLClassifier`\)\.
+Modifies an existing classifier \(a `GrokClassifier`, `XMLClassifier`, or `JsonClassifier`, depending on which field is present\)\.
 
 **Request**
 
@@ -297,6 +365,10 @@ Modifies an existing classifier \(either a `GrokClassifier` or an `XMLClassifier
 + `XMLClassifier` – An UpdateXMLClassifierRequest object\.
 
   An `XMLClassifier` object with updated fields\.
+
++ `JsonClassifier` – An UpdateJsonClassifierRequest object\.
+
+  A `JsonClassifier` object with updated fields\.
 
 **Response**
 

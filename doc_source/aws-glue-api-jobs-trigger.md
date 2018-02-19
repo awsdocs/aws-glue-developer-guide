@@ -84,7 +84,7 @@ Defines the predicate of the trigger, which determines when it fires\.
 
 + `Logical` – String \(valid values: `AND` | `ANY`\)\.
 
-  Currently "OR" is not supported\.
+  Optional field if only one condition is listed\. If multiple conditions are listed, then this field is required\.
 
 + `Conditions` – An array of [Condition](#aws-glue-api-jobs-trigger-Condition)s\.
 
@@ -106,7 +106,7 @@ Defines a condition under which a trigger fires\.
 
 + `State` – String \(valid values: `STARTING` | `RUNNING` | `STOPPING` | `STOPPED` | `SUCCEEDED` | `FAILED`\)\.
 
-  The condition state\. Currently, the only value reported is SUCCEEDED\.
+  The condition state\. Currently, the values supported are SUCCEEDED, STOPPED and FAILED\.
 
 ## Action Structure<a name="aws-glue-api-jobs-trigger-Action"></a>
 
@@ -177,6 +177,8 @@ Creates a new trigger\.
 + `Description` – Description string, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
 
   A description of the new trigger\.
+
++ `Tags` – An array of *UTF\-8 string*–to–*UTF\-8 string* mappings\.
 
 **Response**
 

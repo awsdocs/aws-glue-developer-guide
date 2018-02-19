@@ -40,7 +40,7 @@ Returns a new `DynamicFrame` that results from applying the specified function t
 
 + `totalThreshold` – The maximum number of errors that can occur overall before processing errors out \(optional; the default is zero\)\.
 
-Returns a new `DynamicFrameCollection` created by applying the transform to each `DynamicFrame` in the source `DynamicFrameCollection`\.
+Returns a new `DynamicFrame` that results from applying the specified function to all `DynamicRecords` in the original `DynamicFrame`\.
 
 ## apply\(cls, \*args, \*\*kwargs\)<a name="aws-glue-api-crawler-pyspark-transforms-map-apply"></a>
 

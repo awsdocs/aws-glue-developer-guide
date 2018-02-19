@@ -3,7 +3,7 @@
 Development endpoints create an environment where you can interactively test and debug ETL scripts in various ways before you run them as AWS Glue jobs\. The tutorials in this section show you how to do this using different IDEs\. All of them assume that you have set up a development endpoint and crawled sample data to create tables in your AWS Glue Data Catalog using the steps in the following sections\.
 
 **Note**  
-Your ETL scripts must target Python 2\.7, because AWS Glue development endpoints do not support Python 3 yet\.
+Your Python scripts must target Python 2\.7, because AWS Glue development endpoints do not support Python 3 yet\.
 
 Because you're using only Amazon Simple Storage Service \(Amazon S3\) data in some cases, and a mix of JDBC and Amazon S3 data in others, you will set up one development endpoint that is not in a virtual private cloud \(VPC\) and one that is\.
 

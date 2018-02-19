@@ -2,7 +2,7 @@
 
 A script contains the code that extracts data from sources, transforms it, and loads it into targets\. AWS Glue runs a script when it starts a job\.
 
-AWS Glue uses a language in scripts that is an extension of the PySpark Python dialect for extract, transform, and load \(ETL\) jobs\. It contains *extended constructs* to deal with ETL transformations\. When you automatically generate the source code logic for your job, a script is created\. You can edit this script, or you can provide your own script to process your ETL work\.
+AWS Glue ETL scripts can be coded in Python or Scala\. Python scripts use a language that is an extension of the PySpark Python dialect for extract, transform, and load \(ETL\) jobs\. The script contains *extended constructs* to deal with ETL transformations\. When you automatically generate the source code logic for your job, a script is created\. You can edit this script, or you can provide your own script to process your ETL work\.
 
  For information about defining and editing scripts using the AWS Glue console, see [Working with Scripts on the AWS Glue Console](console-edit-script.md)\.
 
