@@ -13,11 +13,8 @@ Given a source and target, AWS Glue can generate a script to transform the data\
 In the AWS Glue console, the script is represented as code\. You can also view the script as a diagram that uses annotations \(\#\#\) embedded in the script\.  These annotations describe the parameters, transform types, arguments, inputs, and other characteristics of the script that are used to generate a diagram in the AWS Glue console\.
 
 The diagram of the script shows the following:
-
 + Source inputs to the script
-
 + Transforms 
-
 + Target outputs written by the script
 
 Scripts can contain the following annotations:

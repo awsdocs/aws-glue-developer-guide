@@ -12,7 +12,6 @@ case class DateNode extends ScalarNode(value, TypeCode.DATE)  (
 ```
 
 ### DateNode val Fields<a name="glue-etl-scala-apis-glue-types-datenode-case-class-vals"></a>
-
 + `ordering`
 
 ### DateNode def Methods<a name="glue-etl-scala-apis-glue-types-datenode-case-class-defs"></a>

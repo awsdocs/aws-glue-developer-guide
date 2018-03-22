@@ -10,7 +10,9 @@ In the AWS Glue console, a job bookmark option is passed as a parameter when the
 | Job bookmark | Description | 
 | --- | --- | 
 | Enable | Keep track of previously processed data\. When a job runs, process new data since the last checkpoint\. | 
-| Disable | Always process the entire dataset\. You are responsible for managing the output from previous job runs\. | 
+| Disable | Always process the entire dataset\. You are responsible for managing the output from previous job runs\. This is the default\. | 
 | Pause | Process incremental data since the last run\. Don’t update the state information so that every subsequent run processes data since the last bookmark\. You are responsible for managing the output from previous job runs\. | 
 
-For details about the parameters passed to a job, and specifically for a job bookmark, see [Special Parameters Used by AWS Glue](aws-glue-programming-python-glue-arguments.md)\.
+For details about the parameters passed to a job, and specifically for a job bookmark, see [Special Parameters Used by AWS Glue](aws-glue-programming-etl-glue-arguments.md)\.
+
+Many of the AWS Glue PySpark dynamic frame methods include an optional parameter named `transformation_ctx`, which is used to identify state information for a job bookmark\. If you do not pass in the `transformation_ctx` parameter, then job bookmarks are not enabled for a dynamic frame or table used in the method\. For example, if you have an ETL job that reads and joins two Amazon S3 sources, you might choose to pass the `transformation_ctx` parameter only to those methods that you want to enable bookmarks\. For more information about the `DynamicFrameReader` class, see [DynamicFrameReader Class](aws-glue-api-crawler-pyspark-extensions-dynamic-frame-reader.md)\. For more information about PySpark extensions, see [AWS Glue PySpark Extensions Reference](aws-glue-programming-python-extensions.md)\. 

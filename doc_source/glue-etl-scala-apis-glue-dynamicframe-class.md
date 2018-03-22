@@ -22,13 +22,9 @@ DynamicFrames are designed to provide a flexible data model for ETL operations\.
 DynamicFrames provide a range of transformations for data cleaning and ETL\. They also support conversion to and from SparkSQL DataFrames to integrate with existing code and the many analytics operations that DataFrames provide\.
 
 The following parameters are shared across many of the Glue transformations that construct DynamicFrames:
-
 + `transformationContext`  —  Identifier for this DynamicFrame\. The transformationContext is used as a key for job bookmark state that is persisted across runs\.
-
 + `callSite`  —  Used to provide context information for error reporting\. These values are automatically set when calling from Python\.
-
 + `stageThreshold`  —  Maximum number of error records allowed from the computation of this DynamicFrame before throwing an exception, excluding records present in the previous DynamicFrame\.
-
 + `totalThreshold`  —  Maximum number of total error records before an exception is thrown, including those from previous frames\.
 
 ## val errorsCount<a name="glue-etl-scala-apis-glue-dynamicframe-class-vals-errorsCount"></a>
@@ -50,9 +46,7 @@ def applyMapping( mappings : Seq[Product4[String, String, String, String]],
                   totalThreshold : Long = 0
                 ) : DynamicFrame
 ```
-
 + `mappings`  —  Sequence of mappings to construct a new DynamicFrame\.
-
 + `caseSensitive`  —  Whether or not to look treat source columns as case sensitive\. Setting this to false may help when integrating with case\-insensitive stores like AWS Glue Data Catalog\.
 
 Selects, projects, and casts columns based on a sequence of mappings\.
@@ -244,11 +238,8 @@ def join( keys1 : Seq[String],
           totalThreshold : Long = 0
         ) : DynamicFrame
 ```
-
 + `keys1`  —  Columns in this DynamicFrame to use for the join\.
-
 + `keys2`  —  Columns in `frame2` to use for the join\. Must be the same length as `keys1`\.
-
 + `frame2`  —  DynamicFrame to join against\.
 
 Returns the result of performing an equijoin with `frame2` using the specified keys\.
@@ -299,11 +290,8 @@ def relationalize( rootTableName : String,
                    totalThreshold : Long = 0
                  ) : Seq[DynamicFrame]
 ```
-
 + `rootTableName`  —  The name to use for the base DynamicFrame in the output\. DynamicFrames created by pivoting arrays start with this as a prefix\.
-
 + `stagingPath`  —  S3 path for writing intermediate data\.
-
 + `options`  —  Relationalize options and configuration\. Currently unused\.
 
 Flattens all nested structures and pivots arrays into separate tables\.
@@ -366,9 +354,7 @@ def renameField( oldName : String,
                  totalThreshold : Long = 0
                ) : DynamicFrame
 ```
-
 + `oldName`  —  The original name of the column\.
-
 + `newName`  —  The new name of the column\.
 
 Returns a new DynamicFrame with the specified field renamed\.
@@ -407,11 +393,8 @@ def resolveChoice( specs : Seq[Product2[String, String]] = Seq.empty[ResolveSpec
                    totalThreshold : Long = 0
                  ) : DynamicFrame
 ```
-
 + `choiceOption`  —  Action to apply to all ChoiceType columns not listed in the specs sequence\.
-
 + `database`  —  Data Catalog database to use with the `match_catalog` action\.
-
 + `tableName`  —  Data Catalog table to use with the `match_catalog` action\.
 
 Returns a new DynamicFrame by replacing one or more ChoiceTypes with a more specific type\.
@@ -419,17 +402,12 @@ Returns a new DynamicFrame by replacing one or more ChoiceTypes with a more spec
 There are two ways to use resolveChoice\. The first is to specify a sequence of specific columns and how to resolve them\. These are specified as tuples made up of \(column, action\) pairs\.
 
 The possible actions are:
-
 + `cast:type`  —  Attempts to cast all values to the specified type\.
-
 + `make_cols`  —  Converts each distinct type to a column with the name `columnName_type`\.
-
 + `make_struct`  —  Converts a column to a struct with keys for each distinct type\.
-
 + `project:type`  —  Retainz only values of the specified type\.
 
 The other mode for `resolveChoice>` is to specify a single resolution for all ChoiceTypes\. This can be used in cases where the complete list of ChoiceTypes is unknown before execution\. In addition to the actions listed above, this mode also supports the following action:
-
 + `match_catalog`  —  Attempts to cast each ChoiceType to the corresponding type in the specified catalog table\.
 
 **Examples:**
@@ -493,7 +471,6 @@ def selectFields( paths : Seq[String],
                   totalThreshold : Long = 0
                 ) : DynamicFrame
 ```
-
 + `paths`  —  Sequence of column names to select\.
 
 Returns a new DynamicFrame containing the specified columns\.
@@ -506,7 +483,6 @@ The `selectFields` method can only be used to select top\-level columns\. The \[
 ```
 def show( numRows : Int = 20 ) : Unit 
 ```
-
 + `numRows`  —  Number of rows to print\.
 
 Prints rows from this DynamicFrame in JSON format\.
@@ -524,17 +500,13 @@ def spigot( path : String,
 ```
 
 Passthrough transformation that returns the same records but writes out a subset of records as a side effect\.
-
 + `path`  —  Path in S3 to which to write output, in the form `s3://bucket//path`\.
-
 + `options`  —  Optional `JsonOptions` map describing the sampling behavior\.
 
 Returns a DynamicFrame containing the same records as this one\.
 
 By default, writes 100 arbitrary records to the location specified by `path`\. This behavior can be customized using the `options` map\. Valid keys include the following:
-
 + `topk`  —  Specifies the total number of records written out\. The default is 100\.
-
 + `prob`  —  Specifies the probability that an individual record is included\. Default is 1\.
 
 For example, the following call would sample the dataset by selecting each record with a 20% probability and stoping after 200 records have been written:
@@ -555,7 +527,6 @@ def splitFields( paths : Seq[String],
                  totalThreshold : Long = 0
                ) : Seq[DynamicFrame]
 ```
-
 + `paths`  —  The paths to include in the first DynamicFrame\.
 
 Returns a sequence of two DynamicFrames\. The first contains the specified paths and the second contains all other columns\.
@@ -574,11 +545,8 @@ def splitRows( paths : Seq[String],
 ```
 
 Splits rows based on predicates that compare columns to constants\.
-
 + `paths`  —  Columns to use for comparison\.
-
 + `values`  —  Constant values to use for comparison\.
-
 + `operators`  —  Operators to use for comparison\.
 
 Returns a Sequence of two DynamicFrames\. The first contains rows for which the predicate is true and the second contains those for which it is false\.
@@ -626,11 +594,8 @@ def unbox( path : String,
            totalThreshold : Long = 0
          ) : DynamicFrame
 ```
-
 + `path`  —  The column to parse\. Must be string or binary\.
-
 + `format`  —  The format to use for parsing\.
-
 + `optionString`  —  Options to pass to the format, such as the CSV separator\.
 
 Parses an embedded string or binary column according to the specified format\. Parsed columns are nested under a struct with the original column name\.
@@ -727,7 +692,6 @@ This method also unnests nested structs inside of arrays, but for historical rea
 ```
 def withFrameSchema( getSchema : () => Schema ) : DynamicFrame 
 ```
-
 + `getSchema`  —  Function that returns the schema to use\. Specified as a zero\-parameter function to defer potentially expensive computation\.
 
 Sets the schema of this DynamicFrame to the specified value\. This is primarily used internally to avoid costly schema re\-computation\. The passed\-in schema must contain all columns present in the data\.
@@ -737,7 +701,6 @@ Sets the schema of this DynamicFrame to the specified value\. This is primarily 
 ```
 def withName( name : String ) : DynamicFrame 
 ```
-
 + `name`  —  New name to use\.
 
 Returns a copy of this DynamicFrame with a new name\.

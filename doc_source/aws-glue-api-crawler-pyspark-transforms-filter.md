@@ -3,41 +3,26 @@
 Builds a new `DynamicFrame` by selecting records from the input `DynamicFrame` that satisfy a specified predicate function\.
 
 ## Methods<a name="aws-glue-api-crawler-pyspark-transforms-filter-_methods"></a>
-
 + [\_\_call\_\_](#aws-glue-api-crawler-pyspark-transforms-filter-__call__)
-
 + [apply](#aws-glue-api-crawler-pyspark-transforms-filter-apply)
-
 + [name](#aws-glue-api-crawler-pyspark-transforms-filter-name)
-
 + [describeArgs](#aws-glue-api-crawler-pyspark-transforms-filter-describeArgs)
-
 + [describeReturn](#aws-glue-api-crawler-pyspark-transforms-filter-describeReturn)
-
 + [describeTransform](#aws-glue-api-crawler-pyspark-transforms-filter-describeTransform)
-
 + [describeErrors](#aws-glue-api-crawler-pyspark-transforms-filter-describeErrors)
-
 + [describe](#aws-glue-api-crawler-pyspark-transforms-filter-describe)
-
 + [Example Code](#aws-glue-api-crawler-pyspark-transforms-filter-example)
 
 ## \_\_call\_\_\(frame, f, transformation\_ctx="", info="", stageThreshold=0, totalThreshold=0\)\)<a name="aws-glue-api-crawler-pyspark-transforms-filter-__call__"></a>
 
 Returns a new `DynamicFrame` built by selecting records from the input `DynamicFrame` that satisfy a specified predicate function\.
-
 + `frame` – The source `DynamicFrame` to apply the specified filter function to \(required\)\.
-
 + `f` – The predicate function to apply to each `DynamicRecord` in the `DynamicFrame`\. The function must take a `DynamicRecord` as its argument and return True if the `DynamicRecord` meets the filter requirements, or False if it does not \(required\)\.
 
   A `DynamicRecord` represents a logical record in a `DynamicFrame`\. It is similar to a row in a Spark `DataFrame`, except that it is self\-describing and can be used for data that does not conform to a fixed schema\.
-
 + `transformation_ctx` – A unique string that is used to identify state information \(optional\)\.
-
 + `info` – A string associated with errors in the transformation \(optional\)\.
-
 + `stageThreshold` – The maximum number of errors that can occur in the transformation before it errors out \(optional; the default is zero\)\.
-
 + `totalThreshold` – The maximum number of errors that can occur overall before processing errors out \(optional; the default is zero\)\.
 
 ## apply\(cls, \*args, \*\*kwargs\)<a name="aws-glue-api-crawler-pyspark-transforms-filter-apply"></a>

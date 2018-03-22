@@ -12,7 +12,6 @@ case class LongNode extends ScalarNode(value, TypeCode.LONG)  (
 ```
 
 ### LongNode val Fields<a name="glue-etl-scala-apis-glue-types-longnode-case-class-vals"></a>
-
 + `ordering`
 
 ### LongNode def Methods<a name="glue-etl-scala-apis-glue-types-longnode-case-class-defs"></a>

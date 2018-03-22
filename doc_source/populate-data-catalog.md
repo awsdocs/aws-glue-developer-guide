@@ -3,9 +3,7 @@
 The AWS Glue Data Catalog contains references to data that is used as sources and targets of your extract, transform, and load \(ETL\) jobs in AWS Glue\. To create your data warehouse, you must catalog this data\. The AWS Glue Data Catalog is an index to the location, schema, and runtime metrics of your data\. You use the information in the Data Catalog to create and monitor your ETL jobs\. Typically, you run a crawler to take inventory of the data in your data stores, but there are other ways to add metadata tables into your Data Catalog\.
 
 You can add table definitions to the AWS Glue Data Catalog in the following ways:
-
 + Run a crawler that connects to one or more data stores, determines the data structures, and writes tables into the Data Catalog\. You can run your crawler on a schedule\. For more information, see [Cataloging Tables with a Crawler](add-crawler.md)\.
-
 + Use the AWS Glue console to create a table in the AWS Glue Data Catalog\. For more information, see [Working with Tables on the AWS Glue Console](console-tables.md)\.
 
   Use the `CreateTable` operation in the [AWS Glue API](aws-glue-api.md) to create a table in the AWS Glue Data Catalog\.
@@ -28,7 +26,7 @@ The following is the general workflow for how a crawler populates the AWS Glue D
 
 1. The crawler writes metadata to the Data Catalog\. A table definition contains metadata about the data in your data store\. The table is written to a database, which is a container of tables in the Data Catalog\. Attributes of a table include classification, which is a label created by the classifier that inferred the table schema\.
 
-
+**Topics**
 + [Defining Tables in the AWS Glue Data Catalog](tables-described.md)
 + [Cataloging Tables with a Crawler](add-crawler.md)
 + [Defining a Database in Your Data Catalog](define-database.md)

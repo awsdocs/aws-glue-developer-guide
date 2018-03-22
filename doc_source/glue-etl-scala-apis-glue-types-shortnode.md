@@ -12,7 +12,6 @@ case class ShortNode extends ScalarNode(value, TypeCode.SHORT)  (
 ```
 
 ### ShortNode val Fields<a name="glue-etl-scala-apis-glue-types-shortnode-case-class-vals"></a>
-
 + `ordering`
 
 ### ShortNode def Methods<a name="glue-etl-scala-apis-glue-types-shortnode-case-class-defs"></a>

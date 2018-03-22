@@ -1,6 +1,6 @@
 # The AWS Glue Scala NullNode APIs<a name="glue-etl-scala-apis-glue-types-nullnode"></a>
 
-
+**Topics**
 + [The NullNode Class](#glue-etl-scala-apis-glue-types-nullnode-class)
 + [The NullNode Case Object](#glue-etl-scala-apis-glue-types-nullnode-case-object)
 

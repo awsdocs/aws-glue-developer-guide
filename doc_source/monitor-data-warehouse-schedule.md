@@ -23,25 +23,16 @@ cron(fields)
 |  Year  |  1970–2199  |  , \- \* /  | 
 
 **Wildcards**
-
 + The **,** \(comma\) wildcard includes additional values\. In the `Month` field, `JAN,FEB,MAR` would include January, February, and March\.
-
 + The **\-** \(dash\) wildcard specifies ranges\. In the `Day` field, 1–15 would include days 1 through 15 of the specified month\.
-
 + The **\*** \(asterisk\) wildcard includes all values in the field\. In the `Hours` field, **\*** would include every hour\.
-
 + The **/** \(forward slash\) wildcard specifies increments\. In the `Minutes` field, you could enter **1/10** to specify every 10th minute, starting from the first minute of the hour \(for example, the 11th, 21st, and 31st minute\)\.
-
 + The **?** \(question mark\) wildcard specifies one or another\. In the `Day-of-month` field you could enter **7**, and if you didn't care what day of the week the seventh was, you could enter **?** in the Day\-of\-week field\.
-
 + The **L** wildcard in the `Day-of-month` or `Day-of-week` fields specifies the last day of the month or week\.
-
 + The **W** wildcard in the `Day-of-month` field specifies a weekday\. In the `Day-of-month` field, `3W` specifies the day closest to the third weekday of the month\.
 
 **Limits**
-
 + You can't specify the `Day-of-month` and `Day-of-week` fields in the same cron expression\. If you specify a value in one of the fields, you must use a **?** \(question mark\) in the other\.
-
 + Cron expressions that lead to rates faster than 5 minutes are not supported\. The support for specifying both a day\-of\-week and a day\-of\-month value is not yet complete \(you must currently use the '?' character in one of these fields\)\. 
 
 **Examples**  

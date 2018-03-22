@@ -12,7 +12,6 @@ case class BooleanNode extends ScalarNode(value, TypeCode.BOOLEAN)  (
 ```
 
 ### BooleanNode val Fields<a name="glue-etl-scala-apis-glue-types-booleannode-case-class-vals"></a>
-
 + `ordering`
 
 ### BooleanNode def Methods<a name="glue-etl-scala-apis-glue-types-booleannode-case-class-defs"></a>

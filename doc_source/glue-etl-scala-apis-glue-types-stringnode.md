@@ -12,7 +12,6 @@ case class StringNode extends ScalarNode(value, TypeCode.STRING)  (
 ```
 
 ### StringNode val Fields<a name="glue-etl-scala-apis-glue-types-stringnode-case-class-vals"></a>
-
 + `ordering`
 
 ### StringNode def Methods<a name="glue-etl-scala-apis-glue-types-stringnode-case-class-defs"></a>

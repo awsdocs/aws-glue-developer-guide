@@ -1,6 +1,6 @@
 # Catalog API<a name="aws-glue-api-catalog"></a>
 
-
+**Topics**
 + [Database API](aws-glue-api-catalog-databases.md)
 + [Table API](aws-glue-api-catalog-tables.md)
 + [Partition API](aws-glue-api-catalog-partitions.md)

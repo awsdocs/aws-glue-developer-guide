@@ -1,6 +1,6 @@
 # The AWS Glue Scala ScalarNode APIs<a name="glue-etl-scala-apis-glue-types-scalarnode"></a>
 
-
+**Topics**
 + [The ScalarNode Class](#glue-etl-scala-apis-glue-types-scalarnode-class)
 + [The ScalarNode Object](#glue-etl-scala-apis-glue-types-scalarnode-object)
 

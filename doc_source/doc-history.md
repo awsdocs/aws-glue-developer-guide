@@ -1,9 +1,7 @@
 # Document History for AWS Glue<a name="doc-history"></a>
 
 The following table describes important changes to the documentation for AWS Glue\.
-
 + **Latest API version:** 2018\-01\-12
-
 + **Latest documentation update:** January 15, 2018
 
 

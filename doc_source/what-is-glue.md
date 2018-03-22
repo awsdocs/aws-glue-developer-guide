@@ -4,28 +4,20 @@ AWS Glue is a fully managed ETL \(extract, transform, and load\) service that ma
 
 Use the AWS Glue console to discover data, transform it, and make it available for search and querying\. The console calls the underlying services to orchestrate the work required to transform your data\. You can also use the AWS Glue API operations to interface with AWS Glue services\. Edit, debug, and test your Python or Scala Apache Spark ETL code using a familiar development environment\.
 
-For pricing information, see [AWS Glue Pricing](https://aws.amazon.com/glue/pricing/)\.
+For pricing information, see  [AWS Glue Pricing](https://aws.amazon.com/glue/pricing)\.
 
 ## When Should I Use AWS Glue?<a name="when-to-use-glue"></a>
 
 **You can use AWS Glue to build a data warehouse to organize, cleanse, validate, and format data\.** You can transform and move AWS Cloud data  into your data store\. You can also load data from disparate sources into your data warehouse for regular reporting and analysis\. By storing it in a data warehouse, you integrate information from different parts of your business and provide a common source of data for decision making\. 
 
 AWS Glue simplifies many tasks when you are building a data warehouse:
-
 + Discovers and catalogs metadata about your data stores into a central catalog\. You can process semi\-structured data, such as clickstream or process logs\.
-
 + Populates the AWS Glue Data Catalog with table definitions from scheduled crawler programs\. Crawlers call classifier logic to infer the schema, format, and data types of your data\. This metadata is stored as tables in the AWS Glue Data Catalog and used in the authoring process of your ETL jobs\.
-
 + Generates ETL scripts to transform, flatten, and enrich your data from source to target\.
-
 + Detects schema changes and adapts based on your preferences\.
-
 + Triggers your ETL jobs based on a schedule or event\. You can initiate jobs automatically to move your data into your data warehouse\. Triggers can be used to create a dependency flow between jobs\.
-
 + Gathers runtime metrics to monitor the activities of your data warehouse\.
-
 + Handles errors and retries automatically\.
-
 + Scales resources, as needed, to run your jobs\.
 
 **You can use AWS Glue when you run serverless queries against your Amazon S3 data lake\.** AWS Glue can catalog your Amazon Simple Storage Service \(Amazon S3\) data, making it available for querying with Amazon Athena and Amazon Redshift Spectrum\. With crawlers, your metadata stays in sync with the underlying data\. Athena and Redshift Spectrum can directly query your Amazon S3 data lake using the AWS Glue Data Catalog\. With AWS Glue, you access and analyze data through one unified interface without loading it into multiple data silos\. 

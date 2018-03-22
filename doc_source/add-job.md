@@ -8,7 +8,7 @@ AWS Glue can write output files in several data formats, including JSON, CSV, OR
 
 ## Defining Job Properties<a name="create-job"></a>
 
-When you define your job in the AWS Glue console, you provide the following information to control the AWS Glue runtime environment:
+When you define your job in the [AWS Glue console](console-jobs.md), you provide the following information to control the AWS Glue runtime environment:
 
 **IAM role**  
 Specify the IAM role that is used for authorization to resources used to run the job and access data stores\. For more information about permissions for running jobs in AWS Glue, see [Overview of Managing Access Permissions to Your AWS Glue Resources](access-control-overview.md)\.
@@ -20,7 +20,7 @@ The code in the ETL script defines your job's procedural logic\. The script can 
 If the script is coded in Scala, a class name must be provided\. The default class name for AWS Glue generated scripts is **GlueApp**\.
 
 **Temporary directory**  
-Provide the location of a working directory in Amazon S3 where temporary intermediate results are written when AWS Glue runs the script\. Confirm that there isn't a file with the same name as the temporary directory in the path\.
+Provide the location of a working directory in Amazon S3 where temporary intermediate results are written when AWS Glue runs the script\. Confirm that there isn't a file with the same name as the temporary directory in the path\. This directory is used when AWS Glue reads and writes to Amazon Redshift and by certain AWS Glue transforms\.
 
 **Job bookmark**  
 Specify how AWS Glue processes state information when the job runs\. You can have it remember previously processed data, update state information, or ignore state information\.
@@ -30,11 +30,8 @@ If you select this option, when the ETL job writes to Amazon S3, the data is enc
 
 **Script libraries**  
 If your script requires it, you can specify locations for the following:   
-
 + Python library path
-
 + Dependent jars path
-
 + Referenced files path
 You can define the comma\-separated Amazon S3 paths for these libraries when you define a job\. You can override these paths when you run the job\. For more information, see [Providing Your Own Custom Scripts](console-custom-created.md)\.
 

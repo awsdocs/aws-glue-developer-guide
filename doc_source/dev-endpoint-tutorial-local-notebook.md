@@ -14,16 +14,12 @@ The tutorial assumes that you have already taken the steps outlined in [Tutorial
 
    On the menu bar of the download page, choose **Quick Start**, and follow the installation instructions\. Start Zeppelin in the way that's appropriate for your operating system as documented on the Quick Start page\. Leave the terminal window that starts the notebook server open while you are using Zeppelin\. When the server has started successfully, you can see a line in the console that ends with "Done, zeppelin server started\." 
 
-1. Open Zeppelin in your browser by navigating to [http://localhost:8080](http://localhost:8080)\.
+1. Open Zeppelin in your browser by navigating to `http://localhost:8080`\.
 
 1. In Zeppelin in the browser, open the drop\-down menu at **anonymous** in the upper\-right corner of the page, and choose **Interpreter**\. On the interpreters page, search for `spark`, and choose **edit** on the right\. Make the following changes:
-
    + Select the **Connect to existing process** check box, and then set **Host** to `localhost` and **Port** to `9007` \(or whatever other port you are using for port forwarding\)\.
-
    + In **Properties**, set **master** to `yarn-client`\.
-
    + If there is a `spark.executor.memory` property, delete it by choosing the **x** in the **action** column\.
-
    + If there is a `spark.driver.memory` property, delete it by choosing the **x** in the **action** column\.
 
    Choose **Save** at the bottom of the page, and then choose **OK** to confirm that you want to update the interpreter and restart it\. Use the browser back button to return to the Zeppelin start page\.
@@ -35,11 +31,8 @@ Next, use SSH local port forwarding to forward a local port \(here, `9007`\) to 
 Open a terminal window that gives you access to the SSH secure\-shell protocol\. On Microsoft Windows, you can use the BASH shell provided by [Git for Windows](https://git-scm.com/downloads), or install [Cygwin](https://www.cygwin.com/)\.
 
 Run the following SSH command, modified as follows:
-
 + Replace `private-key-file-path` with a path to the `.pem` file that contains the private key corresponding to the public key that you used to create your development endpoint\.
-
 + If you are forwarding a different port than `9007`, replace `9007` with the port number that you are actually using locally \(the second 9007 is the remote port\)\.
-
 + Replace `dev-endpoint-public-dns` with the public DNS address of your development endpoint\. To find this address, navigate to your development endpoint in the AWS Glue console, choose the name, and copy the **Public address** that's listed in the **Endpoint details** page\.
 
 ```
@@ -117,9 +110,7 @@ The output of the script is as follows:
 ```
 
 ## Troubleshooting Your Local Notebook Connection<a name="dev-endpoint-tutorial-local-notebook-troubleshooting"></a>
-
 + If you encounter a *connection refused* error, you might be using a development endpoint that is out of date\. Try creating a new development endpoint and reconnecting\.
-
 + If your connection times out or stops working for any reason, you may need to take the following steps to restore it:
 
   1. In Zeppelin, in the drop\-down menu in the upper\-right corner of the page, choose **Interpretors**\. On the interpreters page, search for `spark`\. Choose **edit**, and clear the **Connect to existing process** check box\. Choose **Save** at the bottom of the page\.

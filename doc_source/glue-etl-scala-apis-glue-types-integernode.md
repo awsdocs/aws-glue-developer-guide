@@ -12,7 +12,6 @@ case class IntegerNode extends ScalarNode(value, TypeCode.INT)  (
 ```
 
 ### IntegerNode val Fields<a name="glue-etl-scala-apis-glue-types-integernode-case-class-vals"></a>
-
 + `ordering`
 
 ### IntegerNode def Methods<a name="glue-etl-scala-apis-glue-types-integernode-case-class-defs"></a>

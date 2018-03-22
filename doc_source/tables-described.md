@@ -13,11 +13,8 @@ The table's history is also maintained in the Data Catalog\. This history includ
 An AWS Glue table definition of an Amazon Simple Storage Service \(Amazon S3\) folder can describe a partitioned table\. For example, to improve query performance, a partitioned table might separate monthly data into different files using the name of the month as a key\. In AWS Glue, table definitions include the partitioning key of a table\. When AWS Glue evaluates the data in Amazon S3 folders to catalog a table, it determines whether an individual table or a partitioned table is added\. 
 
 All the following conditions must be true for AWS Glue to create a partitioned table for an Amazon S3 folder:
-
 + The schemas of the files are similar, as determined by AWS Glue\.
-
 + The data format of the files is the same\.
-
 + The compression format of the files is the same\.
 
 For example, you might own an Amazon S3 bucket named `my-app-bucket`, where you store both iOS and Android app sales data\. The data is partitioned by year, month, and day\. The data files for iOS and Android sales have the same schema, data format, and compression format\. In the AWS Glue Data Catalog, the AWS Glue crawler creates one table definition with partitioning keys for year, month, and day\. 

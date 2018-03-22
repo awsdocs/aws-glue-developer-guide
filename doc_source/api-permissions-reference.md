@@ -90,5 +90,4 @@ If you see an expand arrow \(**↗**\) in the upper\-right corner of the table, 
 | [UpdateUserDefinedFunction Action \(Python: update\_user\_defined\_function\)](aws-glue-api-catalog-functions.md#aws-glue-api-catalog-functions-UpdateUserDefinedFunction) | glue:UpdatateUserDefinedFunction | \* | 
 
 ## Related Topics<a name="w3ab1c15c17c23"></a>
-
 + [Access Control](authentication-and-access-control.md#access-control)

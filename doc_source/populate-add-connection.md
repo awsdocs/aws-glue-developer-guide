@@ -13,35 +13,20 @@ Some types of data stores require additional connection information to access yo
 After AWS Glue connects to a JDBC data store, it must have permission from the data store to perform operations\. The username you provide with the connection must have the required permissions or privileges\. For example, a crawler requires SELECT privileges to retrieve metadata from a JDBC data store\. Likewise, a job that writes to a JDBC target requires the necessary privileges to INSERT, UPDATE, and DELETE data into an existing table\.
 
 AWS Glue can connect to the following data stores by using the JDBC protocol:
-
 + Amazon Redshift
-
 + Amazon Relational Database Service
-
   + Amazon Aurora
-
   + MariaDB
-
   + Microsoft SQL Server
-
   + MySQL
-
   + Oracle
-
   + PostgreSQL
-
 + Publicly accessible databases
-
   + Amazon Aurora
-
   + MariaDB
-
   + Microsoft SQL Server
-
   + MySQL
-
   + Oracle
-
   + PostgreSQL
 
 A connection is not typically required for Amazon S3\. However, to access Amazon S3 from within your virtual private cloud \(VPC\), an Amazon S3 VPC endpoint is required\. For more information, see [Amazon VPC Endpoints for Amazon S3](vpc-endpoints-s3.md)\. 
@@ -79,7 +64,7 @@ The name of the VPC that contains your data store\.
 The subnet in the VPC that contains your data store\.  
 
 **Security groups**  
-The security groups that are associated with your data store\. AWS Glue associates these security groups with the elastic network interface that is attached to your VPC subnet\.
+The security groups that are associated with your data store\. AWS Glue associates these security groups with the elastic network interface that is attached to your VPC subnet\. To allow AWS Glue components to communicate and also prevent access from other networks, at least one chosen security group must specify a self\-referencing inbound rule for all TCP ports\.
 
 For information about managing a VPC with Amazon Redshift, see [Managing Clusters in an Amazon Virtual Private Cloud \(VPC\)](http://docs.aws.amazon.com/redshift/latest/mgmt/managing-clusters-vpc.html)\.
 

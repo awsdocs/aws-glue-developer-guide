@@ -5,19 +5,12 @@ A job in AWS Glue consists of the business logic that performs extract, transfor
 To view existing jobs, sign in to the AWS Management Console and open the AWS Glue console at [https://console\.aws\.amazon\.com/glue/](https://console.aws.amazon.com/glue/)\. Then choose the **Jobs** tab in AWS Glue\. The **Jobs** list displays the location of the script that is associated with each job, when the job was last modified, and the current job bookmark option\. 
 
 From the **Jobs** list, you can do the following:
-
 + To start an existing job, choose **Action**, and then choose **Run job**\.
-
 + To stop a `Running` or `Starting` job, choose **Action**, and then choose **Stop job run**\.
-
 + To add triggers that start a job, choose **Action**, **Choose job triggers**\.
-
 + To modify an existing job, choose **Action**, and then choose **Edit job** or **Delete**\.
-
 + To change a script that is associated with a job, choose **Action**, **Edit script**\.
-
 + To reset the state information that AWS Glue stores about your job, choose **Action**, **Reset job bookmark**\.
-
 + To create a development endpoint with the properties of this job, choose **Action**, **Create development endpoint**\.
 
 **To add a new job using the console**
@@ -28,9 +21,8 @@ From the **Jobs** list, you can do the following:
 
    If you decide to have AWS Glue generate a script for your job, you must specify the job properties, data sources, and data targets, and verify the schema mapping of source columns to target columns\. The generated script is a starting point for you to add code to perform your ETL work\. Verify the code in the script and modify it to meet your business needs\.
 **Note**  
-To get step\-by\-step guidance for adding a job with a generated script, see the **Add job** tutorial in the console\.
-
-    If you provide or author the script, your job defines the sources, targets, and transforms\. But you must specify any connections that are required by the script in the job\. For information about creating your own script, see [Providing Your Own Custom Scripts](console-custom-created.md)\.
+To get step\-by\-step guidance for adding a job with a generated script, see the **Add job** tutorial in the console\.    
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/glue/latest/dg/console-jobs.html)
 
 **Note**  
 The job assumes the permissions of the **IAM role** that you specify when you create it\. This IAM role must have permission to extract data from your data store and write to your target\. The AWS Glue console only lists IAM roles that have attached a trust policy for the AWS Glue principal service\. For more information about providing roles for AWS Glue, see [Using Identity\-Based Policies \(IAM Policies\)](using-identity-based-policies.md)\.
@@ -45,53 +37,35 @@ To get step\-by\-step guidance for adding a job with a generated script, see the
 ## Viewing Job Details<a name="console-jobs-details"></a>
 
 To see details of a job, select the job in the **Jobs** list and review the information on the following tabs:
-
 + History
-
 + Details
-
 + Script
 
 ### History<a name="console-jobs-details-history"></a>
 
 The **History** tab shows your job run history and how successful a job has been in the past\. For each job, the run metrics include the following:
-
 + **Run ID** is an identifier created by AWS Glue for each run of this job\.
-
 + **Retry attempt** shows the number of attempts for jobs that required AWS Glue to automatically retry\.
-
 + **Run status** shows the success of each run listed with the most recent run at the top\. If a job is `Running` or `Starting`, you can choose the action icon in this column to stop it\.
-
 + **Error** shows the details of an error meesage if the run was not successful\.
-
 + **Logs** links to the logs written to `stdout` for this job run\.
 
   The **Logs** link takes you to the CloudWatch Logs, where you can see all the details about the tables that were created in the AWS Glue Data Catalog and any errors that were encountered\. You can manage your log retention period in the CloudWatch console\. The default log retention is `Never Expire`\. For more information about how to change the retention period, see [Change Log Data Retention in CloudWatch Logs](http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SettingLogRetention.html)\.
-
 + **Errors** links to the logs written to `stderr` for this job run\. 
 
   This link takes you to the CloudWatch Logs, where you can see details about any errors that were encountered\. You can manage your log retention period in the CloudWatch console\. The default log retention is `Never Expire`\. For more information about how to change the retention period, see [Change Log Data Retention in CloudWatch Logs](http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SettingLogRetention.html)\.
-
 + **Duration** shows the length of time the job took to run\.
-
 + **Triggered by** shows the trigger that fired to start this job run\.
-
 + **Start time** shows the date and time \(local time\) that the job started\.
-
 + **End time** shows the date and time \(local time\) that the job ended\.
 
 ### Details<a name="console-jobs-details-details"></a>
 
 The **Details** tab includes attributes of your job\. It shows you the details about the job definition and also lists the triggers that can start this job\. Each time one of the triggers in the list fires, the job is started\. For the list of triggers, the details include the following:
-
 + **Trigger name** shows the names of triggers that start this job when fired\.
-
 + **Trigger type** lists the type of trigger that starts this job\.
-
 + **Trigger status** displays whether the trigger is created, activated, or deactivated\.
-
 + **Trigger parameters** shows parameters that define when the trigger fires\.
-
 + **Jobs to trigger** shows the list of jobs that start when this trigger fires\.
 
 ### Script<a name="console-jobs-details-script"></a>

@@ -5,13 +5,10 @@ The following diagram shows the architecture of an AWS Glue environment\.
 ![\[The basic concepts populating your Data Catalog and processing ETL dataflow in AWS Glue.\]](http://docs.aws.amazon.com/glue/latest/dg/images/HowItWorks-overview.png)
 
 You define *jobs* in AWS Glue to accomplish the work that's required to extract, transform, and load \(ETL\) data from a data source to a data target\. You typically perform the following actions:
-
 + You define a *crawler* to populate your AWS Glue Data Catalog with metadata table definitions\. You point your crawler at a data store, and the crawler creates table definitions in the Data Catalog\.
 
   In addition to table definitions, the AWS Glue Data Catalog contains other metadata that is required to define ETL jobs\. You use this metadata when you define a job to transform your data\.
-
 + AWS Glue can generate a script to transform your data\. Or, you can provide the script in the AWS Glue console or API\.
-
 + You can run your job on demand, or you can set it up to start when a specified *trigger* occurs\. The trigger can be a time\-based schedule or an event\.
 
   When your job runs, a script extracts data from your data source, transforms the data, and loads it to your data target\. The script runs in an Apache Spark environment in AWS Glue\.

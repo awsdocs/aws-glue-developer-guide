@@ -1,6 +1,6 @@
 # The AWS Glue Scala DynamicRecord Class<a name="glue-etl-scala-apis-glue-dynamicrecord-class"></a>
 
-
+**Topics**
 + [def addField](#glue-etl-scala-apis-glue-dynamicrecord-class-defs-addField)
 + [def dropField](#glue-etl-scala-apis-glue-dynamicrecord-class-defs-dropField)
 + [def setError](#glue-etl-scala-apis-glue-dynamicrecord-class-defs-setError)
@@ -37,9 +37,7 @@ def addField( path : String,
 ```
 
 Adds a \[\[DynamicNode\]\] to the specified path\.
-
 + `path`  —  Path for the field to be added
-
 + `dynamicNode`  —  \[\[DynamicNode\]\] to be added at the specified path\.
 
 ## def dropField<a name="glue-etl-scala-apis-glue-dynamicrecord-class-defs-dropField"></a>
@@ -49,9 +47,7 @@ Adds a \[\[DynamicNode\]\] to the specified path\.
 ```
 
 Drops a \[\[DynamicNode\]\] from the specified path and returns the dropped node if there is not an array in the specified path\.
-
 + `path`  —  Path to the field to drop\.
-
 + `underRename`  —  True if dropField is called as part of a rename transform, or false otherwise \(false by default\)\.
 
 Returns a \[\[scala\.Option Option\]\]\(\[\[DynamicNode\]\]\)\.
@@ -180,9 +176,7 @@ def apply( row : Row,
 ```
 
 Apply method to convert a Spark SQL \[\[Row\]\] to a \[\[DynamicRecord\]\]\.
-
 + `row`  —  A Spark SQL \[\[Row\]\]\.
-
 + `schema`  —  The \[\[Schema\]\] of that row\.
 
 Returns a DynamicRecord\.

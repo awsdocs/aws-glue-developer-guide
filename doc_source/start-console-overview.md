@@ -17,11 +17,8 @@ With AWS Glue, you store metadata in the AWS Glue Data Catalog\. You use this me
 1. Define a job that describes the transformation of data from source to target\.
 
    Generally, to create a job, you have to make the following choices:
-
    + Pick a table from the AWS Glue Data Catalog to be the source of the job\. Your job uses this table definition to access your data store and interpret the format of your data\.
-
    + Pick a table or location from the AWS Glue Data Catalog to be the target of the job\. Your job uses this information to access your data store\.
-
    + Tell AWS Glue to generate a PySpark script to transform your source to target\. AWS Glue generates the code to call built\-in transforms to convert data from its source schema to target schema format\. These transforms perform operations such as copy data, rename columns, and filter data to transform data as necessary\. You can modify this script in the AWS Glue console\.
 
    For more information about defining jobs in AWS Glue, see [Authoring Jobs in AWS Glue](author-job.md)\.
@@ -29,11 +26,8 @@ With AWS Glue, you store metadata in the AWS Glue Data Catalog\. You use this me
 1. Run your job to transform your data\.
 
    You can run your job on demand, or start it based on a one of these trigger types:
-
    + A trigger that is based on a cron schedule\.
-
    + A trigger that is event\-based; for example, the successful completion of another job can start an AWS Glue job\.
-
    + A trigger that starts a job on demand\.
 
    For more information about triggers in AWS Glue, see [Triggering Jobs in AWS Glue](trigger-job.md)\.
@@ -41,11 +35,8 @@ With AWS Glue, you store metadata in the AWS Glue Data Catalog\. You use this me
 1. Monitor your scheduled crawlers and triggered jobs\.
 
    Use the AWS Glue console to view the following:
-
    + Job run details and errors\.
-
    + Crawler run details and errors\.
-
    + Any notifications about AWS Glue activities
 
    For more information about monitoring your crawlers and jobs in AWS Glue, see [Running and Monitoring AWS Glue](monitor-glue.md)\.

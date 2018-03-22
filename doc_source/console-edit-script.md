@@ -19,15 +19,10 @@ The AWS Glue script editor lets you insert, modify, and delete sources, targets,
 To create a diagram for the script, choose **Generate diagram**\. AWS Glue uses annotation lines in the script beginning with **\#\#** to render the diagram\. To correctly represent your script in the diagram, you must keep the parameters in the annotations and the parameters in the Apache Spark code in sync\.
 
 The script editor lets you add code templates wherever your cursor is positioned in the script\. At the top of the editor, choose from the following options:
-
 + To add a source table to the script, choose **Source**\.
-
 + To add a target table to the script, choose **Target**\.
-
 + To add a target location to the script, choose **Target location**\.
-
 + To add a transform to the script, choose **Transform**\. For information about the functions that are called in your script, see [Program AWS Glue ETL Scripts in Python](aws-glue-programming-python.md)\.
-
 + To add a Spigot transform to the script, choose **Spigot**\.
 
 In the inserted code, modify the `parameters` in both the annotations and Apache Spark code\. For example, if you add a **Spigot** transform, verify that the `path` is replaced in both the `@args` annotation line and the `output` code line\.

@@ -4,7 +4,7 @@ Note that Boto 3 resource APIs are not yet available for AWS Glue\. Currently, o
 
 ## AWS Glue API Names in Python<a name="aws-glue-programming-python-calling-names"></a>
 
-AWS Glue API names in Java and other programming languages are generally CamelCased\. However, when called from Python, these generic names are changed to lowercase, with the parts of the name separated by underscore characters to make them more "Pythonic"\. In the [[ERROR] BAD/MISSING LINK TEXT](aws-glue-api.md) reference documentation, these Pythonic names are listed in parentheses after the generic CamelCased names\.
+AWS Glue API names in Java and other programming languages are generally CamelCased\. However, when called from Python, these generic names are changed to lowercase, with the parts of the name separated by underscore characters to make them more "Pythonic"\. In the [AWS Glue API](aws-glue-api.md) reference documentation, these Pythonic names are listed in parentheses after the generic CamelCased names\.
 
 However, although the AWS Glue API names themselves are transformed to lowercase, their parameter names remain capitalized\. It is important to remember this, because parameters should be passed by name when calling AWS Glue APIs, as described in the following section\.
 

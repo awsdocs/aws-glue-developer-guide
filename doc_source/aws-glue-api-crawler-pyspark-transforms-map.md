@@ -3,41 +3,26 @@
 Builds a new `DynamicFrame` by applying a function to all records in the input `DynamicFrame`\.
 
 ## Methods<a name="aws-glue-api-crawler-pyspark-transforms-map-_methods"></a>
-
 + [\_\_call\_\_](#aws-glue-api-crawler-pyspark-transforms-map-__call__)
-
 + [apply](#aws-glue-api-crawler-pyspark-transforms-map-apply)
-
 + [name](#aws-glue-api-crawler-pyspark-transforms-map-name)
-
 + [describeArgs](#aws-glue-api-crawler-pyspark-transforms-map-describeArgs)
-
 + [describeReturn](#aws-glue-api-crawler-pyspark-transforms-map-describeReturn)
-
 + [describeTransform](#aws-glue-api-crawler-pyspark-transforms-map-describeTransform)
-
 + [describeErrors](#aws-glue-api-crawler-pyspark-transforms-map-describeErrors)
-
 + [describe](#aws-glue-api-crawler-pyspark-transforms-map-describe)
-
 + [Example Code](#aws-glue-api-crawler-pyspark-transforms-map-example)
 
 ## \_\_call\_\_\(frame, f, transformation\_ctx="", info="", stageThreshold=0, totalThreshold=0\)<a name="aws-glue-api-crawler-pyspark-transforms-map-__call__"></a>
 
 Returns a new `DynamicFrame` that results from applying the specified function to all `DynamicRecords` in the original `DynamicFrame`\.
-
 + `frame` – The original `DynamicFrame` to which to apply the mapping function \(required\)\.
-
 + `f` – The function to apply to all `DynamicRecords` in the `DynamicFrame`\. The function must take a `DynamicRecord` as an argument and return a new `DynamicRecord` produced by the mapping \(required\)\.
 
   A `DynamicRecord` represents a logical record in a `DynamicFrame`\. It is similar to a row in an Apache Spark `DataFrame`, except that it is self\-describing and can be used for data that does not conform to a fixed schema\.
-
 + `transformation_ctx` – A unique string that is used to identify state information \(optional\)\.
-
 + `info` – A string associated with errors in the transformation \(optional\)\.
-
 + `stageThreshold` – The maximum number of errors that can occur in the transformation before it errors out \(optional; the default is zero\)\.
-
 + `totalThreshold` – The maximum number of errors that can occur overall before processing errors out \(optional; the default is zero\)\.
 
 Returns a new `DynamicFrame` that results from applying the specified function to all `DynamicRecords` in the original `DynamicFrame`\.

@@ -7,15 +7,10 @@ AWS Glue uses the AWS Glue Data Catalog to store metadata about data sources, tr
 ## AWS Glue Console<a name="console-intro"></a>
 
 You use the AWS Glue console to define and orchestrate your ETL workflow\. The console calls several API operations in the AWS Glue Data Catalog and AWS Glue Jobs system to perform the following tasks:
-
 + Define AWS Glue objects such as jobs, tables, crawlers, and connections\.
-
 + Schedule when crawlers run\.
-
 + Define events or schedules for job triggers\.
-
 + Search and filter lists of AWS Glue objects\.
-
 + Edit transformation scripts\.
 
 ## AWS Glue Data Catalog<a name="data-catalog-intro"></a>

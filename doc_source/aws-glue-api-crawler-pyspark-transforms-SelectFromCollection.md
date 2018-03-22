@@ -3,29 +3,19 @@
 Selects one `DynamicFrame` in a `DynamicFrameCollection`\.
 
 ## Methods<a name="aws-glue-api-crawler-pyspark-transforms-SelectFromCollection-_methods"></a>
-
 + [\_\_call\_\_](#aws-glue-api-crawler-pyspark-transforms-SelectFromCollection-__call__)
-
 + [apply](#aws-glue-api-crawler-pyspark-transforms-SelectFromCollection-apply)
-
 + [name](#aws-glue-api-crawler-pyspark-transforms-SelectFromCollection-name)
-
 + [describeArgs](#aws-glue-api-crawler-pyspark-transforms-SelectFromCollection-describeArgs)
-
 + [describeReturn](#aws-glue-api-crawler-pyspark-transforms-SelectFromCollection-describeReturn)
-
 + [describeTransform](#aws-glue-api-crawler-pyspark-transforms-SelectFromCollection-describeTransform)
-
 + [describeErrors](#aws-glue-api-crawler-pyspark-transforms-SelectFromCollection-describeErrors)
-
 + [describe](#aws-glue-api-crawler-pyspark-transforms-SelectFromCollection-describe)
 
 ## \_\_call\_\_\(dfc, key, transformation\_ctx = ""\)<a name="aws-glue-api-crawler-pyspark-transforms-SelectFromCollection-__call__"></a>
 
 Gets one `DynamicFrame` from a `DynamicFrameCollection`\.
-
 + `dfc` – The key of the `DynamicFrame` to select \(required\)\.
-
 + `transformation_ctx` – A unique string that is used to identify state information \(optional\)\.
 
 Returns the specified `DynamicFrame`\.

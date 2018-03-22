@@ -31,13 +31,9 @@ def getCatalogSink( database : String,
 ```
 
 Creates a \[\[DataSink\]\] that writes to a location specified in a table defined in the data catalog\.
-
 + `database`  —  Database name in the data catalog\.
-
 + `tableName`  —  Table name in the data catalog\.
-
 + `redshiftTmpDir`  —  Temporary staging directory to be used with certain data sinks\. Set to empty by default\.
-
 + `transformationContext`  —  Transformation context associated with the sink to be used by job bookmarks\. Set to empty by default\.
 
 Returns the DataSink\.
@@ -53,13 +49,9 @@ def getCatalogSource( database : String,
 ```
 
 Creates a \[\[DataSource\]\] that reads data from a table definition in the data catalog\.
-
 + `database`  —  Database name in the data catalog\.
-
 + `tableName`  —  Table name in the data catalog\.
-
 + `redshiftTmpDir`  —  Temporary staging directory to be used with certain data sinks\. Set to empty by default\.
-
 + `transformationContext`  —  Transformation context associated with the sink to be used by job bookmarks\. Set to empty by default\.
 
 Returns the DataSource\.
@@ -75,13 +67,9 @@ def getJDBCSink( catalogConnection : String,
 ```
 
 Creates a \[\[DataSink\]\] that writes to a JDBC database specified in a Connection object in the data catalog\. The Connection object has information to connect to a JDBC sink including URL, username, password, vpc, subnet and security groups\.
-
 + `catalogConnection`  —  Name of the connection in the data catalog\.
-
 + `options`  —  \[\[JsonOptions\]\] for additional information required to write to a JDBC database, including the table name\.
-
 + `redshiftTmpDir`  —  Temporary staging directory to be used with certain data sinks\. Set to empty by default\.
-
 + `transformationContext`  —  Transformation context associated with the sink to be used by job bookmarks\. Set to empty by default\.
 
 Returns the DataSink\.
@@ -96,11 +84,8 @@ def getSink( connectionType : String,
 ```
 
 Creates a \[\[DataSink\]\] that writes data to a destination like S3, JDBC or the data catalog\.
-
 + `connectionType`  —  Type of the connection\.
-
 + `options`  —  \[\[JsonOptions\]\] for additional information to establish connection with the data sink\.
-
 + `transformationContext`  —  Transformation context associated with the sink to be used by job bookmarks\. Set to empty by default\.
 
 Returns the DataSink\.
@@ -117,15 +102,10 @@ def getSinkWithFormat( connectionType : String,
 ```
 
 Creates a \[\[DataSink\]\] that writes data to a destination like S3, JDBC or the data catalog and also sets the format for the data to be written out to the destination\.
-
 + `connectionType`  —  Type of the connection\. Refer to \[\[DataSink\]\] for a list of supported connection types\.
-
 + `options`  —  \[\[JsonOptions\]\] for additional information to establish connection with the data sink\.
-
 + `transformationContext`  —  Transformation context associated with the sink to be used by job bookmarks\. Set to empty by default\.
-
 + `format`  —  Format of the data to be written out to the destination\.
-
 + `formatOptions`  —  \[\[JsonOptions\]\] for additional options for formatting data at the destination\.
 
 Returns the DataSink\.
@@ -140,11 +120,8 @@ def getSource( connectionType : String,
 ```
 
 Creates a \[\[DataSource\]\] that reads data from a source like S3, JDBC or the data catalog\.
-
 + `connectionType`  —  Type of the connection\.
-
 + `options`  —  \[\[JsonOptions\]\] for additional information to establish connection with the data source\.
-
 + `transformationContext`  —  Transformation context associated with the sink to be used by job bookmarks\. Set to empty by default\.
 
 Returns the DataSource\.
@@ -161,15 +138,10 @@ def getSourceWithFormat( connectionType : String,
 ```
 
 Creates a \[\[DataSource\]\] that reads data from a source like S3, JDBC or the data catalog and also sets the format of data stored in the source\.
-
 + `connectionType`  —  Type of the connection\.
-
 + `options`  —  \[\[JsonOptions\]\] for additional information to establish connection with the data source\.
-
 + `transformationContext`  —  Transformation context associated with the sink to be used by job bookmarks\. Set to empty by default\.
-
 + `format`  —  Format of the data stored at the source\.
-
 + `formatOptions`  —  \[\[JsonOptions\]\] for additional options for parsing data at the source\.
 
 Returns the DataSource\.
@@ -193,11 +165,8 @@ def this( sc : SparkContext,
 ```
 
 Creates a GlueContext object using the specified \[\[SparkContext\]\], minimum partitions and target partitions\.
-
 + `sc`  —  \[\[SparkContext\]\]
-
 + `minPartitions`  —  Minimum number of partitions\.
-
 + `targetPartitions`  —  Target number of partitions\.
 
 Returns the GlueContext\.
@@ -209,7 +178,6 @@ def this( sc : SparkContext )
 ```
 
 Creates a GlueContext object with the provided \[\[SparkContext\]\]\. Sets the minimum partitions to 10 and target partitions to 20\.
-
 + `sc`  —  \[\[SparkContext\]\]\.
 
 Returns the GlueContext\.
@@ -221,7 +189,6 @@ def this( sparkContext : JavaSparkContext )
 ```
 
 Creates a GlueContext object with the provided \[\[JavaSparkContext\]\]\. Sets the minimum partitions to 10 and target partitions to 20\.
-
 + `sparkContext`  —  \[\[JavaSparkContext\]\]\.
 
 Returns the GlueContext\.

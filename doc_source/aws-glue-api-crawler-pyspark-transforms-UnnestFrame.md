@@ -3,35 +3,22 @@
 Unnests a `DynamicFrame`, flattens nested objects to top\-level elements, and generates joinkeys for array objects\.
 
 ## Methods<a name="aws-glue-api-crawler-pyspark-transforms-UnnestFrame-_methods"></a>
-
 + [\_\_call\_\_](#aws-glue-api-crawler-pyspark-transforms-UnnestFrame-__call__)
-
 + [apply](#aws-glue-api-crawler-pyspark-transforms-UnnestFrame-apply)
-
 + [name](#aws-glue-api-crawler-pyspark-transforms-UnnestFrame-name)
-
 + [describeArgs](#aws-glue-api-crawler-pyspark-transforms-UnnestFrame-describeArgs)
-
 + [describeReturn](#aws-glue-api-crawler-pyspark-transforms-UnnestFrame-describeReturn)
-
 + [describeTransform](#aws-glue-api-crawler-pyspark-transforms-UnnestFrame-describeTransform)
-
 + [describeErrors](#aws-glue-api-crawler-pyspark-transforms-UnnestFrame-describeErrors)
-
 + [describe](#aws-glue-api-crawler-pyspark-transforms-UnnestFrame-describe)
 
 ## \_\_call\_\_\(frame, transformation\_ctx = "", info="", stageThreshold=0, totalThreshold=0\)<a name="aws-glue-api-crawler-pyspark-transforms-UnnestFrame-__call__"></a>
 
 Unnests a `DynamicFrame`\. Flattens nested objects to top\-level elements, and generates joinkeys for array objects\.
-
 + `frame` – The `DynamicFrame` to unnest \(required\)\.
-
 + `transformation_ctx` – A unique string that is used to identify state information \(optional\)\.
-
 + `info` – A string associated with errors in the transformation \(optional\)\.
-
 + `stageThreshold` – The maximum number of errors that can occur in the transformation before it errors out \(optional; the default is zero\)\.
-
 + `totalThreshold` – The maximum number of errors that can occur overall before processing errors out \(optional; the default is zero\)\.
 
 Returns the unnested `DynamicFrame`\.

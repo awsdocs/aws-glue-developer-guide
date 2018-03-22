@@ -8,9 +8,7 @@ from awsglue.utils import getResolvedOptions
 ```
 
 **`getResolvedOptions(args, options)`**
-
 + `args` – The list of arguments contained in `sys.argv`\.
-
 + `options` – A Python array of the argument names that you want to retrieve\.
 
 **Example Retrieving arguments passed to a JobRun**  

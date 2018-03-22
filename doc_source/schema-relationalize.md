@@ -13,11 +13,7 @@ This diagram shows how AWS Glue transforms a semi\-structured schema to a relati
 ![\[Flow showing conversion from semi-structured to relational schema.\]](http://docs.aws.amazon.com/glue/latest/dg/images/HowItWorks-schemaconversion.png)
 
 The diagram illustrates the following:
-
 + Single value `A` converts directly to a relational column\.
-
 + The pair of values, `B1` and `B2`, convert to two relational columns\.
-
 + Structure `C`, with children `X` and `Y`, converts to two relational columns\.
-
 + Array `D[]` converts to a relational column with a foreign key \(FK\) that points to another relational table\. Along with a primary key \(PK\), the second relational table has columns that contain the offset and value of the items in the array\.

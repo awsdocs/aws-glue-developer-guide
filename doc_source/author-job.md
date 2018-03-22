@@ -6,7 +6,7 @@ The following diagram summarizes the basic workflow and steps involved in author
 
 ![\[Workflow showing how to author a job with AWS Glue in 6 basic steps.\]](http://docs.aws.amazon.com/glue/latest/dg/images/AuthorJob-overview.png)
 
-
+**Topics**
 + [Workflow Overview](#author-job-workflow)
 + [Adding Jobs in AWS Glue](add-job.md)
 + [Editing Scripts in AWS Glue](edit-script.md)

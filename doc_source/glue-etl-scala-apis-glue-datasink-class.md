@@ -1,6 +1,6 @@
 # The Abstract DataSink Class<a name="glue-etl-scala-apis-glue-datasink-class"></a>
 
-
+**Topics**
 + [def writeDynamicFrame](#glue-etl-scala-apis-glue-datasink-class-defs-writeDynamicFrame)
 + [def pyWriteDynamicFrame](#glue-etl-scala-apis-glue-datasink-class-defs-pyWriteDynamicFrame)
 + [def supportsFormat](#glue-etl-scala-apis-glue-datasink-class-defs-supportsFormat)

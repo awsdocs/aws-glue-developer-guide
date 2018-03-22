@@ -3,13 +3,9 @@
 Any IAM user that signs in to the AWS Glue console or AWS Command Line Interface \(AWS CLI\) must have permissions to access specific resources\. You provide those permissions by using AWS Identity and Access Management \(IAM\), through policies\.
 
 When you finish this step, your IAM user has the following policies attached: 
-
 + The AWS managed policy **AWSGlueConsoleFullAccess** or the custom policy **GlueConsoleAccessPolicy**
-
 + **CloudWatchLogsReadOnlyAccess**
-
 + **AWSCloudFormationReadOnlyAccess**
-
 + **AmazonAthenaFullAccess**
 
 **To attach an inline policy and embed it in an IAM user**

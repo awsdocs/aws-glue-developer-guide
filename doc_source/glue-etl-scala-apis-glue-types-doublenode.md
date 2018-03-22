@@ -12,7 +12,6 @@ case class DoubleNode extends ScalarNode(value, TypeCode.DOUBLE)  (
 ```
 
 ### DoubleNode val Fields<a name="glue-etl-scala-apis-glue-types-doublenode-case-class-vals"></a>
-
 + `ordering`
 
 ### DoubleNode def Methods<a name="glue-etl-scala-apis-glue-types-doublenode-case-class-defs"></a>

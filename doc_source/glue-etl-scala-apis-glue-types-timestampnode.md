@@ -12,7 +12,6 @@ case class TimestampNode extends ScalarNode(value, TypeCode.TIMESTAMP)  (
 ```
 
 ### TimestampNode val Fields<a name="glue-etl-scala-apis-glue-types-timestampnode-case-class-vals"></a>
-
 + `ordering`
 
 ### TimestampNode def Methods<a name="glue-etl-scala-apis-glue-types-timestampnode-case-class-defs"></a>

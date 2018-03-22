@@ -5,20 +5,14 @@ This example uses a dataset that was downloaded from [http://everypolitician\.or
 You can find the source code for this example in the `join_and_relationalize.py` file in the [AWS Glue samples repository](https://github.com/awslabs/aws-glue-samples) on the GitHub website\.
 
 Using this data, this tutorial shows you how to do the following:
-
 + Use an AWS Glue crawler to classify objects that are stored in an Amazon S3 bucket and save their schemas into the AWS Glue Data Catalog\.
-
 + Examine the table metadata and schemas that result from the crawl\.
-
 + Write a Python extract, transfer, and load \(ETL\) script that uses the metadata in the Data Catalog to do the following:
-
   + Join the data in the different source files together into a single data table \(that is, denormalize the data\)\.
-
   + Filter the joined table into separate tables by type of legislator\.
-
   + Write out the resulting data to separate Apache Parquet files for later analysis\.
 
-The easiest way to debug Python or PySpark scripts is to create a development endpoint and run your code there\. We recommend that you start by setting up a development endpoint to work in\. For more information, see [[ERROR] BAD/MISSING LINK TEXT](console-development-endpoint.md)\.
+The easiest way to debug Python or PySpark scripts is to create a development endpoint and run your code there\. We recommend that you start by setting up a development endpoint to work in\. For more information, see [Working with Development Endpoints on the AWS Glue Console](console-development-endpoint.md)\.
 
 ## Step 1: Crawl the Data in the Amazon S3 Bucket<a name="aws-glue-programming-python-samples-legislators-crawling"></a>
 
@@ -29,17 +23,11 @@ The easiest way to debug Python or PySpark scripts is to create a development en
 1. Run the new crawler, and then check the `legislators` database\. 
 
    The crawler creates the following metadata tables:
-
    + `persons_json`
-
    + `memberships_json`
-
    + `organizations_json`
-
    + `events_json`
-
    + `areas_json`
-
    + `countries_r_json`
 
    This is a semi\-normalized collection of tables containing legislators and their histories\.
@@ -390,12 +378,10 @@ The following is the output:
 Notice in these commands that `toDF()` and then a `where` expression are used to filter for the rows that you want to see\.
 
 So, joining the `hist_root` table with the auxiliary tables lets you do the following:
-
 + Load data into databases without array support\.
-
 + Query each individual item in an array using SQL\.
 
-You already have a connection set up named `redshift3`\. For information about how to create your own connection, see [[ERROR] BAD/MISSING LINK TEXT](populate-add-connection.md)\. 
+You already have a connection set up named `redshift3`\. For information about how to create your own connection, see [Adding a Connection to Your Data Store](populate-add-connection.md)\. 
 
 Next, write this collection into Amazon Redshift by cycling through the `DynamicFrames` one at a time:
 

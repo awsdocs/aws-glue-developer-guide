@@ -44,7 +44,7 @@ If AWS Glue doesn't find a custom classifier that fits the input data format wit
 | Squid 3\.x log | squid | Reads the beginning of the file to determine format\. | 
 | Redis monitor log | redismonlog | Reads the beginning of the file to determine format\. | 
 | Redis log | redislog | Reads the beginning of the file to determine format\. | 
-| CSV | csv | Checks for the following delimiters: comma \(,\), pipe \(|\), tab \(\\t\), semicolon \(;\), and Ctrl\-A \(\\u0001\)\. Ctrl\-A is the Unicode control character for Start Of Heading\. | 
+| CSV | csv | Checks for the following delimiters: comma \(,\), pipe \(\|\), tab \(\\t\), semicolon \(;\), and Ctrl\-A \(\\u0001\)\. Ctrl\-A is the Unicode control character for Start Of Heading\. | 
 | Amazon Redshift | redshift | Uses JDBC connection to import metadata\. | 
 | MySQL | mysql | Uses JDBC connection to import metadata\. | 
 | PostgreSQL | postgresql | Uses JDBC connection to import metadata\. | 
@@ -52,13 +52,8 @@ If AWS Glue doesn't find a custom classifier that fits the input data format wit
 | Microsoft SQL Server | sqlserver | Uses JDBC connection to import metadata\. | 
 
 Files in the following compressed formats can be classified:
-
 + ZIP \(as compression format, not as archive format\)
-
 + BZIP
-
 + GZIP
-
 + LZ4
-
 + Snappy \(as standard Snappy format, not as Hadoop native Snappy format\)

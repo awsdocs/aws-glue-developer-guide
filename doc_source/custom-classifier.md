@@ -30,10 +30,10 @@ For example, to cast a `num` field to an `int` data type, you can use this patte
 %{NUMBER:num:int}
 ```
 
-Patterns can be composed of other patterns\. For example, you can have a pattern for a `SYSLOG` time stamp that is defined by patterns for month, day of the month, and time\.
+Patterns can be composed of other patterns\. For example, you can have a pattern for a `SYSLOG` time stamp that is defined by patterns for month, day of the month, and time \(for example, `Feb 1 06:25:43`\)\. For this data, you might define the following pattern\.
 
 ```
-SYSLOGTIMESTAMP %{MONTH}+%{MONTHDAY}%{TIME}
+SYSLOGTIMESTAMP %{MONTH} +%{MONTHDAY} %{TIME}
 ```
 
 **Note**  
@@ -50,7 +50,7 @@ Name of the classifier\.
 The text string that is written to describe the format of the data that is classified; for example, `special-logs`\.
 
 **Grok pattern**  
-The set of patterns that are applied to the data store to determine whether there is a match\. These patterns are from AWS Glue built\-in patterns and any custom patterns you define\.  
+The set of patterns that are applied to the data store to determine whether there is a match\. These patterns are from AWS Glue [built\-in](#classifier-builtin-patterns) patterns and any custom patterns you define\.  
 The following is an example of a grok pattern:  
 
 ```

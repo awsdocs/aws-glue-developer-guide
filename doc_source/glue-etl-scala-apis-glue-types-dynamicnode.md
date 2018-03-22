@@ -1,6 +1,6 @@
 # The AWS Glue Scala DynamicNode APIs<a name="glue-etl-scala-apis-glue-types-dynamicnode"></a>
 
-
+**Topics**
 + [The DynamicNode Class](#glue-etl-scala-apis-glue-types-dynamicnode-class)
 + [The DynamicNode Object](#glue-etl-scala-apis-glue-types-dynamicnode-object)
 

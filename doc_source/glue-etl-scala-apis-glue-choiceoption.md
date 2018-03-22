@@ -1,6 +1,6 @@
 # The AWS Glue Scala ChoiceOption APIs<a name="glue-etl-scala-apis-glue-choiceoption"></a>
 
-
+**Topics**
 + [The ChoiceOption Trait](#glue-etl-scala-apis-glue-choiceoption-trait)
 + [The ChoiceOption Object](#glue-etl-scala-apis-glue-choiceoption-object)
 + [case class ChoiceOptionWithResolver](#glue-etl-scala-apis-glue-dynamicframe-class-defs-)
@@ -23,15 +23,10 @@ object ChoiceOption
 ```
 
 A general strategy to resolve choice applicable to all ChoiceType nodes in a DynamicFrame
-
 + `val CAST`
-
 + `val MAKE_COLS`
-
 + `val MAKE_STRUCT`
-
 + `val MATCH_CATALOG`
-
 + `val PROJECT`
 
 ### def apply<a name="glue-etl-scala-apis-glue-choiceoption-object-def-apply"></a>

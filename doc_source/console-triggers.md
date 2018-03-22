@@ -34,11 +34,8 @@ Give your trigger a unique name\.
 
 **Trigger type**  
 Specify one of the following:  
-
 + **Schedule:** The trigger fires at a specific time\.
-
-+ **Job events:** The trigger fires when any or all jobs in the list match the selected job event\. For the trigger to fire, the watched job must have been started by a trigger\.
-
++ **Job events:** The trigger fires when any or all jobs in the list match the selected job event\. For the trigger to fire, the watched job must have been started by a trigger\. For any job you choose, you can only watch one job event\.
 + **On\-demand:** The trigger fires when it is started from the triggers list page\.
 
 **Jobs to trigger**  

@@ -12,7 +12,6 @@ case class DecimalNode extends ScalarNode(value, TypeCode.DECIMAL)  (
 ```
 
 ### DecimalNode val Fields<a name="glue-etl-scala-apis-glue-types-decimalnode-case-class-vals"></a>
-
 + `ordering`
 
 ### DecimalNode def Methods<a name="glue-etl-scala-apis-glue-types-decimalnode-case-class-defs"></a>

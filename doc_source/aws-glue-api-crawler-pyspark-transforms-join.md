@@ -3,35 +3,22 @@
 Performs an equality join on two `DynamicFrames`\.
 
 ## Methods<a name="aws-glue-api-crawler-pyspark-transforms-join-_methods"></a>
-
 + [\_\_call\_\_](#aws-glue-api-crawler-pyspark-transforms-join-__call__)
-
 + [apply](#aws-glue-api-crawler-pyspark-transforms-join-apply)
-
 + [name](#aws-glue-api-crawler-pyspark-transforms-join-name)
-
 + [describeArgs](#aws-glue-api-crawler-pyspark-transforms-join-describeArgs)
-
 + [describeReturn](#aws-glue-api-crawler-pyspark-transforms-join-describeReturn)
-
 + [describeTransform](#aws-glue-api-crawler-pyspark-transforms-join-describeTransform)
-
 + [describeErrors](#aws-glue-api-crawler-pyspark-transforms-join-describeErrors)
-
 + [describe](#aws-glue-api-crawler-pyspark-transforms-join-describe)
 
 ## \_\_call\_\_\(frame1, frame2, keys1, keys2, transformation\_ctx = ""\)<a name="aws-glue-api-crawler-pyspark-transforms-join-__call__"></a>
 
 Performs an equality join on two `DynamicFrames`\.
-
 + `frame1` – The first `DynamicFrame` to join \(required\)\.
-
 + `frame2` – The second `DynamicFrame` to join \(required\)\.
-
 + `keys1` – The keys to join on for the first frame \(required\)\.
-
 + `keys2` – The keys to join on for the second frame \(required\)\.
-
 + `transformation_ctx` – A unique string that is used to identify state information \(optional\)\.
 
 Returns a new `DynamicFrame` obtained by joining the two `DynamicFrames`\.

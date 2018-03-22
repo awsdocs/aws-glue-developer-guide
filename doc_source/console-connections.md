@@ -37,9 +37,7 @@ Type a unique name for your connection\.
 
 **Connection type**  
 Choose either Amazon Redshift, Amazon RDS, or JDBC\.   
-
 + If you choose Amazon Redshift, choose a **Cluster**, **Database name**, **Username**, and **Password** in your account to create a JDBC connection\.
-
 + If you choose Amazon RDS, choose an **Instance**, **Database name**, **Username**, and **Password** in your account to create a JDBC connection\. The console also lists the supported database engine types\.
 
 **JDBC URL**  
@@ -48,37 +46,28 @@ Type the URL for your JDBC data store\. For most database engines, this field is
 Depending on the database engine, a different JDBC URL format might be required\. This format can have slightly different use of the colon \(:\) and slash \(/\) or different keywords to specify databases\.   
 For JDBC to connect to the data store, a `db_name` in the data store is required\. The `db_name` is used to establish a network connection with the supplied `username` and `password`\. When connected, AWS Glue can access other databases in the data store to run a crawler or run an ETL job\.  
 The following JDBC URL examples show the syntax for several database engines\.  
-
 + To connect to an Amazon Redshift cluster data store with a `dev` database:
 
    `jdbc:redshift://xxx.us-east-1.redshift.amazonaws.com:8192/dev` 
-
 + To connect to an Amazon RDS for MySQL data store with an `employee` database:
 
    `jdbc:mysql://xxx-cluster.cluster-xxx.us-east-1.rds.amazonaws.com:3306/employee` 
-
 + To connect to an Amazon RDS for PostgreSQL data store with an `employee` database:
 
    `jdbc:postgresql://xxx-cluster.cluster-xxx.us-east-1.rds.amazonaws.com:5432/employee` 
-
 + To connect to an Amazon RDS for Oracle data store with an `employee` service name:
 
    `jdbc:oracle:thin:@//xxx-cluster.cluster-xxx.us-east-1.rds.amazonaws.com:1521/employee` 
 
   The syntax for Amazon RDS for Oracle can follow the following patterns:
-
   + `jdbc:oracle:thin://@host:port/service_name`
-
   + `jdbc:oracle:thin://@host:port:SID`
-
 + To connect to an Amazon RDS for Microsoft SQL Server data store with an `employee` database:
 
    `jdbc:sqlserver://xxx-cluster.cluster-xxx.us-east-1.rds.amazonaws.com:1433;database=employee` 
 
   The syntax for Amazon RDS for SQL Server can follow the following patterns:
-
   + `jdbc:sqlserver://server_name:port;database=db_name`
-
   + `jdbc:sqlserver://server_name:port;databaseName=db_name`
 
 **Username**  

@@ -5,11 +5,7 @@ When an AWS Glue crawler or a job uses connection properties to access a data st
 In addition, Apache Spark requires bi\-directional connectivity among driver and executor nodes\. One of the security groups needs to allow ingress rules on all TCP ports\. You can prevent it from being open to the world by restricting the source of the security group to itself with a self\-referencing security group\. 
 
 Here are some typical actions you can take to troubleshoot connection problems:
-
 + Check the port address of your connection\.
-
 + Check the user name and password string in your connection\.
-
 + For a JDBC data store, verify that it allows incoming connections\.
-
 + Verify that your data store can be accessed within your VPC\.

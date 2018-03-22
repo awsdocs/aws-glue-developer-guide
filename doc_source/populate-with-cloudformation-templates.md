@@ -28,15 +28,15 @@ The following table contains the actions that an AWS CloudFormation template can
 
 | AWS Glue Resource | AWS CloudFormation Template | AWS Glue Samples | 
 | --- | --- | --- | 
-| Classifier | [AWS::Glue::Classifier](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-classifier.html) | Grok classifier | 
-| Connection | [AWS::Glue::Connection](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-connection.html) | MySQL connection | 
-| Crawler | [AWS::Glue::Crawler](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-crawler.html) | Amazon S3 crawler, MySQL crawler | 
-| Database | [AWS::Glue::Database](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-database.html) | Empty database, Database with tables  | 
-| Development endpoint | [AWS::Glue::DevEndpoint](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-devendpoint.html) | Development endpoint | 
-| Job | [AWS::Glue::Job](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-job.html) | Amazon S3 job, JDBC job | 
-| Partition | [AWS::Glue::Partition](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-partition.html) | Partitions of a table | 
-| Table | [AWS::Glue::Table](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-table.html) | Table in a database | 
-| Trigger | [AWS::Glue::Trigger](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-trigger.html) | On\-demand trigger, Scheduled trigger, Conditional trigger  | 
+| Classifier | [AWS::Glue::Classifier](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-classifier.html) | [Grok classifier](#sample-cfn-template-classifier) | 
+| Connection | [AWS::Glue::Connection](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-connection.html) | [MySQL connection](#sample-cfn-template-connection) | 
+| Crawler | [AWS::Glue::Crawler](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-crawler.html) | [Amazon S3 crawler](#sample-cfn-template-crawler-s3), [MySQL crawler](#sample-cfn-template-crawler-jdbc) | 
+| Database | [AWS::Glue::Database](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-database.html) | [Empty database](#sample-cfn-template-database), [Database with tables](#sample-cfn-template-db-table-partition)  | 
+| Development endpoint | [AWS::Glue::DevEndpoint](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-devendpoint.html) | [Development endpoint](#sample-cfn-template-devendpoint) | 
+| Job | [AWS::Glue::Job](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-job.html) | [Amazon S3 job](#sample-cfn-template-job-s3), [JDBC job](#sample-cfn-template-job-jdbc) | 
+| Partition | [AWS::Glue::Partition](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-partition.html) | [Partitions of a table](#sample-cfn-template-db-table-partition) | 
+| Table | [AWS::Glue::Table](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-table.html) | [Table in a database](#sample-cfn-template-db-table-partition) | 
+| Trigger | [AWS::Glue::Trigger](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-trigger.html) | [On\-demand trigger](#sample-cfn-template-trigger-ondemand), [Scheduled trigger](#sample-cfn-template-trigger-scheduled), [Conditional trigger](#sample-cfn-template-trigger-conditional)  | 
 
 To get started, use the following sample templates and customize them with your own metadata\. Then use the AWS CloudFormation console to create an AWS CloudFormation stack to add objects to AWS Glue and any associated services\. Many fields in an AWS Glue object are optional\. These templates illustrate the fields that are required or are necessary for a working and functional AWS Glue object\. 
 
@@ -548,7 +548,8 @@ Resources:
     Type: AWS::Glue::Job   
     Properties:
       Role: !Ref CFNIAMRoleName  
-      #DefaultArguments: JSON object  
+      #DefaultArguments: JSON object 
+      # If script written in Scala, then set DefaultArguments={'--job-language'; 'scala', '--class': 'your scala class'}
       #Connections:  No connection needed for S3 to S3 job 
       #  ConnectionsList  
       #MaxRetries: Double  
@@ -558,7 +559,7 @@ Resources:
         Name: glueetl  
         ScriptLocation: !Ref CFNScriptLocation
              # for access to directories use proper IAM role with permission to buckets and folders that begin with "aws-glue-"					 
-             # script defines temp directory as s3://aws-glue-temporary-xyc/sal   (temp directory not used S3 to S3)
+             # script uses temp directory from job definition if required (temp directory not used S3 to S3)
              # script defines target for output as s3://aws-glue-target/sal    			 
       AllocatedCapacity: 5  
       ExecutionProperty:   
@@ -609,6 +610,7 @@ Resources:
     Properties:
       Role: !Ref CFNIAMRoleName  
       #DefaultArguments: JSON object  
+      # For example, if required by script, set temporary directory as DefaultArguments={'--TempDir'; 's3://aws-glue-temporary-xyc/sal'}
       Connections:
         Connections:
         - !Ref CFNConnectionName 
@@ -619,7 +621,7 @@ Resources:
         Name: glueetl  
         ScriptLocation: !Ref CFNScriptLocation
              # for access to directories use proper IAM role with permission to buckets and folders that begin with "aws-glue-"					 
-             # script defines temp directory as s3://aws-glue-temporary-xyc/sal   (temp directory)
+             # if required, script defines temp directory as argument TempDir and used in script like redshift_tmp_dir = args["TempDir"] 
              # script defines target for output as s3://aws-glue-target/sal    			 
       AllocatedCapacity: 5  
       ExecutionProperty:   

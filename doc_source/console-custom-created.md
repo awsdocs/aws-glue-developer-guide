@@ -14,9 +14,7 @@ To provide your own custom script in AWS Glue, follow these general steps:
 1. In the **Job properties** screen, choose the **IAM role** that is required for your custom script to run\. For more information, see [Authentication and Access Control for AWS Glue](authentication-and-access-control.md)\.
 
 1. Under **This job runs**, choose one of the following:
-
    + An existing script that you provide
-
    + A new script to be authored by you
 
 1. Choose any connections that your script references\. These objects are needed to connect to the necessary JDBC data stores\.
