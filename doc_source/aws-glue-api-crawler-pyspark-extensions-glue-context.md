@@ -61,7 +61,7 @@ Returns a `DynamicFrame` created with the specified connection and format\.
 + `connection_options` – Connection options, such as path and database table \(optional\)\. For a `connection_type` of `s3`, an Amazon S3 path is defined\.
 
   ```
-  connection_options = {"paths": "[s3://aws-glue-target/temp"]}
+  connection_options = {"paths": ["s3://aws-glue-target/temp"]}
   ```
 
   For JDBC connections, several properties must be defined\. Note that the database name must be part of the URL\. It can optionally be included in the connection options\.
