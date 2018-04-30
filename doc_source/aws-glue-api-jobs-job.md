@@ -54,6 +54,9 @@ Specifies a job definition\.
 + `AllocatedCapacity` – Number \(integer\)\.
 
   The number of AWS Glue data processing units \(DPUs\) allocated to runs of this job\. From 2 to 100 DPUs can be allocated; the default is 10\. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory\. For more information, see the [AWS Glue pricing page](https://aws.amazon.com/glue/pricing/)\.
++ `Timeout` – Number \(integer\)\.
+
+  The Job timeout in minutes\. This is the maximum time that a job run can consume resources before it is terminated and enters `TIMEOUT` status\. The default is 2,880 minutes \(48 hours\)\.
 
 ## ExecutionProperty Structure<a name="aws-glue-api-jobs-job-ExecutionProperty"></a>
 
@@ -123,6 +126,9 @@ Specifies information used to update an existing job definition\. Note that the 
 + `AllocatedCapacity` – Number \(integer\)\.
 
   The number of AWS Glue data processing units \(DPUs\) to allocate to this Job\. From 2 to 100 DPUs can be allocated; the default is 10\. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory\. For more information, see the [AWS Glue pricing page](https://aws.amazon.com/glue/pricing/)\.
++ `Timeout` – Number \(integer\)\.
+
+  The Job timeout in minutes\. This is the maximum time that a job run can consume resources before it is terminated and enters `TIMEOUT` status\. The default is 2,880 minutes \(48 hours\)\.
 
 ## Operations<a name="aws-glue-api-jobs-job-actions"></a>
 + [CreateJob Action \(Python: create\_job\)](#aws-glue-api-jobs-job-CreateJob)
@@ -172,6 +178,9 @@ Creates a new job definition\.
 + `AllocatedCapacity` – Number \(integer\)\.
 
   The number of AWS Glue data processing units \(DPUs\) to allocate to this Job\. From 2 to 100 DPUs can be allocated; the default is 10\. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory\. For more information, see the [AWS Glue pricing page](https://aws.amazon.com/glue/pricing/)\.
++ `Timeout` – Number \(integer\)\.
+
+  The Job timeout in minutes\. This is the maximum time that a job run can consume resources before it is terminated and enters `TIMEOUT` status\. The default is 2,880 minutes \(48 hours\)\.
 
 **Response**
 + `Name` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.

@@ -8,13 +8,15 @@ If no classifier returns `certainty=1.0`, AWS Glue uses the output of the classi
 
 ## When Do I Use a Classifier?<a name="classifier-when-used"></a>
 
-You use classifiers when you crawl a data store to define metadata tables in the AWS Glue Data Catalog\. You can set up your crawler with an ordered set of classifiers\. When the crawler invokes a classifier, the classifier determines whether the data is recognized\.  If the classifier can't recognize the data or is not 100 percent certain, the crawler invokes the next classifier in the list to determine if it can recognize the data\.  
+You use classifiers when you crawl a data store to define metadata tables in the AWS Glue Data Catalog\. You can set up your crawler with an ordered set of classifiers\. When the crawler invokes a classifier, the classifier determines whether the data is recognized\.  If the classifier can't recognize the data or is not 100 percent certain, the crawler invokes the next classifier in the list to determine whether it can recognize the data\.  
 
  For more information about creating a classifier using the AWS Glue console, see [Working with Classifiers on the AWS Glue Console](console-classifiers.md)\. 
 
 ## Custom Classifiers<a name="classifier-defining"></a>
 
-The output of a classifier includes a string that indicates the file's classification or format \(for example, `json`\) and the schema of the file\. For custom classifiers, you set the string and logic for creating the schema\. The source code of a custom classifier is a grok pattern\.  
+The output of a classifier includes a string that indicates the file's classification or format \(for example, `json`\) and the schema of the file\. For custom classifiers, you define the logic for creating the schema based on the type of classifier\. Classifier types include defining schemas based on grok patterns, XML tags, and JSON paths\.
+
+If you change a classifier definition, any data that was previously crawled using the classifier is not reclassified\. A crawler keeps track of previously crawled data\. New data is classified with the updated classifier, which might result in an updated schema\. If the schema of your data has evolved, update the classifier to account for any schema changes when your crawler runs\. To reclassify data to correct an incorrect classifier, create a new crawler with the updated classifier\.   
 
 For more information about creating custom classifiers in AWS Glue, see [Writing Custom Classifiers](custom-classifier.md)\.
 
@@ -31,15 +33,16 @@ If AWS Glue doesn't find a custom classifier that fits the input data format wit
 | Classifier type | Classification string | Notes | 
 | --- | --- | --- | 
 | Apache Avro | avro | Reads the beginning of the file to determine format\. | 
+| Apache ORC | orc | Reads the file metadata to determine format\. | 
 | Apache Parquet | parquet | Reads the beginning of the file to determine format\. | 
 | JSON | json | Reads the beginning of the file to determine format\. | 
 | Binary JSON | bson | Reads the beginning of the file to determine format\. | 
 | XML | xml | Reads the beginning of the file to determine format\. AWS Glue determines the table schema based on XML tags in the document\.  For information about creating a custom XML classifier to specify rows in the document, see [Writing XML Custom Classifiers](custom-classifier.md#custom-classifier-xml)\.  | 
 | Ion log | ion | Reads the beginning of the file to determine format\. | 
-| Combined Apache log | combined\_apache | Log formats determined through a grok pattern\. | 
-| Apache log | apache | Log formats determined through a grok pattern\. | 
-| Linux kernel log | linux\_kernel | Log formats determined through a grok pattern\. | 
-| Microsoft log | microsoft\_log | Log formats determined through a grok pattern\. | 
+| Combined Apache log | combined\_apache | Determines log formats through a grok pattern\. | 
+| Apache log | apache | Determines log formats through a grok pattern\. | 
+| Linux kernel log | linux\_kernel | Determines log formats through a grok pattern\. | 
+| Microsoft log | microsoft\_log | Determines log formats through a grok pattern\. | 
 | Ruby log | ruby\_logger | Reads the beginning of the file to determine format\. | 
 | Squid 3\.x log | squid | Reads the beginning of the file to determine format\. | 
 | Redis monitor log | redismonlog | Reads the beginning of the file to determine format\. | 
@@ -57,3 +60,26 @@ Files in the following compressed formats can be classified:
 + GZIP
 + LZ4
 + Snappy \(as standard Snappy format, not as Hadoop native Snappy format\)
+
+### Built\-In CSV Classifier<a name="classifier-builtin-rules"></a>
+
+The built\-in CSV classifier parses CSV file contents to determine the schema for an AWS Glue table\. This classifier checks for the following delimiters:
++ Comma \(,\)
++ Pipe \(\|\)
++ Tab \(\\t\)
++ Semicolon \(;\)
++ Ctrl\-A \(\\u0001\)
+
+  Ctrl\-A is the Unicode control character for `Start Of Heading`\.
+
+To be classified as CSV, the table schema must have at least two columns and two rows of data\. The CSV classifier uses a number of heuristics to determine whether a header is present in a given file\. If the classifier can't determine a header from the first row of data, column headers are displayed as `col1`, `col2`, `col3`, and so on\. The built\-in CSV classifier determines whether to infer a header by evaluating the following characteristics of the file:
++ Every column in a potential header parses as a STRING data type\.
++ Except for the last column, every column in a potential header has content that is fewer than 150 characters\. To allow for a trailing delimiter, the last column can be empty throughout the file\.
++ Every column in a potential header must meet the AWS Glue `regex` requirements for a column name\.
++ The header row must be sufficiently different from the data rows\. To determine this, one or more of the rows must parse as other than STRING type\. If all columns are of type STRING, then the first row of data is not sufficiently different from subsequent rows to be used as the header\.
+
+**Note**  
+If the built\-in CSV classifier does not create your AWS Glue table as you want, you might be able to use one of the following alternatives:  
+Change the column names in the Data Catalog, set the `SchemaChangePolicy` to LOG, and set the partition output configuration to `InheritFromTable` for future crawler runs\.
+Create a custom grok classifier to parse the data and assign the columns that you want\.
+The built\-in CSV classifier creates tables referencing the `LazySimpleSerDe` as the serialization library, which is a good choice for type inference\. However, if the CSV data contains quoted strings, edit the table definition and change the SerDe library to `OpenCSVSerDe`\. Adjust any inferred types to STRING, set the `SchemaChangePolicy` to LOG, and set the partitions output configuration to `InheritFromTable` for future crawler runs\. For more information about SerDe libraries, see [SerDe Reference](http://docs.aws.amazon.com/athena/latest/ug/serde-reference.html) in the Amazon Athena User Guide\.

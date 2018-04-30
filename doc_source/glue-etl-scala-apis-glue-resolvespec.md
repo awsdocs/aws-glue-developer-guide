@@ -48,7 +48,7 @@ case class ResolveSpec extends Product2[String, String]  (
 ```
 
 Creates a ResolveSpec\.
-+ `path`  —  \[\[SchemaPath\]\] of the choice field that needs to be resolved\.
++ `path`  —  `SchemaPath` of the choice field that needs to be resolved\.
 + `action`  —  Resolution action\. The action maybe one of the following: `Project`, `KeepAsStruct`, or `Cast`\.
 
 ### ResolveSpec def Methods<a name="glue-etl-scala-apis-glue-resolvespec-case-class-defs"></a>

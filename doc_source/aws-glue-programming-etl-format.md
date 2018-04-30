@@ -24,11 +24,15 @@ You can use the following `format_options` values with `format="csv"`:
 
 This value designates [Amazon Ion](https://amzn.github.io/ion-docs/) as the data format\. \(For more information, see the [Amazon Ion Specification](https://amzn.github.io/ion-docs/spec.html)\.\)
 
+**Currently, AWS Glue does not support `ion` for output\.**
+
 There are no `format_options` values for `format="ion"`\.
 
 ## format="grokLog"<a name="aws-glue-programming-etl-format-grokLog"></a>
 
 This value designates a log data format specified by one or more Logstash grok patterns \(for example, see [Logstash Reference \(6\.2\]: Grok filter plugin](https://www.elastic.co/guide/en/logstash/current/plugins-filters-grok.html)\)\.
+
+**Currently, AWS Glue does not support `groklog` for output\.**
 
 You can use the following `format_options` values with `format="grokLog"`:
 + `logFormat`: Specifies the grok pattern that matches the log's format\.

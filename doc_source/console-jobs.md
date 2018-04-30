@@ -51,10 +51,11 @@ The **History** tab shows your job run history and how successful a job has been
 + **Logs** links to the logs written to `stdout` for this job run\.
 
   The **Logs** link takes you to the CloudWatch Logs, where you can see all the details about the tables that were created in the AWS Glue Data Catalog and any errors that were encountered\. You can manage your log retention period in the CloudWatch console\. The default log retention is `Never Expire`\. For more information about how to change the retention period, see [Change Log Data Retention in CloudWatch Logs](http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SettingLogRetention.html)\.
-+ **Errors** links to the logs written to `stderr` for this job run\. 
++ **Error logs** links to the logs written to `stderr` for this job run\. 
 
   This link takes you to the CloudWatch Logs, where you can see details about any errors that were encountered\. You can manage your log retention period in the CloudWatch console\. The default log retention is `Never Expire`\. For more information about how to change the retention period, see [Change Log Data Retention in CloudWatch Logs](http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SettingLogRetention.html)\.
-+ **Duration** shows the length of time the job took to run\.
++ **Execution time** shows the length of time during which the job run consumed resources\. The amount is calculated from when the job run starts consuming resources until it finishes\.
++ **Timeout** shows the maximum execution time during which this job run can consume resources before it stops and goes into timeout status\.
 + **Triggered by** shows the trigger that fired to start this job run\.
 + **Start time** shows the date and time \(local time\) that the job started\.
 + **End time** shows the date and time \(local time\) that the job ended\.

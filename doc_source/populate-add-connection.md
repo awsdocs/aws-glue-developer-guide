@@ -51,7 +51,6 @@ The VPC network attributes `enableDnsHostnames` and `enableDnsSupport` must be s
 
 **Important**  
 Don't put your data store in a public subnet or in a private subnet that doesn't have internet access\. Instead, attach it only to private subnets that have internet access through a NAT instance or an Amazon VPC NAT gateway\.
-Currently, an extract, transform, and load \(ETL\) job can access resources in a single subnet only\. If you have multiple data stores in a job, they must be on the same subnet\.
 
 ### Elastic Network Interface Properties<a name="connection-JDBC-VPC-ENI-properties"></a>
 

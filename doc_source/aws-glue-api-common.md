@@ -75,3 +75,4 @@ The API uses the following regular expressions to define what is valid content f
 + Log group string pattern – "`[\.\-_/#A-Za-z0-9]+`"
 + Log\-stream string pattern – "`[^:*]*`"
 + Custom string pattern \#8 – "`^$|arn:aws:kms:.*`"
++ Custom string pattern \#9 – "`arn:aws:glue:.*`"

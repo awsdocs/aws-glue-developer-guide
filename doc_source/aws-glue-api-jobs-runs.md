@@ -36,7 +36,7 @@ Contains information about a job run\.
 + `CompletedOn` – Timestamp\.
 
   The date and time this job run completed\.
-+ `JobRunState` – String \(valid values: `STARTING` \| `RUNNING` \| `STOPPING` \| `STOPPED` \| `SUCCEEDED` \| `FAILED`\)\.
++ `JobRunState` – String \(valid values: `STARTING` \| `RUNNING` \| `STOPPING` \| `STOPPED` \| `SUCCEEDED` \| `FAILED` \| `TIMEOUT`\)\.
 
   The current state of the job run\.
 + `Arguments` – An array of *UTF\-8 string*–to–*UTF\-8 string* mappings\.
@@ -57,6 +57,12 @@ Contains information about a job run\.
 + `AllocatedCapacity` – Number \(integer\)\.
 
   The number of AWS Glue data processing units \(DPUs\) allocated to this JobRun\. From 2 to 100 DPUs can be allocated; the default is 10\. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory\. For more information, see the [AWS Glue pricing page](https://aws.amazon.com/glue/pricing/)\.
++ `ExecutionTime` – Number \(Integer\)\.
+
+  The amount of time \(in seconds\) that the job run consumed resources\.
++ `Timeout` – Number \(integer\)\.
+
+  The JobRun timeout in minutes\. This is the maximum time that a job run can consume resources before it is terminated and enters `TIMEOUT` status\. The default is 2,880 minutes \(48 hours\)\. This overrides the timeout value set in the parent job\.
 
 ## Predecessor Structure<a name="aws-glue-api-jobs-runs-Predecessor"></a>
 
@@ -148,6 +154,9 @@ Starts a job run using a job definition\.
 + `AllocatedCapacity` – Number \(integer\)\.
 
   The number of AWS Glue data processing units \(DPUs\) to allocate to this JobRun\. From 2 to 100 DPUs can be allocated; the default is 10\. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory\. For more information, see the [AWS Glue pricing page](https://aws.amazon.com/glue/pricing/)\.
++ `Timeout` – Number \(integer\)\.
+
+  The JobRun timeout in minutes\. This is the maximum time that a job run can consume resources before it is terminated and enters `TIMEOUT` status\. The default is 2,880 minutes \(48 hours\)\. This overrides the timeout value set in the parent job\.
 
 **Response**
 + `JobRunId` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.

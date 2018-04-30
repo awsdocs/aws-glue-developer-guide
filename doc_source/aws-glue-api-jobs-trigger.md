@@ -81,9 +81,9 @@ Defines a condition under which a trigger fires\.
 + `JobName` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the Job to whose JobRuns this condition applies and on which this trigger waits\.
-+ `State` – String \(valid values: `STARTING` \| `RUNNING` \| `STOPPING` \| `STOPPED` \| `SUCCEEDED` \| `FAILED`\)\.
++ `State` – String \(valid values: `STARTING` \| `RUNNING` \| `STOPPING` \| `STOPPED` \| `SUCCEEDED` \| `FAILED` \| `TIMEOUT`\)\.
 
-  The condition state\. Currently, the values supported are SUCCEEDED, STOPPED and FAILED\.
+  The condition state\. Currently, the values supported are SUCCEEDED, STOPPED, TIMEOUT and FAILED\.
 
 ## Action Structure<a name="aws-glue-api-jobs-trigger-Action"></a>
 
@@ -102,6 +102,9 @@ Defines an action to be initiated by a trigger\.
   For information about how to specify and consume your own Job arguments, see the [Calling AWS Glue APIs in Python](http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html) topic in the developer guide\.
 
   For information about the key\-value pairs that AWS Glue consumes to set up your job, see the [Special Parameters Used by AWS Glue](http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html) topic in the developer guide\.
++ `Timeout` – Number \(integer\)\.
+
+  The JobRun timeout in minutes\. This is the maximum time that a job run can consume resources before it is terminated and enters `TIMEOUT` status\. The default is 2,880 minutes \(48 hours\)\. This overrides the timeout value set in the parent job\.
 
 ## Operations<a name="aws-glue-api-jobs-trigger-actions"></a>
 + [CreateTrigger Action \(Python: create\_trigger\)](#aws-glue-api-jobs-trigger-CreateTrigger)
@@ -139,6 +142,9 @@ Creates a new trigger\.
 + `Description` – Description string, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
 
   A description of the new trigger\.
++ `StartOnCreation` – Boolean\.
+
+  Set to true to start SCHEDULED and CONDITIONAL triggers when created\. True not supported for ON\_DEMAND triggers\.
 
 **Response**
 + `Name` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.

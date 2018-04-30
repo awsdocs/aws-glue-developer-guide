@@ -5,7 +5,7 @@
 The **com\.amazonaws\.services\.glue** package in the AWS Glue Scala library contains the following APIs:
 + [ChoiceOption](glue-etl-scala-apis-glue-choiceoption.md)
 + [DataSink](glue-etl-scala-apis-glue-datasink-class.md)
-+ [](glue-etl-scala-apis-glue-datasource-trait.md)
++ [DataSource trait](glue-etl-scala-apis-glue-datasource-trait.md)
 + [DynamicFrame](glue-etl-scala-apis-glue-dynamicframe.md)
 + [DynamicRecord](glue-etl-scala-apis-glue-dynamicrecord-class.md)
 + [GlueContext](glue-etl-scala-apis-glue-gluecontext.md)
@@ -59,10 +59,10 @@ case class MappingSpec( sourcePath: SchemaPath,
   override def _4: String = ExtendedTypeName.fromDataType(targetType)
 }
 ```
-+ `sourcePath`  —  \[\[SchemaPath\]\] of the source field\.
-+ `sourceType`  —  \[\[DataType\]\] of the source field\.
-+ `targetPath`  —  \[\[SchemaPath\]\] of the target field\.
-+ `targetType`  —  \[\[DataType\]\] of the target field\.
++ `sourcePath`  —  `SchemaPath` of the source field\.
++ `sourceType`  —  `DataType` of the source field\.
++ `targetPath`  —  `SchemaPath` of the target field\.
++ `targetType`  —  `DataType` of the target field\.
 
 A MappingSpec specifies a mapping from a source path and a source data type to a target path and a target data type\. The value at the source path in the source frame appears in the target frame at the target path\. The source data type is cast to the target data type\.
 
@@ -94,9 +94,9 @@ def apply( sourcePath : String,
 
 Creates a MappingSpec\.
 + `sourcePath`  —  String representation of the source path\.
-+ `sourceType`  —  Source \[\[DataType\]\]\.
++ `sourceType`  —  Source `DataType`\.
 + `targetPath`  —  String representation of the target path\.
-+ `targetType`  —  Target \[\[DataType\]\]\.
++ `targetType`  —  Target `DataType`\.
 
 Returns a MappingSpec\.
 

@@ -3,7 +3,7 @@
 Scripts perform the extract, transform, and load \(ETL\) work in AWS Glue\. A script is created when you automatically generate the source code logic for a job\. You can either edit this generated script, or you can provide your own custom script\.
 
 **Important**  
-Your custom script must be compatible with Apache Spark 2\.1\.
+Your custom script must be compatible with Apache Spark 2\.2\.1\.
 
 To provide your own custom script in AWS Glue, follow these general steps:
 

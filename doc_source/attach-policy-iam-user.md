@@ -46,7 +46,7 @@ In this step, you create a policy that is similar to `AWSGlueConsoleFullAccess`\
                    "iam:ListRolePolicies",
                    "iam:GetRole",
                    "iam:GetRolePolicy",
-                   "iam:ListAttachedRolePolicies",				
+                   "iam:ListAttachedRolePolicies",
                    "ec2:DescribeSecurityGroups",
                    "ec2:DescribeSubnets",
                    "ec2:DescribeVpcs",
@@ -59,8 +59,10 @@ In this step, you create a policy that is similar to `AWSGlueConsoleFullAccess`\
                    "s3:ListAllMyBuckets",
                    "s3:ListBucket",
                    "s3:GetBucketAcl",
+                   "s3:GetBucketLocation",
                    "cloudformation:DescribeStacks",
-                   "cloudformation:GetTemplateSummary"
+                   "cloudformation:GetTemplateSummary",
+                   "dynamodb:ListTables"
                ],
                "Resource": [
                    "*"
@@ -107,21 +109,36 @@ In this step, you create a policy that is similar to `AWSGlueConsoleFullAccess`\
            {
                "Effect": "Allow",
                "Action": [
+                   "ec2:RunInstances"
+               ],
+               "Resource": [
+                   "arn:aws:ec2:*:*:instance/*",
+                   "arn:aws:ec2:*:*:key-pair/*",
+                   "arn:aws:ec2:*:*:image/*",
+                   "arn:aws:ec2:*:*:security-group/*",
+                   "arn:aws:ec2:*:*:network-interface/*",
+                   "arn:aws:ec2:*:*:subnet/*",
+                   "arn:aws:ec2:*:*:volume/*"
+               ]
+           },
+           {
+               "Effect": "Allow",
+               "Action": [
                    "ec2:TerminateInstances",
-                   "ec2:RunInstances",
                    "ec2:CreateTags",
                    "ec2:DeleteTags"
                ],
-               "Condition": {
-                   "ForAllValues:StringEquals": {
-                       "aws:TagKeys": [
-                           "aws-glue-dev-endpoint"
-                       ]
-                   }
-               },
                "Resource": [
-                   "*"
-               ]
+                   "arn:aws:ec2:*:*:instance/*"
+               ],
+               "Condition": {
+                   "StringLike": {
+                       "ec2:ResourceTag/aws:cloudformation:stack-id": "arn:aws:cloudformation:*:*:stack/aws-glue-*/*"
+                   },
+                   "StringEquals": {
+                       "ec2:ResourceTag/aws:cloudformation:logical-id": "ZeppelinInstance"
+                   }
+               }
            },
            {
                "Action": [
@@ -151,12 +168,14 @@ In this step, you create a policy that is similar to `AWSGlueConsoleFullAccess`\
                    }
                }
            },
-   		{
+           {
                "Action": [
                    "iam:PassRole"
                ],
                "Effect": "Allow",
-               "Resource": "arn:aws:iam::*:role/service-role/AWSGlueServiceRole*",
+               "Resource": [
+                   "arn:aws:iam::*:role/service-role/AWSGlueServiceRole*"
+               ],
                "Condition": {
                    "StringLike": {
                        "iam:PassedToService": [
@@ -166,7 +185,7 @@ In this step, you create a policy that is similar to `AWSGlueConsoleFullAccess`\
                }
            }
        ]
-       }
+   }
    ```
 
    The following table describes the permissions granted by this policy\.    

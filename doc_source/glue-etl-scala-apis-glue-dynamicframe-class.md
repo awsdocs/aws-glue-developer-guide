@@ -51,7 +51,7 @@ def applyMapping( mappings : Seq[Product4[String, String, String, String]],
 
 Selects, projects, and casts columns based on a sequence of mappings\.
 
-Each mapping is comprised of a source column and type and a target column and type\. Mappings may be specified as either a four\-tuple \(source\_path, source\_type, target\_path, target\_type\) or a \[\[MappingSpec\]\] object containing the same information\.
+Each mapping is comprised of a source column and type and a target column and type\. Mappings may be specified as either a four\-tuple \(source\_path, source\_type, target\_path, target\_type\) or a [MappingSpec](glue-etl-scala-apis.md#glue-etl-scala-apis-glue-mappingspec) object containing the same information\.
 
 In addition to simple projections and casting, mappings can be used to nest or unnest fields by separating components of the path with '\.'\. For example, suppose we have a DynamicFrame with the folowing schema:
 
@@ -218,7 +218,7 @@ Returns the schema if it has already been computed\. Does not scan the data if t
 def isSchemaComputed : Boolean 
 ```
 
-Returns true if the schema has been computed for this DynamicFrame, or false if not\. If this method returns false then calling the \[\[schema\]\] method will require another pass over the records in this DynamicFrame\.
+Returns true if the schema has been computed for this DynamicFrame, or false if not\. If this method returns false then calling the `schema` method will require another pass over the records in this DynamicFrame\.
 
 ## def javaToPython<a name="glue-etl-scala-apis-glue-dynamicframe-class-defs-javaToPython"></a>
 
@@ -296,7 +296,7 @@ def relationalize( rootTableName : String,
 
 Flattens all nested structures and pivots arrays into separate tables\.
 
-This operation can be used to prepare deeply nested data for ingestion into a relational database\. Nested structs are flattened in the same manner as the \[\[unnest\]\] transform\. Additionally arrays are pivoted into separate tables with each array element becoming a row\. For example, take a DynamicFrame with the following data:
+This operation can be used to prepare deeply nested data for ingestion into a relational database\. Nested structs are flattened in the same manner as the [unnest](#glue-etl-scala-apis-glue-dynamicframe-class-defs-unnest) transform\. Additionally arrays are pivoted into separate tables with each array element becoming a row\. For example, take a DynamicFrame with the following data:
 
 ```
  {"name": "Nancy", "age": 47, "friends": ["Fred", "Lakshmi"]}
@@ -446,7 +446,7 @@ def schema : Schema
 
 Returns the schema of this DynamicFrame\.
 
-The returned schema is guaranteed to contain every field that is present in a record in this DynamicFrame, but in a small number of cases it may contaion additional fields as well\. The \[\[recomputeSchema\]\] method can be used to "tighten" the schema based on the records in this DynamicFrame\.
+The returned schema is guaranteed to contain every field that is present in a record in this DynamicFrame, but in a small number of cases it may contaion additional fields as well\. The [unnest](#glue-etl-scala-apis-glue-dynamicframe-class-defs-unnest) method can be used to "tighten" the schema based on the records in this DynamicFrame\.
 
 ## def selectField<a name="glue-etl-scala-apis-glue-dynamicframe-class-defs-selectField"></a>
 
@@ -476,7 +476,7 @@ def selectFields( paths : Seq[String],
 Returns a new DynamicFrame containing the specified columns\.
 
 **Note**  
-The `selectFields` method can only be used to select top\-level columns\. The \[\[applyMapping\]\] method can be used to select nested columns\.
+The `selectFields` method can only be used to select top\-level columns\. The [applyMapping](#glue-etl-scala-apis-glue-dynamicframe-class-defs-applyMapping) method can be used to select nested columns\.
 
 ## def show<a name="glue-etl-scala-apis-glue-dynamicframe-class-defs-show"></a>
 
@@ -580,7 +580,7 @@ def toDF( specs : Seq[ResolveSpec] = Seq.empty[ResolveSpec] ) : DataFrame
 Converts this DynamicFrame to a SparkSQL DataFrame with the same schema and records\.
 
 **Note**  
-Since DataFrames do not support ChoiceTypes, this method will automatically convert ChoiceType columns into StructTypes\. See \[\[resolveChoice\]\] for additional information and options for resolving choices\.
+Since DataFrames do not support ChoiceTypes, this method will automatically convert ChoiceType columns into StructTypes\. See [resolveChoice](#glue-etl-scala-apis-glue-dynamicframe-class-defs-resolveChoice) for additional information and options for resolving choices\.
 
 ## def unbox<a name="glue-etl-scala-apis-glue-dynamicframe-class-defs-unbox"></a>
 

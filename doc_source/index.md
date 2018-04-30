@@ -40,6 +40,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Defining Tables in the AWS Glue Data Catalog](tables-described.md)
       + [Working with Tables on the AWS Glue Console](console-tables.md)
    + [Cataloging Tables with a Crawler](add-crawler.md)
+      + [Configuring a Crawler](crawler-configuration.md)
       + [Scheduling an AWS Glue Crawler](schedule-crawler.md)
       + [Working with Crawlers on the AWS Glue Console](console-crawlers.md)
    + [Defining a Database in Your Data Catalog](define-database.md)

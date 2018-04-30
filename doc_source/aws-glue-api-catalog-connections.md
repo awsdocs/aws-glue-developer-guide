@@ -118,6 +118,7 @@ Creates a connection definition in the Data Catalog\.
 + `InvalidInputException`
 + `OperationTimeoutException`
 + `ResourceNumberLimitExceededException`
++ `GlueEncryptionException`
 
 ## DeleteConnection Action \(Python: delete\_connection\)<a name="aws-glue-api-catalog-connections-DeleteConnection"></a>
 
@@ -160,6 +161,7 @@ Retrieves a connection definition from the Data Catalog\.
 + `EntityNotFoundException`
 + `OperationTimeoutException`
 + `InvalidInputException`
++ `GlueEncryptionException`
 
 ## GetConnections Action \(Python: get\_connections\)<a name="aws-glue-api-catalog-connections-GetConnections"></a>
 
@@ -191,6 +193,7 @@ Retrieves a list of connection definitions from the Data Catalog\.
 + `EntityNotFoundException`
 + `OperationTimeoutException`
 + `InvalidInputException`
++ `GlueEncryptionException`
 
 ## UpdateConnection Action \(Python: update\_connection\)<a name="aws-glue-api-catalog-connections-UpdateConnection"></a>
 
@@ -215,6 +218,7 @@ Updates a connection definition in the Data Catalog\.
 + `EntityNotFoundException`
 + `OperationTimeoutException`
 + `InvalidInputException`
++ `GlueEncryptionException`
 
 ## BatchDeleteConnection Action \(Python: batch\_delete\_connection\)<a name="aws-glue-api-catalog-connections-BatchDeleteConnection"></a>
 

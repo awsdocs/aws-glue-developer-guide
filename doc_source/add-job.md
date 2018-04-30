@@ -41,6 +41,9 @@ A data processing unit \(DPU\) is a relative measure of processing power that is
 **Max concurrency**  
 Sets the maximum number of concurrent runs that are allowed for this job\. The default is 1\. An error is returned when this threshold is reached\. The maximum value you can specify is controlled by a service limit\. For example, if a previous run of a job is still running when a new instance is started, you might want to return an error to prevent two instances of the same job from running concurrently\. 
 
+**Job timeout**  
+Sets the maximum execution time in minutes\. The default is 2880 minutes\. If this limit is greater than the execution time, the job run state changes to “TIMEOUT”\. 
+
 **Number of retries**  
 Specify the number of times, from 0 to 10, that AWS Glue should automatically restart the job if it fails\.
 

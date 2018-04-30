@@ -36,15 +36,15 @@ If the data store that is being crawled is a relational database, the output is 
 
 ## Using Include and Exclude Patterns<a name="crawler-data-stores-exclude"></a>
 
-When evaluating what to include or exclude in a crawl, a crawler starts by evaluating the required include path\. For every data store you want to crawl, you must specify a single include path\.
+When evaluating what to include or exclude in a crawl, a crawler starts by evaluating the required include path\. For every data store that you want to crawl, you must specify a single include path\.
 
 For Amazon S3 data stores, the syntax is `bucket-name/folder-name/file-name.ext`\. To crawl all objects in a bucket, you specify just the bucket name in the include path\.
 
 For JDBC data stores, the syntax is either `database-name/schema-name/table-name` or `database-name/table-name`\. The syntax depends on whether the database engine supports schemas within a database\. For example, for database engines such as MySQL or Oracle, don't specify a `schema-name` in your include path\. You can substitute the percent sign \(`%`\) for a schema or table in the include path to represent all schemas or all tables in a database\. You cannot substitute the percent sign \(`%`\) for database in the include path\.  
 
-A crawler connects to a JDBC data store using an AWS Glue connection that contains a JDBC URI connection string\. The crawler only has access to objects in the database engine using the JDBC username and password in the AWS Glue connection\. *The crawler can only create tables that it can access through the JDBC connection\.* After the crawler accesses the database engine with the JDBC URI, then the include path is used to determine which tables in the database engine are created in the Data Catalog\. For example, with MySQL, if you specify an include path of `MyDatabase/%`, then all tables within `MyDatabase` are created in the Data Catalog\. When accessing Amazon Redshift, if you specify an include path of `MyDatabase/%`, then all tables within all schemas for database `MyDatabase` are created in the Data Catalog\. If you specify an include path of `MyDatabase/MySchema/%`, then all tables in database `MyDatabase` and schema `MySchema` are created\. 
+A crawler connects to a JDBC data store using an AWS Glue connection that contains a JDBC URI connection string\. The crawler only has access to objects in the database engine using the JDBC user name and password in the AWS Glue connection\. *The crawler can only create tables that it can access through the JDBC connection\.* After the crawler accesses the database engine with the JDBC URI, the include path is used to determine which tables in the database engine are created in the Data Catalog\. For example, with MySQL, if you specify an include path of `MyDatabase/%`, then all tables within `MyDatabase` are created in the Data Catalog\. When accessing Amazon Redshift, if you specify an include path of `MyDatabase/%`, then all tables within all schemas for database `MyDatabase` are created in the Data Catalog\. If you specify an include path of `MyDatabase/MySchema/%`, then all tables in database `MyDatabase` and schema `MySchema` are created\. 
 
-After you specify and include path, you can then exclude objects from the crawl that your include path would otherwise include by specifying one or more Unix\-style `glob` exclude patterns\.
+After you specify an include path, you can then exclude objects from the crawl that your include path would otherwise include by specifying one or more Unix\-style `glob` exclude patterns\.
 
 AWS Glue supports the following kinds of `glob` patterns in the exclude pattern\. These patterns are applied to your include path to determine which objects are excluded:
 
@@ -82,29 +82,29 @@ Each exclude pattern is evaluated against the include path\. For example, suppos
       market-us.json
       market-emea.json
       market-ap.json
-      employees/
-         hr.json
-         john.csv
-         jane.csv
-         juan.txt
+   employees/
+      hr.json
+      john.csv
+      jane.csv
+      juan.txt
 ```
 Given the include path `s3://mybucket/myfolder/`, the following are some sample results for exclude patterns:
 
 
 | Exclude pattern | Results | 
 | --- | --- | 
-| departments/\*\* | Excludes all files and folders below departments and includes the employees directory and its files | 
+| departments/\*\* | Excludes all files and folders below departments and includes the employees folder and its files | 
 | departments/market\* | Excludes market\-us\.json, market\-emea\.json, and market\-ap\.json | 
 | \*\*\.csv | Excludes all objects below myfolder that have a name ending with \.csv | 
-| employees/\*\.csv | Excludes all \.csv files in the employees directory | 
+| employees/\*\.csv | Excludes all \.csv files in the employees folder | 
 
 **Example of Excluding a Subset of Amazon S3 Partitions**  
-Suppose your data is partitioned by day so that each day in a year is in a separate Amazon S3 partition\. For January 2015, there are 31 partitions\. Now, to crawl data for only the first week of January, you need to exclude all partitions except days 1 through 7:  
+Suppose that your data is partitioned by day, so that each day in a year is in a separate Amazon S3 partition\. For January 2015, there are 31 partitions\. Now, to crawl data for only the first week of January, you must exclude all partitions except days 1 through 7:  
 
 ```
  2015/01/{[!0],0[8-9]}**, 2015/0[2-9]/**, 2015/1[0-2]/**    
 ```
-Let's look at the parts of this glob pattern\. The first part, ` 2015/01/{[!0],0[8-9]}**`, excludes all days that don't begin with a "0" as well as day 08 and day 09 from month 01 in year 2015\. Notice "\*\*" is used as the suffix to the day number pattern and crosses folder boundries to lower level folders\. If "\*" is used, lower folder levels are not excluded\.  
+Take a look at the parts of this glob pattern\. The first part, ` 2015/01/{[!0],0[8-9]}**`, excludes all days that don't begin with a "0" in addition to day 08 and day 09 from month 01 in year 2015\. Notice that "\*\*" is used as the suffix to the day number pattern and crosses folder boundaries to lower\-level folders\. If "\*" is used, lower folder levels are not excluded\.  
 The second part, ` 2015/0[2-9]/**`, excludes days in months 02 to 09, in year 2015\.  
 The third part, `2015/1[0-2]/**`, excludes days in months 10, 11, and 12, in year 2015\.
 
@@ -132,11 +132,18 @@ Given the include path `MyDatabase/MySchema/%`, the following are some sample re
 
 ## What Happens When a Crawler Runs?<a name="crawler-running"></a>
 
+When a crawler runs, it takes the following actions to interrogate a data store:
++ **Classifies data to determine the format, schema, and associated properties of the raw data** – You can configure the results of classification by creating a custom classifier\.
++ **Groups data into tables or partitions ** – Data is grouped based on crawler heuristics\.
++ **Writes metadata to the Data Catalog ** – You can configure how the crawler adds, updates, and deletes tables and partitions\.
+
 The metadata tables that a crawler creates are contained in a database when you define a crawler\. If your crawler does not define a database, your tables are placed in the default database\. In addition, each table has a classification column that is filled in by the classifier that first successfully recognized the data store\.
 
-The crawler can process both relational database and file data stores\. If the file that is crawled is compressed, the crawler must download it to process it\.
+The crawler can process both relational database and file data stores\.
 
-The crawler generates the names for the tables it creates\. The name of the tables that are stored in the AWS Glue Data Catalog follow these rules:
+If the file that is crawled is compressed, the crawler must download it to process it\. When a crawler runs it interrogates files to determine their format and compression type and writes these properties into the Data Catalog\. Some file formats, for example parquet, enable you to compress parts of the file as it is written\. For these files, the compressed data is an internal component of the file and AWS Glue does not populate the `compressionType` property when it writes tables into the Data Catalog\. In contrast, if an **entire file** is compressed by a compression algorithm, for example gzip, then the `compressionType` property is populated when tables are written into the Data Catalog\. 
+
+The crawler generates the names for the tables it creates\. The names of the tables that are stored in the AWS Glue Data Catalog follow these rules:
 + Only alphanumeric characters and underscore \(`_`\) are allowed\.
 + Any custom prefix cannot be longer than 64 characters\.
 + The maximum length of the name cannot be longer than 128 characters\. The crawler truncates generated names to fit within the limit\.
@@ -158,24 +165,7 @@ s3://bucket01/folder1/table2/partition4/file.txt
 s3://bucket01/folder1/table2/partition5/file.txt
 ```
 
-If the schema for table1 and table2 are similar, and a single data store is defined in the crawler with **Include path** `s3://bucket01/folder1/`, then the crawler creates a single table with two partition columns\. One partition column that contains table1 and table2, and a second partition column that contains partition1 through partition5\. To create two separate tables, define the crawler with two data stores\. In this example, define the first **Include path** as `s3://bucket01/folder1/table1/` and the second as `s3://bucket01/folder1/table2`\.
+If the schemas for table1 and table2 are similar, and a single data store is defined in the crawler with **Include path** `s3://bucket01/folder1/`, the crawler creates a single table with two partition columns\. One partition column contains table1 and table2, and a second partition column contains partition1 through partition5\. To create two separate tables, define the crawler with two data stores\. In this example, define the first **Include path** as `s3://bucket01/folder1/table1/` and the second as `s3://bucket01/folder1/table2`\.
 
 **Note**  
-In Athena each table corresponds to an Amazon S3 prefix with all the objects in it\. If objects have different schemas, Athena does not recognize different objects within the same prefix as separate tables\. This can happen if multiple tables are created by a crawler from the same Amazon S3 prefix\. This might lead to queries in Athena that return zero results\. For Athena to properly recognize and query tables, create the crawler with a separate **Include path** for each different table schema in the Amazon S3 folder structure\. For more information, see [Best Practices When Using Athena with AWS Glue](http://docs.aws.amazon.com/athena/latest/ug/glue-best-practices.html)\.
-
-## What Happens When a Crawler Detects Schema Changes?<a name="crawler-schema-changes"></a>
-
-When a crawler runs against a previously crawled data store, it might discover that a schema is changed or that objects in the data store are now deleted\. The crawler logs schema changes as it runs\. You specify the behavior of the crawler when it finds changes in the schema\.
-
-When a crawler runs, new tables and partitions are always created regardless of the schema change policy\. When the crawler finds a changed schema, you can choose one of the following actions:
-+ Update the table in the AWS Glue Data Catalog\. This is the default\.
-+ Ignore the change\. Do not modify the table in the Data Catalog\.
-
-When the crawler finds a deleted object in the data store, you can choose one of the following actions:
-+ Delete the table from the Data Catalog\.
-+ Ignore the change\. Do not modify the table in the Data Catalog\.
-+ Mark the table as deprecated in the Data Catalog\. This is the default\.
-
-## What Happens When a Crawler Detects Partition Changes?<a name="crawler-partition-changes"></a>
-
-When a crawler runs against a previously crawled data store, it might discover new or changed partitions\. By default, new partitions are added and existing partitions are updated if they have changed\. In addition, you can set a crawler configuration option to `InheritFromTable` \(this option is named **Update all new and existing partitions with metadata from the table** on the AWS Glue console\)\. When this option is set, partitions inherit metadata properties such as their classification, input format, output format, serde information, and schema from their parent table\. Any change in properties to the parent table are propagated to its partitions\. When this configuration option is set on an existing crawler, existing partitions are updated to match the properties of their parent table the next time the crawler runs\. 
+In Athena, each table corresponds to an Amazon S3 prefix with all the objects in it\. If objects have different schemas, Athena does not recognize different objects within the same prefix as separate tables\. This can happen if a crawler creates multiple tables from the same Amazon S3 prefix\. This might lead to queries in Athena that return zero results\. For Athena to properly recognize and query tables, create the crawler with a separate **Include path** for each different table schema in the Amazon S3 folder structure\. For more information, see [Best Practices When Using Athena with AWS Glue](http://docs.aws.amazon.com/athena/latest/ug/glue-best-practices.html)\.

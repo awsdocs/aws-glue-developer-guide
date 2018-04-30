@@ -10,7 +10,7 @@
 object GlueArgParser
 ```
 
-This is strictly consistent with Python version of utils\.getResolvedOptions in AWSGlueDataplanePython pacakge
+This is strictly consistent with Python version of utils\.getResolvedOptions in AWSGlueDataplanePython package
 
 ### GlueArgParser def Methods<a name="glue-etl-scala-apis-glue-util-glueargparser-object-defs"></a>
 

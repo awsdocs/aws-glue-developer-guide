@@ -199,18 +199,38 @@ Name of the classifier\.
 
 **Row tag**  
 The XML tag name that defines a table row in the XML document, without angle brackets `< >`\. The name must comply with XML rules for a tag\.  
-The element containing the row data **cannot** be a self\-closing empty element\. For example:  
+The element containing the row data **cannot** be a self\-closing empty element\. For example, this empty element is **not** parsed by AWS Glue:  
 
 ```
             <row att1=”xx” att2=”yy” />  
 ```
-is not parsed by AWS Glue\. Empty elements can be written as follows:  
+ Empty elements can be written as follows:  
 
 ```
-            <row att1=”xx” att2=”yy”> </row"> 
+            <row att1=”xx” att2=”yy”> </row> 
 ```
 
 AWS Glue keeps track of the creation time, last update time, and version of your classifier\.
+
+For example, suppose you have the following XML file\. To create an AWS Glue table that only contains columns for author and title, create a classifier in the AWS Glue console with **Row tag** as `AnyCompany`\. Then add and run a crawler which uses this custom classifier\.
+
+```
+<?xml version="1.0"?>
+<catalog>
+   <book id="bk101">
+     <AnyCompany>
+       <author>Rivera, Martha</author>
+       <title>AnyCompany Developer Guide</title>
+     </AnyCompany>
+   </book>
+   <book id="bk102">
+     <AnyCompany>   
+       <author>Stiles, John</author>
+       <title>Style Guide for AnyCompany</title>
+     </AnyCompany>
+   </book>
+</catalog>
+```
 
 ## Writing JSON Custom Classifiers<a name="custom-classifier-json"></a>
 

@@ -146,10 +146,10 @@ A job run encountered an invalid transition from source state to target state\.
 + `message` – String\.
 
   A message describing the problem\.
-+ `sourceState` – String \(valid values: `STARTING` \| `RUNNING` \| `STOPPING` \| `STOPPED` \| `SUCCEEDED` \| `FAILED`\)\.
++ `sourceState` – String \(valid values: `STARTING` \| `RUNNING` \| `STOPPING` \| `STOPPED` \| `SUCCEEDED` \| `FAILED` \| `TIMEOUT`\)\.
 
   The source state\.
-+ `targetState` – String \(valid values: `STARTING` \| `RUNNING` \| `STOPPING` \| `STOPPED` \| `SUCCEEDED` \| `FAILED`\)\.
++ `targetState` – String \(valid values: `STARTING` \| `RUNNING` \| `STOPPING` \| `STOPPED` \| `SUCCEEDED` \| `FAILED` \| `TIMEOUT`\)\.
 
   The target state\.
 

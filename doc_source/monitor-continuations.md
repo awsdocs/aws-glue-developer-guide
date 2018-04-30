@@ -1,6 +1,8 @@
 # Job Bookmarks<a name="monitor-continuations"></a>
 
-AWS Glue keeps track of data that has already been processed by a previous run of an extract, transform, and load \(ETL\) job\. This persisted state information is called a *job bookmark*\.  A job bookmark is composed of the states for various elements of jobs, such as sources, transformations, and targets\. Currently, job bookmarks are implemented for Amazon Simple Storage Service \(Amazon S3\) sources and the Relationalize transform\. For example, your ETL job might read new partitions in an Amazon S3 file\. AWS Glue tracks which partitions have successfully been processed by the job to prevent duplicate processing and duplicate data in the job's target data store\. 
+AWS Glue keeps track of data that has already been processed by a previous run of an extract, transform, and load \(ETL\) job\. This persisted state information is called a *job bookmark*\.  A job bookmark is composed of the states for various elements of jobs, such as sources, transformations, and targets\. For example, your ETL job might read new partitions in an Amazon S3 file\. AWS Glue tracks which partitions have successfully been processed by the job to prevent duplicate processing and duplicate data in the job's target data store\.
+
+Currently, job bookmarks are implemented for some Amazon Simple Storage Service \(Amazon S3\) sources and the Relationalize transform\. AWS Glue supports job bookmarks for Amazon S3 source formats of JSON, CSV, Avro, and XML\. Parquet and ORC are not supported\.
 
 In the AWS Glue console, a job bookmark option is passed as a parameter when the job is started\.  
 

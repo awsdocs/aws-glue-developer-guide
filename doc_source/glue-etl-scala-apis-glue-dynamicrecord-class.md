@@ -26,7 +26,7 @@
 class DynamicRecord extends Serializable with Writable with Cloneable
 ```
 
-A DynamicRecord is a self describing data structure that represents a row of data in the data set being processed\. It is self\-describing in the sense that we can get the schema of the row represented by the DynamicRecord by inspecting the record itself\. A DynamicRecord is similar to a \[\[Row\]\] in Spark\.
+A DynamicRecord is a self describing data structure that represents a row of data in the data set being processed\. It is self\-describing in the sense that we can get the schema of the row represented by the DynamicRecord by inspecting the record itself\. A DynamicRecord is similar to a `Row` in Spark\.
 
 ## def addField<a name="glue-etl-scala-apis-glue-dynamicrecord-class-defs-addField"></a>
 
@@ -36,9 +36,9 @@ def addField( path : String,
             ) : Unit
 ```
 
-Adds a \[\[DynamicNode\]\] to the specified path\.
+Adds a [DynamicNode](glue-etl-scala-apis-glue-types-dynamicnode.md) to the specified path\.
 + `path`  —  Path for the field to be added
-+ `dynamicNode`  —  \[\[DynamicNode\]\] to be added at the specified path\.
++ `dynamicNode`  —  [DynamicNode](glue-etl-scala-apis-glue-types-dynamicnode.md) to be added at the specified path\.
 
 ## def dropField<a name="glue-etl-scala-apis-glue-dynamicrecord-class-defs-dropField"></a>
 
@@ -46,11 +46,11 @@ Adds a \[\[DynamicNode\]\] to the specified path\.
  def dropField(path: String, underRename: Boolean = false): Option[DynamicNode]
 ```
 
-Drops a \[\[DynamicNode\]\] from the specified path and returns the dropped node if there is not an array in the specified path\.
+Drops a [DynamicNode](glue-etl-scala-apis-glue-types-dynamicnode.md) from the specified path and returns the dropped node if there is not an array in the specified path\.
 + `path`  —  Path to the field to drop\.
 + `underRename`  —  True if dropField is called as part of a rename transform, or false otherwise \(false by default\)\.
 
-Returns a \[\[scala\.Option Option\]\]\(\[\[DynamicNode\]\]\)\.
+Returns a `scala.Option Option` \([DynamicNode](glue-etl-scala-apis-glue-types-dynamicnode.md)\)\.
 
 ## def setError<a name="glue-etl-scala-apis-glue-dynamicrecord-class-defs-setError"></a>
 
@@ -76,7 +76,7 @@ Checks whether this record is an error record\.
 def getError
 ```
 
-Gets the \[\[Error\]\] if the record is an error record\. Returns \[\[scala\.Some Some\]\]\(Error\) if this record is an error record, or otherwise \[\[scala\.None\]\]\.
+Gets the `Error` if the record is an error record\. Returns `scala.Some Some` \(Error\) if this record is an error record, or otherwise `scala.None` \.
 
 ## def clearError<a name="glue-etl-scala-apis-glue-dynamicrecord-class-defs-clearError"></a>
 
@@ -84,7 +84,7 @@ Gets the \[\[Error\]\] if the record is an error record\. Returns \[\[scala\.Som
 def clearError
 ```
 
-Set the \[\[Error\]\] to \[\[scala\.None None\]\]\.
+Set the `Error` to `scala.None.None` \.
 
 ## def write<a name="glue-etl-scala-apis-glue-dynamicrecord-class-defs-write"></a>
 
@@ -112,7 +112,7 @@ Clonez this record to a new DynamicRecord and returns it\.
 def schema
 ```
 
-Gets the \[\[Schema\]\] by inspecting the record\.
+Gets the `Schema` by inspecting the record\.
 
 ## def getRoot<a name="glue-etl-scala-apis-glue-dynamicrecord-class-defs-getRoot"></a>
 
@@ -138,7 +138,7 @@ def getFieldNode( path : String ) : Option[DynamicNode]
 
 Gets the field's value at the specified `path` as an Option of DyanmicNode\.
 
-Returns \[\[scala\.Some Some\]\]\(\[\[DynamicNode\]\]\) if the field exists, or otherwise \[\[scala\.None None\]\]\.
+Returns `scala.Some Some` \([DynamicNode](glue-etl-scala-apis-glue-types-dynamicnode.md)\) if the field exists, or otherwise `scala.None.None` \.
 
 ## def getField<a name="glue-etl-scala-apis-glue-dynamicrecord-class-defs-getField"></a>
 
@@ -148,7 +148,7 @@ def getField( path : String ) : Option[Any]
 
 Gets the field's value at the specified `path` as an Option of DyanmicNode\.
 
-Returns \[\[scala\.Some Some\]\]\(value\)\.
+Returns `scala.Some Some` \(value\)\.
 
 ## def hashCode<a name="glue-etl-scala-apis-glue-dynamicrecord-class-defs-hashCode"></a>
 
@@ -175,9 +175,9 @@ def apply( row : Row,
            schema : SparkStructType )
 ```
 
-Apply method to convert a Spark SQL \[\[Row\]\] to a \[\[DynamicRecord\]\]\.
-+ `row`  —  A Spark SQL \[\[Row\]\]\.
-+ `schema`  —  The \[\[Schema\]\] of that row\.
+Apply method to convert a Spark SQL `Row` to a [DynamicRecord](#glue-etl-scala-apis-glue-dynamicrecord-class)\.
++ `row`  —  A Spark SQL `Row`\.
++ `schema`  —  The `Schema` of that row\.
 
 Returns a DynamicRecord\.
 

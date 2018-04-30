@@ -174,6 +174,7 @@ Creates a new partition\.
 + `InternalServiceException`
 + `EntityNotFoundException`
 + `OperationTimeoutException`
++ `GlueEncryptionException`
 
 ## BatchCreatePartition Action \(Python: batch\_create\_partition\)<a name="aws-glue-api-catalog-partitions-BatchCreatePartition"></a>
 
@@ -205,6 +206,7 @@ Creates one or more partitions in a batch operation\.
 + `InternalServiceException`
 + `EntityNotFoundException`
 + `OperationTimeoutException`
++ `GlueEncryptionException`
 
 ## UpdatePartition Action \(Python: update\_partition\)<a name="aws-glue-api-catalog-partitions-UpdatePartition"></a>
 
@@ -235,6 +237,7 @@ Updates a partition\.
 + `InvalidInputException`
 + `InternalServiceException`
 + `OperationTimeoutException`
++ `GlueEncryptionException`
 
 ## DeletePartition Action \(Python: delete\_partition\)<a name="aws-glue-api-catalog-partitions-DeletePartition"></a>
 
@@ -320,6 +323,7 @@ Retrieves information about a specified partition\.
 + `InvalidInputException`
 + `InternalServiceException`
 + `OperationTimeoutException`
++ `GlueEncryptionException`
 
 ## GetPartitions Action \(Python: get\_partitions\)<a name="aws-glue-api-catalog-partitions-GetPartitions"></a>
 
@@ -361,6 +365,7 @@ Retrieves information about the partitions in a table\.
 + `InvalidInputException`
 + `OperationTimeoutException`
 + `InternalServiceException`
++ `GlueEncryptionException`
 
 ## BatchGetPartition Action \(Python: batch\_get\_partition\)<a name="aws-glue-api-catalog-partitions-BatchGetPartition"></a>
 
@@ -393,3 +398,4 @@ Retrieves partitions in a batch request\.
 + `EntityNotFoundException`
 + `OperationTimeoutException`
 + `InternalServiceException`
++ `GlueEncryptionException`
