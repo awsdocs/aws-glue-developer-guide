@@ -6,6 +6,9 @@ You can provide a custom classifier to classify your data using a grok pattern o
 
 AWS Glue runs custom classifiers before built\-in classifiers, in the order you specify\. When a crawler finds a classifier that matches the data, the classification string and schema are used in the definition of tables that are written to your AWS Glue Data Catalog\.
 
+**Note**  
+Custom classifiers use GrokSerDe, which has been validated in Amazon Athena only. Querying tables defined with Grok is currently not supported in EMR or Redshift\.
+
 ## Writing Grok Custom Classifiers<a name="custom-classifier-grok"></a>
 
 Grok is a tool that is used to parse textual data given a matching pattern\. A grok pattern is a named set of regular expressions \(regex\) that are used to match data one line at a time\. AWS Glue uses grok patterns to infer the schema of your data\. When a grok pattern matches your data, AWS Glue uses the pattern to determine the structure of your data and map it into fields\.
