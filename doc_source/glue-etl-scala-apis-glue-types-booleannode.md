@@ -1,8 +1,8 @@
-# The AWS Glue Scala BooleanNode APIs<a name="glue-etl-scala-apis-glue-types-booleannode"></a>
+# AWS Glue Scala BooleanNode APIs<a name="glue-etl-scala-apis-glue-types-booleannode"></a>
 
-**Package:   com\.amazonaws\.services\.glue\.types**
+**Package: com\.amazonaws\.services\.glue\.types**
 
-## The BooleanNode Case Class<a name="glue-etl-scala-apis-glue-types-booleannode-case-class"></a>
+## BooleanNode Case Class<a name="glue-etl-scala-apis-glue-types-booleannode-case-class"></a>
 
  **BooleanNode**
 

@@ -1,8 +1,8 @@
-# The AWS Glue Scala ByteNode APIs<a name="glue-etl-scala-apis-glue-types-bytenode"></a>
+# AWS Glue Scala ByteNode APIs<a name="glue-etl-scala-apis-glue-types-bytenode"></a>
 
-**Package:   com\.amazonaws\.services\.glue\.types**
+**Package: com\.amazonaws\.services\.glue\.types**
 
-## The ByteNode Case Class<a name="glue-etl-scala-apis-glue-types-bytenode-case-class"></a>
+## ByteNode Case Class<a name="glue-etl-scala-apis-glue-types-bytenode-case-class"></a>
 
  **ByteNode**
 

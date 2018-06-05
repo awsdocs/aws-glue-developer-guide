@@ -1,4 +1,4 @@
-# The AWS Glue Scala DynamicRecord Class<a name="glue-etl-scala-apis-glue-dynamicrecord-class"></a>
+# AWS Glue Scala DynamicRecord Class<a name="glue-etl-scala-apis-glue-dynamicrecord-class"></a>
 
 **Topics**
 + [def addField](#glue-etl-scala-apis-glue-dynamicrecord-class-defs-addField)
@@ -17,16 +17,16 @@
 + [def getField](#glue-etl-scala-apis-glue-dynamicrecord-class-defs-getField)
 + [def hashCode](#glue-etl-scala-apis-glue-dynamicrecord-class-defs-hashCode)
 + [def equals](#glue-etl-scala-apis-glue-dynamicrecord-class-defs-equals)
-+ [The DynamicRecord Object](#glue-etl-scala-apis-glue-dynamicrecord-object)
-+ [The RecordTraverser Trait](#glue-etl-scala-apis-glue-recordtraverser-trait)
++ [DynamicRecord Object](#glue-etl-scala-apis-glue-dynamicrecord-object)
++ [RecordTraverser Trait](#glue-etl-scala-apis-glue-recordtraverser-trait)
 
-**Package:   com\.amazonaws\.services\.glue**
+**Package: com\.amazonaws\.services\.glue**
 
 ```
 class DynamicRecord extends Serializable with Writable with Cloneable
 ```
 
-A DynamicRecord is a self describing data structure that represents a row of data in the data set being processed\. It is self\-describing in the sense that we can get the schema of the row represented by the DynamicRecord by inspecting the record itself\. A DynamicRecord is similar to a `Row` in Spark\.
+A `DynamicRecord` is a self\-describing data structure that represents a row of data in the dataset that is being processed\. It is self\-describing in the sense that you can get the schema of the row that is represented by the `DynamicRecord` by inspecting the record itself\. A `DynamicRecord` is similar to a `Row` in Apache Spark\.
 
 ## def addField<a name="glue-etl-scala-apis-glue-dynamicrecord-class-defs-addField"></a>
 
@@ -37,8 +37,8 @@ def addField( path : String,
 ```
 
 Adds a [DynamicNode](glue-etl-scala-apis-glue-types-dynamicnode.md) to the specified path\.
-+ `path`  —  Path for the field to be added
-+ `dynamicNode`  —  [DynamicNode](glue-etl-scala-apis-glue-types-dynamicnode.md) to be added at the specified path\.
++ `path` — The path for the field to be added\.
++ `dynamicNode` — The [DynamicNode](glue-etl-scala-apis-glue-types-dynamicnode.md) to be added at the specified path\.
 
 ## def dropField<a name="glue-etl-scala-apis-glue-dynamicrecord-class-defs-dropField"></a>
 
@@ -47,8 +47,8 @@ Adds a [DynamicNode](glue-etl-scala-apis-glue-types-dynamicnode.md) to the speci
 ```
 
 Drops a [DynamicNode](glue-etl-scala-apis-glue-types-dynamicnode.md) from the specified path and returns the dropped node if there is not an array in the specified path\.
-+ `path`  —  Path to the field to drop\.
-+ `underRename`  —  True if dropField is called as part of a rename transform, or false otherwise \(false by default\)\.
++ `path` — The path to the field to drop\.
++ `underRename` — True if `dropField` is called as part of a rename transform, or false otherwise \(false by default\)\.
 
 Returns a `scala.Option Option` \([DynamicNode](glue-etl-scala-apis-glue-types-dynamicnode.md)\)\.
 
@@ -60,7 +60,7 @@ def setError( error : Error )
 
 Sets this record as an error record, as specified by the `error` parameter\.
 
-Returns a DynamicRecord\.
+Returns a `DynamicRecord`\.
 
 ## def isError<a name="glue-etl-scala-apis-glue-dynamicrecord-class-defs-isError"></a>
 
@@ -104,7 +104,7 @@ override def readFields( in : DataInput ) : Unit
 override def clone : DynamicRecord 
 ```
 
-Clonez this record to a new DynamicRecord and returns it\.
+Clones this record to a new `DynamicRecord` and returns it\.
 
 ## def schema<a name="glue-etl-scala-apis-glue-dynamicrecord-class-defs-schema"></a>
 
@@ -120,7 +120,7 @@ Gets the `Schema` by inspecting the record\.
 def getRoot : ObjectNode 
 ```
 
-Getz the root ObjectNode for the record\.
+Gets the root `ObjectNode` for the record\.
 
 ## def toJson<a name="glue-etl-scala-apis-glue-dynamicrecord-class-defs-toJson"></a>
 
@@ -128,7 +128,7 @@ Getz the root ObjectNode for the record\.
 def toJson : String 
 ```
 
-Gets the json string for the record\.
+Gets the JSON string for the record\.
 
 ## def getFieldNode<a name="glue-etl-scala-apis-glue-dynamicrecord-class-defs-getFieldNode"></a>
 
@@ -136,7 +136,7 @@ Gets the json string for the record\.
 def getFieldNode( path : String ) : Option[DynamicNode] 
 ```
 
-Gets the field's value at the specified `path` as an Option of DyanmicNode\.
+Gets the field's value at the specified `path` as an option of `DynamicNode`\.
 
 Returns `scala.Some Some` \([DynamicNode](glue-etl-scala-apis-glue-types-dynamicnode.md)\) if the field exists, or otherwise `scala.None.None` \.
 
@@ -146,7 +146,7 @@ Returns `scala.Some Some` \([DynamicNode](glue-etl-scala-apis-glue-types-dynamic
 def getField( path : String ) : Option[Any] 
 ```
 
-Gets the field's value at the specified `path` as an Option of DyanmicNode\.
+Gets the field's value at the specified `path` as an option of `DynamicNode`\.
 
 Returns `scala.Some Some` \(value\)\.
 
@@ -162,7 +162,7 @@ override def hashCode : Int
 override def equals( other : Any )
 ```
 
-## The DynamicRecord Object<a name="glue-etl-scala-apis-glue-dynamicrecord-object"></a>
+## DynamicRecord Object<a name="glue-etl-scala-apis-glue-dynamicrecord-object"></a>
 
 ```
 object DynamicRecord
@@ -175,13 +175,13 @@ def apply( row : Row,
            schema : SparkStructType )
 ```
 
-Apply method to convert a Spark SQL `Row` to a [DynamicRecord](#glue-etl-scala-apis-glue-dynamicrecord-class)\.
-+ `row`  —  A Spark SQL `Row`\.
-+ `schema`  —  The `Schema` of that row\.
+Apply method to convert an Apache Spark SQL `Row` to a [DynamicRecord](#glue-etl-scala-apis-glue-dynamicrecord-class)\.
++ `row` — A Spark SQL `Row`\.
++ `schema` — The `Schema` of that row\.
 
-Returns a DynamicRecord\.
+Returns a `DynamicRecord`\.
 
-## The RecordTraverser Trait<a name="glue-etl-scala-apis-glue-recordtraverser-trait"></a>
+## RecordTraverser Trait<a name="glue-etl-scala-apis-glue-recordtraverser-trait"></a>
 
 ```
 trait RecordTraverser {

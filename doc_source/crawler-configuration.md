@@ -21,7 +21,7 @@ To specify what the crawler does when it finds changes in the schema, you can ch
 A crawler might also discover new or changed partitions\. By default, new partitions are added and existing partitions are updated if they have changed\. In addition, you can set a crawler configuration option to **Update all new and existing partitions with metadata from the table** on the AWS Glue console\. When this option is set, partitions inherit metadata properties—such as their classification, input format, output format, SerDe information, and schema—from their parent table\. Any changes to these properties in a table are propagated to its partitions\. When this configuration option is set on an existing crawler, existing partitions are updated to match the properties of their parent table the next time the crawler runs\. 
 
 To specify what the crawler does when it finds a deleted object in the data store, choose one of the following actions:
-+ **Delete the table from the Data Catalog**
++ **Delete tables and partitions from the Data Catalog**
 + **Ignore the change and don't update the table in the Data Catalog**
 + **Mark the table as deprecated in the Data Catalog** – This is the default setting\.
 
@@ -72,7 +72,7 @@ The crawler API `Configuration` field can set multiple configuration options\. F
 ```
 
 You can choose one of the following actions to determine what the crawler does when it finds a deleted object in the data store\. The `DeleteBehavior` field in the `SchemaChangePolicy` structure in the crawler API sets the behavior of the crawler when it discovers a deleted object\. 
-+ `DELETE_FROM_DATABASE` – Delete the table from the Data Catalog\.
++ `DELETE_FROM_DATABASE` – Delete tables and partitions from the Data Catalog\.
 + `LOG` – Ignore the change and don't update the table in the Data Catalog\.
 + `DEPRECATE_IN_DATABASE` – Mark the table as deprecated in the Data Catalog\. This is the default setting\.
 

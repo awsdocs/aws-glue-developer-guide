@@ -1,8 +1,8 @@
-# The AWS Glue Scala ArrayNode APIs<a name="glue-etl-scala-apis-glue-types-arraynode"></a>
+# AWS Glue Scala ArrayNode APIs<a name="glue-etl-scala-apis-glue-types-arraynode"></a>
 
-**Package:   com\.amazonaws\.services\.glue\.types**
+**Package: com\.amazonaws\.services\.glue\.types**
 
-## The ArrayNode Case Class<a name="glue-etl-scala-apis-glue-types-arraynode-case-class"></a>
+## ArrayNode Case Class<a name="glue-etl-scala-apis-glue-types-arraynode-case-class"></a>
 
  **ArrayNode**
 

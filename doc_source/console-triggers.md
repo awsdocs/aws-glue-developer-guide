@@ -11,7 +11,7 @@ The unique name you gave the trigger when you created it\.
 Indicates whether the trigger is time\-based \(**Schedule**\), event\-based \(**Job events**\), or started by you \(**On\-demand**\)\.
 
 **Trigger status**  
-Indicates whether the trigger is **Enabled** or **ACTIVATED** and ready to invoke associated jobs when it fires\. The trigger can also be **Disabled** or **DEACTIVATED** and paused so that it doesn't determine whether a job is invoked\.
+Indicates whether the trigger is **Enabled** or **ACTIVATED** and ready to invoke associated jobs when it fires\. The trigger can also be **Disabled** or **DEACTIVATED** and paused so that it doesn't determine whether a job is invoked\. A **CREATED** trigger exists, but does not factor into whether a job runs\.
 
 **Trigger parameters**  
 For **Schedule** triggers, this includes the details about the frequency and time to fire the trigger\. For **Job events** triggers, it includes the list of jobs to watch that, depending on their run state, might fire the trigger\. See the details of the trigger for the watch list of jobs with events\.
@@ -37,6 +37,7 @@ Specify one of the following:
 + **Schedule:** The trigger fires at a specific time\.
 + **Job events:** The trigger fires when any or all jobs in the list match the selected job event\. For the trigger to fire, the watched job must have been started by a trigger\. For any job you choose, you can only watch one job event\.
 + **On\-demand:** The trigger fires when it is started from the triggers list page\.
+For **Schedule** and **Job events** trigger types, you can enable them when they are created\.
 
 **Jobs to trigger**  
 List of jobs that are started by this trigger\.

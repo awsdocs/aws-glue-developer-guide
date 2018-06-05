@@ -1,8 +1,8 @@
-# The AWS Glue Scala StringNode APIs<a name="glue-etl-scala-apis-glue-types-stringnode"></a>
+# AWS Glue Scala StringNode APIs<a name="glue-etl-scala-apis-glue-types-stringnode"></a>
 
-**Package:   com\.amazonaws\.services\.glue\.types**
+**Package: com\.amazonaws\.services\.glue\.types**
 
-## The StringNode Case Class<a name="glue-etl-scala-apis-glue-types-stringnode-case-class"></a>
+## StringNode Case Class<a name="glue-etl-scala-apis-glue-types-stringnode-case-class"></a>
 
  **StringNode**
 

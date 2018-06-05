@@ -1,8 +1,8 @@
-# The AWS Glue Scala Job APIs<a name="glue-etl-scala-apis-glue-util-job"></a>
+# AWS Glue Scala Job APIs<a name="glue-etl-scala-apis-glue-util-job"></a>
 
-**Package:   com\.amazonaws\.services\.glue\.util**
+**Package: com\.amazonaws\.services\.glue\.util**
 
-## The Job Object<a name="glue-etl-scala-apis-glue-util-job-object"></a>
+## Job Object<a name="glue-etl-scala-apis-glue-util-job-object"></a>
 
  **Job**
 

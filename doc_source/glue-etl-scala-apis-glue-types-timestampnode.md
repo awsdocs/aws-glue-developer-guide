@@ -1,10 +1,10 @@
-# The AWS Glue Scala TimestampNode APIs<a name="glue-etl-scala-apis-glue-types-timestampnode"></a>
+# AWS Glue Scala TimestampNode APIs<a name="glue-etl-scala-apis-glue-types-timestampnode"></a>
 
-**Package:   com\.amazonaws\.services\.glue\.types**
+**Package: com\.amazonaws\.services\.glue\.types**
 
-## The TimestampNode Case Class<a name="glue-etl-scala-apis-glue-types-timestampnode-case-class"></a>
+## TimestampNode Case Class<a name="glue-etl-scala-apis-glue-types-timestampnode-case-class"></a>
 
- **TimestampNode**
+**TimestampNode**
 
 ```
 case class TimestampNode extends ScalarNode(value, TypeCode.TIMESTAMP)  (

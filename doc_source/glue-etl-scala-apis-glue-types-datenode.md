@@ -1,8 +1,8 @@
-# The AWS Glue Scala DateNode APIs<a name="glue-etl-scala-apis-glue-types-datenode"></a>
+# AWS Glue Scala DateNode APIs<a name="glue-etl-scala-apis-glue-types-datenode"></a>
 
-**Package:   com\.amazonaws\.services\.glue\.types**
+**Package: com\.amazonaws\.services\.glue\.types**
 
-## The DateNode Case Class<a name="glue-etl-scala-apis-glue-types-datenode-case-class"></a>
+## DateNode Case Class<a name="glue-etl-scala-apis-glue-types-datenode-case-class"></a>
 
  **DateNode**
 

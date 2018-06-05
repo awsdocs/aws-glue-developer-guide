@@ -1,9 +1,9 @@
-# The AWS Glue Scala DynamicFrame APIs<a name="glue-etl-scala-apis-glue-dynamicframe"></a>
+# AWS Glue Scala DynamicFrame APIs<a name="glue-etl-scala-apis-glue-dynamicframe"></a>
 
-**Package:   com\.amazonaws\.services\.glue**
+**Package: com\.amazonaws\.services\.glue**
 
 **Contents**
-+ [The AWS Glue Scala DynamicFrame Class](glue-etl-scala-apis-glue-dynamicframe-class.md)
++ [AWS Glue Scala DynamicFrame Class](glue-etl-scala-apis-glue-dynamicframe-class.md)
   + [val errorsCount](glue-etl-scala-apis-glue-dynamicframe-class.md#glue-etl-scala-apis-glue-dynamicframe-class-vals-errorsCount)
   + [def applyMapping](glue-etl-scala-apis-glue-dynamicframe-class.md#glue-etl-scala-apis-glue-dynamicframe-class-defs-applyMapping)
   + [def assertErrorThreshold](glue-etl-scala-apis-glue-dynamicframe-class.md#glue-etl-scala-apis-glue-dynamicframe-class-defs-assertErrorThreshold)

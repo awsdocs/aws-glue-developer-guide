@@ -11,22 +11,39 @@
 Defines a connection to a data source\.
 
 **Fields**
-+ `Name` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
++ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the connection definition\.
-+ `Description` – Description string, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
++ `Description` – Description string, not more than 2048 bytes long, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
 
   Description of the connection\.
-+ `ConnectionType` – String \(valid values: `JDBC` \| `SFTP`\)\.
++ `ConnectionType` – UTF\-8 string \(valid values: `JDBC` \| `SFTP`\)\.
 
   The type of the connection\. Currently, only JDBC is supported; SFTP is not supported\.
-+ `MatchCriteria` – An array of UTF\-8 strings\.
++ `MatchCriteria` – An array of UTF\-8 strings, not more than 10 items in the array\.
 
   A list of criteria that can be used in selecting this connection\.
-+ `ConnectionProperties` – An array of *UTF\-8 string*–to–*UTF\-8 string* mappings\.
++ `ConnectionProperties` – A map array of key\-value pairs, not more than 100 pairs
 
-  A list of key\-value pairs used as parameters for this connection\.
-+ `PhysicalConnectionRequirements` – A PhysicalConnectionRequirements object\.
+  Each key is a UTF\-8 string \(valid values: `HOST` \| `PORT` \| `USERNAME="USER_NAME"` \| `PASSWORD` \| `ENCRYPTED_PASSWORD` \| `JDBC_DRIVER_JAR_URI` \| `JDBC_DRIVER_CLASS_NAME` \| `JDBC_ENGINE` \| `JDBC_ENGINE_VERSION` \| `CONFIG_FILES` \| `INSTANCE_ID` \| `JDBC_CONNECTION_URL` \| `JDBC_ENFORCE_SSL`\)\.
+
+  Each value is a Value string\.
+
+  These key\-value pairs define parameters for the connection:
+  + `HOST` \- The host URI\.
+  + `PORT` \- The port number\.
+  + `USER_NAME` \- The user name for the connection\.
+  + `PASSWORD` \- A password, if one is used\.
+  + `ENCRYPTED_PASSWORD` \- An encrypted password\.
+  + `JDBC_DRIVER_JAR_URI` \- The URI of the a jar file that contains the JDBC driver to use\.
+  + `JDBC_DRIVER_CLASS_NAME` \- The class name of the JDBC driver to use\.
+  + `JDBC_ENGINE` \- The name of the JDBC engine to use\.
+  + `JDBC_ENGINE_VERSION` \- The version of the JDBC engine to use\.
+  + `CONFIG_FILES` \- The URI of configuration files for the connection\.
+  + `INSTANCE_ID` \- The instance ID to use\.
+  + `JDBC_CONNECTION_URL` \- The URL for the JDBC connection\.
+  + `JDBC_ENFORCE_SSL` \- If present, specifies that SSL must be used for the JDBC connection\.
++ `PhysicalConnectionRequirements` – A [PhysicalConnectionRequirements](#aws-glue-api-catalog-connections-PhysicalConnectionRequirements) object\.
 
   A map of physical connection requirements, such as VPC and SecurityGroup, needed for making this connection successfully\.
 + `CreationTime` – Timestamp\.
@@ -35,7 +52,7 @@ Defines a connection to a data source\.
 + `LastUpdatedTime` – Timestamp\.
 
   The last time this connection definition was updated\.
-+ `LastUpdatedBy` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
++ `LastUpdatedBy` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The user, group or role that last updated this connection definition\.
 
@@ -44,22 +61,26 @@ Defines a connection to a data source\.
 A structure used to specify a connection to create or update\.
 
 **Fields**
-+ `Name` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
 
   The name of the connection\.
-+ `Description` – Description string, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
++ `Description` – Description string, not more than 2048 bytes long, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
 
   Description of the connection\.
-+ `ConnectionType` – String \(valid values: `JDBC` \| `SFTP`\)\. Required\.
++ `ConnectionType` – UTF\-8 string \(valid values: `JDBC` \| `SFTP`\)\. Required\.
 
   The type of the connection\. Currently, only JDBC is supported; SFTP is not supported\.
-+ `MatchCriteria` – An array of UTF\-8 strings\.
++ `MatchCriteria` – An array of UTF\-8 strings, not more than 10 items in the array\.
 
   A list of criteria that can be used in selecting this connection\.
-+ `ConnectionProperties` – An array of *UTF\-8 string*–to–*UTF\-8 string* mappings\. Required\.
++ `ConnectionProperties` – A map array of key\-value pairs, not more than 100 pairs
 
-  A list of key\-value pairs used as parameters for this connection\.
-+ `PhysicalConnectionRequirements` – A PhysicalConnectionRequirements object\.
+  Each key is a UTF\-8 string \(valid values: `HOST` \| `PORT` \| `USERNAME="USER_NAME"` \| `PASSWORD` \| `ENCRYPTED_PASSWORD` \| `JDBC_DRIVER_JAR_URI` \| `JDBC_DRIVER_CLASS_NAME` \| `JDBC_ENGINE` \| `JDBC_ENGINE_VERSION` \| `CONFIG_FILES` \| `INSTANCE_ID` \| `JDBC_CONNECTION_URL` \| `JDBC_ENFORCE_SSL`\)\.
+
+  Each value is a Value string\. Required\.
+
+  These key\-value pairs define parameters for the connection\.
++ `PhysicalConnectionRequirements` – A [PhysicalConnectionRequirements](#aws-glue-api-catalog-connections-PhysicalConnectionRequirements) object\.
 
   A map of physical connection requirements, such as VPC and SecurityGroup, needed for making this connection successfully\.
 
@@ -68,25 +89,25 @@ A structure used to specify a connection to create or update\.
 Specifies the physical requirements for a connection\.
 
 **Fields**
-+ `SubnetId` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
++ `SubnetId` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The subnet ID used by the connection\.
-+ `SecurityGroupIdList` – An array of UTF\-8 strings\.
++ `SecurityGroupIdList` – An array of UTF\-8 strings, not more than 50 items in the array\.
 
   The security group ID list used by the connection\.
-+ `AvailabilityZone` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
++ `AvailabilityZone` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  The connection's availability zone\. This field is deprecated and has no effect\.
+  The connection's availability zone\. This field is redundant, since the specified subnet implies the availability zone to be used\. The field must be populated now, but will be deprecated in the future\.
 
 ## GetConnectionsFilter Structure<a name="aws-glue-api-catalog-connections-GetConnectionsFilter"></a>
 
 Filters the connection definitions returned by the `GetConnections` API\.
 
 **Fields**
-+ `MatchCriteria` – An array of UTF\-8 strings\.
++ `MatchCriteria` – An array of UTF\-8 strings, not more than 10 items in the array\.
 
   A criteria string that must match the criteria recorded in the connection definition for that connection definition to be returned\.
-+ `ConnectionType` – String \(valid values: `JDBC` \| `SFTP`\)\.
++ `ConnectionType` – UTF\-8 string \(valid values: `JDBC` \| `SFTP`\)\.
 
   The type of connections to return\. Currently, only JDBC is supported; SFTP is not supported\.
 
@@ -103,10 +124,10 @@ Filters the connection definitions returned by the `GetConnections` API\.
 Creates a connection definition in the Data Catalog\.
 
 **Request**
-+ `CatalogId` – Catalog id string, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
++ `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The ID of the Data Catalog in which to create the connection\. If none is supplied, the AWS account ID is used by default\.
-+ `ConnectionInput` – A ConnectionInput object\. Required\.
++ `ConnectionInput` – A [ConnectionInput](#aws-glue-api-catalog-connections-ConnectionInput) object\. Required\.
 
   A `ConnectionInput` object defining the connection to create\.
 
@@ -125,10 +146,10 @@ Creates a connection definition in the Data Catalog\.
 Deletes a connection from the Data Catalog\.
 
 **Request**
-+ `CatalogId` – Catalog id string, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
++ `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The ID of the Data Catalog in which the connection resides\. If none is supplied, the AWS account ID is used by default\.
-+ `ConnectionName` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `ConnectionName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
 
   The name of the connection to delete\.
 
@@ -145,15 +166,15 @@ Deletes a connection from the Data Catalog\.
 Retrieves a connection definition from the Data Catalog\.
 
 **Request**
-+ `CatalogId` – Catalog id string, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
++ `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The ID of the Data Catalog in which the connection resides\. If none is supplied, the AWS account ID is used by default\.
-+ `Name` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
 
   The name of the connection definition to retrieve\.
 
 **Response**
-+ `Connection` – A Connection object\.
++ `Connection` – A [Connection](#aws-glue-api-catalog-connections-Connection) object\.
 
   The requested connection definition\.
 
@@ -168,16 +189,16 @@ Retrieves a connection definition from the Data Catalog\.
 Retrieves a list of connection definitions from the Data Catalog\.
 
 **Request**
-+ `CatalogId` – Catalog id string, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
++ `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The ID of the Data Catalog in which the connections reside\. If none is supplied, the AWS account ID is used by default\.
-+ `Filter` – A GetConnectionsFilter object\.
++ `Filter` – A [GetConnectionsFilter](#aws-glue-api-catalog-connections-GetConnectionsFilter) object\.
 
   A filter that controls which connections will be returned\.
-+ `NextToken` – String\.
++ `NextToken` – UTF\-8 string\.
 
   A continuation token, if this is a continuation call\.
-+ `MaxResults` – Number \(integer\)\.
++ `MaxResults` – Number \(integer\), not less than 1 or more than 1000\.
 
   The maximum number of connections to return in one response\.
 
@@ -185,7 +206,7 @@ Retrieves a list of connection definitions from the Data Catalog\.
 + `ConnectionList` – An array of [Connection](#aws-glue-api-catalog-connections-Connection)s\.
 
   A list of requested connection definitions\.
-+ `NextToken` – String\.
++ `NextToken` – UTF\-8 string\.
 
   A continuation token, if the list of connections returned does not include the last of the filtered connections\.
 
@@ -200,13 +221,13 @@ Retrieves a list of connection definitions from the Data Catalog\.
 Updates a connection definition in the Data Catalog\.
 
 **Request**
-+ `CatalogId` – Catalog id string, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
++ `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The ID of the Data Catalog in which the connection resides\. If none is supplied, the AWS account ID is used by default\.
-+ `Name` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
 
   The name of the connection definition to update\.
-+ `ConnectionInput` – A ConnectionInput object\. Required\.
++ `ConnectionInput` – A [ConnectionInput](#aws-glue-api-catalog-connections-ConnectionInput) object\. Required\.
 
   A `ConnectionInput` object that redefines the connection in question\.
 
@@ -225,10 +246,10 @@ Updates a connection definition in the Data Catalog\.
 Deletes a list of connection definitions from the Data Catalog\.
 
 **Request**
-+ `CatalogId` – Catalog id string, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
++ `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The ID of the Data Catalog in which the connections reside\. If none is supplied, the AWS account ID is used by default\.
-+ `ConnectionNameList` – An array of UTF\-8 strings\. Required\.
++ `ConnectionNameList` – An array of UTF\-8 strings, not more than 25 items in the array\. Required\.
 
   A list of names of the connections to delete\.
 
@@ -236,7 +257,11 @@ Deletes a list of connection definitions from the Data Catalog\.
 + `Succeeded` – An array of UTF\-8 strings\.
 
   A list of names of the connection definitions that were successfully deleted\.
-+ `Errors` – An array of *UTF\-8 string*–to–*[ErrorDetail](aws-glue-api-common.md#aws-glue-api-common-ErrorDetail)* mappings\.
++ `Errors` – A map array of key\-value pairs
+
+  Each key is a UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  Each value is a An [ErrorDetail](aws-glue-api-common.md#aws-glue-api-common-ErrorDetail) object\.
 
   A map of the names of connections that were not successfully deleted to error details\.
 

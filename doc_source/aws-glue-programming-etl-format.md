@@ -1,6 +1,6 @@
 # Format Options for ETL Output in AWS Glue<a name="aws-glue-programming-etl-format"></a>
 
-Various AWS Glue PySpark methods and transforms specify their input and/or output format using a `format` parameter and a `format_options` parameter\. These parameters can take the following values:
+Various AWS Glue PySpark and Scala methods and transforms specify their input and/or output format using a `format` parameter and a `format_options` parameter\. These parameters can take the following values:
 
 ## format="avro"<a name="aws-glue-programming-etl-format-avro"></a>
 
@@ -17,14 +17,15 @@ You can use the following `format_options` values with `format="csv"`:
 + `escaper`: Specifies a character to use for escaping\. The default value is `"none"`\.
 + `quoteChar`: Specifies the character to use for quoting\. The default is a double quote: `'"'`\. Set this to `'-1'` to disable quoting entirely\.
 + `multiline`: A Boolean value that specifies whether a single record can span multiple lines\. This can occur when a field contains a quoted new\-line character\. You must set this option to "true" if any record spans multiple lines\. The default value is `"false"`, which allows for more aggressive file\-splitting during parsing\.
-+ `withHeader`: A Boolean value that specifies whether to treat the first line as a header\. The default value is `"false"`\.
++ `withHeader`: A Boolean value that specifies whether to treat the first line as a header\. The default value is `"false"`\. This option can be used in the `DynamicFrameReader` class\.
++ `writeHeader`: A Boolean value that specifies whether to write the header to output\. The default value is `"true"`\. This option can be used in the `DynamicFrameWriter` class\.
 + `skipFirst`: A Boolean value that specifies whether to skip the first data line\. The default value is `"false"`\.
 
 ## format="ion"<a name="aws-glue-programming-etl-format-ion"></a>
 
 This value designates [Amazon Ion](https://amzn.github.io/ion-docs/) as the data format\. \(For more information, see the [Amazon Ion Specification](https://amzn.github.io/ion-docs/spec.html)\.\)
 
-**Currently, AWS Glue does not support `ion` for output\.**
+**Currently, AWS Glue does not support "ion" for output\.**
 
 There are no `format_options` values for `format="ion"`\.
 
@@ -32,7 +33,7 @@ There are no `format_options` values for `format="ion"`\.
 
 This value designates a log data format specified by one or more Logstash grok patterns \(for example, see [Logstash Reference \(6\.2\]: Grok filter plugin](https://www.elastic.co/guide/en/logstash/current/plugins-filters-grok.html)\)\.
 
-**Currently, AWS Glue does not support `groklog` for output\.**
+**Currently, AWS Glue does not support "groklog" for output\.**
 
 You can use the following `format_options` values with `format="grokLog"`:
 + `logFormat`: Specifies the grok pattern that matches the log's format\.
@@ -67,7 +68,9 @@ There are no `format_options` values for `format="parquet"`\. However, any optio
 
 ## format="xml"<a name="aws-glue-programming-etl-format-xml"></a>
 
-This value designates XML as the data format, parsed through a fork the [XML Data Source for Apache Spark](https://github.com/databricks/spark-xml) parser\.
+This value designates XML as the data format, parsed through a fork of the [XML Data Source for Apache Spark](https://github.com/databricks/spark-xml) parser\.
+
+**Currently, AWS Glue does not support "xml" for output\.**
 
 You can use the following `format_options` values with `format="xml"`:
 + `rowtag`: Specifies the XML tag in the file to treat as a row\. Row tags cannot be self\-closing\.

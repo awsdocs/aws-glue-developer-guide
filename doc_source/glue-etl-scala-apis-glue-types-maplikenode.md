@@ -1,10 +1,10 @@
-# The AWS Glue Scala MapLikeNode APIs<a name="glue-etl-scala-apis-glue-types-maplikenode"></a>
+# AWS Glue Scala MapLikeNode APIs<a name="glue-etl-scala-apis-glue-types-maplikenode"></a>
 
-**Package:   com\.amazonaws\.services\.glue\.types**
+**Package: com\.amazonaws\.services\.glue\.types**
 
-## The MapLikeNode Class<a name="glue-etl-scala-apis-glue-types-maplikenode-class"></a>
+## MapLikeNode Class<a name="glue-etl-scala-apis-glue-types-maplikenode-class"></a>
 
-abstract **MapLikeNode**
+**MapLikeNode**
 
 ```
 class MapLikeNode extends DynamicNode  (
@@ -55,4 +55,10 @@ def toJson : String
 def toJson( useQuotes : Boolean ) : String 
 ```
 
-E\.g\. given this JSON: \{"foo": "bar"\} if useQuotes == true, toJson will yield \{"foo": "bar"\} if useQuotes == fase, toJson will yield \{foo: bar\} @return
+**Example:** Given this JSON: 
+
+```
+{"foo": "bar"}
+```
+
+If `useQuotes == true`, `toJson` yields `{"foo": "bar"}`\. If `useQuotes == false`, `toJson` yields `{foo: bar}` @return\.

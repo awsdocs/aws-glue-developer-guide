@@ -1,14 +1,14 @@
-# The AWS Glue Scala ObjectNode APIs<a name="glue-etl-scala-apis-glue-types-objectnode"></a>
+# AWS Glue Scala ObjectNode APIs<a name="glue-etl-scala-apis-glue-types-objectnode"></a>
 
 **Topics**
-+ [The ObjectNode Object](#glue-etl-scala-apis-glue-types-objectnode-object)
-+ [The ObjectNode Case Class](#glue-etl-scala-apis-glue-types-objectnode-case-class)
++ [ObjectNode Object](#glue-etl-scala-apis-glue-types-objectnode-object)
++ [ObjectNode Case Class](#glue-etl-scala-apis-glue-types-objectnode-case-class)
 
-**Package:   com\.amazonaws\.services\.glue\.types**
+**Package: com\.amazonaws\.services\.glue\.types**
 
-## The ObjectNode Object<a name="glue-etl-scala-apis-glue-types-objectnode-object"></a>
+## ObjectNode Object<a name="glue-etl-scala-apis-glue-types-objectnode-object"></a>
 
- **ObjectNode**
+**ObjectNode**
 
 ```
 object ObjectNode
@@ -24,7 +24,7 @@ def apply( frameKeys : Set[String],
          ) : ObjectNode
 ```
 
-## The ObjectNode Case Class<a name="glue-etl-scala-apis-glue-types-objectnode-case-class"></a>
+## ObjectNode Case Class<a name="glue-etl-scala-apis-glue-types-objectnode-case-class"></a>
 
  **ObjectNode**
 

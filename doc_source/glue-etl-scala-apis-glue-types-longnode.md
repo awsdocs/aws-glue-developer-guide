@@ -1,8 +1,8 @@
-# The AWS Glue Scala LongNode APIs<a name="glue-etl-scala-apis-glue-types-longnode"></a>
+# AWS Glue Scala LongNode APIs<a name="glue-etl-scala-apis-glue-types-longnode"></a>
 
-**Package:   com\.amazonaws\.services\.glue\.types**
+**Package: com\.amazonaws\.services\.glue\.types**
 
-## The LongNode Case Class<a name="glue-etl-scala-apis-glue-types-longnode-case-class"></a>
+## LongNode Case Class<a name="glue-etl-scala-apis-glue-types-longnode-case-class"></a>
 
  **LongNode**
 

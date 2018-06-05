@@ -1,14 +1,14 @@
-# The AWS Glue Scala ScalarNode APIs<a name="glue-etl-scala-apis-glue-types-scalarnode"></a>
+# AWS Glue Scala ScalarNode APIs<a name="glue-etl-scala-apis-glue-types-scalarnode"></a>
 
 **Topics**
-+ [The ScalarNode Class](#glue-etl-scala-apis-glue-types-scalarnode-class)
-+ [The ScalarNode Object](#glue-etl-scala-apis-glue-types-scalarnode-object)
++ [ScalarNode Class](#glue-etl-scala-apis-glue-types-scalarnode-class)
++ [ScalarNode Object](#glue-etl-scala-apis-glue-types-scalarnode-object)
 
-**Package:   com\.amazonaws\.services\.glue\.types**
+**Package: com\.amazonaws\.services\.glue\.types**
 
-## The ScalarNode Class<a name="glue-etl-scala-apis-glue-types-scalarnode-class"></a>
+## ScalarNode Class<a name="glue-etl-scala-apis-glue-types-scalarnode-class"></a>
 
-abstract **ScalarNode**
+**ScalarNode**
 
 ```
 class ScalarNode extends DynamicNode  (
@@ -40,7 +40,7 @@ def nodeType
 def toJson
 ```
 
-## The ScalarNode Object<a name="glue-etl-scala-apis-glue-types-scalarnode-object"></a>
+## ScalarNode Object<a name="glue-etl-scala-apis-glue-types-scalarnode-object"></a>
 
  **ScalarNode**
 

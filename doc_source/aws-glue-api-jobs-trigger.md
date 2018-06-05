@@ -12,28 +12,28 @@
 Information about a specific trigger\.
 
 **Fields**
-+ `Name` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
++ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   Name of the trigger\.
-+ `Id` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
++ `Id` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   Reserved for future use\.
-+ `Type` – String \(valid values: `SCHEDULED` \| `CONDITIONAL` \| `ON_DEMAND`\)\.
++ `Type` – UTF\-8 string \(valid values: `SCHEDULED` \| `CONDITIONAL` \| `ON_DEMAND`\)\.
 
   The type of trigger that this is\.
-+ `State` – String \(valid values: `CREATING` \| `CREATED` \| `ACTIVATING` \| `ACTIVATED` \| `DEACTIVATING` \| `DEACTIVATED` \| `DELETING` \| `UPDATING`\)\.
++ `State` – UTF\-8 string \(valid values: `CREATING` \| `CREATED` \| `ACTIVATING` \| `ACTIVATED` \| `DEACTIVATING` \| `DEACTIVATED` \| `DELETING` \| `UPDATING`\)\.
 
   The current state of the trigger\.
-+ `Description` – Description string, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
++ `Description` – Description string, not more than 2048 bytes long, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
 
   A description of this trigger\.
-+ `Schedule` – String\.
++ `Schedule` – UTF\-8 string\.
 
   A `cron` expression used to specify the schedule \(see [Time\-Based Schedules for Jobs and Crawlers](http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)\. For example, to run something every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`\.
 + `Actions` – An array of [Action](#aws-glue-api-jobs-trigger-Action)s\.
 
   The actions initiated by this trigger\.
-+ `Predicate` – A Predicate object\.
++ `Predicate` – A [Predicate](#aws-glue-api-jobs-trigger-Predicate) object\.
 
   The predicate of this trigger, which defines when it will fire\.
 
@@ -42,19 +42,19 @@ Information about a specific trigger\.
 A structure used to provide information used to update a trigger\. This object will update the the previous trigger definition by overwriting it completely\.
 
 **Fields**
-+ `Name` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
++ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   Reserved for future use\.
-+ `Description` – Description string, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
++ `Description` – Description string, not more than 2048 bytes long, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
 
   A description of this trigger\.
-+ `Schedule` – String\.
++ `Schedule` – UTF\-8 string\.
 
   A `cron` expression used to specify the schedule \(see [Time\-Based Schedules for Jobs and Crawlers](http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)\. For example, to run something every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`\.
 + `Actions` – An array of [Action](#aws-glue-api-jobs-trigger-Action)s\.
 
   The actions initiated by this trigger\.
-+ `Predicate` – A Predicate object\.
++ `Predicate` – A [Predicate](#aws-glue-api-jobs-trigger-Predicate) object\.
 
   The predicate of this trigger, which defines when it will fire\.
 
@@ -63,7 +63,7 @@ A structure used to provide information used to update a trigger\. This object w
 Defines the predicate of the trigger, which determines when it fires\.
 
 **Fields**
-+ `Logical` – String \(valid values: `AND` \| `ANY`\)\.
++ `Logical` – UTF\-8 string \(valid values: `AND` \| `ANY`\)\.
 
   Optional field if only one condition is listed\. If multiple conditions are listed, then this field is required\.
 + `Conditions` – An array of [Condition](#aws-glue-api-jobs-trigger-Condition)s\.
@@ -75,13 +75,13 @@ Defines the predicate of the trigger, which determines when it fires\.
 Defines a condition under which a trigger fires\.
 
 **Fields**
-+ `LogicalOperator` – String \(valid values: `EQUALS`\)\.
++ `LogicalOperator` – UTF\-8 string \(valid values: `EQUALS`\)\.
 
   A logical operator\.
-+ `JobName` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
++ `JobName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the Job to whose JobRuns this condition applies and on which this trigger waits\.
-+ `State` – String \(valid values: `STARTING` \| `RUNNING` \| `STOPPING` \| `STOPPED` \| `SUCCEEDED` \| `FAILED` \| `TIMEOUT`\)\.
++ `State` – UTF\-8 string \(valid values: `STARTING` \| `RUNNING` \| `STOPPING` \| `STOPPED` \| `SUCCEEDED` \| `FAILED` \| `TIMEOUT`\)\.
 
   The condition state\. Currently, the values supported are SUCCEEDED, STOPPED, TIMEOUT and FAILED\.
 
@@ -90,10 +90,14 @@ Defines a condition under which a trigger fires\.
 Defines an action to be initiated by a trigger\.
 
 **Fields**
-+ `JobName` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
++ `JobName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of a job to be executed\.
-+ `Arguments` – An array of *UTF\-8 string*–to–*UTF\-8 string* mappings\.
++ `Arguments` – A map array of key\-value pairs
+
+  Each key is a UTF\-8 string\.
+
+  Each value is a UTF\-8 string\.
 
   Arguments to be passed to the job\.
 
@@ -102,9 +106,12 @@ Defines an action to be initiated by a trigger\.
   For information about how to specify and consume your own Job arguments, see the [Calling AWS Glue APIs in Python](http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html) topic in the developer guide\.
 
   For information about the key\-value pairs that AWS Glue consumes to set up your job, see the [Special Parameters Used by AWS Glue](http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html) topic in the developer guide\.
-+ `Timeout` – Number \(integer\)\.
++ `Timeout` – Number \(integer\), at least 1\.
 
   The JobRun timeout in minutes\. This is the maximum time that a job run can consume resources before it is terminated and enters `TIMEOUT` status\. The default is 2,880 minutes \(48 hours\)\. This overrides the timeout value set in the parent job\.
++ `NotificationProperty` – A [NotificationProperty](aws-glue-api-jobs-job.md#aws-glue-api-jobs-job-NotificationProperty) object\.
+
+  Specifies configuration properties of a job run notification\.
 
 ## Operations<a name="aws-glue-api-jobs-trigger-actions"></a>
 + [CreateTrigger Action \(Python: create\_trigger\)](#aws-glue-api-jobs-trigger-CreateTrigger)
@@ -120,18 +127,18 @@ Defines an action to be initiated by a trigger\.
 Creates a new trigger\.
 
 **Request**
-+ `Name` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
 
   The name of the trigger\.
-+ `Type` – String \(valid values: `SCHEDULED` \| `CONDITIONAL` \| `ON_DEMAND`\)\. Required\.
++ `Type` – UTF\-8 string \(valid values: `SCHEDULED` \| `CONDITIONAL` \| `ON_DEMAND`\)\. Required\.
 
   The type of the new trigger\.
-+ `Schedule` – String\.
++ `Schedule` – UTF\-8 string\.
 
   A `cron` expression used to specify the schedule \(see [Time\-Based Schedules for Jobs and Crawlers](http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)\. For example, to run something every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`\.
 
   This field is required when the trigger type is SCHEDULED\.
-+ `Predicate` – A Predicate object\.
++ `Predicate` – A [Predicate](#aws-glue-api-jobs-trigger-Predicate) object\.
 
   A predicate to specify when the new trigger should fire\.
 
@@ -139,7 +146,7 @@ Creates a new trigger\.
 + `Actions` – An array of [Action](#aws-glue-api-jobs-trigger-Action)s\. Required\.
 
   The actions initiated by this trigger when it fires\.
-+ `Description` – Description string, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
++ `Description` – Description string, not more than 2048 bytes long, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
 
   A description of the new trigger\.
 + `StartOnCreation` – Boolean\.
@@ -147,7 +154,7 @@ Creates a new trigger\.
   Set to true to start SCHEDULED and CONDITIONAL triggers when created\. True not supported for ON\_DEMAND triggers\.
 
 **Response**
-+ `Name` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
++ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the trigger\.
 
@@ -165,12 +172,12 @@ Creates a new trigger\.
 Starts an existing trigger\. See [Triggering Jobs](http://docs.aws.amazon.com/glue/latest/dg/trigger-job.html) for information about how different types of trigger are started\.
 
 **Request**
-+ `Name` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
 
   The name of the trigger to start\.
 
 **Response**
-+ `Name` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
++ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the trigger that was started\.
 
@@ -187,12 +194,12 @@ Starts an existing trigger\. See [Triggering Jobs](http://docs.aws.amazon.com/gl
 Retrieves the definition of a trigger\.
 
 **Request**
-+ `Name` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
 
   The name of the trigger to retrieve\.
 
 **Response**
-+ `Trigger` – A Trigger object\.
++ `Trigger` – A [Trigger](#aws-glue-api-jobs-trigger-Trigger) object\.
 
   The requested trigger definition\.
 
@@ -207,13 +214,13 @@ Retrieves the definition of a trigger\.
 Gets all the triggers associated with a job\.
 
 **Request**
-+ `NextToken` – String\.
++ `NextToken` – UTF\-8 string\.
 
   A continuation token, if this is a continuation call\.
-+ `DependentJobName` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
++ `DependentJobName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the job for which to retrieve triggers\. The trigger that can start this job will be returned, and if there is no such trigger, all triggers will be returned\.
-+ `MaxResults` – Number \(integer\)\.
++ `MaxResults` – Number \(integer\), not less than 1 or more than 1000\.
 
   The maximum size of the response\.
 
@@ -221,7 +228,7 @@ Gets all the triggers associated with a job\.
 + `Triggers` – An array of [Trigger](#aws-glue-api-jobs-trigger-Trigger)s\.
 
   A list of triggers for the specified job\.
-+ `NextToken` – String\.
++ `NextToken` – UTF\-8 string\.
 
   A continuation token, if not all the requested triggers have yet been returned\.
 
@@ -236,15 +243,15 @@ Gets all the triggers associated with a job\.
 Updates a trigger definition\.
 
 **Request**
-+ `Name` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
 
   The name of the trigger to update\.
-+ `TriggerUpdate` – A TriggerUpdate object\. Required\.
++ `TriggerUpdate` – A [TriggerUpdate](#aws-glue-api-jobs-trigger-TriggerUpdate) object\. Required\.
 
   The new values with which to update the trigger\.
 
 **Response**
-+ `Trigger` – A Trigger object\.
++ `Trigger` – A [Trigger](#aws-glue-api-jobs-trigger-Trigger) object\.
 
   The resulting trigger definition\.
 
@@ -260,12 +267,12 @@ Updates a trigger definition\.
 Stops a specified trigger\.
 
 **Request**
-+ `Name` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
 
   The name of the trigger to stop\.
 
 **Response**
-+ `Name` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
++ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the trigger that was stopped\.
 
@@ -281,12 +288,12 @@ Stops a specified trigger\.
 Deletes a specified trigger\. If the trigger is not found, no exception is thrown\.
 
 **Request**
-+ `Name` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
 
   The name of the trigger to delete\.
 
 **Response**
-+ `Name` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
++ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the trigger that was deleted\.
 

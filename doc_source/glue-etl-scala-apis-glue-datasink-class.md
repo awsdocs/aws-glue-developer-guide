@@ -1,4 +1,4 @@
-# The Abstract DataSink Class<a name="glue-etl-scala-apis-glue-datasink-class"></a>
+# Abstract DataSink Class<a name="glue-etl-scala-apis-glue-datasink-class"></a>
 
 **Topics**
 + [def writeDynamicFrame](#glue-etl-scala-apis-glue-datasink-class-defs-writeDynamicFrame)
@@ -9,15 +9,15 @@
 + [def setAccumulableSize](#glue-etl-scala-apis-glue-datasink-class-defs-setAccumulableSize)
 + [def getOutputErrorRecordsAccumulable](#glue-etl-scala-apis-glue-datasink-class-defs-getOutputErrorRecordsAccumulable)
 + [def errorsAsDynamicFrame](#glue-etl-scala-apis-glue-datasink-class-defs-errorsAsDynamicFrame)
-+ [The DataSink Object](#glue-etl-scala-apis-glue-datasink-object)
++ [DataSink Object](#glue-etl-scala-apis-glue-datasink-object)
 
-**Package:   com\.amazonaws\.services\.glue**
+**Package: com\.amazonaws\.services\.glue**
 
 ```
 abstract class DataSink
 ```
 
-A DataSink is the writer analog to a DataSource\. It encapsulates a destination and format to which a DynamicFrame can be written\.
+The writer analog to a `DataSource`\. `DataSink` encapsulates a destination and a format that a `DynamicFrame` can be written to\.
 
 ## def writeDynamicFrame<a name="glue-etl-scala-apis-glue-datasink-class-defs-writeDynamicFrame"></a>
 
@@ -75,7 +75,7 @@ def getOutputErrorRecordsAccumulable : Accumulable[List[OutputError], OutputErro
 def errorsAsDynamicFrame : DynamicFrame
 ```
 
-## The DataSink Object<a name="glue-etl-scala-apis-glue-datasink-object"></a>
+## DataSink Object<a name="glue-etl-scala-apis-glue-datasink-object"></a>
 
 ```
 object DataSink

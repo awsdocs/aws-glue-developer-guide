@@ -1,20 +1,20 @@
-# The AWS Glue Scala ChoiceOption APIs<a name="glue-etl-scala-apis-glue-choiceoption"></a>
+# AWS Glue Scala ChoiceOption APIs<a name="glue-etl-scala-apis-glue-choiceoption"></a>
 
 **Topics**
-+ [The ChoiceOption Trait](#glue-etl-scala-apis-glue-choiceoption-trait)
-+ [The ChoiceOption Object](#glue-etl-scala-apis-glue-choiceoption-object)
-+ [case class ChoiceOptionWithResolver](#glue-etl-scala-apis-glue-dynamicframe-class-defs-)
++ [ChoiceOption Trait](#glue-etl-scala-apis-glue-choiceoption-trait)
++ [ChoiceOption Object](#glue-etl-scala-apis-glue-choiceoption-object)
++ [case class ChoiceOptionWithResolver](#glue-etl-scala-apis-glue-choiceoptionwithresolver-case-class)
 + [case class MatchCatalogSchemaChoiceOption](#glue-etl-scala-apis-glue-matchcatalogschemachoiceoption-case-class)
 
-**Package:   com\.amazonaws\.services\.glue**
+**Package: com\.amazonaws\.services\.glue**
 
-## The ChoiceOption Trait<a name="glue-etl-scala-apis-glue-choiceoption-trait"></a>
+## ChoiceOption Trait<a name="glue-etl-scala-apis-glue-choiceoption-trait"></a>
 
 ```
 trait ChoiceOption extends Serializable 
 ```
 
-## The ChoiceOption Object<a name="glue-etl-scala-apis-glue-choiceoption-object"></a>
+## ChoiceOption Object<a name="glue-etl-scala-apis-glue-choiceoption-object"></a>
 
  **ChoiceOption**
 
@@ -22,7 +22,7 @@ trait ChoiceOption extends Serializable
 object ChoiceOption
 ```
 
-A general strategy to resolve choice applicable to all ChoiceType nodes in a DynamicFrame
+A general strategy to resolve choice applicable to all `ChoiceType` nodes in a `DynamicFrame`\.
 + `val CAST`
 + `val MAKE_COLS`
 + `val MAKE_STRUCT`
@@ -35,7 +35,7 @@ A general strategy to resolve choice applicable to all ChoiceType nodes in a Dyn
 def apply(choice: String): ChoiceOption
 ```
 
-## case class ChoiceOptionWithResolver<a name="glue-etl-scala-apis-glue-dynamicframe-class-defs-"></a>
+## case class ChoiceOptionWithResolver<a name="glue-etl-scala-apis-glue-choiceoptionwithresolver-case-class"></a>
 
 ```
 case class ChoiceOptionWithResolver(name: String, choiceResolver: ChoiceResolver) extends ChoiceOption {}

@@ -1,10 +1,10 @@
-# The AWS Glue Scala FloatNode APIs<a name="glue-etl-scala-apis-glue-types-floatnode"></a>
+# AWS Glue Scala FloatNode APIs<a name="glue-etl-scala-apis-glue-types-floatnode"></a>
 
-**Package:   com\.amazonaws\.services\.glue\.types**
+**Package: com\.amazonaws\.services\.glue\.types**
 
-## The FloatNode Case Class<a name="glue-etl-scala-apis-glue-types-floatnode-case-class"></a>
+## FloatNode Case Class<a name="glue-etl-scala-apis-glue-types-floatnode-case-class"></a>
 
- **FloatNode**
+**FloatNode**
 
 ```
 case class FloatNode extends ScalarNode(value, TypeCode.FLOAT)  (

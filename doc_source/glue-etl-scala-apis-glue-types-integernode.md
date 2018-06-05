@@ -1,10 +1,10 @@
-# The AWS Glue Scala IntegerNode APIs<a name="glue-etl-scala-apis-glue-types-integernode"></a>
+# AWS Glue Scala IntegerNode APIs<a name="glue-etl-scala-apis-glue-types-integernode"></a>
 
-**Package:   com\.amazonaws\.services\.glue\.types**
+**Package: com\.amazonaws\.services\.glue\.types**
 
-## The IntegerNode Case Class<a name="glue-etl-scala-apis-glue-types-integernode-case-class"></a>
+## IntegerNode Case Class<a name="glue-etl-scala-apis-glue-types-integernode-case-class"></a>
 
- **IntegerNode**
+**IntegerNode**
 
 ```
 case class IntegerNode extends ScalarNode(value, TypeCode.INT)  (

@@ -146,6 +146,7 @@
     + [Data Types](aws-glue-api-jobs-job.md#aws-glue-api-jobs-job-objects)
     + [Job Structure](aws-glue-api-jobs-job.md#aws-glue-api-jobs-job-Job)
     + [ExecutionProperty Structure](aws-glue-api-jobs-job.md#aws-glue-api-jobs-job-ExecutionProperty)
+    + [NotificationProperty Structure](aws-glue-api-jobs-job.md#aws-glue-api-jobs-job-NotificationProperty)
     + [JobCommand Structure](aws-glue-api-jobs-job.md#aws-glue-api-jobs-job-JobCommand)
     + [ConnectionsList Structure](aws-glue-api-jobs-job.md#aws-glue-api-jobs-job-ConnectionsList)
     + [JobUpdate Structure](aws-glue-api-jobs-job.md#aws-glue-api-jobs-job-JobUpdate)

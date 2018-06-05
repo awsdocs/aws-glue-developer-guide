@@ -1,10 +1,10 @@
-# The AWS Glue Scala ShortNode APIs<a name="glue-etl-scala-apis-glue-types-shortnode"></a>
+# AWS Glue Scala ShortNode APIs<a name="glue-etl-scala-apis-glue-types-shortnode"></a>
 
-**Package:   com\.amazonaws\.services\.glue\.types**
+**Package: com\.amazonaws\.services\.glue\.types**
 
-## The ShortNode Case Class<a name="glue-etl-scala-apis-glue-types-shortnode-case-class"></a>
+## ShortNode Case Class<a name="glue-etl-scala-apis-glue-types-shortnode-case-class"></a>
 
- **ShortNode**
+**ShortNode**
 
 ```
 case class ShortNode extends ScalarNode(value, TypeCode.SHORT)  (

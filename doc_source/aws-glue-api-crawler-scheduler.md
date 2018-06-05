@@ -8,10 +8,10 @@
 A scheduling object using a `cron` statement to schedule an event\.
 
 **Fields**
-+ `ScheduleExpression` – String\.
++ `ScheduleExpression` – UTF\-8 string\.
 
   A `cron` expression used to specify the schedule \(see [Time\-Based Schedules for Jobs and Crawlers](http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)\. For example, to run something every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`\.
-+ `State` – String \(valid values: `SCHEDULED` \| `NOT_SCHEDULED` \| `TRANSITIONING`\)\.
++ `State` – UTF\-8 string \(valid values: `SCHEDULED` \| `NOT_SCHEDULED` \| `TRANSITIONING`\)\.
 
   The state of the schedule\.
 
@@ -25,10 +25,10 @@ A scheduling object using a `cron` statement to schedule an event\.
 Updates the schedule of a crawler using a `cron` expression\.
 
 **Request**
-+ `CrawlerName` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `CrawlerName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
 
   Name of the crawler whose schedule to update\.
-+ `Schedule` – String\.
++ `Schedule` – UTF\-8 string\.
 
   The updated `cron` expression used to specify the schedule \(see [Time\-Based Schedules for Jobs and Crawlers](http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)\. For example, to run something every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`\.
 
@@ -47,7 +47,7 @@ Updates the schedule of a crawler using a `cron` expression\.
 Changes the schedule state of the specified crawler to `SCHEDULED`, unless the crawler is already running or the schedule state is already `SCHEDULED`\.
 
 **Request**
-+ `CrawlerName` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `CrawlerName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
 
   Name of the crawler to schedule\.
 
@@ -66,7 +66,7 @@ Changes the schedule state of the specified crawler to `SCHEDULED`, unless the c
 Sets the schedule state of the specified crawler to `NOT_SCHEDULED`, but does not stop the crawler if it is already running\.
 
 **Request**
-+ `CrawlerName` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `CrawlerName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
 
   Name of the crawler whose schedule state to set\.
 

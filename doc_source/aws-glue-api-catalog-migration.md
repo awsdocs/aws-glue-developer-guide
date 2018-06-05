@@ -14,7 +14,7 @@ A structure containing migration status information\.
 + `ImportTime` – Timestamp\.
 
   The time that the migration was started\.
-+ `ImportedBy` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
++ `ImportedBy` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the person who initiated the migration\.
 
@@ -27,7 +27,7 @@ A structure containing migration status information\.
 Imports an existing Athena Data Catalog to AWS Glue
 
 **Request**
-+ `CatalogId` – Catalog id string, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
++ `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The ID of the catalog to import\. Currently, this should be the AWS account ID\.
 
@@ -43,12 +43,12 @@ Imports an existing Athena Data Catalog to AWS Glue
 Retrieves the status of a migration operation\.
 
 **Request**
-+ `CatalogId` – Catalog id string, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
++ `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The ID of the catalog to migrate\. Currently, this should be the AWS account ID\.
 
 **Response**
-+ `ImportStatus` – A CatalogImportStatus object\.
++ `ImportStatus` – A [CatalogImportStatus](#aws-glue-api-catalog-migration-CatalogImportStatus) object\.
 
   The status of the specified catalog migration\.
 

@@ -1,8 +1,8 @@
-# The AWS Glue Scala MapNode APIs<a name="glue-etl-scala-apis-glue-types-mapnode"></a>
+# AWS Glue Scala MapNode APIs<a name="glue-etl-scala-apis-glue-types-mapnode"></a>
 
-**Package:   com\.amazonaws\.services\.glue\.types**
+**Package: com\.amazonaws\.services\.glue\.types**
 
-## The MapNode Case Class<a name="glue-etl-scala-apis-glue-types-mapnode-case-class"></a>
+## MapNode Case Class<a name="glue-etl-scala-apis-glue-types-mapnode-case-class"></a>
 
  **MapNode**
 

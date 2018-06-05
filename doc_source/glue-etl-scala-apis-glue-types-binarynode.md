@@ -1,8 +1,8 @@
-# The AWS Glue Scala BinaryNode APIs<a name="glue-etl-scala-apis-glue-types-binarynode"></a>
+# AWS Glue Scala BinaryNode APIs<a name="glue-etl-scala-apis-glue-types-binarynode"></a>
 
-**Package:   com\.amazonaws\.services\.glue\.types**
+**Package: com\.amazonaws\.services\.glue\.types**
 
-## The BinaryNode Case Class<a name="glue-etl-scala-apis-glue-types-binarynode-case-class"></a>
+## BinaryNode Case Class<a name="glue-etl-scala-apis-glue-types-binarynode-case-class"></a>
 
  **BinaryNode**
 

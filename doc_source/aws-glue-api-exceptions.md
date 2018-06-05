@@ -5,7 +5,7 @@
 Access to a resource was denied\.
 
 **Fields**
-+ `Message` – String\.
++ `Message` – UTF\-8 string\.
 
   A message describing the problem\.
 
@@ -14,7 +14,7 @@ Access to a resource was denied\.
 A resource to be created or added already exists\.
 
 **Fields**
-+ `Message` – String\.
++ `Message` – UTF\-8 string\.
 
   A message describing the problem\.
 
@@ -23,7 +23,7 @@ A resource to be created or added already exists\.
 Two processes are trying to modify a resource simultaneously\.
 
 **Fields**
-+ `Message` – String\.
++ `Message` – UTF\-8 string\.
 
   A message describing the problem\.
 
@@ -32,7 +32,7 @@ Two processes are trying to modify a resource simultaneously\.
 Too many jobs are being run concurrently\.
 
 **Fields**
-+ `Message` – String\.
++ `Message` – UTF\-8 string\.
 
   A message describing the problem\.
 
@@ -41,7 +41,7 @@ Too many jobs are being run concurrently\.
 The specified crawler is not running\.
 
 **Fields**
-+ `Message` – String\.
++ `Message` – UTF\-8 string\.
 
   A message describing the problem\.
 
@@ -50,7 +50,7 @@ The specified crawler is not running\.
 The operation cannot be performed because the crawler is already running\.
 
 **Fields**
-+ `Message` – String\.
++ `Message` – UTF\-8 string\.
 
   A message describing the problem\.
 
@@ -59,7 +59,7 @@ The operation cannot be performed because the crawler is already running\.
 The specified crawler is stopping\.
 
 **Fields**
-+ `Message` – String\.
++ `Message` – UTF\-8 string\.
 
   A message describing the problem\.
 
@@ -68,7 +68,7 @@ The specified crawler is stopping\.
 A specified entity does not exist
 
 **Fields**
-+ `Message` – String\.
++ `Message` – UTF\-8 string\.
 
   A message describing the problem\.
 
@@ -77,7 +77,7 @@ A specified entity does not exist
 The same unique identifier was associated with two different records\.
 
 **Fields**
-+ `Message` – String\.
++ `Message` – UTF\-8 string\.
 
   A message describing the problem\.
 
@@ -86,7 +86,7 @@ The same unique identifier was associated with two different records\.
 An internal service error occurred\.
 
 **Fields**
-+ `Message` – String\.
++ `Message` – UTF\-8 string\.
 
   A message describing the problem\.
 
@@ -95,7 +95,7 @@ An internal service error occurred\.
 An unknown or invalid execution engine was specified\.
 
 **Fields**
-+ `message` – String\.
++ `message` – UTF\-8 string\.
 
   A message describing the problem\.
 
@@ -104,7 +104,7 @@ An unknown or invalid execution engine was specified\.
 The input provided was not valid\.
 
 **Fields**
-+ `Message` – String\.
++ `Message` – UTF\-8 string\.
 
   A message describing the problem\.
 
@@ -113,7 +113,7 @@ The input provided was not valid\.
 Proper transition from one task to the next failed\.
 
 **Fields**
-+ `message` – String\.
++ `message` – UTF\-8 string\.
 
   A message describing the problem\.
 
@@ -122,7 +122,7 @@ Proper transition from one task to the next failed\.
 A job definition is not valid\.
 
 **Fields**
-+ `message` – String\.
++ `message` – UTF\-8 string\.
 
   A message describing the problem\.
 
@@ -131,7 +131,7 @@ A job definition is not valid\.
 The terminal state of a job run signals a failure\.
 
 **Fields**
-+ `message` – String\.
++ `message` – UTF\-8 string\.
 
   A message describing the problem\.
 
@@ -140,16 +140,16 @@ The terminal state of a job run signals a failure\.
 A job run encountered an invalid transition from source state to target state\.
 
 **Fields**
-+ `jobRunId` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
++ `jobRunId` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The Id of the job run in question\.
-+ `message` – String\.
++ `message` – UTF\-8 string\.
 
   A message describing the problem\.
-+ `sourceState` – String \(valid values: `STARTING` \| `RUNNING` \| `STOPPING` \| `STOPPED` \| `SUCCEEDED` \| `FAILED` \| `TIMEOUT`\)\.
++ `sourceState` – UTF\-8 string \(valid values: `STARTING` \| `RUNNING` \| `STOPPING` \| `STOPPED` \| `SUCCEEDED` \| `FAILED` \| `TIMEOUT`\)\.
 
   The source state\.
-+ `targetState` – String \(valid values: `STARTING` \| `RUNNING` \| `STOPPING` \| `STOPPED` \| `SUCCEEDED` \| `FAILED` \| `TIMEOUT`\)\.
++ `targetState` – UTF\-8 string \(valid values: `STARTING` \| `RUNNING` \| `STOPPING` \| `STOPPED` \| `SUCCEEDED` \| `FAILED` \| `TIMEOUT`\)\.
 
   The target state\.
 
@@ -158,7 +158,7 @@ A job run encountered an invalid transition from source state to target state\.
 A job run is not in a terminal state\.
 
 **Fields**
-+ `message` – String\.
++ `message` – UTF\-8 string\.
 
   A message describing the problem\.
 
@@ -167,7 +167,7 @@ A job run is not in a terminal state\.
 A job runner is late\.
 
 **Fields**
-+ `Message` – String\.
++ `Message` – UTF\-8 string\.
 
   A message describing the problem\.
 
@@ -176,7 +176,7 @@ A job runner is late\.
 There is no applicable schedule\.
 
 **Fields**
-+ `Message` – String\.
++ `Message` – UTF\-8 string\.
 
   A message describing the problem\.
 
@@ -185,7 +185,7 @@ There is no applicable schedule\.
 The operation timed out\.
 
 **Fields**
-+ `Message` – String\.
++ `Message` – UTF\-8 string\.
 
   A message describing the problem\.
 
@@ -194,7 +194,7 @@ The operation timed out\.
 A resource numerical limit was exceeded\.
 
 **Fields**
-+ `Message` – String\.
++ `Message` – UTF\-8 string\.
 
   A message describing the problem\.
 
@@ -203,7 +203,7 @@ A resource numerical limit was exceeded\.
 The specified scheduler is not running\.
 
 **Fields**
-+ `Message` – String\.
++ `Message` – UTF\-8 string\.
 
   A message describing the problem\.
 
@@ -212,7 +212,7 @@ The specified scheduler is not running\.
 The specified scheduler is already running\.
 
 **Fields**
-+ `Message` – String\.
++ `Message` – UTF\-8 string\.
 
   A message describing the problem\.
 
@@ -221,7 +221,7 @@ The specified scheduler is already running\.
 The specified scheduler is transitioning\.
 
 **Fields**
-+ `Message` – String\.
++ `Message` – UTF\-8 string\.
 
   A message describing the problem\.
 
@@ -230,7 +230,7 @@ The specified scheduler is transitioning\.
 The job runner was not recognized\.
 
 **Fields**
-+ `Message` – String\.
++ `Message` – UTF\-8 string\.
 
   A message describing the problem\.
 
@@ -239,7 +239,7 @@ The job runner was not recognized\.
 A value could not be validated\.
 
 **Fields**
-+ `Message` – String\.
++ `Message` – UTF\-8 string\.
 
   A message describing the problem\.
 
@@ -248,6 +248,6 @@ A value could not be validated\.
 There was a version conflict\.
 
 **Fields**
-+ `Message` – String\.
++ `Message` – UTF\-8 string\.
 
   A message describing the problem\.

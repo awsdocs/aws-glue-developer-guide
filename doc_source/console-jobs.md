@@ -56,6 +56,7 @@ The **History** tab shows your job run history and how successful a job has been
   This link takes you to the CloudWatch Logs, where you can see details about any errors that were encountered\. You can manage your log retention period in the CloudWatch console\. The default log retention is `Never Expire`\. For more information about how to change the retention period, see [Change Log Data Retention in CloudWatch Logs](http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SettingLogRetention.html)\.
 + **Execution time** shows the length of time during which the job run consumed resources\. The amount is calculated from when the job run starts consuming resources until it finishes\.
 + **Timeout** shows the maximum execution time during which this job run can consume resources before it stops and goes into timeout status\.
++ **Delay** shows the threshold before sending a job delay notification\. When a job run execution time reaches this threshold, AWS Glue sends a notification \("Glue Job Run Status"\) to CloudWatch Events\.
 + **Triggered by** shows the trigger that fired to start this job run\.
 + **Start time** shows the date and time \(local time\) that the job started\.
 + **End time** shows the date and time \(local time\) that the job ended\.

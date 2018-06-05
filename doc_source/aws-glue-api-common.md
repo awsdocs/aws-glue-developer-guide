@@ -5,10 +5,10 @@
 An AWS Tag\.
 
 **Fields**
-+ `key` – String\.
++ `key` – UTF\-8 string, not less than 1 or more than 128 bytes long\.
 
   The tag key\.
-+ `value` – String\.
++ `value` – UTF\-8 string, not more than 256 bytes long\.
 
   The tag value\.
 
@@ -29,10 +29,10 @@ Contains a numeric value in decimal format\.
 Contains details about an error\.
 
 **Fields**
-+ `ErrorCode` – String, matching the [Single-line string pattern](#aws-glue-api-regex-oneLine)\.
++ `ErrorCode` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](#aws-glue-api-regex-oneLine)\.
 
   The code associated with this error\.
-+ `ErrorMessage` – Description string, matching the [URI address multi-line string pattern](#aws-glue-api-regex-uri)\.
++ `ErrorMessage` – Description string, not more than 2048 bytes long, matching the [URI address multi-line string pattern](#aws-glue-api-regex-uri)\.
 
   A message describing the error\.
 
@@ -47,7 +47,7 @@ Defines a property predicate\.
 + `Value` – Value string\.
 
   The value of the property\.
-+ `Comparator` – String \(valid values: `EQUALS` \| `GREATER_THAN` \| `LESS_THAN` \| `GREATER_THAN_EQUALS` \| `LESS_THAN_EQUALS`\)\.
++ `Comparator` – UTF\-8 string \(valid values: `EQUALS` \| `GREATER_THAN` \| `LESS_THAN` \| `GREATER_THAN_EQUALS` \| `LESS_THAN_EQUALS`\)\.
 
   The comparator used to compare this property to others\.
 
@@ -56,10 +56,10 @@ Defines a property predicate\.
 URIs for function resources\.
 
 **Fields**
-+ `ResourceType` – String \(valid values: `JAR` \| `FILE` \| `ARCHIVE`\)\.
++ `ResourceType` – UTF\-8 string \(valid values: `JAR` \| `FILE` \| `ARCHIVE`\)\.
 
   The type of the resource\.
-+ `Uri` – Uniform resource identifier \(uri\), matching the [URI address multi-line string pattern](#aws-glue-api-regex-uri)\.
++ `Uri` – Uniform resource identifier \(uri\), not less than 1 or more than 1024 bytes long, matching the [URI address multi-line string pattern](#aws-glue-api-regex-uri)\.
 
   The URI for accessing the resource\.
 
@@ -70,9 +70,9 @@ The API uses the following regular expressions to define what is valid content f
 + URI address multi\-line string pattern – "`[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*`"
 + A Logstash Grok string pattern – "`[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\t]*`"
 + Identifier string pattern – "`[A-Za-z_][A-Za-z0-9_]*`"
-+ AWS ARN string pattern – "`arn:aws:iam::\d{12}:role/.*`"
++ AWS Glue ARN string pattern – "`arn:aws:glue:.*`"
++ AWS IAM ARN string pattern – "`arn:aws:iam::\d{12}:role/.*`"
++ AWS KMS ARN string pattern – "`^$|arn:aws:kms:.*`"
 + Version string pattern – "`^[a-zA-Z0-9-_]+$`"
 + Log group string pattern – "`[\.\-_/#A-Za-z0-9]+`"
 + Log\-stream string pattern – "`[^:*]*`"
-+ Custom string pattern \#8 – "`^$|arn:aws:kms:.*`"
-+ Custom string pattern \#9 – "`arn:aws:glue:.*`"

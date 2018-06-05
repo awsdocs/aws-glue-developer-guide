@@ -57,7 +57,7 @@ The following JDBC URL examples show the syntax for several database engines\.
    `jdbc:postgresql://xxx-cluster.cluster-xxx.us-east-1.rds.amazonaws.com:5432/employee` 
 + To connect to an Amazon RDS for Oracle data store with an `employee` service name:
 
-   `jdbc:oracle:thin:@//xxx-cluster.cluster-xxx.us-east-1.rds.amazonaws.com:1521/employee` 
+   `jdbc:oracle:thin://@xxx-cluster.cluster-xxx.us-east-1.rds.amazonaws.com:1521/employee` 
 
   The syntax for Amazon RDS for Oracle can follow the following patterns:
   + `jdbc:oracle:thin://@host:port/service_name`

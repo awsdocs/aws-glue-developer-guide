@@ -17,7 +17,7 @@ If you see an expand arrow \(**↗**\) in the upper\-right corner of the table, 
 | [BatchCreatePartition Action \(Python: batch\_create\_partition\)](aws-glue-api-catalog-partitions.md#aws-glue-api-catalog-partitions-BatchCreatePartition) | glue:BatchCreatePartition | \* | 
 | [BatchDeleteConnection Action \(Python: batch\_delete\_connection\)](aws-glue-api-catalog-connections.md#aws-glue-api-catalog-connections-BatchDeleteConnection) | glue:BatchDeleteConnection | \* | 
 | [BatchDeletePartition Action \(Python: batch\_delete\_partition\)](aws-glue-api-catalog-partitions.md#aws-glue-api-catalog-partitions-BatchDeletePartition) | glue:BatchDeletePartition | \* | 
-| [BatchDeleteTable Action \(Python: batch\_delete\_table\)](aws-glue-api-catalog-tables.md#aws-glue-api-catalog-tables-BatchDeleteTable) | glue:BatchDeletetTable | \* | 
+| [BatchDeleteTable Action \(Python: batch\_delete\_table\)](aws-glue-api-catalog-tables.md#aws-glue-api-catalog-tables-BatchDeleteTable) | glue:BatchDeleteTable | \* | 
 | [BatchGetPartition Action \(Python: batch\_get\_partition\)](aws-glue-api-catalog-partitions.md#aws-glue-api-catalog-partitions-BatchGetPartition) | glue:BatchGetPartition | \* | 
 | [BatchStopJobRun Action \(Python: batch\_stop\_job\_run\)](aws-glue-api-jobs-runs.md#aws-glue-api-jobs-runs-BatchStopJobRun) | glue:BatchStopJobRun | \* | 
 | [CreateClassifier Action \(Python: create\_classifier\)](aws-glue-api-crawler-classifiers.md#aws-glue-api-crawler-classifiers-CreateClassifier) | glue:CreateClassifier | \* | 

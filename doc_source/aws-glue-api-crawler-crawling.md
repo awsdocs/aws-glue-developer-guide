@@ -15,34 +15,34 @@
 Specifies a crawler program that examines a data source and uses classifiers to try to determine its schema\. If successful, the crawler records metadata concerning the data source in the AWS Glue Data Catalog\.
 
 **Fields**
-+ `Name` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
++ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The crawler name\.
-+ `Role` – String\.
++ `Role` – UTF\-8 string\.
 
   The IAM role \(or ARN of an IAM role\) used to access customer resources, such as data in Amazon S3\.
-+ `Targets` – A CrawlerTargets object\.
++ `Targets` – A [CrawlerTargets](#aws-glue-api-crawler-crawling-CrawlerTargets) object\.
 
   A collection of targets to crawl\.
-+ `DatabaseName` – String\.
++ `DatabaseName` – UTF\-8 string\.
 
   The database where metadata is written by this crawler\.
-+ `Description` – Description string, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
++ `Description` – Description string, not more than 2048 bytes long, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
 
   A description of the crawler\.
 + `Classifiers` – An array of UTF\-8 strings\.
 
   A list of custom classifiers associated with the crawler\.
-+ `SchemaChangePolicy` – A SchemaChangePolicy object\.
++ `SchemaChangePolicy` – A [SchemaChangePolicy](#aws-glue-api-crawler-crawling-SchemaChangePolicy) object\.
 
   Sets the behavior when the crawler finds a changed or deleted object\.
-+ `State` – String \(valid values: `READY` \| `RUNNING` \| `STOPPING`\)\.
++ `State` – UTF\-8 string \(valid values: `READY` \| `RUNNING` \| `STOPPING`\)\.
 
   Indicates whether the crawler is running, or whether a run is pending\.
-+ `TablePrefix` – String\.
++ `TablePrefix` – UTF\-8 string, not more than 128 bytes long\.
 
   The prefix added to the names of tables that are created\.
-+ `Schedule` – A Schedule object\.
++ `Schedule` – A [Schedule](aws-glue-api-crawler-scheduler.md#aws-glue-api-crawler-scheduler-Schedule) object\.
 
   For scheduled crawlers, the schedule when the crawler runs\.
 + `CrawlElapsedTime` – Number \(long\)\.
@@ -54,13 +54,13 @@ Specifies a crawler program that examines a data source and uses classifiers to 
 + `LastUpdated` – Timestamp\.
 
   The time the crawler was last updated\.
-+ `LastCrawl` – A LastCrawlInfo object\.
++ `LastCrawl` – A [LastCrawlInfo](#aws-glue-api-crawler-crawling-LastCrawlInfo) object\.
 
   The status of the last crawl, and potentially error information if an error occurred\.
 + `Version` – Number \(long\)\.
 
   The version of the crawler\.
-+ `Configuration` – String\.
++ `Configuration` – UTF\-8 string\.
 
   Crawler configuration information\. This versioned JSON string allows users to specify aspects of a crawler's behavior\. For more information, see [Configuring a Crawler](http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html)\.
 
@@ -69,10 +69,10 @@ Specifies a crawler program that examines a data source and uses classifiers to 
 A scheduling object using a `cron` statement to schedule an event\.
 
 **Fields**
-+ `ScheduleExpression` – String\.
++ `ScheduleExpression` – UTF\-8 string\.
 
   A `cron` expression used to specify the schedule \(see [Time\-Based Schedules for Jobs and Crawlers](http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)\. For example, to run something every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`\.
-+ `State` – String \(valid values: `SCHEDULED` \| `NOT_SCHEDULED` \| `TRANSITIONING`\)\.
++ `State` – UTF\-8 string \(valid values: `SCHEDULED` \| `NOT_SCHEDULED` \| `TRANSITIONING`\)\.
 
   The state of the schedule\.
 
@@ -93,7 +93,7 @@ Specifies data stores to crawl\.
 Specifies a data store in Amazon S3\.
 
 **Fields**
-+ `Path` – String\.
++ `Path` – UTF\-8 string\.
 
   The path to the Amazon S3 target\.
 + `Exclusions` – An array of UTF\-8 strings\.
@@ -105,10 +105,10 @@ Specifies a data store in Amazon S3\.
 Specifies a JDBC data store to crawl\.
 
 **Fields**
-+ `ConnectionName` – String\.
++ `ConnectionName` – UTF\-8 string\.
 
   The name of the connection to use to connect to the JDBC target\.
-+ `Path` – String\.
++ `Path` – UTF\-8 string\.
 
   The path of the JDBC target\.
 + `Exclusions` – An array of UTF\-8 strings\.
@@ -120,28 +120,28 @@ Specifies a JDBC data store to crawl\.
 Metrics for a specified crawler\.
 
 **Fields**
-+ `CrawlerName` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
++ `CrawlerName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the crawler\.
-+ `TimeLeftSeconds` – Number \(double\)\.
++ `TimeLeftSeconds` – Number \(double\), at least 0\.0\.
 
   The estimated time left to complete a running crawl\.
 + `StillEstimating` – Boolean\.
 
   True if the crawler is still estimating how long it will take to complete this run\.
-+ `LastRuntimeSeconds` – Number \(double\)\.
++ `LastRuntimeSeconds` – Number \(double\), at least 0\.0\.
 
   The duration of the crawler's most recent run, in seconds\.
-+ `MedianRuntimeSeconds` – Number \(double\)\.
++ `MedianRuntimeSeconds` – Number \(double\), at least 0\.0\.
 
   The median duration of this crawler's runs, in seconds\.
-+ `TablesCreated` – Number \(integer\)\.
++ `TablesCreated` – Number \(integer\), at least 0\.
 
   The number of tables created by this crawler\.
-+ `TablesUpdated` – Number \(integer\)\.
++ `TablesUpdated` – Number \(integer\), at least 0\.
 
   The number of tables updated by this crawler\.
-+ `TablesDeleted` – Number \(integer\)\.
++ `TablesDeleted` – Number \(integer\), at least 0\.
 
   The number of tables deleted by this crawler\.
 
@@ -150,10 +150,10 @@ Metrics for a specified crawler\.
 Crawler policy for update and deletion behavior\.
 
 **Fields**
-+ `UpdateBehavior` – String \(valid values: `LOG` \| `UPDATE_IN_DATABASE`\)\.
++ `UpdateBehavior` – UTF\-8 string \(valid values: `LOG` \| `UPDATE_IN_DATABASE`\)\.
 
   The update behavior when the crawler finds a changed schema\.
-+ `DeleteBehavior` – String \(valid values: `LOG` \| `DELETE_FROM_DATABASE` \| `DEPRECATE_IN_DATABASE`\)\.
++ `DeleteBehavior` – UTF\-8 string \(valid values: `LOG` \| `DELETE_FROM_DATABASE` \| `DEPRECATE_IN_DATABASE`\)\.
 
   The deletion behavior when the crawler finds a deleted object\.
 
@@ -162,19 +162,19 @@ Crawler policy for update and deletion behavior\.
 Status and error information about the most recent crawl\.
 
 **Fields**
-+ `Status` – String \(valid values: `SUCCEEDED` \| `CANCELLED` \| `FAILED`\)\.
++ `Status` – UTF\-8 string \(valid values: `SUCCEEDED` \| `CANCELLED` \| `FAILED`\)\.
 
   Status of the last crawl\.
-+ `ErrorMessage` – Description string, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
++ `ErrorMessage` – Description string, not more than 2048 bytes long, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
 
   If an error occurred, the error information about the last crawl\.
-+ `LogGroup` – String, matching the [Log group string pattern](aws-glue-api-common.md#aws-glue-api-regex-logGroup-id)\.
++ `LogGroup` – UTF\-8 string, not less than 1 or more than 512 bytes long, matching the [Log group string pattern](aws-glue-api-common.md#aws-glue-api-regex-logGroup-id)\.
 
   The log group for the last crawl\.
-+ `LogStream` – String, matching the [Log-stream string pattern](aws-glue-api-common.md#aws-glue-api-regex-logStream-id)\.
++ `LogStream` – UTF\-8 string, not less than 1 or more than 512 bytes long, matching the [Log-stream string pattern](aws-glue-api-common.md#aws-glue-api-regex-logStream-id)\.
 
   The log stream for the last crawl\.
-+ `MessagePrefix` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
++ `MessagePrefix` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The prefix for a message about this crawl\.
 + `StartTime` – Timestamp\.
@@ -196,34 +196,34 @@ Status and error information about the most recent crawl\.
 Creates a new crawler with specified targets, role, configuration, and optional schedule\. At least one crawl target must be specified, in either the *s3Targets* or the *jdbcTargets* field\.
 
 **Request**
-+ `Name` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
 
   Name of the new crawler\.
-+ `Role` – String\. Required\.
++ `Role` – UTF\-8 string\. Required\.
 
   The IAM role \(or ARN of an IAM role\) used by the new crawler to access customer resources\.
-+ `DatabaseName` – String\. Required\.
++ `DatabaseName` – UTF\-8 string\. Required\.
 
   The AWS Glue database where results are written, such as: `arn:aws:daylight:us-east-1::database/sometable/*`\.
-+ `Description` – Description string, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
++ `Description` – Description string, not more than 2048 bytes long, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
 
   A description of the new crawler\.
-+ `Targets` – A CrawlerTargets object\. Required\.
++ `Targets` – A [CrawlerTargets](#aws-glue-api-crawler-crawling-CrawlerTargets) object\. Required\.
 
   A list of collection of targets to crawl\.
-+ `Schedule` – String\.
++ `Schedule` – UTF\-8 string\.
 
   A `cron` expression used to specify the schedule \(see [Time\-Based Schedules for Jobs and Crawlers](http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)\. For example, to run something every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`\.
 + `Classifiers` – An array of UTF\-8 strings\.
 
   A list of custom classifiers that the user has registered\. By default, all built\-in classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification\.
-+ `TablePrefix` – String\.
++ `TablePrefix` – UTF\-8 string, not more than 128 bytes long\.
 
   The table prefix used for catalog tables that are created\.
-+ `SchemaChangePolicy` – A SchemaChangePolicy object\.
++ `SchemaChangePolicy` – A [SchemaChangePolicy](#aws-glue-api-crawler-crawling-SchemaChangePolicy) object\.
 
   Policy for the crawler's update and deletion behavior\.
-+ `Configuration` – String\.
++ `Configuration` – UTF\-8 string\.
 
   Crawler configuration information\. This versioned JSON string allows users to specify aspects of a crawler's behavior\. For more information, see [Configuring a Crawler](http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html)\.
 
@@ -241,7 +241,7 @@ Creates a new crawler with specified targets, role, configuration, and optional 
 Removes a specified crawler from the Data Catalog, unless the crawler state is `RUNNING`\.
 
 **Request**
-+ `Name` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
 
   Name of the crawler to remove\.
 
@@ -259,12 +259,12 @@ Removes a specified crawler from the Data Catalog, unless the crawler state is `
 Retrieves metadata for a specified crawler\.
 
 **Request**
-+ `Name` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
 
   Name of the crawler to retrieve metadata for\.
 
 **Response**
-+ `Crawler` – A Crawler object\.
++ `Crawler` – A [Crawler](#aws-glue-api-crawler-crawling-Crawler) object\.
 
   The metadata for the specified crawler\.
 
@@ -277,10 +277,10 @@ Retrieves metadata for a specified crawler\.
 Retrieves metadata for all crawlers defined in the customer account\.
 
 **Request**
-+ `MaxResults` – Number \(integer\)\.
++ `MaxResults` – Number \(integer\), not less than 1 or more than 1000\.
 
   The number of crawlers to return on each call\.
-+ `NextToken` – String\.
++ `NextToken` – UTF\-8 string\.
 
   A continuation token, if this is a continuation request\.
 
@@ -288,7 +288,7 @@ Retrieves metadata for all crawlers defined in the customer account\.
 + `Crawlers` – An array of [Crawler](#aws-glue-api-crawler-crawling-Crawler)s\.
 
   A list of crawler metadata\.
-+ `NextToken` – String\.
++ `NextToken` – UTF\-8 string\.
 
   A continuation token, if the returned list has not reached the end of those defined in this customer account\.
 
@@ -300,13 +300,13 @@ Retrieves metadata for all crawlers defined in the customer account\.
 Retrieves metrics about specified crawlers\.
 
 **Request**
-+ `CrawlerNameList` – An array of UTF\-8 strings\.
++ `CrawlerNameList` – An array of UTF\-8 strings, not more than 100 items in the array\.
 
   A list of the names of crawlers about which to retrieve metrics\.
-+ `MaxResults` – Number \(integer\)\.
++ `MaxResults` – Number \(integer\), not less than 1 or more than 1000\.
 
   The maximum size of a list to return\.
-+ `NextToken` – String\.
++ `NextToken` – UTF\-8 string\.
 
   A continuation token, if this is a continuation call\.
 
@@ -314,7 +314,7 @@ Retrieves metrics about specified crawlers\.
 + `CrawlerMetricsList` – An array of [CrawlerMetrics](#aws-glue-api-crawler-crawling-CrawlerMetrics)s\.
 
   A list of metrics for the specified crawler\.
-+ `NextToken` – String\.
++ `NextToken` – UTF\-8 string\.
 
   A continuation token, if the returned list does not contain the last metric available\.
 
@@ -326,34 +326,34 @@ Retrieves metrics about specified crawlers\.
 Updates a crawler\. If a crawler is running, you must stop it using `StopCrawler` before updating it\.
 
 **Request**
-+ `Name` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
 
   Name of the new crawler\.
-+ `Role` – String\.
++ `Role` – UTF\-8 string\.
 
   The IAM role \(or ARN of an IAM role\) used by the new crawler to access customer resources\.
-+ `DatabaseName` – String\.
++ `DatabaseName` – UTF\-8 string\.
 
   The AWS Glue database where results are stored, such as: `arn:aws:daylight:us-east-1::database/sometable/*`\.
-+ `Description` – String, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
++ `Description` – UTF\-8 string, not more than 2048 bytes long, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
 
   A description of the new crawler\.
-+ `Targets` – A CrawlerTargets object\.
++ `Targets` – A [CrawlerTargets](#aws-glue-api-crawler-crawling-CrawlerTargets) object\.
 
   A list of targets to crawl\.
-+ `Schedule` – String\.
++ `Schedule` – UTF\-8 string\.
 
   A `cron` expression used to specify the schedule \(see [Time\-Based Schedules for Jobs and Crawlers](http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)\. For example, to run something every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`\.
 + `Classifiers` – An array of UTF\-8 strings\.
 
   A list of custom classifiers that the user has registered\. By default, all built\-in classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification\.
-+ `TablePrefix` – String\.
++ `TablePrefix` – UTF\-8 string, not more than 128 bytes long\.
 
   The table prefix used for catalog tables that are created\.
-+ `SchemaChangePolicy` – A SchemaChangePolicy object\.
++ `SchemaChangePolicy` – A [SchemaChangePolicy](#aws-glue-api-crawler-crawling-SchemaChangePolicy) object\.
 
   Policy for the crawler's update and deletion behavior\.
-+ `Configuration` – String\.
++ `Configuration` – UTF\-8 string\.
 
   Crawler configuration information\. This versioned JSON string allows users to specify aspects of a crawler's behavior\. For more information, see [Configuring a Crawler](http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html)\.
 
@@ -372,7 +372,7 @@ Updates a crawler\. If a crawler is running, you must stop it using `StopCrawler
 Starts a crawl using the specified crawler, regardless of what is scheduled\. If the crawler is already running, returns a [CrawlerRunningException](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-exceptions.html#aws-glue-api-exceptions-CrawlerRunningException)\.
 
 **Request**
-+ `Name` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
 
   Name of the crawler to start\.
 
@@ -389,7 +389,7 @@ Starts a crawl using the specified crawler, regardless of what is scheduled\. If
 If the specified crawler is running, stops the crawl\.
 
 **Request**
-+ `Name` – String, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
 
   Name of the crawler to stop\.
 

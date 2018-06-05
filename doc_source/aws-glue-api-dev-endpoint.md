@@ -9,56 +9,56 @@
 A development endpoint where a developer can remotely debug ETL scripts\.
 
 **Fields**
-+ `EndpointName` – String\.
++ `EndpointName` – UTF\-8 string\.
 
   The name of the DevEndpoint\.
-+ `RoleArn` – String, matching the [AWS ARN string pattern](aws-glue-api-common.md#aws-glue-api-regex-aws-arn-id)\.
++ `RoleArn` – UTF\-8 string, matching the [AWS IAM ARN string pattern](aws-glue-api-common.md#aws-glue-api-regex-aws-iam-arn-id)\.
 
   The AWS ARN of the IAM role used in this DevEndpoint\.
 + `SecurityGroupIds` – An array of UTF\-8 strings\.
 
   A list of security group identifiers used in this DevEndpoint\.
-+ `SubnetId` – String\.
++ `SubnetId` – UTF\-8 string\.
 
   The subnet ID for this DevEndpoint\.
-+ `YarnEndpointAddress` – String\.
++ `YarnEndpointAddress` – UTF\-8 string\.
 
   The YARN endpoint address used by this DevEndpoint\.
-+ `PrivateAddress` – String\.
++ `PrivateAddress` – UTF\-8 string\.
 
   A private DNS to access the DevEndpoint within a VPC, if the DevEndpoint is created within one\.
 + `ZeppelinRemoteSparkInterpreterPort` – Number \(integer\)\.
 
   The Apache Zeppelin port for the remote Apache Spark interpreter\.
-+ `PublicAddress` – String\.
++ `PublicAddress` – UTF\-8 string\.
 
   The public VPC address used by this DevEndpoint\.
-+ `Status` – String\.
++ `Status` – UTF\-8 string\.
 
   The current status of this DevEndpoint\.
 + `NumberOfNodes` – Number \(integer\)\.
 
   The number of AWS Glue Data Processing Units \(DPUs\) allocated to this DevEndpoint\.
-+ `AvailabilityZone` – String\.
++ `AvailabilityZone` – UTF\-8 string\.
 
   The AWS availability zone where this DevEndpoint is located\.
-+ `VpcId` – String\.
++ `VpcId` – UTF\-8 string\.
 
   The ID of the virtual private cloud \(VPC\) used by this DevEndpoint\.
-+ `ExtraPythonLibsS3Path` – String\.
++ `ExtraPythonLibsS3Path` – UTF\-8 string\.
 
   Path\(s\) to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint\. Multiple values must be complete paths separated by a comma\.
 
   Please note that only pure Python libraries can currently be used on a DevEndpoint\. Libraries that rely on C extensions, such as the [pandas](http://pandas.pydata.org/) Python data analysis library, are not yet supported\.
-+ `ExtraJarsS3Path` – String\.
++ `ExtraJarsS3Path` – UTF\-8 string\.
 
   Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint\.
 
   Please note that only pure Java/Scala libraries can currently be used on a DevEndpoint\.
-+ `FailureReason` – String\.
++ `FailureReason` – UTF\-8 string\.
 
   The reason for a current failure in this DevEndpoint\.
-+ `LastUpdateStatus` – String\.
++ `LastUpdateStatus` – UTF\-8 string\.
 
   The status of the last update\.
 + `CreatedTimestamp` – Timestamp\.
@@ -67,7 +67,7 @@ A development endpoint where a developer can remotely debug ETL scripts\.
 + `LastModifiedTimestamp` – Timestamp\.
 
   The point in time at which this DevEndpoint was last modified\.
-+ `PublicKey` – String\.
++ `PublicKey` – UTF\-8 string\.
 
   The public key to be used by this DevEndpoint for authentication\.
 
@@ -76,12 +76,12 @@ A development endpoint where a developer can remotely debug ETL scripts\.
 Custom libraries to be loaded into a DevEndpoint\.
 
 **Fields**
-+ `ExtraPythonLibsS3Path` – String\.
++ `ExtraPythonLibsS3Path` – UTF\-8 string\.
 
   Path\(s\) to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint\. Multiple values must be complete paths separated by a comma\.
 
   Please note that only pure Python libraries can currently be used on a DevEndpoint\. Libraries that rely on C extensions, such as the [pandas](http://pandas.pydata.org/) Python data analysis library, are not yet supported\.
-+ `ExtraJarsS3Path` – String\.
++ `ExtraJarsS3Path` – UTF\-8 string\.
 
   Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint\.
 
@@ -99,50 +99,50 @@ Custom libraries to be loaded into a DevEndpoint\.
 Creates a new DevEndpoint\.
 
 **Request**
-+ `EndpointName` – String\. Required\.
++ `EndpointName` – UTF\-8 string\. Required\.
 
   The name to be assigned to the new DevEndpoint\.
-+ `RoleArn` – String, matching the [AWS ARN string pattern](aws-glue-api-common.md#aws-glue-api-regex-aws-arn-id)\. Required\.
++ `RoleArn` – UTF\-8 string, matching the [AWS IAM ARN string pattern](aws-glue-api-common.md#aws-glue-api-regex-aws-iam-arn-id)\. Required\.
 
   The IAM role for the DevEndpoint\.
 + `SecurityGroupIds` – An array of UTF\-8 strings\.
 
   Security group IDs for the security groups to be used by the new DevEndpoint\.
-+ `SubnetId` – String\.
++ `SubnetId` – UTF\-8 string\.
 
   The subnet ID for the new DevEndpoint to use\.
-+ `PublicKey` – String\.
++ `PublicKey` – UTF\-8 string\.
 
   The public key to use for authentication\.
 + `NumberOfNodes` – Number \(integer\)\.
 
   The number of AWS Glue Data Processing Units \(DPUs\) to allocate to this DevEndpoint\.
-+ `ExtraPythonLibsS3Path` – String\.
++ `ExtraPythonLibsS3Path` – UTF\-8 string\.
 
   Path\(s\) to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint\. Multiple values must be complete paths separated by a comma\.
 
   Please note that only pure Python libraries can currently be used on a DevEndpoint\. Libraries that rely on C extensions, such as the [pandas](http://pandas.pydata.org/) Python data analysis library, are not yet supported\.
-+ `ExtraJarsS3Path` – String\.
++ `ExtraJarsS3Path` – UTF\-8 string\.
 
   Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint\.
 
 **Response**
-+ `EndpointName` – String\.
++ `EndpointName` – UTF\-8 string\.
 
   The name assigned to the new DevEndpoint\.
-+ `Status` – String\.
++ `Status` – UTF\-8 string\.
 
   The current status of the new DevEndpoint\.
 + `SecurityGroupIds` – An array of UTF\-8 strings\.
 
   The security groups assigned to the new DevEndpoint\.
-+ `SubnetId` – String\.
++ `SubnetId` – UTF\-8 string\.
 
   The subnet ID assigned to the new DevEndpoint\.
-+ `RoleArn` – String, matching the [AWS ARN string pattern](aws-glue-api-common.md#aws-glue-api-regex-aws-arn-id)\.
++ `RoleArn` – UTF\-8 string, matching the [AWS IAM ARN string pattern](aws-glue-api-common.md#aws-glue-api-regex-aws-iam-arn-id)\.
 
   The AWS ARN of the role assigned to the new DevEndpoint\.
-+ `YarnEndpointAddress` – String\.
++ `YarnEndpointAddress` – UTF\-8 string\.
 
   The address of the YARN endpoint used by this DevEndpoint\.
 + `ZeppelinRemoteSparkInterpreterPort` – Number \(integer\)\.
@@ -151,19 +151,19 @@ Creates a new DevEndpoint\.
 + `NumberOfNodes` – Number \(integer\)\.
 
   The number of AWS Glue Data Processing Units \(DPUs\) allocated to this DevEndpoint\.
-+ `AvailabilityZone` – String\.
++ `AvailabilityZone` – UTF\-8 string\.
 
   The AWS availability zone where this DevEndpoint is located\.
-+ `VpcId` – String\.
++ `VpcId` – UTF\-8 string\.
 
   The ID of the VPC used by this DevEndpoint\.
-+ `ExtraPythonLibsS3Path` – String\.
++ `ExtraPythonLibsS3Path` – UTF\-8 string\.
 
   Path\(s\) to one or more Python libraries in an S3 bucket that will be loaded in your DevEndpoint\.
-+ `ExtraJarsS3Path` – String\.
++ `ExtraJarsS3Path` – UTF\-8 string\.
 
   Path to one or more Java Jars in an S3 bucket that will be loaded in your DevEndpoint\.
-+ `FailureReason` – String\.
++ `FailureReason` – UTF\-8 string\.
 
   The reason for a current failure in this DevEndpoint\.
 + `CreatedTimestamp` – Timestamp\.
@@ -185,13 +185,13 @@ Creates a new DevEndpoint\.
 Updates a specified DevEndpoint\.
 
 **Request**
-+ `EndpointName` – String\. Required\.
++ `EndpointName` – UTF\-8 string\. Required\.
 
   The name of the DevEndpoint to be updated\.
-+ `PublicKey` – String\.
++ `PublicKey` – UTF\-8 string\.
 
   The public key for the DevEndpoint to use\.
-+ `CustomLibraries` – A DevEndpointCustomLibraries object\.
++ `CustomLibraries` – A [DevEndpointCustomLibraries](#aws-glue-api-dev-endpoint-DevEndpointCustomLibraries) object\.
 
   Custom Python or Java libraries to be loaded in the DevEndpoint\.
 + `UpdateEtlLibraries` – Boolean\.
@@ -213,7 +213,7 @@ Updates a specified DevEndpoint\.
 Deletes a specified DevEndpoint\.
 
 **Request**
-+ `EndpointName` – String\. Required\.
++ `EndpointName` – UTF\-8 string\. Required\.
 
   The name of the DevEndpoint\.
 
@@ -231,12 +231,12 @@ Deletes a specified DevEndpoint\.
 Retrieves information about a specified DevEndpoint\.
 
 **Request**
-+ `EndpointName` – String\. Required\.
++ `EndpointName` – UTF\-8 string\. Required\.
 
   Name of the DevEndpoint for which to retrieve information\.
 
 **Response**
-+ `DevEndpoint` – A DevEndpoint object\.
++ `DevEndpoint` – A [DevEndpoint](#aws-glue-api-dev-endpoint-DevEndpoint) object\.
 
   A DevEndpoint definition\.
 
@@ -251,10 +251,10 @@ Retrieves information about a specified DevEndpoint\.
 Retrieves all the DevEndpoints in this AWS account\.
 
 **Request**
-+ `MaxResults` – Number \(integer\)\.
++ `MaxResults` – Number \(integer\), not less than 1 or more than 1000\.
 
   The maximum size of information to return\.
-+ `NextToken` – String\.
++ `NextToken` – UTF\-8 string\.
 
   A continuation token, if this is a continuation call\.
 
@@ -262,7 +262,7 @@ Retrieves all the DevEndpoints in this AWS account\.
 + `DevEndpoints` – An array of [DevEndpoint](#aws-glue-api-dev-endpoint-DevEndpoint)s\.
 
   A list of DevEndpoint definitions\.
-+ `NextToken` – String\.
++ `NextToken` – UTF\-8 string\.
 
   A continuation token, if not all DevEndpoint definitions have yet been returned\.
 

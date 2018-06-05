@@ -1,16 +1,16 @@
-# The AWS Glue Scala GlueArgParser APIs<a name="glue-etl-scala-apis-glue-util-glueargparser"></a>
+# AWS Glue Scala GlueArgParser APIs<a name="glue-etl-scala-apis-glue-util-glueargparser"></a>
 
-**Package:   com\.amazonaws\.services\.glue\.util**
+**Package: com\.amazonaws\.services\.glue\.util**
 
-## The GlueArgParser Object<a name="glue-etl-scala-apis-glue-util-glueargparser-object"></a>
+## GlueArgParser Object<a name="glue-etl-scala-apis-glue-util-glueargparser-object"></a>
 
- **GlueArgParser**
+**GlueArgParser**
 
 ```
 object GlueArgParser
 ```
 
-This is strictly consistent with Python version of utils\.getResolvedOptions in AWSGlueDataplanePython package
+This is strictly consistent with the Python version of `utils.getResolvedOptions` in the `AWSGlueDataplanePython` package\.
 
 ### GlueArgParser def Methods<a name="glue-etl-scala-apis-glue-util-glueargparser-object-defs"></a>
 

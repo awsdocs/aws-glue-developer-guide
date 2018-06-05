@@ -1,14 +1,14 @@
-# The AWS Glue Scala DynamicNode APIs<a name="glue-etl-scala-apis-glue-types-dynamicnode"></a>
+# AWS Glue Scala DynamicNode APIs<a name="glue-etl-scala-apis-glue-types-dynamicnode"></a>
 
 **Topics**
-+ [The DynamicNode Class](#glue-etl-scala-apis-glue-types-dynamicnode-class)
-+ [The DynamicNode Object](#glue-etl-scala-apis-glue-types-dynamicnode-object)
++ [DynamicNode Class](#glue-etl-scala-apis-glue-types-dynamicnode-class)
++ [DynamicNode Object](#glue-etl-scala-apis-glue-types-dynamicnode-object)
 
-**Package:   com\.amazonaws\.services\.glue\.types**
+**Package: com\.amazonaws\.services\.glue\.types**
 
-## The DynamicNode Class<a name="glue-etl-scala-apis-glue-types-dynamicnode-class"></a>
+## DynamicNode Class<a name="glue-etl-scala-apis-glue-types-dynamicnode-class"></a>
 
-abstract **DynamicNode**
+**DynamicNode**
 
 ```
 class DynamicNode extends Serializable with Cloneable 
@@ -20,7 +20,7 @@ class DynamicNode extends Serializable with Cloneable
 def getValue : Any
 ```
 
-get plain value bind to current record
+Get plain value and bind to the current record:
 
 ```
 def nodeType : TypeCode
@@ -30,7 +30,7 @@ def nodeType : TypeCode
 def toJson : String
 ```
 
-method for debug
+Method for debug:
 
 ```
 def toRow( schema : Schema,
@@ -42,7 +42,7 @@ def toRow( schema : Schema,
 def typeName : String 
 ```
 
-## The DynamicNode Object<a name="glue-etl-scala-apis-glue-types-dynamicnode-object"></a>
+## DynamicNode Object<a name="glue-etl-scala-apis-glue-types-dynamicnode-object"></a>
 
  **DynamicNode**
 

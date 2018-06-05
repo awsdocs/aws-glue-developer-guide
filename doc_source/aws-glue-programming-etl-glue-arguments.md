@@ -18,6 +18,12 @@ There are a number of argument names that are recognized and used by AWS Glue, t
   ```
 + `--TempDir`  —  Specifies an S3 path to a bucket that can be used as a temporary directory for the Job\.
 
+  For example, to set a temporary directory, pass the argument:
+
+  ```
+  '--TempDir': 's3-path-to-directory'
+  ```
+
 There are also several argument names used by AWS Glue internally that you should never set:
 + `--conf`  —  Internal to AWS Glue\. Do not set\!
 + `--debug`  —  Internal to AWS Glue\. Do not set\!

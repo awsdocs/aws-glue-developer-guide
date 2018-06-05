@@ -44,11 +44,19 @@ Sets the maximum number of concurrent runs that are allowed for this job\. The d
 **Job timeout**  
 Sets the maximum execution time in minutes\. The default is 2880 minutes\. If this limit is greater than the execution time, the job run state changes to “TIMEOUT”\. 
 
+**Delay notification threshold**  
+Sets the threshold \(in minutes\) before a delay notification is sent\. You can set this threshold to send notifications when a `RUNNING`, `STARTING`, or `STOPPING` job run takes more than an expected number of minutes\.
+
 **Number of retries**  
 Specify the number of times, from 0 to 10, that AWS Glue should automatically restart the job if it fails\.
 
 **Job parameters**  
-A set of key\-value pairs that are passed as named parameters to the script invoked by the job\. These are default values that are used when the script is run, but you can override them at run time\. The key name is prefixed with `--`, for example `--myKey`\. For more examples, see Python parameters in [Passing and Accessing Python Parameters in AWS Glue](aws-glue-programming-python-calling.md#aws-glue-programming-python-calling-parameters)\.
+A set of key\-value pairs that are passed as named parameters to the script invoked by the job\. These are default values that are used when the script is run, but you can override them at run time\. The key name is prefixed with `--`, for example `--myKey` and the value is `value-for-myKey`\.   
+
+```
+'--myKey' : 'value-for-myKey'  
+```
+For more examples, see Python parameters in [Passing and Accessing Python Parameters in AWS Glue](aws-glue-programming-python-calling.md#aws-glue-programming-python-calling-parameters)\.
 
 **Target path**  
 For Amazon S3 target locations, provide the location of a directory in Amazon S3 where your output is written when AWS Glue runs the script\. Confirm that there isn't a file with the same name as the target path directory in the path\.

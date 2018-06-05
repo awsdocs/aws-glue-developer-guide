@@ -1,6 +1,6 @@
-# The AWS Glue Scala DynamicFrame Class<a name="glue-etl-scala-apis-glue-dynamicframe-class"></a>
+# AWS Glue Scala DynamicFrame Class<a name="glue-etl-scala-apis-glue-dynamicframe-class"></a>
 
-**Package:   com\.amazonaws\.services\.glue**
+**Package: com\.amazonaws\.services\.glue**
 
 ```
 class DynamicFrame extends Serializable with Logging  (
@@ -15,17 +15,17 @@ class DynamicFrame extends Serializable with Logging  (
            errorExpr : => Unit = {} )
 ```
 
-A DynamicFrame is a distributed collection of self\-describing [DynamicRecord](glue-etl-scala-apis-glue-dynamicrecord-class.md) objects\.
+A `DynamicFrame` is a distributed collection of self\-describing [DynamicRecord](glue-etl-scala-apis-glue-dynamicrecord-class.md) objects\.
 
-DynamicFrames are designed to provide a flexible data model for ETL operations\. They do not require a schema to create and they can be used to read and transform data with messy or inconsistent values and types\. A schema can be computed on\-demand for those operations that need one\.
+`DynamicFrame`s are designed to provide a flexible data model for ETL \(extract, transform, and load\) operations\. They don't require a schema to create, and you can use them to read and transform data that contains messy or inconsistent values and types\. A schema can be computed on demand for those operations that need one\.
 
-DynamicFrames provide a range of transformations for data cleaning and ETL\. They also support conversion to and from SparkSQL DataFrames to integrate with existing code and the many analytics operations that DataFrames provide\.
+`DynamicFrame`s provide a range of transformations for data cleaning and ETL\. They also support conversion to and from SparkSQL DataFrames to integrate with existing code and the many analytics operations that DataFrames provide\.
 
-The following parameters are shared across many of the Glue transformations that construct DynamicFrames:
-+ `transformationContext`  —  Identifier for this DynamicFrame\. The transformationContext is used as a key for job bookmark state that is persisted across runs\.
-+ `callSite`  —  Used to provide context information for error reporting\. These values are automatically set when calling from Python\.
-+ `stageThreshold`  —  Maximum number of error records allowed from the computation of this DynamicFrame before throwing an exception, excluding records present in the previous DynamicFrame\.
-+ `totalThreshold`  —  Maximum number of total error records before an exception is thrown, including those from previous frames\.
+The following parameters are shared across many of the AWS Glue transformations that construct `DynamicFrame`s:
++ `transformationContext` — The identifier for this `DynamicFrame`\. The `transformationContext` is used as a key for job bookmark state that is persisted across runs\.
++ `callSite` — Provides context information for error reporting\. These values are automatically set when calling from Python\.
++ `stageThreshold` — The maximum number of error records that are allowed from the computation of this `DynamicFrame` before throwing an exception, excluding records that are present in the previous `DynamicFrame`\.
++ `totalThreshold` — The maximum number of total error records before an exception is thrown, including those from previous frames\.
 
 ## val errorsCount<a name="glue-etl-scala-apis-glue-dynamicframe-class-vals-errorsCount"></a>
 
@@ -33,7 +33,7 @@ The following parameters are shared across many of the Glue transformations that
 val errorsCount
 ```
 
-The number of error records in this DynamicFrame\. This includes errors from previous operations\.
+The number of error records in this `DynamicFrame`\. This includes errors from previous operations\.
 
 ## def applyMapping<a name="glue-etl-scala-apis-glue-dynamicframe-class-defs-applyMapping"></a>
 
@@ -46,14 +46,16 @@ def applyMapping( mappings : Seq[Product4[String, String, String, String]],
                   totalThreshold : Long = 0
                 ) : DynamicFrame
 ```
-+ `mappings`  —  Sequence of mappings to construct a new DynamicFrame\.
-+ `caseSensitive`  —  Whether or not to look treat source columns as case sensitive\. Setting this to false may help when integrating with case\-insensitive stores like AWS Glue Data Catalog\.
++ `mappings` — A sequence of mappings to construct a new `DynamicFrame`\.
++ `caseSensitive` — Whether to treat source columns as case sensitive\. Setting this to false might help when integrating with case\-insensitive stores like the AWS Glue Data Catalog\.
 
 Selects, projects, and casts columns based on a sequence of mappings\.
 
-Each mapping is comprised of a source column and type and a target column and type\. Mappings may be specified as either a four\-tuple \(source\_path, source\_type, target\_path, target\_type\) or a [MappingSpec](glue-etl-scala-apis.md#glue-etl-scala-apis-glue-mappingspec) object containing the same information\.
+Each mapping is made up of a source column and type and a target column and type\. Mappings can be specified as either a four\-tuple \(`source_path`, `source_type`,` target_path`, `target_type`\) or a [MappingSpec](glue-etl-scala-apis.md#glue-etl-scala-apis-glue-mappingspec) object containing the same information\.
 
-In addition to simple projections and casting, mappings can be used to nest or unnest fields by separating components of the path with '\.'\. For example, suppose we have a DynamicFrame with the folowing schema:
+In addition to using mappings for simple projections and casting, you can use them to nest or unnest fields by separating components of the path with '`.`' \(period\)\. 
+
+For example, suppose that you have a `DynamicFrame` with the following schema:
 
 ```
  {{{
@@ -66,7 +68,7 @@ In addition to simple projections and casting, mappings can be used to nest or u
  }}}
 ```
 
-We can make the following call to unnest the state and zip fields:
+You can make the following call to unnest the `state` and `zip` fields:
 
 ```
  {{{
@@ -78,7 +80,7 @@ We can make the following call to unnest the state and zip fields:
  }}}
 ```
 
-The resulting schema is:
+The resulting schema is as follows:
 
 ```
  {{{
@@ -90,7 +92,7 @@ The resulting schema is:
  }}}
 ```
 
-We can also use `applyMapping` to re\-nest columns\. For example the following inverts the previous transformation and creates a struct named `address` in the target\.:
+You can also use `applyMapping` to re\-nest columns\. For example, the following inverts the previous transformation and creates a struct named `address` in the target:
 
 ```
  {{{
@@ -102,10 +104,10 @@ We can also use `applyMapping` to re\-nest columns\. For example the following i
  }}}
 ```
 
-Field names containing '\.' characters can be quoted using backticks \(''\)\.
+Field names that contain '`.`' \(period\) characters can be quoted by using backticks \(`''`\)\.
 
 **Note**  
-The `applyMapping` method currently cannot be used to map columns nested under arrays\.
+Currently, you can't use the `applyMapping` method to map columns that are nested under arrays\.
 
 ## def assertErrorThreshold<a name="glue-etl-scala-apis-glue-dynamicframe-class-defs-assertErrorThreshold"></a>
 
@@ -113,7 +115,7 @@ The `applyMapping` method currently cannot be used to map columns nested under a
 def assertErrorThreshold : Unit
 ```
 
-Action that forces computation and verifies that the number of error records fall below `stageThreshold` and `totalThreshold`\. Throws an exception if either condition fails\.
+An action that forces computation and verifies that the number of error records falls below `stageThreshold` and `totalThreshold`\. Throws an exception if either condition fails\.
 
 ## def count<a name="glue-etl-scala-apis-glue-dynamicframe-class-defs-count"></a>
 
@@ -122,7 +124,7 @@ lazy
 def count
 ```
 
-Returns the number of elements in this DynamicFrame\.
+Returns the number of elements in this `DynamicFrame`\.
 
 ## def dropField<a name="glue-etl-scala-apis-glue-dynamicframe-class-defs-dropField"></a>
 
@@ -135,7 +137,7 @@ def dropField( path : String,
              ) : DynamicFrame
 ```
 
-Returns a new DynamicFrame with the specified column removed\.
+Returns a new `DynamicFrame` with the specified column removed\.
 
 ## def dropFields<a name="glue-etl-scala-apis-glue-dynamicframe-class-defs-dropFields"></a>
 
@@ -148,9 +150,9 @@ def dropFields( fieldNames : Seq[String],   // The column names to drop.
               ) : DynamicFrame
 ```
 
-Returns a new DynamicFrame with the specified columns removed\.
+Returns a new `DynamicFrame` with the specified columns removed\.
 
-This method can be used to delete nested columns, including those inside of arrays, but it cannot be used to drop specific array elements\.
+You can use this method to delete nested columns, including those inside of arrays, but not to drop specific array elements\.
 
 ## def dropNulls<a name="glue-etl-scala-apis-glue-dynamicframe-class-defs-dropNulls"></a>
 
@@ -161,7 +163,7 @@ def dropNulls( transformationContext : String = "",
                totalThreshold : Long = 0 )
 ```
 
-Returns a new DynamicFrame with all null columns removed\.
+Returns a new `DynamicFrame` with all null columns removed\.
 
 **Note**  
 This only removes columns of type `NullType`\. Individual null values in other columns are not removed or modified\.
@@ -172,7 +174,7 @@ This only removes columns of type `NullType`\. Individual null values in other c
 def errorsAsDynamicFrame
 ```
 
-Returns a new DynamicFrame containing the error records from this DynamicFrame\.
+Returns a new `DynamicFrame` containing the error records from this `DynamicFrame`\.
 
 ## def filter<a name="glue-etl-scala-apis-glue-dynamicframe-class-defs-filter"></a>
 
@@ -186,7 +188,7 @@ def filter( f : DynamicRecord => Boolean,
           ) : DynamicFrame
 ```
 
-Constructs a new DynamicFrame containing only those records for which the function 'f' returns true\. The filter function 'f' should not mutate the input record\.
+Constructs a new `DynamicFrame` containing only those records for which the function '`f`' returns `true`\. The filter function '`f`' should not mutate the input record\.
 
 ## def getName<a name="glue-etl-scala-apis-glue-dynamicframe-class-defs-getName"></a>
 
@@ -194,7 +196,7 @@ Constructs a new DynamicFrame containing only those records for which the functi
 def getName : String 
 ```
 
-Returns the name of this DynamicFrame\.
+Returns the name of this `DynamicFrame`\.
 
 ## def getNumPartitions<a name="glue-etl-scala-apis-glue-dynamicframe-class-defs-getNumPartitions"></a>
 
@@ -202,7 +204,7 @@ Returns the name of this DynamicFrame\.
 def getNumPartitions
 ```
 
-Returns the number of partitions in this DynamicFrame\.
+Returns the number of partitions in this `DynamicFrame`\.
 
 ## def getSchemaIfComputed<a name="glue-etl-scala-apis-glue-dynamicframe-class-defs-getSchemaIfComputed"></a>
 
@@ -218,7 +220,7 @@ Returns the schema if it has already been computed\. Does not scan the data if t
 def isSchemaComputed : Boolean 
 ```
 
-Returns true if the schema has been computed for this DynamicFrame, or false if not\. If this method returns false then calling the `schema` method will require another pass over the records in this DynamicFrame\.
+Returns `true` if the schema has been computed for this `DynamicFrame`, or `false` if not\. If this method returns false, then calling the `schema` method requires another pass over the records in this `DynamicFrame`\.
 
 ## def javaToPython<a name="glue-etl-scala-apis-glue-dynamicframe-class-defs-javaToPython"></a>
 
@@ -238,9 +240,9 @@ def join( keys1 : Seq[String],
           totalThreshold : Long = 0
         ) : DynamicFrame
 ```
-+ `keys1`  —  Columns in this DynamicFrame to use for the join\.
-+ `keys2`  —  Columns in `frame2` to use for the join\. Must be the same length as `keys1`\.
-+ `frame2`  —  DynamicFrame to join against\.
++ `keys1` — The columns in this `DynamicFrame` to use for the join\.
++ `keys2` — The columns in `frame2` to use for the join\. Must be the same length as `keys1`\.
++ `frame2` — The `DynamicFrame` to join against\.
 
 Returns the result of performing an equijoin with `frame2` using the specified keys\.
 
@@ -256,9 +258,9 @@ def map( f : DynamicRecord => DynamicRecord,
        ) : DynamicFrame
 ```
 
-Returns a new DynamicFrame constructed by applying the specified function 'f' to each record in this DynamicFrame\.
+Returns a new `DynamicFrame` constructed by applying the specified function '`f`' to each record in this `DynamicFrame`\.
 
-This method copies each record before applying the specified function, so it is safe to mutate the records\. If the mapping function throws an exception on a given record, that record will be marked as an error and the stack trace will be saved as a column in the error record\.
+This method copies each record before applying the specified function, so it is safe to mutate the records\. If the mapping function throws an exception on a given record, that record is marked as an error, and the stack trace is saved as a column in the error record\.
 
 ## def printSchema<a name="glue-etl-scala-apis-glue-dynamicframe-class-defs-printSchema"></a>
 
@@ -266,7 +268,7 @@ This method copies each record before applying the specified function, so it is 
 def printSchema : Unit 
 ```
 
-Prints the schema of this DynamicFrame to stdout in a human\-readable format\.
+Prints the schema of this `DynamicFrame` to `stdout` in a human\-readable format\.
 
 ## def recomputeSchema<a name="glue-etl-scala-apis-glue-dynamicframe-class-defs-recomputeSchema"></a>
 
@@ -274,7 +276,7 @@ Prints the schema of this DynamicFrame to stdout in a human\-readable format\.
 def recomputeSchema : Schema 
 ```
 
-Forces a schema recomputation\. This requires a scan over the data but may "tighten" the schema if there are some fields in the current schema that are not present in the data\.
+Forces a schema recomputation\. This requires a scan over the data, but it may "tighten" the schema if there are some fields in the current schema that are not present in the data\.
 
 Returns the recomputed schema\.
 
@@ -290,13 +292,13 @@ def relationalize( rootTableName : String,
                    totalThreshold : Long = 0
                  ) : Seq[DynamicFrame]
 ```
-+ `rootTableName`  —  The name to use for the base DynamicFrame in the output\. DynamicFrames created by pivoting arrays start with this as a prefix\.
-+ `stagingPath`  —  S3 path for writing intermediate data\.
-+ `options`  —  Relationalize options and configuration\. Currently unused\.
++ `rootTableName` — The name to use for the base `DynamicFrame` in the output\. `DynamicFrame`s that are created by pivoting arrays start with this as a prefix\.
++ `stagingPath` — The Amazon Simple Storage Service \(Amazon S3\) path for writing intermediate data\.
++ `options` — Relationalize options and configuration\. Currently unused\.
 
 Flattens all nested structures and pivots arrays into separate tables\.
 
-This operation can be used to prepare deeply nested data for ingestion into a relational database\. Nested structs are flattened in the same manner as the [unnest](#glue-etl-scala-apis-glue-dynamicframe-class-defs-unnest) transform\. Additionally arrays are pivoted into separate tables with each array element becoming a row\. For example, take a DynamicFrame with the following data:
+You can use this operation to prepare deeply nested data for ingestion into a relational database\. Nested structs are flattened in the same manner as the [unnest](#glue-etl-scala-apis-glue-dynamicframe-class-defs-unnest) transform\. Additionally, arrays are pivoted into separate tables with each array element becoming a row\. For example, suppose that you have a `DynamicFrame` with the following data:
 
 ```
  {"name": "Nancy", "age": 47, "friends": ["Fred", "Lakshmi"]}
@@ -312,7 +314,7 @@ Execute the following code:
 }}}
 ```
 
-This produces two tables\. The first is named "people" and contains:
+This produces two tables\. The first table is named "people" and contains the following:
 
 ```
 {{{
@@ -322,7 +324,7 @@ This produces two tables\. The first is named "people" and contains:
 }}}
 ```
 
-Here, the friends array has been replaced with an auto\-generated join key\. A separate table called `people.friends` is created with the following content:
+Here, the friends array has been replaced with an auto\-generated join key\. A separate table named `people.friends` is created with the following content:
 
 ```
 {{{
@@ -336,12 +338,12 @@ Here, the friends array has been replaced with an auto\-generated join key\. A s
 }}}
 ```
 
-In this table, 'id' is a join key that identifies which record the array element came from, 'index' refers to the position in the original array, and 'val' is the actual array entry\.
+In this table, '`id`' is a join key that identifies which record the array element came from, '`index`' refers to the position in the original array, and '`val`' is the actual array entry\.
 
-The `relationalize` method returns the sequence of DynamicFrames created by applying this process recursively to all arrays\.
+The `relationalize` method returns the sequence of `DynamicFrame`s created by applying this process recursively to all arrays\.
 
 **Note**  
-The Glue library automatically generates join keys for new tables\. In order to ensure that join keys are unique across job runs, job bookmarks must be enabled\.
+The AWS Glue library automatically generates join keys for new tables\. To ensure that join keys are unique across job runs, you must enable job bookmarks\.
 
 ## def renameField<a name="glue-etl-scala-apis-glue-dynamicframe-class-defs-renameField"></a>
 
@@ -354,12 +356,12 @@ def renameField( oldName : String,
                  totalThreshold : Long = 0
                ) : DynamicFrame
 ```
-+ `oldName`  —  The original name of the column\.
-+ `newName`  —  The new name of the column\.
++ `oldName` — The original name of the column\.
++ `newName` — The new name of the column\.
 
-Returns a new DynamicFrame with the specified field renamed\.
+Returns a new `DynamicFrame` with the specified field renamed\.
 
-This method can be used to rename nested fields\. For example, the following code woudl rename `state` to `state_code` inside the address struct:
+You can use this method to rename nested fields\. For example, the following code would rename `state` to `state_code` inside the address struct:
 
 ```
 {{{
@@ -378,7 +380,7 @@ def repartition( numPartitions : Int,
                ) : DynamicFrame
 ```
 
-Returns a new DynamicFrame with `numPartitions` partitions\.
+Returns a new `DynamicFrame` with `numPartitions` partitions\.
 
 ## def resolveChoice<a name="glue-etl-scala-apis-glue-dynamicframe-class-defs-resolveChoice"></a>
 
@@ -393,22 +395,22 @@ def resolveChoice( specs : Seq[Product2[String, String]] = Seq.empty[ResolveSpec
                    totalThreshold : Long = 0
                  ) : DynamicFrame
 ```
-+ `choiceOption`  —  Action to apply to all ChoiceType columns not listed in the specs sequence\.
-+ `database`  —  Data Catalog database to use with the `match_catalog` action\.
-+ `tableName`  —  Data Catalog table to use with the `match_catalog` action\.
++ `choiceOption` — An action to apply to all `ChoiceType` columns not listed in the specs sequence\.
++ `database` — The Data Catalog database to use with the `match_catalog` action\.
++ `tableName` — The Data Catalog table to use with the `match_catalog` action\.
 
-Returns a new DynamicFrame by replacing one or more ChoiceTypes with a more specific type\.
+Returns a new `DynamicFrame` by replacing one or more `ChoiceType`s with a more specific type\.
 
-There are two ways to use resolveChoice\. The first is to specify a sequence of specific columns and how to resolve them\. These are specified as tuples made up of \(column, action\) pairs\.
+There are two ways to use `resolveChoice`\. The first is to specify a sequence of specific columns and how to resolve them\. These are specified as tuples made up of \(column, action\) pairs\.
 
-The possible actions are:
-+ `cast:type`  —  Attempts to cast all values to the specified type\.
-+ `make_cols`  —  Converts each distinct type to a column with the name `columnName_type`\.
-+ `make_struct`  —  Converts a column to a struct with keys for each distinct type\.
-+ `project:type`  —  Retainz only values of the specified type\.
+The following are the possible actions:
++ `cast:type` — Attempts to cast all values to the specified type\.
++ `make_cols` — Converts each distinct type to a column with the name `columnName_type`\.
++ `make_struct` — Converts a column to a struct with keys for each distinct type\.
++ `project:type` — Retains only values of the specified type\.
 
-The other mode for `resolveChoice>` is to specify a single resolution for all ChoiceTypes\. This can be used in cases where the complete list of ChoiceTypes is unknown before execution\. In addition to the actions listed above, this mode also supports the following action:
-+ `match_catalog`  —  Attempts to cast each ChoiceType to the corresponding type in the specified catalog table\.
+The other mode for `resolveChoice` is to specify a single resolution for all `ChoiceType`s\. You can use this in cases where the complete list of `ChoiceType`s is unknown before execution\. In addition to the actions listed preceding, this mode also supports the following action:
++ `match_catalog` — Attempts to cast each `ChoiceType` to the corresponding type in the specified catalog table\.
 
 **Examples:**
 
@@ -420,7 +422,7 @@ Resolve the `user.id` column by casting to an int, and make the `address` field 
 }}}
 ```
 
-Resolve all ChoiceTypes by converting each choice to a separate column:
+Resolve all `ChoiceType`s by converting each choice to a separate column:
 
 ```
 {{{
@@ -428,7 +430,7 @@ Resolve all ChoiceTypes by converting each choice to a separate column:
 }}}
 ```
 
-Resolve all ChoiceTypes by casting to the types in the specified catalog table:
+Resolve all `ChoiceType`s by casting to the types in the specified catalog table:
 
 ```
 {{{
@@ -444,9 +446,9 @@ Resolve all ChoiceTypes by casting to the types in the specified catalog table:
 def schema : Schema 
 ```
 
-Returns the schema of this DynamicFrame\.
+Returns the schema of this `DynamicFrame`\.
 
-The returned schema is guaranteed to contain every field that is present in a record in this DynamicFrame, but in a small number of cases it may contaion additional fields as well\. The [unnest](#glue-etl-scala-apis-glue-dynamicframe-class-defs-unnest) method can be used to "tighten" the schema based on the records in this DynamicFrame\.
+The returned schema is guaranteed to contain every field that is present in a record in this `DynamicFrame`\. But in a small number of cases, it might also contain additional fields\. You can use the [unnest](#glue-etl-scala-apis-glue-dynamicframe-class-defs-unnest) method to "tighten" the schema based on the records in this `DynamicFrame`\.
 
 ## def selectField<a name="glue-etl-scala-apis-glue-dynamicframe-class-defs-selectField"></a>
 
@@ -459,7 +461,7 @@ def selectField( fieldName : String,
                ) : DynamicFrame
 ```
 
-Returns a single field as a DynamicFrame\.
+Returns a single field as a `DynamicFrame`\.
 
 ## def selectFields<a name="glue-etl-scala-apis-glue-dynamicframe-class-defs-selectFields"></a>
 
@@ -471,21 +473,21 @@ def selectFields( paths : Seq[String],
                   totalThreshold : Long = 0
                 ) : DynamicFrame
 ```
-+ `paths`  —  Sequence of column names to select\.
++ `paths` — The sequence of column names to select\.
 
-Returns a new DynamicFrame containing the specified columns\.
+Returns a new `DynamicFrame` containing the specified columns\.
 
 **Note**  
-The `selectFields` method can only be used to select top\-level columns\. The [applyMapping](#glue-etl-scala-apis-glue-dynamicframe-class-defs-applyMapping) method can be used to select nested columns\.
+You can only use the `selectFields` method to select top\-level columns\. You can use the [applyMapping](#glue-etl-scala-apis-glue-dynamicframe-class-defs-applyMapping) method to select nested columns\.
 
 ## def show<a name="glue-etl-scala-apis-glue-dynamicframe-class-defs-show"></a>
 
 ```
 def show( numRows : Int = 20 ) : Unit 
 ```
-+ `numRows`  —  Number of rows to print\.
++ `numRows` — The number of rows to print\.
 
-Prints rows from this DynamicFrame in JSON format\.
+Prints rows from this `DynamicFrame` in JSON format\.
 
 ## def spigot<a name="glue-etl-scala-apis-glue-dynamicframe-class-defs-spigot"></a>
 
@@ -500,16 +502,16 @@ def spigot( path : String,
 ```
 
 Passthrough transformation that returns the same records but writes out a subset of records as a side effect\.
-+ `path`  —  Path in S3 to which to write output, in the form `s3://bucket//path`\.
-+ `options`  —  Optional `JsonOptions` map describing the sampling behavior\.
++ `path` — The path in Amazon S3 to write output to, in the form `s3://bucket//path`\.
++ `options`  — An optional `JsonOptions` map describing the sampling behavior\.
 
-Returns a DynamicFrame containing the same records as this one\.
+Returns a `DynamicFrame` that contains the same records as this one\.
 
-By default, writes 100 arbitrary records to the location specified by `path`\. This behavior can be customized using the `options` map\. Valid keys include the following:
-+ `topk`  —  Specifies the total number of records written out\. The default is 100\.
-+ `prob`  —  Specifies the probability that an individual record is included\. Default is 1\.
+By default, writes 100 arbitrary records to the location specified by `path`\. You can customize this behavior by using the `options` map\. Valid keys include the following:
++ `topk` — Specifies the total number of records written out\. The default is 100\.
++ `prob` — Specifies the probability that an individual record is included\. Default is 1\.
 
-For example, the following call would sample the dataset by selecting each record with a 20% probability and stoping after 200 records have been written:
+For example, the following call would sample the dataset by selecting each record with a 20 percent probability and stopping after 200 records have been written:
 
 ```
 {{{
@@ -527,9 +529,9 @@ def splitFields( paths : Seq[String],
                  totalThreshold : Long = 0
                ) : Seq[DynamicFrame]
 ```
-+ `paths`  —  The paths to include in the first DynamicFrame\.
++ `paths` — The paths to include in the first `DynamicFrame`\.
 
-Returns a sequence of two DynamicFrames\. The first contains the specified paths and the second contains all other columns\.
+Returns a sequence of two `DynamicFrame`s\. The first `DynamicFrame` contains the specified paths, and the second contains all other columns\.
 
 ## def splitRows<a name="glue-etl-scala-apis-glue-dynamicframe-class-defs-splitRows"></a>
 
@@ -545,17 +547,17 @@ def splitRows( paths : Seq[String],
 ```
 
 Splits rows based on predicates that compare columns to constants\.
-+ `paths`  —  Columns to use for comparison\.
-+ `values`  —  Constant values to use for comparison\.
-+ `operators`  —  Operators to use for comparison\.
++ `paths` — The columns to use for comparison\.
++ `values` — The constant values to use for comparison\.
++ `operators` — The operators to use for comparison\.
 
-Returns a Sequence of two DynamicFrames\. The first contains rows for which the predicate is true and the second contains those for which it is false\.
+Returns a sequence of two `DynamicFrame`s\. The first contains rows for which the predicate is true and the second contains those for which it is false\.
 
-Predicates are specified using three sequences: 'paths' contains the \(possibly nested\) column names, 'values' contains the constant values to compare to, and 'operators' contains the operators to use for comaprison\. All three sequences must be the same length: the `n`th operator will be used to compare the `n`th column with the `n`th value\.
+Predicates are specified using three sequences: '`paths`' contains the \(possibly nested\) column names, '`values`' contains the constant values to compare to, and '`operators`' contains the operators to use for comparison\. All three sequences must be the same length: The `n`th operator is used to compare the `n`th column with the `n`th value\.
 
-Each operator must be one of "\!=", "=", "&lt;=", &lt;, "&gt;=", or "&gt;"\.
+Each operator must be one of "`!=`", "`=`", "`&lt;=`", "`&lt;`", "`&gt;=`", or "`&gt;`"\.
 
-As an example, the following call would split a DynamicFrame so that the first output frame would contain records of people over 65 from the United States and the second woudl contain all other records:
+As an example, the following call would split a `DynamicFrame` so that the first output frame would contain records of people over 65 from the United States, and the second would contain all other records:
 
 ```
 {{{
@@ -569,7 +571,7 @@ As an example, the following call would split a DynamicFrame so that the first o
 def stageErrorsCount
 ```
 
-Returns the number of error records created while computing this DynamicFrame\. This excludes errors from previous operations that were passed into this DynamicFrame as input\.
+Returns the number of error records created while computing this `DynamicFrame`\. This excludes errors from previous operations that were passed into this `DynamicFrame` as input\.
 
 ## def toDF<a name="glue-etl-scala-apis-glue-dynamicframe-class-defs-toDF"></a>
 
@@ -577,10 +579,10 @@ Returns the number of error records created while computing this DynamicFrame\. 
 def toDF( specs : Seq[ResolveSpec] = Seq.empty[ResolveSpec] ) : DataFrame 
 ```
 
-Converts this DynamicFrame to a SparkSQL DataFrame with the same schema and records\.
+Converts this `DynamicFrame` to an Apache Spark SQL `DataFrame` with the same schema and records\.
 
 **Note**  
-Since DataFrames do not support ChoiceTypes, this method will automatically convert ChoiceType columns into StructTypes\. See [resolveChoice](#glue-etl-scala-apis-glue-dynamicframe-class-defs-resolveChoice) for additional information and options for resolving choices\.
+Because `DataFrame`s don't support `ChoiceType`s, this method automatically converts `ChoiceType` columns into `StructType`s\. For more information and options for resolving choice, see [resolveChoice](#glue-etl-scala-apis-glue-dynamicframe-class-defs-resolveChoice)\.
 
 ## def unbox<a name="glue-etl-scala-apis-glue-dynamicframe-class-defs-unbox"></a>
 
@@ -594,13 +596,13 @@ def unbox( path : String,
            totalThreshold : Long = 0
          ) : DynamicFrame
 ```
-+ `path`  —  The column to parse\. Must be string or binary\.
-+ `format`  —  The format to use for parsing\.
-+ `optionString`  —  Options to pass to the format, such as the CSV separator\.
++ `path` — The column to parse\. Must be a string or binary\.
++ `format` — The format to use for parsing\.
++ `optionString` — Options to pass to the format, such as the CSV separator\.
 
 Parses an embedded string or binary column according to the specified format\. Parsed columns are nested under a struct with the original column name\.
 
-For example suppose we had a CSV file with an embedded JSON column:
+For example, suppose that you have a CSV file with an embedded JSON column:
 
 ```
 name, age, address
@@ -608,7 +610,7 @@ Sally, 36, {"state": "NE", "city": "Omaha"}
 ...
 ```
 
-After an initial parse we would get a DynamicFrame with the following schema:
+After an initial parse, you would get a `DynamicFrame` with the following schema:
 
 ```
 {{{
@@ -619,7 +621,7 @@ After an initial parse we would get a DynamicFrame with the following schema:
 }}}
 ```
 
-We can call `unbox` on the address column to parse the specific components:
+You can call `unbox` on the address column to parse the specific components:
 
 ```
 {{{
@@ -627,7 +629,7 @@ We can call `unbox` on the address column to parse the specific components:
 }}}
 ```
 
-This gives us a DynamicFrame with the following schema:
+This gives us a `DynamicFrame` with the following schema:
 
 ```
 {{{
@@ -650,9 +652,9 @@ def unnest( transformationContext : String = "",
           ) : DynamicFrame
 ```
 
-Returns a new DynamicFrame with all nested structures flattened\. Names are constructed using the '\.' character\.
+Returns a new `DynamicFrame` with all nested structures flattened\. Names are constructed using the '`.`' \(period\) character\.
 
-For example, if we have a DynamicFrame with the following schema:
+For example, suppose that you have a `DynamicFrame` with the following schema:
 
 ```
 {{{
@@ -673,7 +675,7 @@ The following call unnests the address struct:
 }}}
 ```
 
-The resulting schema is:
+The resulting schema is as follows:
 
 ```
 {{{
@@ -685,25 +687,25 @@ The resulting schema is:
 }}}
 ```
 
-This method also unnests nested structs inside of arrays, but for historical reasons the name of such fields are prepended with the name of the enclosing array and "\.val"\.
+This method also unnests nested structs inside of arrays\. But for historical reasons, the names of such fields are prepended with the name of the enclosing array and "`.val`"\.
 
 ## def withFrameSchema<a name="glue-etl-scala-apis-glue-dynamicframe-class-defs-withFrameSchema"></a>
 
 ```
 def withFrameSchema( getSchema : () => Schema ) : DynamicFrame 
 ```
-+ `getSchema`  —  Function that returns the schema to use\. Specified as a zero\-parameter function to defer potentially expensive computation\.
++ `getSchema` — A function that returns the schema to use\. Specified as a zero\-parameter function to defer potentially expensive computation\.
 
-Sets the schema of this DynamicFrame to the specified value\. This is primarily used internally to avoid costly schema re\-computation\. The passed\-in schema must contain all columns present in the data\.
+Sets the schema of this `DynamicFrame` to the specified value\. This is primarily used internally to avoid costly schema recomputation\. The passed\-in schema must contain all columns present in the data\.
 
 ## def withName<a name="glue-etl-scala-apis-glue-dynamicframe-class-defs-withName"></a>
 
 ```
 def withName( name : String ) : DynamicFrame 
 ```
-+ `name`  —  New name to use\.
++ `name` — The new name to use\.
 
-Returns a copy of this DynamicFrame with a new name\.
+Returns a copy of this `DynamicFrame` with a new name\.
 
 ## def withTransformationContext<a name="glue-etl-scala-apis-glue-dynamicframe-class-defs-withTransformationContext"></a>
 
@@ -711,4 +713,4 @@ Returns a copy of this DynamicFrame with a new name\.
 def withTransformationContext( ctx : String ) : DynamicFrame 
 ```
 
-Returns a copy of this DynamicFrame with the specified transformation context\.
+Returns a copy of this `DynamicFrame` with the specified transformation context\.

@@ -1,8 +1,8 @@
-# The AWS Glue Scala DataSource Trait<a name="glue-etl-scala-apis-glue-datasource-trait"></a>
+# AWS Glue Scala DataSource Trait<a name="glue-etl-scala-apis-glue-datasource-trait"></a>
 
-**Package:   com\.amazonaws\.services\.glue**
+**Package: com\.amazonaws\.services\.glue**
 
-This is a high\-level interface for producing a DynamicFrame\.
+A high\-level interface for producing a `DynamicFrame`\.
 
 ```
 trait DataSource {
