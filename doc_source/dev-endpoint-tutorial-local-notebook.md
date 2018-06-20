@@ -113,7 +113,7 @@ The output of the script is as follows:
 + If you encounter a *connection refused* error, you might be using a development endpoint that is out of date\. Try creating a new development endpoint and reconnecting\.
 + If your connection times out or stops working for any reason, you may need to take the following steps to restore it:
 
-  1. In Zeppelin, in the drop\-down menu in the upper\-right corner of the page, choose **Interpretors**\. On the interpreters page, search for `spark`\. Choose **edit**, and clear the **Connect to existing process** check box\. Choose **Save** at the bottom of the page\.
+  1. In Zeppelin, in the drop\-down menu in the upper\-right corner of the page, choose **Interpreters**\. On the interpreters page, search for `spark`\. Choose **edit**, and clear the **Connect to existing process** check box\. Choose **Save** at the bottom of the page\.
 
   1. Initiate SSH port forwarding as described earlier\.
 
