@@ -10,9 +10,9 @@ To create a notebook server on Amazon EC2, you must have permission to create re
 
 1. On the AWS Glue console, choose **Dev endpoints** to go to the development endpoints list\.
 
-1. Choose an endpoint by selecting the box next to it\. Then choose **Actions**, and choose **Create notebook server**\.
+1. Choose an endpoint by selecting the box next to it\. Choose and endpoint with an empty SSH public key because the key is generated with a later action on the Amazon EC2 instance\. Then choose **Actions**, and choose **Create notebook server**\.
 
-   To host the notebook server, an Amazon EC2 instance is spun up using an AWS CloudFormation stack on your development endpoint, and a Zeppelin notebook HTTP server is started on port 443\.
+   To host the notebook server, an Amazon EC2 instance is spun up using an AWS CloudFormation stack on your development endpoint\. If you create the Zeppelin server with an SSL certificate, the Zeppelin HTTPS server is started on port 443\.
 
 1. Enter an AWS CloudFormation stack server name such as `demo-cf`, using only alphanumeric characters and hyphens\.
 
@@ -22,7 +22,7 @@ To create a notebook server on Amazon EC2, you must have permission to create re
 
    It is to generally a good practice to ensure that the private\-key file is write\-protected so that it is not accidentally modified\. On macOS and Linux systems, do this by opening a terminal and entering `chmod 400 private-key-file path`\. On Windows, open the console and enter `attrib -r private-key-file path`\.
 
-1. Choose a user name and password to access your Zeppelin notebook\.
+1. Choose a user name to access your Zeppelin notebook\.
 
 1. Choose an Amazon S3 path for your notebook state to be stored in\.
 
@@ -32,6 +32,8 @@ You can view the status of the AWS CloudFormation stack in the AWS CloudFormatio
 
 After the notebook server is created, its status changes to **CREATE\_COMPLETE** in the Amazon EC2 console\. Details about your server also appear in the development endpoint details page\. When the creation is complete, you can connect to a notebook on the new server\.
 
+To complete the setup of the Zeppelin notebook server, you must run a script on the Amazon EC2 instance\. This tutorial requires that you upload an SSL certificate when you create the Zeppelin server on the Amazon EC2 instance\. But there is also an SSH local port forwarding method to connect\. For additional setup instructions, see [Creating a Notebook Server Associated with a Development Endpoint](dev-endpoint-notebook-server-considerations.md)\. When the creation is complete, you can connect to a notebook on the new server using HTTPS\. 
+
 **Note**  
 For any notebook server that you create that is associated with a development endpoint, you manage it\. Therefore, if you delete the development endpoint, to delete the notebook server, you must delete the AWS CloudFormation stack on the AWS CloudFormation console\.
 
@@ -39,7 +41,7 @@ For any notebook server that you create that is associated with a development en
 
 1. In the AWS Glue console, choose Dev endpoints to navigate to the development endpoints list\. Choose the name of the development endpoint for which you created a notebook server\. Choosing the name opens its details page\.
 
-1. At the bottom of the **Endpoint details** page, copy the URL labeled **Notebook Server URL**\.
+1. On the **Endpoint details** page, copy the URL labeled **HTTPS URL** for your notebook server\.
 
 1. Open a web browser, and paste in the notebook server URL\. This lets you access the server using HTTPS on port 443\. Your browser may not recognize the server's certificate, in which case you have to override its protection and proceed anyway\.
 

@@ -17,12 +17,6 @@ In the AWS Glue console, a job bookmark option is passed as a parameter when the
 
 For details about the parameters passed to a job, and specifically for a job bookmark, see [Special Parameters Used by AWS Glue](aws-glue-programming-etl-glue-arguments.md)\.
 
-AWS Glue keeps track of job bookmarks by job name\. If you delete a job, the job bookmark remains\. To delete a job bookmark, you need to contact AWS Support\.
-
-If you intend to reuse a job name, reset the job bookmark\. To reset the job bookmark state, use the AWS Glue console, AWS Glue API named [ResetJobBookmark Action \(Python: reset\_job\_bookmark\)](aws-glue-api-jobs-runs.md#aws-glue-api-jobs-runs-ResetJobBookmark), or the AWS CLI\. For example, with the CLI you can enter the folllowing command\.
-
-```
-    reset-job-bookmark  --job-name my-job-name
-```
+AWS Glue keeps track of job bookmarks by job\. If you delete a job, the job bookmark is deleted\. 
 
 Many of the AWS Glue PySpark dynamic frame methods include an optional parameter named `transformation_ctx`, which is used to identify state information for a job bookmark\. For job bookmarks to work properly, enable the job bookmark parameter and set the `transformation_ctx`\. If you do not pass in the `transformation_ctx` parameter, then job bookmarks are not enabled for a dynamic frame or table used in the method\. For example, if you have an ETL job that reads and joins two Amazon S3 sources, you might choose to pass the `transformation_ctx` parameter only to those methods that you want to enable bookmarks\. If you reset the job bookmark for a job, it resets all transformations associated with the job regardless of the `transformation_ctx` used\. For more information about the `DynamicFrameReader` class, see [DynamicFrameReader Class](aws-glue-api-crawler-pyspark-extensions-dynamic-frame-reader.md)\. For more information about PySpark extensions, see [AWS Glue PySpark Extensions Reference](aws-glue-programming-python-extensions.md)\. 

@@ -26,7 +26,7 @@ Reads a `DynamicFrame` from a Resilient Distributed Dataset \(RDD\)\.
 **`from_options(connection_type, connection_options={}, format=None, format_options={}, transformation_ctx="")`**
 
 Reads a `DynamicFrame` using the specified connection and format\.
-+ `connection_type` – The connection type\. Valid values include `s3`, `mysql`, `postgresql`, `redshift`, `sqlserver`, and `oracle`\.
++ `connection_type` – The connection type\. Valid values include `s3`, `mysql`, `postgresql`, `redshift`, `sqlserver`, `oracle`, and `dynamodb`\.
 + `connection_options` – Connection options, such as path and database table \(optional\)\. For a `connection_type` of `s3`, Amazon S3 paths are defined in an array\.
 
   ```
@@ -38,7 +38,7 @@ Reads a `DynamicFrame` using the specified connection and format\.
   ```
   connection_options = {"url": "jdbc-url/database", "user": "username", "password": "password","dbtable": "table-name", "redshiftTmpDir": "s3-tempdir-path"} 
   ```
-+ `format` – A format specification \(optional\)\. This is used for an Amazon Simple Storage Service \(Amazon S3\) or tape connection that supports multiple formats\. See [Format Options for ETL Output in AWS Glue](aws-glue-programming-etl-format.md) for the formats that are supported\.
++ `format` – A format specification \(optional\)\. This is used for an Amazon Simple Storage Service \(Amazon S3\) or an AWS Glue connection that supports multiple formats\. See [Format Options for ETL Output in AWS Glue](aws-glue-programming-etl-format.md) for the formats that are supported\.
 + `format_options` – Format options for the specified format\. See [Format Options for ETL Output in AWS Glue](aws-glue-programming-etl-format.md) for the formats that are supported\.
 + `transformation_ctx` – The transformation context to use \(optional\)\.
 

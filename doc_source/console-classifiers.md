@@ -5,7 +5,7 @@ A classifier determines the schema of your data\. You can write a custom classif
 The list displays the following properties about each classifier:
 
 **Classifier**  
-The classifier name\. When you create a classifier you must provide a name for it\.
+The classifier name\. When you create a classifier, you must provide a name for it\.
 
 **Classification**  
 The classification type of tables inferred by this classifier\.
@@ -39,6 +39,6 @@ MESSAGEPREFIX .*-.*-.*-.*-.*
 For XML classifiers, this is the name of the XML tag that defines a table row in the XML document\. Type the name without angle brackets `< >`\. The name must comply with XML rules for a tag\.
 
 **JSON path**  
-For JSON classifiers, this is the JSON path to the object, array, or value that defines a row of the table being created\. Type the name in either dot or bracket JSON syntax using AWS Glue supported operators\. For more information, see the list of operators in [Writing JSON Custom Classifiers](custom-classifier.md#custom-classifier-json) 
+For JSON classifiers, this is the JSON path to the object, array, or value that defines a row of the table being created\. Type the name in either dot or bracket JSON syntax using AWS Glue supported operators\. For more information, see the list of operators in [Writing JSON Custom Classifiers](custom-classifier.md#custom-classifier-json)\. 
 
-For more information, see [Writing Custom Classifiers](custom-classifier.md)
+For more information, see [Writing Custom Classifiers](custom-classifier.md)\.

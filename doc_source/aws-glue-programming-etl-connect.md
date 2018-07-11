@@ -1,4 +1,4 @@
-# Connection Types and Options for ETL Output in AWS Glue<a name="aws-glue-programming-etl-connect"></a>
+# Connection Types and Options for ETL in AWS Glue<a name="aws-glue-programming-etl-connect"></a>
 
 Various AWS Glue PySpark and Scala methods and transforms specify connection parameters using a `connectionType` parameter and a `connectionOptions` parameter\.
 
@@ -13,6 +13,7 @@ In general, these are for ETL input and do not apply to ETL sinks\.
 + ["connectionType": "oracle"](#aws-glue-programming-etl-connect-jdbc): Designates a connection to an Oracle database \(see [JDBC connectionType values](#aws-glue-programming-etl-connect-jdbc)\)\.
 + ["connectionType": "sqlserver"](#aws-glue-programming-etl-connect-jdbc): Designates a connection to a Microsoft SQL Server database \(see [JDBC connectionType values](#aws-glue-programming-etl-connect-jdbc)\)\.
 + ["connectionType": "postgresql"](#aws-glue-programming-etl-connect-jdbc): Designates a connection to a [PostgreSQL](https://www.postgresql.org/) database \(see [JDBC connectionType values](#aws-glue-programming-etl-connect-jdbc)\)\.
++ ["connectionType": "dynamodb"](#aws-glue-programming-etl-connect-dynamodb): Designates a connection to Amazon DynamoDB; \(DynamoDB\)\.
 
 ## "connectionType": "s3"<a name="aws-glue-programming-etl-connect-s3"></a>
 
@@ -56,8 +57,16 @@ These include the following:
 Use these `connectionOptions` with JDBC connections:
 + `"url"`: \(Required\) The JDBC URL for the database\.
 + `"dbtable"`: The database table to read from\.
-+ `"tempdir"`: \(Required for Amazon Redshift, optional for other JDBC types\) The Amazon S3 path where temporary data can be staged when copying out of the database\.
++ `"redshiftTmpDir"`: \(Required for Amazon Redshift, optional for other JDBC types\) The Amazon S3 path where temporary data can be staged when copying out of the database\.
 + `"user"`: \(Required\) The username to use when connecting\.
 + `"password"`: \(Required\) The password to use when connecting\.
 
 All other option name/value pairs that are included in `connectionOptions` for a JDBC connection, including formatting options, are passed directly to the underlying SparkSQL DataSource\.
+
+## "connectionType": "dynamodb"<a name="aws-glue-programming-etl-connect-dynamodb"></a>
+
+Designates a connection to Amazon DynamoDB \(DynamoDB\)\.
+
+Use the following `connectionOptions` with `"connectionType": "dynamodb"`:
++ `"dynamodb.input.tableName"`: \(Required\) The DynamoDB table from which to read\.
++ `"dynamodb.throughput.read.percent"`: \(Optional\) The percentage of reserved capacity units \(RCU\) to use\. The default is set to "0\.5"\. Acceptable values are from "0\.1" to "1\.5", inclusive\. 

@@ -19,9 +19,9 @@ Wraps the Apache SparkSQL [SQLContext](https://spark.apache.org/docs/latest/api/
 **`getSource(connection_type, transformation_ctx = "", **options)`**
 
 Creates a `DataSource` object that can be used to read `DynamicFrames` from external sources\.
-+ `connection_type` – The connection type to use, such as Amazon S3, Amazon Redshift, and JDBC\. Valid values include `s3`, `mysql`, `postgresql`, `redshift`, `sqlserver`, and `oracle`\.
++ `connection_type` – The connection type to use, such as Amazon S3, Amazon Redshift, and JDBC\. Valid values include `s3`, `mysql`, `postgresql`, `redshift`, `sqlserver`, `oracle`, and `dynamodb`\.
 + `transformation_ctx` – The transformation context to use \(optional\)\.
-+ `options` – A collection of optional name\-value pairs\.
++ `options` – A collection of optional name\-value pairs\. For more information, see See [Connection Types and Options for ETL in AWS Glue](aws-glue-programming-etl-connect.md)\.
 
 The following is an example of using `getSource`:
 
@@ -57,7 +57,7 @@ Returns a `DynamicFrame` that is created using a catalog database and table name
 **`create_dynamic_frame_from_options(connection_type, connection_options={}, format=None, format_options={}, transformation_ctx = "")`**
 
 Returns a `DynamicFrame` created with the specified connection and format\.
-+ `connection_type` – The connection type, such as Amazon S3, Amazon Redshift, and JDBC\. Valid values include `s3`, `mysql`, `postgresql`, `redshift`, `sqlserver`, and `oracle`\.
++ `connection_type` – The connection type, such as Amazon S3, Amazon Redshift, and JDBC\. Valid values include `s3`, `mysql`, `postgresql`, `redshift`, `sqlserver`, `oracle`, and `dynamodb`\.
 + `connection_options` – Connection options, such as path and database table \(optional\)\. For a `connection_type` of `s3`, an Amazon S3 path is defined\.
 
   ```
@@ -69,7 +69,7 @@ Returns a `DynamicFrame` created with the specified connection and format\.
   ```
   connection_options = {"url": "jdbc-url/database", "user": "username", "password": "password","dbtable": "table-name", "redshiftTmpDir": "s3-tempdir-path"} 
   ```
-+ `format` – A format specification \(optional\)\. This is used for an Amazon Simple Storage Service \(Amazon S3\) or tape connection that supports multiple formats\. See [Format Options for ETL Output in AWS Glue](aws-glue-programming-etl-format.md) for the formats that are supported\.
++ `format` – A format specification \(optional\)\. This is used for an Amazon Simple Storage Service \(Amazon S3\) or an AWS Glue connection that supports multiple formats\. See [Format Options for ETL Output in AWS Glue](aws-glue-programming-etl-format.md) for the formats that are supported\.
 + `format_options` – Format options for the specified format\. See [Format Options for ETL Output in AWS Glue](aws-glue-programming-etl-format.md) for the formats that are supported\.
 + `transformation_ctx` – The transformation context to use \(optional\)\.
 
@@ -117,7 +117,7 @@ Writes and returns a `DynamicFrame` using the specified connection and format\.
   ```
   connection_options = {"url": "jdbc-url/database", "user": "username", "password": "password","dbtable": "table-name", "redshiftTmpDir": "s3-tempdir-path"} 
   ```
-+ `format` – A format specification \(optional\)\. This is used for an Amazon Simple Storage Service \(Amazon S3\) or tape connection that supports multiple formats\. See [Format Options for ETL Output in AWS Glue](aws-glue-programming-etl-format.md) for the formats that are supported\.
++ `format` – A format specification \(optional\)\. This is used for an Amazon Simple Storage Service \(Amazon S3\) or an AWS Glue connection that supports multiple formats\. See [Format Options for ETL Output in AWS Glue](aws-glue-programming-etl-format.md) for the formats that are supported\.
 + `format_options` – Format options for the specified format\. See [Format Options for ETL Output in AWS Glue](aws-glue-programming-etl-format.md) for the formats that are supported\.
 + `transformation_ctx` – A transformation context to use \(optional\)\.
 
@@ -139,7 +139,7 @@ Writes and returns a `DynamicFrame` or `DynamicFrameCollection` that is created 
   ```
   connection_options = {"url": "jdbc-url/database", "user": "username", "password": "password","dbtable": "table-name", "redshiftTmpDir": "s3-tempdir-path"} 
   ```
-+ `format` – A format specification \(optional\)\. This is used for an Amazon Simple Storage Service \(Amazon S3\) or tape connection that supports multiple formats\. See [Format Options for ETL Output in AWS Glue](aws-glue-programming-etl-format.md) for the formats that are supported\.
++ `format` – A format specification \(optional\)\. This is used for an Amazon Simple Storage Service \(Amazon S3\) or an AWS Glue connection that supports multiple formats\. See [Format Options for ETL Output in AWS Glue](aws-glue-programming-etl-format.md) for the formats that are supported\.
 + `format_options` – Format options for the specified format\. See [Format Options for ETL Output in AWS Glue](aws-glue-programming-etl-format.md) for the formats that are supported\.
 + `transformation_ctx` – A transformation context to use \(optional\)\.
 

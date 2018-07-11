@@ -53,6 +53,7 @@ If AWS Glue doesn't find a custom classifier that fits the input data format wit
 | PostgreSQL | postgresql | Uses JDBC connection to import metadata\. | 
 | Oracle database | oracle | Uses JDBC connection to import metadata\. | 
 | Microsoft SQL Server | sqlserver | Uses JDBC connection to import metadata\. | 
+| Amazon DynamoDB | dynamodb | Reads data from the DynamoDB table\. | 
 
 Files in the following compressed formats can be classified:
 + ZIP \(as compression format, not as archive format\)

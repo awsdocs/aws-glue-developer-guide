@@ -25,7 +25,7 @@ You can use the following `format_options` values with `format="csv"`:
 
 This value designates [Amazon Ion](https://amzn.github.io/ion-docs/) as the data format\. \(For more information, see the [Amazon Ion Specification](https://amzn.github.io/ion-docs/spec.html)\.\)
 
-**Currently, AWS Glue does not support "ion" for output\.**
+**Currently, AWS Glue does not support `ion` for output\.**
 
 There are no `format_options` values for `format="ion"`\.
 
@@ -33,7 +33,7 @@ There are no `format_options` values for `format="ion"`\.
 
 This value designates a log data format specified by one or more Logstash grok patterns \(for example, see [Logstash Reference \(6\.2\]: Grok filter plugin](https://www.elastic.co/guide/en/logstash/current/plugins-filters-grok.html)\)\.
 
-**Currently, AWS Glue does not support "groklog" for output\.**
+**Currently, AWS Glue does not support `groklog` for output\.**
 
 You can use the following `format_options` values with `format="grokLog"`:
 + `logFormat`: Specifies the grok pattern that matches the log's format\.
@@ -73,7 +73,7 @@ This value designates XML as the data format, parsed through a fork of the [XML 
 **Currently, AWS Glue does not support "xml" for output\.**
 
 You can use the following `format_options` values with `format="xml"`:
-+ `rowtag`: Specifies the XML tag in the file to treat as a row\. Row tags cannot be self\-closing\.
++ `rowTag`: Specifies the XML tag in the file to treat as a row\. Row tags cannot be self\-closing\.
 + `encoding`: Specifies the character encoding\. The default value is `"UTF-8"`\.
 + `excludeAttribute`: A Boolean value that specifies whether you want to exclude attributes in elements or not\. The default value is `"false"`\.
 + `treatEmptyValuesAsNulls`: A Boolean value that specifies whether to treat white space as a null value\. The default value is `"false"`\.

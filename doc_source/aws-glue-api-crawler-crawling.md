@@ -6,6 +6,7 @@
 + [CrawlerTargets Structure](#aws-glue-api-crawler-crawling-CrawlerTargets)
 + [S3Target Structure](#aws-glue-api-crawler-crawling-S3Target)
 + [JdbcTarget Structure](#aws-glue-api-crawler-crawling-JdbcTarget)
++ [DynamoDBTarget Structure](#aws-glue-api-crawler-crawling-DynamoDBTarget)
 + [CrawlerMetrics Structure](#aws-glue-api-crawler-crawling-CrawlerMetrics)
 + [SchemaChangePolicy Structure](#aws-glue-api-crawler-crawling-SchemaChangePolicy)
 + [LastCrawlInfo Structure](#aws-glue-api-crawler-crawling-LastCrawlInfo)
@@ -87,6 +88,9 @@ Specifies data stores to crawl\.
 + `JdbcTargets` – An array of [JdbcTarget](#aws-glue-api-crawler-crawling-JdbcTarget)s\.
 
   Specifies JDBC targets\.
++ `DynamoDBTargets` – An array of [DynamoDBTarget](#aws-glue-api-crawler-crawling-DynamoDBTarget)s\.
+
+  Specifies DynamoDB targets\.
 
 ## S3Target Structure<a name="aws-glue-api-crawler-crawling-S3Target"></a>
 
@@ -114,6 +118,15 @@ Specifies a JDBC data store to crawl\.
 + `Exclusions` – An array of UTF\-8 strings\.
 
   A list of glob patterns used to exclude from the crawl\. For more information, see [Catalog Tables with a Crawler](http://docs.aws.amazon.com/glue/latest/dg/add-crawler.html)\.
+
+## DynamoDBTarget Structure<a name="aws-glue-api-crawler-crawling-DynamoDBTarget"></a>
+
+Specifies a DynamoDB table to crawl\.
+
+**Fields**
++ `Path` – UTF\-8 string\.
+
+  The name of the DynamoDB table to crawl\.
 
 ## CrawlerMetrics Structure<a name="aws-glue-api-crawler-crawling-CrawlerMetrics"></a>
 
@@ -193,7 +206,7 @@ Status and error information about the most recent crawl\.
 
 ## CreateCrawler Action \(Python: create\_crawler\)<a name="aws-glue-api-crawler-crawling-CreateCrawler"></a>
 
-Creates a new crawler with specified targets, role, configuration, and optional schedule\. At least one crawl target must be specified, in either the *s3Targets* or the *jdbcTargets* field\.
+Creates a new crawler with specified targets, role, configuration, and optional schedule\. At least one crawl target must be specified, in the *s3Targets* field, the *jdbcTargets* field, or the *DynamoDBTargets* field\.
 
 **Request**
 + `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.

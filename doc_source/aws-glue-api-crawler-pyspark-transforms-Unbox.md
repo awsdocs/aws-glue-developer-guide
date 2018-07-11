@@ -17,7 +17,7 @@ Unboxes a string field in a `DynamicFrame`\.
 Unboxes a string field in a `DynamicFrame`\.
 + `frame` – The `DynamicFrame` in which to unbox a field\. \(required\)\.
 + `path` – The full path to the `StringNode` to unbox \(required\)\.
-+ `format` – A format specification \(optional\)\. This is used for an Amazon Simple Storage Service \(Amazon S3\) or tape connection that supports multiple formats\. See [Format Options for ETL Output in AWS Glue](aws-glue-programming-etl-format.md) for the formats that are supported\.
++ `format` – A format specification \(optional\)\. This is used for an Amazon Simple Storage Service \(Amazon S3\) or an AWS Glue connection that supports multiple formats\. See [Format Options for ETL Output in AWS Glue](aws-glue-programming-etl-format.md) for the formats that are supported\.
 + `transformation_ctx` – A unique string that is used to identify state information \(optional\)\.
 + `info` – A string associated with errors in the transformation \(optional\)\.
 + `stageThreshold` – The maximum number of errors that can occur in the transformation before it errors out \(optional; the default is zero\)\.

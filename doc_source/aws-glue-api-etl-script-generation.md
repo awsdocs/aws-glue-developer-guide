@@ -67,6 +67,9 @@ The location of resources\.
 + `S3` – An array of [CodeGenNodeArg](#aws-glue-api-etl-script-generation-CodeGenNodeArg)s, not more than 50 items in the array\.
 
   An Amazon S3 location\.
++ `DynamoDB` – An array of [CodeGenNodeArg](#aws-glue-api-etl-script-generation-CodeGenNodeArg)s, not more than 50 items in the array\.
+
+  A DynamoDB Table location\.
 
 ## CatalogEntry Structure<a name="aws-glue-api-etl-script-generation-CatalogEntry"></a>
 
@@ -219,4 +222,3 @@ Gets code to perform a specified mapping\.
 + `InvalidInputException`
 + `InternalServiceException`
 + `OperationTimeoutException`
-+ `EntityNotFoundException`

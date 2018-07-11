@@ -30,19 +30,19 @@ Defines a connection to a data source\.
   Each value is a Value string\.
 
   These key\-value pairs define parameters for the connection:
-  + `HOST` \- The host URI\.
-  + `PORT` \- The port number\.
-  + `USER_NAME` \- The user name for the connection\.
-  + `PASSWORD` \- A password, if one is used\.
-  + `ENCRYPTED_PASSWORD` \- An encrypted password\.
-  + `JDBC_DRIVER_JAR_URI` \- The URI of the a jar file that contains the JDBC driver to use\.
+  + `HOST` \- The host URI: either the fully qualified domain name \(FQDN\) or the IPv4 address of the database host\.
+  + `PORT` \- The port number, between 1024 and 65535, of the port on which the database host is listening for database connections\.
+  + `USER_NAME` \- The name under which to log in to the database\.
+  + `PASSWORD` \- A password, if one is used, for the user name\.
+  + `ENCRYPTED_PASSWORD` \- \(Reserved for future use\)\.
+  + `JDBC_DRIVER_JAR_URI` \- The S3 path of the a jar file that contains the JDBC driver to use\.
   + `JDBC_DRIVER_CLASS_NAME` \- The class name of the JDBC driver to use\.
   + `JDBC_ENGINE` \- The name of the JDBC engine to use\.
   + `JDBC_ENGINE_VERSION` \- The version of the JDBC engine to use\.
-  + `CONFIG_FILES` \- The URI of configuration files for the connection\.
+  + `CONFIG_FILES` \- \(Reserved for future use\)\.
   + `INSTANCE_ID` \- The instance ID to use\.
   + `JDBC_CONNECTION_URL` \- The URL for the JDBC connection\.
-  + `JDBC_ENFORCE_SSL` \- If present, specifies that SSL must be used for the JDBC connection\.
+  + `JDBC_ENFORCE_SSL` \- A Boolean string \(true, false\) specifying whether SSL with hostname matching will be enforced for the JDBC connection on the client\. The default is false\.
 + `PhysicalConnectionRequirements` – A [PhysicalConnectionRequirements](#aws-glue-api-catalog-connections-PhysicalConnectionRequirements) object\.
 
   A map of physical connection requirements, such as VPC and SecurityGroup, needed for making this connection successfully\.

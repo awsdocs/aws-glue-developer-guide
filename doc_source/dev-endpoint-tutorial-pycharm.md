@@ -54,7 +54,11 @@ The tutorial assumes that you have already taken the steps outlined in [Tutorial
    + Choose the **\+** icon at the top of the middle pane to add a new server\. Give it a name and set its **Type** to `SFTP`\.
    + Set the **SFTP host** to the **Public address** of your development endpoint, as listed on its details page \(choose the name of your development endpoint in the AWS Glue console to display the details page\)\.
    + Set the **User name** to `glue`\.
-   + Set the **Auth type** to **Key pair \(OpenSSH or Putty\)**\. Set the **Private key file** by browsing to the location where your development endpoint's private key file is located\. Note that PyCharm only supports DSA, RSA and ECDSA OpenSSH key types\. You can use an up\-to\-date version of `ssh-keygen` to generate a key\-pair type that PyCharm accepts\.
+   + Set the **Auth type** to **Key pair \(OpenSSH or Putty\)**\. Set the **Private key file** by browsing to the location where your development endpoint's private key file is located\. Note that PyCharm only supports DSA, RSA and ECDSA OpenSSH key types, and does not accept keys in Putty's private format\. You can use an up\-to\-date version of `ssh-keygen` to generate a key\-pair type that PyCharm accepts, using syntax like the following:
+
+     ```
+     ssh-keygen -t rsa -f my_key_file_name -C "my_email@example.com"
+     ```
    + Choose **Test SFTP connection**, and allow the connection to be tested\. If the connection succeeds, choose **Apply**\.
 
     The **Settings** screen should now look something like the following:  

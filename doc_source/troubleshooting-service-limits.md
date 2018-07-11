@@ -22,6 +22,6 @@
 | Number of concurrent job runs per account | 30 | 
 | Number of concurrent job runs per job | 3 | 
 | Number of jobs per trigger | 10 | 
-| Number of development endpoints per account | 2 | 
+| Number of development endpoints per account | 5 | 
 | Maximum DPUs used by a development endpoint at one time | 5 | 
 | Maximum DPUs used by a role at one time | 100 | 

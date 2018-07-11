@@ -12,7 +12,7 @@ The tutorial assumes that you have already taken the steps outlined in [Tutorial
 
 1. Download Apache Zeppelin \(the version with all interpreters\) from [the Zeppelin download page](http://zeppelin.apache.org/download.html) onto your local machine\. 
 
-   On the menu bar of the download page, choose **Quick Start**, and follow the installation instructions\. Start Zeppelin in the way that's appropriate for your operating system as documented on the Quick Start page\. Leave the terminal window that starts the notebook server open while you are using Zeppelin\. When the server has started successfully, you can see a line in the console that ends with "Done, zeppelin server started\." 
+   Download the older release named **zeppelin\-0\.7\.3\-bin\-all\.tgz** from the download page and follow the installation instructions\. Start Zeppelin in the way that's appropriate for your operating system\. Leave the terminal window that starts the notebook server open while you are using Zeppelin\. When the server has started successfully, you can see a line in the console that ends with "Done, zeppelin server started\." 
 
 1. Open Zeppelin in your browser by navigating to `http://localhost:8080`\.
 

@@ -109,6 +109,7 @@
     + [CrawlerTargets Structure](aws-glue-api-crawler-crawling.md#aws-glue-api-crawler-crawling-CrawlerTargets)
     + [S3Target Structure](aws-glue-api-crawler-crawling.md#aws-glue-api-crawler-crawling-S3Target)
     + [JdbcTarget Structure](aws-glue-api-crawler-crawling.md#aws-glue-api-crawler-crawling-JdbcTarget)
+    + [DynamoDBTarget Structure](aws-glue-api-crawler-crawling.md#aws-glue-api-crawler-crawling-DynamoDBTarget)
     + [CrawlerMetrics Structure](aws-glue-api-crawler-crawling.md#aws-glue-api-crawler-crawling-CrawlerMetrics)
     + [SchemaChangePolicy Structure](aws-glue-api-crawler-crawling.md#aws-glue-api-crawler-crawling-SchemaChangePolicy)
     + [LastCrawlInfo Structure](aws-glue-api-crawler-crawling.md#aws-glue-api-crawler-crawling-LastCrawlInfo)

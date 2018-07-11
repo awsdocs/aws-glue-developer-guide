@@ -23,9 +23,13 @@ To enable AWS Glue components to communicate, you must set up access to your dat
    For example:  
 ![\[An example of a self-referencing inbound rule.\]](http://docs.aws.amazon.com/glue/latest/dg/images/SetupSecurityGroup-Start.png)
 
-1. Add a rule for outbound traffic also\. Either open outbound traffic to all ports, or create a self\-referencing rule of **Type** `All TCP`, **Protocol** is `TCP`, **Port Range** includes all ports, and whose **Source** is the same security group name as the **Group ID**\. 
+1. Add a rule for outbound traffic also\. Either open outbound traffic to all ports, for example:  
+****    
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/glue/latest/dg/setup-vpc-for-glue-access.html)
 
-   The outbound rule looks similar to one of these rules:  
+   Or create a self\-referencing rule where **Type** `All TCP`, **Protocol** is `TCP`, **Port Range** includes all ports, and whose **Destination** is the same security group name as the **Group ID**\. If using an Amazon S3 VPC endpoint, also add an HTTPS rule for Amazon S3 access\. The *s3\-prefix\-list\-id* is required in the security group rule to allow traffic from the VPC to the Amazon S3 VPC endpoint\.
+
+   For example:  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/glue/latest/dg/setup-vpc-for-glue-access.html)
 
@@ -52,8 +56,12 @@ To enable AWS Glue components to communicate, you must set up access to your dat
    For example:  
 ![\[An example of a self-referencing inbound rule.\]](http://docs.aws.amazon.com/glue/latest/dg/images/SetupSecurityGroup-Start.png)
 
-1. Add a rule to for outbound traffic also\. Either open outbound traffic to all ports or create a self\-referencing rule of **Type** `All TCP`, **Protocol** is `TCP`, **Port Range** includes all ports, and whose **Source** is the same security group name as the **Group ID**\. 
+1. Add a rule for outbound traffic also\. Either open outbound traffic to all ports, for example:  
+****    
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/glue/latest/dg/setup-vpc-for-glue-access.html)
 
-   The outbound rule looks similar to one of these rules:  
+   Or create a self\-referencing rule where **Type** `All TCP`, **Protocol** is `TCP`, **Port Range** includes all ports, and whose **Destination** is the same security group name as the **Group ID**\. If using an Amazon S3 VPC endpoint, also add an HTTPS rule for Amazon S3 access\. The *s3\-prefix\-list\-id* is required in the security group rule to allow traffic from the VPC to the Amazon S3 VPC endpoint\.
+
+   For example:  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/glue/latest/dg/setup-vpc-for-glue-access.html)

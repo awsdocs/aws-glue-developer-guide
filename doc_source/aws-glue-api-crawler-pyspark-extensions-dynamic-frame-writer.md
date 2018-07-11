@@ -29,7 +29,7 @@ Writes a `DynamicFrame` using the specified connection and format\.
   ```
   connection_options = {"url": "jdbc-url/database", "user": "username", "password": "password","dbtable": "table-name", "redshiftTmpDir": "s3-tempdir-path"} 
   ```
-+ `format` – A format specification \(optional\)\. This is used for an Amazon Simple Storage Service \(Amazon S3\) or tape connection that supports multiple formats\. See [Format Options for ETL Output in AWS Glue](aws-glue-programming-etl-format.md) for the formats that are supported\.
++ `format` – A format specification \(optional\)\. This is used for an Amazon Simple Storage Service \(Amazon S3\) or an AWS Glue connection that supports multiple formats\. See [Format Options for ETL Output in AWS Glue](aws-glue-programming-etl-format.md) for the formats that are supported\.
 + `format_options` – Format options for the specified format\. See [Format Options for ETL Output in AWS Glue](aws-glue-programming-etl-format.md) for the formats that are supported\.
 + `transformation_ctx` – A transformation context to use \(optional\)\.
 

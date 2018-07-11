@@ -509,7 +509,7 @@ Returns a `DynamicFrame` that contains the same records as this one\.
 
 By default, writes 100 arbitrary records to the location specified by `path`\. You can customize this behavior by using the `options` map\. Valid keys include the following:
 + `topk` — Specifies the total number of records written out\. The default is 100\.
-+ `prob` — Specifies the probability that an individual record is included\. Default is 1\.
++ `prob` — Specifies the probability \(as a decimal\) that an individual record is included\. Default is 1\.
 
 For example, the following call would sample the dataset by selecting each record with a 20 percent probability and stopping after 200 records have been written:
 

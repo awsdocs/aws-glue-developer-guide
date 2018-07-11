@@ -6,8 +6,10 @@ You can provide a custom classifier to classify your data using a grok pattern o
 
 AWS Glue runs custom classifiers before built\-in classifiers, in the order you specify\. When a crawler finds a classifier that matches the data, the classification string and schema are used in the definition of tables that are written to your AWS Glue Data Catalog\.
 
-**Note**  
-Custom classifiers use GrokSerDe, which has been validated in Amazon Athena only. Querying tables defined with Grok is currently not supported in EMR or Redshift\.
+**Topics**
++ [Writing Grok Custom Classifiers](#custom-classifier-grok)
++ [Writing XML Custom Classifiers](#custom-classifier-xml)
++ [Writing JSON Custom Classifiers](#custom-classifier-json)
 
 ## Writing Grok Custom Classifiers<a name="custom-classifier-grok"></a>
 
@@ -15,13 +17,16 @@ Grok is a tool that is used to parse textual data given a matching pattern\. A g
 
 AWS Glue provides many built\-in patterns, or you can define your own\. You can create a grok pattern using built\-in patterns and custom patterns in your custom classifier definition\. You can tailor a grok pattern to classify custom text file formats\.
 
+**Note**  
+AWS Glue grok custom classifiers use the `GrokSerDe` serialization library for tables created in the AWS Glue Data Catalog\. If you are using the AWS Glue Data Catalog with Amazon Athena, Amazon EMR, or Redshift Spectrum, check the documentation about those services for information about support of the `GrokSerDe`\. Currently, you might encounter problems querying tables created with the `GrokSerDe` from Amazon EMR and Redshift Spectrum\.
+
 The following is the basic syntax for the components of a grok pattern:
 
 ```
 %{PATTERN:field-name}
 ```
 
-Data that matches the named `PATTERN` is mapped to the `field-name` column in the schema, with a default data type of `string`\. Optionally, the data type for the field can be cast to `byte, boolean, double, short, int, long, or float` in the resulting schema\.
+Data that matches the named `PATTERN` is mapped to the `field-name` column in the schema, with a default data type of `string`\. Optionally, the data type for the field can be cast to `byte`, `boolean`, `double`, `short`, `int`, `long`, or `float` in the resulting schema\.
 
 ```
 %{PATTERN:field-name:data-type}
@@ -33,7 +38,7 @@ For example, to cast a `num` field to an `int` data type, you can use this patte
 %{NUMBER:num:int}
 ```
 
-Patterns can be composed of other patterns\. For example, you can have a pattern for a `SYSLOG` time stamp that is defined by patterns for month, day of the month, and time \(for example, `Feb 1 06:25:43`\)\. For this data, you might define the following pattern\.
+Patterns can be composed of other patterns\. For example, you can have a pattern for a `SYSLOG` time stamp that is defined by patterns for month, day of the month, and time \(for example, `Feb 1 06:25:43`\)\. For this data, you might define the following pattern:
 
 ```
 SYSLOGTIMESTAMP %{MONTH} +%{MONTHDAY} %{TIME}
@@ -53,7 +58,7 @@ Name of the classifier\.
 The text string that is written to describe the format of the data that is classified; for example, `special-logs`\.
 
 **Grok pattern**  
-The set of patterns that are applied to the data store to determine whether there is a match\. These patterns are from AWS Glue [built\-in](#classifier-builtin-patterns) patterns and any custom patterns you define\.  
+The set of patterns that are applied to the data store to determine whether there is a match\. These patterns are from AWS Glue [built\-in patterns](#classifier-builtin-patterns) and any custom patterns that you define\.  
 The following is an example of a grok pattern:  
 
 ```
@@ -215,7 +220,7 @@ The element containing the row data **cannot** be a self\-closing empty element\
 
 AWS Glue keeps track of the creation time, last update time, and version of your classifier\.
 
-For example, suppose you have the following XML file\. To create an AWS Glue table that only contains columns for author and title, create a classifier in the AWS Glue console with **Row tag** as `AnyCompany`\. Then add and run a crawler which uses this custom classifier\.
+For example, suppose that you have the following XML file\. To create an AWS Glue table that only contains columns for author and title, create a classifier in the AWS Glue console with **Row tag** as `AnyCompany`\. Then add and run a crawler that uses this custom classifier\.
 
 ```
 <?xml version="1.0"?>
@@ -237,7 +242,7 @@ For example, suppose you have the following XML file\. To create an AWS Glue tab
 
 ## Writing JSON Custom Classifiers<a name="custom-classifier-json"></a>
 
-JSON \(JavaScript Object Notation\) is a data\-interchange format\. It defines data structures with name\-value pairs or an ordered list of values\. With a JSON custom classifier, you can specify the JSON path to a data structure which is used to define the the schema for your table\.
+JSON \(JavaScript Object Notation\) is a data\-interchange format\. It defines data structures with name\-value pairs or an ordered list of values\. With a JSON custom classifier, you can specify the JSON path to a data structure that is used to define the schema for your table\.
 
 ### Custom Classifier Values in AWS Glue<a name="classifier-values-json"></a>
 
@@ -247,13 +252,13 @@ When you define a JSON classifier, you supply the following values to AWS Glue t
 Name of the classifier\.
 
 **JSON path**  
-A JSON path that points to an object which is used to define a table schema\. The JSON path can be written in dot notation or bracket notation\. The following operators are supported:      
+A JSON path that points to an object that is used to define a table schema\. The JSON path can be written in dot notation or bracket notation\. The following operators are supported:      
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html)
 
 AWS Glue keeps track of the creation time, last update time, and version of your classifier\.
 
-**Example of Using a JSON Classifier To Pull Records From an Array**  
-Suppose your JSON data is an array of records\. For example the first few lines of your file might look like:  
+**Example of Using a JSON Classifier to Pull Records from an Array**  
+Suppose that your JSON data is an array of records\. For example, the first few lines of your file might look like the following:  
 
 ```
 [
@@ -319,13 +324,13 @@ Suppose your JSON data is an array of records\. For example the first few lines 
   }
 ]
 ```
-When running a crawler using the built\-in JSON classifier, the entire file is used to define the schema\. Because you don’t specify a JSON path, the crawler will treat the data as one object, that is, just an array\. For example, the schema might look like:  
+When you run a crawler using the built\-in JSON classifier, the entire file is used to define the schema\. Because you don’t specify a JSON path, the crawler treats the data as one object, that is, just an array\. For example, the schema might look like the following:  
 
 ```
 root
 |-- record: array
 ```
-However, to create a schema that is based on each record in the JSON array, create a custom JSON classifier and specify the JSON path as `$[*]`\. When you specify this JSON path, the classifier interrogates all 12 records in the array to determine the schema\. The resulting schema contains separate fields for each object, similiar to this:  
+However, to create a schema that is based on each record in the JSON array, create a custom JSON classifier and specify the JSON path as `$[*]`\. When you specify this JSON path, the classifier interrogates all 12 records in the array to determine the schema\. The resulting schema contains separate fields for each object, similar to the following example:  
 
 ```
 root
@@ -334,8 +339,8 @@ root
 |-- name: string
 ```
 
-**Example of Using a JSON Classifier To Only Examine Parts Of a File**  
-Suppose your JSON data follows the pattern of the example JSON file `s3://awsglue-datasets/examples/us-legislators/all/areas.json` drawn from [http://everypolitician\.org/](http://everypolitician.org/)\. Example objects in the JSON file look like:  
+**Example of Using a JSON Classifier to Examine Only Parts of a File**  
+Suppose that your JSON data follows the pattern of the example JSON file `s3://awsglue-datasets/examples/us-legislators/all/areas.json` drawn from [http://everypolitician\.org/](http://everypolitician.org/)\. Example objects in the JSON file look like the following:  
 
 ```
 {
@@ -392,7 +397,7 @@ Suppose your JSON data follows the pattern of the example JSON file `s3://awsglu
   "name": "Alaska"
 }
 ```
-When running a crawler using the built\-in JSON classifier, the entire file is used to create the schema\. You might end up with a schema like this:  
+When you run a crawler using the built\-in JSON classifier, the entire file is used to create the schema\. You might end up with a schema like this:  
 
 ```
 root
@@ -409,13 +414,13 @@ root
 |    |    |-- note: string
 |    |    |-- name: string
 ```
-However, to create a schema using just the "id" object, create a custom JSON classifier and specify the JSON path as `$.id`\. Then the schema is based on only the "id" field:  
+However, to create a schema using just the "`id`" object, create a custom JSON classifier and specify the JSON path as `$.id`\. Then the schema is based on only the "`id`" field:  
 
 ```
 root
 |-- record: string
 ```
-The first few lines of data extracted with this schema looks like this:  
+The first few lines of data extracted with this schema look like this:  
 
 ```
 {"record": "ocd-division/country:us/state:ak"}
@@ -439,13 +444,14 @@ The first few lines of data extracted with this schema looks like this:
 {"record": "ocd-division/country:us/state:az/cd:6"}
 {"record": "ocd-division/country:us/state:az/cd:7"}
 ```
-To create a schema based on a deeply nested object, such as "identifier", in the JSON file, you can create a custom JSON classifier and specify the JSON path as `$.identifiers[*].identifier`\. Although the schema is very simliar to the previous example, it is based on a different object in the JSON file\. The schema looks like:  
+To create a schema based on a deeply nested object, such as "`identifier`," in the JSON file, you can create a custom JSON classifier and specify the JSON path as `$.identifiers[*].identifier`\. Although the schema is similar to the previous example, it is based on a different object in the JSON file\.   
+The schema looks like the following:  
 
 ```
 root
 |-- record: string
 ```
-Listing the first few lines of data from the table shows that the schema is based on the data in the "identifier" object:  
+Listing the first few lines of data from the table shows that the schema is based on the data in the "`identifier`" object:  
 
 ```
 {"record": "Regional/North_America/United_States/Alaska/"}
@@ -469,13 +475,13 @@ Listing the first few lines of data from the table shows that the schema is base
 {"record": "161950"}
 {"record": "131885589"}
 ```
-To create a table based on another deeply nested object, such as the "name" field in the "other\_names" array in the JSON file, you can create a custom JSON classifier and specify the JSON path as `$.other_names[*].name`\. Although the schema is very simliar to the previous example, it is based on a different object in the JSON file\. The schema looks like:  
+To create a table based on another deeply nested object, such as the "`name`" field in the "`other_names`" array in the JSON file, you can create a custom JSON classifier and specify the JSON path as `$.other_names[*].name`\. Although the schema is similar to the previous example, it is based on a different object in the JSON file\. The schema looks like the following:  
 
 ```
 root
 |-- record: string
 ```
-Listing the first few lines of data in the table shows that it is based on the data in the "name" object in the "other\_names" array:  
+Listing the first few lines of data in the table shows that it is based on the data in the "`name`" object in the "`other_names`" array:  
 
 ```
 {"record": "Alaska"}

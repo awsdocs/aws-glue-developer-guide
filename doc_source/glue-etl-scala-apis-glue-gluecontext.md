@@ -121,7 +121,7 @@ def getSource( connectionType : String,
 ```
 
 Creates a [DataSource trait](glue-etl-scala-apis-glue-datasource-trait.md) that reads data from a source like Amazon S3, JDBC, or the AWS Glue Data Catalog\.
-+ `connectionType` — The type of the data source\. Can be one of “s3”, “mysql”, “redshift”, “oracle”, “sqlserver”, “postgresql”, “parquet”, or “orc”\. 
++ `connectionType` — The type of the data source\. Can be one of “s3”, “mysql”, “redshift”, “oracle”, “sqlserver”, “postgresql”, "dynamodb", “parquet”, or “orc”\. 
 + `connectionOptions` — A string of JSON name\-value pairs that provide additional information for establishing a connection with the data source\.
   + `connectionOptions` when the `connectionType` is "s3":
     + *paths* \(required\) — List of Amazon S3 paths to read\.
@@ -132,6 +132,9 @@ Creates a [DataSource trait](glue-etl-scala-apis-glue-datasource-trait.md) that 
     + *groupFiles* \(optional\) — Grouping files is enabled by default when the input contains more than 50,000 files\. To disable grouping with fewer than 50,000 files, set this parameter to “inPartition”\. To disable grouping when there are more than 50,000 files, set this parameter to “none”\. 
     + *groupSize* \(optional\) — The target group size in bytes\. The default is computed based on the input data size and the size of your cluster\. When there are fewer than 50,000 input files, groupFiles must be set to “inPartition” for this option to take effect\. 
     + *recurse* \(optional\) — If set to true, recursively read files in any subdirectory of the specified paths\.
+  + `connectionOptions` when the `connectionType` is "dynamodb":
+    + *dynamodb\.input\.tableName* \(required\) — The DynamoDB table from which to read\.
+    + *dynamodb\.throughput\.read\.percent* \(optional\) — The percentage of reserved capacity units \(RCU\) to use\. The default is set to "0\.5"\. Acceptable values are from "0\.1" to "1\.5", inclusive\.
   + `connectionOptions` when the `connectionType` is "parquet" or "orc":
     + *paths* \(required\) — List of Amazon S3 paths to read\.
     + Any additional options are passed directly to the SparkSQL DataSource\.
@@ -157,7 +160,7 @@ def getSourceWithFormat( connectionType : String,
 ```
 
 Creates a [DataSource trait](glue-etl-scala-apis-glue-datasource-trait.md) that reads data from a source like Amazon S3, JDBC, or the AWS Glue Data Catalog, and also sets the format of data stored in the source\.
-+ `connectionType` — The type of the data source\. Can be one of “s3”, “mysql”, “redshift”, “oracle”, “sqlserver”, “postgresql”, “parquet”, or “orc”\. 
++ `connectionType` — The type of the data source\. Can be one of “s3”, “mysql”, “redshift”, “oracle”, “sqlserver”, “postgresql”, "dynamodb", “parquet”, or “orc”\. 
 + `options` — A string of JSON name\-value pairs that provide additional information for establishing a connection with the data source\.
 + `transformationContext` — The transformation context that is associated with the sink to be used by job bookmarks\. Set to empty by default\.
 + `format` — The format of the data that is stored at the source\. When the `connectionType` is "s3", you can also specify `format`\. Can be one of “avro”, “csv”, “grokLog”, “ion”, “json”, “xml”, “parquet”, or “orc”\. 

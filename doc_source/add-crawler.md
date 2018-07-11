@@ -2,7 +2,7 @@
 
 You can use a crawler to populate the AWS Glue Data Catalog with tables\. This is the primary method used by most AWS Glue users\. You add a crawler within your Data Catalog to traverse your data stores\. The output of the crawler consists of one or more metadata tables that are defined in your Data Catalog\. Extract, transform, and load \(ETL\) jobs that you define in AWS Glue use these metadata tables as sources and targets\.
 
-Your crawler uses an AWS Identity and Access Management \(IAM\) role for permission to access your data stores and the Data Catalog\. The role you pass to the crawler must have permission to access Amazon S3 paths that are crawled\. Some data stores require additional authorization to establish a connection\. For more information, see [Adding a Connection to Your Data Store](populate-add-connection.md)\.
+Your crawler uses an AWS Identity and Access Management \(IAM\) role for permission to access your data stores and the Data Catalog\. **The role you pass to the crawler must have permission to access Amazon S3 paths and Amazon DynamoDB tables that are crawled\.** For more information, see [Working with Crawlers on the AWS Glue Console](console-crawlers.md)\. Some data stores require additional authorization to establish a connection\. For more information, see [Adding a Connection to Your Data Store](populate-add-connection.md)\.
 
 For more information about using the AWS Glue console to add a crawler, see [Working with Crawlers on the AWS Glue Console](console-crawlers.md)\.
 
@@ -12,7 +12,7 @@ When you define a crawler, you choose one or more classifiers that evaluate the 
 
 ## Which Data Stores Can I Crawl?<a name="crawler-data-stores"></a>
 
-A crawler can crawl both file\-based and relational table\-based data stores\. Crawlers can crawl the following data stores:
+A crawler can crawl both file\-based and table\-based data stores\. Crawlers can crawl the following data stores:
 + Amazon Simple Storage Service \(Amazon S3\)
 + Amazon Redshift
 + Amazon Relational Database Service \(Amazon RDS\)
@@ -22,10 +22,11 @@ A crawler can crawl both file\-based and relational table\-based data stores\. C
   + MySQL
   + Oracle
   + PostgreSQL
++ Amazon DynamoDB
 + Publicly accessible databases
-  + Amazon Aurora
+  + Aurora
   + MariaDB
-  + Microsoft SQL Server
+  + SQL Server
   + MySQL
   + Oracle
   + PostgreSQL
@@ -34,9 +35,11 @@ When you define an Amazon S3 data store to crawl, you can choose whether to craw
 
 If the data store that is being crawled is a relational database, the output is also a set of metadata tables defined in the AWS Glue Data Catalog\. When you crawl a relational database, you must provide authorization credentials for a connection to read objects in the database engine\. Depending on the type of database engine, you can choose which objects are crawled, such as databases, schemas, and tables\.  
 
+If the data store that's being crawled is one or more Amazon DynamoDB tables, the output is one or more metadata tables in the AWS Glue Data Catalog\. When defining a crawler using the AWS Glue console, you specify a DynamoDB table\. If you're using the AWS Glue API, you specify a list of tables\.
+
 ## Using Include and Exclude Patterns<a name="crawler-data-stores-exclude"></a>
 
-When evaluating what to include or exclude in a crawl, a crawler starts by evaluating the required include path\. For every data store that you want to crawl, you must specify a single include path\.
+When evaluating what to include or exclude in a crawl, a crawler starts by evaluating the required include path for Amazon S3 and relational data stores\. For every data store that you want to crawl, you must specify a single include path\. 
 
 For Amazon S3 data stores, the syntax is `bucket-name/folder-name/file-name.ext`\. To crawl all objects in a bucket, you specify just the bucket name in the include path\.
 
@@ -141,7 +144,7 @@ The metadata tables that a crawler creates are contained in a database when you 
 
 The crawler can process both relational database and file data stores\.
 
-If the file that is crawled is compressed, the crawler must download it to process it\. When a crawler runs it interrogates files to determine their format and compression type and writes these properties into the Data Catalog\. Some file formats, for example parquet, enable you to compress parts of the file as it is written\. For these files, the compressed data is an internal component of the file and AWS Glue does not populate the `compressionType` property when it writes tables into the Data Catalog\. In contrast, if an **entire file** is compressed by a compression algorithm, for example gzip, then the `compressionType` property is populated when tables are written into the Data Catalog\. 
+If the file that is crawled is compressed, the crawler must download it to process it\. When a crawler runs, it interrogates files to determine their format and compression type and writes these properties into the Data Catalog\. Some file formats \(for example, Apache Parquet\) enable you to compress parts of the file as it is written\. For these files, the compressed data is an internal component of the file and AWS Glue does not populate the `compressionType` property when it writes tables into the Data Catalog\. In contrast, if an **entire file** is compressed by a compression algorithm \(for example, gzip\), then the `compressionType` property is populated when tables are written into the Data Catalog\. 
 
 The crawler generates the names for the tables it creates\. The names of the tables that are stored in the AWS Glue Data Catalog follow these rules:
 + Only alphanumeric characters and underscore \(`_`\) are allowed\.
@@ -165,7 +168,7 @@ s3://bucket01/folder1/table2/partition4/file.txt
 s3://bucket01/folder1/table2/partition5/file.txt
 ```
 
-If the schemas for table1 and table2 are similar, and a single data store is defined in the crawler with **Include path** `s3://bucket01/folder1/`, the crawler creates a single table with two partition columns\. One partition column contains table1 and table2, and a second partition column contains partition1 through partition5\. To create two separate tables, define the crawler with two data stores\. In this example, define the first **Include path** as `s3://bucket01/folder1/table1/` and the second as `s3://bucket01/folder1/table2`\.
+If the schemas for `table1` and `table2` are similar, and a single data store is defined in the crawler with **Include path** `s3://bucket01/folder1/`, the crawler creates a single table with two partition columns\. One partition column contains `table1` and `table2`, and a second partition column contains `partition1` through `partition5`\. To create two separate tables, define the crawler with two data stores\. In this example, define the first **Include path** as `s3://bucket01/folder1/table1/` and the second as `s3://bucket01/folder1/table2`\.
 
 **Note**  
-In Athena, each table corresponds to an Amazon S3 prefix with all the objects in it\. If objects have different schemas, Athena does not recognize different objects within the same prefix as separate tables\. This can happen if a crawler creates multiple tables from the same Amazon S3 prefix\. This might lead to queries in Athena that return zero results\. For Athena to properly recognize and query tables, create the crawler with a separate **Include path** for each different table schema in the Amazon S3 folder structure\. For more information, see [Best Practices When Using Athena with AWS Glue](http://docs.aws.amazon.com/athena/latest/ug/glue-best-practices.html)\.
+In Amazon Athena, each table corresponds to an Amazon S3 prefix with all the objects in it\. If objects have different schemas, Athena does not recognize different objects within the same prefix as separate tables\. This can happen if a crawler creates multiple tables from the same Amazon S3 prefix\. This might lead to queries in Athena that return zero results\. For Athena to properly recognize and query tables, create the crawler with a separate **Include path** for each different table schema in the Amazon S3 folder structure\. For more information, see [Best Practices When Using Athena with AWS Glue](http://docs.aws.amazon.com/athena/latest/ug/glue-best-practices.html)\.

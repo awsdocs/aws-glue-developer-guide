@@ -19,7 +19,7 @@ To use a development endpoint, you can follow this workflow\.
 
 1. The console or API can poll the development endpoint until it is provisioned and ready for work\. When it's ready, you can connect to the development endpoint to create and test AWS Glue scripts\.
    + You can install an Apache Zeppelin notebook on your local machine, connect it to a development endpoint, and then develop on it using your browser\.
-   + You can create an Apache Zeppelin notebook server in its own Amazon EC2 instance in your account using the AWS Glue console, and then connect to it using your browser\.
+   + You can create an Apache Zeppelin notebook server in its own Amazon EC2 instance in your account using the AWS Glue console, and then connect to it using your browser\. For more information about how to create a notebbook server, see [Creating a Notebook Server Associated with a Development Endpoint](dev-endpoint-notebook-server-considerations.md)\. 
    + You can open a terminal window to connect directly to a development endpoint\.
    + If you have the Professional edition of the JetBrains [PyCharm Python IDE](https://www.jetbrains.com/pycharm/), you can connect it to a development endpoint and use it to develop interactively\. PyCharm can then support remote breakpoints if you insert `pydevd` statements in your script\.
 
