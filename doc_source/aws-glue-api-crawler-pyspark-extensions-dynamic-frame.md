@@ -235,7 +235,7 @@ Returns a new `DynamicFrame` containing the selected fields\.
 
 Writes sample records to a specified destination during a transformation, and returns the input `DynamicFrame` with an additional write step\.
 + `path` – The path to the destination to which to write \(required\)\.
-+ `options` – Key\-value pairs specifying options \(optional\)\. The `"topk"` option specifies that the first `k` records should be written\. The `"prob"` option specifies the probability of picking any given record, to be used in selecting records to write\.
++ `options` – Key\-value pairs specifying options \(optional\)\. The `"topk"` option specifies that the first `k` records should be written\. The `"prob"` option specifies the probability (as a decimal) of picking any given record, to be used in selecting records to write\.
 + `transformation_ctx` – A unique string that is used to identify state information \(optional\)\.
 
 ## split\_fields<a name="aws-glue-api-crawler-pyspark-extensions-dynamic-frame-split_fields"></a>
