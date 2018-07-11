@@ -17,7 +17,7 @@ Writes sample records to a specified destination during a transformation\.
 Writes sample records to a specified destination during a transformation\.
 + `frame` – The `DynamicFrame` to spigot \(required\)\.
 + `path` – The path to the destination to write to \(required\)\.
-+ `options` – JSON key\-value pairs specifying options \(optional\)\. The `"topk"` option specifies that the first k records should be written\. The `"prob"` option specifies the probability of picking any given record, to be used in selecting records to write\.
++ `options` – JSON key\-value pairs specifying options \(optional\)\. The `"topk"` option specifies that the first k records should be written\. The `"prob"` option specifies the probability (as a decimal) of picking any given record, to be used in selecting records to write\.
 + `transformation_ctx` – A unique string that is used to identify state information \(optional\)\.
 
 Returns the input `DynamicFrame` with an additional write step\.
