@@ -40,6 +40,7 @@ To see details of a job, select the job in the **Jobs** list and review the info
 + History
 + Details
 + Script
++ Metrics
 
 ### History<a name="console-jobs-details-history"></a>
 
@@ -61,6 +62,8 @@ The **History** tab shows your job run history and how successful a job has been
 + **Start time** shows the date and time \(local time\) that the job started\.
 + **End time** shows the date and time \(local time\) that the job ended\.
 
+For a specific job run, you can **View run metrics**, which displays graphs of metrics for the selected job run\. For more information about how to enable metrics and interpret the graphs, see [Job Monitoring and Debugging](monitor-profile-glue-job-cloudwatch-metrics.md)\.
+
 ### Details<a name="console-jobs-details-details"></a>
 
 The **Details** tab includes attributes of your job\. It shows you the details about the job definition and also lists the triggers that can start this job\. Each time one of the triggers in the list fires, the job is started\. For the list of triggers, the details include the following:
@@ -73,3 +76,58 @@ The **Details** tab includes attributes of your job\. It shows you the details a
 ### Script<a name="console-jobs-details-script"></a>
 
 The **Script** tab shows the script that runs when your job is started\. You can invoke an **Edit script** view from this tab\. For more information about the script editor in the AWS Glue console, see [Working with Scripts on the AWS Glue Console](console-edit-script.md)\. For information about the functions that are called in your script, see [Program AWS Glue ETL Scripts in Python](aws-glue-programming-python.md)\.
+
+### Metrics<a name="console-jobs-details-metrics"></a>
+
+The **Metrics** tab shows metrics collected when a job runs and profiling is enabled\. The following graphs are shown: 
++ ETL Data Movement
++ Memory Profile: Driver and Executors
+
+Choose **View additional metrics** to show the following graphs:
++ ETL Data Movement
++ Memory Profile: Driver and Executors
++ Data Shuffle Across Executors
++ CPU Load: Driver and Executors
++ Job Execution: Active Executors, Completed Stages & Maximum Needed Executors
+
+Data for these graphs is pushed to CloudWatch metrics if the job is enabled to collect metrics\. For more information about how to enable metrics and interpret the graphs, see [Job Monitoring and Debugging](monitor-profile-glue-job-cloudwatch-metrics.md)\. 
+
+**Example of ETL Data Movement Graph**  
+The ETL Data Movement graph shows the following metrics:  
++ the number of bytes read from Amazon S3 by all executors—[`glue.ALL.s3.filesystem.read_bytes`](monitoring-awsglue-with-cloudwatch-metrics.md#glue.ALL.s3.filesystem.read_bytes)
++ number of bytes written to Amazon S3 by all executors—[`glue.ALL.s3.filesystem.write_bytes`](monitoring-awsglue-with-cloudwatch-metrics.md#glue.ALL.s3.filesystem.write_bytes)
+
+![\[The graph for ETL Data Movement in the Metrics tab of the AWS Glue console.\]](http://docs.aws.amazon.com/glue/latest/dg/images/job_detailed_etl.png)
+
+**Example of Memory Profile Graph**  
+The Memory Profile graph shows the following metrics:  
++ the fraction of memory used by the JVM heap for this driver \(scale: 0\-1\) by the driver, an executor identified by *executorId*, or all executors—
+  + [`glue.driver.jvm.heap.usage`](monitoring-awsglue-with-cloudwatch-metrics.md#glue.driver.jvm.heap.usage)
+  + [`glue.executorId.jvm.heap.usage`](monitoring-awsglue-with-cloudwatch-metrics.md#glue.executorId.jvm.heap.usage)
+  + [`glue.ALL.jvm.heap.usage`](monitoring-awsglue-with-cloudwatch-metrics.md#glue.ALL.jvm.heap.usage)
+
+![\[The graph for Memory Profile in the Metrics tab of the AWS Glue console.\]](http://docs.aws.amazon.com/glue/latest/dg/images/job_detailed_mem.png)
+
+**Example of Data Shuffle Across Executors Graph**  
+The Data Shuffle Across Executors graph shows the following metrics:  
++ the number of bytes read by all executors to shuffle data between them—[`glue.driver.aggregate.shuffleLocalBytesRead`](monitoring-awsglue-with-cloudwatch-metrics.md#glue.driver.aggregate.shuffleLocalBytesRead)
++ the number of bytes written by all executors to shuffle data between them—[`glue.driver.aggregate.shuffleBytesWritten`](monitoring-awsglue-with-cloudwatch-metrics.md#glue.driver.aggregate.shuffleBytesWritten)
+
+![\[The graph for Data Shuffle Across Executors in the Metrics tab of the AWS Glue console.\]](http://docs.aws.amazon.com/glue/latest/dg/images/job_detailed_data.png)
+
+**Example of CPU Load Graph**  
+The CPU Load graph shows the following metrics:  
++ the fraction of CPU system load used \(scale: 0\-1\) by the driver, an executor identified by *executorId*, or all executors—
+  + [`glue.driver.system.cpuSystemLoad`](monitoring-awsglue-with-cloudwatch-metrics.md#glue.driver.system.cpuSystemLoad)
+  + [`glue.executorId.system.cpuSystemLoad`](monitoring-awsglue-with-cloudwatch-metrics.md#glue.executorId.system.cpuSystemLoad)
+  + [`glue.ALL.system.cpuSystemLoad`](monitoring-awsglue-with-cloudwatch-metrics.md#glue.ALL.system.cpuSystemLoad)
+
+![\[The graph for CPU Load in the Metrics tab of the AWS Glue console.\]](http://docs.aws.amazon.com/glue/latest/dg/images/job_detailed_cpu.png)
+
+**Example of Job Execution Graph**  
+The Job Execution graph shows the following metrics:  
++ the number of actively running executors—[`glue.driver.ExecutorAllocationManager.executors.numberAllExecutors`](monitoring-awsglue-with-cloudwatch-metrics.md#glue.driver.ExecutorAllocationManager.executors.numberAllExecutors)
++ the number of completed stages—[`glue.aggregate.numCompletedStages`](monitoring-awsglue-with-cloudwatch-metrics.md#glue.driver.aggregate.numCompletedStages)
++ the number of maximum needed executors—[`glue.driver.ExecutorAllocationManager.executors.numberMaxNeededExecutors`](monitoring-awsglue-with-cloudwatch-metrics.md#glue.driver.ExecutorAllocationManager.executors.numberMaxNeededExecutors)
+
+![\[The graph for Job Execution in the Metrics tab of the AWS Glue console.\]](http://docs.aws.amazon.com/glue/latest/dg/images/job_detailed_exec.png)
