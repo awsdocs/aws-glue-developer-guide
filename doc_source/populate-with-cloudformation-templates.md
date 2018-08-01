@@ -488,7 +488,7 @@ Resources:
       DatabaseInput:
         Name: !Ref CFNDatabaseName
         Description: "AWS Glue container to hold metadata tables for the flights crawler"
- #Create a crawler to crawl the flights data on a public S3 bucket
+ #Create a crawler to crawl the flights data in MySQL database
   CFNCrawlerFlights:
     Type: AWS::Glue::Crawler
     Properties:
@@ -594,7 +594,7 @@ Parameters:
 # The S3 path where the script for this job is located
   CFNScriptLocation:  
     Type: String
-    Default: s3://aws-glue-scripts-827630067164-us-east-1/salinero/sal-job-dec4a	
+    Default: s3://aws-glue-scripts-123456789012-us-east-1/myid/sal-job-dec4a	
 # The name of the connection used for JDBC data source
   CFNConnectionName:  
     Type: String

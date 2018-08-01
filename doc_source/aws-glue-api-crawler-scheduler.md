@@ -22,10 +22,10 @@ A scheduling object using a `cron` statement to schedule an event\.
 
 ## UpdateCrawlerSchedule Action \(Python: update\_crawler\_schedule\)<a name="aws-glue-api-crawler-scheduler-UpdateCrawlerSchedule"></a>
 
-Updates the schedule of a crawler using a `cron` expression\.
+Updates the schedule of a crawler using a `cron` expression\. 
 
 **Request**
-+ `CrawlerName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `CrawlerName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   Name of the crawler whose schedule to update\.
 + `Schedule` – UTF\-8 string\.
@@ -47,7 +47,7 @@ Updates the schedule of a crawler using a `cron` expression\.
 Changes the schedule state of the specified crawler to `SCHEDULED`, unless the crawler is already running or the schedule state is already `SCHEDULED`\.
 
 **Request**
-+ `CrawlerName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `CrawlerName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   Name of the crawler to schedule\.
 
@@ -66,7 +66,7 @@ Changes the schedule state of the specified crawler to `SCHEDULED`, unless the c
 Sets the schedule state of the specified crawler to `NOT_SCHEDULED`, but does not stop the crawler if it is already running\.
 
 **Request**
-+ `CrawlerName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `CrawlerName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   Name of the crawler whose schedule state to set\.
 

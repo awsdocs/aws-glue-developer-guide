@@ -25,6 +25,9 @@ Provide the location of a working directory in Amazon S3 where temporary interme
 **Job bookmark**  
 Specify how AWS Glue processes state information when the job runs\. You can have it remember previously processed data, update state information, or ignore state information\.
 
+**Job profiling**  
+Enable or disable the creation of CloudWatch metrics when this job runs\. To see profiling data this option must be enabled\. For more information about how to enable and visualize metrics, see [Job Monitoring and Debugging](monitor-profile-glue-job-cloudwatch-metrics.md)\. 
+
 **Server\-side encryption**  
 If you select this option, when the ETL job writes to Amazon S3, the data is encrypted at rest using SSE\-S3 encryption\. Both your Amazon S3 data target and any data that is written to an Amazon S3 temporary directory is encrypted\. For more information, see [Protecting Data Using Server\-Side Encryption with Amazon S3\-Managed Encryption Keys \(SSE\-S3\)](http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)\.
 

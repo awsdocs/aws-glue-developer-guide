@@ -9,7 +9,7 @@
 The `Database` object represents a logical grouping of tables that may reside in a Hive metastore or an RDBMS\.
 
 **Fields**
-+ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `Name` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   Name of the database\. For Hive compatibility, this is folded to lowercase when it is stored\.
 + `Description` – Description string, not more than 2048 bytes long, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
@@ -18,7 +18,7 @@ The `Database` object represents a logical grouping of tables that may reside in
 + `LocationUri` – Uniform resource identifier \(uri\), not less than 1 or more than 1024 bytes long, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
 
   The location of the database \(for example, an HDFS path\)\.
-+ `Parameters` – A map array of key\-value pairs
++ `Parameters` – A map array of key\-value pairs\.
 
   Each key is a Key string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
@@ -34,7 +34,7 @@ The `Database` object represents a logical grouping of tables that may reside in
 The structure used to create or update a database\.
 
 **Fields**
-+ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `Name` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   Name of the database\. For Hive compatibility, this is folded to lowercase when it is stored\.
 + `Description` – Description string, not more than 2048 bytes long, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
@@ -43,7 +43,7 @@ The structure used to create or update a database\.
 + `LocationUri` – Uniform resource identifier \(uri\), not less than 1 or more than 1024 bytes long, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
 
   The location of the database \(for example, an HDFS path\)\.
-+ `Parameters` – A map array of key\-value pairs
++ `Parameters` – A map array of key\-value pairs\.
 
   Each key is a Key string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
@@ -66,7 +66,7 @@ Creates a new database in a Data Catalog\.
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The ID of the Data Catalog in which to create the database\. If none is supplied, the AWS account ID is used by default\.
-+ `DatabaseInput` – A [DatabaseInput](#aws-glue-api-catalog-databases-DatabaseInput) object\. Required\.
++ `DatabaseInput` – *Required:* A [DatabaseInput](#aws-glue-api-catalog-databases-DatabaseInput) object\.
 
   A `DatabaseInput` object defining the metadata database to create in the catalog\.
 
@@ -79,7 +79,6 @@ Creates a new database in a Data Catalog\.
 + `ResourceNumberLimitExceededException`
 + `InternalServiceException`
 + `OperationTimeoutException`
-+ `GlueEncryptionException`
 
 ## UpdateDatabase Action \(Python: update\_database\)<a name="aws-glue-api-catalog-databases-UpdateDatabase"></a>
 
@@ -89,10 +88,10 @@ Updates an existing database definition in a Data Catalog\.
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The ID of the Data Catalog in which the metadata database resides\. If none is supplied, the AWS account ID is used by default\.
-+ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `Name` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the database to update in the catalog\. For Hive compatibility, this is folded to lowercase\.
-+ `DatabaseInput` – A [DatabaseInput](#aws-glue-api-catalog-databases-DatabaseInput) object\. Required\.
++ `DatabaseInput` – *Required:* A [DatabaseInput](#aws-glue-api-catalog-databases-DatabaseInput) object\.
 
   A `DatabaseInput` object specifying the new definition of the metadata database in the catalog\.
 
@@ -104,7 +103,6 @@ Updates an existing database definition in a Data Catalog\.
 + `InvalidInputException`
 + `InternalServiceException`
 + `OperationTimeoutException`
-+ `GlueEncryptionException`
 
 ## DeleteDatabase Action \(Python: delete\_database\)<a name="aws-glue-api-catalog-databases-DeleteDatabase"></a>
 
@@ -118,7 +116,7 @@ To ensure immediate deletion of all related resources, before calling `DeleteDat
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The ID of the Data Catalog in which the database resides\. If none is supplied, the AWS account ID is used by default\.
-+ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `Name` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the Database to delete\. For Hive compatibility, this must be all lowercase\.
 
@@ -139,7 +137,7 @@ Retrieves the definition of a specified database\.
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The ID of the Data Catalog in which the database resides\. If none is supplied, the AWS account ID is used by default\.
-+ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `Name` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the database to retrieve\. For Hive compatibility, this should be all lowercase\.
 
@@ -153,7 +151,6 @@ Retrieves the definition of a specified database\.
 + `EntityNotFoundException`
 + `InternalServiceException`
 + `OperationTimeoutException`
-+ `GlueEncryptionException`
 
 ## GetDatabases Action \(Python: get\_databases\)<a name="aws-glue-api-catalog-databases-GetDatabases"></a>
 
@@ -171,7 +168,7 @@ Retrieves all Databases defined in a given Data Catalog\.
   The maximum number of databases to return in one response\.
 
 **Response**
-+ `DatabaseList` – An array of [Database](#aws-glue-api-catalog-databases-Database)s\. Required\.
++ `DatabaseList` – *Required:* An array of [Database](#aws-glue-api-catalog-databases-Database) objects\.
 
   A list of `Database` objects from the specified catalog\.
 + `NextToken` – UTF\-8 string\.
@@ -182,4 +179,3 @@ Retrieves all Databases defined in a given Data Catalog\.
 + `InvalidInputException`
 + `InternalServiceException`
 + `OperationTimeoutException`
-+ `GlueEncryptionException`

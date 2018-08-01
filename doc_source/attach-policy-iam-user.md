@@ -62,7 +62,11 @@ In this step, you create a policy that is similar to `AWSGlueConsoleFullAccess`\
                    "s3:GetBucketLocation",
                    "cloudformation:DescribeStacks",
                    "cloudformation:GetTemplateSummary",
-                   "dynamodb:ListTables"
+                   "dynamodb:ListTables",
+                   "kms:ListAliases",
+                   "kms:DescribeKey",
+                   "cloudwatch:GetMetricData",
+                   "cloudwatch:ListDashboards"                
                ],
                "Resource": [
                    "*"

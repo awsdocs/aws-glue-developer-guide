@@ -6,6 +6,7 @@ When a crawler runs, it might encounter changes to your data store that result i
 + [Configuring a Crawler on the AWS Glue Console](#crawler-configure-changes-console)
 + [Configuring a Crawler Using the API](#crawler-configure-changes-api)
 + [How to Prevent the Crawler from Changing an Existing Schema](#crawler-schema-changes-prevent)
++ [How to Create a Single Schema For Each Amazon S3 Include Path](#crawler-grouping-policy)
 
 ## Configuring a Crawler on the AWS Glue Console<a name="crawler-configure-changes-console"></a>
 
@@ -98,3 +99,32 @@ When you configure the crawler using the API, set the following parameters:
      }
   }
   ```
+
+## How to Create a Single Schema For Each Amazon S3 Include Path<a name="crawler-grouping-policy"></a>
+
+By default, when a crawler defines tables for data stored in Amazon S3, it considers both data compatibility and schema similarity\. Data compatibility factors taken into account include whether the data is of the same format \(for example, JSON\), the same compression type \(for example, GZIP\), the structure of the Amazon S3 path, and other data attributes\. Schema similarity is a measure of how closely the schemas of separate Amazon S3 objects are similar\.
+
+You can configure a crawler to `CombineCompatibleSchemas` into a common table definition when possible\. With this option, the crawler still considers data compatibility, but ignores the similarity of the specific schemas when evaluating Amazon S3 objects in the specified include path\.
+
+If you are configuring the crawler on the console, to combine schemas, select the crawler option **Create a single schema for each S3 path**\.
+
+When you configure the crawler using the API, set the following configuration option:
++  Set the `Configuration` field with a string representation of the following JSON object in the crawler API; for example: 
+
+  ```
+  {
+     "Version": 1.0,
+     "Grouping": {
+        "TableGroupingPolicy": "CombineCompatibleSchemas" }
+  }
+  ```
+
+To help illustrate this option, suppose you define a crawler with an include path `s3://bucket/table1/`\. When the crawler runs, it finds two JSON files with the following characteristics:
++ **File 1** – `S3://bucket/table1/year=2017/data1.json`
++ *File content* – `{“A”: 1, “B”: 2}`
++ *Schema* – `A:int, B:int`
++ **File 2** – `S3://bucket/table1/year=2018/data2.json`
++ *File content* – `{“C”: 3, “D”: 4}`
++ *Schema* – `C: int, D: int`
+
+By default, the crawler creates two tables, named `year_2017` and `year_2018` because the schemas are not sufficiently similar\. However, if the option **Create a single schema for each S3 path** is selected, and if the data is compatible, the crawler creates one table\. The table has the schema `A:int,B:int,C:int,D:int` and `partitionKey` `year:string`\.

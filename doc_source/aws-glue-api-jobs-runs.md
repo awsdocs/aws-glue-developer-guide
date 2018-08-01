@@ -39,7 +39,7 @@ Contains information about a job run\.
 + `JobRunState` – UTF\-8 string \(valid values: `STARTING` \| `RUNNING` \| `STOPPING` \| `STOPPED` \| `SUCCEEDED` \| `FAILED` \| `TIMEOUT`\)\.
 
   The current state of the job run\.
-+ `Arguments` – A map array of key\-value pairs
++ `Arguments` – A map array of key\-value pairs\.
 
   Each key is a UTF\-8 string\.
 
@@ -55,7 +55,7 @@ Contains information about a job run\.
 + `ErrorMessage` – UTF\-8 string\.
 
   An error message associated with this job run\.
-+ `PredecessorRuns` – An array of [Predecessor](#aws-glue-api-jobs-runs-Predecessor)s\.
++ `PredecessorRuns` – An array of [Predecessor](#aws-glue-api-jobs-runs-Predecessor) objects\.
 
   A list of predecessors to this job run\.
 + `AllocatedCapacity` – Number \(integer\)\.
@@ -143,13 +143,13 @@ Records an error that occurred when attempting to stop a specified job run\.
 Starts a job run using a job definition\.
 
 **Request**
-+ `JobName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `JobName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the job definition to use\.
 + `JobRunId` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The ID of a previous JobRun to retry\.
-+ `Arguments` – A map array of key\-value pairs
++ `Arguments` – A map array of key\-value pairs\.
 
   Each key is a UTF\-8 string\.
 
@@ -190,18 +190,18 @@ Starts a job run using a job definition\.
 Stops one or more job runs for a specified job definition\.
 
 **Request**
-+ `JobName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `JobName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the job definition for which to stop job runs\.
-+ `JobRunIds` – An array of UTF\-8 strings, not less than 1 or more than 25 items in the array\. Required\.
++ `JobRunIds` – *Required:* An array of UTF\-8 strings, not less than 1 or more than 25 strings\.
 
   A list of the JobRunIds that should be stopped for that job definition\.
 
 **Response**
-+ `SuccessfulSubmissions` – An array of [BatchStopJobRunSuccessfulSubmission](#aws-glue-api-jobs-runs-BatchStopJobRunSuccessfulSubmission)s\.
++ `SuccessfulSubmissions` – An array of [BatchStopJobRunSuccessfulSubmission](#aws-glue-api-jobs-runs-BatchStopJobRunSuccessfulSubmission) objects\.
 
   A list of the JobRuns that were successfully submitted for stopping\.
-+ `Errors` – An array of [BatchStopJobRunError](#aws-glue-api-jobs-runs-BatchStopJobRunError)s\.
++ `Errors` – An array of [BatchStopJobRunError](#aws-glue-api-jobs-runs-BatchStopJobRunError) objects\.
 
   A list of the errors that were encountered in tryng to stop JobRuns, including the JobRunId for which each error was encountered and details about the error\.
 
@@ -215,10 +215,10 @@ Stops one or more job runs for a specified job definition\.
 Retrieves the metadata for a given job run\.
 
 **Request**
-+ `JobName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `JobName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   Name of the job definition being run\.
-+ `RunId` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `RunId` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The ID of the job run\.
 + `PredecessorsIncluded` – Boolean\.
@@ -241,7 +241,7 @@ Retrieves the metadata for a given job run\.
 Retrieves metadata for all runs of a given job definition\.
 
 **Request**
-+ `JobName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `JobName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the job definition for which to retrieve all job runs\.
 + `NextToken` – UTF\-8 string\.
@@ -252,7 +252,7 @@ Retrieves metadata for all runs of a given job definition\.
   The maximum size of the response\.
 
 **Response**
-+ `JobRuns` – An array of [JobRun](#aws-glue-api-jobs-runs-JobRun)s\.
++ `JobRuns` – An array of [JobRun](#aws-glue-api-jobs-runs-JobRun) objects\.
 
   A list of job\-run metatdata objects\.
 + `NextToken` – UTF\-8 string\.
@@ -270,7 +270,7 @@ Retrieves metadata for all runs of a given job definition\.
 Resets a bookmark entry\.
 
 **Request**
-+ `JobName` – UTF\-8 string\. Required\.
++ `JobName` – *Required:* UTF\-8 string\.
 
   The name of the job in question\.
 

@@ -37,7 +37,7 @@ Specifies a job definition\.
 + `Command` – A [JobCommand](#aws-glue-api-jobs-job-JobCommand) object\.
 
   The JobCommand that executes this job\.
-+ `DefaultArguments` – A map array of key\-value pairs
++ `DefaultArguments` – A map array of key\-value pairs\.
 
   Each key is a UTF\-8 string\.
 
@@ -125,7 +125,7 @@ Specifies information used to update an existing job definition\. Note that the 
 + `Command` – A [JobCommand](#aws-glue-api-jobs-job-JobCommand) object\.
 
   The JobCommand that executes this job \(required\)\.
-+ `DefaultArguments` – A map array of key\-value pairs
++ `DefaultArguments` – A map array of key\-value pairs\.
 
   Each key is a UTF\-8 string\.
 
@@ -166,7 +166,7 @@ Specifies information used to update an existing job definition\. Note that the 
 Creates a new job definition\.
 
 **Request**
-+ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `Name` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name you assign to this job definition\. It must be unique in your account\.
 + `Description` – Description string, not more than 2048 bytes long, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
@@ -175,16 +175,16 @@ Creates a new job definition\.
 + `LogUri` – UTF\-8 string\.
 
   This field is reserved for future use\.
-+ `Role` – UTF\-8 string\. Required\.
++ `Role` – *Required:* UTF\-8 string\.
 
   The name or ARN of the IAM role associated with this job\.
 + `ExecutionProperty` – An [ExecutionProperty](#aws-glue-api-jobs-job-ExecutionProperty) object\.
 
   An ExecutionProperty specifying the maximum number of concurrent runs allowed for this job\.
-+ `Command` – A [JobCommand](#aws-glue-api-jobs-job-JobCommand) object\. Required\.
++ `Command` – *Required:* A [JobCommand](#aws-glue-api-jobs-job-JobCommand) object\.
 
   The JobCommand that executes this job\.
-+ `DefaultArguments` – A map array of key\-value pairs
++ `DefaultArguments` – A map array of key\-value pairs\.
 
   Each key is a UTF\-8 string\.
 
@@ -232,10 +232,10 @@ Creates a new job definition\.
 Updates an existing job definition\.
 
 **Request**
-+ `JobName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `JobName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   Name of the job definition to update\.
-+ `JobUpdate` – A [JobUpdate](#aws-glue-api-jobs-job-JobUpdate) object\. Required\.
++ `JobUpdate` – *Required:* A [JobUpdate](#aws-glue-api-jobs-job-JobUpdate) object\.
 
   Specifies the values with which to update the job definition\.
 
@@ -256,7 +256,7 @@ Updates an existing job definition\.
 Retrieves an existing job definition\.
 
 **Request**
-+ `JobName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `JobName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the job definition to retrieve\.
 
@@ -284,7 +284,7 @@ Retrieves all current job definitions\.
   The maximum size of the response\.
 
 **Response**
-+ `Jobs` – An array of [Job](#aws-glue-api-jobs-job-Job)s\.
++ `Jobs` – An array of [Job](#aws-glue-api-jobs-job-Job) objects\.
 
   A list of job definitions\.
 + `NextToken` – UTF\-8 string\.
@@ -302,7 +302,7 @@ Retrieves all current job definitions\.
 Deletes a specified job definition\. If the job definition is not found, no exception is thrown\.
 
 **Request**
-+ `JobName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `JobName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the job definition to delete\.
 

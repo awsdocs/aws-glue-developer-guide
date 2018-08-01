@@ -23,6 +23,7 @@ There are a number of argument names that are recognized and used by AWS Glue, t
   ```
   '--TempDir': 's3-path-to-directory'
   ```
++ `--enable-metrics`  —  Enables the collection of metrics for job profiling for this job run\. These metrics are available on the AWS Glue console and CloudWatch console\. To enable metrics, only specify the key, no value is needed\.
 
 There are also several argument names used by AWS Glue internally that you should never set:
 + `--conf`  —  Internal to AWS Glue\. Do not set\!

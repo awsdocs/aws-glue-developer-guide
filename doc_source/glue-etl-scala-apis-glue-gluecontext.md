@@ -63,7 +63,7 @@ Creates a [DataSink](glue-etl-scala-apis-glue-datasink-class.md) that writes to 
 + `options` — A string of JSON name\-value pairs that provide additional information that is required to write to a JDBC data store\. This includes: 
   + *dbtable* \(required\) — The name of the JDBC table\.
   + *database* \(required\) — The name of the JDBC database\.
-  + Any additional options passed directly to the SparkSQL JDBC writer\.
+  + Any additional options passed directly to the SparkSQL JDBC writer\. For more information, see [Redshift data source for Spark](https://github.com/databricks/spark-redshift)\.
 + `redshiftTmpDir` — A temporary staging directory to be used with certain data sinks\. Set to empty by default\.
 + `transformationContext` — The transformation context that is associated with the sink to be used by job bookmarks\. Set to empty by default\.
 
@@ -137,11 +137,11 @@ Creates a [DataSource trait](glue-etl-scala-apis-glue-datasource-trait.md) that 
     + *dynamodb\.throughput\.read\.percent* \(optional\) — The percentage of reserved capacity units \(RCU\) to use\. The default is set to "0\.5"\. Acceptable values are from "0\.1" to "1\.5", inclusive\.
   + `connectionOptions` when the `connectionType` is "parquet" or "orc":
     + *paths* \(required\) — List of Amazon S3 paths to read\.
-    + Any additional options are passed directly to the SparkSQL DataSource\.
+    + Any additional options are passed directly to the SparkSQL DataSource\. For more information, see [Redshift data source for Spark](https://github.com/databricks/spark-redshift)\.
   + `connectionOptions` when the `connectionType` is "redshift":
     + *url* \(required\) — The JDBC URL for an Amazon Redshift database\.
     + *dbtable* \(required\) — The Amazon Redshift table to read\.
-    + *tempdir* \(required\) — The Amazon S3 path where temporary data can be staged when copying out of Amazon Redshift\.
+    + *redshitTmpDir* \(required\) — The Amazon S3 path where temporary data can be staged when copying out of Amazon Redshift\.
     + *user* \(required\) — The username to use when connecting to the Amazon Redshift cluster\.
     + *password* \(required\) — The password to use when connecting to the Amazon Redshift cluster\.
 + `transformationContext` — The transformation context that is associated with the sink to be used by job bookmarks\. Set to empty by default\.

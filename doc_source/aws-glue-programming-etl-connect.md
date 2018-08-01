@@ -35,7 +35,7 @@ Designates a connection to files stored in Amazon Simple Storage Service \(Amazo
 
 Use the following `connectionOptions` with `"connectionType": "parquet"`:
 + `paths`: \(Required\) A list of the Amazon S3 paths from which to read\.
-+ *\(Other option name/value pairs\)*: Any additional options, including formatting options, are passed directly to the SparkSQL DataSource\.
++ *\(Other option name/value pairs\)*: Any additional options, including formatting options, are passed directly to the SparkSQL DataSource\. For more information, see [Redshift data source for Spark](https://github.com/databricks/spark-redshift)\.
 
 ## "connectionType": "orc"<a name="aws-glue-programming-etl-connect-orc"></a>
 
@@ -43,7 +43,7 @@ Designates a connection to files stored in Amazon S3 in the [Apache Hive Optimiz
 
 Use the following `connectionOptions` with `"connectionType": "orc"`:
 + `paths`: \(Required\) A list of the Amazon S3 paths from which to read\.
-+ *\(Other option name/value pairs\)*: Any additional options, including formatting options, are passed directly to the SparkSQL DataSource\.
++ *\(Other option name/value pairs\)*: Any additional options, including formatting options, are passed directly to the SparkSQL DataSource\. For more information, see [Redshift data source for Spark](https://github.com/databricks/spark-redshift)\.
 
 ## JDBC connectionType values<a name="aws-glue-programming-etl-connect-jdbc"></a>
 
@@ -61,7 +61,7 @@ Use these `connectionOptions` with JDBC connections:
 + `"user"`: \(Required\) The username to use when connecting\.
 + `"password"`: \(Required\) The password to use when connecting\.
 
-All other option name/value pairs that are included in `connectionOptions` for a JDBC connection, including formatting options, are passed directly to the underlying SparkSQL DataSource\.
+All other option name/value pairs that are included in `connectionOptions` for a JDBC connection, including formatting options, are passed directly to the underlying SparkSQL DataSource\. For more information, see [Redshift data source for Spark](https://github.com/databricks/spark-redshift)\.
 
 ## "connectionType": "dynamodb"<a name="aws-glue-programming-etl-connect-dynamodb"></a>
 

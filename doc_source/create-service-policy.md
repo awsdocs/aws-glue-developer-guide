@@ -43,7 +43,8 @@ Add any permissions needed for Amazon S3 resources\. You might want to scope the
                    "ec2:DescribeVpcAttribute",
                    "iam:ListRolePolicies",
                    "iam:GetRole",
-                   "iam:GetRolePolicy"
+                   "iam:GetRolePolicy",
+                   "cloudwatch:PutMetricData"                
                ],
                "Resource": [
                    "*"

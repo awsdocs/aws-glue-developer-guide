@@ -69,7 +69,12 @@ A development endpoint where a developer can remotely debug ETL scripts\.
   The point in time at which this DevEndpoint was last modified\.
 + `PublicKey` – UTF\-8 string\.
 
-  The public key to be used by this DevEndpoint for authentication\.
+  The public key to be used by this DevEndpoint for authentication\. This attribute is provided for backward compatibility, as the recommended attribute to use is public keys\.
++ `PublicKeys` – An array of UTF\-8 strings\.
+
+  A list of public keys to be used by the DevEndpoints for authentication\. The use of this attribute is preferred over a single public key because the public keys allow you to have a different private key per client\.
+**Note**  
+If you previously created an endpoint with a public key, you must remove that key to be able to set a list of public keys: call the `UpdateDevEndpoint` API with the public key content in the `deletePublicKeys` attribute, and the list of new keys in the `addPublicKeys` attribute\.
 
 ## DevEndpointCustomLibraries Structure<a name="aws-glue-api-dev-endpoint-DevEndpointCustomLibraries"></a>
 
@@ -99,10 +104,10 @@ Custom libraries to be loaded into a DevEndpoint\.
 Creates a new DevEndpoint\.
 
 **Request**
-+ `EndpointName` – UTF\-8 string\. Required\.
++ `EndpointName` – *Required:* UTF\-8 string\.
 
   The name to be assigned to the new DevEndpoint\.
-+ `RoleArn` – UTF\-8 string, matching the [AWS IAM ARN string pattern](aws-glue-api-common.md#aws-glue-api-regex-aws-iam-arn-id)\. Required\.
++ `RoleArn` – *Required:* UTF\-8 string, matching the [AWS IAM ARN string pattern](aws-glue-api-common.md#aws-glue-api-regex-aws-iam-arn-id)\.
 
   The IAM role for the DevEndpoint\.
 + `SecurityGroupIds` – An array of UTF\-8 strings\.
@@ -113,7 +118,12 @@ Creates a new DevEndpoint\.
   The subnet ID for the new DevEndpoint to use\.
 + `PublicKey` – UTF\-8 string\.
 
-  The public key to use for authentication\.
+  The public key to be used by this DevEndpoint for authentication\. This attribute is provided for backward compatibility, as the recommended attribute to use is public keys\.
++ `PublicKeys` – An array of UTF\-8 strings, not more than 5 strings\.
+
+  A list of public keys to be used by the DevEndpoints for authentication\. The use of this attribute is preferred over a single public key because the public keys allow you to have a different private key per client\.
+**Note**  
+If you previously created an endpoint with a public key, you must remove that key to be able to set a list of public keys: call the `UpdateDevEndpoint` API with the public key content in the `deletePublicKeys` attribute, and the list of new keys in the `addPublicKeys` attribute\.
 + `NumberOfNodes` – Number \(integer\)\.
 
   The number of AWS Glue Data Processing Units \(DPUs\) to allocate to this DevEndpoint\.
@@ -185,12 +195,18 @@ Creates a new DevEndpoint\.
 Updates a specified DevEndpoint\.
 
 **Request**
-+ `EndpointName` – UTF\-8 string\. Required\.
++ `EndpointName` – *Required:* UTF\-8 string\.
 
   The name of the DevEndpoint to be updated\.
 + `PublicKey` – UTF\-8 string\.
 
   The public key for the DevEndpoint to use\.
++ `AddPublicKeys` – An array of UTF\-8 strings, not more than 5 strings\.
+
+  The list of public keys for the DevEndpoint to use\.
++ `DeletePublicKeys` – An array of UTF\-8 strings, not more than 5 strings\.
+
+  The list of public keys to be deleted from the DevEndpoint\.
 + `CustomLibraries` – A [DevEndpointCustomLibraries](#aws-glue-api-dev-endpoint-DevEndpointCustomLibraries) object\.
 
   Custom Python or Java libraries to be loaded in the DevEndpoint\.
@@ -213,7 +229,7 @@ Updates a specified DevEndpoint\.
 Deletes a specified DevEndpoint\.
 
 **Request**
-+ `EndpointName` – UTF\-8 string\. Required\.
++ `EndpointName` – *Required:* UTF\-8 string\.
 
   The name of the DevEndpoint\.
 
@@ -231,7 +247,7 @@ Deletes a specified DevEndpoint\.
 Retrieves information about a specified DevEndpoint\.
 
 **Request**
-+ `EndpointName` – UTF\-8 string\. Required\.
++ `EndpointName` – *Required:* UTF\-8 string\.
 
   Name of the DevEndpoint for which to retrieve information\.
 
@@ -259,7 +275,7 @@ Retrieves all the DevEndpoints in this AWS account\.
   A continuation token, if this is a continuation call\.
 
 **Response**
-+ `DevEndpoints` – An array of [DevEndpoint](#aws-glue-api-dev-endpoint-DevEndpoint)s\.
++ `DevEndpoints` – An array of [DevEndpoint](#aws-glue-api-dev-endpoint-DevEndpoint) objects\.
 
   A list of DevEndpoint definitions\.
 + `NextToken` – UTF\-8 string\.

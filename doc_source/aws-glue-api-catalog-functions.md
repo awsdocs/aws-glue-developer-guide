@@ -24,7 +24,7 @@ Represents the equivalent of a Hive user\-defined function \(`UDF`\) definition\
 + `CreateTime` – Timestamp\.
 
   The time at which the function was created\.
-+ `ResourceUris` – An array of [ResourceUri](aws-glue-api-common.md#aws-glue-api-common-ResourceUri)s, not more than 1000 items in the array\.
++ `ResourceUris` – An array of [ResourceUri](aws-glue-api-common.md#aws-glue-api-common-ResourceUri) objects, not more than 1000 structures\.
 
   The resource URIs for the function\.
 
@@ -45,7 +45,7 @@ A structure used to create or updata a user\-defined function\.
 + `OwnerType` – UTF\-8 string \(valid values: `USER` \| `ROLE` \| `GROUP`\)\.
 
   The owner type\.
-+ `ResourceUris` – An array of [ResourceUri](aws-glue-api-common.md#aws-glue-api-common-ResourceUri)s, not more than 1000 items in the array\.
++ `ResourceUris` – An array of [ResourceUri](aws-glue-api-common.md#aws-glue-api-common-ResourceUri) objects, not more than 1000 structures\.
 
   The resource URIs for the function\.
 
@@ -64,10 +64,10 @@ Creates a new function definition in the Data Catalog\.
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The ID of the Data Catalog in which to create the function\. If none is supplied, the AWS account ID is used by default\.
-+ `DatabaseName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the catalog database in which to create the function\.
-+ `FunctionInput` – An [UserDefinedFunctionInput](#aws-glue-api-catalog-functions-UserDefinedFunctionInput) object\. Required\.
++ `FunctionInput` – *Required:* An [UserDefinedFunctionInput](#aws-glue-api-catalog-functions-UserDefinedFunctionInput) object\.
 
   A `FunctionInput` object that defines the function to create in the Data Catalog\.
 
@@ -81,7 +81,6 @@ Creates a new function definition in the Data Catalog\.
 + `EntityNotFoundException`
 + `OperationTimeoutException`
 + `ResourceNumberLimitExceededException`
-+ `GlueEncryptionException`
 
 ## UpdateUserDefinedFunction Action \(Python: update\_user\_defined\_function\)<a name="aws-glue-api-catalog-functions-UpdateUserDefinedFunction"></a>
 
@@ -91,13 +90,13 @@ Updates an existing function definition in the Data Catalog\.
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The ID of the Data Catalog where the function to be updated is located\. If none is supplied, the AWS account ID is used by default\.
-+ `DatabaseName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the catalog database where the function to be updated is located\.
-+ `FunctionName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `FunctionName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the function\.
-+ `FunctionInput` – An [UserDefinedFunctionInput](#aws-glue-api-catalog-functions-UserDefinedFunctionInput) object\. Required\.
++ `FunctionInput` – *Required:* An [UserDefinedFunctionInput](#aws-glue-api-catalog-functions-UserDefinedFunctionInput) object\.
 
   A `FunctionInput` object that re\-defines the function in the Data Catalog\.
 
@@ -109,7 +108,6 @@ Updates an existing function definition in the Data Catalog\.
 + `InvalidInputException`
 + `InternalServiceException`
 + `OperationTimeoutException`
-+ `GlueEncryptionException`
 
 ## DeleteUserDefinedFunction Action \(Python: delete\_user\_defined\_function\)<a name="aws-glue-api-catalog-functions-DeleteUserDefinedFunction"></a>
 
@@ -119,10 +117,10 @@ Deletes an existing function definition from the Data Catalog\.
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The ID of the Data Catalog where the function to be deleted is located\. If none is supplied, the AWS account ID is used by default\.
-+ `DatabaseName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the catalog database where the function is located\.
-+ `FunctionName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `FunctionName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the function definition to be deleted\.
 
@@ -143,10 +141,10 @@ Retrieves a specified function definition from the Data Catalog\.
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The ID of the Data Catalog where the function to be retrieved is located\. If none is supplied, the AWS account ID is used by default\.
-+ `DatabaseName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the catalog database where the function is located\.
-+ `FunctionName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `FunctionName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the function\.
 
@@ -160,7 +158,6 @@ Retrieves a specified function definition from the Data Catalog\.
 + `InvalidInputException`
 + `InternalServiceException`
 + `OperationTimeoutException`
-+ `GlueEncryptionException`
 
 ## GetUserDefinedFunctions Action \(Python: get\_user\_defined\_functions\)<a name="aws-glue-api-catalog-functions-GetUserDefinedFunctions"></a>
 
@@ -170,10 +167,10 @@ Retrieves a multiple function definitions from the Data Catalog\.
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The ID of the Data Catalog where the functions to be retrieved are located\. If none is supplied, the AWS account ID is used by default\.
-+ `DatabaseName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the catalog database where the functions are located\.
-+ `Pattern` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `Pattern` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   An optional function\-name pattern string that filters the function definitions returned\.
 + `NextToken` – UTF\-8 string\.
@@ -184,7 +181,7 @@ Retrieves a multiple function definitions from the Data Catalog\.
   The maximum number of functions to return in one response\.
 
 **Response**
-+ `UserDefinedFunctions` – An array of [UserDefinedFunction](#aws-glue-api-catalog-functions-UserDefinedFunction)s\.
++ `UserDefinedFunctions` – An array of [UserDefinedFunction](#aws-glue-api-catalog-functions-UserDefinedFunction) objects\.
 
   A list of requested function definitions\.
 + `NextToken` – UTF\-8 string\.
@@ -196,4 +193,3 @@ Retrieves a multiple function definitions from the Data Catalog\.
 + `InvalidInputException`
 + `OperationTimeoutException`
 + `InternalServiceException`
-+ `GlueEncryptionException`

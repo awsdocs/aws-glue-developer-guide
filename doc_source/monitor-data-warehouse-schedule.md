@@ -9,7 +9,7 @@ Cron expressions have six required fields, which are separated by white space\.
 **Syntax**
 
 ```
-cron(fields)
+cron(Minutes Hours Day-of-month Month Day-of-week Year)
 ```
 
 
@@ -48,3 +48,9 @@ When creating a schedule, you can use the following sample cron strings\.
 |  0/15  |  \*  |  \*  |  \*  |  ?  |  \*  |  Run every 15 minutes  | 
 |  0/10  |  \*  |  ?  |  \*  |  MON\-FRI  |  \*  |  Run every 10 minutes Monday through Friday  | 
 |  0/5  |  8–17  |  ?  |  \*  |  MON\-FRI  |  \*  |  Run every 5 minutes Monday through Friday between 8:00 am and 5:55 pm \(UTC\)  | 
+
+For example to run on a schedule of every day at 12:15 UTC, specify:
+
+```
+cron(15 12 * * ? *)   
+```

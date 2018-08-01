@@ -93,6 +93,7 @@ Amazon's trademarks and trade dress may not be used in
       + [Format Options for ETL Output in AWS Glue](aws-glue-programming-etl-format.md)
       + [Managing Partitions for ETL Output in AWS Glue](aws-glue-programming-etl-partitions.md)
       + [Reading Input Files in Larger Groups](grouping-input-files.md)
+      + [Moving Data to and from Amazon Redshift](aws-glue-programming-etl-redshift.md)
    + [Program AWS Glue ETL Scripts in Python](aws-glue-programming-python.md)
       + [Setting Up to Use Python with AWS Glue](aws-glue-programming-python-setup.md)
       + [Calling AWS Glue APIs in Python](aws-glue-programming-python-calling.md)

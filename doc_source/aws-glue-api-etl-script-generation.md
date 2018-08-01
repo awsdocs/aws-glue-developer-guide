@@ -13,13 +13,13 @@
 Represents a node in a directed acyclic graph \(DAG\)
 
 **Fields**
-+ `Id` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Identifier string pattern](aws-glue-api-common.md#aws-glue-api-regex-id)\. Required\.
++ `Id` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Identifier string pattern](aws-glue-api-common.md#aws-glue-api-regex-id)\.
 
   A node identifier that is unique within the node's graph\.
-+ `NodeType` – UTF\-8 string\. Required\.
++ `NodeType` – *Required:* UTF\-8 string\.
 
   The type of node this is\.
-+ `Args` – An array of [CodeGenNodeArg](#aws-glue-api-etl-script-generation-CodeGenNodeArg)s, not more than 50 items in the array\. Required\.
++ `Args` – *Required:* An array of [CodeGenNodeArg](#aws-glue-api-etl-script-generation-CodeGenNodeArg) objects, not more than 50 structures\.
 
   Properties of the node, in the form of name\-value pairs\.
 + `LineNumber` – Number \(integer\)\.
@@ -31,10 +31,10 @@ Represents a node in a directed acyclic graph \(DAG\)
 An argument or property of a node\.
 
 **Fields**
-+ `Name` – UTF\-8 string\. Required\.
++ `Name` – *Required:* UTF\-8 string\.
 
   The name of the argument or property\.
-+ `Value` – UTF\-8 string\. Required\.
++ `Value` – *Required:* UTF\-8 string\.
 
   The value of the argument or property\.
 + `Param` – Boolean\.
@@ -46,10 +46,10 @@ An argument or property of a node\.
 Represents a directional edge in a directed acyclic graph \(DAG\)\.
 
 **Fields**
-+ `Source` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Identifier string pattern](aws-glue-api-common.md#aws-glue-api-regex-id)\. Required\.
++ `Source` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Identifier string pattern](aws-glue-api-common.md#aws-glue-api-regex-id)\.
 
   The ID of the node at which the edge starts\.
-+ `Target` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Identifier string pattern](aws-glue-api-common.md#aws-glue-api-regex-id)\. Required\.
++ `Target` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Identifier string pattern](aws-glue-api-common.md#aws-glue-api-regex-id)\.
 
   The ID of the node at which the edge ends\.
 + `TargetParameter` – UTF\-8 string\.
@@ -61,13 +61,13 @@ Represents a directional edge in a directed acyclic graph \(DAG\)\.
 The location of resources\.
 
 **Fields**
-+ `Jdbc` – An array of [CodeGenNodeArg](#aws-glue-api-etl-script-generation-CodeGenNodeArg)s, not more than 50 items in the array\.
++ `Jdbc` – An array of [CodeGenNodeArg](#aws-glue-api-etl-script-generation-CodeGenNodeArg) objects, not more than 50 structures\.
 
   A JDBC location\.
-+ `S3` – An array of [CodeGenNodeArg](#aws-glue-api-etl-script-generation-CodeGenNodeArg)s, not more than 50 items in the array\.
++ `S3` – An array of [CodeGenNodeArg](#aws-glue-api-etl-script-generation-CodeGenNodeArg) objects, not more than 50 structures\.
 
   An Amazon S3 location\.
-+ `DynamoDB` – An array of [CodeGenNodeArg](#aws-glue-api-etl-script-generation-CodeGenNodeArg)s, not more than 50 items in the array\.
++ `DynamoDB` – An array of [CodeGenNodeArg](#aws-glue-api-etl-script-generation-CodeGenNodeArg) objects, not more than 50 structures\.
 
   A DynamoDB Table location\.
 
@@ -76,10 +76,10 @@ The location of resources\.
 Specifies a table definition in the Data Catalog\.
 
 **Fields**
-+ `DatabaseName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The database in which the table metadata resides\.
-+ `TableName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `TableName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the table in question\.
 
@@ -118,10 +118,10 @@ Defines a mapping\.
 Transforms a directed acyclic graph \(DAG\) into code\.
 
 **Request**
-+ `DagNodes` – An array of [CodeGenNode](#aws-glue-api-etl-script-generation-CodeGenNode)s\.
++ `DagNodes` – An array of [CodeGenNode](#aws-glue-api-etl-script-generation-CodeGenNode) objects\.
 
   A list of the nodes in the DAG\.
-+ `DagEdges` – An array of [CodeGenEdge](#aws-glue-api-etl-script-generation-CodeGenEdge)s\.
++ `DagEdges` – An array of [CodeGenEdge](#aws-glue-api-etl-script-generation-CodeGenEdge) objects\.
 
   A list of the edges in the DAG\.
 + `Language` – UTF\-8 string \(valid values: `PYTHON` \| `SCALA`\)\.
@@ -143,7 +143,7 @@ Transforms a directed acyclic graph \(DAG\) into code\.
 
 ## GetDataflowGraph Action \(Python: get\_dataflow\_graph\)<a name="aws-glue-api-etl-script-generation-GetDataflowGraph"></a>
 
-Transforms a Python script into a directed acyclic graph \(DAG\)\.
+Transforms a Python script into a directed acyclic graph \(DAG\)\. 
 
 **Request**
 + `PythonScript` – UTF\-8 string\.
@@ -151,10 +151,10 @@ Transforms a Python script into a directed acyclic graph \(DAG\)\.
   The Python script to transform\.
 
 **Response**
-+ `DagNodes` – An array of [CodeGenNode](#aws-glue-api-etl-script-generation-CodeGenNode)s\.
++ `DagNodes` – An array of [CodeGenNode](#aws-glue-api-etl-script-generation-CodeGenNode) objects\.
 
   A list of the nodes in the resulting DAG\.
-+ `DagEdges` – An array of [CodeGenEdge](#aws-glue-api-etl-script-generation-CodeGenEdge)s\.
++ `DagEdges` – An array of [CodeGenEdge](#aws-glue-api-etl-script-generation-CodeGenEdge) objects\.
 
   A list of the edges in the resulting DAG\.
 
@@ -168,10 +168,10 @@ Transforms a Python script into a directed acyclic graph \(DAG\)\.
 Creates mappings\.
 
 **Request**
-+ `Source` – A [CatalogEntry](#aws-glue-api-etl-script-generation-CatalogEntry) object\. Required\.
++ `Source` – *Required:* A [CatalogEntry](#aws-glue-api-etl-script-generation-CatalogEntry) object\.
 
   Specifies the source table\.
-+ `Sinks` – An array of [CatalogEntry](#aws-glue-api-etl-script-generation-CatalogEntry)s\.
++ `Sinks` – An array of [CatalogEntry](#aws-glue-api-etl-script-generation-CatalogEntry) objects\.
 
   A list of target tables\.
 + `Location` – A [Location](#aws-glue-api-etl-script-generation-Location) object\.
@@ -179,7 +179,7 @@ Creates mappings\.
   Parameters for the mapping\.
 
 **Response**
-+ `Mapping` – An array of [MappingEntry](#aws-glue-api-etl-script-generation-MappingEntry)s\. Required\.
++ `Mapping` – *Required:* An array of [MappingEntry](#aws-glue-api-etl-script-generation-MappingEntry) objects\.
 
   A list of mappings to the specified targets\.
 
@@ -194,13 +194,13 @@ Creates mappings\.
 Gets code to perform a specified mapping\.
 
 **Request**
-+ `Mapping` – An array of [MappingEntry](#aws-glue-api-etl-script-generation-MappingEntry)s\. Required\.
++ `Mapping` – *Required:* An array of [MappingEntry](#aws-glue-api-etl-script-generation-MappingEntry) objects\.
 
   The list of mappings from a source table to target tables\.
-+ `Source` – A [CatalogEntry](#aws-glue-api-etl-script-generation-CatalogEntry) object\. Required\.
++ `Source` – *Required:* A [CatalogEntry](#aws-glue-api-etl-script-generation-CatalogEntry) object\.
 
   The source table\.
-+ `Sinks` – An array of [CatalogEntry](#aws-glue-api-etl-script-generation-CatalogEntry)s\.
++ `Sinks` – An array of [CatalogEntry](#aws-glue-api-etl-script-generation-CatalogEntry) objects\.
 
   The target tables\.
 + `Location` – A [Location](#aws-glue-api-etl-script-generation-Location) object\.
@@ -222,3 +222,4 @@ Gets code to perform a specified mapping\.
 + `InvalidInputException`
 + `InternalServiceException`
 + `OperationTimeoutException`
++ `EntityNotFoundException`

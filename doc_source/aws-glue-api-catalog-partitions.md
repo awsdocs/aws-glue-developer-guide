@@ -15,7 +15,7 @@
 Represents a slice of table data\.
 
 **Fields**
-+ `Values` – An array of UTF\-8 strings, at least 1 item in the array\.
++ `Values` – An array of UTF\-8 strings, at least 1 string\.
 
   The values of the partition\.
 + `DatabaseName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
@@ -33,7 +33,7 @@ Represents a slice of table data\.
 + `StorageDescriptor` – A [StorageDescriptor](aws-glue-api-catalog-tables.md#aws-glue-api-catalog-tables-StorageDescriptor) object\.
 
   Provides information about the physical location where the partition is stored\.
-+ `Parameters` – A map array of key\-value pairs
++ `Parameters` – A map array of key\-value pairs\.
 
   Each key is a Key string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
@@ -49,7 +49,7 @@ Represents a slice of table data\.
 The structure used to create and update a partion\.
 
 **Fields**
-+ `Values` – An array of UTF\-8 strings, at least 1 item in the array\.
++ `Values` – An array of UTF\-8 strings, at least 1 string\.
 
   The values of the partition\.
 + `LastAccessTime` – Timestamp\.
@@ -58,7 +58,7 @@ The structure used to create and update a partion\.
 + `StorageDescriptor` – A [StorageDescriptor](aws-glue-api-catalog-tables.md#aws-glue-api-catalog-tables-StorageDescriptor) object\.
 
   Provides information about the physical location where the partition is stored\.
-+ `Parameters` – A map array of key\-value pairs
++ `Parameters` – A map array of key\-value pairs\.
 
   Each key is a Key string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
@@ -77,7 +77,7 @@ A partition specification for partitions that share a physical location\.
 + `StorageDescriptor` – A [StorageDescriptor](aws-glue-api-catalog-tables.md#aws-glue-api-catalog-tables-StorageDescriptor) object\.
 
   The shared physical storage information\.
-+ `Partitions` – An array of [Partition](#aws-glue-api-catalog-partitions-Partition)s\.
++ `Partitions` – An array of [Partition](#aws-glue-api-catalog-partitions-Partition) objects\.
 
   A list of the partitions that share this physical location\.
 
@@ -86,7 +86,7 @@ A partition specification for partitions that share a physical location\.
 Lists related partitions\.
 
 **Fields**
-+ `Partitions` – An array of [Partition](#aws-glue-api-catalog-partitions-Partition)s\.
++ `Partitions` – An array of [Partition](#aws-glue-api-catalog-partitions-Partition) objects\.
 
   A list of the partitions in the composing specification\.
 
@@ -116,7 +116,7 @@ Provides a root path to specified partitions\.
 Contains a list of values defining partitions\.
 
 **Fields**
-+ `Values` – An array of UTF\-8 strings, at least 1 item in the array\. Required\.
++ `Values` – *Required:* An array of UTF\-8 strings, at least 1 string\.
 
   The list of values\.
 
@@ -125,10 +125,10 @@ Contains a list of values defining partitions\.
 Defines a non\-overlapping region of a table's partitions, allowing multiple requests to be executed in parallel\.
 
 **Fields**
-+ `SegmentNumber` – Number \(integer\), at least 0\. Required\.
++ `SegmentNumber` – *Required:* Number \(integer\), not more than None\.
 
   The zero\-based index number of the this segment\. For example, if the total number of segments is 4, SegmentNumber values will range from zero through three\.
-+ `TotalSegments` – Number \(integer\), not less than 1 or more than 10\. Required\.
++ `TotalSegments` – *Required:* Number \(integer\), not less than 1 or more than 10\.
 
   The total numer of segments\.
 
@@ -137,7 +137,7 @@ Defines a non\-overlapping region of a table's partitions, allowing multiple req
 Contains information about a partition error\.
 
 **Fields**
-+ `PartitionValues` – An array of UTF\-8 strings, at least 1 item in the array\.
++ `PartitionValues` – An array of UTF\-8 strings, at least 1 string\.
 
   The values that define the partition\.
 + `ErrorDetail` – An [ErrorDetail](aws-glue-api-common.md#aws-glue-api-common-ErrorDetail) object\.
@@ -162,13 +162,13 @@ Creates a new partition\.
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The ID of the catalog in which the partion is to be created\. Currently, this should be the AWS account ID\.
-+ `DatabaseName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the metadata database in which the partition is to be created\.
-+ `TableName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `TableName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the metadata table in which the partition is to be created\.
-+ `PartitionInput` – A [PartitionInput](#aws-glue-api-catalog-partitions-PartitionInput) object\. Required\.
++ `PartitionInput` – *Required:* A [PartitionInput](#aws-glue-api-catalog-partitions-PartitionInput) object\.
 
   A `PartitionInput` structure defining the partition to be created\.
 
@@ -182,7 +182,6 @@ Creates a new partition\.
 + `InternalServiceException`
 + `EntityNotFoundException`
 + `OperationTimeoutException`
-+ `GlueEncryptionException`
 
 ## BatchCreatePartition Action \(Python: batch\_create\_partition\)<a name="aws-glue-api-catalog-partitions-BatchCreatePartition"></a>
 
@@ -192,18 +191,18 @@ Creates one or more partitions in a batch operation\.
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The ID of the catalog in which the partion is to be created\. Currently, this should be the AWS account ID\.
-+ `DatabaseName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the metadata database in which the partition is to be created\.
-+ `TableName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `TableName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the metadata table in which the partition is to be created\.
-+ `PartitionInputList` – An array of [PartitionInput](#aws-glue-api-catalog-partitions-PartitionInput)s, not more than 100 items in the array\. Required\.
++ `PartitionInputList` – *Required:* An array of [PartitionInput](#aws-glue-api-catalog-partitions-PartitionInput) objects, not more than 100 structures\.
 
   A list of `PartitionInput` structures that define the partitions to be created\.
 
 **Response**
-+ `Errors` – An array of [PartitionError](#aws-glue-api-catalog-partitions-PartitionError)s\.
++ `Errors` – An array of [PartitionError](#aws-glue-api-catalog-partitions-PartitionError) objects\.
 
   Errors encountered when trying to create the requested partitions\.
 
@@ -214,7 +213,6 @@ Creates one or more partitions in a batch operation\.
 + `InternalServiceException`
 + `EntityNotFoundException`
 + `OperationTimeoutException`
-+ `GlueEncryptionException`
 
 ## UpdatePartition Action \(Python: update\_partition\)<a name="aws-glue-api-catalog-partitions-UpdatePartition"></a>
 
@@ -224,16 +222,16 @@ Updates a partition\.
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The ID of the Data Catalog where the partition to be updated resides\. If none is supplied, the AWS account ID is used by default\.
-+ `DatabaseName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the catalog database in which the table in question resides\.
-+ `TableName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `TableName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the table where the partition to be updated is located\.
-+ `PartitionValueList` – An array of UTF\-8 strings, not more than 100 items in the array\. Required\.
++ `PartitionValueList` – *Required:* An array of UTF\-8 strings, not more than 100 strings\.
 
   A list of the values defining the partition\.
-+ `PartitionInput` – A [PartitionInput](#aws-glue-api-catalog-partitions-PartitionInput) object\. Required\.
++ `PartitionInput` – *Required:* A [PartitionInput](#aws-glue-api-catalog-partitions-PartitionInput) object\.
 
   The new partition object to which to update the partition\.
 
@@ -245,7 +243,6 @@ Updates a partition\.
 + `InvalidInputException`
 + `InternalServiceException`
 + `OperationTimeoutException`
-+ `GlueEncryptionException`
 
 ## DeletePartition Action \(Python: delete\_partition\)<a name="aws-glue-api-catalog-partitions-DeletePartition"></a>
 
@@ -255,13 +252,13 @@ Deletes a specified partition\.
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The ID of the Data Catalog where the partition to be deleted resides\. If none is supplied, the AWS account ID is used by default\.
-+ `DatabaseName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the catalog database in which the table in question resides\.
-+ `TableName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `TableName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the table where the partition to be deleted is located\.
-+ `PartitionValues` – An array of UTF\-8 strings, at least 1 item in the array\. Required\.
++ `PartitionValues` – *Required:* An array of UTF\-8 strings, at least 1 string\.
 
   The values that define the partition\.
 
@@ -282,18 +279,18 @@ Deletes one or more partitions in a batch operation\.
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The ID of the Data Catalog where the partition to be deleted resides\. If none is supplied, the AWS account ID is used by default\.
-+ `DatabaseName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the catalog database in which the table in question resides\.
-+ `TableName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `TableName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the table where the partitions to be deleted is located\.
-+ `PartitionsToDelete` – An array of [PartitionValueList](#aws-glue-api-catalog-partitions-PartitionValueList)s, not more than 25 items in the array\. Required\.
++ `PartitionsToDelete` – *Required:* An array of [PartitionValueList](#aws-glue-api-catalog-partitions-PartitionValueList) objects, not more than 25 structures\.
 
   A list of `PartitionInput` structures that define the partitions to be deleted\.
 
 **Response**
-+ `Errors` – An array of [PartitionError](#aws-glue-api-catalog-partitions-PartitionError)s\.
++ `Errors` – An array of [PartitionError](#aws-glue-api-catalog-partitions-PartitionError) objects\.
 
   Errors encountered when trying to delete the requested partitions\.
 
@@ -311,13 +308,13 @@ Retrieves information about a specified partition\.
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The ID of the Data Catalog where the partition in question resides\. If none is supplied, the AWS account ID is used by default\.
-+ `DatabaseName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the catalog database where the partition resides\.
-+ `TableName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `TableName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the partition's table\.
-+ `PartitionValues` – An array of UTF\-8 strings, at least 1 item in the array\. Required\.
++ `PartitionValues` – *Required:* An array of UTF\-8 strings, at least 1 string\.
 
   The values that define the partition\.
 
@@ -331,7 +328,6 @@ Retrieves information about a specified partition\.
 + `InvalidInputException`
 + `InternalServiceException`
 + `OperationTimeoutException`
-+ `GlueEncryptionException`
 
 ## GetPartitions Action \(Python: get\_partitions\)<a name="aws-glue-api-catalog-partitions-GetPartitions"></a>
 
@@ -341,15 +337,122 @@ Retrieves information about the partitions in a table\.
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The ID of the Data Catalog where the partitions in question reside\. If none is supplied, the AWS account ID is used by default\.
-+ `DatabaseName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the catalog database where the partitions reside\.
-+ `TableName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `TableName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the partitions' table\.
 + `Expression` – Predicate string, not more than 2048 bytes long, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
 
   An expression filtering the partitions to be returned\.
+
+  The expression uses SQL syntax similar to the SQL `WHERE` filter clause\. The SQL statement parser [JSQLParser](http://jsqlparser.sourceforge.net/home.php) parses the expression\. 
+
+  *Operators*: The following are the operators that you can use in the `Expression` API call:  
+=  
+Checks if the values of the two operands are equal or not; if yes, then the condition becomes true\.  
+Example: Assume 'variable a' holds 10 and 'variable b' holds 20\.   
+\(a = b\) is not true\.  
+< >  
+Checks if the values of two operands are equal or not; if the values are not equal, then the condition becomes true\.  
+Example: \(a < > b\) is true\.  
+>  
+Checks if the value of the left operand is greater than the value of the right operand; if yes, then the condition becomes true\.  
+Example: \(a > b\) is not true\.  
+<  
+Checks if the value of the left operand is less than the value of the right operand; if yes, then the condition becomes true\.  
+Example: \(a < b\) is true\.  
+>=  
+Checks if the value of the left operand is greater than or equal to the value of the right operand; if yes, then the condition becomes true\.  
+Example: \(a >= b\) is not true\.  
+<=  
+Checks if the value of the left operand is less than or equal to the value of the right operand; if yes, then the condition becomes true\.  
+Example: \(a <= b\) is true\.  
+AND, OR, IN, BETWEEN, LIKE, NOT, IS NULL  
+Logical operators\.
+
+  *Supported Partition Key Types*: The following are the the supported partition keys\.
+  + `string`
+  + `date`
+  + `timestamp`
+  + `int`
+  + `bigint`
+  + `long`
+  + `tinyint`
+  + `smallint`
+  + `decimal`
+
+  If an invalid type is encountered, a `[PredicateConstructionException](https://code.amazon.com/packages/DaylightService/blobs/5820762977ffbdd59f23f4cf349e47189632202f/--/src/com/amazonaws/daylight/core/storage/parsers/query/parser/PredicateFactoryProvider.java#L37)` is thrown\. 
+
+  The following list shows the valid operators on each type\. When you define a crawler, the `partitionKey` type is created as a `STRING`, to be compatible with the catalog partitions\. 
+
+  *Valid Operations*:   
+Operator: =  
+Applies to: String, Data, Timestamp, Int/BigInt/TinyInt/Long\.  
+Operator: < >  
+Applies to: String, Data, Timestamp, Int/BigInt/TinyInt/Long\.  
+Operator: >  
+Applies to: String, Data, Timestamp, Int/BigInt/TinyInt/Long\.  
+Operator: <  
+Applies to: String, Data, Timestamp, Int/BigInt/TinyInt/Long\.  
+Operator: >=  
+Applies to: String, Data, Timestamp, Int/BigInt/TinyInt/Long\.  
+Operator: <=  
+Applies to: String, Data, Timestamp, Int/BigInt/TinyInt/Long\.  
+Operator: LIKE  
+String\.
+**Note**  
+The "`LIKE`" operator only applies to the `STRING` type, and does not support regular expressions\.
+
+  *Sample API Call*:   
+**Example**  
+
+  The table `twitter_partition` has three partitions:
+
+  ```
+  year = 2015
+          year = 2016
+          year = 2017
+  ```  
+**Example**  
+
+  Get Partition `year` equals to 2015
+
+  ```
+  aws glue get-partitions --database-name dbname --table-name twitter_partition 
+          --expression "year*=*'2015'"
+  ```  
+**Example**  
+
+  Get Partition `year` between 2016\-2018 \(exclusive\)
+
+  ```
+  aws glue get-partitions --database-name dbname --table-name twitter_partition 
+          --expression "year>'2016' AND year<'2018'"
+  ```  
+**Example**  
+
+  Get Partition `year` year between 2015\-2018 \(inclusive\)\. The following API calls are equivalent to each other
+
+  ```
+  aws glue get-partitions --database-name dbname --table-name twitter_partition 
+          --expression "year>='2015' *AND* year<='2018'"
+          
+          aws glue get-partitions --database-name dbname --table-name twitter_partition 
+          --expression "year *BETWEEN* 2016 AND 2018"
+          
+          aws glue get-partitions --database-name dbname --table-name twitter_partition 
+          --expression "year *IN* (2015,2016,2017,2018)"
+  ```  
+**Example**  
+
+  A wildcard partition filter, where the following call output will be partition year=2017\. A regular expression is not supported in `LIKE`\.
+
+  ```
+  aws glue get-partitions --database-name dbname --table-name twitter_partition 
+          --expression "year LIKE '%7'"
+  ```
 + `NextToken` – UTF\-8 string\.
 
   A continuation token, if this is not the first call to retrieve these partitions\.
@@ -361,7 +464,7 @@ Retrieves information about the partitions in a table\.
   The maximum number of partitions to return in a single response\.
 
 **Response**
-+ `Partitions` – An array of [Partition](#aws-glue-api-catalog-partitions-Partition)s\.
++ `Partitions` – An array of [Partition](#aws-glue-api-catalog-partitions-Partition) objects\.
 
   A list of requested partitions\.
 + `NextToken` – UTF\-8 string\.
@@ -373,7 +476,6 @@ Retrieves information about the partitions in a table\.
 + `InvalidInputException`
 + `OperationTimeoutException`
 + `InternalServiceException`
-+ `GlueEncryptionException`
 
 ## BatchGetPartition Action \(Python: batch\_get\_partition\)<a name="aws-glue-api-catalog-partitions-BatchGetPartition"></a>
 
@@ -383,21 +485,21 @@ Retrieves partitions in a batch request\.
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The ID of the Data Catalog where the partitions in question reside\. If none is supplied, the AWS account ID is used by default\.
-+ `DatabaseName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the catalog database where the partitions reside\.
-+ `TableName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `TableName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the partitions' table\.
-+ `PartitionsToGet` – An array of [PartitionValueList](#aws-glue-api-catalog-partitions-PartitionValueList)s, not more than 1000 items in the array\. Required\.
++ `PartitionsToGet` – *Required:* An array of [PartitionValueList](#aws-glue-api-catalog-partitions-PartitionValueList) objects, not more than 1000 structures\.
 
   A list of partition values identifying the partitions to retrieve\.
 
 **Response**
-+ `Partitions` – An array of [Partition](#aws-glue-api-catalog-partitions-Partition)s\.
++ `Partitions` – An array of [Partition](#aws-glue-api-catalog-partitions-Partition) objects\.
 
   A list of the requested partitions\.
-+ `UnprocessedKeys` – An array of [PartitionValueList](#aws-glue-api-catalog-partitions-PartitionValueList)s, not more than 1000 items in the array\.
++ `UnprocessedKeys` – An array of [PartitionValueList](#aws-glue-api-catalog-partitions-PartitionValueList) objects, not more than 1000 structures\.
 
   A list of the partition values in the request for which partions were not returned\.
 
@@ -406,4 +508,3 @@ Retrieves partitions in a batch request\.
 + `EntityNotFoundException`
 + `OperationTimeoutException`
 + `InternalServiceException`
-+ `GlueEncryptionException`

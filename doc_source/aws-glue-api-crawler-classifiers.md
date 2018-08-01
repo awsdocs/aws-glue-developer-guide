@@ -34,10 +34,10 @@ You can use the standard classifiers that AWS Glue supplies, or you can write yo
 A classifier that uses `grok` patterns\.
 
 **Fields**
-+ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `Name` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the classifier\.
-+ `Classification` – UTF\-8 string\. Required\.
++ `Classification` – *Required:* UTF\-8 string\.
 
   An identifier of the data format that the classifier matches, such as Twitter, JSON, Omniture logs, and so on\.
 + `CreationTime` – Timestamp\.
@@ -49,7 +49,7 @@ A classifier that uses `grok` patterns\.
 + `Version` – Number \(long\)\.
 
   The version of this classifier\.
-+ `GrokPattern` – UTF\-8 string, not less than 1 or more than 2048 bytes long, matching the [A Logstash Grok string pattern](aws-glue-api-common.md#aws-glue-api-grok-pattern)\. Required\.
++ `GrokPattern` – *Required:* UTF\-8 string, not less than 1 or more than 2048 bytes long, matching the [A Logstash Grok string pattern](aws-glue-api-common.md#aws-glue-api-grok-pattern)\.
 
   The grok pattern applied to a data store by this classifier\. For more information, see built\-in patterns in [Writing Custom Classifers](http://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html)\.
 + `CustomPatterns` – UTF\-8 string, not more than 16000 bytes long, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
@@ -61,10 +61,10 @@ A classifier that uses `grok` patterns\.
 A classifier for `XML` content\.
 
 **Fields**
-+ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `Name` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the classifier\.
-+ `Classification` – UTF\-8 string\. Required\.
++ `Classification` – *Required:* UTF\-8 string\.
 
   An identifier of the data format that the classifier matches\.
 + `CreationTime` – Timestamp\.
@@ -85,7 +85,7 @@ A classifier for `XML` content\.
 A classifier for `JSON` content\.
 
 **Fields**
-+ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `Name` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the classifier\.
 + `CreationTime` – Timestamp\.
@@ -97,7 +97,7 @@ A classifier for `JSON` content\.
 + `Version` – Number \(long\)\.
 
   The version of this classifier\.
-+ `JsonPath` – UTF\-8 string\. Required\.
++ `JsonPath` – *Required:* UTF\-8 string\.
 
   A `JsonPath` string defining the JSON data for the classifier to classify\. AWS Glue supports a subset of JsonPath, as described in [Writing JsonPath Custom Classifiers](https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json)\.
 
@@ -106,13 +106,13 @@ A classifier for `JSON` content\.
 Specifies a `grok` classifier for `CreateClassifier` to create\.
 
 **Fields**
-+ `Classification` – UTF\-8 string\. Required\.
++ `Classification` – *Required:* UTF\-8 string\.
 
   An identifier of the data format that the classifier matches, such as Twitter, JSON, Omniture logs, Amazon CloudWatch Logs, and so on\.
-+ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `Name` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the new classifier\.
-+ `GrokPattern` – UTF\-8 string, not less than 1 or more than 2048 bytes long, matching the [A Logstash Grok string pattern](aws-glue-api-common.md#aws-glue-api-grok-pattern)\. Required\.
++ `GrokPattern` – *Required:* UTF\-8 string, not less than 1 or more than 2048 bytes long, matching the [A Logstash Grok string pattern](aws-glue-api-common.md#aws-glue-api-grok-pattern)\.
 
   The grok pattern used by this classifier\.
 + `CustomPatterns` – UTF\-8 string, not more than 16000 bytes long, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
@@ -124,7 +124,7 @@ Specifies a `grok` classifier for `CreateClassifier` to create\.
 Specifies a grok classifier to update when passed to `UpdateClassifier`\.
 
 **Fields**
-+ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `Name` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the `GrokClassifier`\.
 + `Classification` – UTF\-8 string\.
@@ -142,10 +142,10 @@ Specifies a grok classifier to update when passed to `UpdateClassifier`\.
 Specifies an XML classifier for `CreateClassifier` to create\.
 
 **Fields**
-+ `Classification` – UTF\-8 string\. Required\.
++ `Classification` – *Required:* UTF\-8 string\.
 
   An identifier of the data format that the classifier matches\.
-+ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `Name` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the classifier\.
 + `RowTag` – UTF\-8 string\.
@@ -157,7 +157,7 @@ Specifies an XML classifier for `CreateClassifier` to create\.
 Specifies an XML classifier to be updated\.
 
 **Fields**
-+ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `Name` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the classifier\.
 + `Classification` – UTF\-8 string\.
@@ -172,10 +172,10 @@ Specifies an XML classifier to be updated\.
 Specifies a JSON classifier for `CreateClassifier` to create\.
 
 **Fields**
-+ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `Name` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the classifier\.
-+ `JsonPath` – UTF\-8 string\. Required\.
++ `JsonPath` – *Required:* UTF\-8 string\.
 
   A `JsonPath` string defining the JSON data for the classifier to classify\. AWS Glue supports a subset of JsonPath, as described in [Writing JsonPath Custom Classifiers](https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json)\.
 
@@ -184,7 +184,7 @@ Specifies a JSON classifier for `CreateClassifier` to create\.
 Specifies a JSON classifier to be updated\.
 
 **Fields**
-+ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `Name` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the classifier\.
 + `JsonPath` – UTF\-8 string\.
@@ -226,7 +226,7 @@ Creates a classifier in the user's account\. This may be a `GrokClassifier`, an 
 Removes a classifier from the Data Catalog\.
 
 **Request**
-+ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `Name` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   Name of the classifier to remove\.
 
@@ -242,7 +242,7 @@ Removes a classifier from the Data Catalog\.
 Retrieve a classifier by name\.
 
 **Request**
-+ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\. Required\.
++ `Name` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   Name of the classifier to retrieve\.
 
@@ -268,7 +268,7 @@ Lists all classifier objects in the Data Catalog\.
   An optional continuation token\.
 
 **Response**
-+ `Classifiers` – An array of [Classifier](#aws-glue-api-crawler-classifiers-Classifier)s\.
++ `Classifiers` – An array of [Classifier](#aws-glue-api-crawler-classifiers-Classifier) objects\.
 
   The requested list of classifier objects\.
 + `NextToken` – UTF\-8 string\.
