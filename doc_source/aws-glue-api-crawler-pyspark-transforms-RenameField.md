@@ -18,7 +18,7 @@ Renames a node within a `DynamicFrame`\.
 + `frame` – The `DynamicFrame` in which to rename a node \(required\)\.
 + `old_name` – Full path to the node to rename \(required\)\.
 
-  If the old name has dots in it, RenameField will not work unless you place back\-ticks around it \(```\)\. For example, to replace `this.old.name` with `thisNewName`, you would call RenameField as follows:
+  If the old name has dots in it, RenameField will not work unless you place back\-ticks around it \(\`\`\)\. For example, to replace `this.old.name` with `thisNewName`, you would call RenameField as follows:
 
   ```
   newDyF = RenameField(oldDyF, "`this.old.name`", "thisNewName")

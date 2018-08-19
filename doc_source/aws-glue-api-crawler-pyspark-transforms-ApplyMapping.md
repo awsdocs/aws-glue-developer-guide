@@ -17,6 +17,12 @@ Applies a mapping in a `DynamicFrame`\.
 Applies a declarative mapping to a specified `DynamicFrame`\.
 + `frame` – The `DynamicFrame` in which to apply the mapping \(required\)\.
 + `mappings` – A list of mapping tuples, each consisting of: \(source column, source type, target column, target type\)\. Required\.
+
+  If the source column has dots in it, the mapping will not work unless you place back\-ticks around it \(\`\`\)\. For example, to map `this.old.name` (string) to `thisNewName` (string), you would use the following tuple:
+
+  ```
+  ("`this.old.name`", "string", "thisNewName", "string")
+  ```
 + `transformation_ctx` – A unique string that is used to identify state information \(optional\)\.
 + `info` – A string associated with errors in the transformation \(optional\)\.
 + `stageThreshold` – The maximum number of errors that can occur in the transformation before it errors out \(optional; the default is zero\)\.
