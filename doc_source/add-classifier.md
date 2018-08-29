@@ -56,7 +56,7 @@ If AWS Glue doesn't find a custom classifier that fits the input data format wit
 | Amazon DynamoDB | dynamodb | Reads data from the DynamoDB table\. | 
 
 Files in the following compressed formats can be classified:
-+ ZIP \(as compression format, not as archive format\)
++ ZIP \(supported for archives containing only a single file\)\. Note that Zip is not well\-supported in other services \(because of the archive\)\.
 + BZIP
 + GZIP
 + LZ4

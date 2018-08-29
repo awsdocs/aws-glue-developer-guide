@@ -79,6 +79,7 @@ Creates a new database in a Data Catalog\.
 + `ResourceNumberLimitExceededException`
 + `InternalServiceException`
 + `OperationTimeoutException`
++ `GlueEncryptionException`
 
 ## UpdateDatabase Action \(Python: update\_database\)<a name="aws-glue-api-catalog-databases-UpdateDatabase"></a>
 
@@ -103,6 +104,7 @@ Updates an existing database definition in a Data Catalog\.
 + `InvalidInputException`
 + `InternalServiceException`
 + `OperationTimeoutException`
++ `GlueEncryptionException`
 
 ## DeleteDatabase Action \(Python: delete\_database\)<a name="aws-glue-api-catalog-databases-DeleteDatabase"></a>
 
@@ -151,6 +153,7 @@ Retrieves the definition of a specified database\.
 + `EntityNotFoundException`
 + `InternalServiceException`
 + `OperationTimeoutException`
++ `GlueEncryptionException`
 
 ## GetDatabases Action \(Python: get\_databases\)<a name="aws-glue-api-catalog-databases-GetDatabases"></a>
 
@@ -179,3 +182,4 @@ Retrieves all Databases defined in a given Data Catalog\.
 + `InvalidInputException`
 + `InternalServiceException`
 + `OperationTimeoutException`
++ `GlueEncryptionException`

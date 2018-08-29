@@ -99,7 +99,7 @@ Defines an action to be initiated by a trigger\.
 
   Each value is a UTF\-8 string\.
 
-  Arguments to be passed to the job\.
+  Arguments to be passed to the job run\.
 
   You can specify arguments here that your own job\-execution script consumes, as well as arguments that AWS Glue itself consumes\.
 
@@ -112,6 +112,9 @@ Defines an action to be initiated by a trigger\.
 + `NotificationProperty` – A [NotificationProperty](aws-glue-api-jobs-job.md#aws-glue-api-jobs-job-NotificationProperty) object\.
 
   Specifies configuration properties of a job run notification\.
++ `SecurityConfiguration` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the SecurityConfiguration structure to be used with this action\.
 
 ## Operations<a name="aws-glue-api-jobs-trigger-actions"></a>
 + [CreateTrigger Action \(Python: create\_trigger\)](#aws-glue-api-jobs-trigger-CreateTrigger)

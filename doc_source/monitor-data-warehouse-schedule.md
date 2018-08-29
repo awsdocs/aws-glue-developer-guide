@@ -33,7 +33,7 @@ cron(Minutes Hours Day-of-month Month Day-of-week Year)
 
 **Limits**
 + You can't specify the `Day-of-month` and `Day-of-week` fields in the same cron expression\. If you specify a value in one of the fields, you must use a **?** \(question mark\) in the other\.
-+ Cron expressions that lead to rates faster than 5 minutes are not supported\. The support for specifying both a day\-of\-week and a day\-of\-month value is not yet complete \(you must currently use the '?' character in one of these fields\)\. 
++ Cron expressions that lead to rates faster than 5 minutes are not supported\. 
 
 **Examples**  
 When creating a schedule, you can use the following sample cron strings\.

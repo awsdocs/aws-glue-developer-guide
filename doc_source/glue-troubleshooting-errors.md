@@ -52,11 +52,6 @@ The user who defines a job must have permission for `iam:PassRole` for AWS Glue\
 ## Error: Could Not Find Subnet for AZ<a name="error-az-not-available"></a>
 + The Availability Zone might not be available to AWS Glue\. Create and use a new subnet in a different Availability Zone from the one specified in the message\.
 
-## Error: Job Run Exception for Connection List with Multiple Subnet or AZ<a name="error-connection-multiple-az-in-job"></a>
-
-When running a job, validation fails with the exception: `CONNECTION_LIST_CONNECTION_WITH_MULTIPLE_SUBNET_ID` and `CONNECTION_LIST_CONNECTION_WITH_MULTIPLE_AZ`\.
-+ If your job has multiple connections, they can't be in different Availability Zones or subnets\. Ensure that all connections in a job are in the same Availability Zone, or edit the job to remove connections so that only connections that are in the same Availability Zone are required\.
-
 ## Error: Job Run Exception When Writing to a JDBC Target<a name="error-job-run-jdbc-target"></a>
 
 When you are running a job that writes to a JDBC target, the job might encounter errors in the following scenarios:

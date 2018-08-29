@@ -21,8 +21,6 @@ Each AWS account has one AWS Glue Data Catalog\. It provides a uniform repositor
 
 You can use AWS Identity and Access Management \(IAM\) policies to control access to the data sources managed by the AWS Glue Data Catalog\. These policies allow different groups in your enterprise to safely publish data to the wider organization while protecting sensitive information\. IAM policies let you clearly and consistently define which users have access to which data, regardless of its location\.
 
-The Data Catalog also provides comprehensive audit and governance capabilities, with schema change tracking, lineage of data, and data access controls\. You can audit changes to data schemas and track the movement of data across systems, to ensure that data is not inappropriately modified or inadvertently shared\.
-
 For information about how to use the AWS Glue Data Catalog, see [Populating the AWS Glue Data Catalog](populate-data-catalog.md)\. For information about how to program using the Data Catalog API, see [Catalog API](aws-glue-api-catalog.md)\.
 
 ## AWS Glue Crawlers and Classifiers<a name="crawling-intro"></a>

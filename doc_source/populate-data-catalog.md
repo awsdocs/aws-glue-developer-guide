@@ -32,4 +32,5 @@ The following is the general workflow for how a crawler populates the AWS Glue D
 + [Defining a Database in Your Data Catalog](define-database.md)
 + [Adding Classifiers to a Crawler](add-classifier.md)
 + [Adding a Connection to Your Data Store](populate-add-connection.md)
++ [Working with Data Catalog Settings on the AWS Glue Console](console-data-catalog-settings.md)
 + [Populating the Data Catalog Using AWS CloudFormation Templates](populate-with-cloudformation-templates.md)

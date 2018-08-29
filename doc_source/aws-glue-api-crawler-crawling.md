@@ -63,7 +63,14 @@ Specifies a crawler program that examines a data source and uses classifiers to 
   The version of the crawler\.
 + `Configuration` – UTF\-8 string\.
 
-  Crawler configuration information\. This versioned JSON string allows users to specify aspects of a crawler's behavior\. For more information, see [Configuring a Crawler](http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html)\.
+  Crawler configuration information\. This versioned JSON string allows users to specify aspects of a Crawler's behavior\.
+
+  You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition\. Use the following JSON string to specify that behavior:
+
+  Example: `'{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }'`
++ `CrawlerSecurityConfiguration` – UTF\-8 string, not more than 128 bytes long\.
+
+  The name of the SecurityConfiguration structure to be used by this Crawler\.
 
 ## Schedule Structure<a name="aws-glue-api-crawler-crawling-Schedule"></a>
 
@@ -238,7 +245,14 @@ Creates a new crawler with specified targets, role, configuration, and optional 
   Policy for the crawler's update and deletion behavior\.
 + `Configuration` – UTF\-8 string\.
 
-  Crawler configuration information\. This versioned JSON string allows users to specify aspects of a crawler's behavior\. For more information, see [Configuring a Crawler](http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html)\.
+  Crawler configuration information\. This versioned JSON string allows users to specify aspects of a Crawler's behavior\.
+
+  You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition\. Use the following JSON string to specify that behavior:
+
+  Example: `'{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }'`
++ `CrawlerSecurityConfiguration` – UTF\-8 string, not more than 128 bytes long\.
+
+  The name of the SecurityConfiguration structure to be used by this Crawler\.
 
 **Response**
 + *No Response parameters\.*
@@ -368,7 +382,14 @@ Updates a crawler\. If a crawler is running, you must stop it using `StopCrawler
   Policy for the crawler's update and deletion behavior\.
 + `Configuration` – UTF\-8 string\.
 
-  Crawler configuration information\. This versioned JSON string allows users to specify aspects of a crawler's behavior\. For more information, see [Configuring a Crawler](http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html)\.
+  Crawler configuration information\. This versioned JSON string allows users to specify aspects of a Crawler's behavior\.
+
+  You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition\. Use the following JSON string to specify that behavior:
+
+  Example: `'{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }'`
++ `CrawlerSecurityConfiguration` – UTF\-8 string, not more than 128 bytes long\.
+
+  The name of the SecurityConfiguration structure to be used by this Crawler\.
 
 **Response**
 + *No Response parameters\.*

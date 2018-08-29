@@ -7,4 +7,5 @@ The following sections provide an overview and walk you through setting up and u
 + [Setting Up DNS in Your VPC](set-up-vpc-dns.md)
 + [Setting Up Your Environment to Access Data Stores](start-connecting.md)
 + [Setting Up Your Environment for Development Endpoints](start-development-endpoint.md)
++ [Setting Up Encryption in AWS Glue](set-up-encryption.md)
 + [AWS Glue Console Workflow Overview](start-console-overview.md)

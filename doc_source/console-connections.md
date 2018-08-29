@@ -40,6 +40,25 @@ Choose either Amazon Redshift, Amazon RDS, or JDBC\.
 + If you choose Amazon Redshift, choose a **Cluster**, **Database name**, **Username**, and **Password** in your account to create a JDBC connection\.
 + If you choose Amazon RDS, choose an **Instance**, **Database name**, **Username**, and **Password** in your account to create a JDBC connection\. The console also lists the supported database engine types\.
 
+**Require SSL connection**  
+Select this option to require AWS Glue to verify that the JDBC database connection is connected over a trusted Secure Socket Layer \(SSL\)\. This option is optional\. If not selected, AWS Glue can ignore failures when it uses SSL to encrypt a connection to a JDBC database\. See the documentation for your database for configuration instructions\. When you select this option, if AWS Glue cannot connect using SSL, the job run, crawler, or ETL statements in a development endpoint fail\.  
+This option is validated on the AWS Glue client side\. AWS Glue only connects to JDBC over SSL with certificate and host name validation\. Support is available for:   
++ Oracle
++ Microsoft SQL Server
++ PostgreSQL
++ Amazon Redshift
++ MySQL \(Amazon RDS instances only\)
++ Aurora MySQL \(Amazon RDS instances only\)
+To enable an **Amazon RDS Oracle** data store to use **Require SSL connection**, you need to create and attach an option group to the Oracle instance\.  
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. Add an **Option group** to the Amazon RDS Oracle instance\. For more information about how to add an option group on the Amazon RDS console, see [Creating an Option Group](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithOptionGroups.html#USER_WorkingWithOptionGroups.Create)
+
+1. Add an **Option** to the option group for **SSL**\. The **Port** you specify for SSL is later used when you create an AWS Glue JDBC connection URL for the Amazon RDS Oracle instance\. For more information about how to add an option on the Amazon RDS console, see [Adding an Option to an Option Group](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithOptionGroups.html#USER_WorkingWithOptionGroups.AddOption)\. For more information about the Oracle SSL option, see [Oracle SSL](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.Options.SSL.html)\. 
+
+1. On the AWS Glue console, create a connection to the Amazon RDS Oracle instance\. In the connection definition, select **Require SSL connection**, and when requested, enter the **Port** you used in the Amazon RDS Oracle SSL option\. 
+
 **JDBC URL**  
 Type the URL for your JDBC data store\. For most database engines, this field is in the following format\.  
  ` jdbc:protocol://host:port/db_name `   
@@ -75,6 +94,9 @@ Provide a user name that has permission to access the JDBC data store\.
 
 **Password**  
 Type the password for the user name that has access permission to the JDBC data store\.
+
+**Port**  
+Type the port used in the JDBC URL to connect to an Amazon RDS Oracle instance\. This field is only shown when **Require SSL connection** is selected for an Amazon RDS Oracle instance\.
 
 **VPC**  
 Choose the name of the virtual private cloud \(VPC\) that contains your data store\. The AWS Glue console lists all VPCs for the current region\.

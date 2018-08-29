@@ -81,6 +81,7 @@ Creates a new function definition in the Data Catalog\.
 + `EntityNotFoundException`
 + `OperationTimeoutException`
 + `ResourceNumberLimitExceededException`
++ `GlueEncryptionException`
 
 ## UpdateUserDefinedFunction Action \(Python: update\_user\_defined\_function\)<a name="aws-glue-api-catalog-functions-UpdateUserDefinedFunction"></a>
 
@@ -108,6 +109,7 @@ Updates an existing function definition in the Data Catalog\.
 + `InvalidInputException`
 + `InternalServiceException`
 + `OperationTimeoutException`
++ `GlueEncryptionException`
 
 ## DeleteUserDefinedFunction Action \(Python: delete\_user\_defined\_function\)<a name="aws-glue-api-catalog-functions-DeleteUserDefinedFunction"></a>
 
@@ -158,6 +160,7 @@ Retrieves a specified function definition from the Data Catalog\.
 + `InvalidInputException`
 + `InternalServiceException`
 + `OperationTimeoutException`
++ `GlueEncryptionException`
 
 ## GetUserDefinedFunctions Action \(Python: get\_user\_defined\_functions\)<a name="aws-glue-api-catalog-functions-GetUserDefinedFunctions"></a>
 
@@ -193,3 +196,4 @@ Retrieves a multiple function definitions from the Data Catalog\.
 + `InvalidInputException`
 + `OperationTimeoutException`
 + `InternalServiceException`
++ `GlueEncryptionException`

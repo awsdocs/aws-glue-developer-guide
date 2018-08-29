@@ -47,7 +47,7 @@ You can use the following `format_options` values with `format="grokLog"`:
 This value designates a [JSON](https://www.json.org/) \(JavaScript Object Notation\) data format\.
 
 You can use the following `format_options` values with `format="json"`:
-+ `jsonPath`: A [JsonPath](https://github.com/json-path/JsonPath) expression that identifies an object to be written\. For example, the following JsonPath expression targets the `id` field of a JSON object:
++ `jsonPath`: A [JsonPath](https://github.com/json-path/JsonPath) expression that identifies an object to be read into records\. This is particularly useful when a file contains records nested inside an outer array\. For example, the following JsonPath expression targets the `id` field of a JSON object:
 
   ```
   format="json", format_options={"jsonPath": "$.id"}

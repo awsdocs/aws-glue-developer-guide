@@ -61,7 +61,11 @@ def getJDBCSink( catalogConnection : String,
 Creates a [DataSink](glue-etl-scala-apis-glue-datasink-class.md) that writes to a JDBC database that is specified in a `Connection` object in the Data Catalog\. The `Connection` object has information to connect to a JDBC sink, including the URL, user name, password, VPC, subnet, and security groups\.
 + `catalogConnection` — The name of the connection in the Data Catalog that contains the JDBC URL to write to\.
 + `options` — A string of JSON name\-value pairs that provide additional information that is required to write to a JDBC data store\. This includes: 
-  + *dbtable* \(required\) — The name of the JDBC table\.
+  + *dbtable* \(required\) — The name of the JDBC table\. For JDBC data stores that support schemas within a database, specify `schema.table-name`\. If a schema is not provided, then the default "public" schema is used\. The following example shows an options parameter that points to a schema named `test` and a table named `test_table` in database `test_db`\.
+
+    ```
+    options = JsonOptions("""{"dbtable": "test.test_table", "database": "test_db"}""")
+    ```
   + *database* \(required\) — The name of the JDBC database\.
   + Any additional options passed directly to the SparkSQL JDBC writer\. For more information, see [Redshift data source for Spark](https://github.com/databricks/spark-redshift)\.
 + `redshiftTmpDir` — A temporary staging directory to be used with certain data sinks\. Set to empty by default\.

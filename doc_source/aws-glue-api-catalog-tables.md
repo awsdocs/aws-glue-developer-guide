@@ -121,7 +121,7 @@ Structure used to create or update the table\.
 A column in a `Table`\.
 
 **Fields**
-+ `Name` – *Required:* UTF\-8 string, not less than 1 or more than 1024 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
++ `Name` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the `Column`\.
 + `Type` – UTF\-8 string, not more than 131072 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
@@ -303,6 +303,7 @@ Creates a new table definition in the Data Catalog\.
 + `ResourceNumberLimitExceededException`
 + `InternalServiceException`
 + `OperationTimeoutException`
++ `GlueEncryptionException`
 
 ## UpdateTable Action \(Python: update\_table\)<a name="aws-glue-api-catalog-tables-UpdateTable"></a>
 
@@ -332,6 +333,7 @@ Updates a metadata table in the Data Catalog\.
 + `OperationTimeoutException`
 + `ConcurrentModificationException`
 + `ResourceNumberLimitExceededException`
++ `GlueEncryptionException`
 
 ## DeleteTable Action \(Python: delete\_table\)<a name="aws-glue-api-catalog-tables-DeleteTable"></a>
 
@@ -416,6 +418,7 @@ Retrieves the `Table` definition in a Data Catalog for a specified table\.
 + `InvalidInputException`
 + `InternalServiceException`
 + `OperationTimeoutException`
++ `GlueEncryptionException`
 
 ## GetTables Action \(Python: get\_tables\)<a name="aws-glue-api-catalog-tables-GetTables"></a>
 
@@ -451,6 +454,7 @@ Retrieves the definitions of some or all of the tables in a given `Database`\.
 + `InvalidInputException`
 + `OperationTimeoutException`
 + `InternalServiceException`
++ `GlueEncryptionException`
 
 ## GetTableVersion Action \(Python: get\_table\_version\)<a name="aws-glue-api-catalog-tables-GetTableVersion"></a>
 
@@ -480,6 +484,7 @@ Retrieves a specified version of a table\.
 + `InvalidInputException`
 + `InternalServiceException`
 + `OperationTimeoutException`
++ `GlueEncryptionException`
 
 ## GetTableVersions Action \(Python: get\_table\_versions\)<a name="aws-glue-api-catalog-tables-GetTableVersions"></a>
 
@@ -515,6 +520,7 @@ Retrieves a list of strings that identify available versions of a specified tabl
 + `InvalidInputException`
 + `InternalServiceException`
 + `OperationTimeoutException`
++ `GlueEncryptionException`
 
 ## DeleteTableVersion Action \(Python: delete\_table\_version\)<a name="aws-glue-api-catalog-tables-DeleteTableVersion"></a>
 

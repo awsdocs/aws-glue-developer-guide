@@ -1,11 +1,12 @@
 # Document History for AWS Glue<a name="doc-history"></a>
 
 The following table describes important changes to the documentation for AWS Glue\.
-+ **Latest API version:** 2018\-07\-10
-+ **Latest documentation update:** July 13, 2018
++ **Latest API version:** 2018\-08\-24
++ **Latest documentation update:** August 24, 2018
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| Support for encryption | Added information about using encryption with AWS Glue\. For more information, see [ Encryption and Secure Access for AWS Glue](http://docs.aws.amazon.com/glue/latest/dg/encryption-glue-resources.html) and [Setting Up Encryption in AWS Glue](http://docs.aws.amazon.com/glue/latest/dg/set-up-encryption.html)\. | August 24, 2018 | 
 | Support for Apache Spark job metrics | Added information about the use of Apache Spark metrics for better debugging and profiling of ETL jobs\. You can easily track runtime metrics such as bytes read and written, memory usage and CPU load of the driver and executors, and data shuffles among executors from the AWS Glue console\. For more information, see [ Monitoring AWS Glue Using CloudWatch Metrics](http://docs.aws.amazon.com/glue/latest/dg/monitoring-awsglue-with-cloudwatch-metrics.html), [Job Monitoring and Debugging](http://docs.aws.amazon.com/glue/latest/dg/monitor-profile-glue-job-cloudwatch-metrics.html) and [Working with Jobs on the AWS Glue Console](http://docs.aws.amazon.com/glue/latest/dg/console-jobs.html)\. | July 13, 2018 | 
 | Support of DynamoDB as a data source | Added information about crawling DynamoDB and using it as a data source of ETL jobs\. For more information, see [Cataloging Tables with a Crawler](http://docs.aws.amazon.com/glue/latest/dg/add-crawler.html) and [Connection Parameters](http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-connect.html)\. | July 10, 2018 | 
 | Updates to create notebook server procedure | Updated information about how to create a notebook server on an Amazon EC2 instance associated with a development endpoint\. For more information, see [Creating a Notebook Server Associated with a Development Endpoint](http://docs.aws.amazon.com/glue/latest/dg/dev-endpoint-notebook-server-considerations.html)\. | July 9, 2018 | 

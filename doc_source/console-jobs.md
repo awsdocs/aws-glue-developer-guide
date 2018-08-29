@@ -21,7 +21,9 @@ From the **Jobs** list, you can do the following:
 
    If you decide to have AWS Glue generate a script for your job, you must specify the job properties, data sources, and data targets, and verify the schema mapping of source columns to target columns\. The generated script is a starting point for you to add code to perform your ETL work\. Verify the code in the script and modify it to meet your business needs\.
 **Note**  
-To get step\-by\-step guidance for adding a job with a generated script, see the **Add job** tutorial in the console\.    
+To get step\-by\-step guidance for adding a job with a generated script, see the **Add job** tutorial in the console\.
+
+   Optionally, you can add a security configuration to a job to specify at\-rest encryption options\. For more information, see [Encrypting Data Written by Crawlers, Jobs, and Development Endpoints](encryption-security-configuration.md)\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/glue/latest/dg/console-jobs.html)
 
 **Note**  

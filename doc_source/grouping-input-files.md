@@ -10,7 +10,7 @@ You can use this method to enable grouping for tables in the Data Catalog with A
 Set **groupFiles** to `inPartition` to enable the grouping of files within an Amazon S3 data partition\. AWS Glue automatically enables grouping if there are more than 50,000 input files\. For example:  
 
 ```
-  '--groupFiles': 'inPartition'
+  'groupFiles': 'inPartition'
 ```
 
 **groupSize**  
@@ -18,11 +18,12 @@ Set **groupSize** to the target size of groups in bytes\. The **groupSize** prop
 For example, to set the group size to 1 MB:  
 
 ```
-  '--groupSize': '1024 * 1024'
+  'groupSize': '1048576'
 ```
+Note that the `groupsize` should be set with the result of a calculation\. For example 1024 \* 1024 = 1048576\.
 
 If you are reading from Amazon S3 directly using the `create_dynamic_frame_from_options` method, add these connection options\. For example, the following attempts to group files into 1 MB groups:
 
 ```
-df = glueContext.create_dynamic_frame_from_options("s3", {'paths': ["s3://s3path/"], 'groupFiles': 'inPartition', 'groupSize': 1024 * 1024}, format="json")
+df = glueContext.create_dynamic_frame_from_options("s3", {'paths': ["s3://s3path/"], 'groupFiles': 'inPartition', 'groupSize': '1048576'}, format="json")
 ```

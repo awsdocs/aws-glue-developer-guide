@@ -49,6 +49,8 @@ Amount of time the development endpoint has been provisioned and `READY`\.
 
 1. Follow the steps in the AWS Glue **Add endpoint** wizard to provide the properties that are required to create an endpoint\. If you choose to provide an SSH public key when you create your development endpoint, save your SSH private key to access the development endpoint later\. 
 
+   Optionally, you can add a security configuration to a development endpoint to specify at\-rest encryption options\. For more information, see [Encrypting Data Written by Crawlers, Jobs, and Development Endpoints](encryption-security-configuration.md)\.
+
    The following are some optional fields you can provide:  
 **Data processing units \(DPUs\)**  
 The number of DPUs that AWS Glue uses for your development endpoint\. The number must be greater than 1\.  
@@ -101,6 +103,12 @@ The available subnets that you can use with your notebook server\. An asterisk \
 
 **Security groups**  
 The available security groups that you can use with your notebook server\. The security group must have inbound rules for HTTPS \(port 443\) and SSH \(port 22\)\. Ensure that the rule's source is either 0\.0\.0\.0/0 or the IP address of the machine connecting to the notebook\.
+
+**S3 AWS KMS key**  
+A key used for client\-side KMS encryption of the Zeppelin notebook storage on Amazon S3\.  This field is optional\. Enable access to Amazon S3 by either choosing an AWS KMS key or choose **Enter a key ARN** and provide the Amazon Resource Name \(ARN\) for the key\. Type the ARN in the form `arn:aws:kms:region:account-id:key/key-id`\. You can also provide the ARN in the form of a key alias, such as `arn:aws:kms:region:account-id:alias/alias-name`\. 
+
+**Custom AMI ID**  
+A custom Amazon Machine Image \(AMI\) ID of an encrypted Amazon Elastic Block Storage \(EBS\) EC2 instance\. This field is optional\. Provide the AMI ID by either choosing an AMI ID or choose **Enter AMI ID** and type the custom AMI ID\. For more information about how to encrypt your notebook server storage, see [Encryption and AMI Copy](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html#ami-copy-encryption.html)\.
 
 **Notebook server tags**  
 The AWS CloudFormation stack is always tagged with a key **aws\-glue\-dev\-endpoint** and the value of the name of the development endpoint\. You can add more tags to the AWS CloudFormation stack\.

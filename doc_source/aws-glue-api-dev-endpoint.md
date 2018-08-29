@@ -70,11 +70,14 @@ A development endpoint where a developer can remotely debug ETL scripts\.
 + `PublicKey` – UTF\-8 string\.
 
   The public key to be used by this DevEndpoint for authentication\. This attribute is provided for backward compatibility, as the recommended attribute to use is public keys\.
-+ `PublicKeys` – An array of UTF\-8 strings\.
++ `PublicKeys` – An array of UTF\-8 strings, not more than 5 strings\.
 
   A list of public keys to be used by the DevEndpoints for authentication\. The use of this attribute is preferred over a single public key because the public keys allow you to have a different private key per client\.
 **Note**  
 If you previously created an endpoint with a public key, you must remove that key to be able to set a list of public keys: call the `UpdateDevEndpoint` API with the public key content in the `deletePublicKeys` attribute, and the list of new keys in the `addPublicKeys` attribute\.
++ `SecurityConfiguration` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the SecurityConfiguration structure to be used with this DevEndpoint\.
 
 ## DevEndpointCustomLibraries Structure<a name="aws-glue-api-dev-endpoint-DevEndpointCustomLibraries"></a>
 
@@ -135,6 +138,9 @@ If you previously created an endpoint with a public key, you must remove that ke
 + `ExtraJarsS3Path` – UTF\-8 string\.
 
   Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint\.
++ `SecurityConfiguration` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the SecurityConfiguration structure to be used with this DevEndpoint\.
 
 **Response**
 + `EndpointName` – UTF\-8 string\.
@@ -176,6 +182,9 @@ If you previously created an endpoint with a public key, you must remove that ke
 + `FailureReason` – UTF\-8 string\.
 
   The reason for a current failure in this DevEndpoint\.
++ `SecurityConfiguration` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the SecurityConfiguration structure being used with this DevEndpoint\.
 + `CreatedTimestamp` – Timestamp\.
 
   The point in time at which this DevEndpoint was created\.

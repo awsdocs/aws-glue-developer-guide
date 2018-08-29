@@ -86,7 +86,8 @@ Add any permissions needed for Amazon S3 resources\. You might want to scope the
                "Action": [
                    "logs:CreateLogGroup",
                    "logs:CreateLogStream",
-                   "logs:PutLogEvents"
+                   "logs:PutLogEvents",
+                   "logs:AssociateKmsKey"                
                ],
                "Resource": [
                    "arn:aws:logs:*:*:/aws-glue/*"

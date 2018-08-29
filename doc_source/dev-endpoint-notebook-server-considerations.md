@@ -64,7 +64,7 @@ There are many ways to generate an SSL certificate\. It is a security best pract
 
    The *dns\-address\-of\-ec2\-instance* is the address of the Amazon EC2 instance where the keystore is copied\. 
 
-1. From the home directory, `/home/ec2-user/`, run the `./setup_notebook_server.py` script\. This script performs the following actions:
+1. From the home directory, `/home/ec2-user/`, run the `./setup_notebook_server.py` script\. This script is created and placed on the Amazon EC2 instance by AWS Glue\. This script performs the following actions:
    + **Asks for a Zeppelin notebook password:** The password is SHA\-256 hashed plus salted\-and\-iterated with a random 128\-bit salt kept in the `shiro.ini` file with restricted access\. This is the best practice available to Apache Shiro, the authorization package that Apache Zeppelin uses\.
    + **Generates SSH public and private keys:** The script overwrites any existing SSH public key on the development endpoint that is associated with the notebook server\. **As a result, any other notebook servers, Read–Eval–Print Loops \(REPLs\), or IDEs that connect to this development endpoint can no longer connect\.**
    + **Verifies or generates an SSL certificate:** Either use an SSL certificate that was generated with a certificate authority \(CA\) or generate a certificate with this script\. If you copied a certificate, the script asks for the location of the keystore file\. Provide the entire path on the Amazon EC2 instance, for example, `/home/ec2-user/keystore.jks`\. The SSL certificate is verified\.

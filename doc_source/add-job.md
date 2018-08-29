@@ -25,7 +25,7 @@ Provide the location of a working directory in Amazon S3 where temporary interme
 **Job bookmark**  
 Specify how AWS Glue processes state information when the job runs\. You can have it remember previously processed data, update state information, or ignore state information\.
 
-**Job profiling**  
+**Job metrics**  
 Enable or disable the creation of CloudWatch metrics when this job runs\. To see profiling data this option must be enabled\. For more information about how to enable and visualize metrics, see [Job Monitoring and Debugging](monitor-profile-glue-job-cloudwatch-metrics.md)\. 
 
 **Server\-side encryption**  

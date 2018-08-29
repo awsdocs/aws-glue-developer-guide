@@ -25,7 +25,7 @@ The following diagram shows the ETL workflow containing these five steps\.
 + [Automating AWS Glue with CloudWatch Events](automating-awsglue-with-cloudwatch-events.md)
 + [Monitoring with Amazon CloudWatch](monitor-cloudwatch.md)
 + [Job Monitoring and Debugging](monitor-profile-glue-job-cloudwatch-metrics.md)
-+ [Logging AWS Glue Operations Using AWS CloudTrail](monitor-cloudtrail.md)
++ [Logging AWS Glue API Calls with AWS CloudTrail](monitor-cloudtrail.md)
 
 ## Automated Monitoring Tools<a name="monitoring-automated_tools"></a>
 

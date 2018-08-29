@@ -25,7 +25,7 @@ Defines a connection to a data source\.
   A list of criteria that can be used in selecting this connection\.
 + `ConnectionProperties` – A map array of key\-value pairs, not more than 100pairs\.
 
-  Each key is a UTF\-8 string \(valid values: `HOST` \| `PORT` \| `USERNAME="USER_NAME"` \| `PASSWORD` \| `ENCRYPTED_PASSWORD` \| `JDBC_DRIVER_JAR_URI` \| `JDBC_DRIVER_CLASS_NAME` \| `JDBC_ENGINE` \| `JDBC_ENGINE_VERSION` \| `CONFIG_FILES` \| `INSTANCE_ID` \| `JDBC_CONNECTION_URL` \| `JDBC_ENFORCE_SSL`\)\.
+  Each key is a UTF\-8 string \(valid values: `HOST` \| `PORT` \| `USERNAME="USER_NAME"` \| `PASSWORD` \| `JDBC_DRIVER_JAR_URI` \| `JDBC_DRIVER_CLASS_NAME` \| `JDBC_ENGINE` \| `JDBC_ENGINE_VERSION` \| `CONFIG_FILES` \| `INSTANCE_ID` \| `JDBC_CONNECTION_URL` \| `JDBC_ENFORCE_SSL`\)\.
 
   Each value is a Value string\.
 
@@ -34,7 +34,6 @@ Defines a connection to a data source\.
   + `PORT` \- The port number, between 1024 and 65535, of the port on which the database host is listening for database connections\.
   + `USER_NAME` \- The name under which to log in to the database\.
   + `PASSWORD` \- A password, if one is used, for the user name\.
-  + `ENCRYPTED_PASSWORD` \- \(Reserved for future use\)\.
   + `JDBC_DRIVER_JAR_URI` \- The S3 path of the a jar file that contains the JDBC driver to use\.
   + `JDBC_DRIVER_CLASS_NAME` \- The class name of the JDBC driver to use\.
   + `JDBC_ENGINE` \- The name of the JDBC engine to use\.
@@ -75,7 +74,7 @@ A structure used to specify a connection to create or update\.
   A list of criteria that can be used in selecting this connection\.
 + `ConnectionProperties` – *Required:* A map array of key\-value pairs, not more than 100pairs\.
 
-  Each key is a UTF\-8 string \(valid values: `HOST` \| `PORT` \| `USERNAME="USER_NAME"` \| `PASSWORD` \| `ENCRYPTED_PASSWORD` \| `JDBC_DRIVER_JAR_URI` \| `JDBC_DRIVER_CLASS_NAME` \| `JDBC_ENGINE` \| `JDBC_ENGINE_VERSION` \| `CONFIG_FILES` \| `INSTANCE_ID` \| `JDBC_CONNECTION_URL` \| `JDBC_ENFORCE_SSL`\)\.
+  Each key is a UTF\-8 string \(valid values: `HOST` \| `PORT` \| `USERNAME="USER_NAME"` \| `PASSWORD` \| `JDBC_DRIVER_JAR_URI` \| `JDBC_DRIVER_CLASS_NAME` \| `JDBC_ENGINE` \| `JDBC_ENGINE_VERSION` \| `CONFIG_FILES` \| `INSTANCE_ID` \| `JDBC_CONNECTION_URL` \| `JDBC_ENFORCE_SSL`\)\.
 
   Each value is a Value string\.
 
@@ -139,6 +138,7 @@ Creates a connection definition in the Data Catalog\.
 + `InvalidInputException`
 + `OperationTimeoutException`
 + `ResourceNumberLimitExceededException`
++ `GlueEncryptionException`
 
 ## DeleteConnection Action \(Python: delete\_connection\)<a name="aws-glue-api-catalog-connections-DeleteConnection"></a>
 
@@ -158,7 +158,6 @@ Deletes a connection from the Data Catalog\.
 **Errors**
 + `EntityNotFoundException`
 + `OperationTimeoutException`
-+ `InvalidInputException`
 
 ## GetConnection Action \(Python: get\_connection\)<a name="aws-glue-api-catalog-connections-GetConnection"></a>
 
@@ -181,6 +180,7 @@ Retrieves a connection definition from the Data Catalog\.
 + `EntityNotFoundException`
 + `OperationTimeoutException`
 + `InvalidInputException`
++ `GlueEncryptionException`
 
 ## GetConnections Action \(Python: get\_connections\)<a name="aws-glue-api-catalog-connections-GetConnections"></a>
 
@@ -212,6 +212,7 @@ Retrieves a list of connection definitions from the Data Catalog\.
 + `EntityNotFoundException`
 + `OperationTimeoutException`
 + `InvalidInputException`
++ `GlueEncryptionException`
 
 ## UpdateConnection Action \(Python: update\_connection\)<a name="aws-glue-api-catalog-connections-UpdateConnection"></a>
 
@@ -236,6 +237,7 @@ Updates a connection definition in the Data Catalog\.
 + `EntityNotFoundException`
 + `OperationTimeoutException`
 + `InvalidInputException`
++ `GlueEncryptionException`
 
 ## BatchDeleteConnection Action \(Python: batch\_delete\_connection\)<a name="aws-glue-api-catalog-connections-BatchDeleteConnection"></a>
 
@@ -264,4 +266,3 @@ Deletes a list of connection definitions from the Data Catalog\.
 **Errors**
 + `InternalServiceException`
 + `OperationTimeoutException`
-+ `InvalidInputException`

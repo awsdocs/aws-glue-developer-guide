@@ -1,6 +1,6 @@
 # Tutorial: Set Up a Local Apache Zeppelin Notebook to Test and Debug ETL Scripts<a name="dev-endpoint-tutorial-local-notebook"></a>
 
-In this tutorial, you connect an Apache Zeppelin Notebook on your local machine to a development endpoint so that you can interactively run, debug, and test AWS Glue ETL \(extract, transform, and load\) scripts before deploying them\.
+In this tutorial, you connect an Apache Zeppelin Notebook on your local machine to a development endpoint so that you can interactively run, debug, and test AWS Glue ETL \(extract, transform, and load\) scripts before deploying them\. This tutorial uses SSH port forwarding to connect your local machine to an AWS Glue development endpoint\. For more information, see [Port forwarding](https://en.wikipedia.org/wiki/Port_forwarding) in Wikipedia\.
 
 The tutorial assumes that you have already taken the steps outlined in [Tutorial Prerequisites](dev-endpoint-tutorial-prerequisites.md)\.
 
@@ -26,13 +26,13 @@ The tutorial assumes that you have already taken the steps outlined in [Tutorial
 
 ## Initiating SSH Port Forwarding to Connect to Your DevEndpoint<a name="dev-endpoint-tutorial-local-notebook-port-forward"></a>
 
-Next, use SSH local port forwarding to forward a local port \(here, `9007`\) to remote destination 169\.254\.76\.1:9007\.
+Next, use SSH local port forwarding to forward a local port \(here, `9007`\) to the remote destination defined by AWS Glue \(`169.254.76.1:9007`\)\. 
 
 Open a terminal window that gives you access to the SSH secure\-shell protocol\. On Microsoft Windows, you can use the BASH shell provided by [Git for Windows](https://git-scm.com/downloads), or install [Cygwin](https://www.cygwin.com/)\.
 
 Run the following SSH command, modified as follows:
 + Replace `private-key-file-path` with a path to the `.pem` file that contains the private key corresponding to the public key that you used to create your development endpoint\.
-+ If you are forwarding a different port than `9007`, replace `9007` with the port number that you are actually using locally \(the second 9007 is the remote port\)\.
++ If you are forwarding a different port than `9007`, replace `9007` with the port number that you are actually using locally\. The address, `169.254.76.1:9007`, is the remote port and not changed by you\.
 + Replace `dev-endpoint-public-dns` with the public DNS address of your development endpoint\. To find this address, navigate to your development endpoint in the AWS Glue console, choose the name, and copy the **Public address** that's listed in the **Endpoint details** page\.
 
 ```

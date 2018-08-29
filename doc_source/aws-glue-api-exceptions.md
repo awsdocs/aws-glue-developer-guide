@@ -72,6 +72,15 @@ A specified entity does not exist
 
   A message describing the problem\.
 
+## GlueEncryptionException Structure<a name="aws-glue-api-exceptions-GlueEncryptionException"></a>
+
+An encryption operation failed\.
+
+**Fields**
++ `Message` – UTF\-8 string\.
+
+  A message describing the problem\.
+
 ## IdempotentParameterMismatchException Structure<a name="aws-glue-api-exceptions-IdempotentParameterMismatchException"></a>
 
 The same unique identifier was associated with two different records\.

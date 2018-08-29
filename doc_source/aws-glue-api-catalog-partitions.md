@@ -15,7 +15,7 @@
 Represents a slice of table data\.
 
 **Fields**
-+ `Values` – An array of UTF\-8 strings, at least 1 string\.
++ `Values` – An array of UTF\-8 strings\.
 
   The values of the partition\.
 + `DatabaseName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
@@ -49,7 +49,7 @@ Represents a slice of table data\.
 The structure used to create and update a partion\.
 
 **Fields**
-+ `Values` – An array of UTF\-8 strings, at least 1 string\.
++ `Values` – An array of UTF\-8 strings\.
 
   The values of the partition\.
 + `LastAccessTime` – Timestamp\.
@@ -116,7 +116,7 @@ Provides a root path to specified partitions\.
 Contains a list of values defining partitions\.
 
 **Fields**
-+ `Values` – *Required:* An array of UTF\-8 strings, at least 1 string\.
++ `Values` – *Required:* An array of UTF\-8 strings\.
 
   The list of values\.
 
@@ -137,7 +137,7 @@ Defines a non\-overlapping region of a table's partitions, allowing multiple req
 Contains information about a partition error\.
 
 **Fields**
-+ `PartitionValues` – An array of UTF\-8 strings, at least 1 string\.
++ `PartitionValues` – An array of UTF\-8 strings\.
 
   The values that define the partition\.
 + `ErrorDetail` – An [ErrorDetail](aws-glue-api-common.md#aws-glue-api-common-ErrorDetail) object\.
@@ -182,6 +182,7 @@ Creates a new partition\.
 + `InternalServiceException`
 + `EntityNotFoundException`
 + `OperationTimeoutException`
++ `GlueEncryptionException`
 
 ## BatchCreatePartition Action \(Python: batch\_create\_partition\)<a name="aws-glue-api-catalog-partitions-BatchCreatePartition"></a>
 
@@ -213,6 +214,7 @@ Creates one or more partitions in a batch operation\.
 + `InternalServiceException`
 + `EntityNotFoundException`
 + `OperationTimeoutException`
++ `GlueEncryptionException`
 
 ## UpdatePartition Action \(Python: update\_partition\)<a name="aws-glue-api-catalog-partitions-UpdatePartition"></a>
 
@@ -243,6 +245,7 @@ Updates a partition\.
 + `InvalidInputException`
 + `InternalServiceException`
 + `OperationTimeoutException`
++ `GlueEncryptionException`
 
 ## DeletePartition Action \(Python: delete\_partition\)<a name="aws-glue-api-catalog-partitions-DeletePartition"></a>
 
@@ -258,7 +261,7 @@ Deletes a specified partition\.
 + `TableName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the table where the partition to be deleted is located\.
-+ `PartitionValues` – *Required:* An array of UTF\-8 strings, at least 1 string\.
++ `PartitionValues` – *Required:* An array of UTF\-8 strings\.
 
   The values that define the partition\.
 
@@ -314,7 +317,7 @@ Retrieves information about a specified partition\.
 + `TableName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the partition's table\.
-+ `PartitionValues` – *Required:* An array of UTF\-8 strings, at least 1 string\.
++ `PartitionValues` – *Required:* An array of UTF\-8 strings\.
 
   The values that define the partition\.
 
@@ -328,6 +331,7 @@ Retrieves information about a specified partition\.
 + `InvalidInputException`
 + `InternalServiceException`
 + `OperationTimeoutException`
++ `GlueEncryptionException`
 
 ## GetPartitions Action \(Python: get\_partitions\)<a name="aws-glue-api-catalog-partitions-GetPartitions"></a>
 
@@ -346,113 +350,6 @@ Retrieves information about the partitions in a table\.
 + `Expression` – Predicate string, not more than 2048 bytes long, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
 
   An expression filtering the partitions to be returned\.
-
-  The expression uses SQL syntax similar to the SQL `WHERE` filter clause\. The SQL statement parser [JSQLParser](http://jsqlparser.sourceforge.net/home.php) parses the expression\. 
-
-  *Operators*: The following are the operators that you can use in the `Expression` API call:  
-=  
-Checks if the values of the two operands are equal or not; if yes, then the condition becomes true\.  
-Example: Assume 'variable a' holds 10 and 'variable b' holds 20\.   
-\(a = b\) is not true\.  
-< >  
-Checks if the values of two operands are equal or not; if the values are not equal, then the condition becomes true\.  
-Example: \(a < > b\) is true\.  
->  
-Checks if the value of the left operand is greater than the value of the right operand; if yes, then the condition becomes true\.  
-Example: \(a > b\) is not true\.  
-<  
-Checks if the value of the left operand is less than the value of the right operand; if yes, then the condition becomes true\.  
-Example: \(a < b\) is true\.  
->=  
-Checks if the value of the left operand is greater than or equal to the value of the right operand; if yes, then the condition becomes true\.  
-Example: \(a >= b\) is not true\.  
-<=  
-Checks if the value of the left operand is less than or equal to the value of the right operand; if yes, then the condition becomes true\.  
-Example: \(a <= b\) is true\.  
-AND, OR, IN, BETWEEN, LIKE, NOT, IS NULL  
-Logical operators\.
-
-  *Supported Partition Key Types*: The following are the the supported partition keys\.
-  + `string`
-  + `date`
-  + `timestamp`
-  + `int`
-  + `bigint`
-  + `long`
-  + `tinyint`
-  + `smallint`
-  + `decimal`
-
-  If an invalid type is encountered, a `[PredicateConstructionException](https://code.amazon.com/packages/DaylightService/blobs/5820762977ffbdd59f23f4cf349e47189632202f/--/src/com/amazonaws/daylight/core/storage/parsers/query/parser/PredicateFactoryProvider.java#L37)` is thrown\. 
-
-  The following list shows the valid operators on each type\. When you define a crawler, the `partitionKey` type is created as a `STRING`, to be compatible with the catalog partitions\. 
-
-  *Valid Operations*:   
-Operator: =  
-Applies to: String, Data, Timestamp, Int/BigInt/TinyInt/Long\.  
-Operator: < >  
-Applies to: String, Data, Timestamp, Int/BigInt/TinyInt/Long\.  
-Operator: >  
-Applies to: String, Data, Timestamp, Int/BigInt/TinyInt/Long\.  
-Operator: <  
-Applies to: String, Data, Timestamp, Int/BigInt/TinyInt/Long\.  
-Operator: >=  
-Applies to: String, Data, Timestamp, Int/BigInt/TinyInt/Long\.  
-Operator: <=  
-Applies to: String, Data, Timestamp, Int/BigInt/TinyInt/Long\.  
-Operator: LIKE  
-String\.
-**Note**  
-The "`LIKE`" operator only applies to the `STRING` type, and does not support regular expressions\.
-
-  *Sample API Call*:   
-**Example**  
-
-  The table `twitter_partition` has three partitions:
-
-  ```
-  year = 2015
-          year = 2016
-          year = 2017
-  ```  
-**Example**  
-
-  Get Partition `year` equals to 2015
-
-  ```
-  aws glue get-partitions --database-name dbname --table-name twitter_partition 
-          --expression "year*=*'2015'"
-  ```  
-**Example**  
-
-  Get Partition `year` between 2016\-2018 \(exclusive\)
-
-  ```
-  aws glue get-partitions --database-name dbname --table-name twitter_partition 
-          --expression "year>'2016' AND year<'2018'"
-  ```  
-**Example**  
-
-  Get Partition `year` year between 2015\-2018 \(inclusive\)\. The following API calls are equivalent to each other
-
-  ```
-  aws glue get-partitions --database-name dbname --table-name twitter_partition 
-          --expression "year>='2015' *AND* year<='2018'"
-          
-          aws glue get-partitions --database-name dbname --table-name twitter_partition 
-          --expression "year *BETWEEN* 2016 AND 2018"
-          
-          aws glue get-partitions --database-name dbname --table-name twitter_partition 
-          --expression "year *IN* (2015,2016,2017,2018)"
-  ```  
-**Example**  
-
-  A wildcard partition filter, where the following call output will be partition year=2017\. A regular expression is not supported in `LIKE`\.
-
-  ```
-  aws glue get-partitions --database-name dbname --table-name twitter_partition 
-          --expression "year LIKE '%7'"
-  ```
 + `NextToken` – UTF\-8 string\.
 
   A continuation token, if this is not the first call to retrieve these partitions\.
@@ -476,6 +373,7 @@ The "`LIKE`" operator only applies to the `STRING` type, and does not support re
 + `InvalidInputException`
 + `OperationTimeoutException`
 + `InternalServiceException`
++ `GlueEncryptionException`
 
 ## BatchGetPartition Action \(Python: batch\_get\_partition\)<a name="aws-glue-api-catalog-partitions-BatchGetPartition"></a>
 
@@ -508,3 +406,4 @@ Retrieves partitions in a batch request\.
 + `EntityNotFoundException`
 + `OperationTimeoutException`
 + `InternalServiceException`
++ `GlueEncryptionException`

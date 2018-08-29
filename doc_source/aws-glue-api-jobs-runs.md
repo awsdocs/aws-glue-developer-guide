@@ -70,6 +70,12 @@ Contains information about a job run\.
 + `NotificationProperty` – A [NotificationProperty](aws-glue-api-jobs-job.md#aws-glue-api-jobs-job-NotificationProperty) object\.
 
   Specifies configuration properties of a job run notification\.
++ `SecurityConfiguration` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the SecurityConfiguration structure to be used with this job run\.
++ `LogGroupName` – UTF\-8 string\.
+
+  The name of the log group for secure logging, that can be server\-side encrypted in CloudWatch using KMS\. This name can be `/aws-glue/jobs/`, in which case the default encryption is `NONE`\. If you add a role name and SecurityConfiguration name \(in other words, `/aws-glue/jobs-yourRoleName-yourSecurityConfigurationName/`\), then that security configuration will be used to encrypt the log group\.
 
 ## Predecessor Structure<a name="aws-glue-api-jobs-runs-Predecessor"></a>
 
@@ -171,6 +177,9 @@ Starts a job run using a job definition\.
 + `NotificationProperty` – A [NotificationProperty](aws-glue-api-jobs-job.md#aws-glue-api-jobs-job-NotificationProperty) object\.
 
   Specifies configuration properties of a job run notification\.
++ `SecurityConfiguration` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the SecurityConfiguration structure to be used with this job run\.
 
 **Response**
 + `JobRunId` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.

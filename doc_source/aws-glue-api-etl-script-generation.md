@@ -143,7 +143,7 @@ Transforms a directed acyclic graph \(DAG\) into code\.
 
 ## GetDataflowGraph Action \(Python: get\_dataflow\_graph\)<a name="aws-glue-api-etl-script-generation-GetDataflowGraph"></a>
 
-Transforms a Python script into a directed acyclic graph \(DAG\)\. 
+Transforms a Python script into a directed acyclic graph \(DAG\)\.
 
 **Request**
 + `PythonScript` – UTF\-8 string\.
@@ -222,4 +222,3 @@ Gets code to perform a specified mapping\.
 + `InvalidInputException`
 + `InternalServiceException`
 + `OperationTimeoutException`
-+ `EntityNotFoundException`

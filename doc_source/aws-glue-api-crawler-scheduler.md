@@ -22,7 +22,7 @@ A scheduling object using a `cron` statement to schedule an event\.
 
 ## UpdateCrawlerSchedule Action \(Python: update\_crawler\_schedule\)<a name="aws-glue-api-crawler-scheduler-UpdateCrawlerSchedule"></a>
 
-Updates the schedule of a crawler using a `cron` expression\. 
+Updates the schedule of a crawler using a `cron` expression\.
 
 **Request**
 + `CrawlerName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
