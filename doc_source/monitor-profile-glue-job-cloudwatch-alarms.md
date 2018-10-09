@@ -7,6 +7,6 @@ A few common scenarios for setting up alarms are as follows:
 + Straggling executors: Set an alarm when the number of executors falls below a certain threshold for a large duration of time in an AWS Glue job\.
 + Data backlog or reprocessing: Compare the metrics from individual jobs in a workflow using a CloudWatch math expression\. You can then trigger an alarm on the resulting expression value \(such as the ratio of bytes written by a job and bytes read by a following job\)\.
 
-For detailed instructions on setting alarms, see [Create or Edit a CloudWatch Alarm](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ConsoleAlarms.html) in the *[Amazon CloudWatch Events User Guide](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/)*\. 
+For detailed instructions on setting alarms, see [Create or Edit a CloudWatch Alarm](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ConsoleAlarms.html) in the *[Amazon CloudWatch Events User Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/)*\. 
 
 For monitoring and debugging scenarios using CloudWatch, see [Job Monitoring and Debugging](monitor-profile-glue-job-cloudwatch-metrics.md)\.

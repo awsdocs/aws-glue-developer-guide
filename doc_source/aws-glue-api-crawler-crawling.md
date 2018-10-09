@@ -63,11 +63,7 @@ Specifies a crawler program that examines a data source and uses classifiers to 
   The version of the crawler\.
 + `Configuration` – UTF\-8 string\.
 
-  Crawler configuration information\. This versioned JSON string allows users to specify aspects of a Crawler's behavior\.
-
-  You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition\. Use the following JSON string to specify that behavior:
-
-  Example: `'{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }'`
+  Crawler configuration information\. This versioned JSON string allows users to specify aspects of a crawler's behavior\. For more information, see [Configuring a Crawler](https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html)\.
 + `CrawlerSecurityConfiguration` – UTF\-8 string, not more than 128 bytes long\.
 
   The name of the SecurityConfiguration structure to be used by this Crawler\.
@@ -79,7 +75,7 @@ A scheduling object using a `cron` statement to schedule an event\.
 **Fields**
 + `ScheduleExpression` – UTF\-8 string\.
 
-  A `cron` expression used to specify the schedule \(see [Time\-Based Schedules for Jobs and Crawlers](http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)\. For example, to run something every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`\.
+  A `cron` expression used to specify the schedule \(see [Time\-Based Schedules for Jobs and Crawlers](https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)\. For example, to run something every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`\.
 + `State` – UTF\-8 string \(valid values: `SCHEDULED` \| `NOT_SCHEDULED` \| `TRANSITIONING`\)\.
 
   The state of the schedule\.
@@ -109,7 +105,7 @@ Specifies a data store in Amazon S3\.
   The path to the Amazon S3 target\.
 + `Exclusions` – An array of UTF\-8 strings\.
 
-  A list of glob patterns used to exclude from the crawl\. For more information, see [Catalog Tables with a Crawler](http://docs.aws.amazon.com/glue/latest/dg/add-crawler.html)\.
+  A list of glob patterns used to exclude from the crawl\. For more information, see [Catalog Tables with a Crawler](https://docs.aws.amazon.com/glue/latest/dg/add-crawler.html)\.
 
 ## JdbcTarget Structure<a name="aws-glue-api-crawler-crawling-JdbcTarget"></a>
 
@@ -124,7 +120,7 @@ Specifies a JDBC data store to crawl\.
   The path of the JDBC target\.
 + `Exclusions` – An array of UTF\-8 strings\.
 
-  A list of glob patterns used to exclude from the crawl\. For more information, see [Catalog Tables with a Crawler](http://docs.aws.amazon.com/glue/latest/dg/add-crawler.html)\.
+  A list of glob patterns used to exclude from the crawl\. For more information, see [Catalog Tables with a Crawler](https://docs.aws.amazon.com/glue/latest/dg/add-crawler.html)\.
 
 ## DynamoDBTarget Structure<a name="aws-glue-api-crawler-crawling-DynamoDBTarget"></a>
 
@@ -233,7 +229,7 @@ Creates a new crawler with specified targets, role, configuration, and optional 
   A list of collection of targets to crawl\.
 + `Schedule` – UTF\-8 string\.
 
-  A `cron` expression used to specify the schedule \(see [Time\-Based Schedules for Jobs and Crawlers](http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)\. For example, to run something every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`\.
+  A `cron` expression used to specify the schedule \(see [Time\-Based Schedules for Jobs and Crawlers](https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)\. For example, to run something every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`\.
 + `Classifiers` – An array of UTF\-8 strings\.
 
   A list of custom classifiers that the user has registered\. By default, all built\-in classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification\.
@@ -245,11 +241,7 @@ Creates a new crawler with specified targets, role, configuration, and optional 
   Policy for the crawler's update and deletion behavior\.
 + `Configuration` – UTF\-8 string\.
 
-  Crawler configuration information\. This versioned JSON string allows users to specify aspects of a Crawler's behavior\.
-
-  You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition\. Use the following JSON string to specify that behavior:
-
-  Example: `'{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }'`
+  Crawler configuration information\. This versioned JSON string allows users to specify aspects of a crawler's behavior\. For more information, see [Configuring a Crawler](https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html)\.
 + `CrawlerSecurityConfiguration` – UTF\-8 string, not more than 128 bytes long\.
 
   The name of the SecurityConfiguration structure to be used by this Crawler\.
@@ -370,7 +362,7 @@ Updates a crawler\. If a crawler is running, you must stop it using `StopCrawler
   A list of targets to crawl\.
 + `Schedule` – UTF\-8 string\.
 
-  A `cron` expression used to specify the schedule \(see [Time\-Based Schedules for Jobs and Crawlers](http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)\. For example, to run something every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`\.
+  A `cron` expression used to specify the schedule \(see [Time\-Based Schedules for Jobs and Crawlers](https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)\. For example, to run something every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`\.
 + `Classifiers` – An array of UTF\-8 strings\.
 
   A list of custom classifiers that the user has registered\. By default, all built\-in classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification\.
@@ -382,11 +374,7 @@ Updates a crawler\. If a crawler is running, you must stop it using `StopCrawler
   Policy for the crawler's update and deletion behavior\.
 + `Configuration` – UTF\-8 string\.
 
-  Crawler configuration information\. This versioned JSON string allows users to specify aspects of a Crawler's behavior\.
-
-  You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition\. Use the following JSON string to specify that behavior:
-
-  Example: `'{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }'`
+  Crawler configuration information\. This versioned JSON string allows users to specify aspects of a crawler's behavior\. For more information, see [Configuring a Crawler](https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html)\.
 + `CrawlerSecurityConfiguration` – UTF\-8 string, not more than 128 bytes long\.
 
   The name of the SecurityConfiguration structure to be used by this Crawler\.

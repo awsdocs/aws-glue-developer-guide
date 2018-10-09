@@ -26,13 +26,13 @@ A development endpoint where a developer can remotely debug ETL scripts\.
   The YARN endpoint address used by this DevEndpoint\.
 + `PrivateAddress` – UTF\-8 string\.
 
-  A private DNS to access the DevEndpoint within a VPC, if the DevEndpoint is created within one\.
+  A private IP address to access the DevEndpoint within a VPC, if the DevEndpoint is created within one\. The PrivateAddress field is present only when you create the DevEndpoint within your virtual private cloud \(VPC\)\.
 + `ZeppelinRemoteSparkInterpreterPort` – Number \(integer\)\.
 
   The Apache Zeppelin port for the remote Apache Spark interpreter\.
 + `PublicAddress` – UTF\-8 string\.
 
-  The public VPC address used by this DevEndpoint\.
+  The public IP address used by this DevEndpoint\. The PublicAddress field is present only when you create a non\-VPC \(virtual private cloud\) DevEndpoint\.
 + `Status` – UTF\-8 string\.
 
   The current status of this DevEndpoint\.
@@ -255,6 +255,9 @@ Deletes a specified DevEndpoint\.
 
 Retrieves information about a specified DevEndpoint\.
 
+**Note**  
+When you create a development endpoint in a virtual private cloud \(VPC\), AWS Glue returns only a private IP address, and the public IP address field is not populated\. When you create a non\-VPC development endpoint, AWS Glue returns only a public IP address\.
+
 **Request**
 + `EndpointName` – *Required:* UTF\-8 string\.
 
@@ -274,6 +277,9 @@ Retrieves information about a specified DevEndpoint\.
 ## GetDevEndpoints Action \(Python: get\_dev\_endpoints\)<a name="aws-glue-api-dev-endpoint-GetDevEndpoints"></a>
 
 Retrieves all the DevEndpoints in this AWS account\.
+
+**Note**  
+When you create a development endpoint in a virtual private cloud \(VPC\), AWS Glue returns only a private IP address and the public IP address field is not populated\. When you create a non\-VPC development endpoint, AWS Glue returns only a public IP address\.
 
 **Request**
 + `MaxResults` – Number \(integer\), not less than 1 or more than 1000\.

@@ -60,7 +60,7 @@ When you crawl DynamoDB tables, you can choose one table name from the list of D
 
 ## Viewing Crawler Results<a name="console-crawlers-details"></a>
 
-To view the results of a crawler, find the crawler name in the list and choose the **Logs** link\. This link takes you to the CloudWatch Logs, where you can see details about which tables were created in the AWS Glue Data Catalog and any errors that were encountered\. You can manage your log retention period in the CloudWatch console\. The default log retention is `Never Expire`\. For more information about how to change the retention period, see [Change Log Data Retention in CloudWatch Logs](http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SettingLogRetention.html)\.
+To view the results of a crawler, find the crawler name in the list and choose the **Logs** link\. This link takes you to the CloudWatch Logs, where you can see details about which tables were created in the AWS Glue Data Catalog and any errors that were encountered\. You can manage your log retention period in the CloudWatch console\. The default log retention is `Never Expire`\. For more information about how to change the retention period, see [Change Log Data Retention in CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SettingLogRetention.html)\.
 
 To see details of a crawler, choose the crawler name in the list\. Crawler details include the information you defined when you created the crawler with the **Add crawler** wizard\. When a crawler run completes, choose **Tables** in the navigation pane to see the tables that were created by your crawler in the database that you specified\.
 

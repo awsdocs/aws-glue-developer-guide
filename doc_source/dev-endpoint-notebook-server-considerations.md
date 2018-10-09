@@ -22,7 +22,7 @@ The following sections explain some of the choices to make and the actions to ta
 
    In the **Add SSH public key \(optional\)** step, leave the public key empty\. In a later step, you generate and push a public key to the development endpoint and a corresponding private key to the Amazon EC2 instance that is running the notebook server\. 
 
-1. When the development endpoint is provisioned, continue with the steps to create a notebook server on Amazon EC2\. On the development endpoints list page, choose the development endpoint that you just created\. Choose **Actions**, **Create notebook server**, and fill in the information about your notebook server\. \(For more information, see [Working with Development Endpoints on the AWS Glue Console](console-development-endpoint.md)\.\)
+1. When the development endpoint is provisioned, continue with the steps to create a notebook server on Amazon EC2\. On the development endpoints list page, choose the development endpoint that you just created\. Choose **Action**, **Create Zeppelin notebook server**, and fill in the information about your notebook server\. \(For more information, see [Working with Development Endpoints on the AWS Glue Console](console-development-endpoint.md)\.\)
 
 1. Choose **Finish**\. The notebook server is created with an AWS CloudFormation stack\. The AWS Glue console provides you with the information you need to access the Amazon EC2 instance\.
 
@@ -34,11 +34,11 @@ After you create the development endpoint and notebook server, complete the foll
 
 **To set up access to the notebook server**
 
-1. If your local desktop is running Windows, you need a way to run commands SSH and SCP to interact with the Amazon EC2 instance\. Instructions to connect can be found in the Amazon EC2 documentation\. For more information, see [Connecting to Your Linux Instance from Windows Using PuTTY](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html) 
+1. If your local desktop is running Windows, you need a way to run commands SSH and SCP to interact with the Amazon EC2 instance\. You can find instructions for connecting in the Amazon EC2 documentation\. For more information, see [Connecting to Your Linux Instance from Windows Using PuTTY](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html)\. 
 
 1. You can connect to your Zeppelin notebook using an HTTPS URL\. This requires a Secure Sockets Layer \(SSL\) certificate on your Amazon EC2 instance\. The notebook server must provide web browsers with a certificate to validate its authenticity and to allow encrypted traffic for sensitive data such as passwords\.  
 
-   **If you have an SSL certificate from a certificate authority \(CA\)**, copy your SSL certificate key store onto the Amazon EC2 instance into a path that the `ec2-user` has write access to, such as `/home/ec2-user/`\. See the AWS Glue console notebook server details for the scp command to **Copy certificate**\. For example, open a terminal window, and type the following command:
+   **If you have an SSL certificate from a certificate authority \(CA\)**, copy your SSL certificate key store onto the Amazon EC2 instance into a path that the `ec2-user` has write access to, such as `/home/ec2-user/`\. See the AWS Glue console notebook server details for the scp command to **Copy certificate**\. For example, open a terminal window, and enter the following command:
 
    ```
    scp -i ec2-private-key keystore.jks ec2-user@dns-address-of-ec2-instance:~/keystore.jks
@@ -50,21 +50,21 @@ After you create the development endpoint and notebook server, complete the foll
 
    The *dns\-address\-of\-ec2\-instance* is the address of the Amazon EC2 instance where the keystore is copied\. 
 **Note**  
-There are many ways to generate an SSL certificate\. It is a security best practice to use a certificate generated with a certificate authority \(CA\)\. You might need to enlist the help of an administrator in your organization to obtain the certificate\. Follow the policies of your organization when you create a keystore for the notebook server\. For more information, see [Certificate authority \(CA\)](https://en.wikipedia.org/wiki/Certificate_authority) in Wikipedia\. 
+There are many ways to generate an SSL certificate\. It is a security best practice to use a certificate generated with a certificate authority \(CA\)\. You might need to enlist the help of an administrator in your organization to obtain the certificate\. Follow the policies of your organization when you create a keystore for the notebook server\. For more information, see [Certificate authority](https://en.wikipedia.org/wiki/Certificate_authority) in Wikipedia\. 
 
-   Another method is to generate a self\-signed certificate with a script on your notebook server Amazon EC2 instance\. However, with this method, each local machine that connects to the notebook server, must be configured to trust the certificate generated before connecting to the notebook server\. Also, when the generated certificate expires, a new certificate must be generated and trusted on all local machines\. For more information about the setup, see [Self\-signed certificates](#dev-endpoint-notebook-server-self-signed-certificate)\. For more information, see [Self\-signed certificate](https://en.wikipedia.org/wiki/Self-signed_certificate) in Wikipedia\. 
+   Another method is to generate a self\-signed certificate with a script on your notebook server Amazon EC2 instance\. However, with this method, each local machine that connects to the notebook server must be configured to trust the certificate generated before connecting to the notebook server\. Also, when the generated certificate expires, a new certificate must be generated and trusted on all local machines\. For more information about the setup, see [Self\-signed certificates](#dev-endpoint-notebook-server-self-signed-certificate)\. For more information, see [Self\-signed certificate](https://en.wikipedia.org/wiki/Self-signed_certificate) in Wikipedia\. 
 
-1. Using SSH, connect to the Amazon EC2 instance that is running your notebook server\. For example: 
+1. Using SSH, connect to the Amazon EC2 instance that is running your notebook server; for example: 
 
    ```
    ssh -i ec2-private-key ec2-user@dns-address-of-ec2-instance
    ```
 
-   The *ec2\-private\-key* is the key needed to access the Amazon EC2 instance\. When you created the notebook server, you provided an Amazon EC2 key pair and saved this EC2 private key to your local machine\. You might need to edit the **Copy certificate** command to point to the key file on your local machine\. You can also find this key file name on the Amazon EC2 console details for your notebook server\. 
+   The *ec2\-private\-key* is the key that is needed to access the Amazon EC2 instance\. When you created the notebook server, you provided an Amazon EC2 key pair and saved this EC2 private key to your local machine\. You might need to edit the **Copy certificate** command to point to the key file on your local machine\. You can also find this key file name on the Amazon EC2 console details for your notebook server\. 
 
    The *dns\-address\-of\-ec2\-instance* is the address of the Amazon EC2 instance where the keystore is copied\. 
 
-1. From the home directory, `/home/ec2-user/`, run the `./setup_notebook_server.py` script\. This script is created and placed on the Amazon EC2 instance by AWS Glue\. This script performs the following actions:
+1. From the home directory, `/home/ec2-user/`, run the `./setup_notebook_server.py` script\. AWS Glue created and placed this script on the Amazon EC2 instance\. The script performs the following actions:
    + **Asks for a Zeppelin notebook password:** The password is SHA\-256 hashed plus salted\-and\-iterated with a random 128\-bit salt kept in the `shiro.ini` file with restricted access\. This is the best practice available to Apache Shiro, the authorization package that Apache Zeppelin uses\.
    + **Generates SSH public and private keys:** The script overwrites any existing SSH public key on the development endpoint that is associated with the notebook server\. **As a result, any other notebook servers, Read–Eval–Print Loops \(REPLs\), or IDEs that connect to this development endpoint can no longer connect\.**
    + **Verifies or generates an SSL certificate:** Either use an SSL certificate that was generated with a certificate authority \(CA\) or generate a certificate with this script\. If you copied a certificate, the script asks for the location of the keystore file\. Provide the entire path on the Amazon EC2 instance, for example, `/home/ec2-user/keystore.jks`\. The SSL certificate is verified\.
@@ -152,31 +152,31 @@ There are many ways to generate an SSL certificate\. It is a security best pract
 
 After you create the development endpoint and notebook server, connect to your Zeppelin notebook\. Depending on how you set up your environment, you can connect in one of the following ways\.
 
-1. **Connect with a trusted CA certificate\.** If you provided an SSL certificate from a certificate authority \(CA\) when the Zeppelin server was set up on the Amazon EC2 instance, choose this method\. To connect with HTTPS on port 443, open a web browser and type the URL for the notebook server\. You can find this URL on the development notebook details page for your notebook server\. Type the contents of the **HTTPS URL** field; for example:
+1. **Connect with a trusted CA certificate\.** If you provided an SSL certificate from a certificate authority \(CA\) when the Zeppelin server was set up on the Amazon EC2 instance, choose this method\. To connect with HTTPS on port 443, open a web browser and enter the URL for the notebook server\. You can find this URL on the development notebook details page for your notebook server\. Enter the contents of the **HTTPS URL** field; for example:
 
    ```
    https://public-dns-address-of-ec2-instance:443 
    ```
 
-1. <a name="dev-endpoint-notebook-server-self-signed-certificate"></a>**Connect with a self\-signed certificate\.** If you ran the `setup_notebook_server.py` script to generate an SSL certificate, first trust the connection between the your web browser and the notebook server\. The details of this action vary by operating system and web browser\. The general work flow is:
+1. <a name="dev-endpoint-notebook-server-self-signed-certificate"></a>**Connect with a self\-signed certificate\.** If you ran the `setup_notebook_server.py` script to generate an SSL certificate, first trust the connection between your web browser and the notebook server\. The details of this action vary by operating system and web browser\. The general work flow is as follows:
 
-   1. Access the SSL certificate from the local computer\. For some scenarios, this requires you to copy the SSL certificate from the Amazon EC2 instance to the local computer\. For example:
+   1. Access the SSL certificate from the local computer\. For some scenarios, this requires you to copy the SSL certificate from the Amazon EC2 instance to the local computer; for example:
 
       ```
         scp -i path-to-ec2-private-key ec2-user@notebook-server-dns:/home/ec2-user/notebook-server-dns.der  notebook-server-dns.der
       ```
 
-   1. Import and view \(or view and then import\) the certificate into the certificate manager used by your operating system and browser\. Verify it matches the certificate generated on the Amazon EC2 instance\.
+   1. Import and view \(or view and then import\) the certificate into the certificate manager that is used by your operating system and browser\. Verify that it matches the certificate generated on the Amazon EC2 instance\.
 
-   **Firefox browser:**
+   **Mozilla Firefox browser:**
 
-   For the Firefox browser, you might encounter an error like **Your connection is not secure**\. These steps might vary by Firefox versions\. To set up the connection, the general steps are:
+   In Firefox, you might encounter an error like **Your connection is not secure**\. To set up the connection, the general steps are as follows \(the steps might vary by Firefox version\):
 
-   1. Find the **Options** or **Preferences** page, navigate to the page to choose **View Certificates**\. This option might appear in the **Privacy**, **Security**, or **Advanced** tab\.
+   1. Find the **Options** or **Preferences** page, navigate to the page and choose **View Certificates**\. This option might appear in the **Privacy**, **Security**, or **Advanced** tab\.
 
-   1. On the **Certificate Manager** window, navigate to the **Servers** tab, then choose **Add Exception**\.
+   1. In the **Certificate Manager** window, choose the **Servers** tab, and then choose **Add Exception**\.
 
-   1. Type in the HTTPS **Location** of the notebook server on Amazon EC2, then choose **Get Certificate**\. Choose **View**\.
+   1. Enter the HTTPS **Location** of the notebook server on Amazon EC2, and then choose **Get Certificate**\. Choose **View**\.
 
    1. Verify that the **Common Name \(CN\)** matches the DNS of the notebook server Amazon EC2 instance\. Also, verify that the **SHA\-256 Fingerprint** matches that of the certificate generated on the Amazon EC2 instance\. You can find the SHA\-256 fingerprint of the certificate in the output of the `setup_notebook_server.py` script or by running an openssl command on the notebook instance\.
 
@@ -188,15 +188,15 @@ After you create the development endpoint and notebook server, connect to your Z
 
    1. When the certificate expires, generate a new certificate on the Amazon EC2 instance and trust it on your local computer\.
 
-   **Chrome browser on Mac:**
+   **Google Chrome browser on macOS:**
 
-   For the Chrome browser on Mac, you might encounter an error like **Your connection is not private**\. To set up the connection, the general steps are:
+   When using Chrome on macOS, you might encounter an error like **Your connection is not private**\. To set up the connection, the general steps are as follows:
 
    1. Copy the SSL certificate from the Amazon EC2 instance to your local computer\.
 
-   1. Choose **Preferences** or **Settings** to find the **Settings** page\. Navigate to the **Advanced** section, then the **Privacy and security** section\. Choose **Manage certificates**\.
+   1. Choose **Preferences** or **Settings** to find the **Settings** page\. Navigate to the **Advanced** section, and then find the **Privacy and security** section\. Choose **Manage certificates**\.
 
-   1. On the **Keychain Access** window, navigate to the **Certificates** and choose **File**, **Import items** to import the SSL certificate\.
+   1. In the **Keychain Access** window, navigate to the **Certificates** and choose **File**, **Import items** to import the SSL certificate\.
 
    1. Verify that the **Common Name \(CN\)** matches the DNS of the notebook server Amazon EC2 instance\. Also, verify that the **SHA\-256 Fingerprint** matches that of the certificate generated on the Amazon EC2 instance\. You can find the SHA\-256 fingerprint of the certificate in the output of the `setup_notebook_server.py` script or by running an openssl command on the notebook instance\.
 
@@ -210,19 +210,19 @@ After you create the development endpoint and notebook server, connect to your Z
 
    **Chrome browser on Windows:**
 
-   For the Chrome browser on Windows, you might encounter an error like **Your connection is not private**\. To set up the connection, the general steps are:
+   When using Chrome on Windows, you might encounter an error like **Your connection is not private**\. To set up the connection, the general steps are as follows:
 
    1. Copy the SSL certificate from the Amazon EC2 instance to your local computer\.
 
-   1. Find the **Settings** page, navigate to the **Advanced** section, then the **Privacy and security** section\. Choose **Manage certificates**\.
+   1. Find the **Settings** page, navigate to the **Advanced** section, and then find the **Privacy and security** section\. Choose **Manage certificates**\.
 
-   1. On the **Certificates** window, navigate to the **Trusted Root Certification Authorities** tab and choose **Import** to import the SSL certificate\.
+   1. In the **Certificates** window, navigate to the **Trusted Root Certification Authorities** tab, and choose **Import** to import the SSL certificate\.
 
    1. Place the certificate in the **Certificate store** for **Trusted Root Certification Authorities**\.
 
    1. Trust by installing the certificate\.
 
-   1. Verify that the **SHA\-1 Thumbprint** displayed by certificate in the browser matches that of the certificate generated on the Amazon EC2 instance\. The certificate can be found on browser by navigating to the list of **Trusted Root Certification Authorities** and choosing the certificate **Issued To** the Amazon EC2 instance\. Choose to **View** the certificate, choose the **Details**, then view the **Thumbprint** for `sha1`\. You can find the corresponding SHA\-1 fingerprint of the certificate by running an openssl command on the Amazon EC2 instance\.
+   1. Verify that the **SHA\-1 Thumbprint** that is displayed by the certificate in the browser matches that of the certificate generated on the Amazon EC2 instance\. To find the certificate on the browser, navigate to the list of **Trusted Root Certification Authorities**, and choose the certificate **Issued To** the Amazon EC2 instance\. Choose to **View** the certificate, choose **Details**, and then view the **Thumbprint** for `sha1`\. You can find the corresponding SHA\-1 fingerprint of the certificate by running an `openssl` command on the Amazon EC2 instance\.
 
       ```
         openssl x509 -noout -fingerprint -sha1 -inform der -in path-to-certificate.der
@@ -230,21 +230,21 @@ After you create the development endpoint and notebook server, connect to your Z
 
    1. When the certificate expires, generate a new certificate on the Amazon EC2 instance and trust it on your local computer\.
 
-   **Internet Explorer browser on Windows:**
+   **Microsoft Internet Explorer browser on Windows:**
 
-   For the Internet Explorer browser on Windows, you might encounter an error like **Your connection is not private**\. To set up the connection, the general steps are:
+   When using Internet Explorer on Windows, you might encounter an error like **Your connection is not private**\. To set up the connection, the general steps are as follows:
 
    1. Copy the SSL certificate from the Amazon EC2 instance to your local computer\.
 
-   1. Find the **Internet Options** page, navigate to the **Content** tab, then the **Certificates** section\. 
+   1. Find the **Internet Options** page, navigate to the **Content** tab, and then find the **Certificates** section\. 
 
-   1. On the **Certificates** window, navigate to the **Trusted Root Certification Authorities** tab and choose **Import** to import the SSL certificate\.
+   1. In the **Certificates** window, navigate to the **Trusted Root Certification Authorities** tab, and choose **Import** to import the SSL certificate\.
 
    1. Place the certificate in the **Certificate store** for **Trusted Root Certification Authorities**\.
 
    1. Trust by installing the certificate\.
 
-   1. Verify that the **SHA\-1 Thumbprint** displayed by certificate in the browser matches that of the certificate generated on the Amazon EC2 instance\. The certificate can be found on browser by navigating to the list of **Trusted Root Certification Authorities** and choosing the certificate **Issued To** the Amazon EC2 instance\. Choose to **View** the certificate, choose the **Details**, then view the **Thumbprint** for `sha1`\. You can find the corresponding SHA\-1 fingerprint of the certificate by running an openssl command on the Amazon EC2 instance\.
+   1. Verify that the **SHA\-1 Thumbprint** that is displayed by the certificate in the browser matches that of the certificate generated on the Amazon EC2 instance\. To find the certificate on the browser, navigate to the list of **Trusted Root Certification Authorities**, and choose the certificate **Issued To** the Amazon EC2 instance\. Choose to **View** the certificate, choose **Details**, and then view the **Thumbprint** for `sha1`\. You can find the corresponding SHA\-1 fingerprint of the certificate by running an openssl command on the Amazon EC2 instance\.
 
       ```
         openssl x509 -noout -fingerprint -sha1 -inform der -in path-to-certificate.der
@@ -252,7 +252,7 @@ After you create the development endpoint and notebook server, connect to your Z
 
    1. When the certificate expires, generate a new certificate on the Amazon EC2 instance and trust it on your local computer\.
 
-   After you have trusted the certificate, to connect with HTTPS on port 443, open a web browser and type the URL for the notebook server\. You can find this URL on the development notebook details page for your notebook server\. Type the contents of the **HTTPS URL** field; for example:
+   After you trust the certificate, to connect with HTTPS on port 443, open a web browser and enter the URL for the notebook server\. You can find this URL on the development notebook details page for your notebook server\. Enter the contents of the **HTTPS URL** field; for example:
 
    ```
    https://public-dns-address-of-ec2-instance:443 

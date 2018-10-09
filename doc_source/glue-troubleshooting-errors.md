@@ -70,7 +70,7 @@ When you are running a job that writes to a JDBC target, the job might encounter
 ## Error: Amazon S3 Timeout<a name="error-s3-timeout"></a>
 
 If AWS Glue returns a connect timed out error, it might be because it is trying to access an Amazon S3 bucket in another AWS Region\. 
-+ An Amazon S3 VPC endpoint can only route traffic to buckets within an AWS Region\. If you need to connect to buckets in other Regions, a possible workaround is to use a NAT gateway\. For more information, see [NAT Gateways](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html)\.
++ An Amazon S3 VPC endpoint can only route traffic to buckets within an AWS Region\. If you need to connect to buckets in other Regions, a possible workaround is to use a NAT gateway\. For more information, see [NAT Gateways](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html)\.
 
 ## Error: Amazon S3 Access Denied<a name="error-s3-access-denied"></a>
 
@@ -134,17 +134,21 @@ If a job run returns an an error like *Failed to parse XML document with handler
 44.	at java.lang.Thread.run(Thread.java:748)
 ```
 
+## Error: Amazon S3 Service Token Expired<a name="error-s3-service-token-expired"></a>
+
+When moving data to and from Amazon Redshift, temporary Amazon S3 credentials, which expire after 1 hour, are used\. If you have a long running job, it might fail\. For information about how to set up your long running jobs to move data to and from Amazon Redshift, see [Moving Data to and from Amazon Redshift](aws-glue-programming-etl-redshift.md)\.
+
 ## Error: No Private DNS for Network Interface Found<a name="error-no-private-DNS"></a>
 
 If a job fails or a development endpoint fails to provision, it might be because of a problem in the network setup\.
-+ If you are using the Amazon provided DNS, the value of `enableDnsHostnames` must be set to true\. For more information, see [DNS](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-dns.html)\. 
++ If you are using the Amazon provided DNS, the value of `enableDnsHostnames` must be set to true\. For more information, see [DNS](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html)\. 
 
 ## Error: Development Endpoint Provisioning Failed<a name="error-development-endpoint-failed"></a>
 
 If AWS Glue fails to successfully provision a development endpoint, it might be because of a problem in the network setup\.
 + When you define a development endpoint, the VPC, subnet, and security groups are validated to confirm that they meet certain requirements\.
 + If you provided the optional SSH public key, check that it is a valid SSH public key\.
-+ Check in the VPC console that your VPC uses a valid **DHCP option set**\. For more information, see [DHCP option sets](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_DHCP_Options.html)\. 
++ Check in the VPC console that your VPC uses a valid **DHCP option set**\. For more information, see [DHCP option sets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html)\. 
 + If after a few minutes, the development endpoint **Provisioning status** changes to `FAILED` and the failure reason is DNS related, for example, `Reverse dns resolution of ip 10.5.237.213 failed`, check your DNS setup\. For more information, see [Setting Up DNS in Your VPC](set-up-vpc-dns.md)\. 
 + If the cluster remains in the PROVISIONING state, contact AWS Support\.
 
@@ -152,7 +156,7 @@ If AWS Glue fails to successfully provision a development endpoint, it might be 
 
 If AWS Glue fails to create the notebook server for a development endpoint, it might be because of one of the following problems: 
 + AWS Glue passes an IAM role to Amazon EC2 when it is setting up the notebook server\. The IAM role must have a trust relationship to Amazon EC2\.
-+ The IAM role must have an instance profile of the same name\. When you create the role for Amazon EC2 with the IAM console, the instance profile with the same name is automatically created\. Check for an error in the log regarding an invalid instance profile name `iamInstanceProfile.name`\. For more information, see [Using Instance Profiles](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html)\. 
++ The IAM role must have an instance profile of the same name\. When you create the role for Amazon EC2 with the IAM console, the instance profile with the same name is automatically created\. Check for an error in the log regarding an invalid instance profile name `iamInstanceProfile.name`\. For more information, see [Using Instance Profiles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html)\. 
 + Check that your role has permission to access `aws-glue*` buckets in the policy that you pass to create the notebook server\. 
 
 ## Error: Local Notebook Fails to Start<a name="error-local-notebook-fails-to-start"></a>
@@ -173,4 +177,4 @@ If AWS Glue fails to successfully run a crawler to catalog your data, it might b
 
 ## Error: Upgrading Athena Data Catalog<a name="error-running-athena-upgrade"></a>
 
-If you encounter errors while upgrading your Athena Data Catalog to the AWS Glue Data Catalog, see the Amazon Athena User Guide topic [Upgrading to the AWS Glue Data Catalog Step\-by\-Step](http://docs.aws.amazon.com/athena/latest/ug/glue-upgrade.html)\. 
+If you encounter errors while upgrading your Athena Data Catalog to the AWS Glue Data Catalog, see the Amazon Athena User Guide topic [Upgrading to the AWS Glue Data Catalog Step\-by\-Step](https://docs.aws.amazon.com/athena/latest/ug/glue-upgrade.html)\. 

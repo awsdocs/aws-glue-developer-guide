@@ -8,7 +8,7 @@ Crawlers not only infer file types and schemas, they also automatically identify
 
 After you crawl a table, you can view the partitions that the crawler created by navigating to the table in the AWS Glue console and choosing **View Partitions**\.
 
-For Apache Hive\-style partitioned paths in `key=val` style, crawlers automatically populate the column name in the Data Catalog using default names like `partition_0`, `partition_1`, and so on\. To change the default names in the console, navigate to the table, choose **Edit Schema**, and modify the names of the partition columns there\.
+For Apache Hive\-style partitioned paths in `key=val` style, crawlers automatically populate the column name using the key name\. Otherwise, it uses default names like `partition_0`, `partition_1`, and so on\. To change the default names on the console, navigate to the table, choose **Edit Schema**, and modify the names of the partition columns there\.
 
 In your ETL scripts, you can then filter on the partition columns\.
 

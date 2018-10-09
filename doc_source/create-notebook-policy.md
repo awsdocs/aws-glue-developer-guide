@@ -1,4 +1,4 @@
-# Step 4: Create an IAM Policy for Notebooks<a name="create-notebook-policy"></a>
+# Step 4: Create an IAM Policy for Notebook Servers<a name="create-notebook-policy"></a>
 
 If you plan to use notebooks with development endpoints, you must specify permissions when you create the notebook server\. You provide those permissions by using AWS Identity and Access Management \(IAM\)\.
 

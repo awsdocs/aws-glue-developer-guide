@@ -32,7 +32,7 @@ Defines a connection to a data source\.
   These key\-value pairs define parameters for the connection:
   + `HOST` \- The host URI: either the fully qualified domain name \(FQDN\) or the IPv4 address of the database host\.
   + `PORT` \- The port number, between 1024 and 65535, of the port on which the database host is listening for database connections\.
-  + `USER_NAME` \- The name under which to log in to the database\.
+  + `USER_NAME` \- The name under which to log in to the database\. The value string for `USER_NAME` is "`USERNAME`"\.
   + `PASSWORD` \- A password, if one is used, for the user name\.
   + `JDBC_DRIVER_JAR_URI` \- The S3 path of the a jar file that contains the JDBC driver to use\.
   + `JDBC_DRIVER_CLASS_NAME` \- The class name of the JDBC driver to use\.

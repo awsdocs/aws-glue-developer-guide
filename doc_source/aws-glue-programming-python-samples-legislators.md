@@ -395,6 +395,10 @@ for df_name in dfc.keys():
                                                    redshift_tmp_dir = "s3://glue-sample-target/temp-dir/")
 ```
 
+The `dbtable` property is the name of the JDBC table\. For JDBC data stores that support schemas within a database, specify `schema.table-name`\. If a schema is not provided, then the default "public" schema is used\.
+
+For more information, see [Connection Types and Options for ETL in AWS Glue](aws-glue-programming-etl-connect.md)\.
+
 Here's what the tables look like in Amazon Redshift\. \(You connected to Amazon Redshift through psql\.\)
 
 ```

@@ -35,7 +35,7 @@ The following dashboard superimposes the Amazon S3 bytes written metric from the
 
 ![\[Graph showing the data read and written.\]](http://docs.aws.amazon.com/glue/latest/dg/images/monitor-debug-multiple-4.png)
 
-In this example, [job bookmarks](http://docs.aws.amazon.com/glue/latest/dg/monitor-continuations.html) are not enabled\. No transformation contexts are used to enable job bookmarks in the script code\. 
+In this example, [job bookmarks](https://docs.aws.amazon.com/glue/latest/dg/monitor-continuations.html) are not enabled\. No transformation contexts are used to enable job bookmarks in the script code\. 
 
 **Job History**: The Input and Output jobs have multiple runs, as shown on the **History** tab, starting from 12:00 PM\.
 

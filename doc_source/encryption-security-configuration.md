@@ -22,7 +22,7 @@ For more information about security configurations, see [Working with Security C
 
 Follow these steps to set up your AWS Glue environment to use security configurations\.
 
-1. Create or update your AWS Key Management Service \(AWS KMS\) keys to allow AWS KMS permissions to the IAM roles that are passed to AWS Glue crawlers and jobs to encrypt CloudWatch Logs\. For more information, see [Encrypt Log Data in CloudWatch Logs Using AWS KMS](http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/encrypt-log-data-kms.html) in the *Amazon CloudWatch Logs User Guide*\. 
+1. Create or update your AWS Key Management Service \(AWS KMS\) keys to allow AWS KMS permissions to the IAM roles that are passed to AWS Glue crawlers and jobs to encrypt CloudWatch Logs\. For more information, see [Encrypt Log Data in CloudWatch Logs Using AWS KMS](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/encrypt-log-data-kms.html) in the *Amazon CloudWatch Logs User Guide*\. 
 
    In the following example, *"role1"*, *"role2"*, and *"role3"* are IAM roles that are passed to crawlers and jobs:
 
@@ -54,10 +54,10 @@ Follow these steps to set up your AWS Glue environment to use security configura
 
 You can connect directly to AWS KMS through a private endpoint in your virtual private cloud \(VPC\) instead of connecting over the internet\. When you use a VPC endpoint, communication between your VPC and AWS KMS is conducted entirely within the AWS network\.
 
-You can create an AWS KMS VPC endpoint within a VPC\. Without this step, your jobs or crawlers might fail with a `kms timeout` on jobs or an `internal service exception` on crawlers\. For detailed instructions, see [Connecting to AWS KMS Through a VPC Endpoint](http://docs.aws.amazon.com/kms/latest/developerguide/kms-vpc-endpoint.html) in the *AWS Key Management Service Developer Guide*\. 
+You can create an AWS KMS VPC endpoint within a VPC\. Without this step, your jobs or crawlers might fail with a `kms timeout` on jobs or an `internal service exception` on crawlers\. For detailed instructions, see [Connecting to AWS KMS Through a VPC Endpoint](https://docs.aws.amazon.com/kms/latest/developerguide/kms-vpc-endpoint.html) in the *AWS Key Management Service Developer Guide*\. 
 
 As you follow these instructions, on the [VPC console](https://console.aws.amazon.com//vpc), you must do the following:
 + Select the **Enable Private DNS name** check box\.
 + Choose the **Security group** \(with self\-referencing rule\) that you use for your job or crawler that accesses Java Database Connectivity \(JDBC\)\. For more information about AWS Glue connections, see [Adding a Connection to Your Data Store](populate-add-connection.md)\.
 
-When you add a security configuration to a crawler or job that accesses JDBC data stores, AWS Glue must have a route to the AWS KMS endpoint\. You can provide the route with a network address translation \(NAT\) gateway or with an AWS KMS VPC endpoint\. To create a NAT gateway, see [NAT Gateways](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html) in the *Amazon VPC User Guide*\.
+When you add a security configuration to a crawler or job that accesses JDBC data stores, AWS Glue must have a route to the AWS KMS endpoint\. You can provide the route with a network address translation \(NAT\) gateway or with an AWS KMS VPC endpoint\. To create a NAT gateway, see [NAT Gateways](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html) in the *Amazon VPC User Guide*\.

@@ -57,6 +57,6 @@ Server\-side \(SSE\-KMS\) encryption is used to encrypt CloudWatch Logs\. This f
 Client\-side \(CSE\-KMS\) encryption is used to encrypt job bookmarks\. This field is optional\. The bookmark data is encrypted before it is sent to Amazon S3 for storage\. To enable it, choose an AWS KMS key, or choose **Enter a key ARN** and provide the ARN for the key\. Enter the ARN in the form `arn:aws:kms:region:account-id:key/key-id`\. You can also provide the ARN as a key alias, such as `arn:aws:kms:region:account-id:alias/alias-name`\.
 
 For more information, see the following topics in the *Amazon Simple Storage Service Developer Guide*:
-+ For information about `SSE-S3`, see [Protecting Data Using Server\-Side Encryption with Amazon S3\-Managed Encryption Keys \(SSE\-S3\)](http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)\. 
-+ For information about `SSE-KMS`, see [Protecting Data Using Server\-Side Encryption with AWS KMS–Managed Keys \(SSE\-KMS\)](http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html)\. 
-+ For information about `CSE-KMS`, see [Using an AWS KMS–Managed Customer Master Key \(CMK\)](http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html#client-side-encryption-kms-managed-master-key-intro)\. 
++ For information about `SSE-S3`, see [Protecting Data Using Server\-Side Encryption with Amazon S3\-Managed Encryption Keys \(SSE\-S3\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)\. 
++ For information about `SSE-KMS`, see [Protecting Data Using Server\-Side Encryption with AWS KMS–Managed Keys \(SSE\-KMS\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html)\. 
++ For information about `CSE-KMS`, see [Using an AWS KMS–Managed Customer Master Key \(CMK\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html#client-side-encryption-kms-managed-master-key-intro)\. 

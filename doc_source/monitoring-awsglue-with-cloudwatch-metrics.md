@@ -41,11 +41,6 @@ AWS Glue reports metrics to CloudWatch every 30 seconds, and the CloudWatch Metr
 
 The Spark metrics that AWS Glue passes on to CloudWatch, on the other hand, are generally absolute values representing the current state at the time they are reported\. AWS Glue reports them to CloudWatch every 30 seconds, and the Metric Dashboards generally show the average across the data points received in the last one minute\.
 
-All these AWS Glue and Spark metrics have the following three CloudWatch dimensions: 
-+ `JobName` – The name of an AWS Glue Job\.
-+ `JobRunId` – Either the JobRun ID of a AWS Glue job run, or `ALL`\.
-+ `Type` – Either `count` \(an aggregate number\) or `gauge` \(a value at a point in time\)\.
-
 AWS Glue metric names are all preceded by one of 3 kinds of prefix:
 + `glue.driver.` – Metrics whose names begin with this prefix either represent AWS Glue Metrics that are aggregated from all executors at the Spark driver, or Spark metrics corresponding to the Spark driver\.
 + `glue.`*executorId*`.` – The *executorId* is the number of a specific Spark executor, and corresponds with the executors listed in the logs\.
@@ -83,8 +78,8 @@ AWS Glue metrics use the AWS Glue namespace and provide metrics for the followin
 
 | Dimension | Description | 
 | --- | --- | 
-|  `JobName`  |  Filters for metrics of all job runs of a specific job\.  | 
-|  `JobRunId`  |  Filters for metrics of a specific job run\.  | 
-|  `Type`  |  Filters for metrics of a specified type\.  | 
+|  `JobName`  |  This dimension filters for metrics of all job runs of a specific AWS Glue job\.  | 
+|  `JobRunId`  |  This dimension filters for metrics of a specific AWS Glue job run by a JobRun ID, or `ALL`\.  | 
+|  `Type`  |  This dimension filters for metrics by either `count` \(an aggregate number\) or `gauge` \(a value at a point in time\)\.  | 
 
-For more information, see the [CloudWatch User Guide](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/)\.
+For more information, see the [CloudWatch User Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/)\.

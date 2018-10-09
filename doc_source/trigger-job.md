@@ -17,7 +17,7 @@ A time\-based trigger based on cron\.
 
 **Job events \(conditional\)**  
 An event\-based trigger that fires when a previous job or multiple jobs satisfy a list of conditions\. You provide a list of job events to watch for when their run state changes to `succeeded`, `failed`, `stopped`, or `timeout`\. This trigger waits to fire until any or all the conditions are satisfied\.   
-Dependent jobs are only started if the job which completes was started by a trigger \(not run ad\-hoc\)\. To create a job dependency chain, start the first job in the chain with a **schedule** or **on\-demand** trigger\.
+Dependent jobs are only started if the job which completes was started by a trigger \(not run ad\-hoc\)\.  All jobs in a dependency chain must be descendants of a single **schedule** or **on\-demand** trigger\. 
 
 **On\-demand**  
 The trigger fires when you start it\. As jobs complete, any triggers watching for completion are also fired and dependent jobs are started\.

@@ -29,7 +29,7 @@ Information about a specific trigger\.
   A description of this trigger\.
 + `Schedule` – UTF\-8 string\.
 
-  A `cron` expression used to specify the schedule \(see [Time\-Based Schedules for Jobs and Crawlers](http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)\. For example, to run something every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`\.
+  A `cron` expression used to specify the schedule \(see [Time\-Based Schedules for Jobs and Crawlers](https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)\. For example, to run something every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`\.
 + `Actions` – An array of [Action](#aws-glue-api-jobs-trigger-Action) objects\.
 
   The actions initiated by this trigger\.
@@ -50,7 +50,7 @@ A structure used to provide information used to update a trigger\. This object w
   A description of this trigger\.
 + `Schedule` – UTF\-8 string\.
 
-  A `cron` expression used to specify the schedule \(see [Time\-Based Schedules for Jobs and Crawlers](http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)\. For example, to run something every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`\.
+  A `cron` expression used to specify the schedule \(see [Time\-Based Schedules for Jobs and Crawlers](https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)\. For example, to run something every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`\.
 + `Actions` – An array of [Action](#aws-glue-api-jobs-trigger-Action) objects\.
 
   The actions initiated by this trigger\.
@@ -103,9 +103,9 @@ Defines an action to be initiated by a trigger\.
 
   You can specify arguments here that your own job\-execution script consumes, as well as arguments that AWS Glue itself consumes\.
 
-  For information about how to specify and consume your own Job arguments, see the [Calling AWS Glue APIs in Python](http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html) topic in the developer guide\.
+  For information about how to specify and consume your own Job arguments, see the [Calling AWS Glue APIs in Python](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html) topic in the developer guide\.
 
-  For information about the key\-value pairs that AWS Glue consumes to set up your job, see the [Special Parameters Used by AWS Glue](http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html) topic in the developer guide\.
+  For information about the key\-value pairs that AWS Glue consumes to set up your job, see the [Special Parameters Used by AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html) topic in the developer guide\.
 + `Timeout` – Number \(integer\), at least 1\.
 
   The JobRun timeout in minutes\. This is the maximum time that a job run can consume resources before it is terminated and enters `TIMEOUT` status\. The default is 2,880 minutes \(48 hours\)\. This overrides the timeout value set in the parent job\.
@@ -138,7 +138,7 @@ Creates a new trigger\.
   The type of the new trigger\.
 + `Schedule` – UTF\-8 string\.
 
-  A `cron` expression used to specify the schedule \(see [Time\-Based Schedules for Jobs and Crawlers](http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)\. For example, to run something every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`\.
+  A `cron` expression used to specify the schedule \(see [Time\-Based Schedules for Jobs and Crawlers](https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)\. For example, to run something every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`\.
 
   This field is required when the trigger type is SCHEDULED\.
 + `Predicate` – A [Predicate](#aws-glue-api-jobs-trigger-Predicate) object\.
@@ -172,7 +172,7 @@ Creates a new trigger\.
 
 ## StartTrigger Action \(Python: start\_trigger\)<a name="aws-glue-api-jobs-trigger-StartTrigger"></a>
 
-Starts an existing trigger\. See [Triggering Jobs](http://docs.aws.amazon.com/glue/latest/dg/trigger-job.html) for information about how different types of trigger are started\.
+Starts an existing trigger\. See [Triggering Jobs](https://docs.aws.amazon.com/glue/latest/dg/trigger-job.html) for information about how different types of trigger are started\.
 
 **Request**
 + `Name` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.

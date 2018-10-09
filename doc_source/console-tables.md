@@ -11,7 +11,7 @@ To use a crawler to add tables, choose **Add tables**, **Add tables using a craw
 If you know the attributes that are required to create an Amazon Simple Storage Service \(Amazon S3\) table definition in your Data Catalog, you can create it with the table wizard\. Choose **Add tables**, **Add table manually**, and follow the instructions in the **Add table** wizard\.
 
 When adding a table manually through the console, consider the following:
-+ If you plan to access the table from Amazon Athena, then provide a name with only alphanumeric and underscore characters\. For more information, see [Athena names](http://docs.aws.amazon.com/athena/latest/ug/tables-databases-columns-names.html#ate-table-database-and-column-names-allow-only-underscore-special-characters)\.
++ If you plan to access the table from Amazon Athena, then provide a name with only alphanumeric and underscore characters\. For more information, see [Athena names](https://docs.aws.amazon.com/athena/latest/ug/tables-databases-columns-names.html#ate-table-database-and-column-names-allow-only-underscore-special-characters)\.
 + The location of your source data must be an Amazon S3 path\.
 + The data format of the data must match one of the listed formats in the wizard\. The corresponding classification, SerDe, and other table properties are automatically populated based on the format chosen\. You can define tables with the following formats:   
 **JSON**  

@@ -1,7 +1,7 @@
 # AWS Glue Limits<a name="troubleshooting-service-limits"></a>
 
 **Note**  
- You can contact AWS Support to  [request a limit increase](http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html) for the limits listed here\. Unless otherwise noted, each limit is region\-specific\. 
+ You can contact AWS Support to  [request a limit increase](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html) for the limits listed here\. Unless otherwise noted, each limit is region\-specific\. 
 
 
 ****  

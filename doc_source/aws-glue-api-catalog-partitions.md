@@ -350,6 +350,95 @@ Retrieves information about the partitions in a table\.
 + `Expression` – Predicate string, not more than 2048 bytes long, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
 
   An expression filtering the partitions to be returned\.
+
+  The expression uses SQL syntax similar to the SQL `WHERE` filter clause\. The SQL statement parser [JSQLParser](http://jsqlparser.sourceforge.net/home.php) parses the expression\. 
+
+  *Operators*: The following are the operators that you can use in the `Expression` API call:  
+=  
+Checks if the values of the two operands are equal or not; if yes, then the condition becomes true\.  
+Example: Assume 'variable a' holds 10 and 'variable b' holds 20\.   
+\(a = b\) is not true\.  
+< >  
+Checks if the values of two operands are equal or not; if the values are not equal, then the condition becomes true\.  
+Example: \(a < > b\) is true\.  
+>  
+Checks if the value of the left operand is greater than the value of the right operand; if yes, then the condition becomes true\.  
+Example: \(a > b\) is not true\.  
+<  
+Checks if the value of the left operand is less than the value of the right operand; if yes, then the condition becomes true\.  
+Example: \(a < b\) is true\.  
+>=  
+Checks if the value of the left operand is greater than or equal to the value of the right operand; if yes, then the condition becomes true\.  
+Example: \(a >= b\) is not true\.  
+<=  
+Checks if the value of the left operand is less than or equal to the value of the right operand; if yes, then the condition becomes true\.  
+Example: \(a <= b\) is true\.  
+AND, OR, IN, BETWEEN, LIKE, NOT, IS NULL  
+Logical operators\.
+
+  *Supported Partition Key Types*: The following are the the supported partition keys\.
+  + `string`
+  + `date`
+  + `timestamp`
+  + `int`
+  + `bigint`
+  + `long`
+  + `tinyint`
+  + `smallint`
+  + `decimal`
+
+  If an invalid type is encountered, an exception is thrown\. 
+
+  The following list shows the valid operators on each type\. When you define a crawler, the `partitionKey` type is created as a `STRING`, to be compatible with the catalog partitions\. 
+
+  *Sample API Call*:   
+**Example**  
+
+  The table `twitter_partition` has three partitions:
+
+  ```
+  year = 2015
+          year = 2016
+          year = 2017
+  ```  
+**Example**  
+
+  Get Partition `year` equals to 2015
+
+  ```
+  aws glue get-partitions --database-name dbname --table-name twitter_partition 
+          --expression "year*=*'2015'"
+  ```  
+**Example**  
+
+  Get Partition `year` between 2016\-2018 \(exclusive\)
+
+  ```
+  aws glue get-partitions --database-name dbname --table-name twitter_partition 
+          --expression "year>'2016' AND year<'2018'"
+  ```  
+**Example**  
+
+  Get Partition `year` year between 2015\-2018 \(inclusive\)\. The following API calls are equivalent to each other
+
+  ```
+  aws glue get-partitions --database-name dbname --table-name twitter_partition 
+          --expression "year>='2015' AND year<='2018'"
+          
+          aws glue get-partitions --database-name dbname --table-name twitter_partition 
+          --expression "year BETWEEN 2015 AND 2018"
+          
+          aws glue get-partitions --database-name dbname --table-name twitter_partition 
+          --expression "year IN (2015,2016,2017,2018)"
+  ```  
+**Example**  
+
+  A wildcard partition filter, where the following call output will be partition year=2017\. A regular expression is not supported in `LIKE`\.
+
+  ```
+  aws glue get-partitions --database-name dbname --table-name twitter_partition 
+          --expression "year LIKE '%7'"
+  ```
 + `NextToken` – UTF\-8 string\.
 
   A continuation token, if this is not the first call to retrieve these partitions\.

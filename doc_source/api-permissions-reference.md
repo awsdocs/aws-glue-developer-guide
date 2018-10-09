@@ -2,7 +2,7 @@
 
 When you are setting up [Access Control](authentication-and-access-control.md#access-control) and writing a permissions policy that you can attach to an IAM identity \(identity\-based policies\), you can use the following table as a reference\. The table lists each AWS Glue API operation, the corresponding actions for which you can grant permissions to perform the action, and the AWS resource for which you can grant the permissions\. You specify the actions in the policy's `Action` field, and you specify the resource value in the policy's `Resource` field\. 
 
-You can use AWS\-wide condition keys in your AWS Glue policies to express conditions\. For a complete list of AWS\-wide keys, see [Available Keys](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#AvailableKeys) in the *IAM User Guide*\. 
+You can use AWS\-wide condition keys in your AWS Glue policies to express conditions\. For a complete list of AWS\-wide keys, see [Available Keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#AvailableKeys) in the *IAM User Guide*\. 
 
 **Note**  
 To specify an action, use the `glue:` prefix followed by the API operation name \(for example, `glue:GetTable`\)\.
@@ -24,7 +24,7 @@ If you see an expand arrow \(**↗**\) in the upper\-right corner of the table, 
 | [CreateConnection Action \(Python: create\_connection\)](aws-glue-api-catalog-connections.md#aws-glue-api-catalog-connections-CreateConnection) | glue:CreateConnection | \* | 
 | [CreateCrawler Action \(Python: create\_crawler\)](aws-glue-api-crawler-crawling.md#aws-glue-api-crawler-crawling-CreateCrawler) | glue:CreateCrawler | \* | 
 | [CreateDatabase Action \(Python: create\_database\)](aws-glue-api-catalog-databases.md#aws-glue-api-catalog-databases-CreateDatabase) | glue:CreateDatabase | \* | 
-| [CreateDevEndpoint Action \(Python: create\_dev\_endpoint\)](aws-glue-api-dev-endpoint.md#aws-glue-api-dev-endpoint-CreateDevEndpoint) | glue:CreateDevEndpoint | \* | 
+| [CreateDevEndpoint Action \(Python: create\_dev\_endpoint\)](aws-glue-api-dev-endpoint.md#aws-glue-api-dev-endpoint-CreateDevEndpoint) | glue:CreateDevEndpoint |  arn:aws:glue:region:account\-id:devEndpoint/development\-endpoint\-name or arn:aws:glue:region:account\-id:devEndpoint/\* | 
 | [CreateJob Action \(Python: create\_job\)](aws-glue-api-jobs-job.md#aws-glue-api-jobs-job-CreateJob) | glue:CreateJob | \* | 
 | [CreatePartition Action \(Python: create\_partition\)](aws-glue-api-catalog-partitions.md#aws-glue-api-catalog-partitions-CreatePartition) | glue:CreatePartition | \* | 
 | [CreateScript Action \(Python: create\_script\)](aws-glue-api-etl-script-generation.md#aws-glue-api-etl-script-generation-CreateScript) | glue:CreateScript | \* | 
@@ -35,7 +35,7 @@ If you see an expand arrow \(**↗**\) in the upper\-right corner of the table, 
 | [DeleteConnection Action \(Python: delete\_connection\)](aws-glue-api-catalog-connections.md#aws-glue-api-catalog-connections-DeleteConnection) | glue:DeleteConnection | \* | 
 | [DeleteCrawler Action \(Python: delete\_crawler\)](aws-glue-api-crawler-crawling.md#aws-glue-api-crawler-crawling-DeleteCrawler) | glue:DeleteCrawler | \* | 
 | [DeleteDatabase Action \(Python: delete\_database\)](aws-glue-api-catalog-databases.md#aws-glue-api-catalog-databases-DeleteDatabase) | glue:DeleteDatabase | \* | 
-| [DeleteDevEndpoint Action \(Python: delete\_dev\_endpoint\)](aws-glue-api-dev-endpoint.md#aws-glue-api-dev-endpoint-DeleteDevEndpoint) | glue:DeleteDevEndpoint | \* | 
+| [DeleteDevEndpoint Action \(Python: delete\_dev\_endpoint\)](aws-glue-api-dev-endpoint.md#aws-glue-api-dev-endpoint-DeleteDevEndpoint) | glue:DeleteDevEndpoint |  arn:aws:glue:region:account\-id:devEndpoint/development\-endpoint\-name or arn:aws:glue:region:account\-id:devEndpoint/\* | 
 | [DeleteJob Action \(Python: delete\_job\)](aws-glue-api-jobs-job.md#aws-glue-api-jobs-job-DeleteJob) | glue:DeleteJob | \* | 
 | [DeletePartition Action \(Python: delete\_partition\)](aws-glue-api-catalog-partitions.md#aws-glue-api-catalog-partitions-DeletePartition) | glue:DeletePartition | \* | 
 | [DeleteTable Action \(Python: delete\_table\)](aws-glue-api-catalog-tables.md#aws-glue-api-catalog-tables-DeleteTable) | glue:DeleteTable | \* | 
@@ -52,7 +52,7 @@ If you see an expand arrow \(**↗**\) in the upper\-right corner of the table, 
 | [GetDatabase Action \(Python: get\_database\)](aws-glue-api-catalog-databases.md#aws-glue-api-catalog-databases-GetDatabase) | glue:GetDatabase | \* | 
 | [GetDatabases Action \(Python: get\_databases\)](aws-glue-api-catalog-databases.md#aws-glue-api-catalog-databases-GetDatabases) | glue:GetDatabases | \* | 
 | [GetDataflowGraph Action \(Python: get\_dataflow\_graph\)](aws-glue-api-etl-script-generation.md#aws-glue-api-etl-script-generation-GetDataflowGraph) | glue:GetDataflowGraph | \* | 
-| [GetDevEndpoint Action \(Python: get\_dev\_endpoint\)](aws-glue-api-dev-endpoint.md#aws-glue-api-dev-endpoint-GetDevEndpoint) | glue:GetDevEndpoint | \* | 
+| [GetDevEndpoint Action \(Python: get\_dev\_endpoint\)](aws-glue-api-dev-endpoint.md#aws-glue-api-dev-endpoint-GetDevEndpoint) | glue:GetDevEndpoint |  arn:aws:glue:region:account\-id:devEndpoint/development\-endpoint\-name or arn:aws:glue:region:account\-id:devEndpoint/\* | 
 | [GetDevEndpoints Action \(Python: get\_dev\_endpoints\)](aws-glue-api-dev-endpoint.md#aws-glue-api-dev-endpoint-GetDevEndpoints) | glue:GetDevEndpoints | \* | 
 | [GetJob Action \(Python: get\_job\)](aws-glue-api-jobs-job.md#aws-glue-api-jobs-job-GetJob) | glue:GetJob | \* | 
 | [GetJobRun Action \(Python: get\_job\_run\)](aws-glue-api-jobs-runs.md#aws-glue-api-jobs-runs-GetJobRun) | glue:GetJobRun | \* | 
@@ -82,12 +82,12 @@ If you see an expand arrow \(**↗**\) in the upper\-right corner of the table, 
 | [UpdateCrawler Action \(Python: update\_crawler\)](aws-glue-api-crawler-crawling.md#aws-glue-api-crawler-crawling-UpdateCrawler) | glue:UpdateCrawler | \* | 
 | [UpdateCrawlerSchedule Action \(Python: update\_crawler\_schedule\)](aws-glue-api-crawler-scheduler.md#aws-glue-api-crawler-scheduler-UpdateCrawlerSchedule) | glue:UpdateCrawlerSchedule | \* | 
 | [UpdateDatabase Action \(Python: update\_database\)](aws-glue-api-catalog-databases.md#aws-glue-api-catalog-databases-UpdateDatabase) | glue:UpdateDatabase | \* | 
-| [UpdateDevEndpoint Action \(Python: update\_dev\_endpoint\)](aws-glue-api-dev-endpoint.md#aws-glue-api-dev-endpoint-UpdateDevEndpoint) | glue:UpdateDevEndpoint | \* | 
+| [UpdateDevEndpoint Action \(Python: update\_dev\_endpoint\)](aws-glue-api-dev-endpoint.md#aws-glue-api-dev-endpoint-UpdateDevEndpoint) | glue:UpdateDevEndpoint |  arn:aws:glue:region:account\-id:devEndpoint/development\-endpoint\-name or arn:aws:glue:region:account\-id:devEndpoint/\* | 
 | [UpdateJob Action \(Python: update\_job\)](aws-glue-api-jobs-job.md#aws-glue-api-jobs-job-UpdateJob) | glue:UpdateJob | \* | 
 | [UpdatePartition Action \(Python: update\_partition\)](aws-glue-api-catalog-partitions.md#aws-glue-api-catalog-partitions-UpdatePartition) | glue:UpdatePartition | \* | 
 | [UpdateTable Action \(Python: update\_table\)](aws-glue-api-catalog-tables.md#aws-glue-api-catalog-tables-UpdateTable) | glue:UpdateTable | \* | 
 | [UpdateTrigger Action \(Python: update\_trigger\)](aws-glue-api-jobs-trigger.md#aws-glue-api-jobs-trigger-UpdateTrigger) | glue:UpdateTrigger | \* | 
 | [UpdateUserDefinedFunction Action \(Python: update\_user\_defined\_function\)](aws-glue-api-catalog-functions.md#aws-glue-api-catalog-functions-UpdateUserDefinedFunction) | glue:UpdatateUserDefinedFunction | \* | 
 
-## Related Topics<a name="w3ab1c13c15c17c23"></a>
+## Related Topics<a name="w4aac13c15c25c23"></a>
 + [Access Control](authentication-and-access-control.md#access-control)

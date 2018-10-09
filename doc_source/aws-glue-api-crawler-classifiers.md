@@ -51,10 +51,10 @@ A classifier that uses `grok` patterns\.
   The version of this classifier\.
 + `GrokPattern` – *Required:* UTF\-8 string, not less than 1 or more than 2048 bytes long, matching the [A Logstash Grok string pattern](aws-glue-api-common.md#aws-glue-api-grok-pattern)\.
 
-  The grok pattern applied to a data store by this classifier\. For more information, see built\-in patterns in [Writing Custom Classifers](http://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html)\.
+  The grok pattern applied to a data store by this classifier\. For more information, see built\-in patterns in [Writing Custom Classifers](https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html)\.
 + `CustomPatterns` – UTF\-8 string, not more than 16000 bytes long, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
 
-  Optional custom grok patterns defined by this classifier\. For more information, see custom patterns in [Writing Custom Classifers](http://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html)\.
+  Optional custom grok patterns defined by this classifier\. For more information, see custom patterns in [Writing Custom Classifers](https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html)\.
 
 ## XMLClassifier Structure<a name="aws-glue-api-crawler-classifiers-XMLClassifier"></a>
 

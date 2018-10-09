@@ -4,6 +4,7 @@ Any IAM user that signs in to the AWS Glue console or AWS Command Line Interface
 
 When you finish this step, your IAM user has the following policies attached: 
 + The AWS managed policy **AWSGlueConsoleFullAccess** or the custom policy **GlueConsoleAccessPolicy**
++ **AWSGlueConsoleSageMakerNotebookFullAccess**
 + **CloudWatchLogsReadOnlyAccess**
 + **AWSCloudFormationReadOnlyAccess**
 + **AmazonAthenaFullAccess**
@@ -24,13 +25,11 @@ In this step, you create a policy that is similar to `AWSGlueConsoleFullAccess`\
 
 1. In the list, choose the name of the user to embed a policy in\.
 
-1. Choose the **Permissions** tab and, if necessary, expand the **Inline Policies** section\.
+1. Choose the **Permissions** tab and, if necessary, expand the **Permissions policies** section\.
 
 1. Choose the **Add Inline policy** link\.
 
-1. In the **Set Permissions** screen, choose **Custom Policy**, and then choose **Select** to open the policy editor\.
-
-1. Specify a name for the policy, for example **GlueConsoleAccessPolicy**\. Create your policy document with the following statements:
+1. On the **Create Policy** screen, navigate to a tab to edit JSON\. Create a policy document with the following JSON statements, and then choose **Review policy**\.
 
    ```
    {
@@ -195,11 +194,9 @@ In this step, you create a policy that is similar to `AWSGlueConsoleFullAccess`\
    The following table describes the permissions granted by this policy\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/glue/latest/dg/attach-policy-iam-user.html)
 
-1. Choose **Validate Policy**, and ensure that no errors appear in a red box at the top of the screen\. Correct any that are reported\.
+1. On the **Review policy** screen, type a name for the policy, for example **GlueConsoleAccessPolicy**\. When you're satisfied with the policy, then choose **Create policy**\. Ensure that no errors appear in a red box at the top of the screen\. Correct any that are reported\.
 **Note**  
 If **Use autoformatting** is selected, the policy is reformatted whenever you open a policy or choose **Validate Policy**\.
-
-1. When you are satisfied with the policy, choose **Apply Policy**\.
 
 **To attach the AWSGlueConsoleFullAccess managed policy**
 
@@ -212,6 +209,20 @@ You can skip this step if you created your own policy for AWS Glue console acces
 1. In the navigation pane, choose **Policies**\.
 
 1. In the list of policies, select the check box next to the **AWSGlueConsoleFullAccess**\. You can use the **Filter** menu and the search box to filter the list of policies\.
+
+1. Choose **Policy actions**, and then choose **Attach**\.
+
+1. Choose the user to attach the policy to\. You can use the **Filter** menu and the search box to filter the list of principal entities\. After choosing the user to attach the policy to, choose **Attach policy**\.
+
+**To attach the AWSGlueConsoleSageMakerNotebookFullAccess managed policy**
+
+You can attach the **AWSGlueConsoleSageMakerNotebookFullAccess** policy to a user to manage Amazon SageMaker notebooks created on the AWS Glue console\. In addition to other required AWS Glue console permissions, this policy grants access to resources needed to manage Amazon SageMaker notebooks\. 
+
+1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
+
+1. In the navigation pane, choose **Policies**\. 
+
+1. In the list of policies, select the check box next to the **AWSGlueConsoleSageMakerNotebookFullAccess**\. You can use the **Filter** menu and the search box to filter the list of policies\.
 
 1. Choose **Policy actions**, and then choose **Attach**\.
 

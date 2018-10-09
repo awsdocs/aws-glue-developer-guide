@@ -1,4 +1,4 @@
-# Tutorial: Set Up an Apache Zeppelin Notebook on Amazon EC2<a name="dev-endpoint-tutorial-EC2-notebook"></a>
+# Tutorial: Set Up an Apache Zeppelin Notebook Server on Amazon EC2<a name="dev-endpoint-tutorial-EC2-notebook"></a>
 
 In this tutorial, you create an Apache Zeppelin Notebook server that is hosted on an Amazon EC2 instance\. The notebook connects to one of your development endpoints so that you can interactively run, debug, and test AWS Glue ETL \(extract, transform, and load\) scripts before deploying them\.
 
@@ -16,9 +16,9 @@ To create a notebook server on Amazon EC2, you must have permission to create re
 
 1. Enter an AWS CloudFormation stack server name such as `demo-cf`, using only alphanumeric characters and hyphens\.
 
-1. Choose an IAM role that you have set up with a trust relationship to Amazon EC2, as documented in [Step 5: Create an IAM Role for Notebooks](create-an-iam-role-notebook.md)\.
+1. Choose an IAM role that you have set up with a trust relationship to Amazon EC2, as documented in [Step 5: Create an IAM Role for Notebook Servers](create-an-iam-role-notebook.md)\.
 
-1. Choose an Amazon EC2 key pair that you have generated on the Amazon EC2 console \([https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\), or choose **Create EC2 key pair** to generate a new one\. Remember where you have downloaded and saved the private key portion of the pair\. This key pair is different from the SSH key you used when creating your development endpoint \(the keys that Amazon EC2 uses are 2048\-bit SSH\-2 RSA keys\)\. For more information about Amazon EC2 keys, see [Amazon EC2 Key Pairs](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)\. 
+1. Choose an Amazon EC2 key pair that you have generated on the Amazon EC2 console \([https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\), or choose **Create EC2 key pair** to generate a new one\. Remember where you have downloaded and saved the private key portion of the pair\. This key pair is different from the SSH key you used when creating your development endpoint \(the keys that Amazon EC2 uses are 2048\-bit SSH\-2 RSA keys\)\. For more information about Amazon EC2 keys, see [Amazon EC2 Key Pairs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)\. 
 
    It is to generally a good practice to ensure that the private\-key file is write\-protected so that it is not accidentally modified\. On macOS and Linux systems, do this by opening a terminal and entering `chmod 400 private-key-file path`\. On Windows, open the console and enter `attrib -r private-key-file path`\.
 

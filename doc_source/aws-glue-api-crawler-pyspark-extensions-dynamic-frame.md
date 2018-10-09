@@ -223,7 +223,7 @@ df2 = df.resolveChoice(specs = [("a.b", "make_struct"), ("c.d", "cast:double")])
 **`select_fields(paths, transformation_ctx="", info="", stageThreshold=0, totalThreshold=0)`**
 
 Returns a new `DynamicFrame` containing the selected fields\.
-+ `paths` – A list of strings, each of which is a full path to a node that you want to select\.
++ `paths` – A list of strings, each of which is a path to a top\-level node that you want to select\.
 + `transformation_ctx` – A unique string that is used to identify state information \(optional\)\.
 + `info` – A string to be associated with error reporting for this transformation \(optional\)\.
 + `stageThreshold` – The number of errors encountered during this transformation at which the process should error out \(optional: zero by default, indicating that the process should not error out\)\.

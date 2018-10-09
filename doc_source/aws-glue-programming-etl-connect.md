@@ -56,7 +56,7 @@ These include the following:
 
 Use these `connectionOptions` with JDBC connections:
 + `"url"`: \(Required\) The JDBC URL for the database\.
-+ `"dbtable"`: The database table to read from\.
++ `"dbtable"`: The database table to read from\. For JDBC data stores that support schemas within a database, specify `schema.table-name`\. If a schema is not provided, then the default "public" schema is used\.
 + `"redshiftTmpDir"`: \(Required for Amazon Redshift, optional for other JDBC types\) The Amazon S3 path where temporary data can be staged when copying out of the database\.
 + `"user"`: \(Required\) The username to use when connecting\.
 + `"password"`: \(Required\) The password to use when connecting\.

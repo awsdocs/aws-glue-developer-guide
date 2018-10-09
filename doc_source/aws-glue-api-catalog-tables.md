@@ -237,7 +237,7 @@ Specifies a version of a table\.
   The table in question
 + `VersionId` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  The ID value that identifies this table version\.
+  The ID value that identifies this table version\. A `VersionId` is a string representation of an integer\. Each version is incremented by 1\.
 
 ## TableError Structure<a name="aws-glue-api-catalog-tables-TableError"></a>
 
@@ -261,7 +261,7 @@ An error record for table\-version operations\.
   The name of the table in question\.
 + `VersionId` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  The ID value of the version in question\.
+  The ID value of the version in question\. A `VersionID` is a string representation of an integer\. Each version is incremented by 1\.
 + `ErrorDetail` – An [ErrorDetail](aws-glue-api-common.md#aws-glue-api-common-ErrorDetail) object\.
 
   Detail about the error\.
@@ -472,7 +472,7 @@ Retrieves a specified version of a table\.
   The name of the table\. For Hive compatibility, this name is entirely lowercase\.
 + `VersionId` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  The ID value of the table version to be retrieved\.
+  The ID value of the table version to be retrieved\. A `VersionID` is a string representation of an integer\. Each version is incremented by 1\. 
 
 **Response**
 + `TableVersion` – A [TableVersion](#aws-glue-api-catalog-tables-TableVersion) object\.
@@ -538,7 +538,7 @@ Deletes a specified version of a table\.
   The name of the table\. For Hive compatibility, this name is entirely lowercase\.
 + `VersionId` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  The ID of the table version to be deleted\.
+  The ID of the table version to be deleted\. A `VersionID` is a string representation of an integer\. Each version is incremented by 1\.
 
 **Response**
 + *No Response parameters\.*
@@ -565,7 +565,7 @@ Deletes a specified batch of versions of a table\.
   The name of the table\. For Hive compatibility, this name is entirely lowercase\.
 + `VersionIds` – *Required:* An array of UTF\-8 strings, not more than 100 strings\.
 
-  A list of the IDs of versions to be deleted\.
+  A list of the IDs of versions to be deleted\. A `VersionId` is a string representation of an integer\. Each version is incremented by 1\.
 
 **Response**
 + `Errors` – An array of [TableVersionError](#aws-glue-api-catalog-tables-TableVersionError) objects\.

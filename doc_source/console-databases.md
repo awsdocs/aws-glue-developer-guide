@@ -7,7 +7,7 @@ To view the list of databases, sign in to the AWS Management Console and open th
 From the **Databases** tab in the AWS Glue console, you can add, edit, and delete databases:
 + To create a new database, choose **Add database** and provide a name and description\. For compatibility with other metadata stores, such as Apache Hive, the name is folded to lowercase characters\.
 **Note**  
-If you plan to access the database from Amazon Athena, then provide a name with only alphanumeric and underscore characters\. For more information, see [Athena names](http://docs.aws.amazon.com/athena/latest/ug/tables-databases-columns-names.html#ate-table-database-and-column-names-allow-only-underscore-special-characters)\.
+If you plan to access the database from Amazon Athena, then provide a name with only alphanumeric and underscore characters\. For more information, see [Athena names](https://docs.aws.amazon.com/athena/latest/ug/tables-databases-columns-names.html#ate-table-database-and-column-names-allow-only-underscore-special-characters)\.
 + To edit the description for a database, select the check box next to the database name and choose **Action**, **Edit database**\.
 + To delete a database, select the check box next to the database name and choose **Action**, **Delete database**\.
 + To display the list of tables contained in the database, select the check box next to the database name and choose **View tables**\.

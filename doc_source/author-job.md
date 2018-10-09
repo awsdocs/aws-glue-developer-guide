@@ -12,6 +12,7 @@ The following diagram summarizes the basic workflow and steps involved in author
 + [Editing Scripts in AWS Glue](edit-script.md)
 + [Triggering Jobs in AWS Glue](trigger-job.md)
 + [Using Development Endpoints for Developing Scripts](dev-endpoint.md)
++ [Managing Notebooks](notebooks-with-glue.md)
 
 ## Workflow Overview<a name="author-job-workflow"></a>
 
@@ -19,9 +20,9 @@ When you author a job, you supply details about data sources, targets, and other
 
 The following describes an overall process of authoring jobs in the AWS Glue console:
 
-1. You choose a data source for your job\. The tables that represent your data source must already be defined in your Data Catalog\. If the source requires a connection, the connection is also referenced in your job\. If your job requires multiple data sources, you can later edit the script to add them\.
+1. You choose a data source for your job\. The tables that represent your data source must already be defined in your Data Catalog\. If the source requires a connection, the connection is also referenced in your job\. If your job requires multiple data sources, you can add them later by editing the script\.
 
-1. You choose a data target of your job\. The tables that represent the data target can be defined in your Data Catalog, or your job can create the target tables when it runs\. You choose a target location when you author the job\. If the target requires a connection, the connection is also referenced in your job\. If your job requires multiple data targets, you can later edit the script to add them\.
+1. You choose a data target of your job\. The tables that represent the data target can be defined in your Data Catalog, or your job can create the target tables when it runs\. You choose a target location when you author the job\. If the target requires a connection, the connection is also referenced in your job\. If your job requires multiple data targets, you can add them later by editing the script\.
 
 1. You customize the job\-processing environment by providing arguments for your job and generated script\. For more information, see [Adding Jobs in AWS Glue](add-job.md)\.
 

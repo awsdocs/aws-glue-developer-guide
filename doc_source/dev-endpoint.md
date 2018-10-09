@@ -20,12 +20,15 @@ To use a development endpoint, you can follow this workflow\.
 1. The console or API can poll the development endpoint until it is provisioned and ready for work\. When it's ready, you can connect to the development endpoint to create and test AWS Glue scripts\.
    + You can install an Apache Zeppelin notebook on your local machine, connect it to a development endpoint, and then develop on it using your browser\.
    + You can create an Apache Zeppelin notebook server in its own Amazon EC2 instance in your account using the AWS Glue console, and then connect to it using your browser\. For more information about how to create a notebbook server, see [Creating a Notebook Server Associated with a Development Endpoint](dev-endpoint-notebook-server-considerations.md)\. 
+   + You can create an Amazon SageMaker notebook server in your account using the AWS Glue console\. For more information about how to create a notebbook, see [Working with Notebooks on the AWS Glue Console](console-notebooks.md)\. 
    + You can open a terminal window to connect directly to a development endpoint\.
    + If you have the Professional edition of the JetBrains [PyCharm Python IDE](https://www.jetbrains.com/pycharm/), you can connect it to a development endpoint and use it to develop interactively\. PyCharm can then support remote breakpoints if you insert `pydevd` statements in your script\.
 
 1. When you finish debugging and testing on your development endpoint, you can delete it\.
 
 ## Accessing Your Development Endpoint<a name="dev-endpoint-elastic-ip"></a>
+
+When you create a development endpoint in a virtual private cloud \(VPC\), AWS Glue returns only a private IP address, and the public IP address field is not populated\. When you create a non\-VPC development endpoint, AWS Glue returns only a public IP address\.
 
 If your development endpoint has a **Public address**, then confirm it is reachable with the SSH private key for the development endpoint\. For example:
 
@@ -34,6 +37,9 @@ ssh -i dev-endpoint-private-key.pem glue@public-address
 ```
 
  If your development endpoint has a **Private address** and your VPC subnet is routable from the public internet and its security groups allow inbound access from your client, then you can follow these instructions to attach an **elastic IP** to a development endpoint, thereby allowing access from the internet\.
+
+**Note**  
+To use elastic IPs, the subnet being used requires an internet gateway associated through the route table\.
 
 1. On the AWS Glue console, navigate to the development endpoint details page\. Record the **Private address** for use in the next step\. 
 
@@ -53,3 +59,5 @@ ssh -i dev-endpoint-private-key.pem glue@public-address
    ```
    ssh -i dev-endpoint-private-key.pem glue@elastic-ip
    ```
+
+   For information about using a bastion host to get SSH access to the development endpoint’s private address, see [Securely Connect to Linux Instances Running in a Private Amazon VPC](https://aws.amazon.com/blogs/security/securely-connect-to-linux-instances-running-in-a-private-amazon-vpc/)\.

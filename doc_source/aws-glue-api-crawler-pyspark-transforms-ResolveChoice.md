@@ -22,7 +22,7 @@ Provides information for resolving ambiguous types within a `DynamicFrame`\. Ret
   + `cast`:  Allows you to specify a type to cast to \(for example, `cast:int`\)\.
   + `make_cols`:  Resolves a potential ambiguity by flattening the data\. For example, if `columnA` could be an `int` or a `string`, the resolution is to produce two columns named `columnA_int` and `columnA_string` in the resulting `DynamicFrame`\.
   + `make_struct`:  Resolves a potential ambiguity by using a struct to represent the data\. For example, if data in a column could be an `int` or a `string`, using the `make_struct` action produces a column of structures in the resulting `DynamicFrame` with each containing both an `int` and a `string`\.
-  + `project`:  Resolves a potential ambiguity by projecting all the data to one of the possible data types\. For example, if data in a column could be an `int` or a `string`, using a `project:string` action produces a column in the resulting `DynamicFrame` where all the `int` values are converted to strings\.
+  + `project`:  Resolves a potential ambiguity by retaining only values of a specified type in the resulting `DynamicFrame`\. For example, if data in a `ChoiceType` column could be an `int` or a `string`, specifying a `project:string` action drops columns from the resulting `DynamicFrame` which are not type `string`\. 
 
   If the `path` identifies an array, place empty square brackets after the name of the array to avoid ambiguity\. For example, suppose you are working with data structured as follows:
 

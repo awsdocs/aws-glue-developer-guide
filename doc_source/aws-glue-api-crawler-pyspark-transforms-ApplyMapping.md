@@ -28,7 +28,7 @@ Applies a declarative mapping to a specified `DynamicFrame`\.
 + `stageThreshold` – The maximum number of errors that can occur in the transformation before it errors out \(optional; the default is zero\)\.
 + `totalThreshold` – The maximum number of errors that can occur overall before processing errors out \(optional; the default is zero\)\.
 
-Returns a new `DynamicFrame` in which the mapping has been applied\.
+Returns only the fields of the `DynamicFrame` specified in the "mapping" tuples\.
 
 ## apply\(cls, \*args, \*\*kwargs\)<a name="aws-glue-api-crawler-pyspark-transforms-ApplyMapping-apply"></a>
 

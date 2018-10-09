@@ -11,25 +11,6 @@ In AWS Glue, you control encryption settings in the following places:
 
 For more information about how to set up encryption, see [Setting Up Encryption in AWS Glue](set-up-encryption.md)\. 
 
-
-| Region | Code | 
-| --- | --- | 
-| Region | Code | 
-| --- | --- | 
-|   Encryption is available in the following AWS Regions: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/glue/latest/dg/encryption-glue-resources.html) Encryption is **not** available in the following AWS Regions: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/glue/latest/dg/encryption-glue-resources.html)   | 
-| US East \(Ohio\) | `us-east-2` | 
-| US East \(N\. Virginia\) | `us-east-1` | 
-| US West \(Oregon\) | `us-west-2` | 
-| Asia Pacific \(Tokyo\) | `ap-northeast-1` | 
-| Asia Pacific \(Seoul\) | `ap-northeast-2` | 
-| Asia Pacific \(Mumbai\) | `ap-south-1` | 
-| Asia Pacific \(Singapore\) | `ap-southeast-1` | 
-| Asia Pacific \(Sydney\) | `ap-southeast-2` | 
-| EU \(Frankfurt\) | `eu-central-1` | 
-| EU \(Ireland\) | `eu-west-1` | 
-| EU \(London\) | `eu-west-2` | 
-| Canada \(Central\) | `ca-central-1` | 
-
 **Topics**
 + [Encrypting Your Data Catalog](encrypt-glue-data-catalog.md)
 + [Encrypting Data Written by Crawlers, Jobs, and Development Endpoints](encryption-security-configuration.md)

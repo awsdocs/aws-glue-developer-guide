@@ -4,7 +4,7 @@ For security reasons, many AWS customers run their applications within an Amazon
 
 **Note**  
 If you created your AWS account after 2013\-12\-04, you already have a default VPC in each AWS Region\. You can immediately start using your default VPC without any additional configuration\.  
-For more information, see [Your Default VPC and Subnets](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/default-vpc.html) in the Amazon VPC User Guide\.
+For more information, see [Your Default VPC and Subnets](https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html) in the Amazon VPC User Guide\.
 
 Many customers have legitimate privacy and security concerns about sending and receiving data across the public internet\. Customers can address these concerns by using a virtual private network \(VPN\) to route all Amazon S3 network traffic through their own corporate network infrastructure\. However, this approach can introduce bandwidth and availability challenges\.
 
@@ -12,7 +12,7 @@ VPC endpoints for Amazon S3 can alleviate these challenges\. A VPC endpoint for 
 
 When you create a VPC endpoint for Amazon S3, any requests to an Amazon S3 endpoint within the Region \(for example, *s3\.us\-west\-2\.amazonaws\.com*\) are routed to a private Amazon S3 endpoint within the Amazon network\. You don't need to modify your applications running on EC2 instances in your VPC—the endpoint name remains the same, but the route to Amazon S3 stays entirely within the Amazon network, and does not access the public internet\.
 
-For more information about VPC endpoints, see [VPC Endpoints](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-endpoints.html) in the Amazon VPC User Guide\.
+For more information about VPC endpoints, see [VPC Endpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html) in the Amazon VPC User Guide\.
 
 The following diagram shows how AWS Glue can use a VPC endpoint to access Amazon S3\.
 

@@ -88,11 +88,11 @@ The following example shows how call the AWS Glue APIs using Python, to create a
 1. Get the job status:
 
    ```
-   status = glue.get_job_run(JobName=myJob['Name'], RunId=myNewJobRun['JobRunId'])
+   status = glue.get_job_run(JobName=myJob['Name'], RunId=JobRun['JobRunId'])
    ```
 
 1. Print the current state of the job run:
 
    ```
-   print status['myNewJobRun']['JobRunState']
+   print status['JobRun']['JobRunState']
    ```

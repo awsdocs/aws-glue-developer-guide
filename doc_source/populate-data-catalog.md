@@ -27,10 +27,10 @@ The following is the general workflow for how a crawler populates the AWS Glue D
 1. The crawler writes metadata to the Data Catalog\. A table definition contains metadata about the data in your data store\. The table is written to a database, which is a container of tables in the Data Catalog\. Attributes of a table include classification, which is a label created by the classifier that inferred the table schema\.
 
 **Topics**
-+ [Defining Tables in the AWS Glue Data Catalog](tables-described.md)
-+ [Cataloging Tables with a Crawler](add-crawler.md)
 + [Defining a Database in Your Data Catalog](define-database.md)
-+ [Adding Classifiers to a Crawler](add-classifier.md)
++ [Defining Tables in the AWS Glue Data Catalog](tables-described.md)
 + [Adding a Connection to Your Data Store](populate-add-connection.md)
++ [Cataloging Tables with a Crawler](add-crawler.md)
++ [Adding Classifiers to a Crawler](add-classifier.md)
 + [Working with Data Catalog Settings on the AWS Glue Console](console-data-catalog-settings.md)
 + [Populating the Data Catalog Using AWS CloudFormation Templates](populate-with-cloudformation-templates.md)

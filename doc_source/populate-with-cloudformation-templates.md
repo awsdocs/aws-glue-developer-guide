@@ -4,7 +4,7 @@ AWS CloudFormation is a service that can create many AWS resources\. AWS Glue pr
 
 AWS CloudFormation provides a simplified syntax—either JSON \(JavaScript Object Notation\) or YAML \(YAML Ain't Markup Language\)—to express the creation of AWS resources\. You can use AWS CloudFormation templates to define Data Catalog objects such as databases, tables, partitions, crawlers, classifiers, and connections\. You can also define ETL objects such as jobs, triggers, and development endpoints\. You create a template that describes all the AWS resources you want, and AWS CloudFormation takes care of provisioning and configuring those resources for you\.
 
-For more information, see [What Is AWS CloudFormation?](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html) and [Working with AWS CloudFormation Templates](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-guide.html) in the *AWS CloudFormation User Guide*\.
+For more information, see [What Is AWS CloudFormation?](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html) and [Working with AWS CloudFormation Templates](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-guide.html) in the *AWS CloudFormation User Guide*\.
 
 If you plan to use AWS CloudFormation templates that are compatible with AWS Glue, as an administrator, you must grant access to AWS CloudFormation and to the AWS services and actions on which it depends\. To grant permissions to create AWS CloudFormation resources, attach the following policy to the IAM users that work with AWS CloudFormation: 
 
@@ -28,27 +28,27 @@ The following table contains the actions that an AWS CloudFormation template can
 
 | AWS Glue Resource | AWS CloudFormation Template | AWS Glue Samples | 
 | --- | --- | --- | 
-| Classifier | [AWS::Glue::Classifier](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-classifier.html) | [Grok classifier](#sample-cfn-template-classifier) | 
-| Connection | [AWS::Glue::Connection](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-connection.html) | [MySQL connection](#sample-cfn-template-connection) | 
-| Crawler | [AWS::Glue::Crawler](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-crawler.html) | [Amazon S3 crawler](#sample-cfn-template-crawler-s3), [MySQL crawler](#sample-cfn-template-crawler-jdbc) | 
-| Database | [AWS::Glue::Database](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-database.html) | [Empty database](#sample-cfn-template-database), [Database with tables](#sample-cfn-template-db-table-partition)  | 
-| Development endpoint | [AWS::Glue::DevEndpoint](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-devendpoint.html) | [Development endpoint](#sample-cfn-template-devendpoint) | 
-| Job | [AWS::Glue::Job](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-job.html) | [Amazon S3 job](#sample-cfn-template-job-s3), [JDBC job](#sample-cfn-template-job-jdbc) | 
-| Partition | [AWS::Glue::Partition](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-partition.html) | [Partitions of a table](#sample-cfn-template-db-table-partition) | 
-| Table | [AWS::Glue::Table](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-table.html) | [Table in a database](#sample-cfn-template-db-table-partition) | 
-| Trigger | [AWS::Glue::Trigger](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-trigger.html) | [On\-demand trigger](#sample-cfn-template-trigger-ondemand), [Scheduled trigger](#sample-cfn-template-trigger-scheduled), [Conditional trigger](#sample-cfn-template-trigger-conditional)  | 
+| Classifier | [AWS::Glue::Classifier](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-classifier.html) | [Grok classifier](#sample-cfn-template-classifier), [JSON classifier](#sample-cfn-template-classifier-json), [XML classifier](#sample-cfn-template-classifier-xml) | 
+| Connection | [AWS::Glue::Connection](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-connection.html) | [MySQL connection](#sample-cfn-template-connection) | 
+| Crawler | [AWS::Glue::Crawler](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-crawler.html) | [Amazon S3 crawler](#sample-cfn-template-crawler-s3), [MySQL crawler](#sample-cfn-template-crawler-jdbc) | 
+| Database | [AWS::Glue::Database](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-database.html) | [Empty database](#sample-cfn-template-database), [Database with tables](#sample-cfn-template-db-table-partition)  | 
+| Development endpoint | [AWS::Glue::DevEndpoint](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-devendpoint.html) | [Development endpoint](#sample-cfn-template-devendpoint) | 
+| Job | [AWS::Glue::Job](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-job.html) | [Amazon S3 job](#sample-cfn-template-job-s3), [JDBC job](#sample-cfn-template-job-jdbc) | 
+| Partition | [AWS::Glue::Partition](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-partition.html) | [Partitions of a table](#sample-cfn-template-db-table-partition) | 
+| Table | [AWS::Glue::Table](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-table.html) | [Table in a database](#sample-cfn-template-db-table-partition) | 
+| Trigger | [AWS::Glue::Trigger](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-trigger.html) | [On\-demand trigger](#sample-cfn-template-trigger-ondemand), [Scheduled trigger](#sample-cfn-template-trigger-scheduled), [Conditional trigger](#sample-cfn-template-trigger-conditional)  | 
 
 To get started, use the following sample templates and customize them with your own metadata\. Then use the AWS CloudFormation console to create an AWS CloudFormation stack to add objects to AWS Glue and any associated services\. Many fields in an AWS Glue object are optional\. These templates illustrate the fields that are required or are necessary for a working and functional AWS Glue object\. 
 
  An AWS CloudFormation template can be in either JSON or YAML format\. In these examples, YAML is used for easier readability\. The examples contain comments \(`#`\) to describe the values that are defined in the templates\. 
 
-AWS CloudFormation templates can include a `Parameters` section\. This section can be changed in the sample text or when the YAML file is submitted to the AWS CloudFormation console to create a stack\. The `Resources` section of the template contains the definition of AWS Glue and related objects\. AWS CloudFormation template syntax definitions might contain properties that include more detailed property syntax\. Not all properties might be required to create an AWS Glue object; these samples show example values for common properties to create an AWS Glue object\.
+AWS CloudFormation templates can include a `Parameters` section\. This section can be changed in the sample text or when the YAML file is submitted to the AWS CloudFormation console to create a stack\. The `Resources` section of the template contains the definition of AWS Glue and related objects\. AWS CloudFormation template syntax definitions might contain properties that include more detailed property syntax\. Not all properties might be required to create an AWS Glue object\. These samples show example values for common properties to create an AWS Glue object\.
 
 ## Sample AWS CloudFormation Template for an AWS Glue Database<a name="sample-cfn-template-database"></a>
 
 An AWS Glue database in the Data Catalog contains metadata tables\. The database consists of very few properties and can be created in the Data Catalog with an AWS CloudFormation template\. The following sample template is provided to get you started and to illustrate the use of AWS CloudFormation stacks with AWS Glue\. The only resource created by the sample template is a database named `cfn-mysampledatabase`\. You can change it by editing the text of the sample or changing the value on the AWS CloudFormation console when you submit the YAML\.
 
-The following shows example values for common properties to create an AWS Glue database\. For more information about the AWS CloudFormation database template for AWS Glue, see [AWS::Glue::Database](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-database.html)\.  
+The following shows example values for common properties to create an AWS Glue database\. For more information about the AWS CloudFormation database template for AWS Glue, see [AWS::Glue::Database](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-database.html)\.  
 
 ```
 ---
@@ -245,7 +245,7 @@ Resources:
             SerializationLibrary: org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe
 ```
 
-## Sample AWS CloudFormation Template for an AWS Glue Classifier<a name="sample-cfn-template-classifier"></a>
+## Sample AWS CloudFormation Template for an AWS Glue Grok Classifier<a name="sample-cfn-template-classifier"></a>
 
 An AWS Glue classifier determines the schema of your data\. One type of custom classifier uses a grok pattern to match your data\. If the pattern matches, then the custom classifier is used to create your table's schema and set the `classification` to the value set in the classifier definition\.
 
@@ -277,6 +277,73 @@ Resources:
         Classification: greedy                                                        	   
         GrokPattern: "%{GREEDYDATA:message}"
         #CustomPatterns: none
+```
+
+## Sample AWS CloudFormation Template for an AWS Glue JSON Classifier<a name="sample-cfn-template-classifier-json"></a>
+
+An AWS Glue classifier determines the schema of your data\. One type of custom classifier uses a `JsonPath` string defining the JSON data for the classifier to classify\. AWS Glue supports a subset of the operators for `JsonPath`, as described in [Writing JsonPath Custom Classifiers](https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json)\. 
+
+If the pattern matches, then the custom classifier is used to create your table's schema\.
+
+This sample creates a classifier that creates a schema with each record in the `Records3` array in an object\.
+
+```
+---
+AWSTemplateFormatVersion: '2010-09-09'
+# Sample CFN YAML to demonstrate creating a JSON classifier
+#
+# Parameters section contains names that are substituted in the Resources section
+# These parameters are the names the resources created in the Data Catalog
+Parameters:                                                                                                       
+# The name of the classifier to be created
+  CFNClassifierName:  
+    Type: String
+    Default: cfn-classifier-json-one-column-1                                                               	
+#
+#
+# Resources section defines metadata for the Data Catalog
+Resources:
+# Create classifier that uses a JSON pattern.	
+  CFNClassifierFlights:
+    Type: AWS::Glue::Classifier   
+    Properties:
+      JSONClassifier:
+        #JSON classifier		
+        Name: !Ref CFNClassifierName
+        JsonPath: $.Records3[*]
+```
+
+## Sample AWS CloudFormation Template for an AWS Glue XML Classifier<a name="sample-cfn-template-classifier-xml"></a>
+
+An AWS Glue classifier determines the schema of your data\. One type of custom classifier specifies an XML tag to designate the element that contains each record in an XML document that is being parsed\. If the pattern matches, then the custom classifier is used to create your table's schema and set the `classification` to the value set in the classifier definition\.
+
+This sample creates a classifier that creates a schema with each record in the `Record` tag and sets the classification to `XML`\.
+
+```
+---
+AWSTemplateFormatVersion: '2010-09-09'
+# Sample CFN YAML to demonstrate creating an XML classifier
+#
+# Parameters section contains names that are substituted in the Resources section
+# These parameters are the names the resources created in the Data Catalog
+Parameters:                                                                                                       
+# The name of the classifier to be created
+  CFNClassifierName:  
+    Type: String
+    Default: cfn-classifier-xml-one-column-1                                                               	
+#
+#
+# Resources section defines metadata for the Data Catalog
+Resources:
+# Create classifier that uses the XML pattern and classifies it as "XML".	
+  CFNClassifierFlights:
+    Type: AWS::Glue::Classifier   
+    Properties:
+      XMLClassifier:
+        #XML classifier		
+        Name: !Ref CFNClassifierName
+        Classification: XML   
+        RowTag: <Records>
 ```
 
 ## Sample AWS CloudFormation Template for an AWS Glue Crawler for Amazon S3<a name="sample-cfn-template-crawler-s3"></a>
@@ -360,6 +427,7 @@ Resources:
       SchemaChangePolicy:
         UpdateBehavior: "UPDATE_IN_DATABASE"
         DeleteBehavior: "LOG"
+      Configuration: "{\"Version\":1.0,\"CrawlerOutput\":{\"Partitions\":{\"AddOrUpdateBehavior\":\"InheritFromTable\"},\"Tables\":{\"AddOrUpdateBehavior\":\"MergeNewColumns\"}}}"
 ```
 
 ## Sample AWS CloudFormation Template for an AWS Glue Connection<a name="sample-cfn-template-connection"></a>
@@ -508,6 +576,7 @@ Resources:
       SchemaChangePolicy:
         UpdateBehavior: "UPDATE_IN_DATABASE"
         DeleteBehavior: "LOG"
+	  Configuration: "{\"Version\":1.0,\"CrawlerOutput\":{\"Partitions\":{\"AddOrUpdateBehavior\":\"InheritFromTable\"},\"Tables\":{\"AddOrUpdateBehavior\":\"MergeNewColumns\"}}}"
 ```
 
 ## Sample AWS CloudFormation Template for an AWS Glue Job for Amazon S3 to Amazon S3<a name="sample-cfn-template-job-s3"></a>

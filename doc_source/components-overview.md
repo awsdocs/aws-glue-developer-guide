@@ -1,6 +1,6 @@
 # AWS Glue Components<a name="components-overview"></a>
 
-AWS Glue provides a console and API operations to set up and manage your extract, transform, and load \(ETL\) workload\. You can use API operations through several language\-specific SDKs and the AWS Command Line Interface \(AWS CLI\)\. For information about using the AWS CLI, see [AWS CLI Command Reference](http://docs.aws.amazon.com/cli/latest/reference/)\.
+AWS Glue provides a console and API operations to set up and manage your extract, transform, and load \(ETL\) workload\. You can use API operations through several language\-specific SDKs and the AWS Command Line Interface \(AWS CLI\)\. For information about using the AWS CLI, see [AWS CLI Command Reference](https://docs.aws.amazon.com/cli/latest/reference/)\.
 
 AWS Glue uses the AWS Glue Data Catalog to store metadata about data sources, transforms, and targets\. The Data Catalog is a drop\-in replacement for the Apache Hive Metastore\. The AWS Glue Jobs system provides a managed infrastructure for defining, scheduling, and running ETL operations on your data\. For more information about the AWS Glue API, see [AWS Glue API](aws-glue-api.md)\.
 
