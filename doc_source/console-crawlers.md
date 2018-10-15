@@ -65,7 +65,7 @@ To view the results of a crawler, find the crawler name in the list and choose t
 To see details of a crawler, choose the crawler name in the list\. Crawler details include the information you defined when you created the crawler with the **Add crawler** wizard\. When a crawler run completes, choose **Tables** in the navigation pane to see the tables that were created by your crawler in the database that you specified\.
 
 **Note**  
-The crawler assumes the permissions of the **IAM role** that you specify when you define it\. This IAM role must have permissions to extract data from your data store and write to the Data Catalog\. The AWS Glue console lists only IAM roles that have attached a trust policy for the AWS Glue principal service\. From the console, you can also create an IAM role with an IAM policy to access Amazon S3 data stores accessed by the crawler\. For more information about providing roles for AWS Glue, see [Using Identity\-Based Policies \(IAM Policies\)](using-identity-based-policies.md)\.
+The crawler assumes the permissions of the **IAM role** that you specify when you define it\. This IAM role must have permissions to extract data from your data store and write to the Data Catalog\. The AWS Glue console lists only IAM roles that have attached a trust policy for the AWS Glue principal service\. From the console, you can also create an IAM role with an IAM policy to access Amazon S3 data stores accessed by the crawler\. For more information about providing roles for AWS Glue, see [Identity\-Based Policies](using-identity-based-policies.md)\.
 
 The following are some important properties and metrics about the last run of a crawler:
 

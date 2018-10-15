@@ -1,11 +1,12 @@
 # Document History for AWS Glue<a name="doc-history"></a>
 
 The following table describes important changes to the documentation for AWS Glue\.
-+ **Latest API version:** 2018\-09\-26
-+ **Latest documentation update:** October 5, 2018
++ **Latest API version:** 2018\-10\-15
++ **Latest documentation update:** October 15, 2018
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Support for resource\-level permission and resource\-based policies](#doc-history) | Added information about using resource\-level permissions and resource\-based policies with AWS Glue\. For more information, see the topics within [Security in AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/security-glue.html)\. | October 15, 2018 | 
 | [Support for Amazon SageMaker notebooks](#doc-history) | Added information about using Amazon SageMaker notebooks with AWS Glue development endpoints\. For more information, see [ Managing Notebooks](https://docs.aws.amazon.com/glue/latest/dg/notebooks-with-glue.html)\. | October 5, 2018 | 
 | [Support for encryption](#doc-history) | Added information about using encryption with AWS Glue\. For more information, see [ Encryption and Secure Access for AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/encryption-glue-resources.html) and [Setting Up Encryption in AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/set-up-encryption.html)\. | August 24, 2018 | 
 | [Support for Apache Spark job metrics](#doc-history) | Added information about the use of Apache Spark metrics for better debugging and profiling of ETL jobs\. You can easily track runtime metrics such as bytes read and written, memory usage and CPU load of the driver and executors, and data shuffles among executors from the AWS Glue console\. For more information, see [ Monitoring AWS Glue Using CloudWatch Metrics](https://docs.aws.amazon.com/glue/latest/dg/monitoring-awsglue-with-cloudwatch-metrics.html), [Job Monitoring and Debugging](https://docs.aws.amazon.com/glue/latest/dg/monitor-profile-glue-job-cloudwatch-metrics.html) and [Working with Jobs on the AWS Glue Console](https://docs.aws.amazon.com/glue/latest/dg/console-jobs.html)\. | July 13, 2018 | 

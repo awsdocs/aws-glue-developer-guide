@@ -1,8 +1,14 @@
 # Authentication and Access Control for AWS Glue<a name="authentication-and-access-control"></a>
 
 Access to AWS Glue requires credentials\. Those credentials must have permissions to access AWS resources, such as an AWS Glue table or an Amazon Elastic Compute Cloud \(Amazon EC2\) instance\. The following sections provide details on how you can use [AWS Identity and Access Management \(IAM\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) and AWS Glue to help secure access to your resources\. 
+
+**Topics**
 + [Authentication](#authentication)
-+ [Access Control](#access-control)
++ [Overview of Managing Access Permissions to Your AWS Glue Resources](access-control-overview.md)
++ [Granting Cross\-Account Access](cross-account-access.md)
++ [Specifying AWS Glue Resource ARNs](glue-specifying-resource-arns.md)
++ [AWS Glue Access\-Control Policy Examples](glue-policy-examples.md)
++ [AWS Glue API Permissions: Actions and Resources Reference](api-permissions-reference.md)
 
 ## Authentication<a name="authentication"></a>
 
@@ -25,13 +31,3 @@ You can access AWS as any of the following types of identities:
 
       
   + **Applications running on Amazon EC2** – You can use an IAM role to manage temporary credentials for applications that are running on an EC2 instance and making AWS API requests\. This is preferable to storing access keys within the EC2 instance\. To assign an AWS role to an EC2 instance and make it available to all of its applications, you create an instance profile that is attached to the instance\. An instance profile contains the role and enables programs that are running on the EC2 instance to get temporary credentials\. For more information, see [Using an IAM Role to Grant Permissions to Applications Running on Amazon EC2 Instances](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html) in the *IAM User Guide*\. 
-
-## Access Control<a name="access-control"></a>
-
-You can have valid credentials to authenticate your requests, but unless you have permissions you cannot create or access AWS Glue resources\. For example, you must have permissions to create an AWS Glue table\.
-
-The following sections describe how to manage permissions for AWS Glue\. We recommend that you read the overview first\.
-+ [Overview of Managing Access](access-control-overview.md)
-+ [Using Identity\-Based Policies \(IAM Policies\)](using-identity-based-policies.md)
-+ [Specifying AWS Glue Resource ARNs](glue-specifying-resource-arns.md)
-+ [AWS Glue API Permissions Reference](api-permissions-reference.md)

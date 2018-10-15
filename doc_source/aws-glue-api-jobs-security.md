@@ -99,6 +99,9 @@ Specifies a security configuration\.
 ## Operations<a name="aws-glue-api-jobs-security-actions"></a>
 + [GetDataCatalogEncryptionSettings Action \(Python: get\_data\_catalog\_encryption\_settings\)](#aws-glue-api-jobs-security-GetDataCatalogEncryptionSettings)
 + [PutDataCatalogEncryptionSettings Action \(Python: put\_data\_catalog\_encryption\_settings\)](#aws-glue-api-jobs-security-PutDataCatalogEncryptionSettings)
++ [PutResourcePolicy Action \(Python: put\_resource\_policy\)](#aws-glue-api-jobs-security-PutResourcePolicy)
++ [GetResourcePolicy Action \(Python: get\_resource\_policy\)](#aws-glue-api-jobs-security-GetResourcePolicy)
++ [DeleteResourcePolicy Action \(Python: delete\_resource\_policy\)](#aws-glue-api-jobs-security-DeleteResourcePolicy)
 + [CreateSecurityConfiguration Action \(Python: create\_security\_configuration\)](#aws-glue-api-jobs-security-CreateSecurityConfiguration)
 + [DeleteSecurityConfiguration Action \(Python: delete\_security\_configuration\)](#aws-glue-api-jobs-security-DeleteSecurityConfiguration)
 + [GetSecurityConfiguration Action \(Python: get\_security\_configuration\)](#aws-glue-api-jobs-security-GetSecurityConfiguration)
@@ -142,6 +145,77 @@ Sets the security configuration for a specified catalog\. Once the configuration
 + `InternalServiceException`
 + `InvalidInputException`
 + `OperationTimeoutException`
+
+## PutResourcePolicy Action \(Python: put\_resource\_policy\)<a name="aws-glue-api-jobs-security-PutResourcePolicy"></a>
+
+Sets the Data Catalog resource policy for access control\.
+
+**Request**
++ `PolicyInJson` – *Required:* UTF\-8 string, not less than 2 or more than 10240 bytes long\.
+
+  Contains the policy document to set, in JSON format\.
++ `PolicyHashCondition` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  This is the hash value returned when the previous policy was set using PutResourcePolicy\. Its purpose is to prevent concurrent modifications of a policy\. Do not use this parameter if no previous policy has been set\.
++ `PolicyExistsCondition` – UTF\-8 string \(valid values: `MUST_EXIST` \| `NOT_EXIST` \| `NONE`\)\.
+
+  A value of `MUST_EXIST` is used to update a policy\. A value of `NOT_EXIST` is used to create a new policy\. If a value of `NONE` or a null value is used, the call will not depend on the existence of a policy\.
+
+**Response**
++ `PolicyHash` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  A hash of the policy that has just been set\. This must be included in a subsequent call that overwrites or updates this policy\.
+
+**Errors**
++ `EntityNotFoundException`
++ `InternalServiceException`
++ `OperationTimeoutException`
++ `InvalidInputException`
+
+## GetResourcePolicy Action \(Python: get\_resource\_policy\)<a name="aws-glue-api-jobs-security-GetResourcePolicy"></a>
+
+Retrieves a specified resource policy\.
+
+**Request**
++ *No Request parameters\.*
+
+**Response**
++ `PolicyInJson` – UTF\-8 string, not less than 2 or more than 10240 bytes long\.
+
+  Contains the requested policy document, in JSON format\.
++ `PolicyHash` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  Contains the hash value associated with this policy\.
++ `CreateTime` – Timestamp\.
+
+  The date and time at which the policy was created\.
++ `UpdateTime` – Timestamp\.
+
+  The date and time at which the policy was last updated\.
+
+**Errors**
++ `EntityNotFoundException`
++ `InternalServiceException`
++ `OperationTimeoutException`
++ `InvalidInputException`
+
+## DeleteResourcePolicy Action \(Python: delete\_resource\_policy\)<a name="aws-glue-api-jobs-security-DeleteResourcePolicy"></a>
+
+Deletes a specified policy\.
+
+**Request**
++ `PolicyHashCondition` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The hash value returned when this policy was set\.
+
+**Response**
++ *No Response parameters\.*
+
+**Errors**
++ `EntityNotFoundException`
++ `InternalServiceException`
++ `OperationTimeoutException`
++ `InvalidInputException`
 
 ## CreateSecurityConfiguration Action \(Python: create\_security\_configuration\)<a name="aws-glue-api-jobs-security-CreateSecurityConfiguration"></a>
 

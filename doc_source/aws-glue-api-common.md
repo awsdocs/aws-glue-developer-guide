@@ -70,6 +70,7 @@ The API uses the following regular expressions to define what is valid content f
 + URI address multi\-line string pattern – "`[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*`"
 + A Logstash Grok string pattern – "`[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\t]*`"
 + Identifier string pattern – "`[A-Za-z_][A-Za-z0-9_]*`"
++ AWS Glue ARN string pattern – "`arn:aws:glue:.*`"
 + AWS IAM ARN string pattern – "`arn:aws:iam::\d{12}:role/.*`"
 + Version string pattern – "`^[a-zA-Z0-9-_]+$`"
 + Log group string pattern – "`[\.\-_/#A-Za-z0-9]+`"

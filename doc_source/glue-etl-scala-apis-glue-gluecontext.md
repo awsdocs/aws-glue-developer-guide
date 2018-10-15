@@ -19,6 +19,8 @@ def getCatalogSink( database : String,
                     tableName : String,
                     redshiftTmpDir : String = "",
                     transformationContext : String = ""
+                    additionalOptions: JsonOptions = JsonOptions.empty,
+                    catalogId: String = null                                
                   ) : DataSink
 ```
 
@@ -27,6 +29,8 @@ Creates a [DataSink](glue-etl-scala-apis-glue-datasink-class.md) that writes to 
 + `tableName` — The table name in the Data Catalog\.
 + `redshiftTmpDir` — The temporary staging directory to be used with certain data sinks\. Set to empty by default\.
 + `transformationContext` — The transformation context that is associated with the sink to be used by job bookmarks\. Set to empty by default\.
++ `additionalOptions` – Additional options provided to AWS Glue\. 
++ `catalogId` — The catalog ID \(account ID\) of the Data Catalog being accessed\. When null, the default account ID of the caller is used\. 
 
 Returns the `DataSink`\.
 
@@ -37,6 +41,9 @@ def getCatalogSource( database : String,
                       tableName : String,
                       redshiftTmpDir : String = "",
                       transformationContext : String = ""
+                      push_down_predicate : String = " "
+                      additionalOptions: JsonOptions = JsonOptions.empty,
+                      catalogId: String = null
                     ) : DataSource
 ```
 
@@ -45,6 +52,9 @@ Creates a [DataSource trait](glue-etl-scala-apis-glue-datasource-trait.md) that 
 + `tableName` — The table name in the Data Catalog\.
 + `redshiftTmpDir` — The temporary staging directory to be used with certain data sinks\. Set to empty by default\.
 + `transformationContext` — The transformation context that is associated with the sink to be used by job bookmarks\. Set to empty by default\.
++ `push_down_predicate` – Filters partitions without having to list and read all the files in your dataset\. For more information, see [Pre\-Filtering Using Pushdown Predicates](aws-glue-programming-etl-partitions.md#aws-glue-programming-etl-partitions-pushdowns)\.
++ `additionalOptions` – Additional options provided to AWS Glue\. 
++ `catalogId` — The catalog ID \(account ID\) of the Data Catalog being accessed\. When null, the default account ID of the caller is used\. 
 
 Returns the `DataSource`\.
 
@@ -54,7 +64,8 @@ Returns the `DataSource`\.
 def getJDBCSink( catalogConnection : String,
                  options : JsonOptions,
                  redshiftTmpDir : String = "",
-                 transformationContext : String = ""
+                 transformationContext : String = "",
+                 catalogId: String = null
                ) : DataSink
 ```
 
@@ -70,6 +81,7 @@ Creates a [DataSink](glue-etl-scala-apis-glue-datasink-class.md) that writes to 
   + Any additional options passed directly to the SparkSQL JDBC writer\. For more information, see [Redshift data source for Spark](https://github.com/databricks/spark-redshift)\.
 + `redshiftTmpDir` — A temporary staging directory to be used with certain data sinks\. Set to empty by default\.
 + `transformationContext` — The transformation context that is associated with the sink to be used by job bookmarks\. Set to empty by default\.
++ `catalogId` — The catalog ID \(account ID\) of the Data Catalog being accessed\. When null, the default account ID of the caller is used\. 
 
 Example code:
 
@@ -121,6 +133,7 @@ Returns the `DataSink`\.
 def getSource( connectionType : String,
                connectionOptions : JsonOptions,
                transformationContext : String = ""
+               pushDownPredicate
              ) : DataSource
 ```
 
@@ -149,6 +162,7 @@ Creates a [DataSource trait](glue-etl-scala-apis-glue-datasource-trait.md) that 
     + *user* \(required\) — The username to use when connecting to the Amazon Redshift cluster\.
     + *password* \(required\) — The password to use when connecting to the Amazon Redshift cluster\.
 + `transformationContext` — The transformation context that is associated with the sink to be used by job bookmarks\. Set to empty by default\.
++ `pushDownPredicate` — Predicate on partition columns\.
 
 Returns the `DataSource`\.
 

@@ -1,35 +1,113 @@
-# Using Identity\-Based Policies \(IAM Policies\) for AWS Glue<a name="using-identity-based-policies"></a>
+# Identity\-Based Policies \(IAM Policies\) For Access Control<a name="using-identity-based-policies"></a>
 
-This topic provides examples of identity\-based policies that demonstrate how an account administrator can attach permissions policies to IAM identities \(that is, users, groups, and roles\) and thereby grant permissions to perform operations on AWS Glue resources\.
+This type of policy is attached to an IAM identity \(user, group, role, or service\) and grants permissions for that IAM identity to access specified resources\.
 
-**Important**  
-We recommend that you first review the introductory topics that explain the basic concepts and options available to manage access to your AWS Glue resources\. For more information, see [Overview of Managing Access Permissions to Your AWS Glue Resources](access-control-overview.md)\. 
+AWS Glue supports identity\-based policies \(IAM policies\) for all AWS Glue operations\. By attaching a policy to a user or a group in your account, you can grant them permissions to create, access, or modify an AWS Glue resource such as a table in the AWS Glue Data Catalog\.
 
-The sections in this topic cover the following:
-+ [Permissions Required to Use the AWS Glue Console](#console-permissions)
-+ [AWS Managed \(Predefined\) Policies for AWS Glue](#access-policy-examples-aws-managed)
+By attaching a policy to an IAM role, you can grant cross\-account access permissions to IAM identities in other AWS accounts\. For more information, see [Granting Cross\-Account Access](cross-account-access.md)\.
 
-The following shows an example of a permissions policy for Amazon DynamoDB\.
+The following is an example identity\-based policy that grants permissions for AWS Glue actions \(`glue:GetTable`, `GetTables`, `GetDatabase`, and `GetDatabases`\)\. The wildcard character \(`*`\) in the `Resource` value means that you are granting permission to these actions to obtain names and details of all the tables and databases in the Data Catalog\. If the user also has access to other catalogs through a resource policy, then it is given access to these resources too\. 
+
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "GetTables",
+      "Effect": "Allow",
+      "Action": [
+        "glue:GetTable",
+        "glue:GetTables",
+        "glue:GetDatabase",
+        "glue:GetDataBases"          
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+```
+
+Here is another example, targeting the `us-west-2` Region and using a placeholder for the specific AWS account number\.
+
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "GetTablesActionOnBooks",
+      "Effect": "Allow",
+      "Action": [
+        "glue:GetTable",
+        "glue:GetTables"     
+      ],
+      "Resource": [
+        "arn:aws:glue:us-west-2:123456789012:catalog",      
+        "arn:aws:glue:us-west-2:123456789012:database/db1",
+        "arn:aws:glue:us-west-2:123456789012:table/db1/books"
+      ]
+    }
+  ]
+}
+```
+
+This policy grants read\-only permission to a table named `books` in the database named `db1`\. Notice that to grant `Get` permission to a table that permission to the catalog and database resources is also required\.  
+
+To deny access to a table, requires that you create a policy to deny a user access to the table, or its parent database or catalog\. This allows you to easily deny access to a specific resource that cannot be circumvented with a subsequent allow permission\. For example, if you deny access to table `books` in database `db1`, then if you grant access to database `db1`, access to table `books` is still denied\. The following is an example identity\-based policy that denies permissions for AWS Glue actions \(`glue:GetTables` and `GetTable`\) to database `db1` and all of the tables within it\. 
+
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DenyGetTablesToDb1",
+      "Effect": "Deny",
+      "Action": [
+        "glue:GetTables",
+        "glue:GetTable"        
+      ],
+      "Resource": [      
+        "arn:aws:glue:us-west-2:123456789012:database/db1"
+      ]
+    }
+  ]
+}
+```
+
+For more policy examples, see [Identity\-Based Policy Examples](glue-policy-examples-iam.md)\.
+
+## Resource\-Level Permissions Only Applies To Data Catalog Objects<a name="glue-identity-based-policy-limitations"></a>
+
+Because you can only define fine\-grained control for *catalog* objects in the Data Catalog, you must write your client's IAM policy so that API operations that allow ARNs for the `Resource` statement are not mixed with API operations that do not allow ARNs\. For example, the following IAM policy allows API operations for `GetJob` and `GetCrawler` and defines the `Resource` as `*` because AWS Glue does not allow ARNs for crawlers and jobs\. Because ARNs are allowed for *catalog* API operations such as `GetDatabase` and `GetTable`, ARNs can be specified in the second half of the policy\.
 
 ```
 {
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "DescribeQueryScanBooksTable",
             "Effect": "Allow",
             "Action": [
-                "dynamodb:DescribeTable",
-                "dynamodb:Query",
-                "dynamodb:Scan"
+                "glue:GetJob*",
+                "glue:GetCrawler*"
             ],
-            "Resource": "arn:aws:dynamodb:us-west-2:account-id:table/Books"
+            "Resource": "*"   
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "glue:Get*"
+            ],
+            "Resource": [
+                "arn:aws:glue:us-east-1:123456789012:catalog",
+                "arn:aws:glue:us-east-1:123456789012:database/default",
+                "arn:aws:glue:us-east-1:123456789012:table/default/e*1*",
+                "arn:aws:glue:us-east-1:123456789012:connection/connection2"
+            ]
         }
     ]
 }
 ```
 
- The policy has one statement that grants permissions for three DynamoDB actions \(`dynamodb:DescribeTable`, `dynamodb:Query` and `dynamodb:Scan`\) on a table in the `us-west-2` region, which is owned by the AWS account specified by `account-id`\. The *Amazon Resource Name \(ARN\)* in the `Resource` value specifies the table to which the permissions apply\.
+For a list of AWS Glue catalog objects that allow ARNs, see [Data Catalog ARNs](glue-specifying-resource-arns.md#data-catalog-resource-arns) 
 
 ## Permissions Required to Use the AWS Glue Console<a name="console-permissions"></a>
 
@@ -56,6 +134,7 @@ The following AWS managed policies, which you can attach to users in your accoun
 + **AWSGlueConsoleFullAccess** – Grants full access to AWS Glue resources when using the AWS Management Console\. If you follow the naming convention for resources specified in this policy, users have full console capabilities\. This policy is typically attached to users of the AWS Glue console\.
 + **AWSGlueServiceRole** – Grants access to resources that various AWS Glue processes require to run on your behalf\. These resources include AWS Glue, Amazon S3, IAM, CloudWatch Logs, and Amazon EC2\. If you follow the naming convention for resources specified in this policy, AWS Glue processes have the required permissions\. This policy is typically attached to roles specified when defining crawlers, jobs, and development endpoints\.
 + **AWSGlueServiceNotebookRole** – Grants access to resources required when creating a notebook server\. These resources include AWS Glue, Amazon S3, and Amazon EC2\. If you follow the naming convention for resources specified in this policy, AWS Glue processes have the required permissions\. This policy is typically attached to roles specified when creating a notebook server on a development endpoint\.
++ **AWSGlueConsoleSageMakerNotebookFullAccess** – Grants full access to AWS Glue and Amazon SageMaker resources when using the AWS Management Console\. If you follow the naming convention for resources specified in this policy, users have full console capabilities\. This policy is typically attached to users of the AWS Glue console who manage Amazon SageMaker notebooks\.
 
 **Note**  
 You can review these permissions policies by signing in to the IAM console and searching for specific policies there\.

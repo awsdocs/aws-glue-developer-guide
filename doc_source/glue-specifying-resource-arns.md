@@ -1,11 +1,79 @@
 # Specifying AWS Glue Resource ARNs<a name="glue-specifying-resource-arns"></a>
 
-In AWS Glue, you can control access to resources by using an IAM policy\. In a policy, you use an Amazon Resource Name \(ARN\) to identify the resource that the policy applies to\. Not all resources in AWS Glue support ARNs\. 
+In AWS Glue, access to resources can be controlled with an IAM policy\. In a policy, you use an Amazon Resource Name \(ARN\) to identity the resource the policy applies to\. Not all resources in AWS Glue support ARNs\.
 
 **Topics**
++ [Data Catalog Amazon Resource Names \(ARNs\)](#data-catalog-resource-arns)
 + [Amazon Resource Names \(ARNs\) for Non\-Catalog Objects](#non-catalog-resource-arns)
 + [Access Control for AWS Glue Non\-Catalog Singular API Operations](#non-catalog-singular-apis)
 + [Access\-Control for AWS Glue Non\-Catalog API Operations That Retrieve Multiple Items](#non-catalog-plural-apis)
+
+## Data Catalog Amazon Resource Names \(ARNs\)<a name="data-catalog-resource-arns"></a>
+
+Data Catalog resources have a hierarchical structure, with `catalog` as the root:
+
+```
+arn:aws:glue:region:account-id:catalog
+```
+
+Each AWS account has a single Data Catalog in an AWS Region with the 12\-digit account ID as the catalog ID\. Resources have unique Amazon Resource Names \(ARNs\) associated with them, as shown in the following table\.
+
+
+| **Resource Type**  |  **ARN Format**  | 
+| --- | --- | 
+| Catalog |  `arn:aws:glue:region:account-id:catalog` For example: `arn:aws:glue:us-east-1:123456789012:catalog`  | 
+| Database |  `arn:aws:glue:region:account-id:database/database name` For example: `arn:aws:glue:us-east-1:123456789012:database/db1`  | 
+| Table |  `arn:aws:glue:region:account-id:table/database name/table name` For example: `arn:aws:glue:us-east-1:123456789012:table/db1/tbl1`  | 
+| User\-defined function |  `arn:aws:glue:region:account-id:userDefinedFunction/database name/user-defined function name` For example: `arn:aws:glue:us-east-1:123456789012:userdefinedfunction/db1/func1`  | 
+| Connection |  `arn:aws:glue:region:account-id:connection/connection name` For example: `arn:aws:glue:us-east-1:123456789012:connection/connection1`  | 
+
+To enable fine\-grained access control, you can use these ARNs in your IAM policies and resource policies to grant and deny access to specific resources\. Wildcards are allowed in the policies, for example, the following ARN matches all tables in database `default`\.
+
+```
+arn:aws:glue:us-east-1:123456789012:table/default/*
+```
+
+**Important**  
+All operations performed on a Data Catalog resource require permission on the resource and all the ancestors of that resource\. For example, to create a partitions for a table requires permission on the table, database, and catalog where the table is located\. The following example shows the permission required to create partitions on table `PrivateTable` in database `PrivateDatabase` in the Data Catalog\.  
+
+```
+{
+   "Sid": "GrantCreatePartitions",
+   "Effect": "Allow",
+   "Action": [
+       "glue:BatchCreatePartitions"
+   ],
+   "Resource": [
+       "arn:aws:glue:us-east-1:123456789012:table/PrivateDatabase/PrivateTable",
+       "arn:aws:glue:us-east-1:123456789012:database/PrivateDatabase",
+       "arn:aws:glue:us-east-1:123456789012:catalog"
+   ]
+}
+```
+In addition to permission on the resource and all its ancestors, all delete operations require permission on all children of that resource\. For example, to delete a database, requires permission on all the tables and user\-defined functions in the database, as well as the database and the catalog where the database is located\. The following example shows the permission required to delete database `PrivateDatabase` in the Data Catalog\.  
+
+```
+{
+   "Sid": "GrantDeleteDatabase",
+   "Effect": "Allow",
+   "Action": [
+       "glue:DeleteDatabase"
+   ],
+   "Resource": [
+       "arn:aws:glue:us-east-1:123456789012:table/PrivateDatabase/*",
+       "arn:aws:glue:us-east-1:123456789012:userdefinedfunction/PrivateDatabase/*",
+       "arn:aws:glue:us-east-1:123456789012:database/PrivateDatabase",
+       "arn:aws:glue:us-east-1:123456789012:catalog"
+   ]
+}
+```
+In summary, actions on Data Catalog resources follow these permission rules:  
+Actions on the catalog requires permission on the catalog only\.
+Actions on a database requires permission on the database and catalog\.
+Delete actions on a database requires permission on the database and catalog plus all tables and user\-defined functions in the database\.
+Actions on a table, partition, or table version requires permission on the table, database, and catalog\.
+Actions on a user\-defined function requires permission on the user\-defined function, database, and catalog\.
+Actions on a connection requires permission on the connection and catalog\.
 
 ## Amazon Resource Names \(ARNs\) for Non\-Catalog Objects<a name="non-catalog-resource-arns"></a>
 

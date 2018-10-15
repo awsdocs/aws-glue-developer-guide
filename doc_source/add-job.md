@@ -29,7 +29,8 @@ Specify how AWS Glue processes state information when the job runs\. You can hav
 Enable or disable the creation of CloudWatch metrics when this job runs\. To see profiling data this option must be enabled\. For more information about how to enable and visualize metrics, see [Job Monitoring and Debugging](monitor-profile-glue-job-cloudwatch-metrics.md)\. 
 
 **Server\-side encryption**  
-If you select this option, when the ETL job writes to Amazon S3, the data is encrypted at rest using SSE\-S3 encryption\. Both your Amazon S3 data target and any data that is written to an Amazon S3 temporary directory is encrypted\. For more information, see [Protecting Data Using Server\-Side Encryption with Amazon S3\-Managed Encryption Keys \(SSE\-S3\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)\.
+If you select this option, when the ETL job writes to Amazon S3, the data is encrypted at rest using SSE\-S3 encryption\. Both your Amazon S3 data target and any data that is written to an Amazon S3 temporary directory is encrypted\. For more information, see [Protecting Data Using Server\-Side Encryption with Amazon S3\-Managed Encryption Keys \(SSE\-S3\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)\.  
+Currently, a security configuration overrides any server\-side encryption \(SSE\-S3\) setting passed as an ETL job parameter\. Thus, if both a security configuration and an SSE\-S3 parameter are associated with a job, the SSE\-S3 parameter is ignored\.
 
 **Script libraries**  
 If your script requires it, you can specify locations for the following:   

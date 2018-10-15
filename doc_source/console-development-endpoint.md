@@ -21,7 +21,7 @@ Reason for the development endpoint failure\.
 Address to connect to the development endpoint\. On the Amazon EC2 console, you can view the ENI attached to this IP address\. This internal address is created if the development endpoint is associated with a virtual private cloud \(VPC\)\. For more information about accessing a development endpoint from a private address, see [Accessing Your Development Endpoint](dev-endpoint.md#dev-endpoint-elastic-ip)\.
 
 **Public address**  
-Address to connect to a non\-VPC development endpoint\. This address is not populated for a VPC development endpoint\. That is, when you create a development endpoint associated with a virtual private cloud \(VPC\) this public address is not created\.
+Address to connect to the development endpoint\. 
 
 **Public key contents**  
 Current public SSH keys that are associated with the development endpoint \(optional\)\. If you provided a public key when you created the development endpoint, you should have saved the corresponding SSH private key\.
@@ -118,3 +118,18 @@ A custom Amazon Machine Image \(AMI\) ID of an encrypted Amazon Elastic Block St
 
 **Notebook server tags**  
 The AWS CloudFormation stack is always tagged with a key **aws\-glue\-dev\-endpoint** and the value of the name of the development endpoint\. You can add more tags to the AWS CloudFormation stack\.
+
+**EC2 instance**  
+The name of Amazon EC2 instance that is created to host your notebook\. This links to the Amazon EC2 console \([https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\) where the instance is tagged with the key **aws\-glue\-dev\-endpoint** and value of the name of the development endpoint\. 
+
+**CloudFormation stack**  
+The name of the AWS CloudFormation stack used to create the notebook server\. 
+
+**SSH to EC2 server command**  
+Type this command in a terminal window to connect to the Amazon EC2 instance that is running your notebook server\. The Amazon EC2 address shown in this command is either public or private depending on whether you chose to **Attach a public IP to the notebook server EC2 instance**\.
+
+**Copy certificate**  
+Example scp command to copy the keystore required to set up the Zeppelin notebook server to the Amazon EC2 instance that hosts the notebook server\. Run the command from a terminal window in the directory where the Amazon EC2 private key is located\. The key to access the Amazon EC2 instance is the parameter to the `-i` option\. You provide the *path\-to\-keystore\-file*\. The location where the development endpoint private SSH key on the Amazon EC2 server is located is the remaining part of the command\.
+
+**HTTPS URL**  
+After completing the setup of a notebook server, type this URL in a browser to connect to your notebook using HTTPS\.
