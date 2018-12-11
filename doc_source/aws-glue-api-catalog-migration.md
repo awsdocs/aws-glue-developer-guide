@@ -1,5 +1,7 @@
 # Importing an Athena Catalog to AWS Glue<a name="aws-glue-api-catalog-migration"></a>
 
+The Migration API describes AWS Glue data types and operations having to do with migrating an Athena Data Catalog to AWS Glue\.
+
 ## Data Types<a name="aws-glue-api-catalog-migration-objects"></a>
 + [CatalogImportStatus Structure](#aws-glue-api-catalog-migration-CatalogImportStatus)
 

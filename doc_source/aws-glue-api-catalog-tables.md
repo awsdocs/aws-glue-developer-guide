@@ -1,5 +1,7 @@
 # Table API<a name="aws-glue-api-catalog-tables"></a>
 
+The Table API describes data types and operations associated with tables\.
+
 ## Data Types<a name="aws-glue-api-catalog-tables-objects"></a>
 + [Table Structure](#aws-glue-api-catalog-tables-Table)
 + [TableInput Structure](#aws-glue-api-catalog-tables-TableInput)
@@ -50,6 +52,10 @@ Represents a collection of related data organized in columns and rows\.
 + `PartitionKeys` – An array of [Column](#aws-glue-api-catalog-tables-Column) objects\.
 
   A list of columns by which the table is partitioned\. Only primitive types are supported as partition keys\.
+
+  When creating a table used by Athena, and you do not specify any `partitionKeys`, you must at least set the value of `partitionKeys` to an empty list\. For example:
+
+  `"PartitionKeys": []`
 + `ViewOriginalText` – UTF\-8 string, not more than 409600 bytes long\.
 
   If the table is a view, the original text of the view; otherwise `null`\.
@@ -99,6 +105,10 @@ Structure used to create or update the table\.
 + `PartitionKeys` – An array of [Column](#aws-glue-api-catalog-tables-Column) objects\.
 
   A list of columns by which the table is partitioned\. Only primitive types are supported as partition keys\.
+
+  When creating a table used by Athena, and you do not specify any `partitionKeys`, you must at least set the value of `partitionKeys` to an empty list\. For example:
+
+  `"PartitionKeys": []`
 + `ViewOriginalText` – UTF\-8 string, not more than 409600 bytes long\.
 
   If the table is a view, the original text of the view; otherwise `null`\.

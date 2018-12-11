@@ -1,8 +1,11 @@
 # Security APIs in AWS Glue<a name="aws-glue-api-jobs-security"></a>
 
+The Security API describes the security data types, and the API related to security in AWS Glue\.
+
 ## Data Types<a name="aws-glue-api-jobs-security-objects"></a>
 + [DataCatalogEncryptionSettings Structure](#aws-glue-api-jobs-security-DataCatalogEncryptionSettings)
 + [EncryptionAtRest Structure](#aws-glue-api-jobs-security-EncryptionAtRest)
++ [ConnectionPasswordEncryption Structure](#aws-glue-api-jobs-security-ConnectionPasswordEncryption)
 + [EncryptionConfiguration Structure](#aws-glue-api-jobs-security-EncryptionConfiguration)
 + [S3Encryption Structure](#aws-glue-api-jobs-security-S3Encryption)
 + [CloudWatchEncryption Structure](#aws-glue-api-jobs-security-CloudWatchEncryption)
@@ -16,11 +19,14 @@ Contains configuration information for maintaining Data Catalog security\.
 **Fields**
 + `EncryptionAtRest` – An [EncryptionAtRest](#aws-glue-api-jobs-security-EncryptionAtRest) object\.
 
-  Specifies encryption\-at\-rest configuration for the Data Catalog\.
+  Specifies the encryption\-at\-rest configuration for the Data Catalog\.
++ `ConnectionPasswordEncryption` – A [ConnectionPasswordEncryption](#aws-glue-api-jobs-security-ConnectionPasswordEncryption) object\.
+
+  When connection password protection is enabled, the Data Catalog uses a customer\-provided key to encrypt the password as part of `CreateConnection` or `UpdateConnection` and store it in the `ENCRYPTED_PASSWORD` field in the connection properties\. You can enable catalog encryption or only password encryption\.
 
 ## EncryptionAtRest Structure<a name="aws-glue-api-jobs-security-EncryptionAtRest"></a>
 
-Specifies encryption\-at\-rest configuration for the Data Catalog\.
+Specifies the encryption\-at\-rest configuration for the Data Catalog\.
 
 **Fields**
 + `CatalogEncryptionMode` – *Required:* UTF\-8 string \(valid values: `DISABLED` \| `SSE-KMS="SSEKMS"`\)\.
@@ -29,6 +35,26 @@ Specifies encryption\-at\-rest configuration for the Data Catalog\.
 + `SseAwsKmsKeyId` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The ID of the AWS KMS key to use for encryption at rest\.
+
+## ConnectionPasswordEncryption Structure<a name="aws-glue-api-jobs-security-ConnectionPasswordEncryption"></a>
+
+The data structure used by the Data Catalog to encrypt the password as part of `CreateConnection` or `UpdateConnection` and store it in the `ENCRYPTED_PASSWORD` field in the connection properties\. You can enable catalog encryption or only password encryption\.
+
+When a `CreationConnection` request arrives containing a password, the Data Catalog first encrypts the password using your AWS KMS key\. It then encrypts the whole connection object again if catalog encryption is also enabled\.
+
+This encryption requires that you set AWS KMS key permissions to enable or restrict access on the password key according to your security requirements\. For example, you might want only admin users to have decrypt permission on the password key\.
+
+**Fields**
++ `ReturnConnectionPasswordEncrypted` – *Required:* Boolean\.
+
+  When the `ReturnConnectionPasswordEncrypted` flag is set to "true", passwords remain encrypted in the responses of `GetConnection` and `GetConnections`\. This encryption takes effect independently from catalog encryption\. 
++ `AwsKmsKeyId` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  An AWS KMS key that is used to encrypt the connection password\. 
+
+  If connection password protection is enabled, the caller of `CreateConnection` and `UpdateConnection` needs at least `kms:Encrypt` permission on the specified AWS KMS key, to encrypt passwords before storing them in the Data Catalog\. 
+
+  You can set the decrypt permission to enable or restrict access on the password key according to your security requirements\.
 
 ## EncryptionConfiguration Structure<a name="aws-glue-api-jobs-security-EncryptionConfiguration"></a>
 
@@ -114,7 +140,7 @@ Retrieves the security configuration for a specified catalog\.
 **Request**
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  The ID of the Data Catalog for which to retrieve the security configuration\. If none is supplied, the AWS account ID is used by default\.
+  The ID of the Data Catalog for which to retrieve the security configuration\. If none is provided, the AWS account ID is used by default\.
 
 **Response**
 + `DataCatalogEncryptionSettings` – A [DataCatalogEncryptionSettings](#aws-glue-api-jobs-security-DataCatalogEncryptionSettings) object\.
@@ -128,12 +154,12 @@ Retrieves the security configuration for a specified catalog\.
 
 ## PutDataCatalogEncryptionSettings Action \(Python: put\_data\_catalog\_encryption\_settings\)<a name="aws-glue-api-jobs-security-PutDataCatalogEncryptionSettings"></a>
 
-Sets the security configuration for a specified catalog\. Once the configuration has been set, the specified encryption is applied to every catalog write thereafter\.
+Sets the security configuration for a specified catalog\. After the configuration has been set, the specified encryption is applied to every catalog write thereafter\.
 
 **Request**
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  The ID of the Data Catalog for which to set the security configuration\. If none is supplied, the AWS account ID is used by default\.
+  The ID of the Data Catalog for which to set the security configuration\. If none is provided, the AWS account ID is used by default\.
 + `DataCatalogEncryptionSettings` – *Required:* A [DataCatalogEncryptionSettings](#aws-glue-api-jobs-security-DataCatalogEncryptionSettings) object\.
 
   The security configuration to set\.
@@ -156,7 +182,7 @@ Sets the Data Catalog resource policy for access control\.
   Contains the policy document to set, in JSON format\.
 + `PolicyHashCondition` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  This is the hash value returned when the previous policy was set using PutResourcePolicy\. Its purpose is to prevent concurrent modifications of a policy\. Do not use this parameter if no previous policy has been set\.
+  The hash value returned when the previous policy was set using `PutResourcePolicy`\. Its purpose is to prevent concurrent modifications of a policy\. Do not use this parameter if no previous policy has been set\.
 + `PolicyExistsCondition` – UTF\-8 string \(valid values: `MUST_EXIST` \| `NOT_EXIST` \| `NONE`\)\.
 
   A value of `MUST_EXIST` is used to update a policy\. A value of `NOT_EXIST` is used to create a new policy\. If a value of `NONE` or a null value is used, the call will not depend on the existence of a policy\.
@@ -171,6 +197,7 @@ Sets the Data Catalog resource policy for access control\.
 + `InternalServiceException`
 + `OperationTimeoutException`
 + `InvalidInputException`
++ `ConditionCheckFailureException`
 
 ## GetResourcePolicy Action \(Python: get\_resource\_policy\)<a name="aws-glue-api-jobs-security-GetResourcePolicy"></a>
 
@@ -216,6 +243,7 @@ Deletes a specified policy\.
 + `InternalServiceException`
 + `OperationTimeoutException`
 + `InvalidInputException`
++ `ConditionCheckFailureException`
 
 ## CreateSecurityConfiguration Action \(Python: create\_security\_configuration\)<a name="aws-glue-api-jobs-security-CreateSecurityConfiguration"></a>
 

@@ -22,8 +22,15 @@ For example, to set the group size to 1 MB:
 ```
 Note that the `groupsize` should be set with the result of a calculation\. For example 1024 \* 1024 = 1048576\.
 
+**recurse**  
+Set **recurse** to `True` to recursively read files in all subdirectories when specifying `paths` as an array of paths\. You do not need to set **recurse** if `paths` is an array of object keys in Amazon S3\. For example:  
+
+```
+  'recurse':True
+```
+
 If you are reading from Amazon S3 directly using the `create_dynamic_frame_from_options` method, add these connection options\. For example, the following attempts to group files into 1 MB groups:
 
 ```
-df = glueContext.create_dynamic_frame_from_options("s3", {'paths': ["s3://s3path/"], 'groupFiles': 'inPartition', 'groupSize': '1048576'}, format="json")
+df = glueContext.create_dynamic_frame_from_options("s3", {'paths': ["s3://s3path/"], 'recurse':True, 'groupFiles': 'inPartition', 'groupSize': '1048576'}, format="json")
 ```

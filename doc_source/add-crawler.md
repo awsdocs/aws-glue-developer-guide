@@ -54,14 +54,14 @@ AWS Glue supports the following kinds of `glob` patterns in the exclude pattern\
 
 | Exclude pattern | Description | 
 | --- | --- | 
-| \*\.csv | Matches an Amazon S3 path that represents an object name ending in \.csv | 
+| \*\.csv | Matches an Amazon S3 path that represents an object name in the current folder ending in \.csv | 
 | \*\.\* | Matches all object names that contain a dot | 
 | \*\.\{csv,avro\} | Matches object names ending with \.csv or \.avro | 
 | foo\.? | Matches object names starting with foo\. that are followed by a single character extension | 
-| /myfolder/\* | Matches objects in one level of subfolder from myfolder, such as /myfolder/mysource | 
-| /myfolder/\*/\* | Matches objects in two levels of subfolders from myfolder, such as /myfolder/mysource/data | 
-| /myfolder/\*\* | Matches objects in all subfolders of myfolder, such as /myfolder/mysource/mydata and /myfolder/mysource/data | 
-| /myfolder\*\* | Matches subfolder myfolder as well as files below myfolder, such as /myfolder and /myfolder/mydata\.txt | 
+| myfolder/\* | Matches objects in one level of subfolder from myfolder, such as /myfolder/mysource | 
+| myfolder/\*/\* | Matches objects in two levels of subfolders from myfolder, such as /myfolder/mysource/data | 
+| myfolder/\*\* | Matches objects in all subfolders of myfolder, such as /myfolder/mysource/mydata and /myfolder/mysource/data | 
+| myfolder\*\* | Matches subfolder myfolder as well as files below myfolder, such as /myfolder and /myfolder/mydata\.txt | 
 | Market\* | Matches tables in a JDBC database with names that begin with Market, such as Market\_us and Market\_fr | 
 
 AWS Glue interprets `glob` exclude patterns as follows:

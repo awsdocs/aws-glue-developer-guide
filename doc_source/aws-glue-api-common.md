@@ -1,5 +1,7 @@
 # Common Data Types<a name="aws-glue-api-common"></a>
 
+The Common Data Types describes miscellaneous common data types in AWS Glue\.
+
 ## Tag Structure<a name="aws-glue-api-common-Tag"></a>
 
 An AWS Tag\.
@@ -41,10 +43,10 @@ Contains details about an error\.
 Defines a property predicate\.
 
 **Fields**
-+ `Key` – Value string\.
++ `Key` – Value string, not more than 1024 bytes long\.
 
   The key of the property\.
-+ `Value` – Value string\.
++ `Value` – Value string, not more than 1024 bytes long\.
 
   The value of the property\.
 + `Comparator` – UTF\-8 string \(valid values: `EQUALS` \| `GREATER_THAN` \| `LESS_THAN` \| `GREATER_THAN_EQUALS` \| `LESS_THAN_EQUALS`\)\.

@@ -1,4 +1,4 @@
-# Format Options for ETL Output in AWS Glue<a name="aws-glue-programming-etl-format"></a>
+# Format Options for ETL Inputs and Outputs in AWS Glue<a name="aws-glue-programming-etl-format"></a>
 
 Various AWS Glue PySpark and Scala methods and transforms specify their input and/or output format using a `format` parameter and a `format_options` parameter\. These parameters can take the following values:
 

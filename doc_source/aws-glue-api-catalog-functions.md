@@ -1,5 +1,7 @@
 # User\-Defined Function API<a name="aws-glue-api-catalog-functions"></a>
 
+The User\-Defined Function API describes AWS Glue data types and operations used in working with functions\.
+
 ## Data Types<a name="aws-glue-api-catalog-functions-objects"></a>
 + [UserDefinedFunction Structure](#aws-glue-api-catalog-functions-UserDefinedFunction)
 + [UserDefinedFunctionInput Structure](#aws-glue-api-catalog-functions-UserDefinedFunctionInput)

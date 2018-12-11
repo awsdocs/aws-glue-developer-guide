@@ -1,5 +1,7 @@
 # Triggers<a name="aws-glue-api-jobs-trigger"></a>
 
+The Triggers API describes the data types and API related to creating, updating, or deleting, and starting and stopping job triggers in AWS Glue\.
+
 ## Data Types<a name="aws-glue-api-jobs-trigger-objects"></a>
 + [Trigger Structure](#aws-glue-api-jobs-trigger-Trigger)
 + [TriggerUpdate Structure](#aws-glue-api-jobs-trigger-TriggerUpdate)

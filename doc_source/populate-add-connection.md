@@ -31,7 +31,7 @@ AWS Glue can connect to the following data stores by using the JDBC protocol:
 
 A connection is not typically required for Amazon S3\. However, to access Amazon S3 from within your virtual private cloud \(VPC\), an Amazon S3 VPC endpoint is required\. For more information, see [Amazon VPC Endpoints for Amazon S3](vpc-endpoints-s3.md)\. 
 
-In your connection information, you also must consider whether data is accessed through a VPC and then set up network parameters accordingly\.
+In your connection information, you also must consider whether data is accessed through a VPC and then set up network parameters accordingly\.  AWS Glue requires a private IP for JDBC endpoints\. Connections to databases can be over a VPN and DirectConnect as they provide private IP access to on\-premises databases\.
 
 For information about how to connect to on\-premises databases, see the blog post [How to access and analyze on\-premises data stores using AWS Glue](https://aws.amazon.com/blogs/big-data/how-to-access-and-analyze-on-premises-data-stores-using-aws-glue/)\. 
 

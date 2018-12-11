@@ -158,7 +158,7 @@ Creates a [DataSource trait](glue-etl-scala-apis-glue-datasource-trait.md) that 
   + `connectionOptions` when the `connectionType` is "redshift":
     + *url* \(required\) — The JDBC URL for an Amazon Redshift database\.
     + *dbtable* \(required\) — The Amazon Redshift table to read\.
-    + *redshitTmpDir* \(required\) — The Amazon S3 path where temporary data can be staged when copying out of Amazon Redshift\.
+    + *redshiftTmpDir* \(required\) — The Amazon S3 path where temporary data can be staged when copying out of Amazon Redshift\.
     + *user* \(required\) — The username to use when connecting to the Amazon Redshift cluster\.
     + *password* \(required\) — The password to use when connecting to the Amazon Redshift cluster\.
 + `transformationContext` — The transformation context that is associated with the sink to be used by job bookmarks\. Set to empty by default\.

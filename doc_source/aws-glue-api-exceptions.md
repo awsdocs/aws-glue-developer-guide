@@ -1,5 +1,7 @@
 # Exceptions<a name="aws-glue-api-exceptions"></a>
 
+This section describes AWS Glue exceptions that you can use to find the source of problems and fix them\.
+
 ## AccessDeniedException Structure<a name="aws-glue-api-exceptions-AccessDeniedException"></a>
 
 Access to a resource was denied\.

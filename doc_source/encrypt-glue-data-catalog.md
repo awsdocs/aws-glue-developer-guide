@@ -8,7 +8,7 @@ You can enable encryption of your AWS Glue Data Catalog objects in the **Setting
 + Connections
 + User\-defined functions
 
-You can set this behavior using the AWS Management Console or AWS CLI\.
+You can set this behavior using the AWS Management Console or AWS Command Line Interface \(AWS CLI\)\.
 
 **To enable encryption using the console**
 

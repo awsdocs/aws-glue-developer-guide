@@ -146,5 +146,5 @@ Storage costs and other costs that are directly associated with the new resource
 
 AWS Glue cross\-account access has the following limitations:
 + Cross\-account access to AWS Glue is not allowed if the resource owner account has not migrated the Amazon Athena data catalog to AWS Glue\. You can find the current migration status using the [GetCatalogImportStatus \(get\_catalog\_import\_status\)](aws-glue-api-catalog-migration.md#aws-glue-api-catalog-migration-GetCatalogImportStatus)\. For more details on how to migrate an Athena catalog to AWS Glue, see [Upgrading to the AWS Glue Data Catalog Step\-by\-Step](https://docs.aws.amazon.com/athena/latest/ug/glue-upgrade.html) in the *Amazon Athena User Guide*\.
-+ Cross\-account access is **only** supported for Data Catalog resources, including databases, tables, partitions, user\-defined functions, and connections\.
++ Cross\-account access is **only** supported for Data Catalog resources, including databases, tables, user\-defined functions, and connections\.
 + Cross\-account access to the Data Catalog is not supported when using an AWS Glue crawler, Amazon Athena, or Amazon Redshift\.

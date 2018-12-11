@@ -5,6 +5,33 @@ If you encounter errors in AWS Glue, use the following solutions to help you fin
 **Note**  
  The AWS Glue GitHub repository contains additional troubleshooting guidance in [ AWS Glue Frequently Asked Questions](https://github.com/awslabs/aws-glue-samples/blob/master/FAQ_and_How_to.md)\. 
 
+**Topics**
++ [Error: Resource Unavailable](#error-resource-unavailable)
++ [Error: Could Not Find S3 Endpoint or NAT Gateway for subnetId in VPC](#error-s3-subnet-vpc-NAT-configuration)
++ [Error: Inbound Rule in Security Group Required](#error-inbound-self-reference-rule)
++ [Error: Outbound Rule in Security Group Required](#error-outbound-self-reference-rule)
++ [Error: Custom DNS Resolution Failures](#error-custom-dns)
++ [Error: Job Run Failed Because the Role Passed Should Be Given Assume Role Permissions for the AWS Glue Service](#error-assume-role-user-policy)
++ [Error: DescribeVpcEndpoints Action Is Unauthorized\. Unable to Validate VPC ID vpc\-id](#error-DescribeVpcEndpoints-permission)
++ [Error: DescribeRouteTables Action Is Unauthorized\. Unable to Validate Subnet Id: subnet\-id in VPC id: vpc\-id](#error-DescribeRouteTables-permission)
++ [Error: Failed to Call ec2:DescribeSubnets](#error-DescribeSubnets-permission)
++ [Error: Failed to Call ec2:DescribeSecurityGroups](#error-DescribeSecurityGroups-permission)
++ [Error: Could Not Find Subnet for AZ](#error-az-not-available)
++ [Error: Job Run Exception When Writing to a JDBC Target](#error-job-run-jdbc-target)
++ [Error: Amazon S3 Timeout](#error-s3-timeout)
++ [Error: Amazon S3 Access Denied](#error-s3-access-denied)
++ [Error: Amazon S3 Access Key ID Does Not Exist](#error-s3-accesskeyid-not-found)
++ [Error: Job Run Fails When Accessing Amazon S3 with an `s3a://` URI](#error-s3a-uri-directory-listing)
++ [Error: Amazon S3 Service Token Expired](#error-s3-service-token-expired)
++ [Error: No Private DNS for Network Interface Found](#error-no-private-DNS)
++ [Error: Development Endpoint Provisioning Failed](#error-development-endpoint-failed)
++ [Error: Notebook Server CREATE\_FAILED](#error-notebook-server-ec2-instance-profile)
++ [Error: Local Notebook Fails to Start](#error-local-notebook-fails-to-start)
++ [Error: Notebook Usage Errors](#error-notebook-usage-errors)
++ [Error: Running Crawler Failed](#error-running-crawler-failed)
++ [Error: Upgrading Athena Data Catalog](#error-running-athena-upgrade)
++ [Error: A Job is Reprocessing Data When Job Bookmarks Are Enabled](#error-job-bookmarks-reprocess-data)
+
 ## Error: Resource Unavailable<a name="error-resource-unavailable"></a>
 
 If AWS Glue returns a resource unavailable message, you can view error messages or logs to help you learn more about the issue\. The following tasks describe general methods for troubleshooting\.
@@ -32,7 +59,7 @@ At least one security group must open all egress ports\. To limit traffic, the s
 When using a custom DNS for internet name resolution, both forward DNS lookup and reverse DNS lookup must be implemented\. Otherwise, you might receive errors similar to: *Reverse dns resolution of ip failure* or *Dns resolution of dns failed*\. If AWS Glue returns a message, you can view error messages or logs to help you learn more about the issue\. The following tasks describe general methods for troubleshooting\.
 + A custom DNS configuration without reverse lookup can cause AWS Glue to fail\. Check your DNS configuration\. If you are using Route 53 or Microsoft Active Directory, make sure that there are forward and reverse lookups\. For more information, see [Setting Up DNS in Your VPC](set-up-vpc-dns.md)\.
 
-## Error: Job run failed because the role passed should be given assume role permissions for the AWS Glue Service<a name="error-assume-role-user-policy"></a>
+## Error: Job Run Failed Because the Role Passed Should Be Given Assume Role Permissions for the AWS Glue Service<a name="error-assume-role-user-policy"></a>
 
 The user who defines a job must have permission for `iam:PassRole` for AWS Glue\.
 + When a user creates an AWS Glue job, confirm that the user's role contains a policy that contains `iam:PassRole` for AWS Glue\. For more information, see [Step 3: Attach a Policy to IAM Users That Access AWS Glue](attach-policy-iam-user.md)\.
@@ -83,9 +110,9 @@ If AWS Glue returns an access key ID does not exist error when running a job, it
 + An ETL job uses an IAM role to access data stores, confirm that the IAM role for your job was not deleted before the job started\.
 + An IAM role contains permissions to access your data stores, confirm that any attached Amazon S3 policy containing `s3:ListBucket` is correct\.
 
-## Error: Job run fails when accessing Amazon S3 with an `s3a://` URI<a name="error-s3a-uri-directory-listing"></a>
+## Error: Job Run Fails When Accessing Amazon S3 with an `s3a://` URI<a name="error-s3a-uri-directory-listing"></a>
 
-If a job run returns an an error like *Failed to parse XML document with handler class *, it might be because of a failure trying to list hundreds of files using the using an `s3a://` URI\. Access your data store using an `s3://` URI instead\. The following exception trace highlights the errors to look for:
+If a job run returns an error like *Failed to parse XML document with handler class *, it might be because of a failure trying to list hundreds of files using an `s3a://` URI\. Access your data store using an `s3://` URI instead\. The following exception trace highlights the errors to look for:
 
 ```
 1.	com.amazonaws.SdkClientException: Failed to parse XML document with handler class com.amazonaws.services.s3.model.transform.XmlResponsesSaxParser$ListBucketHandler
@@ -149,7 +176,7 @@ If AWS Glue fails to successfully provision a development endpoint, it might be 
 + When you define a development endpoint, the VPC, subnet, and security groups are validated to confirm that they meet certain requirements\.
 + If you provided the optional SSH public key, check that it is a valid SSH public key\.
 + Check in the VPC console that your VPC uses a valid **DHCP option set**\. For more information, see [DHCP option sets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html)\. 
-+ If after a few minutes, the development endpoint **Provisioning status** changes to `FAILED` and the failure reason is DNS related, for example, `Reverse dns resolution of ip 10.5.237.213 failed`, check your DNS setup\. For more information, see [Setting Up DNS in Your VPC](set-up-vpc-dns.md)\. 
++ If after a few minutes, the development endpoint **Provisioning status** changes to `FAILED`, and the failure reason is DNS related \(for example, `Reverse dns resolution of ip 10.5.237.213 failed`\), check your DNS setup\. For more information, see [Setting Up DNS in Your VPC](set-up-vpc-dns.md)\. 
 + If the cluster remains in the PROVISIONING state, contact AWS Support\.
 
 ## Error: Notebook Server CREATE\_FAILED<a name="error-notebook-server-ec2-instance-profile"></a>
@@ -177,4 +204,36 @@ If AWS Glue fails to successfully run a crawler to catalog your data, it might b
 
 ## Error: Upgrading Athena Data Catalog<a name="error-running-athena-upgrade"></a>
 
-If you encounter errors while upgrading your Athena Data Catalog to the AWS Glue Data Catalog, see the Amazon Athena User Guide topic [Upgrading to the AWS Glue Data Catalog Step\-by\-Step](https://docs.aws.amazon.com/athena/latest/ug/glue-upgrade.html)\. 
+If you encounter errors while upgrading your Athena Data Catalog to the AWS Glue Data Catalog, see the *Amazon Athena User Guide* topic [Upgrading to the AWS Glue Data Catalog Step\-by\-Step](https://docs.aws.amazon.com/athena/latest/ug/glue-upgrade.html)\. 
+
+## Error: A Job is Reprocessing Data When Job Bookmarks Are Enabled<a name="error-job-bookmarks-reprocess-data"></a>
+
+There might be cases when you have enabled AWS Glue job bookmarks, but your ETL job is reprocessing data that was already processed in an earlier run\. Check for these common causes of this error: 
+
+**Max Concurrency**  
+Ensure that the maximum number of concurrent runs for the job is 1\. For more information, see the discussion of max concurrency in [Adding Jobs in AWS Glue](add-job.md)\. When you have multiple concurrent jobs with job bookmarks and the maximum concurrency is set to 1, the job bookmark doesn't work correctly\.
+
+**Missing Job Object**  
+Ensure that your job run script ends with the following commit:
+
+```
+job.commit()
+```
+
+When you include this object, AWS Glue records the timestamp and path of the job run\. If you run the job again with the same path, AWS Glue processes only the new files\. If you don't include this object and job bookmarks are enabled, the job reprocesses the already processed files along with the new files and creates redundancy in the job's target data store\.
+
+**Spark DataFrame**  
+AWS Glue job bookmarks don't work if you're using the Apache Spark `DataFrame` as the data sink for your job\. Job bookmarks only work when you use the AWS Glue [DynamicFrame Class](aws-glue-api-crawler-pyspark-extensions-dynamic-frame.md)\. To resolve this error, switch to the `DynamicFrame` using the [fromDF](aws-glue-api-crawler-pyspark-extensions-dynamic-frame.md#aws-glue-api-crawler-pyspark-extensions-dynamic-frame-fromDF) construction\. 
+
+**Missing Transformation Context Parameter**  
+Transformation context is an optional parameter in the `GlueContext` class, but job bookmarks don't work if you don't include it\. To resolve this error, add the transformation context parameter when you [create the DynamicFrame](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-crawler-pyspark-extensions-glue-context.html#aws-glue-api-crawler-pyspark-extensions-glue-context-create_dynamic_frame_from_catalog), as shown following:
+
+```
+sample_dynF=create_dynamic_frame_from_catalog(database, table_name,transformation_ctx="sample_dynF") 
+```
+
+**Input Source**  
+If you are using a relational database \(a JDBC connection\) for the input source, job bookmarks work only if the table's primary keys are in sequential order\. Job bookmarks work for new rows, but not for updated rows\. That is because job bookmarks look for the primary keys, which already exist\. This does not apply if your input source is Amazon Simple Storage Service \(Amazon S3\)\.
+
+**Last Modified Time**  
+For Amazon S3 input sources, job bookmarks check the last modified time of the objects, rather than the file names, to verify which objects need to be reprocessed\. If your input source data has been modified since your last job run, the files are reprocessed when you run the job again\. 

@@ -1,4 +1,6 @@
-# AWS Glue API for Autogenerating ETL Scripts<a name="aws-glue-api-etl-script-generation"></a>
+# Autogenerating ETL Scripts API<a name="aws-glue-api-etl-script-generation"></a>
+
+The ETL script\-generation API describes the datatypes and API for generating ETL scripts in AWS Glue\.
 
 ## Data Types<a name="aws-glue-api-etl-script-generation-objects"></a>
 + [CodeGenNode Structure](#aws-glue-api-etl-script-generation-CodeGenNode)

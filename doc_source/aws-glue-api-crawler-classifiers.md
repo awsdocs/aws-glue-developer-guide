@@ -1,5 +1,7 @@
 # Classifier API<a name="aws-glue-api-crawler-classifiers"></a>
 
+The Classifier API describes AWS Glue classifier data types, and includes the API for creating, deleting, updating, and listing classifiers\.
+
 ## Data Types<a name="aws-glue-api-crawler-classifiers-objects"></a>
 + [Classifier Structure](#aws-glue-api-crawler-classifiers-Classifier)
 + [GrokClassifier Structure](#aws-glue-api-crawler-classifiers-GrokClassifier)

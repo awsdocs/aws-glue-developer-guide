@@ -1,5 +1,7 @@
 # Job Runs<a name="aws-glue-api-jobs-runs"></a>
 
+The Jobs Runs API describes the data types and API related to starting, stopping, or viewing job runs, and resetting job bookmarks, in AWS Glue\.
+
 ## Data Types<a name="aws-glue-api-jobs-runs-objects"></a>
 + [JobRun Structure](#aws-glue-api-jobs-runs-JobRun)
 + [Predecessor Structure](#aws-glue-api-jobs-runs-Predecessor)

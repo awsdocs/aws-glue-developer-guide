@@ -12,7 +12,7 @@ The easiest way to debug Python or PySpark scripts is to create a development en
 
 1. Following the process described in [Working with Crawlers on the AWS Glue Console](console-crawlers.md), create a new crawler that can crawl the `s3://awsglue-datasets/examples/medicare/Medicare_Hospital_Provider.csv` file, and can place the resulting metadata into a database named `payments` in the AWS Glue Data Catalog\.
 
-1. Run the new crawler, and then check the `payments` database\. You should find that the crawler has created a metadata table named `medicare` in the database after reading the first 2 MB of data in the file\.
+1. Run the new crawler, and then check the `payments` database\. You should find that the crawler has created a metadata table named `medicare` in the database after reading the beginning of the file to determine its format and delimiter\.
 
    The schema of the new `medicare` table is as follows:
 

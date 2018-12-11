@@ -1,5 +1,7 @@
 # Jobs<a name="aws-glue-api-jobs-job"></a>
 
+The Jobs API describes the data types and API related to creating, updating, deleting, or viewing jobs in AWS Glue\.
+
 ## Data Types<a name="aws-glue-api-jobs-job-objects"></a>
 + [Job Structure](#aws-glue-api-jobs-job-Job)
 + [ExecutionProperty Structure](#aws-glue-api-jobs-job-ExecutionProperty)

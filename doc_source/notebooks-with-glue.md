@@ -1,8 +1,10 @@
 # Managing Notebooks<a name="notebooks-with-glue"></a>
 
-A notebook enables interactive development and testing of your ETL \(extract, transform, and load\) scripts on a development endpoint\. AWS Glue provides an interface to Amazon SageMaker notebooks and Apache Zeppelin notebook servers\. Amazon SageMaker provides an integrated Jupyter authoring notebook instance\. With AWS Glue, you create and manage Amazon SageMaker notebooks\. You can also open Amazon SageMaker notebooks from the AWS Glue console\. Apache Zeppelin notebook servers are run on Amazon EC2 instances\. You can create these instances on the AWS Glue console\. 
+A notebook enables interactive development and testing of your ETL \(extract, transform, and load\) scripts on a development endpoint\. AWS Glue provides an interface to Amazon SageMaker notebooks and Apache Zeppelin notebook servers\.
++ Amazon SageMaker provides an integrated Jupyter authoring notebook instance\. With AWS Glue, you create and manage Amazon SageMaker notebooks\. You can also open Amazon SageMaker notebooks from the AWS Glue console\.
 
-In addition, you can use Apache Spark with Amazon SageMaker on AWS Glue development endpoints which support Amazon SageMaker \(but not AWS Glue ETL jobs\)\. SageMaker Spark is an open source Apache Spark library for Amazon SageMaker\. For more information, see see [Using Apache Spark with Amazon SageMaker](https://docs.aws.amazon.com/sagemaker/latest/dg/apache-spark.html)\. 
+  In addition, you can use Apache Spark with Amazon SageMaker on AWS Glue development endpoints which support Amazon SageMaker \(but not AWS Glue ETL jobs\)\. SageMaker Spark is an open source Apache Spark library for Amazon SageMaker\. For more information, see see [Using Apache Spark with Amazon SageMaker](https://docs.aws.amazon.com/sagemaker/latest/dg/apache-spark.html)\. 
++ Apache Zeppelin notebook servers are run on Amazon EC2 instances\. You can create these instances on the AWS Glue console\.
 
  For more information about creating and accessing your notebooks using the AWS Glue console, see [Working with Notebooks on the AWS Glue Console](console-notebooks.md)\. 
 

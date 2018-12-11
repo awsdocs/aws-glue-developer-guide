@@ -1,5 +1,7 @@
 # Crawler Scheduler API<a name="aws-glue-api-crawler-scheduler"></a>
 
+The Crawler Scheduler API describes AWS Glue crawler data types, along with the API for creating, deleting, updating, and listing crawlers\.
+
 ## Data Types<a name="aws-glue-api-crawler-scheduler-objects"></a>
 + [Schedule Structure](#aws-glue-api-crawler-scheduler-Schedule)
 

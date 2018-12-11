@@ -49,6 +49,7 @@ This option is validated on the AWS Glue client side\. AWS Glue only connects to
 + Amazon Redshift
 + MySQL \(Amazon RDS instances only\)
 + Aurora MySQL \(Amazon RDS instances only\)
++ Aurora Postgres \(Amazon RDS instances only\)
 To enable an **Amazon RDS Oracle** data store to use **Require SSL connection**, you need to create and attach an option group to the Oracle instance\.  
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.

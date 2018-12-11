@@ -1,8 +1,8 @@
 # Setting Up Encryption in AWS Glue<a name="set-up-encryption"></a>
 
-The following example workflow highlights the options that you must configure when you use encryption with AWS Glue\. The example demonstrates the use of specific AWS Key Management Service \(AWS KMS\) keys, but you might choose other settings based on your particular needs\. This workflow highlights only the options that pertain to encryption when setting up AWS Glue\. For more information about encryption, see [Encryption and Secure Access for AWS Glue](encryption-glue-resources.md)\.  
+The following example workflow highlights the options to configure when you use encryption with AWS Glue\. The example demonstrates the use of specific AWS Key Management Service \(AWS KMS\) keys, but you might choose other settings based on your particular needs\. This workflow highlights only the options that pertain to encryption when setting up AWS Glue\. For more information about encryption, see [Encryption and Secure Access for AWS Glue](encryption-glue-resources.md)\.  
 
-1. If the user of the AWS Glue console doesn't use a permissions policy that allows all AWS Glue API operations \(for example, `"glue:*"`\), confirm that the following permissions are allowed:
+1. If the user of the AWS Glue console doesn't use a permissions policy that allows all AWS Glue API operations \(for example, `"glue:*"`\), confirm that the following actions are allowed:
    + `"glue:GetDataCatalogEncryptionSettings"`
    + `"glue:PutDataCatalogEncryptionSettings"`
    + `"glue:CreateSecurityConfiguration"`
@@ -10,7 +10,7 @@ The following example workflow highlights the options that you must configure wh
    + `"glue:GetSecurityConfigurations"`
    + `"glue:DeleteSecurityConfiguration"`
 
-1. Any client accessing an encrypted catalog—that is, any console user, crawler, job, or development endpoint—needs permissions as follows:
+1. Any client that accesses or writes to an encrypted catalog—that is, any console user, crawler, job, or development endpoint—needs the following permissions:
 
    ```
    {
@@ -27,7 +27,22 @@ The following example workflow highlights the options that you must configure wh
    }
    ```
 
-1. The role of any extract, transform, and load \(ETL\) job that writes encrypted data to Amazon S3 needs permissions as follows:
+1. Any user or role that accesses an encrypted connection password needs the following permissions:
+
+   ```
+   {
+    "Version": "2012-10-17",        
+     "Statement": {
+        "Effect": "Allow",
+        "Action": [
+              "kms:Decrypt"
+             ],
+        "Resource": "(key-arns-used-for-password-encryption)"
+             }
+   }
+   ```
+
+1. The role of any extract, transform, and load \(ETL\) job that writes encrypted data to Amazon S3 needs the following permissions:
 
    ```
    {
@@ -44,7 +59,7 @@ The following example workflow highlights the options that you must configure wh
    }
    ```
 
-1. Any ETL job or crawler that writes encrypted Amazon CloudWatch Logs requires the following permissions in the key policy:
+1. Any ETL job or crawler that writes encrypted Amazon CloudWatch Logs requires the following permissions in the key policy \(not IAM policy\):
 
    ```
    {
@@ -62,6 +77,8 @@ The following example workflow highlights the options that you must configure wh
     	"Resource": "arn of key used for ETL/crawler cloudwatch encryption"
     }
    ```
+
+   For more information about key policies, see [Using Key Policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the *AWS Key Management Service Developer Guide*\.
 
 1. Any ETL job that uses an encrypted job bookmark needs the following permissions:
 
@@ -95,4 +112,4 @@ The following example workflow highlights the options that you must configure wh
 
 1. In the navigation pane, choose **Jobs**\. Choose **Add job** to create a job that transforms data\. In the job definition, choose the security configuration that you created\. 
 
-1. On the AWS Glue console, run your job on demand\. Verify that any Amazon S3 data written by the job, the CloudWatch Logs written by the job, and the job bookmarks are encrypted\.
+1. On the AWS Glue console, run your job on demand\. Verify that any Amazon S3 data written by the job, the CloudWatch Logs written by the job, and the job bookmarks are all encrypted\.

@@ -32,6 +32,8 @@ When a crawler runs, the provided IAM role must have permission to access the da
 }
 ```
 
+If the crawler reads KMS encrypted Amazon S3 data, then the **IAM role** must have decrypt permission on the KMS key\. For more information, see [Step 2: Create an IAM Role for AWS Glue](create-an-iam-role.md)\.
+
 For an Amazon DynamoDB data store, you can use the AWS Glue console to create a policy or add a policy similar to the following: 
 
 ```

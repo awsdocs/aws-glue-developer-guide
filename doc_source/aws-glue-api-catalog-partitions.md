@@ -1,5 +1,7 @@
 # Partition API<a name="aws-glue-api-catalog-partitions"></a>
 
+The Partition API describes data types and operations used to work with partitions\.
+
 ## Data Types<a name="aws-glue-api-catalog-partitions-objects"></a>
 + [Partition Structure](#aws-glue-api-catalog-partitions-Partition)
 + [PartitionInput Structure](#aws-glue-api-catalog-partitions-PartitionInput)
@@ -51,7 +53,7 @@ The structure used to create and update a partion\.
 **Fields**
 + `Values` – An array of UTF\-8 strings\.
 
-  The values of the partition\.
+  The values of the partition\. Although this parameter is not required by the SDK, you must specify this parameter for a valid input\.
 + `LastAccessTime` – Timestamp\.
 
   The last time at which the partition was accessed\.

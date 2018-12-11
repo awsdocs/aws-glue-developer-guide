@@ -27,7 +27,7 @@ Address to connect to the development endpoint\.
 Current public SSH keys that are associated with the development endpoint \(optional\)\. If you provided a public key when you created the development endpoint, you should have saved the corresponding SSH private key\.
 
 **IAM role**  
-Specify the IAM role that is used for authorization to resources\. For more information about creating an IAM role, see [Step 2: Create an IAM Role for AWS Glue](create-an-iam-role.md)\.
+Specify the IAM role that is used for authorization to resources\. If the development endpoint reads KMS encrypted Amazon S3 data, then the **IAM role** must have decrypt permission on the KMS key\. For more information about creating an IAM role, see [Step 2: Create an IAM Role for AWS Glue](create-an-iam-role.md)\.
 
 **SSH to Python REPL**  
 You can open a terminal window on your computer \(laptop\) and type this command to interact with the development endpoint in as a Read\-Eval\-Print Loop \(REPL\) shell\. This field is only shown if the development endpoint contains a public SSH key\.

@@ -274,7 +274,7 @@ Unboxes a string field in a `DynamicFrame` and returns a new `DynamicFrame` cont
 
 A `DynamicRecord` represents a logical record in a `DynamicFrame`\. It is similar to a row in an Apache Spark `DataFrame`, except that it is self\-describing and can be used for data that does not conform to a fixed schema\.
 + `path` – A full path to the string node you want to unbox\.
-+ `format` – A format specification \(optional\)\. This is used for an Amazon Simple Storage Service \(Amazon S3\) or an AWS Glue connection that supports multiple formats\. See [Format Options for ETL Output in AWS Glue](aws-glue-programming-etl-format.md) for the formats that are supported\.
++ `format` – A format specification \(optional\)\. This is used for an Amazon Simple Storage Service \(Amazon S3\) or an AWS Glue connection that supports multiple formats\. See [Format Options for ETL Inputs and Outputs in AWS Glue](aws-glue-programming-etl-format.md) for the formats that are supported\.
 + `transformation_ctx` – A unique string that is used to identify state information \(optional\)\.
 + `info` – A string to be associated with error reporting for this transformation \(optional\)\.
 + `stageThreshold` – The number of errors encountered during this transformation at which the process should error out \(optional: zero by default, indicating that the process should not error out\)\.
@@ -319,8 +319,8 @@ Gets a [DataSink\(object\)](aws-glue-api-crawler-pyspark-extensions-types.md#aws
   ```
   connection_options = {"url": "jdbc-url/database", "user": "username", "password": "password","dbtable": "table-name", "redshiftTmpDir": "s3-tempdir-path"} 
   ```
-+ `format` – A format specification \(optional\)\. This is used for an Amazon Simple Storage Service \(Amazon S3\) or an AWS Glue connection that supports multiple formats\. See [Format Options for ETL Output in AWS Glue](aws-glue-programming-etl-format.md) for the formats that are supported\.
-+ `format_options` – Format options for the specified format\. See [Format Options for ETL Output in AWS Glue](aws-glue-programming-etl-format.md) for the formats that are supported\.
++ `format` – A format specification \(optional\)\. This is used for an Amazon Simple Storage Service \(Amazon S3\) or an AWS Glue connection that supports multiple formats\. See [Format Options for ETL Inputs and Outputs in AWS Glue](aws-glue-programming-etl-format.md) for the formats that are supported\.
++ `format_options` – Format options for the specified format\. See [Format Options for ETL Inputs and Outputs in AWS Glue](aws-glue-programming-etl-format.md) for the formats that are supported\.
 + `accumulator_size` – The accumulable size to use \(optional\)\.
 
 ##  — Errors —<a name="aws-glue-api-crawler-pyspark-extensions-dynamic-frame-_errors"></a>
