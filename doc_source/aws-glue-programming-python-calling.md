@@ -14,7 +14,7 @@ In Python calls to AWS Glue APIs, it's best to pass parameters explicitly by nam
 
 ```
 job = glue.create_job(Name='sample', Role='Glue_DefaultRole',
-                      command={'Name': 'glueetl',
+                      Command={'Name': 'glueetl',
                                'ScriptLocation': 's3://my_script_bucket/scripts/my_etl_script.py'})
 ```
 
