@@ -60,10 +60,19 @@ Specifies a job definition\.
   The maximum number of times to retry this job after a JobRun fails\.
 + `AllocatedCapacity` – Number \(integer\)\.
 
+  This field is deprecated, use `MaxCapacity` instead\.
+
   The number of AWS Glue data processing units \(DPUs\) allocated to runs of this job\. From 2 to 100 DPUs can be allocated; the default is 10\. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory\. For more information, see the [AWS Glue pricing page](https://aws.amazon.com/glue/pricing/)\.
 + `Timeout` – Number \(integer\), at least 1\.
 
   The job timeout in minutes\. This is the maximum time that a job run can consume resources before it is terminated and enters `TIMEOUT` status\. The default is 2,880 minutes \(48 hours\)\.
++ `MaxCapacity` – Number \(double\)\.
+
+  The number of AWS Glue data processing units \(DPUs\) that can be allocated when this job runs\. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory\. For more information, see the [AWS Glue pricing page](https://aws.amazon.com/glue/pricing/)\.
+
+  The value that can be allocated for `MaxCapacity` depends on whether you are running a python shell job, or an Apache Spark ETL job:
+  + When you specify a python shell job \(`JobCommand.Name`="pythonshell"\), you can allocate either 0\.0625 or 1 DPU\. The default is 0\.0625 DPU\.
+  + When you specify an Apache Spark ETL job \(`JobCommand.Name`="glueetl"\), you can allocate from 2 to 100 DPUs\. The default is 10 DPUs\. This job type cannot have a fractional DPU allocation\.
 + `NotificationProperty` – A [NotificationProperty](#aws-glue-api-jobs-job-NotificationProperty) object\.
 
   Specifies configuration properties of a job notification\.
@@ -96,7 +105,7 @@ Specifies code executed when a job is run\.
 **Fields**
 + `Name` – UTF\-8 string\.
 
-  The name of the job command: this must be `glueetl`\.
+  The name of the job command: this must be `glueetl`, for an Apache Spark ETL job, or `pythonshell`, for a Python shell job\.
 + `ScriptLocation` – UTF\-8 string\.
 
   Specifies the S3 path to a script that executes a job \(required\)\.
@@ -151,10 +160,19 @@ Specifies information used to update an existing job definition\. Note that the 
   The maximum number of times to retry this job if it fails\.
 + `AllocatedCapacity` – Number \(integer\)\.
 
+  This field is deprecated\. Use `MaxCapacity` instead\.
+
   The number of AWS Glue data processing units \(DPUs\) to allocate to this Job\. From 2 to 100 DPUs can be allocated; the default is 10\. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory\. For more information, see the [AWS Glue pricing page](https://aws.amazon.com/glue/pricing/)\.
 + `Timeout` – Number \(integer\), at least 1\.
 
   The job timeout in minutes\. This is the maximum time that a job run can consume resources before it is terminated and enters `TIMEOUT` status\. The default is 2,880 minutes \(48 hours\)\.
++ `MaxCapacity` – Number \(double\)\.
+
+  The number of AWS Glue data processing units \(DPUs\) that can be allocated when this job runs\. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory\. For more information, see the [AWS Glue pricing page](https://aws.amazon.com/glue/pricing/)\.
+
+  The value that can be allocated for `MaxCapacity` depends on whether you are running a python shell job, or an Apache Spark ETL job:
+  + When you specify a python shell job \(`JobCommand.Name`="pythonshell"\), you can allocate either 0\.0625 or 1 DPU\. The default is 0\.0625 DPU\.
+  + When you specify an Apache Spark ETL job \(`JobCommand.Name`="glueetl"\), you can allocate from 2 to 100 DPUs\. The default is 10 DPUs\. This job type cannot have a fractional DPU allocation\.
 + `NotificationProperty` – A [NotificationProperty](#aws-glue-api-jobs-job-NotificationProperty) object\.
 
   Specifies configuration properties of a job notification\.
@@ -213,10 +231,19 @@ Creates a new job definition\.
   The maximum number of times to retry this job if it fails\.
 + `AllocatedCapacity` – Number \(integer\)\.
 
+  This parameter is deprecated\. Use `MaxCapacity` instead\.
+
   The number of AWS Glue data processing units \(DPUs\) to allocate to this Job\. From 2 to 100 DPUs can be allocated; the default is 10\. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory\. For more information, see the [AWS Glue pricing page](https://aws.amazon.com/glue/pricing/)\.
 + `Timeout` – Number \(integer\), at least 1\.
 
   The job timeout in minutes\. This is the maximum time that a job run can consume resources before it is terminated and enters `TIMEOUT` status\. The default is 2,880 minutes \(48 hours\)\.
++ `MaxCapacity` – Number \(double\)\.
+
+  The number of AWS Glue data processing units \(DPUs\) that can be allocated when this job runs\. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory\. For more information, see the [AWS Glue pricing page](https://aws.amazon.com/glue/pricing/)\.
+
+  The value that can be allocated for `MaxCapacity` depends on whether you are running a python shell job, or an Apache Spark ETL job:
+  + When you specify a python shell job \(`JobCommand.Name`="pythonshell"\), you can allocate either 0\.0625 or 1 DPU\. The default is 0\.0625 DPU\.
+  + When you specify an Apache Spark ETL job \(`JobCommand.Name`="glueetl"\), you can allocate from 2 to 100 DPUs\. The default is 10 DPUs\. This job type cannot have a fractional DPU allocation\.
 + `NotificationProperty` – A [NotificationProperty](#aws-glue-api-jobs-job-NotificationProperty) object\.
 
   Specifies configuration properties of a job notification\.

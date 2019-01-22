@@ -1,11 +1,13 @@
 # Document History for AWS Glue<a name="doc-history"></a>
 
 The following table describes important changes to the documentation for AWS Glue\.
-+ **Latest API version:** 2018\-12\-12
-+ **Latest documentation update:** December 11, 2018
++ **Latest API version:** 2019\-01\-18
++ **Latest documentation update:** January 18, 2019
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Support for Python shell jobs](#doc-history) | Added information about Python shell jobs and the new field **Maximum capacity**\. For more information, see [Adding Python Shell Jobs in AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/add-job-python.html)\. | January 18, 2019 | 
+| [Support for notifications when there are changes to databases and tables](#doc-history) | Added information about events that are generated for changes to database, table, and partition API calls\. You can configure actions in CloudWatch Events to respond to these events\. For more information, see [Automating AWS Glue with CloudWatch Events](https://docs.aws.amazon.com/glue/latest/dg/automating-awsglue-with-cloudwatch-events.html)\. | January 16, 2019 | 
 | [Support for encrypting connection passwords](#doc-history) | Added information about encrypting passwords used in connection objects\. For more information, see [Encrypting Connection Passwords](https://docs.aws.amazon.com/glue/latest/dg/encrypt-connection-passwords.html)\. | December 11, 2018 | 
 | [Support for resource\-level permission and resource\-based policies](#doc-history) | Added information about using resource\-level permissions and resource\-based policies with AWS Glue\. For more information, see the topics within [Security in AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/security-glue.html)\. | October 15, 2018 | 
 | [Support for Amazon SageMaker notebooks](#doc-history) | Added information about using Amazon SageMaker notebooks with AWS Glue development endpoints\. For more information, see [ Managing Notebooks](https://docs.aws.amazon.com/glue/latest/dg/notebooks-with-glue.html)\. | October 5, 2018 | 

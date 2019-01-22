@@ -16,12 +16,17 @@ A notebook enables interactive development and testing of your ETL \(extract, tr
 |   Managing Amazon SageMaker notebooks with AWS Glue development endpoints is available in the following AWS Regions: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/glue/latest/dg/notebooks-with-glue.html)   | 
 | US East \(Ohio\) | `us-east-2` | 
 | US East \(N\. Virginia\) | `us-east-1` | 
+| US West \(N\. California\) | `us-west-1` | 
 | US West \(Oregon\) | `us-west-2` | 
 | Asia Pacific \(Tokyo\) | `ap-northeast-1` | 
 | Asia Pacific \(Seoul\) | `ap-northeast-2` | 
+| Asia Pacific \(Mumbai\) | `ap-south-1` | 
+| Asia Pacific \(Singapore\) | `ap-southeast-1` | 
 | Asia Pacific \(Sydney\) | `ap-southeast-2` | 
+| Canada \(Central\) | `ca-central-1` | 
 | EU \(Frankfurt\) | `eu-central-1` | 
 | EU \(Ireland\) | `eu-west-1` | 
+| EU \(London\) | `eu-west-2` | 
 
 **Topics**
 + [Creating a Notebook Server Associated with a Development Endpoint](dev-endpoint-notebook-server-considerations.md)

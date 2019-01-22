@@ -16,6 +16,11 @@ You define *jobs* in AWS Glue to accomplish the work that's required to extract,
 **Important**  
 Tables and databases in AWS Glue are objects in the AWS Glue Data Catalog\. They contain metadata; they don't contain data from a data store\.
 
+
+|  | 
+| --- |
+|  **Text\-based data, such as CSVs, must be encoded in `UTF-8` for AWS Glue to process it successfully\. For more information, see [UTF\-8](https://en.wikipedia.org/wiki/UTF-8) in Wikipedia\.**   | 
+
 ## AWS Glue Terminology<a name="components-major"></a>
 
 AWS Glue relies on the interaction of several components to create and manage your data warehouse workflow\.

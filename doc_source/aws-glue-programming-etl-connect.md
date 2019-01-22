@@ -69,4 +69,4 @@ Designates a connection to Amazon DynamoDB \(DynamoDB\)\.
 
 Use the following `connectionOptions` with `"connectionType": "dynamodb"`:
 + `"dynamodb.input.tableName"`: \(Required\) The DynamoDB table from which to read\.
-+ `"dynamodb.throughput.read.percent"`: \(Optional\) The percentage of reserved capacity units \(RCU\) to use\. The default is set to "0\.5"\. Acceptable values are from "0\.1" to "1\.5", inclusive\. 
++ `"dynamodb.throughput.read.percent"`: \(Optional\) The percentage of read capacity units \(RCU\) to use\. The default is set to "0\.5"\. Acceptable values are from "0\.1" to "1\.5", inclusive\. 

@@ -32,13 +32,13 @@ If AWS Glue doesn't find a custom classifier that fits the input data format wit
 
 | Classifier type | Classification string | Notes | 
 | --- | --- | --- | 
-| Apache Avro | avro | Reads the beginning of the file to determine format\. | 
+| Apache Avro | avro | Reads the schema at the beginning of the file to determine format\. | 
 | Apache ORC | orc | Reads the file metadata to determine format\. | 
-| Apache Parquet | parquet | Reads the beginning of the file to determine format\. | 
+| Apache Parquet | parquet | Reads the schema at the end of the file to determine format\. | 
 | JSON | json | Reads the beginning of the file to determine format\. | 
 | Binary JSON | bson | Reads the beginning of the file to determine format\. | 
 | XML | xml | Reads the beginning of the file to determine format\. AWS Glue determines the table schema based on XML tags in the document\.  For information about creating a custom XML classifier to specify rows in the document, see [Writing XML Custom Classifiers](custom-classifier.md#custom-classifier-xml)\.  | 
-| Ion log | ion | Reads the beginning of the file to determine format\. | 
+| Amazon Ion | ion | Reads the beginning of the file to determine format\. | 
 | Combined Apache log | combined\_apache | Determines log formats through a grok pattern\. | 
 | Apache log | apache | Determines log formats through a grok pattern\. | 
 | Linux kernel log | linux\_kernel | Determines log formats through a grok pattern\. | 

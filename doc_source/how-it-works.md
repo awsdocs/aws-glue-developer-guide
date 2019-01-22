@@ -6,6 +6,8 @@ AWS Glue takes care of provisioning and managing the resources that are required
 
 With AWS Glue, you create jobs using table definitions in your Data Catalog\. Jobs consist of scripts that contain the programming logic that performs the transformation\. You use triggers to initiate jobs either on a schedule or as a result of a specified event\. You determine where your target data resides and which source data populates your target\. With your input, AWS Glue generates the code that's required to transform your data from source to target\. You can also provide scripts in the AWS Glue console or API to process your data\.
 
+AWS Glue is available in several AWS Regions\. For more information, see [AWS Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html) in the Amazon Web Services General Reference\.
+
 **Topics**
 + [Serverless ETL Jobs Run in Isolation](#how-it-works-isolation)
 + [AWS Glue Concepts](components-key-concepts.md)

@@ -1,7 +1,7 @@
 # AWS Glue Developer Guide
 
 -----
-*****Copyright &copy; 2018 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; 2019 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -69,6 +69,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Populating the Data Catalog Using AWS CloudFormation Templates](populate-with-cloudformation-templates.md)
 + [Authoring Jobs in AWS Glue](author-job.md)
    + [Adding Jobs in AWS Glue](add-job.md)
+      + [Adding Python Shell Jobs in AWS Glue](add-job-python.md)
       + [Built-In Transforms](built-in-transforms.md)
       + [Working with Jobs on the AWS Glue Console](console-jobs.md)
    + [Editing Scripts in AWS Glue](edit-script.md)

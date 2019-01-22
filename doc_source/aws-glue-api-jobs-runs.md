@@ -62,6 +62,8 @@ Contains information about a job run\.
   A list of predecessors to this job run\.
 + `AllocatedCapacity` – Number \(integer\)\.
 
+  This field is deprecated, use `MaxCapacity` instead\.
+
   The number of AWS Glue data processing units \(DPUs\) allocated to this JobRun\. From 2 to 100 DPUs can be allocated; the default is 10\. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory\. For more information, see the [AWS Glue pricing page](https://aws.amazon.com/glue/pricing/)\.
 + `ExecutionTime` – Number \(integer\)\.
 
@@ -69,6 +71,13 @@ Contains information about a job run\.
 + `Timeout` – Number \(integer\), at least 1\.
 
   The JobRun timeout in minutes\. This is the maximum time that a job run can consume resources before it is terminated and enters `TIMEOUT` status\. The default is 2,880 minutes \(48 hours\)\. This overrides the timeout value set in the parent job\.
++ `MaxCapacity` – Number \(double\)\.
+
+  The number of AWS Glue data processing units \(DPUs\) that can be allocated when this job runs\. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory\. For more information, see the [AWS Glue pricing page](https://aws.amazon.com/glue/pricing/)\.
+
+  The value that can be allocated for `MaxCapacity` depends on whether you are running a python shell job, or an Apache Spark ETL job:
+  + When you specify a python shell job \(`JobCommand.Name`="pythonshell"\), you can allocate either 0\.0625 or 1 DPU\. The default is 0\.0625 DPU\.
+  + When you specify an Apache Spark ETL job \(`JobCommand.Name`="glueetl"\), you can allocate from 2 to 100 DPUs\. The default is 10 DPUs\. This job type cannot have a fractional DPU allocation\.
 + `NotificationProperty` – A [NotificationProperty](aws-glue-api-jobs-job.md#aws-glue-api-jobs-job-NotificationProperty) object\.
 
   Specifies configuration properties of a job run notification\.
@@ -172,10 +181,19 @@ Starts a job run using a job definition\.
   For information about the key\-value pairs that AWS Glue consumes to set up your job, see the [Special Parameters Used by AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html) topic in the developer guide\.
 + `AllocatedCapacity` – Number \(integer\)\.
 
+  This field is deprecated, use `MaxCapacity` instead\.
+
   The number of AWS Glue data processing units \(DPUs\) to allocate to this JobRun\. From 2 to 100 DPUs can be allocated; the default is 10\. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory\. For more information, see the [AWS Glue pricing page](https://aws.amazon.com/glue/pricing/)\.
 + `Timeout` – Number \(integer\), at least 1\.
 
   The JobRun timeout in minutes\. This is the maximum time that a job run can consume resources before it is terminated and enters `TIMEOUT` status\. The default is 2,880 minutes \(48 hours\)\. This overrides the timeout value set in the parent job\.
++ `MaxCapacity` – Number \(double\)\.
+
+  The number of AWS Glue data processing units \(DPUs\) that can be allocated when this job runs\. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory\. For more information, see the [AWS Glue pricing page](https://aws.amazon.com/glue/pricing/)\.
+
+  The value that can be allocated for `MaxCapacity` depends on whether you are running a python shell job, or an Apache Spark ETL job:
+  + When you specify a python shell job \(`JobCommand.Name`="pythonshell"\), you can allocate either 0\.0625 or 1 DPU\. The default is 0\.0625 DPU\.
+  + When you specify an Apache Spark ETL job \(`JobCommand.Name`="glueetl"\), you can allocate from 2 to 100 DPUs\. The default is 10 DPUs\. This job type cannot have a fractional DPU allocation\.
 + `NotificationProperty` – A [NotificationProperty](aws-glue-api-jobs-job.md#aws-glue-api-jobs-job-NotificationProperty) object\.
 
   Specifies configuration properties of a job run notification\.
