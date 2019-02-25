@@ -130,7 +130,7 @@ Executor 4
 
 The executor ran out of memory while reading the JDBC table because the default configuration for the Spark JDBC fetch size is zero\. This means that the JDBC driver on the Spark executor tries to fetch the 34 million rows from the database together and cache them, even though Spark streams through the rows one at a time\. With Spark, you can avoid this scenario by setting the fetch size parameter to a non\-zero default value\.
 
-You can also fix this issue by using AWS Glue dynamic frames instead\. By default, dynamic frames use a fetch size of 1,000 rows\. As a result, the executor does not take more than 7 percent of its total memory\. The AWS Glue job finishes in less than two minutes with only a single executor\. 
+You can also fix this issue by using AWS Glue dynamic frames instead\. By default, dynamic frames use a fetch size of 1,000 rows that is a typically sufficient value\. As a result, the executor does not take more than 7 percent of its total memory\. The AWS Glue job finishes in less than two minutes with only a single executor\. While using AWS Glue dynamic frames is the recommended approach, it is also possible to set the fetch size using the Apache Spark `fetchsize` property\. See the [Spark SQL, DataFrames and Datasets Guide](https://spark.apache.org/docs/2.2.0/sql-programming-guide.html#jdbc-to-other-databases)\.
 
 ```
 val (url, database, tableName) = {
@@ -141,6 +141,6 @@ val df = source.getDynamicFrame
 glueContext.write_dynamic_frame.from_options(frame = df, connection_type = "s3", connection_options = {"path": output_path}, format = "parquet", transformation_ctx = "datasink")
 ```
 
-**Normal profiled metrics:** The [executor memory](monitoring-awsglue-with-cloudwatch-metrics.md#glue.ALL.jvm.heap.usage) with AWS Glue dynamic frames never exceeds the safe threshold, as shown in the following image\. It streams in the rows from the database and caches only 1,000 rows in the JDBC driver at any point in time\.
+**Normal profiled metrics:** The [executor memory](monitoring-awsglue-with-cloudwatch-metrics.md#glue.ALL.jvm.heap.usage) with AWS Glue dynamic frames never exceeds the safe threshold, as shown in the following image\. It streams in the rows from the database and caches only 1,000 rows in the JDBC driver at any point in time\. An out of memory exception does not occur\.
 
 ![\[AWS Glue console showing executor memory below the safe threshold.\]](http://docs.aws.amazon.com/glue/latest/dg/images/monitor-debug-oom-2-memoryprofile-fixed.png)

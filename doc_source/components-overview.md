@@ -23,6 +23,12 @@ You can use AWS Identity and Access Management \(IAM\) policies to control acces
 
 For information about how to use the AWS Glue Data Catalog, see [Populating the AWS Glue Data Catalog](populate-data-catalog.md)\. For information about how to program using the Data Catalog API, see [Catalog API](aws-glue-api-catalog.md)\.
 
+Other AWS services and open source projects can use the AWS Glue Data Catalog:
++ Amazon Athena – for more information, see [Understanding Tables, Databases, and the Data Catalog](https://docs.aws.amazon.com/athena/latest/ug/understanding-tables-databases-and-the-data-catalog.html) in the Amazon Athena User Guide\.
++ Amazon Redshift Spectrum – for more information, see [Using Amazon Redshift Spectrum to Query External Data](https://docs.aws.amazon.com/redshift/latest/dg/c-using-spectrum.html) in the Amazon Redshift Database Developer Guide\.
++ Amazon EMR – for more information, see [Use Resource\-Based Policies for Amazon EMR Access to AWS Glue Data Catalog](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-iam-roles-glue.html) in the Amazon EMR Management Guide\.
++ AWS Glue Data Catalog Client for Apache Hive Metastore – for more information about this GitHub project, see [AWS Glue Data Catalog Client for Apache Hive Metastore](https://github.com/awslabs/aws-glue-data-catalog-client-for-apache-hive-metastore)\.
+
 ## AWS Glue Crawlers and Classifiers<a name="crawling-intro"></a>
 
 AWS Glue also lets you set up crawlers that can scan data in all kinds of repositories, classify it, extract schema information from it, and store the metadata automatically in the AWS Glue Data Catalog\. From there it can be used to guide ETL operations\.

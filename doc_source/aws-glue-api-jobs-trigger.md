@@ -101,7 +101,7 @@ Defines an action to be initiated by a trigger\.
 
   Each value is a UTF\-8 string\.
 
-  Arguments to be passed to the job run\.
+  The job arguments used when this trigger fires\. For this job run, they replace the default arguments set in the job definition itself\.
 
   You can specify arguments here that your own job\-execution script consumes, as well as arguments that AWS Glue itself consumes\.
 
@@ -157,6 +157,13 @@ Creates a new trigger\.
 + `StartOnCreation` – Boolean\.
 
   Set to true to start SCHEDULED and CONDITIONAL triggers when created\. True not supported for ON\_DEMAND triggers\.
++ `Tags` – A map array of key\-value pairs, not more than 50 pairs\.
+
+  Each key is a UTF\-8 string, not less than 1 or more than 128 bytes long\.
+
+  Each value is a UTF\-8 string, not more than 256 bytes long\.
+
+  The tags to use with this trigger\. You may use tags to limit access to the trigger\. For more information about tags in AWS Glue, see [AWS Tags in AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the developer guide\. 
 
 **Response**
 + `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.

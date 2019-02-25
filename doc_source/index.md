@@ -202,6 +202,7 @@ Amazon's trademarks and trade dress may not be used in
       + [Job Runs](aws-glue-api-jobs-runs.md)
       + [Triggers](aws-glue-api-jobs-trigger.md)
    + [Development Endpoints API](aws-glue-api-dev-endpoint.md)
+   + [Tagging APIs in AWS Glue](aws-glue-api-tags.md)
    + [Common Data Types](aws-glue-api-common.md)
    + [Exceptions](aws-glue-api-exceptions.md)
 + [Document History for AWS Glue](doc-history.md)

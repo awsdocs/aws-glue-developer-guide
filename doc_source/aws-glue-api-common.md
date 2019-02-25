@@ -4,15 +4,15 @@ The Common Data Types describes miscellaneous common data types in AWS Glue\.
 
 ## Tag Structure<a name="aws-glue-api-common-Tag"></a>
 
-An AWS Tag\.
+The `Tag` object represents a label that you can assign to an AWS resource\. Each tag consists of a key and an optional value, both of which you define\.
 
 **Fields**
 + `key` – UTF\-8 string, not less than 1 or more than 128 bytes long\.
 
-  The tag key\.
+  The tag key\. The key is required when you create a tag on an object\. The key is case\-sensitive, and must not contain the prefix aws\.
 + `value` – UTF\-8 string, not more than 256 bytes long\.
 
-  The tag value\.
+  The tag value\. The value is optional when you create a tag on an object\. The value is case\-sensitive, and must not contain the prefix aws\.
 
 ## DecimalNumber Structure<a name="aws-glue-api-common-DecimalNumber"></a>
 

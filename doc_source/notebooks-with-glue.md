@@ -27,6 +27,7 @@ A notebook enables interactive development and testing of your ETL \(extract, tr
 | EU \(Frankfurt\) | `eu-central-1` | 
 | EU \(Ireland\) | `eu-west-1` | 
 | EU \(London\) | `eu-west-2` | 
+| AWS GovCloud \(US\-West\) | `us-gov-west-1` | 
 
 **Topics**
 + [Creating a Notebook Server Associated with a Development Endpoint](dev-endpoint-notebook-server-considerations.md)

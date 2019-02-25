@@ -1,11 +1,11 @@
 # Code Example: Joining and Relationalizing Data<a name="aws-glue-programming-python-samples-legislators"></a>
 
-This example uses a dataset that was downloaded from [http://everypolitician\.org/](http://everypolitician.org/) to the `sample-dataset` bucket in Amazon Simple Storage Service \(Amazon S3\): `s3://awsglue-datasets/examples/us-legislators/all`\. The dataset contains data in JSON format about United States legislators and the seats that they have held in the US House of Representatives and Senate, and has been modified slightly for purposes of this tutorial\.
+This example uses a dataset that was downloaded from [http://everypolitician\.org/](http://everypolitician.org/) to the `sample-dataset` bucket in Amazon Simple Storage Service \(Amazon S3\): `s3://awsglue-datasets/examples/us-legislators/all`\. The dataset contains data in JSON format about United States legislators and the seats that they have held in the US House of Representatives and Senate, and has been modified slightly and made available in a public Amazon S3 bucket for purposes of this tutorial\.
 
 You can find the source code for this example in the `join_and_relationalize.py` file in the [AWS Glue samples repository](https://github.com/awslabs/aws-glue-samples) on the GitHub website\.
 
 Using this data, this tutorial shows you how to do the following:
-+ Use an AWS Glue crawler to classify objects that are stored in an Amazon S3 bucket and save their schemas into the AWS Glue Data Catalog\.
++ Use an AWS Glue crawler to classify objects that are stored in a public Amazon S3 bucket and save their schemas into the AWS Glue Data Catalog\.
 + Examine the table metadata and schemas that result from the crawl\.
 + Write a Python extract, transfer, and load \(ETL\) script that uses the metadata in the Data Catalog to do the following:
   + Join the data in the different source files together into a single data table \(that is, denormalize the data\)\.
@@ -18,7 +18,7 @@ The easiest way to debug Python or PySpark scripts is to create a development en
 
 1. Sign in to the AWS Management Console, and open the AWS Glue console at [https://console\.aws\.amazon\.com/glue/](https://console.aws.amazon.com/glue/)\.
 
-1. Following the steps in [Working with Crawlers on the AWS Glue Console](console-crawlers.md), create a new crawler that can crawl the `s3://awsglue-datasets/examples/us-legislators/all` dataset into a database named `legislators` in the AWS Glue Data Catalog\.
+1. Following the steps in [Working with Crawlers on the AWS Glue Console](console-crawlers.md), create a new crawler that can crawl the `s3://awsglue-datasets/examples/us-legislators/all` dataset into a database named `legislators` in the AWS Glue Data Catalog\. The example data is already in this public Amazon S3 bucket\.
 
 1. Run the new crawler, and then check the `legislators` database\. 
 

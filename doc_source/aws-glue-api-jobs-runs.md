@@ -47,7 +47,7 @@ Contains information about a job run\.
 
   Each value is a UTF\-8 string\.
 
-  The job arguments associated with this run\. These override equivalent default arguments set for the job\.
+  The job arguments associated with this run\. For this job run, they replace the default arguments set in the job definition itself\.
 
   You can specify arguments here that your own job\-execution script consumes, as well as arguments that AWS Glue itself consumes\.
 
@@ -172,7 +172,7 @@ Starts a job run using a job definition\.
 
   Each value is a UTF\-8 string\.
 
-  The job arguments specifically for this run\. They override the equivalent default arguments set for in the job definition itself\.
+  The job arguments specifically for this run\. For this job run, they replace the default arguments set in the job definition itself\.
 
   You can specify arguments here that your own job\-execution script consumes, as well as arguments that AWS Glue itself consumes\.
 

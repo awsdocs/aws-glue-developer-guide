@@ -247,6 +247,13 @@ Creates a new crawler with specified targets, role, configuration, and optional 
 + `CrawlerSecurityConfiguration` – UTF\-8 string, not more than 128 bytes long\.
 
   The name of the SecurityConfiguration structure to be used by this Crawler\.
++ `Tags` – A map array of key\-value pairs, not more than 50 pairs\.
+
+  Each key is a UTF\-8 string, not less than 1 or more than 128 bytes long\.
+
+  Each value is a UTF\-8 string, not more than 256 bytes long\.
+
+  The tags to use with this crawler request\. You may use tags to limit access to the crawler\. For more information about tags in AWS Glue, see [AWS Tags in AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the developer guide\.
 
 **Response**
 + *No Response parameters\.*

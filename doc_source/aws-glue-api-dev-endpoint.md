@@ -143,6 +143,13 @@ If you previously created an endpoint with a public key, you must remove that ke
 + `SecurityConfiguration` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the SecurityConfiguration structure to be used with this DevEndpoint\.
++ `Tags` – A map array of key\-value pairs, not more than 50 pairs\.
+
+  Each key is a UTF\-8 string, not less than 1 or more than 128 bytes long\.
+
+  Each value is a UTF\-8 string, not more than 256 bytes long\.
+
+  The tags to use with this DevEndpoint\. You may use tags to limit access to the DevEndpoint\. 
 
 **Response**
 + `EndpointName` – UTF\-8 string\.

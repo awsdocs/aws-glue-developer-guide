@@ -63,7 +63,7 @@ The environment for running a Python shell job supports the following libraries:
 + xml\.etree\.ElementTree
 + zipfile
 
-The `NumPy` library can be used in a Python shell job for scientific computing\. For more information, see [NumPy](http:www.numpy.org)\. The following example shows a NumPy script that can be used in a Python shell job\. The script prints "Hello world" and the results of several mathematical calculations\.
+The `NumPy` library can be used in a Python shell job for scientific computing\. For more information, see [NumPy](http://www.numpy.org)\. The following example shows a NumPy script that can be used in a Python shell job\. The script prints "Hello world" and the results of several mathematical calculations\.
 
 ```
 import numpy as np
