@@ -41,7 +41,7 @@ def getCatalogSource( database : String,
                       tableName : String,
                       redshiftTmpDir : String = "",
                       transformationContext : String = ""
-                      push_down_predicate : String = " "
+                      pushDownPredicate : String = " "
                       additionalOptions: JsonOptions = JsonOptions.empty,
                       catalogId: String = null
                     ) : DataSource
@@ -52,7 +52,7 @@ Creates a [DataSource trait](glue-etl-scala-apis-glue-datasource-trait.md) that 
 + `tableName` — The table name in the Data Catalog\.
 + `redshiftTmpDir` — The temporary staging directory to be used with certain data sinks\. Set to empty by default\.
 + `transformationContext` — The transformation context that is associated with the sink to be used by job bookmarks\. Set to empty by default\.
-+ `push_down_predicate` – Filters partitions without having to list and read all the files in your dataset\. For more information, see [Pre\-Filtering Using Pushdown Predicates](aws-glue-programming-etl-partitions.md#aws-glue-programming-etl-partitions-pushdowns)\.
++ `pushDownPredicate` – Filters partitions without having to list and read all the files in your dataset\. For more information, see [Pre\-Filtering Using Pushdown Predicates](aws-glue-programming-etl-partitions.md#aws-glue-programming-etl-partitions-pushdowns)\.
 + `additionalOptions` – Additional options provided to AWS Glue\.
 + `catalogId` — The catalog ID \(account ID\) of the Data Catalog being accessed\. When null, the default account ID of the caller is used\.
 
