@@ -65,7 +65,11 @@ Comma\-separated Amazon Simple Storage Service \(Amazon S3\) paths to Python lib
 Only pure Python libraries can be used\. Libraries that rely on C extensions, such as the pandas Python Data Analysis Library, are not yet supported\.  
 **Dependent jars path**  
 Comma\-separated Amazon S3 paths to JAR files that are required by the script\.  
-Currently, only pure Java or Scala \(2\.11\) libraries can be used\.
+Currently, only pure Java or Scala \(2\.11\) libraries can be used\.  
+**Tags**  
+Tag your development endpoint with a **Tag key** and optional **Tag value**\. Once created, tag keys are read\-only\. Use tags on some resources to help you organize and identify them\. For more information, see [AWS Tags in AWS Glue](monitor-tags.md)\.   
+**Use Glue Data Catalog as the Hive metastore**  
+Enables you to use the AWS Glue Data Catalog as a Spark Hive metastore\.
 
 ## Creating a Notebook Server Hosted on Amazon EC2<a name="console-ec2-notebook-create"></a>
 

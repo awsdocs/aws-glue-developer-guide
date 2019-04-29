@@ -86,6 +86,15 @@ In this step, you create a policy that is similar to `AWSGlueConsoleFullAccess`\
            {
                "Effect": "Allow",
                "Action": [
+                   "tag:GetResources"
+               ],
+               "Resource": [
+                   "*"
+               ]
+           },
+           {
+               "Effect": "Allow",
+               "Action": [
                    "s3:CreateBucket"
                ],
                "Resource": [

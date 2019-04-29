@@ -1,11 +1,13 @@
 # Document History for AWS Glue<a name="doc-history"></a>
 
 The following table describes important changes to the documentation for AWS Glue\.
-+ **Latest API version:** 2019\-01\-18
-+ **Latest documentation update:** January 18, 2019
++ **Latest API version:** 2019\-03\-14
++ **Latest documentation update:** March 14, 2019
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Support for AWS Resource Tags](#doc-history) | Added information about using AWS resource tags to help you manage and control access to your AWS Glue resources\. You can assign AWS resource tags to jobs, triggers, endpoints, and crawlers in AWS Glue\. For more information, see [AWS Tags in AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html)\. | March 20, 2019 | 
+| [Support of AWS Glue Data Catalog for Spark SQL jobs](#doc-history) | Added information about configuring your AWS Glue jobs and development endpoints to use the AWS Glue Data Catalog as an external Apache Hive Metastore\. This allows jobs and development endpoints to directly run Apache Spark SQL queries against the tables stored in the AWS Glue Data Catalog\. For more information, see [AWS Glue Data Catalog Support for Spark SQL Jobs](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-data-catalog-hive.html)\. | March 14, 2019 | 
 | [Support for Python shell jobs](#doc-history) | Added information about Python shell jobs and the new field **Maximum capacity**\. For more information, see [Adding Python Shell Jobs in AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/add-job-python.html)\. | January 18, 2019 | 
 | [Support for notifications when there are changes to databases and tables](#doc-history) | Added information about events that are generated for changes to database, table, and partition API calls\. You can configure actions in CloudWatch Events to respond to these events\. For more information, see [Automating AWS Glue with CloudWatch Events](https://docs.aws.amazon.com/glue/latest/dg/automating-awsglue-with-cloudwatch-events.html)\. | January 16, 2019 | 
 | [Support for encrypting connection passwords](#doc-history) | Added information about encrypting passwords used in connection objects\. For more information, see [Encrypting Connection Passwords](https://docs.aws.amazon.com/glue/latest/dg/encrypt-connection-passwords.html)\. | December 11, 2018 | 

@@ -4,4 +4,5 @@ This section contains examples of both identity\-based \(IAM\) access\-control p
 
 **Topics**
 + [AWS Glue Identity\-Based \(IAM\) Access\-Control Policy Examples](glue-policy-examples-iam.md)
++ [AWS Glue Identity\-Based \(IAM\) Access\-Control Policy With Tags Examples](glue-policy-examples-iam-tags.md)
 + [AWS Glue Resource\-Based Access\-Control Policy Examples](glue-policy-examples-resource-policies.md)

@@ -69,4 +69,5 @@ Designates a connection to Amazon DynamoDB \(DynamoDB\)\.
 
 Use the following `connectionOptions` with `"connectionType": "dynamodb"`:
 + `"dynamodb.input.tableName"`: \(Required\) The DynamoDB table from which to read\.
-+ `"dynamodb.throughput.read.percent"`: \(Optional\) The percentage of read capacity units \(RCU\) to use\. The default is set to "0\.5"\. Acceptable values are from "0\.1" to "1\.5", inclusive\. 
++ `"dynamodb.throughput.read.percent"`: \(Optional\) The percentage of read capacity units \(RCU\) to use\. The default is set to "0\.5"\. Acceptable values are from "0\.1" to "1\.5", inclusive\.
++ `"dynamodb.splits"`: \(Optional\) This parameter defines how many splits we partition this DynamoDB table into while reading\. The default is set to "1"\. Acceptable values are from "1" to "1,000,000", inclusive\.

@@ -31,7 +31,7 @@ For Amazon S3 input sources, AWS Glue job bookmarks check the last modified time
 If you intend to reprocess all the data using the same job, reset the job bookmark\. To reset the job bookmark state, use the AWS Glue console, the [ResetJobBookmark Action \(Python: reset\_job\_bookmark\)](aws-glue-api-jobs-runs.md#aws-glue-api-jobs-runs-ResetJobBookmark) API operation, or the AWS CLI\. For example, enter the following command using the AWS CLI:
 
 ```
-    reset-job-bookmark  - -job-name my-job-name
+    aws glue reset-job-bookmark --job-name my-job-name
 ```
 
 AWS Glue keeps track of job bookmarks by job\. If you delete a job, the job bookmark is deleted\.

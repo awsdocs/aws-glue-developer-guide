@@ -1,6 +1,6 @@
 # Writing Custom Classifiers<a name="custom-classifier"></a>
 
-You can provide a custom classifier to classify your data using a grok pattern or an XML tag in AWS Glue\. A crawler calls a custom classifier\. If the classifier recognizes the data, it returns the classification and schema of the data to the crawler\. You might need to define a custom classifier if your data doesn't match any built\-in classifiers, or if you want to customize the tables that are created by the crawler\.
+You can provide a custom classifier to classify your data in AWS Glue\. You can create a custom classifier using a grok pattern, an XML tag, JavaScript Object Notation \(JSON\), or comma\-separated values \(CSV\)\. An AWS Glue crawler calls a custom classifier\. If the classifier recognizes the data, it returns the classification and schema of the data to the crawler\. You might need to define a custom classifier if your data doesn't match any built\-in classifiers, or if you want to customize the tables that are created by the crawler\.
 
  For more information about creating a classifier using the AWS Glue console, see [Working with Classifiers on the AWS Glue Console](console-classifiers.md)\. 
 
@@ -10,6 +10,7 @@ AWS Glue runs custom classifiers before built\-in classifiers, in the order you 
 + [Writing Grok Custom Classifiers](#custom-classifier-grok)
 + [Writing XML Custom Classifiers](#custom-classifier-xml)
 + [Writing JSON Custom Classifiers](#custom-classifier-json)
++ [Writing CSV Custom Classifiers](#custom-classifier-csv)
 
 ## Writing Grok Custom Classifiers<a name="custom-classifier-grok"></a>
 
@@ -38,7 +39,7 @@ For example, to cast a `num` field to an `int` data type, you can use this patte
 %{NUMBER:num:int}
 ```
 
-Patterns can be composed of other patterns\. For example, you can have a pattern for a `SYSLOG` time stamp that is defined by patterns for month, day of the month, and time \(for example, `Feb 1 06:25:43`\)\. For this data, you might define the following pattern:
+Patterns can be composed of other patterns\. For example, you can have a pattern for a `SYSLOG` timestamp that is defined by patterns for month, day of the month, and time \(for example, `Feb 1 06:25:43`\)\. For this data, you might define the following pattern:
 
 ```
 SYSLOGTIMESTAMP %{MONTH} +%{MONTHDAY} %{TIME}
@@ -82,7 +83,7 @@ AWS Glue keeps track of the creation time, last update time, and version of your
 
 AWS Glue provides many common patterns that you can use to build a custom classifier\. You add a named pattern to the `grok pattern` in a classifier definition\.
 
-The following list consists of a line for each pattern\. In each line, the pattern name is followed its definition\.  [Regular expression \(regex\)](http://en.wikipedia.org/wiki/Regular_expression) syntax is used in defining the pattern\.
+The following list consists of a line for each pattern\. In each line, the pattern name is followed its definition\. [Regular expression \(regex\)](http://en.wikipedia.org/wiki/Regular_expression) syntax is used in defining the pattern\.
 
 ```
 #AWS Glue Built-in patterns
@@ -196,7 +197,7 @@ The following list consists of a line for each pattern\. In each line, the patte
 
 ## Writing XML Custom Classifiers<a name="custom-classifier-xml"></a>
 
-XML \(Extensible Markup Language\) defines the structure of a document with the use of tags in the file\. With an XML custom classifier, you can specify the tag name used to define a row\.
+XML defines the structure of a document with the use of tags in the file\. With an XML custom classifier, you can specify the tag name used to define a row\.
 
 ### Custom Classifier Values in AWS Glue<a name="classifier-values-xml"></a>
 
@@ -242,7 +243,7 @@ For example, suppose that you have the following XML file\. To create an AWS Glu
 
 ## Writing JSON Custom Classifiers<a name="custom-classifier-json"></a>
 
-JSON \(JavaScript Object Notation\) is a data\-interchange format\. It defines data structures with name\-value pairs or an ordered list of values\. With a JSON custom classifier, you can specify the JSON path to a data structure that is used to define the schema for your table\.
+JSON is a data\-interchange format\. It defines data structures with name\-value pairs or an ordered list of values\. With a JSON custom classifier, you can specify the JSON path to a data structure that is used to define the schema for your table\.
 
 ### Custom Classifier Values in AWS Glue<a name="classifier-values-json"></a>
 
@@ -505,3 +506,29 @@ Listing the first few lines of data in the table shows that it is based on the d
 {"record": "Alaska"}
 {"record": "আলাস্কা"}
 ```
+
+## Writing CSV Custom Classifiers<a name="custom-classifier-csv"></a>
+
+You can use a custom CSV classifier to infer the schema of various types of CSV data\. The custom attributes that you can provide for your classifier include delimiters, options about the header, and whether to perform certain validations on the data\.
+
+### Custom Classifier Values in AWS Glue<a name="classifier-values-csv"></a>
+
+When you define a CSV classifier, you provide the following values to AWS Glue to create the classifier\. The classification field of this classifier is set to `csv`\.
+
+**Name**  
+Name of the classifier\.
+
+**Column delimiter**  
+A custom symbol to denote what separates each column entry in the row\.
+
+**Quote symbol**  
+A custom symbol to denote what combines content into a single column value\. Must be different from the column delimiter\.
+
+**Column headings**  
+Indicates the behavior for how column headings should be detected in the CSV file\. If your custom CSV file has column headings, enter a comma\-delimited list of the column headings\.
+
+**Processing options: Allow files with single column**  
+Enables the processing of files that contain only one column\.
+
+**Processing options: Trim white space before identifying column values**  
+Specifies whether to trim values before identifying the type of column values\.

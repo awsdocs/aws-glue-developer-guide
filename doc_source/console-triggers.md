@@ -7,6 +7,9 @@ The **Triggers** list displays properties for each trigger:
 **Trigger name**  
 The unique name you gave the trigger when you created it\.
 
+**Tags**  
+Tag your trigger with a **Tag key** and optional **Tag value**\. Once created, tag keys are read\-only\. Use tags on some resources to help you organize and identify them\. For more information, see [AWS Tags in AWS Glue](monitor-tags.md)\. 
+
 **Trigger type**  
 Indicates whether the trigger is time\-based \(**Schedule**\), event\-based \(**Job events**\), or started by you \(**On\-demand**\)\.
 

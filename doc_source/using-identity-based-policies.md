@@ -75,9 +75,38 @@ To deny access to a table, requires that you create a policy to deny a user acce
 
 For more policy examples, see [Identity\-Based Policy Examples](glue-policy-examples-iam.md)\.
 
-## Resource\-Level Permissions Only Applies To Data Catalog Objects<a name="glue-identity-based-policy-limitations"></a>
+## Identity\-Based Policies \(IAM Policies\) with Tags<a name="glue-identity-based-policy-tags"></a>
 
-Because you can only define fine\-grained control for *catalog* objects in the Data Catalog, you must write your client's IAM policy so that API operations that allow ARNs for the `Resource` statement are not mixed with API operations that do not allow ARNs\. For example, the following IAM policy allows API operations for `GetJob` and `GetCrawler` and defines the `Resource` as `*` because AWS Glue does not allow ARNs for crawlers and jobs\. Because ARNs are allowed for *catalog* API operations such as `GetDatabase` and `GetTable`, ARNs can be specified in the second half of the policy\.
+You can also control access to certain types of AWS Glue resources using AWS tags\. For more information about tags in AWS Glue, see [AWS Tags](monitor-tags.md)\. 
+
+ You can use the `Condition` element along with the `glue:resourceTag` context key in an IAM user policy to allow or deny access based on keys associated with crawlers, jobs, triggers, and development endpoints\. For example:
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+         "Effect": "Allow",
+         "Action": "glue:*",
+         "Resource": "*",
+         "Condition": {
+             "StringEquals": {
+                "glue:resourceTag/Name": "Tom"
+              }
+          }
+         }
+    ]
+}
+```
+
+**Important**  
+The condition context keys apply only to those AWS Glue API actions on crawlers, jobs, triggers, and development endpoints\. For more information about which APIs are affected, see [AWS Glue API Permissions: Actions and Resources Reference](api-permissions-reference.md)\.
+
+For information about how to control access using tags, see [AWS Glue Identity\-Based \(IAM\) Access\-Control Policy With Tags Examples](glue-policy-examples-iam-tags.md)\.
+
+## Resource\-Level Permissions Only Applies To Specific AWS Glue Objects<a name="glue-identity-based-policy-limitations"></a>
+
+Because you can only define fine\-grained control for specific objects in AWS Glue, you must write your client's IAM policy so that API operations that allow ARNs for the `Resource` statement are not mixed with API operations that do not allow ARNs\. For example, the following IAM policy allows API operations for `GetClassifier` and `GetJobRun` and defines the `Resource` as `*` because AWS Glue does not allow ARNs for classifiers and job runs\. Because ARNs are allowed for specific API operations such as `GetDatabase` and `GetTable`, ARNs can be specified in the second half of the policy\.
 
 ```
 {
@@ -86,8 +115,8 @@ Because you can only define fine\-grained control for *catalog* objects in the D
         {
             "Effect": "Allow",
             "Action": [
-                "glue:GetJob*",
-                "glue:GetCrawler*"
+                "glue:GetClassifier*",
+                "glue:GetJobRun*"
             ],
             "Resource": "*"   
         },
@@ -107,7 +136,7 @@ Because you can only define fine\-grained control for *catalog* objects in the D
 }
 ```
 
-For a list of AWS Glue catalog objects that allow ARNs, see [Data Catalog ARNs](glue-specifying-resource-arns.md#data-catalog-resource-arns) 
+For a list of AWS Glue objects that allow ARNs, see [Resource ARNs](glue-specifying-resource-arns.md) 
 
 ## Permissions Required to Use the AWS Glue Console<a name="console-permissions"></a>
 

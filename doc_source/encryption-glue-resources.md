@@ -7,7 +7,7 @@ With AWS Glue, you can encrypt data using keys that you manage with AWS Key Mana
 In AWS Glue, you control encryption settings in the following places:
 + The settings of your Data Catalog\.
 + The security configurations that you create\.
-+ The server\-side encryption \(SSE\-S3\) setting that is passed as a parameter to your AWS Glue ETL \(extract, transform, and load\) job\.
++ The server\-side encryption setting \(SSE\-S3 or SSE\-KMS\) that is passed as a parameter to your AWS Glue ETL \(extract, transform, and load\) job\.
 
 For more information about how to set up encryption, see [Setting Up Encryption in AWS Glue](set-up-encryption.md)\. 
 

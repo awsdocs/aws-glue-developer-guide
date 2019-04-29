@@ -6,6 +6,8 @@ The Common Data Types describes miscellaneous common data types in AWS Glue\.
 
 The `Tag` object represents a label that you can assign to an AWS resource\. Each tag consists of a key and an optional value, both of which you define\.
 
+For more information about tags, and controlling access to resources in AWS Glue, see [AWS Tags in AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) and [Specifying AWS Glue Resource ARNs](https://docs.aws.amazon.com/glue/latest/dg/glue-specifying-resource-arns.html) in the developer guide\.
+
 **Fields**
 + `key` – UTF\-8 string, not less than 1 or more than 128 bytes long\.
 
@@ -55,7 +57,7 @@ Defines a property predicate\.
 
 ## ResourceUri Structure<a name="aws-glue-api-common-ResourceUri"></a>
 
-URIs for function resources\.
+The URIs for function resources\.
 
 **Fields**
 + `ResourceType` – UTF\-8 string \(valid values: `JAR` \| `FILE` \| `ARCHIVE`\)\.
@@ -77,4 +79,5 @@ The API uses the following regular expressions to define what is valid content f
 + Version string pattern – "`^[a-zA-Z0-9-_]+$`"
 + Log group string pattern – "`[\.\-_/#A-Za-z0-9]+`"
 + Log\-stream string pattern – "`[^:*]*`"
-+ Custom string pattern \#10 – "`arn:aws:kms:.*`"
++ Custom string pattern \#10 – "`[^\r\n]`"
++ Custom string pattern \#11 – "`arn:aws:kms:.*`"

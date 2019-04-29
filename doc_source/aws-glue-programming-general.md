@@ -10,3 +10,4 @@ The following sections describe techniques and values that apply generally to AW
 + [Reading Input Files in Larger Groups](grouping-input-files.md)
 + [Reading from JDBC Tables in Parallel](run-jdbc-parallel-read-job.md)
 + [Moving Data to and from Amazon Redshift](aws-glue-programming-etl-redshift.md)
++ [AWS Glue Data Catalog Support for Spark SQL Jobs](aws-glue-programming-etl-glue-data-catalog-hive.md)

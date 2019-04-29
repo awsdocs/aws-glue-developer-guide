@@ -7,6 +7,7 @@ In AWS Glue, access to resources can be controlled with an IAM policy\. In a pol
 + [Amazon Resource Names \(ARNs\) for Non\-Catalog Objects](#non-catalog-resource-arns)
 + [Access Control for AWS Glue Non\-Catalog Singular API Operations](#non-catalog-singular-apis)
 + [Access\-Control for AWS Glue Non\-Catalog API Operations That Retrieve Multiple Items](#non-catalog-plural-apis)
++ [Access\-Control for AWS Glue Non\-Catalog Batch Get API Operations](#non-catalog-batch-get-apis)
 
 ## Data Catalog Amazon Resource Names \(ARNs\)<a name="data-catalog-resource-arns"></a>
 
@@ -24,7 +25,7 @@ Each AWS account has a single Data Catalog in an AWS Region with the 12\-digit a
 | Catalog |  `arn:aws:glue:region:account-id:catalog` For example: `arn:aws:glue:us-east-1:123456789012:catalog`  | 
 | Database |  `arn:aws:glue:region:account-id:database/database name` For example: `arn:aws:glue:us-east-1:123456789012:database/db1`  | 
 | Table |  `arn:aws:glue:region:account-id:table/database name/table name` For example: `arn:aws:glue:us-east-1:123456789012:table/db1/tbl1`  | 
-| User\-defined function |  `arn:aws:glue:region:account-id:userDefinedFunction/database name/user-defined function name` For example: `arn:aws:glue:us-east-1:123456789012:userdefinedfunction/db1/func1`  | 
+| User\-defined function |  `arn:aws:glue:region:account-id:userDefinedFunction/database name/user-defined function name` For example: `arn:aws:glue:us-east-1:123456789012:userDefinedFunction/db1/func1`  | 
 | Connection |  `arn:aws:glue:region:account-id:connection/connection name` For example: `arn:aws:glue:us-east-1:123456789012:connection/connection1`  | 
 
 To enable fine\-grained access control, you can use these ARNs in your IAM policies and resource policies to grant and deny access to specific resources\. Wildcards are allowed in the policies, for example, the following ARN matches all tables in database `default`\.
@@ -61,7 +62,7 @@ In addition to permission on the resource and all its ancestors, all delete oper
    ],
    "Resource": [
        "arn:aws:glue:us-east-1:123456789012:table/PrivateDatabase/*",
-       "arn:aws:glue:us-east-1:123456789012:userdefinedfunction/PrivateDatabase/*",
+       "arn:aws:glue:us-east-1:123456789012:userDefinedFunction/PrivateDatabase/*",
        "arn:aws:glue:us-east-1:123456789012:database/PrivateDatabase",
        "arn:aws:glue:us-east-1:123456789012:catalog"
    ]
@@ -82,6 +83,9 @@ Some AWS Glue resources allow resource\-level permissions to control access usin
 
 | **Resource Type**  |  **ARN Format**  | 
 | --- | --- | 
+| Crawler |  `arn:aws:glue:region:account-id:crawler/crawler-name` For example: `arn:aws:glue:us-east-1:123456789012:crawler/mycrawler`  | 
+| Job |  `arn:aws:glue:region:account-id:job/job-name` For example: `arn:aws:glue:us-east-1:123456789012:job/testjob`  | 
+| Trigger |  `arn:aws:glue:region:account-id:trigger/trigger-name` For example: `arn:aws:glue:us-east-1:123456789012:trigger/sampletrigger`  | 
 | Development endpoint |  `arn:aws:glue:region:account-id:devEndpoint/development-endpoint-name` For example: `arn:aws:glue:us-east-1:123456789012:devEndpoint/temporarydevendpoint`  | 
 
 ## Access Control for AWS Glue Non\-Catalog Singular API Operations<a name="non-catalog-singular-apis"></a>
@@ -143,7 +147,7 @@ You can combine the two policies as in the following example\. Although you migh
 
 Some AWS Glue API operations retrieve multiple items \(such as multiple development endpoints\); for example, `GetDevEndpoints`\. For this operation, you can specify only a wildcard \(\*\) resource, not specific ARNs\.
 
-For example, to allow `GetDevEndpoints`, the following policy must scope the resource to the wildcard \(\*\) because `GetDevEndpoints` is a plural API operation\. The singular operations \(`GetDevEndpoint`, `CreateDevEndpoint`, and `DeleteDevendpoint`\) are also scoped to all \(\*\) resources in the example\.
+For example, to include `GetDevEndpoints` in the policy, the resource must scoped to the wildcard \(\*\)\. The singular operations \(`GetDevEndpoint`, `CreateDevEndpoint`, and `DeleteDevendpoint`\) are also scoped to all \(\*\) resources in the example\.
 
 ```
 {
@@ -160,3 +164,31 @@ For example, to allow `GetDevEndpoints`, the following policy must scope the res
             ]
 }
 ```
+
+## Access\-Control for AWS Glue Non\-Catalog Batch Get API Operations<a name="non-catalog-batch-get-apis"></a>
+
+Some AWS Glue API operations retrieve multiple items \(such as multiple development endpoints\); for example, `BatchGetDevEndpoints`\. For this operation, you can specify an ARN to limit the scope of resources that can be accessed\.
+
+For example, to allow access to a specific development endpoint, include `BatchGetDevEndpoints` in the policy with the its resource ARN\.
+
+```
+{
+            "Sid": "BatchGet API included",
+            "Effect": "Allow",
+            "Action": [
+                "glue:BatchGetDevEndpoints"
+            ],
+            "Resource": [
+                "arn:aws:glue:us-east-1:123456789012:devEndpoint/de1" 
+            ]
+}
+```
+
+With this policy, you can successfully access the development endpoint named `de1`\. However, if you try to access the development endpoint named `de2`, an error is returned\. For example:
+
+```
+An error occurred (AccessDeniedException) when calling the BatchGetDevEndpoints operation: No access to any requested resource.
+```
+
+**Important**  
+For alternative approaches to setting up IAM policies, such as using using `List` and `BatchGet` API operations, see [AWS Glue Identity\-Based \(IAM\) Access\-Control Policy With Tags Examples](glue-policy-examples-iam-tags.md)\. 

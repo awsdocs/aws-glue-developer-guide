@@ -42,7 +42,7 @@ The data structure used by the Data Catalog to encrypt the password as part of `
 
 When a `CreationConnection` request arrives containing a password, the Data Catalog first encrypts the password using your AWS KMS key\. It then encrypts the whole connection object again if catalog encryption is also enabled\.
 
-This encryption requires that you set AWS KMS key permissions to enable or restrict access on the password key according to your security requirements\. For example, you might want only admin users to have decrypt permission on the password key\.
+This encryption requires that you set AWS KMS key permissions to enable or restrict access on the password key according to your security requirements\. For example, you might want only administrators to have decrypt permission on the password key\.
 
 **Fields**
 + `ReturnConnectionPasswordEncrypted` – *Required:* Boolean\.
@@ -63,49 +63,49 @@ Specifies an encryption configuration\.
 **Fields**
 + `S3Encryption` – An array of [S3Encryption](#aws-glue-api-jobs-security-S3Encryption) objects\.
 
-  The encryption configuration for S3 data\.
+  The encryption configuration for Amazon Simple Storage Service \(Amazon S3\) data\.
 + `CloudWatchEncryption` – A [CloudWatchEncryption](#aws-glue-api-jobs-security-CloudWatchEncryption) object\.
 
-  The encryption configuration for CloudWatch\.
+  The encryption configuration for Amazon CloudWatch\.
 + `JobBookmarksEncryption` – A [JobBookmarksEncryption](#aws-glue-api-jobs-security-JobBookmarksEncryption) object\.
 
-  The encryption configuration for Job Bookmarks\.
+  The encryption configuration for job bookmarks\.
 
 ## S3Encryption Structure<a name="aws-glue-api-jobs-security-S3Encryption"></a>
 
-Specifies how S3 data should be encrypted\.
+Specifies how Amazon Simple Storage Service \(Amazon S3\) data should be encrypted\.
 
 **Fields**
 + `S3EncryptionMode` – UTF\-8 string \(valid values: `DISABLED` \| `SSE-KMS="SSEKMS"` \| `SSE-S3="SSES3"`\)\.
 
-  The encryption mode to use for S3 data\.
-+ `KmsKeyArn` – UTF\-8 string, matching the [Custom string pattern #10](aws-glue-api-common.md#regex_10)\.
+  The encryption mode to use for Amazon S3 data\.
++ `KmsKeyArn` – UTF\-8 string, matching the [Custom string pattern #11](aws-glue-api-common.md#regex_11)\.
 
-  The AWS ARN of the KMS key to be used to encrypt the data\.
+  The Amazon Resource Name \(ARN\) of the KMS key to be used to encrypt the data\.
 
 ## CloudWatchEncryption Structure<a name="aws-glue-api-jobs-security-CloudWatchEncryption"></a>
 
-Specifies how CloudWatch data should be encrypted\.
+Specifies how Amazon CloudWatch data should be encrypted\.
 
 **Fields**
 + `CloudWatchEncryptionMode` – UTF\-8 string \(valid values: `DISABLED` \| `SSE-KMS="SSEKMS"`\)\.
 
   The encryption mode to use for CloudWatch data\.
-+ `KmsKeyArn` – UTF\-8 string, matching the [Custom string pattern #10](aws-glue-api-common.md#regex_10)\.
++ `KmsKeyArn` – UTF\-8 string, matching the [Custom string pattern #11](aws-glue-api-common.md#regex_11)\.
 
-  The AWS ARN of the KMS key to be used to encrypt the data\.
+  The Amazon Resource Name \(ARN\) of the KMS key to be used to encrypt the data\.
 
 ## JobBookmarksEncryption Structure<a name="aws-glue-api-jobs-security-JobBookmarksEncryption"></a>
 
-Specifies how Job bookmark data should be encrypted\.
+Specifies how job bookmark data should be encrypted\.
 
 **Fields**
 + `JobBookmarksEncryptionMode` – UTF\-8 string \(valid values: `DISABLED` \| `CSE-KMS="CSEKMS"`\)\.
 
-  The encryption mode to use for Job bookmarks data\.
-+ `KmsKeyArn` – UTF\-8 string, matching the [Custom string pattern #10](aws-glue-api-common.md#regex_10)\.
+  The encryption mode to use for job bookmarks data\.
++ `KmsKeyArn` – UTF\-8 string, matching the [Custom string pattern #11](aws-glue-api-common.md#regex_11)\.
 
-  The AWS ARN of the KMS key to be used to encrypt the data\.
+  The Amazon Resource Name \(ARN\) of the KMS key to be used to encrypt the data\.
 
 ## SecurityConfiguration Structure<a name="aws-glue-api-jobs-security-SecurityConfiguration"></a>
 
@@ -140,7 +140,7 @@ Retrieves the security configuration for a specified catalog\.
 **Request**
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  The ID of the Data Catalog for which to retrieve the security configuration\. If none is provided, the AWS account ID is used by default\.
+  The ID of the Data Catalog to retrieve the security configuration for\. If none is provided, the AWS account ID is used by default\.
 
 **Response**
 + `DataCatalogEncryptionSettings` – A [DataCatalogEncryptionSettings](#aws-glue-api-jobs-security-DataCatalogEncryptionSettings) object\.
@@ -159,7 +159,7 @@ Sets the security configuration for a specified catalog\. After the configuratio
 **Request**
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  The ID of the Data Catalog for which to set the security configuration\. If none is provided, the AWS account ID is used by default\.
+  The ID of the Data Catalog to set the security configuration for\. If none is provided, the AWS account ID is used by default\.
 + `DataCatalogEncryptionSettings` – *Required:* A [DataCatalogEncryptionSettings](#aws-glue-api-jobs-security-DataCatalogEncryptionSettings) object\.
 
   The security configuration to set\.
@@ -302,7 +302,7 @@ Retrieves a specified security configuration\.
 **Response**
 + `SecurityConfiguration` – A [SecurityConfiguration](#aws-glue-api-jobs-security-SecurityConfiguration) object\.
 
-  The requested security configuration
+  The requested security configuration\.
 
 **Errors**
 + `EntityNotFoundException`

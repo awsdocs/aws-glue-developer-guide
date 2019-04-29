@@ -37,14 +37,14 @@ Defines a connection to a data source\.
   + `USER_NAME` \- The name under which to log in to the database\. The value string for `USER_NAME` is "`USERNAME`"\.
   + `PASSWORD` \- A password, if one is used, for the user name\.
   + `ENCRYPTED_PASSWORD` \- When you enable connection password protection by setting `ConnectionPasswordEncryption` in the Data Catalog encryption settings, this field stores the encrypted password\.
-  + `JDBC_DRIVER_JAR_URI` \- The Amazon S3 path of the JAR file that contains the JDBC driver to use\.
+  + `JDBC_DRIVER_JAR_URI` \- The Amazon Simple Storage Service \(Amazon S3\) path of the JAR file that contains the JDBC driver to use\.
   + `JDBC_DRIVER_CLASS_NAME` \- The class name of the JDBC driver to use\.
   + `JDBC_ENGINE` \- The name of the JDBC engine to use\.
   + `JDBC_ENGINE_VERSION` \- The version of the JDBC engine to use\.
-  + `CONFIG_FILES` \- \(Reserved for future use\)\.
+  + `CONFIG_FILES` \- \(Reserved for future use\.\)
   + `INSTANCE_ID` \- The instance ID to use\.
   + `JDBC_CONNECTION_URL` \- The URL for the JDBC connection\.
-  + `JDBC_ENFORCE_SSL` \- A Boolean string \(true, false\) specifying whether Secure Sockets Layer \(SSL\) with hostname matching will be enforced for the JDBC connection on the client\. The default is false\.
+  + `JDBC_ENFORCE_SSL` \- A Boolean string \(true, false\) specifying whether Secure Sockets Layer \(SSL\) with hostname matching is enforced for the JDBC connection on the client\. The default is false\.
 + `PhysicalConnectionRequirements` – A [PhysicalConnectionRequirements](#aws-glue-api-catalog-connections-PhysicalConnectionRequirements) object\.
 
   A map of physical connection requirements, such as virtual private cloud \(VPC\) and `SecurityGroup`, that are needed to make this connection successfully\.
@@ -175,7 +175,7 @@ Retrieves a connection definition from the Data Catalog\.
   The name of the connection definition to retrieve\.
 + `HidePassword` – Boolean\.
 
-  Allows you to retrieve the connection metadata without returning the password\. For instance, the AWS Glue console uses this flag to retrieve the connection, and does not display the password\. Set this parameter when the caller might not have permission to use the AWS KMS key to decrypt the password, but does have permission to access the rest of the connection properties\.
+  Allows you to retrieve the connection metadata without returning the password\. For instance, the AWS Glue console uses this flag to retrieve the connection, and does not display the password\. Set this parameter when the caller might not have permission to use the AWS KMS key to decrypt the password, but it does have permission to access the rest of the connection properties\.
 
 **Response**
 + `Connection` – A [Connection](#aws-glue-api-catalog-connections-Connection) object\.
@@ -198,10 +198,10 @@ Retrieves a list of connection definitions from the Data Catalog\.
   The ID of the Data Catalog in which the connections reside\. If none is provided, the AWS account ID is used by default\.
 + `Filter` – A [GetConnectionsFilter](#aws-glue-api-catalog-connections-GetConnectionsFilter) object\.
 
-  A filter that controls which connections will be returned\.
+  A filter that controls which connections are returned\.
 + `HidePassword` – Boolean\.
 
-  Allows you to retrieve the connection metadata without returning the password\. For instance, the AWS Glue console uses this flag to retrieve the connection, and does not display the password\. Set this parameter when the caller might not have permission to use the AWS KMS key to decrypt the password, but does have permission to access the rest of the connection properties\.
+  Allows you to retrieve the connection metadata without returning the password\. For instance, the AWS Glue console uses this flag to retrieve the connection, and does not display the password\. Set this parameter when the caller might not have permission to use the AWS KMS key to decrypt the password, but it does have permission to access the rest of the connection properties\.
 + `NextToken` – UTF\-8 string\.
 
   A continuation token, if this is a continuation call\.

@@ -153,7 +153,7 @@ A job run encountered an invalid transition from source state to target state\.
 **Fields**
 + `jobRunId` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  The Id of the job run in question\.
+  The ID of the job run in question\.
 + `message` – UTF\-8 string\.
 
   A message describing the problem\.

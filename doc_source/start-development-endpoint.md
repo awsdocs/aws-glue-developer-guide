@@ -49,9 +49,6 @@ Make sure you set up your DNS environment for AWS Glue\. For more information, s
 
  With a development endpoint, you can create a notebook server to test your ETL scripts with Zeppelin notebooks\. To enable communication to your notebook, specify a security group with inbound rules for both HTTPS \(port 443\) and SSH \(port 22\)\. Ensure that the rule's source is either 0\.0\.0\.0/0 or the IP address of the machine that is connecting to the notebook\. 
 
-**Note**  
-When using a custom DNS, ensure that the custom DNS server is able to do forward and reverse resolution for the entire subnet CIDR where the notebook server is launched\.
-
 **To set up a security group**
 
 1. Sign in to the AWS Management Console and open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.

@@ -66,6 +66,19 @@ This value designates [Apache Parquet](https://parquet.apache.org/documentation/
 
 There are no `format_options` values for `format="parquet"`\. However, any options that are accepted by the underlying SparkSQL code can be passed to it by way of the `connection_options` map parameter\.
 
+## format="glueparquet"<a name="aws-glue-programming-etl-format-glue-parquet"></a>
+
+This value designates a custom Parquet writer type that is optimized for Dynamic Frames as the data format\. A precomputed schema is not required before writing\. As data comes in, `glueparquet` computes and modifies the schema dynamically\. 
+
+You can use the following `format_options` values with `format="glueparquet"`:
++ `compression`: Specifies the compression codec used when writing Parquet files\. The default value is `"snappy"`\.
++ `blockSize`: Specifies the size of a row group being buffered in memory\. The default value is `"128MB"`\.
++ `pageSize`: Specifies the size of the smallest unit that must be read fully to access a single record\. The default value is `"1MB"`\.
+
+ Limitations:
++ `glueparquet` supports only a schema shrinkage or expansion, but not a type change\.
++ `glueparquet` is not able to store a schema\-only file\.
+
 ## format="xml"<a name="aws-glue-programming-etl-format-xml"></a>
 
 This value designates XML as the data format, parsed through a fork of the [XML Data Source for Apache Spark](https://github.com/databricks/spark-xml) parser\.

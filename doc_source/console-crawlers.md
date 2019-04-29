@@ -10,6 +10,8 @@ A crawler accesses your data store, extracts metadata, and creates table definit
 **Note**  
 To get step\-by\-step guidance for adding a crawler, choose **Add crawler** under **Tutorials** in the navigation pane\. You can also use the **Add crawler** wizard to create and modify an IAM role that attaches a policy that includes permissions for your Amazon Simple Storage Service \(Amazon S3\) data stores\.
 
+   Optionally, you can tag your crawler with a **Tag key** and optional **Tag value**\. Once created, tag keys are read\-only\. Use tags on some resources to help you organize and identify them\. For more information, see [AWS Tags in AWS Glue](monitor-tags.md)\. 
+
    Optionally, you can add a security configuration to a crawler to specify at\-rest encryption options\. For more information, see [Encrypting Data Written by Crawlers, Jobs, and Development Endpoints](encryption-security-configuration.md)\.
 
 When a crawler runs, the provided IAM role must have permission to access the data store that is crawled\. For an Amazon S3 data store, you can use the AWS Glue console to create a policy or add a policy similar to the following: 

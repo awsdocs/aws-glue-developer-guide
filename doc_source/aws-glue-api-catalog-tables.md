@@ -21,31 +21,31 @@ Represents a collection of related data organized in columns and rows\.
 **Fields**
 + `Name` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  Name of the table\. For Hive compatibility, this must be entirely lowercase\.
+  The table name\. For Hive compatibility, this must be entirely lowercase\.
 + `DatabaseName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  Name of the metadata database where the table metadata resides\. For Hive compatibility, this must be all lowercase\.
+  The name of the database where the table metadata resides\. For Hive compatibility, this must be all lowercase\.
 + `Description` – Description string, not more than 2048 bytes long, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
 
-  Description of the table\.
+  A description of the table\.
 + `Owner` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  Owner of the table\.
+  The owner of the table\.
 + `CreateTime` – Timestamp\.
 
-  Time when the table definition was created in the Data Catalog\.
+  The time when the table definition was created in the Data Catalog\.
 + `UpdateTime` – Timestamp\.
 
-  Last time the table was updated\.
+  The last time that the table was updated\.
 + `LastAccessTime` – Timestamp\.
 
-  Last time the table was accessed\. This is usually taken from HDFS, and may not be reliable\.
+  The last time that the table was accessed\. This is usually taken from HDFS, and might not be reliable\.
 + `LastAnalyzedTime` – Timestamp\.
 
-  Last time column statistics were computed for this table\.
+  The last time that column statistics were computed for this table\.
 + `Retention` – Number \(integer\), not more than None\.
 
-  Retention time for this table\.
+  The retention time for this table\.
 + `StorageDescriptor` – A [StorageDescriptor](#aws-glue-api-catalog-tables-StorageDescriptor) object\.
 
   A storage descriptor containing information about the physical storage of this table\.
@@ -53,7 +53,7 @@ Represents a collection of related data organized in columns and rows\.
 
   A list of columns by which the table is partitioned\. Only primitive types are supported as partition keys\.
 
-  When creating a table used by Athena, and you do not specify any `partitionKeys`, you must at least set the value of `partitionKeys` to an empty list\. For example:
+  When you create a table used by Amazon Athena, and you do not specify any `partitionKeys`, you must at least set the value of `partitionKeys` to an empty list\. For example:
 
   `"PartitionKeys": []`
 + `ViewOriginalText` – UTF\-8 string, not more than 409600 bytes long\.
@@ -74,31 +74,31 @@ Represents a collection of related data organized in columns and rows\.
   These key\-value pairs define properties associated with the table\.
 + `CreatedBy` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  Person or entity who created the table\.
+  The person or entity who created the table\.
 
 ## TableInput Structure<a name="aws-glue-api-catalog-tables-TableInput"></a>
 
-Structure used to create or update the table\.
+A structure used to define a table\.
 
 **Fields**
 + `Name` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  Name of the table\. For Hive compatibility, this is folded to lowercase when it is stored\.
+  The table name\. For Hive compatibility, this is folded to lowercase when it is stored\.
 + `Description` – Description string, not more than 2048 bytes long, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
 
-  Description of the table\.
+  A description of the table\.
 + `Owner` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  Owner of the table\.
+  The table owner\.
 + `LastAccessTime` – Timestamp\.
 
-  Last time the table was accessed\.
+  The last time that the table was accessed\.
 + `LastAnalyzedTime` – Timestamp\.
 
-  Last time column statistics were computed for this table\.
+  The last time that column statistics were computed for this table\.
 + `Retention` – Number \(integer\), not more than None\.
 
-  Retention time for this table\.
+  The retention time for this table\.
 + `StorageDescriptor` – A [StorageDescriptor](#aws-glue-api-catalog-tables-StorageDescriptor) object\.
 
   A storage descriptor containing information about the physical storage of this table\.
@@ -106,7 +106,7 @@ Structure used to create or update the table\.
 
   A list of columns by which the table is partitioned\. Only primitive types are supported as partition keys\.
 
-  When creating a table used by Athena, and you do not specify any `partitionKeys`, you must at least set the value of `partitionKeys` to an empty list\. For example:
+  When you create a table used by Amazon Athena, and you do not specify any `partitionKeys`, you must at least set the value of `partitionKeys` to an empty list\. For example:
 
   `"PartitionKeys": []`
 + `ViewOriginalText` – UTF\-8 string, not more than 409600 bytes long\.
@@ -136,10 +136,10 @@ A column in a `Table`\.
   The name of the `Column`\.
 + `Type` – UTF\-8 string, not more than 131072 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  The datatype of data in the `Column`\.
+  The data type of the data in the `Column`\.
 + `Comment` – Comment string, not more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  Free\-form text comment\.
+  A free\-form text comment\.
 
 ## StorageDescriptor Structure<a name="aws-glue-api-catalog-tables-StorageDescriptor"></a>
 
@@ -151,7 +151,7 @@ Describes the physical storage of table data\.
   A list of the `Columns` in the table\.
 + `Location` – Location string, not more than 2056 bytes long, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
 
-  The physical location of the table\. By default this takes the form of the warehouse location, followed by the database location in the warehouse, followed by the table name\.
+  The physical location of the table\. By default, this takes the form of the warehouse location, followed by the database location in the warehouse, followed by the table name\.
 + `InputFormat` – Format string, not more than 128 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The input format: `SequenceFileInputFormat` \(binary\), or `TextInputFormat`, or a custom format\.
@@ -160,13 +160,13 @@ Describes the physical storage of table data\.
   The output format: `SequenceFileOutputFormat` \(binary\), or `IgnoreKeyTextOutputFormat`, or a custom format\.
 + `Compressed` – Boolean\.
 
-  True if the data in the table is compressed, or False if not\.
+  `True` if the data in the table is compressed, or `False` if not\.
 + `NumberOfBuckets` – Number \(integer\)\.
 
   Must be specified if the table contains any dimension columns\.
 + `SerdeInfo` – A [SerDeInfo](#aws-glue-api-catalog-tables-SerDeInfo) object\.
 
-  Serialization/deserialization \(SerDe\) information\.
+  The serialization/deserialization \(SerDe\) information\.
 + `BucketColumns` – An array of UTF\-8 strings\.
 
   A list of reducer grouping columns, clustering columns, and bucketing columns in the table\.
@@ -179,17 +179,17 @@ Describes the physical storage of table data\.
 
   Each value is a UTF\-8 string, not more than 512000 bytes long\.
 
-  User\-supplied properties in key\-value form\.
+  The user\-supplied properties in key\-value form\.
 + `SkewedInfo` – A [SkewedInfo](#aws-glue-api-catalog-tables-SkewedInfo) object\.
 
-  Information about values that appear very frequently in a column \(skewed values\)\.
+  The information about values that appear frequently in a column \(skewed values\)\.
 + `StoredAsSubDirectories` – Boolean\.
 
-  True if the table data is stored in subdirectories, or False if not\.
+  `True` if the table data is stored in subdirectories, or `False` if not\.
 
 ## SerDeInfo Structure<a name="aws-glue-api-catalog-tables-SerDeInfo"></a>
 
-Information about a serialization/deserialization program \(SerDe\) which serves as an extractor and loader\.
+Information about a serialization/deserialization program \(SerDe\) that serves as an extractor and loader\.
 
 **Fields**
 + `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
@@ -197,7 +197,7 @@ Information about a serialization/deserialization program \(SerDe\) which serves
   Name of the SerDe\.
 + `SerializationLibrary` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  Usually the class that implements the SerDe\. An example is: `org.apache.hadoop.hive.serde2.columnar.ColumnarSerDe`\.
+  Usually the class that implements the SerDe\. An example is `org.apache.hadoop.hive.serde2.columnar.ColumnarSerDe`\.
 + `Parameters` – A map array of key\-value pairs\.
 
   Each key is a Key string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
@@ -220,7 +220,7 @@ Specifies the sort order of a sorted column\.
 
 ## SkewedInfo Structure<a name="aws-glue-api-catalog-tables-SkewedInfo"></a>
 
-Specifies skewed values in a table\. Skewed are ones that occur with very high frequency\.
+Specifies skewed values in a table\. Skewed values are those that occur with very high frequency\.
 
 **Fields**
 + `SkewedColumnNames` – An array of UTF\-8 strings\.
@@ -244,7 +244,7 @@ Specifies a version of a table\.
 **Fields**
 + `Table` – A [Table](#aws-glue-api-catalog-tables-Table) object\.
 
-  The table in question
+  The table in question\.
 + `VersionId` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The ID value that identifies this table version\. A `VersionId` is a string representation of an integer\. Each version is incremented by 1\.
@@ -256,10 +256,10 @@ An error record for table operations\.
 **Fields**
 + `TableName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  Name of the table\. For Hive compatibility, this must be entirely lowercase\.
+  The name of the table\. For Hive compatibility, this must be entirely lowercase\.
 + `ErrorDetail` – An [ErrorDetail](aws-glue-api-common.md#aws-glue-api-common-ErrorDetail) object\.
 
-  Detail about the error\.
+  The details about the error\.
 
 ## TableVersionError Structure<a name="aws-glue-api-catalog-tables-TableVersionError"></a>
 
@@ -274,7 +274,7 @@ An error record for table\-version operations\.
   The ID value of the version in question\. A `VersionID` is a string representation of an integer\. Each version is incremented by 1\.
 + `ErrorDetail` – An [ErrorDetail](aws-glue-api-common.md#aws-glue-api-common-ErrorDetail) object\.
 
-  Detail about the error\.
+  The details about the error\.
 
 ## Operations<a name="aws-glue-api-catalog-tables-actions"></a>
 + [CreateTable Action \(Python: create\_table\)](#aws-glue-api-catalog-tables-CreateTable)
@@ -322,7 +322,7 @@ Updates a metadata table in the Data Catalog\.
 **Request**
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  The ID of the Data Catalog where the table resides\. If none is supplied, the AWS account ID is used by default\.
+  The ID of the Data Catalog where the table resides\. If none is provided, the AWS account ID is used by default\.
 + `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the catalog database in which the table resides\. For Hive compatibility, this name is entirely lowercase\.
@@ -331,7 +331,7 @@ Updates a metadata table in the Data Catalog\.
   An updated `TableInput` object to define the metadata table in the catalog\.
 + `SkipArchive` – Boolean\.
 
-  By default, `UpdateTable` always creates an archived version of the table before updating it\. If `skipArchive` is set to true, however, `UpdateTable` does not create the archived version\.
+  By default, `UpdateTable` always creates an archived version of the table before updating it\. However, if `skipArchive` is set to true, `UpdateTable` does not create the archived version\.
 
 **Response**
 + *No Response parameters\.*
@@ -350,13 +350,13 @@ Updates a metadata table in the Data Catalog\.
 Removes a table definition from the Data Catalog\.
 
 **Note**  
-After completing this operation, you will no longer have access to the table versions and partitions that belong to the deleted table\. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service\.  
-To ensure immediate deletion of all related resources, before calling `DeleteTable`, use `DeleteTableVersion` or `BatchDeleteTableVersion`, and `DeletePartition` or `BatchDeletePartition`, to delete any resources that belong to the table\.
+After completing this operation, you no longer have access to the table versions and partitions that belong to the deleted table\. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service\.  
+To ensure the immediate deletion of all related resources, before calling `DeleteTable`, use `DeleteTableVersion` or `BatchDeleteTableVersion`, and `DeletePartition` or `BatchDeletePartition`, to delete any resources that belong to the table\.
 
 **Request**
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  The ID of the Data Catalog where the table resides\. If none is supplied, the AWS account ID is used by default\.
+  The ID of the Data Catalog where the table resides\. If none is provided, the AWS account ID is used by default\.
 + `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the catalog database in which the table resides\. For Hive compatibility, this name is entirely lowercase\.
@@ -378,16 +378,16 @@ To ensure immediate deletion of all related resources, before calling `DeleteTab
 Deletes multiple tables at once\.
 
 **Note**  
-After completing this operation, you will no longer have access to the table versions and partitions that belong to the deleted table\. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service\.  
-To ensure immediate deletion of all related resources, before calling `BatchDeleteTable`, use `DeleteTableVersion` or `BatchDeleteTableVersion`, and `DeletePartition` or `BatchDeletePartition`, to delete any resources that belong to the table\.
+After completing this operation, you no longer have access to the table versions and partitions that belong to the deleted table\. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service\.  
+To ensure the immediate deletion of all related resources, before calling `BatchDeleteTable`, use `DeleteTableVersion` or `BatchDeleteTableVersion`, and `DeletePartition` or `BatchDeletePartition`, to delete any resources that belong to the table\.
 
 **Request**
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  The ID of the Data Catalog where the table resides\. If none is supplied, the AWS account ID is used by default\.
+  The ID of the Data Catalog where the table resides\. If none is provided, the AWS account ID is used by default\.
 + `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  The name of the catalog database where the tables to delete reside\. For Hive compatibility, this name is entirely lowercase\.
+  The name of the catalog database in which the tables to delete reside\. For Hive compatibility, this name is entirely lowercase\.
 + `TablesToDelete` – *Required:* An array of UTF\-8 strings, not more than 100 strings\.
 
   A list of the table to delete\.
@@ -410,7 +410,7 @@ Retrieves the `Table` definition in a Data Catalog for a specified table\.
 **Request**
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  The ID of the Data Catalog where the table resides\. If none is supplied, the AWS account ID is used by default\.
+  The ID of the Data Catalog where the table resides\. If none is provided, the AWS account ID is used by default\.
 + `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the database in the catalog in which the table resides\. For Hive compatibility, this name is entirely lowercase\.
@@ -437,7 +437,7 @@ Retrieves the definitions of some or all of the tables in a given `Database`\.
 **Request**
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  The ID of the Data Catalog where the tables reside\. If none is supplied, the AWS account ID is used by default\.
+  The ID of the Data Catalog where the tables reside\. If none is provided, the AWS account ID is used by default\.
 + `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The database in the catalog whose tables to list\. For Hive compatibility, this name is entirely lowercase\.
@@ -473,7 +473,7 @@ Retrieves a specified version of a table\.
 **Request**
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  The ID of the Data Catalog where the tables reside\. If none is supplied, the AWS account ID is used by default\.
+  The ID of the Data Catalog where the tables reside\. If none is provided, the AWS account ID is used by default\.
 + `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The database in the catalog in which the table resides\. For Hive compatibility, this name is entirely lowercase\.
@@ -503,7 +503,7 @@ Retrieves a list of strings that identify available versions of a specified tabl
 **Request**
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  The ID of the Data Catalog where the tables reside\. If none is supplied, the AWS account ID is used by default\.
+  The ID of the Data Catalog where the tables reside\. If none is provided, the AWS account ID is used by default\.
 + `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The database in the catalog in which the table resides\. For Hive compatibility, this name is entirely lowercase\.
@@ -539,7 +539,7 @@ Deletes a specified version of a table\.
 **Request**
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  The ID of the Data Catalog where the tables reside\. If none is supplied, the AWS account ID is used by default\.
+  The ID of the Data Catalog where the tables reside\. If none is provided, the AWS account ID is used by default\.
 + `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The database in the catalog in which the table resides\. For Hive compatibility, this name is entirely lowercase\.
@@ -566,7 +566,7 @@ Deletes a specified batch of versions of a table\.
 **Request**
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  The ID of the Data Catalog where the tables reside\. If none is supplied, the AWS account ID is used by default\.
+  The ID of the Data Catalog where the tables reside\. If none is provided, the AWS account ID is used by default\.
 + `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The database in the catalog in which the table resides\. For Hive compatibility, this name is entirely lowercase\.

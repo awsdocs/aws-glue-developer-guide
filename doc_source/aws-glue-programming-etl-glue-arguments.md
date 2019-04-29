@@ -24,6 +24,7 @@ There are a number of argument names that are recognized and used by AWS Glue, t
   '--TempDir': 's3-path-to-directory'
   ```
 + `--enable-metrics`  —  Enables the collection of metrics for job profiling for this job run\. These metrics are available on the AWS Glue console and CloudWatch console\. To enable metrics, only specify the key, no value is needed\.
++ `--enable-glue-datacatalog`  —  Enables you to use the AWS Glue Data Catalog as a Spark Hive metastore\.
 
 For example, the following is the syntax for running a job with a `--`argument and a special parameter:
 

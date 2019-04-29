@@ -50,6 +50,13 @@ Follow these steps to set up your AWS Glue environment to use security configura
 
 1. Ensure that the AWS KMS key is `ENABLED` before it is used\.
 
+1. Ensure that the AWS Glue job includes the following code for the security setting to take effect:
+
+   ```
+               job = Job(glueContext) 
+               job.init(args['JOB_NAME'], args)
+   ```
+
 ## Creating a Route to AWS KMS for VPC Jobs and Crawlers<a name="encryption-kms-vpc-endpoint"></a>
 
 You can connect directly to AWS KMS through a private endpoint in your virtual private cloud \(VPC\) instead of connecting over the internet\. When you use a VPC endpoint, communication between your VPC and AWS KMS is conducted entirely within the AWS network\.

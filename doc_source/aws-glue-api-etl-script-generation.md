@@ -20,7 +20,7 @@ Represents a node in a directed acyclic graph \(DAG\)
   A node identifier that is unique within the node's graph\.
 + `NodeType` – *Required:* UTF\-8 string\.
 
-  The type of node this is\.
+  The type of node that this is\.
 + `Args` – *Required:* An array of [CodeGenNodeArg](#aws-glue-api-etl-script-generation-CodeGenNodeArg) objects, not more than 50 structures\.
 
   Properties of the node, in the form of name\-value pairs\.
@@ -68,14 +68,14 @@ The location of resources\.
   A JDBC location\.
 + `S3` – An array of [CodeGenNodeArg](#aws-glue-api-etl-script-generation-CodeGenNodeArg) objects, not more than 50 structures\.
 
-  An Amazon S3 location\.
+  An Amazon Simple Storage Service \(Amazon S3\) location\.
 + `DynamoDB` – An array of [CodeGenNodeArg](#aws-glue-api-etl-script-generation-CodeGenNodeArg) objects, not more than 50 structures\.
 
-  A DynamoDB Table location\.
+  An Amazon DynamoDB table location\.
 
 ## CatalogEntry Structure<a name="aws-glue-api-etl-script-generation-CatalogEntry"></a>
 
-Specifies a table definition in the Data Catalog\.
+Specifies a table definition in the AWS Glue Data Catalog\.
 
 **Fields**
 + `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
@@ -207,7 +207,7 @@ Gets code to perform a specified mapping\.
   The target tables\.
 + `Location` – A [Location](#aws-glue-api-etl-script-generation-Location) object\.
 
-  Parameters for the mapping\.
+  The parameters for the mapping\.
 + `Language` – UTF\-8 string \(valid values: `PYTHON` \| `SCALA`\)\.
 
   The programming language of the code to perform the mapping\.
@@ -218,7 +218,7 @@ Gets code to perform a specified mapping\.
   A Python script to perform the mapping\.
 + `ScalaCode` – UTF\-8 string\.
 
-  Scala code to perform the mapping\.
+  The Scala code to perform the mapping\.
 
 **Errors**
 + `InvalidInputException`

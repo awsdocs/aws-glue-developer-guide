@@ -32,7 +32,7 @@ Represents the equivalent of a Hive user\-defined function \(`UDF`\) definition\
 
 ## UserDefinedFunctionInput Structure<a name="aws-glue-api-catalog-functions-UserDefinedFunctionInput"></a>
 
-A structure used to create or updata a user\-defined function\.
+A structure used to create or update a user\-defined function\.
 
 **Fields**
 + `FunctionName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
@@ -65,7 +65,7 @@ Creates a new function definition in the Data Catalog\.
 **Request**
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  The ID of the Data Catalog in which to create the function\. If none is supplied, the AWS account ID is used by default\.
+  The ID of the Data Catalog in which to create the function\. If none is provided, the AWS account ID is used by default\.
 + `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the catalog database in which to create the function\.
@@ -92,7 +92,7 @@ Updates an existing function definition in the Data Catalog\.
 **Request**
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  The ID of the Data Catalog where the function to be updated is located\. If none is supplied, the AWS account ID is used by default\.
+  The ID of the Data Catalog where the function to be updated is located\. If none is provided, the AWS account ID is used by default\.
 + `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the catalog database where the function to be updated is located\.
@@ -101,7 +101,7 @@ Updates an existing function definition in the Data Catalog\.
   The name of the function\.
 + `FunctionInput` – *Required:* An [UserDefinedFunctionInput](#aws-glue-api-catalog-functions-UserDefinedFunctionInput) object\.
 
-  A `FunctionInput` object that re\-defines the function in the Data Catalog\.
+  A `FunctionInput` object that redefines the function in the Data Catalog\.
 
 **Response**
 + *No Response parameters\.*
@@ -144,7 +144,7 @@ Retrieves a specified function definition from the Data Catalog\.
 **Request**
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  The ID of the Data Catalog where the function to be retrieved is located\. If none is supplied, the AWS account ID is used by default\.
+  The ID of the Data Catalog where the function to be retrieved is located\. If none is provided, the AWS account ID is used by default\.
 + `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the catalog database where the function is located\.
@@ -166,12 +166,12 @@ Retrieves a specified function definition from the Data Catalog\.
 
 ## GetUserDefinedFunctions Action \(Python: get\_user\_defined\_functions\)<a name="aws-glue-api-catalog-functions-GetUserDefinedFunctions"></a>
 
-Retrieves a multiple function definitions from the Data Catalog\.
+Retrieves multiple function definitions from the Data Catalog\.
 
 **Request**
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  The ID of the Data Catalog where the functions to be retrieved are located\. If none is supplied, the AWS account ID is used by default\.
+  The ID of the Data Catalog where the functions to be retrieved are located\. If none is provided, the AWS account ID is used by default\.
 + `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the catalog database where the functions are located\.

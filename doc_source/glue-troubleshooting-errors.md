@@ -10,7 +10,6 @@ If you encounter errors in AWS Glue, use the following solutions to help you fin
 + [Error: Could Not Find S3 Endpoint or NAT Gateway for subnetId in VPC](#error-s3-subnet-vpc-NAT-configuration)
 + [Error: Inbound Rule in Security Group Required](#error-inbound-self-reference-rule)
 + [Error: Outbound Rule in Security Group Required](#error-outbound-self-reference-rule)
-+ [Error: Custom DNS Resolution Failures](#error-custom-dns)
 + [Error: Job Run Failed Because the Role Passed Should Be Given Assume Role Permissions for the AWS Glue Service](#error-assume-role-user-policy)
 + [Error: DescribeVpcEndpoints Action Is Unauthorized\. Unable to Validate VPC ID vpc\-id](#error-DescribeVpcEndpoints-permission)
 + [Error: DescribeRouteTables Action Is Unauthorized\. Unable to Validate Subnet Id: subnet\-id in VPC id: vpc\-id](#error-DescribeRouteTables-permission)
@@ -53,11 +52,6 @@ At least one security group must open all ingress ports\. To limit traffic, the 
 At least one security group must open all egress ports\. To limit traffic, the source security group in your outbound rule can be restricted to the same security group\.
 + For any connections that you use, check your security group for an outbound rule that is self\-referencing\. For more information, see [Setting Up Your Environment to Access Data Stores](start-connecting.md)\.
 + When you are using a development endpoint, check your security group for an outbound rule that is self\-referencing\. For more information, see [Setting Up Your Environment to Access Data Stores](start-connecting.md)\.
-
-## Error: Custom DNS Resolution Failures<a name="error-custom-dns"></a>
-
-When using a custom DNS for internet name resolution, both forward DNS lookup and reverse DNS lookup must be implemented\. Otherwise, you might receive errors similar to: *Reverse dns resolution of ip failure* or *Dns resolution of dns failed*\. If AWS Glue returns a message, you can view error messages or logs to help you learn more about the issue\. The following tasks describe general methods for troubleshooting\.
-+ A custom DNS configuration without reverse lookup can cause AWS Glue to fail\. Check your DNS configuration\. If you are using Route 53 or Microsoft Active Directory, make sure that there are forward and reverse lookups\. For more information, see [Setting Up DNS in Your VPC](set-up-vpc-dns.md)\.
 
 ## Error: Job Run Failed Because the Role Passed Should Be Given Assume Role Permissions for the AWS Glue Service<a name="error-assume-role-user-policy"></a>
 
@@ -176,7 +170,6 @@ If AWS Glue fails to successfully provision a development endpoint, it might be 
 + When you define a development endpoint, the VPC, subnet, and security groups are validated to confirm that they meet certain requirements\.
 + If you provided the optional SSH public key, check that it is a valid SSH public key\.
 + Check in the VPC console that your VPC uses a valid **DHCP option set**\. For more information, see [DHCP option sets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html)\. 
-+ If after a few minutes, the development endpoint **Provisioning status** changes to `FAILED`, and the failure reason is DNS related \(for example, `Reverse dns resolution of ip 10.5.237.213 failed`\), check your DNS setup\. For more information, see [Setting Up DNS in Your VPC](set-up-vpc-dns.md)\. 
 + If the cluster remains in the PROVISIONING state, contact AWS Support\.
 
 ## Error: Notebook Server CREATE\_FAILED<a name="error-notebook-server-ec2-instance-profile"></a>
