@@ -46,6 +46,8 @@ You can use the following `format_options` values with `format="grokLog"`:
 
 This value designates a [JSON](https://www.json.org/) \(JavaScript Object Notation\) data format\.
 
+**Currently, AWS Glue does not support `format_options` for `json` output\.**
+
 You can use the following `format_options` values with `format="json"`:
 + `jsonPath`: A [JsonPath](https://github.com/json-path/JsonPath) expression that identifies an object to be read into records\. This is particularly useful when a file contains records nested inside an outer array\. For example, the following JsonPath expression targets the `id` field of a JSON object:
 
