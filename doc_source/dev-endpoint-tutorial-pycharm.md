@@ -34,7 +34,7 @@ The tutorial assumes that you have already taken the steps outlined in [Tutorial
      persons_DyF.printSchema()
    
    if __name__ == "__main__":
-   main()
+      main()
    ```
 
 1. Download the AWS Glue Python library file, `PyGlue.zip`, from `https://s3.amazonaws.com/aws-glue-jes-prod-us-east-1-assets/etl/python/PyGlue.zip` to a convenient location on your local machine\.
