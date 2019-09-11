@@ -17,7 +17,7 @@ You use the AWS Glue console to define and orchestrate your ETL workflow\. The c
 
 The AWS Glue Data Catalog is your persistent metadata store\. It is a managed service that lets you store, annotate, and share metadata in the AWS Cloud in the same way you would in an Apache Hive metastore\.
 
-Each AWS account has one AWS Glue Data Catalog\. It provides a uniform repository where disparate systems can store and find metadata to keep track of data in data silos, and use that metadata to query and transform the data\.
+Each AWS account has one AWS Glue Data Catalog per AWS region\. It provides a uniform repository where disparate systems can store and find metadata to keep track of data in data silos, and use that metadata to query and transform the data\.
 
 You can use AWS Identity and Access Management \(IAM\) policies to control access to the data sources managed by the AWS Glue Data Catalog\. These policies allow different groups in your enterprise to safely publish data to the wider organization while protecting sensitive information\. IAM policies let you clearly and consistently define which users have access to which data, regardless of its location\.
 
