@@ -90,6 +90,12 @@ The following JDBC URL examples show the syntax for several database engines\.
   + `jdbc:sqlserver://server_name:port;database=db_name`
   + `jdbc:sqlserver://server_name:port;databaseName=db_name`
 
++ To connect to an Microsoft SQL Server data store with an `employee` database:
+
+   `jdbc:sqlserver://server_name\instance:1433;databaseName=employee` 
+
+  **Important** When connecting to a Microsoft SQL database, the port number for the server needs to be set to 0 in case the SQL server is running the SQL browser.
+
 **Username**  
 Provide a user name that has permission to access the JDBC data store\.
 
