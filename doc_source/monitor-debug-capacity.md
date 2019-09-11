@@ -43,7 +43,7 @@ Based on the results of the previous job run, you can increase the total number 
 
 ![\[Graph showing increasing the total number of allocated DPUs\]](http://docs.aws.amazon.com/glue/latest/dg/images/monitor-debug-capacity-3.png)
 
-As the following image shows, the total number of active executors reaches the maximum allocated—107 executors\. Similarly, the maximum needed executors is never above the maximum allocated executors\. The maximum needed executors number is computed from the actively running and pending task counts, so it might be smaller than the number of active executors\. This is because there can be executors that are partially or completely idle for a short period of time and are not yet decommissioned\.
+As the above image shows, the total number of active executors reaches the maximum allocated—107 executors\. Similarly, the maximum needed executors is never above the maximum allocated executors\. The maximum needed executors number is computed from the actively running and pending task counts, so it might be smaller than the number of active executors\. This is because there can be executors that are partially or completely idle for a short period of time and are not yet decommissioned\.
 
 ![\[Graph showing the total number of active executors reaching the maximum allocated.\]](http://docs.aws.amazon.com/glue/latest/dg/images/monitor-debug-capacity-4.png)
 
