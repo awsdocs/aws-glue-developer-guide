@@ -25,7 +25,7 @@ The number of maximum needed executors is computed by adding the total number of
 
 In contrast, the number of actively running executors measures how many executors are running active Apache Spark tasks\. As the job progresses, the maximum needed executors can change and typically goes down towards the end of the job as the pending task queue diminishes\.
 
-The horizontal red line in the following graph shows the number of maximum allocated executors, which depends on the number of DPUs that you allocate for the job\. In this case, you allocate 10 DPUs for the job run\. One DPU is reserved for the application master\. Nine DPUs run two executors each and one executor is reserved for the Spark driver\. So, the number of maximum allocated executors is 2\*9 \- 1 = 17 executors\.
+The horizontal red line in the following graph shows the number of maximum allocated executors, which depends on the number of DPUs that you allocate for the job\. In this case, you allocate 10 DPUs for the job run\. One DPU is reserved for the  master\. Nine DPUs run two executors each and one executor is reserved for the Spark driver, Spark driver runs inside application master\. So, the number of maximum allocated executors is 2\*9 \- 1 = 17 executors\.
 
 ![\[The job metrics showing active executors and maximum needed executors.\]](http://docs.aws.amazon.com/glue/latest/dg/images/monitor-debug-capacity-1.png)
 
