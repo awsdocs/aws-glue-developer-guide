@@ -1,4 +1,4 @@
-# AWS Glue Identity\-Based \(IAM\) Access\-Control Policy Examples<a name="glue-policy-examples-iam"></a>
+# AWS Glue Identity\-Based \(IAM\) Access Control Policy Examples<a name="glue-policy-examples-iam"></a>
 
 This section contains example AWS Identity and Access Management \(IAM\) policies that grant permissions for various AWS Glue actions and resources\. You can copy these examples and edit them on the IAM console\. Then you can attach them to IAM identities such as users, roles, and groups\.
 
@@ -7,7 +7,7 @@ These examples all use the `us-west-2` Region\. You can replace this with whatev
 
 ## Example 1: Grant Read\-Only Permission to a Table<a name="example-glue-iam-access-policy-grants-read-only"></a>
 
-The following policy grants read\-only permission to a `books` table in database `db1`\. For more information about resource ARNs, see [Data Catalog Amazon Resource Names \(ARNs\)](glue-specifying-resource-arns.md#data-catalog-resource-arns)\.
+The following policy grants read\-only permission to a `books` table in database `db1`\. For more information about resource Amazon Resource Names \(ARNs\), see [Data Catalog ARNs](glue-specifying-resource-arns.md#data-catalog-resource-arns)\.
 
 ```
 {
@@ -78,7 +78,7 @@ Assume that there are three tables—`customers`, `stores`, and `store_sales`—
 }
 ```
 
-You can simplify the preceding policy by using `store*` to match any table names that start with `store`:
+You can simplify the preceding policy by using `store*` to match any table names that start with `store`\.
 
 ```
 {
@@ -100,7 +100,7 @@ You can simplify the preceding policy by using `store*` to match any table names
 }
 ```
 
-Similarly, using `/db1/*` to match all tables in `db1`, the following policy grants `GetTables` access to all the tables in `db1`:
+Similarly, using `/db1/*` to match all tables in `db1`, the following policy grants `GetTables` access to all the tables in `db1`\.
 
 ```
 {
@@ -122,7 +122,7 @@ Similarly, using `/db1/*` to match all tables in `db1`, the following policy gra
 }
 ```
 
-If no table ARN is provided, a call to `GetTables` succeeds, but it returns an empty list:
+If no table ARN is provided, a call to `GetTables` succeeds, but it returns an empty list\.
 
 ```
 {
@@ -143,7 +143,7 @@ If no table ARN is provided, a call to `GetTables` succeeds, but it returns an e
 }
 ```
 
-If the database ARN is missing in the policy, a call to `GetTables` fails with an `AccessDeniedException`:
+If the database ARN is missing in the policy, a call to `GetTables` fails with an `AccessDeniedException`\.
 
 ```
 {
@@ -205,7 +205,7 @@ The following policy grants all permissions on a table named `books` in database
 }
 ```
 
-The preceding policy can be simplified in practice:
+The preceding policy can be simplified in practice\.
 
 ```
 {

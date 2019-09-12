@@ -1,10 +1,10 @@
 # AWS Glue API Permissions: Actions and Resources Reference<a name="api-permissions-reference"></a>
 
-Use the following table as a reference when you're setting up [Authentication and Access Control for AWS Glue](authentication-and-access-control.md) and writing a permissions policy to attach to an IAM identity \(identity\-based policy\) or to a resource \(resource policy\)\. The table lists each AWS Glue API operation, the corresponding actions for which you can grant permissions to perform the action, and the AWS resource for which you can grant the permissions\. You specify the actions in the policy's `Action` field, and you specify the resource value in the policy's `Resource` field\. 
+Use the following table as a reference when you're setting up [Identity and Access Management in AWS Glue](authentication-and-access-control.md) and writing a permissions policy to attach to an IAM identity \(identity\-based policy\) or to a resource \(resource policy\)\. The table lists each AWS Glue API operation, the corresponding actions for which you can grant permissions to perform the action, and the AWS resource for which you can grant the permissions\. You specify the actions in the policy's `Action` field, and you specify the resource value in the policy's `Resource` field\. 
 
-Actions on some AWS Glue resources require that ancestor and child resource ARNs are also included in the policy's `Resource` field\. For more information, see [Data Catalog Amazon Resource Names \(ARNs\)](glue-specifying-resource-arns.md#data-catalog-resource-arns)\. 
+Actions on some AWS Glue resources require that ancestor and child resource ARNs are also included in the policy's `Resource` field\. For more information, see [Data Catalog ARNs](glue-specifying-resource-arns.md#data-catalog-resource-arns)\. 
 
-Generally, you can replace ARN segments with wildcards\. For more information see [IAM JSON Policy Elements](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_resource.html) in the *IAM User Guide*\.
+Generally, you can replace ARN segments with wildcards\. For more information, see [IAM JSON Policy Elements](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_resource.html) in the *IAM User Guide*\.
 
 Condition keys for IAM policies are listed by API operation\. You can use AWS\-wide condition keys in your AWS Glue policies to express conditions\. For a complete list of AWS\-wide keys, see [AWS Global Condition Keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html) in the *IAM User Guide*\. 
 
@@ -118,4 +118,4 @@ If you see an expand arrow \(**↗**\) in the upper\-right corner of the table, 
 | [UpdateUserDefinedFunction \(update\_user\_defined\_function\)](aws-glue-api-catalog-functions.md#aws-glue-api-catalog-functions-UpdateUserDefinedFunction) | glue:UpdateUserDefinedFunction | <pre><br />arn:aws:glue:region:account-id:userDefinedFunction/database-name/user-defined-function-name<br />arn:aws:glue:region:account-id:database/database-name<br />arn:aws:glue:region:account-id:catalog               <br />             </pre>  |  | 
 
 ## Related Topics<a name="api-permissions-reference-related"></a>
-+ [Authentication and Access Control](authentication-and-access-control.md)
++ [Identity and Access Management](authentication-and-access-control.md)

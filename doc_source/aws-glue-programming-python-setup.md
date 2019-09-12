@@ -1,12 +1,12 @@
 # Setting Up to Use Python with AWS Glue<a name="aws-glue-programming-python-setup"></a>
 
-Use Python 2\.7 rather than Python 3 to develop your ETL scripts\. The AWS Glue development endpoints that provide interactive testing and development do not work with Python 3 yet\.
+Use Python to develop your ETL scripts for Spark jobs\. The supported Python versions for ETL jobs depend on the Glue version of the job\. For more information on Glue versions, see [Adding Jobs in AWS Glue](add-job.html)\. The AWS Glue development endpoints that provide interactive testing and development support only Python 2\.7\. 
 
 **To set up your system for using Python with AWS Glue**
 
 Follow these steps to install Python and to be able to invoke the AWS Glue APIs\. 
 
-1. If you don't already have Python 2\.7 installed, download and install it from the [Python\.org download page](https://www.python.org/downloads/)\.
+1. If you don't already have Python installed, download and install it from the [Python\.org download page](https://www.python.org/downloads/)\.
 
 1. Install the AWS Command Line Interface \(AWS CLI\) as documented in the [AWS CLI documentation](https://docs.aws.amazon.com/cli/latest/userguide/installing.html)\.
 

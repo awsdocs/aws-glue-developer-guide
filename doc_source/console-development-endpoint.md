@@ -57,7 +57,7 @@ Amount of time the development endpoint has been provisioned and `READY`\.
 
    The following are some optional fields you can provide:  
 **Security configuration**  
-Add a security configuration to a development endpoint to specify at\-rest encryption options\. For more information, see [Encrypting Data Written by Crawlers, Jobs, and Development Endpoints](encryption-security-configuration.md)\.  
+Add a security configuration to a development endpoint to specify at\-rest encryption options\.   
 **Data processing units \(DPUs\)**  
 The number of DPUs that AWS Glue uses for your development endpoint\. The number must be greater than 1\.  
 **Python library path**  
@@ -69,7 +69,16 @@ Currently, only pure Java or Scala \(2\.11\) libraries can be used\.
 **Tags**  
 Tag your development endpoint with a **Tag key** and optional **Tag value**\. Once created, tag keys are read\-only\. Use tags on some resources to help you organize and identify them\. For more information, see [AWS Tags in AWS Glue](monitor-tags.md)\.   
 **Use Glue Data Catalog as the Hive metastore**  
-Enables you to use the AWS Glue Data Catalog as a Spark Hive metastore\.
+Enables you to use the AWS Glue Data Catalog as a Spark Hive metastore\.  
+**Worker type**  
+The type of predefined worker that is allocated to the development endpoint\. Accepts a value of Standard, G\.1X, or G\.2X\.  
+   + For the `Standard` worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker\.
+   + For the `G.1X` worker type, each worker maps to 1 DPU \(4 vCPU, 16 GB of memory, 64 GB disk\), and provides 1 executor per worker\. We recommend this worker type for memory\-intensive jobs\.
+   + For the `G.2X` worker type, each worker maps to 2 DPU \(8 vCPU, 32 GB of memory, 128 GB disk\), and provides 1 executor per worker\. We recommend this worker type for memory\-intensive jobs\.
+Known issue: when a development endpoint is created with the `G.2X` `WorkerType` configuration, the Spark drivers for the development endpoint will run on 4 vCPU, 16 GB of memory, and a 64 GB disk\.   
+**Number of workers**  
+The number of workers of a defined `workerType` that are allocated to the development endpoint\.  
+The maximum number of workers you can define are 299 for `G.1X`, and 149 for `G.2X`\. 
 
 ## Creating a Notebook Server Hosted on Amazon EC2<a name="console-ec2-notebook-create"></a>
 

@@ -2,7 +2,15 @@
 
 AWS Glue tracks data that has already been processed during a previous run of an ETL job by persisting state information from the job run\. This persisted state information is called a *job bookmark*\. Job bookmarks help AWS Glue maintain state information and prevent the reprocessing of old data\. With job bookmarks, you can process new data when rerunning on a scheduled interval\.  A job bookmark is composed of the states for various elements of jobs, such as sources, transformations, and targets\. For example, your ETL job might read new partitions in an Amazon S3 file\. AWS Glue tracks which partitions the job has processed successfully to prevent duplicate processing and duplicate data in the job's target data store\.
 
-Job bookmarks are implemented for some Amazon Simple Storage Service \(Amazon S3\) sources and the Relationalize transform\. AWS Glue supports job bookmarks for the Amazon S3 source formats JSON, CSV, Apache Avro, and XML\. The Apache Parquet and ORC formats are currently not supported\.
+Job bookmarks are implemented for some Amazon Simple Storage Service \(Amazon S3\) sources and the Relationalize transform\. The following table lists the Amazon S3 source formats that AWS Glue supports for job bookmarks\.
+
+
+| AWS Glue version | Amazon S3 source formats | 
+| --- | --- | 
+| Version 0\.9 | JSON, CSV, Apache Avro, XML | 
+| Version 1\.0 and later | JSON, CSV, Apache Avro, XML, Parquet, ORC | 
+
+For information about Glue versions, see [Defining Job Properties](add-job.md#create-job)\.
 
 Job bookmarks are implemented for a limited use case for a relational database \(JDBC connection\) input source\. For this input source, job bookmarks are supported only if the table's primary keys are in sequential order\. Also, job bookmarks search for new rows, but not updated rows\. This is because bookmarks look for the primary keys, which already exist\. 
 

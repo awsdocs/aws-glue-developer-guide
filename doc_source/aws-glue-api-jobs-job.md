@@ -47,11 +47,11 @@ Specifies a job definition\.
 
   The default arguments for this job, specified as name\-value pairs\.
 
-  You can specify arguments here that your own job\-execution script consumes, in addition to arguments that AWS Glue itself consumes\.
+  You can specify arguments here that your own job\-execution script consumes, as well as arguments that AWS Glue itself consumes\.
 
-  For information about how to specify and consume your own job arguments, see [Calling AWS Glue APIs in Python](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html) in the *AWS Glue Developer Guide*\.
+  For information about how to specify and consume your own Job arguments, see the [Calling AWS Glue APIs in Python](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html) topic in the developer guide\.
 
-  For information about the key\-value pairs that AWS Glue consumes to set up your job, see [Special Parameters Used by AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html) in the *AWS Glue Developer Guide*\.
+  For information about the key\-value pairs that AWS Glue consumes to set up your job, see the [Special Parameters Used by AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html) topic in the developer guide\.
 + `Connections` – A [ConnectionsList](#aws-glue-api-jobs-job-ConnectionsList) object\.
 
   The connections used for this job\.
@@ -92,6 +92,13 @@ Specifies a job definition\.
 + `NotificationProperty` – A [NotificationProperty](#aws-glue-api-jobs-job-NotificationProperty) object\.
 
   Specifies configuration properties of a job notification\.
++ `GlueVersion` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Custom string pattern #13](aws-glue-api-common.md#regex_13)\.
+
+  Glue version determines the versions of Apache Spark and Python that AWS Glue supports\. The Python version indicates the version supported for jobs of type Spark\. 
+
+  For more information about the available AWS Glue versions and corresponding Spark and Python versions, see [Glue version](https://docs.aws.amazon.com/glue/latest/dg/add-job.html) in the developer guide\.
+
+  Jobs that are created without specifying a Glue version default to Glue 0\.9\.
 
 ## ExecutionProperty Structure<a name="aws-glue-api-jobs-job-ExecutionProperty"></a>
 
@@ -121,7 +128,10 @@ Specifies code executed when a job is run\.
   The name of the job command\. For an Apache Spark ETL job, this must be `glueetl`\. For a Python shell job, it must be `pythonshell`\.
 + `ScriptLocation` – UTF\-8 string\.
 
-  Specifies the Amazon Simple Storage Service \(Amazon S3\) path to a script that executes a job \(required\)\.
+  Specifies the Amazon Simple Storage Service \(Amazon S3\) path to a script that executes a job\.
++ `PythonVersion` – UTF\-8 string, matching the [Custom string pattern #11](aws-glue-api-common.md#regex_11)\.
+
+  The Python version being used to execute a Python shell job\. Allowed values are 2 or 3\.
 
 ## ConnectionsList Structure<a name="aws-glue-api-jobs-job-ConnectionsList"></a>
 
@@ -160,11 +170,11 @@ Specifies information used to update an existing job definition\. The previous j
 
   The default arguments for this job\.
 
-  You can specify arguments here that your own job\-execution script consumes, in addition to arguments that AWS Glue itself consumes\.
+  You can specify arguments here that your own job\-execution script consumes, as well as arguments that AWS Glue itself consumes\.
 
-  For information about how to specify and consume your own job arguments, see [Calling AWS Glue APIs in Python](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html) in the *AWS Glue Developer Guide*\.
+  For information about how to specify and consume your own Job arguments, see the [Calling AWS Glue APIs in Python](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html) topic in the developer guide\.
 
-  For information about the key\-value pairs that AWS Glue consumes to set up your job, see [Special Parameters Used by AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html) in the *AWS Glue Developer Guide*\.
+  For information about the key\-value pairs that AWS Glue consumes to set up your job, see the [Special Parameters Used by AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html) topic in the developer guide\.
 + `Connections` – A [ConnectionsList](#aws-glue-api-jobs-job-ConnectionsList) object\.
 
   The connections used for this job\.
@@ -205,6 +215,11 @@ Specifies information used to update an existing job definition\. The previous j
 + `NotificationProperty` – A [NotificationProperty](#aws-glue-api-jobs-job-NotificationProperty) object\.
 
   Specifies the configuration properties of a job notification\.
++ `GlueVersion` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Custom string pattern #13](aws-glue-api-common.md#regex_13)\.
+
+  Glue version determines the versions of Apache Spark and Python that AWS Glue supports\. The Python version indicates the version supported for jobs of type Spark\. 
+
+  For more information about the available AWS Glue versions and corresponding Spark and Python versions, see [Glue version](https://docs.aws.amazon.com/glue/latest/dg/add-job.html) in the developer guide\.
 
 ## Operations<a name="aws-glue-api-jobs-job-actions"></a>
 + [CreateJob Action \(Python: create\_job\)](#aws-glue-api-jobs-job-CreateJob)
@@ -246,11 +261,11 @@ Creates a new job definition\.
 
   The default arguments for this job\.
 
-  You can specify arguments here that your own job\-execution script consumes, in addition to arguments that AWS Glue itself consumes\.
+  You can specify arguments here that your own job\-execution script consumes, as well as arguments that AWS Glue itself consumes\.
 
-  For information about how to specify and consume your own Job arguments, see [Calling AWS Glue APIs in Python](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html) in the *AWS Glue Developer Guide*\.
+  For information about how to specify and consume your own Job arguments, see the [Calling AWS Glue APIs in Python](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html) topic in the developer guide\.
 
-  For information about the key\-value pairs that AWS Glue consumes to set up your job, see [Special Parameters Used by AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html) in the *AWS Glue Developer Guide*\.
+  For information about the key\-value pairs that AWS Glue consumes to set up your job, see the [Special Parameters Used by AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html) topic in the developer guide\.
 + `Connections` – A [ConnectionsList](#aws-glue-api-jobs-job-ConnectionsList) object\.
 
   The connections used for this job\.
@@ -274,20 +289,6 @@ Creates a new job definition\.
   The value that can be allocated for `MaxCapacity` depends on whether you are running a Python shell job or an Apache Spark ETL job:
   + When you specify a Python shell job \(`JobCommand.Name`="pythonshell"\), you can allocate either 0\.0625 or 1 DPU\. The default is 0\.0625 DPU\.
   + When you specify an Apache Spark ETL job \(`JobCommand.Name`="glueetl"\), you can allocate from 2 to 100 DPUs\. The default is 10 DPUs\. This job type cannot have a fractional DPU allocation\.
-+ `NotificationProperty` – A [NotificationProperty](#aws-glue-api-jobs-job-NotificationProperty) object\.
-
-  Specifies configuration properties of a job notification\.
-+ `WorkerType` – UTF\-8 string \(valid values: `Standard=""` \| `G.1X=""` \| `G.2X=""`\)\.
-
-  The type of predefined worker that is allocated when a job runs\. Accepts a value of Standard, G\.1X, or G\.2X\.
-  + For the `Standard` worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker\.
-  + For the `G.1X` worker type, each worker maps to 1 DPU \(4 vCPU, 16 GB of memory, 64 GB disk\), and provides 1 executor per worker\. We recommend this worker type for memory\-intensive jobs\.
-  + For the `G.2X` worker type, each worker maps to 2 DPU \(8 vCPU, 32 GB of memory, 128 GB disk\), and provides 1 executor per worker\. We recommend this worker type for memory\-intensive jobs\.
-+ `NumberOfWorkers` – Number \(integer\)\.
-
-  The number of workers of a defined `workerType` that are allocated when a job runs\.
-
-  The maximum number of workers you can define are 299 for `G.1X`, and 149 for `G.2X`\. 
 + `SecurityConfiguration` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the `SecurityConfiguration` structure to be used with this job\.
@@ -297,7 +298,28 @@ Creates a new job definition\.
 
   Each value is a UTF\-8 string, not more than 256 bytes long\.
 
-  The tags to use with this job\. You can use tags to limit access to the job\. For more information, see [AWS Tags in AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the *AWS Glue Developer Guide*\.
+  The tags to use with this job\. You may use tags to limit access to the job\. For more information about tags in AWS Glue, see [AWS Tags in AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the developer guide\.
++ `NotificationProperty` – A [NotificationProperty](#aws-glue-api-jobs-job-NotificationProperty) object\.
+
+  Specifies configuration properties of a job notification\.
++ `GlueVersion` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Custom string pattern #13](aws-glue-api-common.md#regex_13)\.
+
+  Glue version determines the versions of Apache Spark and Python that AWS Glue supports\. The Python version indicates the version supported for jobs of type Spark\. 
+
+  For more information about the available AWS Glue versions and corresponding Spark and Python versions, see [Glue version](https://docs.aws.amazon.com/glue/latest/dg/add-job.html) in the developer guide\.
+
+  Jobs that are created without specifying a Glue version default to Glue 0\.9\.
++ `NumberOfWorkers` – Number \(integer\)\.
+
+  The number of workers of a defined `workerType` that are allocated when a job runs\.
+
+  The maximum number of workers you can define are 299 for `G.1X`, and 149 for `G.2X`\. 
++ `WorkerType` – UTF\-8 string \(valid values: `Standard=""` \| `G.1X=""` \| `G.2X=""`\)\.
+
+  The type of predefined worker that is allocated when a job runs\. Accepts a value of Standard, G\.1X, or G\.2X\.
+  + For the `Standard` worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker\.
+  + For the `G.1X` worker type, each worker maps to 1 DPU \(4 vCPU, 16 GB of memory, 64 GB disk\), and provides 1 executor per worker\. We recommend this worker type for memory\-intensive jobs\.
+  + For the `G.2X` worker type, each worker maps to 2 DPU \(8 vCPU, 32 GB of memory, 128 GB disk\), and provides 1 executor per worker\. We recommend this worker type for memory\-intensive jobs\.
 
 **Response**
 + `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.

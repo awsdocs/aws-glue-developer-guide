@@ -9,6 +9,7 @@ The Crawler API describes AWS Glue crawler data types, along with the API for cr
 + [S3Target Structure](#aws-glue-api-crawler-crawling-S3Target)
 + [JdbcTarget Structure](#aws-glue-api-crawler-crawling-JdbcTarget)
 + [DynamoDBTarget Structure](#aws-glue-api-crawler-crawling-DynamoDBTarget)
++ [CatalogTarget Structure](#aws-glue-api-crawler-crawling-CatalogTarget)
 + [CrawlerMetrics Structure](#aws-glue-api-crawler-crawling-CrawlerMetrics)
 + [SchemaChangePolicy Structure](#aws-glue-api-crawler-crawling-SchemaChangePolicy)
 + [LastCrawlInfo Structure](#aws-glue-api-crawler-crawling-LastCrawlInfo)
@@ -77,7 +78,7 @@ A scheduling object using a `cron` statement to schedule an event\.
 **Fields**
 + `ScheduleExpression` – UTF\-8 string\.
 
-  A `cron` expression used to specify the schedule\. For more information, see [Time\-Based Schedules for Jobs and Crawlers](https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)\. For example, to run something every day at 12:15 UTC, specify `cron(15 12 * * ? *)`\.
+  A `cron` expression used to specify the schedule \(see [Time\-Based Schedules for Jobs and Crawlers](https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)\. For example, to run something every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`\.
 + `State` – UTF\-8 string \(valid values: `SCHEDULED` \| `NOT_SCHEDULED` \| `TRANSITIONING`\)\.
 
   The state of the schedule\.
@@ -96,6 +97,9 @@ Specifies data stores to crawl\.
 + `DynamoDBTargets` – An array of [DynamoDBTarget](#aws-glue-api-crawler-crawling-DynamoDBTarget) objects\.
 
   Specifies Amazon DynamoDB targets\.
++ `CatalogTargets` – An array of [CatalogTarget](#aws-glue-api-crawler-crawling-CatalogTarget) objects\.
+
+  Specifies AWS Glue Data Catalog targets\.
 
 ## S3Target Structure<a name="aws-glue-api-crawler-crawling-S3Target"></a>
 
@@ -132,6 +136,18 @@ Specifies an Amazon DynamoDB table to crawl\.
 + `Path` – UTF\-8 string\.
 
   The name of the DynamoDB table to crawl\.
+
+## CatalogTarget Structure<a name="aws-glue-api-crawler-crawling-CatalogTarget"></a>
+
+Specifies an AWS Glue Data Catalog target\.
+
+**Fields**
++ `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the database to be synchronized\.
++ `Tables` – *Required:* An array of UTF\-8 strings, at least 1 string\.
+
+  A list of the tables to be synchronized\.
 
 ## CrawlerMetrics Structure<a name="aws-glue-api-crawler-crawling-CrawlerMetrics"></a>
 
@@ -222,7 +238,7 @@ Creates a new crawler with specified targets, role, configuration, and optional 
 + `Role` – *Required:* UTF\-8 string\.
 
   The IAM role or Amazon Resource Name \(ARN\) of an IAM role used by the new crawler to access customer resources\.
-+ `DatabaseName` – *Required:* UTF\-8 string\.
++ `DatabaseName` – UTF\-8 string\.
 
   The AWS Glue database where results are written, such as: `arn:aws:daylight:us-east-1::database/sometable/*`\.
 + `Description` – Description string, not more than 2048 bytes long, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
@@ -233,7 +249,7 @@ Creates a new crawler with specified targets, role, configuration, and optional 
   A list of collection of targets to crawl\.
 + `Schedule` – UTF\-8 string\.
 
-  A `cron` expression used to specify the schedule\. For more information, see [Time\-Based Schedules for Jobs and Crawlers](https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)\. For example, to run something every day at 12:15 UTC, specify `cron(15 12 * * ? *)`\.
+  A `cron` expression used to specify the schedule \(see [Time\-Based Schedules for Jobs and Crawlers](https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)\. For example, to run something every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`\.
 + `Classifiers` – An array of UTF\-8 strings\.
 
   A list of custom classifiers that the user has registered\. By default, all built\-in classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification\.
@@ -245,7 +261,7 @@ Creates a new crawler with specified targets, role, configuration, and optional 
   The policy for the crawler's update and deletion behavior\.
 + `Configuration` – UTF\-8 string\.
 
-  The crawler configuration information\. This versioned JSON string allows users to specify aspects of a crawler's behavior\. For more information, see [Configuring a Crawler](https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html)\.
+  Crawler configuration information\. This versioned JSON string allows users to specify aspects of a crawler's behavior\. For more information, see [Configuring a Crawler](https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html)\.
 + `CrawlerSecurityConfiguration` – UTF\-8 string, not more than 128 bytes long\.
 
   The name of the `SecurityConfiguration` structure to be used by this crawler\.
@@ -255,7 +271,7 @@ Creates a new crawler with specified targets, role, configuration, and optional 
 
   Each value is a UTF\-8 string, not more than 256 bytes long\.
 
-  The tags to use with this crawler request\. You can use tags to limit access to the crawler\. For more information, see [AWS Tags in AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html)\.
+  The tags to use with this crawler request\. You may use tags to limit access to the crawler\. For more information about tags in AWS Glue, see [AWS Tags in AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the developer guide\.
 
 **Response**
 + *No Response parameters\.*
@@ -373,7 +389,7 @@ Updates a crawler\. If a crawler is running, you must stop it using `StopCrawler
   A list of targets to crawl\.
 + `Schedule` – UTF\-8 string\.
 
-  A `cron` expression used to specify the schedule\. For more information, see [Time\-Based Schedules for Jobs and Crawlers](https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)\. For example, to run something every day at 12:15 UTC, specify `cron(15 12 * * ? *)`\.
+  A `cron` expression used to specify the schedule \(see [Time\-Based Schedules for Jobs and Crawlers](https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)\. For example, to run something every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`\.
 + `Classifiers` – An array of UTF\-8 strings\.
 
   A list of custom classifiers that the user has registered\. By default, all built\-in classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification\.
@@ -385,7 +401,7 @@ Updates a crawler\. If a crawler is running, you must stop it using `StopCrawler
   The policy for the crawler's update and deletion behavior\.
 + `Configuration` – UTF\-8 string\.
 
-  The crawler configuration information\. This versioned JSON string allows users to specify aspects of a crawler's behavior\. For more information, see [Configuring a Crawler](https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html)\.
+  Crawler configuration information\. This versioned JSON string allows users to specify aspects of a crawler's behavior\. For more information, see [Configuring a Crawler](https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html)\.
 + `CrawlerSecurityConfiguration` – UTF\-8 string, not more than 128 bytes long\.
 
   The name of the `SecurityConfiguration` structure to be used by this crawler\.

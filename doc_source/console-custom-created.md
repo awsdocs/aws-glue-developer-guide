@@ -3,7 +3,7 @@
 Scripts perform the extract, transform, and load \(ETL\) work in AWS Glue\. A script is created when you automatically generate the source code logic for a job\. You can either edit this generated script, or you can provide your own custom script\.
 
 **Important**  
-Your custom script must be compatible with Apache Spark 2\.2\.1\.
+Different versions of AWS Glue support different versions of Apache Spark\. Your custom script must be compatible with the supported Apache Spark version\. For information about AWS Glue versions, see the [Glue version job property](add-job.md#glue-version-table)\.
 
 To provide your own custom script in AWS Glue, follow these general steps:
 
@@ -11,7 +11,7 @@ To provide your own custom script in AWS Glue, follow these general steps:
 
 1. Choose the **Jobs** tab, and then choose **Add job** to start the **Add job** wizard\.
 
-1. In the **Job properties** screen, choose the **IAM role** that is required for your custom script to run\. For more information, see [Authentication and Access Control for AWS Glue](authentication-and-access-control.md)\.
+1. In the **Job properties** screen, choose the **IAM role** that is required for your custom script to run\. For more information, see [Identity and Access Management in AWS Glue](authentication-and-access-control.md)\.
 
 1. Under **This job runs**, choose one of the following:
    + An existing script that you provide

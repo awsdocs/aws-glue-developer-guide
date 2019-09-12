@@ -1,6 +1,6 @@
-# Overview of Managing Access Permissions to Your AWS Glue Resources<a name="access-control-overview"></a>
+# Managing Access Permissions for AWS Glue Resources<a name="access-control-overview"></a>
 
-You can have valid credentials to authenticate your requests, but unless you have the appropriate permissions, you can't create or access an AWS Glue resource such as a table in the Data Catalog\.
+You can have valid credentials to authenticate your requests, but unless you have the appropriate permissions, you can't create or access an AWS Glue resource such as a table in the AWS Glue Data Catalog\.
 
 Every AWS resource is owned by an AWS account, and permissions to create or access a resource are governed by permissions policies\. An account administrator can attach permissions policies to IAM identities \(that is, users, groups, and roles\)\. Some services \(such as AWS Glue and Amazon S3\) also support attaching permissions policies to the resources themselves\. 
 
@@ -16,37 +16,37 @@ When granting permissions, you decide who is getting the permissions, the resour
 + [Managing Access to Resources](#access-control-manage-access-intro)
 + [Specifying Policy Elements: Actions, Effects, and Principals](#specify-policy-elements)
 + [Specifying Conditions in a Policy](#specifying-conditions-overview)
-+ [Identity\-Based Policies \(IAM Policies\) For Access Control](using-identity-based-policies.md)
-+ [AWS Glue Resource Policies For Access Control](glue-resource-policies.md)
++ [Identity\-Based Policies \(IAM Policies\) for Access Control](using-identity-based-policies.md)
++ [AWS Glue Resource Policies for Access Control](glue-resource-policies.md)
 
 ## Using Permissions Policies to Manage Access to Resources<a name="access-control-permissions"></a>
 
-A *permissions policy* is defined by a JSON object that describes who has access to what\. The syntax of the JSON object is largely defined by the IAM service \(see [AWS IAM Policy Reference](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) in the *IAM User Guide*\)\.
+A *permissions policy* is defined by a JSON object that describes who has access to what\. The syntax of the JSON object is largely defined by AWS Identity and Access Management \(IAM\)\. For more information, see [IAM JSON Policy Reference](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) in the *IAM User Guide*\.
 
 **Note**  
-This section discusses using IAM in the context of AWS Glue but does not provide detailed information about the IAM service\. For detailed IAM documentation, see [What Is IAM?](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) in the *IAM User Guide*\.
+This section discusses using IAM in the context of AWS Glue, but it does not provide detailed information about the IAM service\. For more information, see [What Is IAM?](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) in the *IAM User Guide*\.
 
 For a table showing all of the AWS Glue API operations and the resources that they apply to, see [AWS Glue API Permissions: Actions and Resources Reference](api-permissions-reference.md)\.
 
-To learn more about IAM policy syntax and descriptions, see [AWS IAM Policy Reference](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) in the *IAM User Guide*\.
+To learn more about IAM policy syntax and descriptions, see [IAM JSON Policy Reference](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) in the *IAM User Guide*\.
 
-AWS Glue supports two kinds of policy:
-+ [Identity\-Based Policies \(IAM Policies\) For Access Control](using-identity-based-policies.md)
-+ [AWS Glue Resource Policies For Access Control](glue-resource-policies.md)
+AWS Glue supports two kinds of policies:
++ [Identity\-Based Policies \(IAM Policies\) for Access Control](using-identity-based-policies.md)
++ [AWS Glue Resource Policies for Access Control](glue-resource-policies.md)
 
 By supporting both identity\-based and resource policies, AWS Glue gives you fine\-grained control over who can access what metadata\.
 
-For more examples, see [AWS Glue Resource\-Based Access\-Control Policy Examples](glue-policy-examples-resource-policies.md)\.
+For more examples, see [AWS Glue Resource\-Based Access Control Policy Examples](glue-policy-examples-resource-policies.md)\.
 
 ## AWS Glue Resources and Operations<a name="access-control-resources"></a>
 
-AWS Glue provides a set of operations to work with AWS Glue resources\. For a list of available operations, see AWS Glue [AWS Glue API](aws-glue-api.md)\.
+AWS Glue provides a set of operations to work with AWS Glue resources\. For a list of available operations, see [AWS Glue API](aws-glue-api.md)\.
 
 ## Understanding Resource Ownership<a name="access-control-resource-ownership"></a>
 
-The AWS account owns the resources that are created in the account, regardless of who created the resources\. Specifically, the resource owner is the AWS account of the [principal entity](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html) \(that is, the root account, an IAM user, or an IAM role\) that authenticates the resource creation request\. The following examples illustrate how this works:
-+ If you use the root account credentials of your AWS account to create a table, your AWS account is the owner of the resource \(in AWS Glue, the resource is a table\)\.
-+ If you create an IAM user in your AWS account and grant permissions to create a table to that user, the user can create a table\. However, your AWS account, to which the user belongs, owns the table resource\.
+The AWS account owns the resources that are created in the account, regardless of who created the resources\. Specifically, the resource owner is the AWS account of the [principal entity](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html) \(that is, the AWS account root user, an IAM user, or an IAM role\) that authenticates the resource creation request\. The following examples illustrate how this works:
++ If you use the AWS account root user credentials of your AWS account to create a table, your AWS account is the owner of the resource \(in AWS Glue, the resource is a table\)\.
++ If you create an IAM user in your AWS account and grant permissions to create a table to that user, the user can create a table\. However, your AWS account, which the user belongs to, owns the table resource\.
 + If you create an IAM role in your AWS account with permissions to create a table, anyone who can assume the role can create a table\. Your AWS account, to which the user belongs, owns the table resource\. 
 
 ## Managing Access to Resources<a name="access-control-manage-access-intro"></a>
@@ -54,9 +54,9 @@ The AWS account owns the resources that are created in the account, regardless o
 A *permissions policy* describes who has access to what\. The following section explains the available options for creating permissions policies\.
 
 **Note**  
-This section discusses using IAM in the context of AWS Glue\. It doesn't provide detailed information about the IAM service\. For complete IAM documentation, see [What Is IAM?](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) in the *IAM User Guide*\. For information about IAM policy syntax and descriptions, see [AWS IAM Policy Reference](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) in the *IAM User Guide*\.
+This section discusses using IAM in the context of AWS Glue\. It doesn't provide detailed information about the IAM service\. For complete IAM documentation, see [What Is IAM?](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) in the *IAM User Guide*\. For information about IAM policy syntax and descriptions, see [IAM JSON Policy Reference](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) in the *IAM User Guide*\.
 
-Policies attached to an IAM identity are referred to as *identity\-based* policies \(IAM policies\) and policies attached to a resource are referred to as *resource\-based* policies\.
+Policies that are attached to an IAM identity are referred to as *identity\-based* policies \(IAM policies\)\. Policies that are attached to a resource are referred to as *resource\-based* policies\.
 
 **Topics**
 + [Identity\-Based Policies \(IAM Policies\)](#access-control-manage-access-identity-based)
@@ -76,7 +76,7 @@ You can attach policies to IAM identities\. For example, you can do the followin
 
   For more information about using IAM to delegate permissions, see [Access Management](https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html) in the *IAM User Guide*\.
 
-The following is an example identity\-based policy that grants permissions for one AWS Glue action \(`GetTables`\)\. The wildcard character \(`*`\) in the `Resource` value means that you are granting permission to this action to obtain names and details of all the tables in a databases in the Data Catalog\. If the user also has access to other catalogs through a resource policy, then it is given access to these resources too\. 
+The following is an example identity\-based policy that grants permissions for one AWS Glue action \(`GetTables`\)\. The wildcard character \(`*`\) in the `Resource` value means that you are granting permission to this action to obtain names and details of all the tables in a database in the Data Catalog\. If the user also has access to other catalogs through a resource policy, it is given access to these resources too\. 
 
 ```
 {
@@ -94,7 +94,7 @@ The following is an example identity\-based policy that grants permissions for o
 }
 ```
 
-For more information about using identity\-based policies with AWS Glue, see [Identity\-Based Policies \(IAM Policies\) For Access Control](using-identity-based-policies.md)\. For more information about users, groups, roles, and permissions, see [Identities \(Users, Groups, and Roles\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html) in the *IAM User Guide*\. 
+For more information about using identity\-based policies with AWS Glue, see [Identity\-Based Policies \(IAM Policies\) for Access Control](using-identity-based-policies.md)\. For more information about users, groups, roles, and permissions, see [Identities \(Users, Groups, and Roles\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html) in the *IAM User Guide*\. 
 
 ### Resource\-Based Policies<a name="access-control-manage-access-resource-based"></a>
 
@@ -110,12 +110,12 @@ The following are the most basic policy elements:
 + **Effect** – You specify the effect, either allow or deny, when the user requests the specific action\. If you don't explicitly grant access to \(allow\) a resource, access is implicitly denied\. You can also explicitly deny access to a resource, which you might do to make sure that a user cannot access it, even if a different policy grants access\.
 + **Principal** – In identity\-based policies \(IAM policies\), the user that the policy is attached to is the implicit principal\. For resource\-based policies, you specify the user, account, service, or other entity that you want to receive permissions \(applies to resource\-based policies only\)\. AWS Glue doesn't support resource\-based policies\.
 
-To learn more about IAM policy syntax and descriptions, see [AWS IAM Policy Reference](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) in the *IAM User Guide*\.
+To learn more about IAM policy syntax and descriptions, see [IAM JSON Policy Reference](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) in the *IAM User Guide*\.
 
 For a table showing all of the AWS Glue API operations and the resources that they apply to, see [AWS Glue API Permissions: Actions and Resources Reference](api-permissions-reference.md)\.
 
 ## Specifying Conditions in a Policy<a name="specifying-conditions-overview"></a>
 
-When you grant permissions, you can use the access policy language to specify the conditions when a policy should take effect\. For example, you might want a policy to be applied only after a specific date\. For more information about specifying conditions in a policy language, see [Condition](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#Condition) in the *IAM User Guide*\.
+When you grant permissions, you can use the access policy language to specify the conditions when a policy should take effect\. For example, you might want a policy to be applied only after a specific date\. For more information about specifying conditions in a policy language, see [Condition](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html) in the *IAM User Guide*\.
 
 To express conditions, you use predefined condition keys\. There are AWS\-wide condition keys and AWS Glue–specific keys that you can use as appropriate\. For a complete list of AWS\-wide keys, see [Available Keys for Conditions](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#AvailableKeys) in the *IAM User Guide*\.  

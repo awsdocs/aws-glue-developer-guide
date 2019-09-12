@@ -15,7 +15,7 @@ Selects one `DynamicFrame` in a `DynamicFrameCollection`\.
 ## \_\_call\_\_\(dfc, key, transformation\_ctx = ""\)<a name="aws-glue-api-crawler-pyspark-transforms-SelectFromCollection-__call__"></a>
 
 Gets one `DynamicFrame` from a `DynamicFrameCollection`\.
-+ `dfc` - The `DynamicFrameCollection` from which the `DynamicFrame` should be selected \(required\)\.
++ `dfc` – The `DynamicFrameCollection` from which the `DynamicFrame` should be selected \(required\)\.
 + `key` – The key of the `DynamicFrame` to select \(required\)\.
 + `transformation_ctx` – A unique string that is used to identify state information \(optional\)\.
 

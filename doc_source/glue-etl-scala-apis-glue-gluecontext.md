@@ -20,7 +20,7 @@ def getCatalogSink( database : String,
                     redshiftTmpDir : String = "",
                     transformationContext : String = ""
                     additionalOptions: JsonOptions = JsonOptions.empty,
-                    catalogId: String = null
+                    catalogId: String = null                                
                   ) : DataSink
 ```
 
@@ -29,8 +29,8 @@ Creates a [DataSink](glue-etl-scala-apis-glue-datasink-class.md) that writes to 
 + `tableName` — The table name in the Data Catalog\.
 + `redshiftTmpDir` — The temporary staging directory to be used with certain data sinks\. Set to empty by default\.
 + `transformationContext` — The transformation context that is associated with the sink to be used by job bookmarks\. Set to empty by default\.
-+ `additionalOptions` – Additional options provided to AWS Glue\.
-+ `catalogId` — The catalog ID \(account ID\) of the Data Catalog being accessed\. When null, the default account ID of the caller is used\.
++ `additionalOptions` – Additional options provided to AWS Glue\. 
++ `catalogId` — The catalog ID \(account ID\) of the Data Catalog being accessed\. When null, the default account ID of the caller is used\. 
 
 Returns the `DataSink`\.
 
@@ -53,8 +53,8 @@ Creates a [DataSource trait](glue-etl-scala-apis-glue-datasource-trait.md) that 
 + `redshiftTmpDir` — The temporary staging directory to be used with certain data sinks\. Set to empty by default\.
 + `transformationContext` — The transformation context that is associated with the sink to be used by job bookmarks\. Set to empty by default\.
 + `pushDownPredicate` – Filters partitions without having to list and read all the files in your dataset\. For more information, see [Pre\-Filtering Using Pushdown Predicates](aws-glue-programming-etl-partitions.md#aws-glue-programming-etl-partitions-pushdowns)\.
-+ `additionalOptions` – Additional options provided to AWS Glue\.
-+ `catalogId` — The catalog ID \(account ID\) of the Data Catalog being accessed\. When null, the default account ID of the caller is used\.
++ `additionalOptions` – Additional options provided to AWS Glue\. 
++ `catalogId` — The catalog ID \(account ID\) of the Data Catalog being accessed\. When null, the default account ID of the caller is used\. 
 
 Returns the `DataSource`\.
 
@@ -71,7 +71,7 @@ def getJDBCSink( catalogConnection : String,
 
 Creates a [DataSink](glue-etl-scala-apis-glue-datasink-class.md) that writes to a JDBC database that is specified in a `Connection` object in the Data Catalog\. The `Connection` object has information to connect to a JDBC sink, including the URL, user name, password, VPC, subnet, and security groups\.
 + `catalogConnection` — The name of the connection in the Data Catalog that contains the JDBC URL to write to\.
-+ `options` — A string of JSON name\-value pairs that provide additional information that is required to write to a JDBC data store\. This includes:
++ `options` — A string of JSON name\-value pairs that provide additional information that is required to write to a JDBC data store\. This includes: 
   + *dbtable* \(required\) — The name of the JDBC table\. For JDBC data stores that support schemas within a database, specify `schema.table-name`\. If a schema is not provided, then the default "public" schema is used\. The following example shows an options parameter that points to a schema named `test` and a table named `test_table` in database `test_db`\.
 
     ```
@@ -81,7 +81,7 @@ Creates a [DataSink](glue-etl-scala-apis-glue-datasink-class.md) that writes to 
   + Any additional options passed directly to the SparkSQL JDBC writer\. For more information, see [Redshift data source for Spark](https://github.com/databricks/spark-redshift)\.
 + `redshiftTmpDir` — A temporary staging directory to be used with certain data sinks\. Set to empty by default\.
 + `transformationContext` — The transformation context that is associated with the sink to be used by job bookmarks\. Set to empty by default\.
-+ `catalogId` — The catalog ID \(account ID\) of the Data Catalog being accessed\. When null, the default account ID of the caller is used\.
++ `catalogId` — The catalog ID \(account ID\) of the Data Catalog being accessed\. When null, the default account ID of the caller is used\. 
 
 Example code:
 
@@ -138,7 +138,7 @@ def getSource( connectionType : String,
 ```
 
 Creates a [DataSource trait](glue-etl-scala-apis-glue-datasource-trait.md) that reads data from a source like Amazon S3, JDBC, or the AWS Glue Data Catalog\.
-+ `connectionType` — The type of the data source\. Can be one of “s3”, “mysql”, “redshift”, “oracle”, “sqlserver”, “postgresql”, "dynamodb", “parquet”, or “orc”\.
++ `connectionType` — The type of the data source\. Can be one of “s3”, “mysql”, “redshift”, “oracle”, “sqlserver”, “postgresql”, "dynamodb", “parquet”, or “orc”\. 
 + `connectionOptions` — A string of JSON name\-value pairs that provide additional information for establishing a connection with the data source\.
   + `connectionOptions` when the `connectionType` is "s3":
     + *paths* \(required\) — List of Amazon S3 paths to read\.
@@ -146,8 +146,8 @@ Creates a [DataSource trait](glue-etl-scala-apis-glue-datasource-trait.md) that 
     + *exclusions* \(optional\) — A string containing a JSON list of glob patterns to exclude\. For example "\[\\"\*\*\.pdf\\"\]" excludes all PDF files\.
     + *maxBand* \(optional\) — This advanced option controls the duration in seconds after which AWS Glue expects an Amazon S3 listing to be consistent\. Files with modification timestamps falling within the last maxBand seconds are tracked when using job bookmarks to account for Amazon S3 eventual consistency\. It is rare to set this option\. The default is 900 seconds\.
     + *maxFilesInBand* \(optional\) — This advanced option specifies the maximum number of files to save from the last maxBand seconds\. If this number is exceeded, extra files are skipped and processed only in the next job run\.
-    + *groupFiles* \(optional\) — Grouping files is enabled by default when the input contains more than 50,000 files\. To disable grouping with fewer than 50,000 files, set this parameter to “inPartition”\. To disable grouping when there are more than 50,000 files, set this parameter to “none”\.
-    + *groupSize* \(optional\) — The target group size in bytes\. The default is computed based on the input data size and the size of your cluster\. When there are fewer than 50,000 input files, groupFiles must be set to “inPartition” for this option to take effect\.
+    + *groupFiles* \(optional\) — Grouping files is enabled by default when the input contains more than 50,000 files\. To disable grouping with fewer than 50,000 files, set this parameter to “inPartition”\. To disable grouping when there are more than 50,000 files, set this parameter to “none”\. 
+    + *groupSize* \(optional\) — The target group size in bytes\. The default is computed based on the input data size and the size of your cluster\. When there are fewer than 50,000 input files, groupFiles must be set to “inPartition” for this option to take effect\. 
     + *recurse* \(optional\) — If set to true, recursively read files in any subdirectory of the specified paths\.
   + `connectionOptions` when the `connectionType` is "dynamodb":
     + *dynamodb\.input\.tableName* \(required\) — The DynamoDB table from which to read\.
@@ -178,10 +178,10 @@ def getSourceWithFormat( connectionType : String,
 ```
 
 Creates a [DataSource trait](glue-etl-scala-apis-glue-datasource-trait.md) that reads data from a source like Amazon S3, JDBC, or the AWS Glue Data Catalog, and also sets the format of data stored in the source\.
-+ `connectionType` — The type of the data source\. Can be one of “s3”, “mysql”, “redshift”, “oracle”, “sqlserver”, “postgresql”, "dynamodb", “parquet”, or “orc”\.
++ `connectionType` — The type of the data source\. Can be one of “s3”, “mysql”, “redshift”, “oracle”, “sqlserver”, “postgresql”, "dynamodb", “parquet”, or “orc”\. 
 + `options` — A string of JSON name\-value pairs that provide additional information for establishing a connection with the data source\.
 + `transformationContext` — The transformation context that is associated with the sink to be used by job bookmarks\. Set to empty by default\.
-+ `format` — The format of the data that is stored at the source\. When the `connectionType` is "s3", you can also specify `format`\. Can be one of “avro”, “csv”, “grokLog”, “ion”, “json”, “xml”, “parquet”, or “orc”\.
++ `format` — The format of the data that is stored at the source\. When the `connectionType` is "s3", you can also specify `format`\. Can be one of “avro”, “csv”, “grokLog”, “ion”, “json”, “xml”, “parquet”, or “orc”\. 
 + `formatOptions` — A string of JSON name\-value pairs that provide additional options for parsing data at the source\. See [Format Options](aws-glue-programming-etl-format.md)\.
 
 Returns the `DataSource`\.
@@ -189,7 +189,7 @@ Returns the `DataSource`\.
 ## def getSparkSession<a name="glue-etl-scala-apis-glue-gluecontext-defs-getSparkSession"></a>
 
 ```
-def getSparkSession : SparkSession
+def getSparkSession : SparkSession 
 ```
 
 Gets the `SparkSession` object associated with this GlueContext\. Use this SparkSession object to register tables and UDFs for use with `DataFrame` created from DynamicFrames\.

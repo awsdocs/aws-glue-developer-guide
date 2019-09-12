@@ -23,7 +23,7 @@ From the **Jobs** list, you can do the following:
 **Note**  
 To get step\-by\-step guidance for adding a job with a generated script, see the **Add job** tutorial in the console\.
 
-   Optionally, you can add a security configuration to a job to specify at\-rest encryption options\. For more information, see [Encrypting Data Written by Crawlers, Jobs, and Development Endpoints](encryption-security-configuration.md)\.    
+   Optionally, you can add a security configuration to a job to specify at\-rest encryption options\.     
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/glue/latest/dg/console-jobs.html)
 
 **Note**  

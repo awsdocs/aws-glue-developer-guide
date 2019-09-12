@@ -6,7 +6,7 @@ To get started, sign in to the AWS Management Console and open the AWS Glue cons
 
 ## Adding Tables on the Console<a name="console-tables-add"></a>
 
-To use a crawler to add tables, choose **Add tables**, **Add tables using a crawler**\. Then follow the instructions in the **Add crawler** wizard\. When the crawler runs, tables are added to the AWS Glue Data Catalog\. For more information, see [Cataloging Tables with a Crawler](add-crawler.md)\.
+To use a crawler to add tables, choose **Add tables**, **Add tables using a crawler**\. Then follow the instructions in the **Add crawler** wizard\. When the crawler runs, tables are added to the AWS Glue Data Catalog\. For more information, see [Defining Crawlers](add-crawler.md)\.
 
 If you know the attributes that are required to create an Amazon Simple Storage Service \(Amazon S3\) table definition in your Data Catalog, you can create it with the table wizard\. Choose **Add tables**, **Add table manually**, and follow the instructions in the **Add table** wizard\.
 

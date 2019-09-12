@@ -11,3 +11,5 @@ The following sections describe techniques and values that apply generally to AW
 + [Reading from JDBC Tables in Parallel](run-jdbc-parallel-read-job.md)
 + [Moving Data to and from Amazon Redshift](aws-glue-programming-etl-redshift.md)
 + [AWS Glue Data Catalog Support for Spark SQL Jobs](aws-glue-programming-etl-glue-data-catalog-hive.md)
++ [Excluding Amazon S3 Storage Classes](aws-glue-programming-etl-storage-classes.md)
++ [Developing and Testing ETL Scripts Locally Using the AWS Glue ETL Library](aws-glue-programming-etl-libraries.md)

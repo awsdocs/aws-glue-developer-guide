@@ -215,9 +215,6 @@ job.commit()
 
 When you include this object, AWS Glue records the timestamp and path of the job run\. If you run the job again with the same path, AWS Glue processes only the new files\. If you don't include this object and job bookmarks are enabled, the job reprocesses the already processed files along with the new files and creates redundancy in the job's target data store\.
 
-**Spark DataFrame**  
-AWS Glue job bookmarks don't work if you're using the Apache Spark `DataFrame` as the data sink for your job\. Job bookmarks only work when you use the AWS Glue [DynamicFrame Class](aws-glue-api-crawler-pyspark-extensions-dynamic-frame.md)\. To resolve this error, switch to the `DynamicFrame` using the [fromDF](aws-glue-api-crawler-pyspark-extensions-dynamic-frame.md#aws-glue-api-crawler-pyspark-extensions-dynamic-frame-fromDF) construction\. 
-
 **Missing Transformation Context Parameter**  
 Transformation context is an optional parameter in the `GlueContext` class, but job bookmarks don't work if you don't include it\. To resolve this error, add the transformation context parameter when you [create the DynamicFrame](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-crawler-pyspark-extensions-glue-context.html#aws-glue-api-crawler-pyspark-extensions-glue-context-create_dynamic_frame_from_catalog), as shown following:
 

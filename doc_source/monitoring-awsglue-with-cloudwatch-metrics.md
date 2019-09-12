@@ -1,24 +1,24 @@
-# Monitoring AWS Glue Using CloudWatch Metrics<a name="monitoring-awsglue-with-cloudwatch-metrics"></a>
+# Monitoring AWS Glue Using Amazon CloudWatch Metrics<a name="monitoring-awsglue-with-cloudwatch-metrics"></a>
 
-You can profile and monitor AWS Glue operations using AWS Glue Job Profiler, which collects and processes raw data from AWS Glue jobs into readable, near real\-time metrics stored in CloudWatch\. These statistics are retained and aggregated in CloudWatch so that you can access historical information for a better perspective on how your application is performing\.
+You can profile and monitor AWS Glue operations using AWS Glue job profiler\. It collects and processes raw data from AWS Glue jobs into readable, near real\-time metrics stored in Amazon CloudWatch\. These statistics are retained and aggregated in CloudWatch so that you can access historical information for a better perspective on how your application is performing\.
 
 ## AWS Glue Metrics Overview<a name="metrics-overview"></a>
 
-When you interact with AWS Glue, it sends the metrics described below to CloudWatch\. You can view these metrics in the AWS Glue console \(the preferred method\), the CloudWatch console dashboard, or the AWS CLI\. 
+When you interact with AWS Glue, it sends metrics to CloudWatch\. You can view these metrics using the AWS Glue console \(the preferred method\), the CloudWatch console dashboard, or the AWS Command Line Interface \(AWS CLI\)\. 
 
 **To view metrics using the AWS Glue console dashboard**
 
 You can view summary or detailed graphs of metrics for a job, or detailed graphs for a job run\. For details about the graphs and metrics you can access in the AWS Glue console dashboard, see [Working with Jobs on the AWS Glue Console](console-jobs.md)\.
 
-1. Open the AWS Glue console at [https://console\.aws\.amazon\.com/glue/](https://console.aws.amazon.com/glue/)
+1. Sign in to the AWS Management Console and open the AWS Glue console at [https://console\.aws\.amazon\.com/glue/](https://console.aws.amazon.com/glue/)\.
 
 1. In the navigation pane, choose **Jobs**\.
 
 1. Select a job from the **Jobs** list\.
 
-1. Select the **Metrics** tab\.
+1. Choose the **Metrics** tab\.
 
-1. Select **View Additional Metrics** to see more detailed metrics\.
+1. Choose **View additional metrics** to see more detailed metrics\.
 
 **To view metrics using the CloudWatch console dashboard**
 
@@ -28,22 +28,22 @@ Metrics are grouped first by the service namespace, and then by the various dime
 
 1. In the navigation pane, choose **Metrics**\.
 
-1. Select the **Glue** namespace\.
+1. Choose the **Glue** namespace\.
 
 **To view metrics using the AWS CLI**
-+ At a command prompt, use the following command:
++ At a command prompt, use the following command\.
 
   ```
   1. aws cloudwatch list-metrics --namespace "Glue"
   ```
 
-AWS Glue reports metrics to CloudWatch every 30 seconds, and the CloudWatch Metric Dashboards are configured to display them every minute\. The AWS Glue metrics represent delta values from the previously reported values\. Where appropriate, Metric Dashboards aggregates \(sums\) the 30\-second values to obtain a value for the entire last minute\. Glue metrics are enabled at initialization of a GlueContext in a script and are generally updated only at the end of an Apache Spark task\. They represent the aggregate values across all completed Spark tasks so far\.
+AWS Glue reports metrics to CloudWatch every 30 seconds, and the CloudWatch metrics dashboards are configured to display them every minute\. The AWS Glue metrics represent delta values from the previously reported values\. Where appropriate, metrics dashboards aggregate \(sum\) the 30\-second values to obtain a value for the entire last minute\. AWS Glue metrics are enabled at initialization of a `GlueContext` in a script and are generally updated only at the end of an Apache Spark task\. They represent the aggregate values across all completed Spark tasks so far\.
 
-The Spark metrics that AWS Glue passes on to CloudWatch, on the other hand, are generally absolute values representing the current state at the time they are reported\. AWS Glue reports them to CloudWatch every 30 seconds, and the Metric Dashboards generally show the average across the data points received in the last one minute\.
+However, the Spark metrics that AWS Glue passes on to CloudWatch are generally absolute values representing the current state at the time they are reported\. AWS Glue reports them to CloudWatch every 30 seconds, and the metrics dashboards generally show the average across the data points received in the last 1 minute\.
 
-AWS Glue metric names are all preceded by one of 3 kinds of prefix:
-+ `glue.driver.` – Metrics whose names begin with this prefix either represent AWS Glue Metrics that are aggregated from all executors at the Spark driver, or Spark metrics corresponding to the Spark driver\.
-+ `glue.`*executorId*`.` – The *executorId* is the number of a specific Spark executor, and corresponds with the executors listed in the logs\.
+AWS Glue metrics names are all preceded by one of the following types of prefix:
++ `glue.driver.` – Metrics whose names begin with this prefix either represent AWS Glue metrics that are aggregated from all executors at the Spark driver, or Spark metrics corresponding to the Spark driver\.
++ `glue.`*executorId*`.` – The *executorId* is the number of a specific Spark executor\. It corresponds with the executors listed in the logs\.
 + `glue.ALL.` – Metrics whose names begin with this prefix aggregate values from all Spark executors\.
 
 ## AWS Glue Metrics<a name="awsglue-metrics"></a>
@@ -82,4 +82,4 @@ AWS Glue metrics use the AWS Glue namespace and provide metrics for the followin
 |  `JobRunId`  |  This dimension filters for metrics of a specific AWS Glue job run by a JobRun ID, or `ALL`\.  | 
 |  `Type`  |  This dimension filters for metrics by either `count` \(an aggregate number\) or `gauge` \(a value at a point in time\)\.  | 
 
-For more information, see the [CloudWatch User Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/)\.
+For more information, see the [Amazon CloudWatch User Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/)\.

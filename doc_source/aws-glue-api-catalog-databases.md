@@ -5,6 +5,8 @@ The Database API describes database data types, and includes the API for creatin
 ## Data Types<a name="aws-glue-api-catalog-databases-objects"></a>
 + [Database Structure](#aws-glue-api-catalog-databases-Database)
 + [DatabaseInput Structure](#aws-glue-api-catalog-databases-DatabaseInput)
++ [PrincipalPermissions Structure](#aws-glue-api-catalog-databases-PrincipalPermissions)
++ [DataLakePrincipal Structure](#aws-glue-api-catalog-databases-DataLakePrincipal)
 
 ## Database Structure<a name="aws-glue-api-catalog-databases-Database"></a>
 
@@ -30,6 +32,9 @@ The `Database` object represents a logical grouping of tables that might reside 
 + `CreateTime` – Timestamp\.
 
   The time at which the metadata database was created in the catalog\.
++ `CreateTableDefaultPermissions` – An array of [PrincipalPermissions](#aws-glue-api-catalog-databases-PrincipalPermissions) objects\.
+
+  Creates a set of default permissions on the table for principals\. 
 
 ## DatabaseInput Structure<a name="aws-glue-api-catalog-databases-DatabaseInput"></a>
 
@@ -44,7 +49,7 @@ The structure used to create or update a database\.
   A description of the database\.
 + `LocationUri` – Uniform resource identifier \(uri\), not less than 1 or more than 1024 bytes long, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
 
-  The location of the database \(for example, an HDFS path\)\.
+  The location of the database \(for example, an HDFS path\)\. 
 + `Parameters` – A map array of key\-value pairs\.
 
   Each key is a Key string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
@@ -52,6 +57,32 @@ The structure used to create or update a database\.
   Each value is a UTF\-8 string, not more than 512000 bytes long\.
 
   These key\-value pairs define parameters and properties of the database\.
+
+  These key\-value pairs define parameters and properties of the database\.
++ `CreateTableDefaultPermissions` – An array of [PrincipalPermissions](#aws-glue-api-catalog-databases-PrincipalPermissions) objects\.
+
+  Creates a set of default permissions on the table for principals\. 
+
+## PrincipalPermissions Structure<a name="aws-glue-api-catalog-databases-PrincipalPermissions"></a>
+
+Permissions granted to a principal\.
+
+**Fields**
++ `Principal` – A [DataLakePrincipal](#aws-glue-api-catalog-databases-DataLakePrincipal) object\.
+
+  The principal who is granted permissions\.
++ `Permissions` – An array of UTF\-8 strings\.
+
+  The permissions that are granted to the principal\.
+
+## DataLakePrincipal Structure<a name="aws-glue-api-catalog-databases-DataLakePrincipal"></a>
+
+The AWS Lake Formation principal\.
+
+**Fields**
++ `DataLakePrincipalIdentifier` – UTF\-8 string, not less than 1 or more than 255 bytes long\.
+
+  An identifier for the AWS Lake Formation principal\.
 
 ## Operations<a name="aws-glue-api-catalog-databases-actions"></a>
 + [CreateDatabase Action \(Python: create\_database\)](#aws-glue-api-catalog-databases-CreateDatabase)

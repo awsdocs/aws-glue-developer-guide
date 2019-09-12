@@ -1,12 +1,13 @@
 # Defining Tables in the AWS Glue Data Catalog<a name="tables-described"></a>
 
-When you define a table in AWS Glue, you also specify the value of a classification field that indicates the type and format of the data that's stored in that table\. If a crawler creates the table, these classifications are determined by either a built\-in classifier or a custom classifier\. If you create a table manually in the console or by using an API, you specify the classification when you define the table\. For more information about creating a table using the AWS Glue console, see [Working with Tables on the AWS Glue Console](console-tables.md)\. 
+You can add table definitions to the Data Catalog in the following ways:
++ Run a crawler that connects to one or more data stores, determines the data structures, and writes tables into the Data Catalog\. The crawler uses built\-in or custom classifiers to recognize the structure of the data\. You can run your crawler on a schedule\. For more information, see [Defining Crawlers](add-crawler.md)\.
++ Use the AWS Glue console to manually create a table in the AWS Glue Data Catalog\. For more information, see [Working with Tables on the AWS Glue Console](console-tables.md)\.
++ Use the `CreateTable` operation in the [AWS Glue API](aws-glue-api.md) to create a table in the AWS Glue Data Catalog\. For more information, see [CreateTable Action \(Python: create\_table\)](aws-glue-api-catalog-tables.md#aws-glue-api-catalog-tables-CreateTable)\.
++ Use AWS CloudFormation templates\. For more information, see [Populating the Data Catalog Using AWS CloudFormation Templates](populate-with-cloudformation-templates.md)\.
++ Migrate an Apache Hive metastore\. For more information, see [Migration between the Hive Metastore and the AWS Glue Data Catalog](https://github.com/aws-samples/aws-glue-samples/tree/master/utilities/Hive_metastore_migration) on GitHub\.
 
-When a crawler detects a change in table metadata, a new version of the table is created in the AWS Glue Data Catalog\. You can compare current and past versions of a table\.
-
-The schema of the table contains its structure\. You can also edit a schema to create a new version of the table\.
-
-The table's history is also maintained in the Data Catalog\. This history includes metrics that are gathered when a data store is updated by an extract, transform, and load \(ETL\) job\. You can find out the name of the job, when it ran, how many rows were added, and how long the job took to run\. The version of the schema that was used by an ETL job is also kept in the history\.
+When you define a table manually using the console or an API, you specify the table schema and the value of a classification field that indicates the type and format of the data in the data source\. If a crawler creates the table, the data format and schema are determined by either a built\-in classifier or a custom classifier\. For more information about creating a table using the AWS Glue console, see [Working with Tables on the AWS Glue Console](console-tables.md)\. 
 
 ## Table Partitions<a name="tables-partition"></a>
 
@@ -30,3 +31,15 @@ The following Amazon S3 listing of `my-app-bucket` shows some of the partitions\
    my-app-bucket/Sales/year='2017'/month='feb'/day='4'/iOS.csv
    my-app-bucket/Sales/year='2017'/month='feb'/day='4'/Android.csv
 ```
+
+## Updating Manually Created Data Catalog Tables Using Crawlers<a name="update-manual-tables"></a>
+
+You might want to create AWS Glue Data Catalog tables manually and then keep them updated with AWS Glue crawlers\. Crawlers running on a schedule can add new partitions and update the tables with any schema changes\. This also applies to tables migrated from an Apache Hive metastore\.
+
+To do this, when you define a crawler, instead of specifying one or more data stores as the source of a crawl, you specify one or more existing Data Catalog tables\. The crawler then crawls the data stores specified by the catalog tables\. In this case, no new tables are created; instead, your manually created tables are updated\.
+
+The following are other reasons why you might want to manually create catalog tables and specify catalog tables as the crawler source:
++ You want to choose the catalog table name and not rely on the catalog table naming algorithm\.
++ You want to prevent new tables from being created in the case where files with a format that could disrupt partition detection are mistakenly saved in the data source path\.
+
+For more information, see [Crawler Source Type](define-crawler.md#crawler-source-type)\.

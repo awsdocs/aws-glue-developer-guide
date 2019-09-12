@@ -1,8 +1,8 @@
-# Identity\-Based Policies \(IAM Policies\) For Access Control<a name="using-identity-based-policies"></a>
+# Identity\-Based Policies \(IAM Policies\) for Access Control<a name="using-identity-based-policies"></a>
 
-This type of policy is attached to an IAM identity \(user, group, role, or service\) and grants permissions for that IAM identity to access specified resources\.
+Identity\-based policies are attached to an IAM identity \(user, group, role, or service\)\. This type of policy grants permissions for that IAM identity to access specified resources\.
 
-AWS Glue supports identity\-based policies \(IAM policies\) for all AWS Glue operations\. By attaching a policy to a user or a group in your account, you can grant them permissions to create, access, or modify an AWS Glue resource such as a table in the AWS Glue Data Catalog\.
+AWS Glue supports identity\-based policies \(IAM policies\) for all AWS Glue operations\. By attaching a policy to a user or a group in your account, you can grant them permissions to create, access, or modify an AWS Glue resource, such as a table in the AWS Glue Data Catalog\.
 
 By attaching a policy to an IAM role, you can grant cross\-account access permissions to IAM identities in other AWS accounts\. For more information, see [Granting Cross\-Account Access](cross-account-access.md)\.
 
@@ -102,11 +102,11 @@ You can also control access to certain types of AWS Glue resources using AWS tag
 **Important**  
 The condition context keys apply only to those AWS Glue API actions on crawlers, jobs, triggers, and development endpoints\. For more information about which APIs are affected, see [AWS Glue API Permissions: Actions and Resources Reference](api-permissions-reference.md)\.
 
-For information about how to control access using tags, see [AWS Glue Identity\-Based \(IAM\) Access\-Control Policy With Tags Examples](glue-policy-examples-iam-tags.md)\.
+For information about how to control access using tags, see [AWS Glue Identity\-Based \(IAM\) Access Control Policy with Tags Examples](glue-policy-examples-iam-tags.md)\.
 
-## Resource\-Level Permissions Only Applies To Specific AWS Glue Objects<a name="glue-identity-based-policy-limitations"></a>
+## Resource\-Level Permissions Only Apply to Specific AWS Glue Objects<a name="glue-identity-based-policy-limitations"></a>
 
-Because you can only define fine\-grained control for specific objects in AWS Glue, you must write your client's IAM policy so that API operations that allow ARNs for the `Resource` statement are not mixed with API operations that do not allow ARNs\. For example, the following IAM policy allows API operations for `GetClassifier` and `GetJobRun` and defines the `Resource` as `*` because AWS Glue does not allow ARNs for classifiers and job runs\. Because ARNs are allowed for specific API operations such as `GetDatabase` and `GetTable`, ARNs can be specified in the second half of the policy\.
+You can only define fine\-grained control for specific objects in AWS Glue\. Therefore you must write your client's IAM policy so that API operations that allow Amazon Resource Names \(ARNs\) for the `Resource` statement are not mixed with API operations that don't allow ARNs\. For example, the following IAM policy allows API operations for `GetClassifier` and `GetJobRun`\. It defines the `Resource` as `*` because AWS Glue doesn't allow ARNs for classifiers and job runs\. Because ARNs are allowed for specific API operations such as `GetDatabase` and `GetTable`, ARNs can be specified in the second half of the policy\.
 
 ```
 {
@@ -136,22 +136,22 @@ Because you can only define fine\-grained control for specific objects in AWS Gl
 }
 ```
 
-For a list of AWS Glue objects that allow ARNs, see [Resource ARNs](glue-specifying-resource-arns.md) 
+For a list of AWS Glue objects that allow ARNs, see [Resource ARNs](glue-specifying-resource-arns.md)\. 
 
 ## Permissions Required to Use the AWS Glue Console<a name="console-permissions"></a>
 
-For a user to work with the AWS Glue console, that user must have a minimum set of permissions that allows the user to work with the AWS Glue resources for their AWS account\. In addition to these AWS Glue permissions, the console requires permissions from the following services:
+For a user to work with the AWS Glue console, that user must have a minimum set of permissions that allows them to work with the AWS Glue resources for their AWS account\. In addition to these AWS Glue permissions, the console requires permissions from the following services:
 + Amazon CloudWatch Logs permissions to display logs\.
-+ AWS Identity and Access Management permissions to list and pass roles\.
++ AWS Identity and Access Management \(IAM\) permissions to list and pass roles\.
 + AWS CloudFormation permissions to work with stacks\.
-+ Amazon Elastic Compute Cloud permissions to list VPCs, subnets, security groups, instances, and other objects\.
-+ Amazon Simple Storage Service permissions to list buckets and objects\. Also permission to retrieve and save scripts\.
++ Amazon Elastic Compute Cloud \(Amazon EC2\) permissions to list VPCs, subnets, security groups, instances, and other objects\.
++ Amazon Simple Storage Service \(Amazon S3\) permissions to list buckets and objects, and to retrieve and save scripts\.
 + Amazon Redshift permissions to work with clusters\.
-+ Amazon Relational Database Service permissions to list instances\.
++ Amazon Relational Database Service \(Amazon RDS\) permissions to list instances\.
 
-For more information on the permissions that your users require to view and work with the AWS Glue console, see [Step 3: Attach a Policy to IAM Users That Access AWS Glue](attach-policy-iam-user.md)\.
+For more information about the permissions that users require to view and work with the AWS Glue console, see [Step 3: Attach a Policy to IAM Users That Access AWS Glue](attach-policy-iam-user.md)\.
 
-If you create an IAM policy that is more restrictive than the minimum required permissions, the console won't function as intended for users with that IAM policy\. To ensure that those users can still use the AWS Glue console, also attach the `AWSGlueConsoleFullAccess` managed policy to  the user, as described in [AWS Managed \(Predefined\) Policies for AWS Glue](#access-policy-examples-aws-managed)\.
+If you create an IAM policy that is more restrictive than the minimum required permissions, the console won't function as intended for users with that IAM policy\. To ensure that those users can still use the AWS Glue console, also attach the `AWSGlueConsoleFullAccess` managed policy to the user, as described in [AWS Managed \(Predefined\) Policies for AWS Glue](#access-policy-examples-aws-managed)\.
 
 You don't need to allow minimum console permissions for users that are making calls only to the AWS CLI or the AWS Glue API\.
 

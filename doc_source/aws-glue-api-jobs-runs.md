@@ -49,11 +49,11 @@ Contains information about a job run\.
 
   The job arguments associated with this run\. For this job run, they replace the default arguments set in the job definition itself\.
 
-  You can specify arguments here that your own job\-execution script consumes, in addition to arguments that AWS Glue itself consumes\.
+  You can specify arguments here that your own job\-execution script consumes, as well as arguments that AWS Glue itself consumes\.
 
-  For information about how to specify and consume your own job arguments, see [Calling AWS Glue APIs in Python](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html) in the *AWS Glue Developer Guide*\.
+  For information about how to specify and consume your own job arguments, see the [Calling AWS Glue APIs in Python](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html) topic in the developer guide\.
 
-  For information about the key\-value pairs that AWS Glue consumes to set up your job, see [Special Parameters Used by AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html) in the *AWS Glue Developer Guide*\.
+  For information about the key\-value pairs that AWS Glue consumes to set up your job, see the [Special Parameters Used by AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html) topic in the developer guide\.
 + `ErrorMessage` – UTF\-8 string\.
 
   An error message associated with this job run\.
@@ -64,7 +64,7 @@ Contains information about a job run\.
 
   This field is deprecated\. Use `MaxCapacity` instead\.
 
-  The number of AWS Glue data processing units \(DPUs\) allocated to this `JobRun`\. You can allocate from 2 to 100 DPUs; the default is 10\. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory\. For more information, see the [AWS Glue pricing page](https://aws.amazon.com/glue/pricing/)\.
+  The number of AWS Glue data processing units \(DPUs\) allocated to this JobRun\. From 2 to 100 DPUs can be allocated; the default is 10\. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory\. For more information, see the [AWS Glue pricing page](https://aws.amazon.com/glue/pricing/)\.
 + `ExecutionTime` – Number \(integer\)\.
 
   The amount of time \(in seconds\) that the job run consumed resources\.
@@ -73,16 +73,13 @@ Contains information about a job run\.
   The `JobRun` timeout in minutes\. This is the maximum time that a job run can consume resources before it is terminated and enters `TIMEOUT` status\. The default is 2,880 minutes \(48 hours\)\. This overrides the timeout value set in the parent job\.
 + `MaxCapacity` – Number \(double\)\.
 
-  The number of AWS Glue data processing units \(DPUs\) that can be allocated when this job runs\. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory\. For more information, see the [AWS Glue pricing page](https://aws.amazon.com/glue/pricing/)\.
+  The number of AWS Glue data processing units \(DPUs\) that can be allocated when this job runs\. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory\. For more information, see the [AWS Glue pricing page](https://docs.aws.amazon.com/https://aws.amazon.com/glue/pricing/)\.
 
   Do not set `Max Capacity` if using `WorkerType` and `NumberOfWorkers`\.
 
   The value that can be allocated for `MaxCapacity` depends on whether you are running a Python shell job or an Apache Spark ETL job:
   + When you specify a Python shell job \(`JobCommand.Name`="pythonshell"\), you can allocate either 0\.0625 or 1 DPU\. The default is 0\.0625 DPU\.
   + When you specify an Apache Spark ETL job \(`JobCommand.Name`="glueetl"\), you can allocate from 2 to 100 DPUs\. The default is 10 DPUs\. This job type cannot have a fractional DPU allocation\.
-+ `NotificationProperty` – A [NotificationProperty](aws-glue-api-jobs-job.md#aws-glue-api-jobs-job-NotificationProperty) object\.
-
-  Specifies configuration properties of a job run notification\.
 + `WorkerType` – UTF\-8 string \(valid values: `Standard=""` \| `G.1X=""` \| `G.2X=""`\)\.
 
   The type of predefined worker that is allocated when a job runs\. Accepts a value of Standard, G\.1X, or G\.2X\.
@@ -100,6 +97,16 @@ Contains information about a job run\.
 + `LogGroupName` – UTF\-8 string\.
 
   The name of the log group for secure logging that can be server\-side encrypted in Amazon CloudWatch using AWS KMS\. This name can be `/aws-glue/jobs/`, in which case the default encryption is `NONE`\. If you add a role name and `SecurityConfiguration` name \(in other words, `/aws-glue/jobs-yourRoleName-yourSecurityConfigurationName/`\), then that security configuration is used to encrypt the log group\.
++ `NotificationProperty` – A [NotificationProperty](aws-glue-api-jobs-job.md#aws-glue-api-jobs-job-NotificationProperty) object\.
+
+  Specifies configuration properties of a job run notification\.
++ `GlueVersion` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Custom string pattern #13](aws-glue-api-common.md#regex_13)\.
+
+  Glue version determines the versions of Apache Spark and Python that AWS Glue supports\. The Python version indicates the version supported for jobs of type Spark\. 
+
+  For more information about the available AWS Glue versions and corresponding Spark and Python versions, see [Glue version](https://docs.aws.amazon.com/glue/latest/dg/add-job.html) in the developer guide\.
+
+  Jobs that are created without specifying a Glue version default to Glue 0\.9\.
 
 ## Predecessor Structure<a name="aws-glue-api-jobs-runs-Predecessor"></a>
 
@@ -130,6 +137,12 @@ Defines a point that a job can resume processing\.
 + `Attempt` – Number \(integer\)\.
 
   The attempt ID number\.
++ `PreviousRunId` – UTF\-8 string\.
+
+  The unique run identifier associated with the previous job run\.
++ `RunId` – UTF\-8 string\.
+
+  The run ID number\.
 + `JobBookmark` – UTF\-8 string\.
 
   The bookmark itself\.
@@ -187,28 +200,34 @@ Starts a job run using a job definition\.
 
   The job arguments specifically for this run\. For this job run, they replace the default arguments set in the job definition itself\.
 
-  You can specify arguments here that your own job\-execution script consumes, in addition to arguments that AWS Glue itself consumes\.
+  You can specify arguments here that your own job\-execution script consumes, as well as arguments that AWS Glue itself consumes\.
 
-  For information about how to specify and consume your own job arguments, see [Calling AWS Glue APIs in Python](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html) in the *AWS Glue Developer Guide*\.
+  For information about how to specify and consume your own Job arguments, see the [Calling AWS Glue APIs in Python](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html) topic in the developer guide\.
 
-  For information about the key\-value pairs that AWS Glue consumes to set up your job, see [Special Parameters Used by AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html) in the *AWS Glue Developer Guide*\.
+  For information about the key\-value pairs that AWS Glue consumes to set up your job, see the [Special Parameters Used by AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html) topic in the developer guide\.
 + `AllocatedCapacity` – Number \(integer\)\.
 
   This field is deprecated\. Use `MaxCapacity` instead\.
 
-  The number of AWS Glue data processing units \(DPUs\) to allocate to this `JobRun`\. You can allocate from 2 to 100 DPUs; the default is 10\. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory\. For more information, see the [AWS Glue pricing page](https://aws.amazon.com/glue/pricing/)\.
+  The number of AWS Glue data processing units \(DPUs\) to allocate to this JobRun\. From 2 to 100 DPUs can be allocated; the default is 10\. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory\. For more information, see the [AWS Glue pricing page](https://docs.aws.amazon.com/https://aws.amazon.com/glue/pricing/)\.
 + `Timeout` – Number \(integer\), at least 1\.
 
   The `JobRun` timeout in minutes\. This is the maximum time that a job run can consume resources before it is terminated and enters `TIMEOUT` status\. The default is 2,880 minutes \(48 hours\)\. This overrides the timeout value set in the parent job\.
 + `MaxCapacity` – Number \(double\)\.
 
-  The number of AWS Glue data processing units \(DPUs\) that can be allocated when this job runs\. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory\. For more information, see the [AWS Glue pricing page](https://aws.amazon.com/glue/pricing/)\.
+  The number of AWS Glue data processing units \(DPUs\) that can be allocated when this job runs\. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory\. For more information, see the [AWS Glue pricing page](https://docs.aws.amazon.com/https://aws.amazon.com/glue/pricing/)\.
 
   Do not set `Max Capacity` if using `WorkerType` and `NumberOfWorkers`\.
 
   The value that can be allocated for `MaxCapacity` depends on whether you are running a Python shell job, or an Apache Spark ETL job:
   + When you specify a Python shell job \(`JobCommand.Name`="pythonshell"\), you can allocate either 0\.0625 or 1 DPU\. The default is 0\.0625 DPU\.
   + When you specify an Apache Spark ETL job \(`JobCommand.Name`="glueetl"\), you can allocate from 2 to 100 DPUs\. The default is 10 DPUs\. This job type cannot have a fractional DPU allocation\.
++ `SecurityConfiguration` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the `SecurityConfiguration` structure to be used with this job run\.
++ `NotificationProperty` – A [NotificationProperty](aws-glue-api-jobs-job.md#aws-glue-api-jobs-job-NotificationProperty) object\.
+
+  Specifies configuration properties of a job run notification\.
 + `WorkerType` – UTF\-8 string \(valid values: `Standard=""` \| `G.1X=""` \| `G.2X=""`\)\.
 
   The type of predefined worker that is allocated when a job runs\. Accepts a value of Standard, G\.1X, or G\.2X\.
@@ -220,12 +239,6 @@ Starts a job run using a job definition\.
   The number of workers of a defined `workerType` that are allocated when a job runs\.
 
   The maximum number of workers you can define are 299 for `G.1X`, and 149 for `G.2X`\. 
-+ `SecurityConfiguration` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
-
-  The name of the `SecurityConfiguration` structure to be used with this job run\.
-+ `NotificationProperty` – A [NotificationProperty](aws-glue-api-jobs-job.md#aws-glue-api-jobs-job-NotificationProperty) object\.
-
-  Specifies configuration properties of a job run notification\.
 
 **Response**
 + `JobRunId` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
@@ -328,6 +341,9 @@ Resets a bookmark entry\.
 + `JobName` – *Required:* UTF\-8 string\.
 
   The name of the job in question\.
++ `RunId` – UTF\-8 string\.
+
+  The unique run identifier associated with this job run\.
 
 **Response**
 + `JobBookmarkEntry` – A [JobBookmarkEntry](#aws-glue-api-jobs-runs-JobBookmarkEntry) object\.

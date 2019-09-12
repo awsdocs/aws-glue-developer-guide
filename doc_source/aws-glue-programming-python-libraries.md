@@ -2,7 +2,7 @@
 
 You can use Python extension modules and libraries with your AWS Glue ETL scripts as long as they are written in pure Python\. C libraries such as `pandas` are not supported at the present time, nor are extensions written in other languages\.
 
-Note that the instructions below on Zipping libraries only applies to Spark ETL scripts. Python libraries for Python Shell scripts should be packaged as `.egg` files instead, as described in [Providing Your Own Python Library](add-job-python.md#providing-your-own-python-library).
+Note that the instructions below on packaging libraries as a `.zip` archive only applies to Spark ETL scripts\. Python libraries for Python Shell scripts should be packaged as `.egg` files instead, as described in [Providing Your Own Python Library](https://docs.aws.amazon.com/glue/latest/dg/add-job-python.html#create-python-extra-library)\.
 
 ## Zipping Libraries for Inclusion<a name="aws-glue-programming-python-libraries-zipping"></a>
 

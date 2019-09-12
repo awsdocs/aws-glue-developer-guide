@@ -6,7 +6,7 @@ The tutorial assumes that you have already taken the steps outlined in [Tutorial
 
 ## Installing an Apache Zeppelin Notebook<a name="dev-endpoint-tutorial-local-notebook-zeppelin"></a>
 
-1. Make sure that you have an up\-to\-date version of Java installed on your local machine \(see [the Java home page](https://www.java.com/en/) for the latest version\)\.
+1. Make sure that you have Java Development Kit 1\.7 installed on your local machine \(see [the Java home page](https://www.java.com/en/)\)\.
 
    If you are running on Microsoft Windows, make sure that the `JAVA_HOME` environment variable points to the right Java directory\. It's possible to update Java without updating this variable, and if it points to a folder that no longer exists, Zeppelin fails to start\.
 

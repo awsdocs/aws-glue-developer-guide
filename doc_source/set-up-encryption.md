@@ -1,6 +1,6 @@
 # Setting Up Encryption in AWS Glue<a name="set-up-encryption"></a>
 
-The following example workflow highlights the options to configure when you use encryption with AWS Glue\. The example demonstrates the use of specific AWS Key Management Service \(AWS KMS\) keys, but you might choose other settings based on your particular needs\. This workflow highlights only the options that pertain to encryption when setting up AWS Glue\. For more information about encryption, see [Encryption and Secure Access for AWS Glue](encryption-glue-resources.md)\.  
+The following example workflow highlights the options to configure when you use encryption with AWS Glue\. The example demonstrates the use of specific AWS Key Management Service \(AWS KMS\) keys, but you might choose other settings based on your particular needs\. This workflow highlights only the options that pertain to encryption when setting up AWS Glue\.  
 
 1. If the user of the AWS Glue console doesn't use a permissions policy that allows all AWS Glue API operations \(for example, `"glue:*"`\), confirm that the following actions are allowed:
    + `"glue:GetDataCatalogEncryptionSettings"`
@@ -98,7 +98,7 @@ The following example workflow highlights the options to configure when you use 
 
 1. On the AWS Glue console, choose **Settings** in the navigation pane\. On the **Data catalog settings** page, encrypt your Data Catalog by selecting the **Metadata encryption** check box\. This option encrypts all the objects in the Data Catalog with the AWS KMS key that you choose\.
 
-   When encryption is enabled, the client that is accessing the Data Catalog must have AWS KMS permissions\. For more information, see [Encrypting Your Data Catalog](encrypt-glue-data-catalog.md)\.
+   When encryption is enabled, the client that is accessing the Data Catalog must have AWS KMS permissions\. 
 
 1. In the navigation pane, choose **Security configurations**\. A security configuration is a set of security properties that can be used to configure AWS Glue processes\. Then choose **Add security configuration**\. In the configuration, choose any of the following options: 
 

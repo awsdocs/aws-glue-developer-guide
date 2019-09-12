@@ -1,4 +1,4 @@
-# AWS Glue Resource\-Based Access\-Control Policy Examples<a name="glue-policy-examples-resource-policies"></a>
+# AWS Glue Resource\-Based Access Control Policy Examples<a name="glue-policy-examples-resource-policies"></a>
 
 This section contains example resource policies, including policies that grant cross\-account access\.
 
@@ -16,7 +16,7 @@ The following examples use the AWS Command Line Interface \(AWS CLI\) to interac
 
 1. Configure the AWS CLI by following the instructions in [Configuration and Credential Files](https://docs.aws.amazon.com/cli/latest/userguide/cli-config-files.html)\. Create an admin profile using your AWS account administrator credentials\. Configure the default AWS Region to us\-west\-2 \(or a Region that you use\), and set the default output format to **JSON**\.
 
-1. Test access to the AWS Glue API by running the following command \(replacing *Alice* with a real IAM user or role in your account\):
+1. Test access to the AWS Glue API by running the following command \(replacing *Alice* with a real IAM user or role in your account\)\.
 
    ```
    # Run as admin of account account-id
@@ -47,7 +47,7 @@ The following examples use the AWS Command Line Interface \(AWS CLI\) to interac
 
 In this example, an admin user in Account A creates a resource policy that grants IAM user `Alice` in Account A full access to the catalog\. Alice has no IAM policy attached\.
 
-To do this, the administrator user runs the following AWS CLI command:
+To do this, the administrator user runs the following AWS CLI command\.
 
 ```
 # Run as admin of Account A
@@ -72,7 +72,7 @@ $ aws glue put-resource-policy --profile administrator-name --region us-west-2 -
 }'
 ```
 
-Instead of entering the JSON policy document as a part of your AWS CLI command, you can save a policy document in a file and reference the file path in the AWS CLI command, prefixed by `file://`\. The following is an example of how you might do that:
+Instead of entering the JSON policy document as a part of your AWS CLI command, you can save a policy document in a file and reference the file path in the AWS CLI command, prefixed by `file://`\. The following is an example of how you might do that\.
 
 ```
 $ echo '{
@@ -99,7 +99,7 @@ $ aws glue put-resource-policy --profile admin1 \
     --region us-west-2 --policy-in-json file:///temp/policy.json
 ```
 
-After this resource policy has propagated, Alice can access all AWS Glue resources in Account A; for example:
+After this resource policy has propagated, Alice can access all AWS Glue resources in Account A, as follows\.
 
 ```
 # Run as user Alice
@@ -112,7 +112,7 @@ $ aws glue create-database --profile alice --region us-west-2 --database-input '
 $ aws glue get-table --profile alice --region us-west-2 --database-name "default" --table-name "tbl1"}
 ```
 
-In response to Alice's `get-table` call, the AWS Glue service returns the following:
+In response to Alice's `get-table` call, the AWS Glue service returns the following\.
 
 ```
 {
@@ -239,4 +239,4 @@ In this example, a resource policy in Account A is used to grant to Bob in Accou
 
 In step 2, the administrator in Account A grants permission to the root user of Account B\. The root user can then delegate the permissions it owns to all IAM principals \(users, roles, groups, and so forth\) by attaching IAM policies to them\. Because an admin user already has a full\-access IAM policy attached, an administrator automatically owns the permissions granted to the root user, and also the permission to delegate permissions to other IAM users in the account\.
 
-Alternatively, in step 2, you could grant permission to the ARN of user Bob directly\. This restricts the cross\-account access permission to Bob alone\. However, step 3 is still required for Bob to actually gain the cross\-account access\. For cross\-account access, **both** the resource policy in the resource account **and** an IAM policy in the user's account are required for access to work\. This is different from the same\-account access in Example 1, where either the resource policy or the IAM policy can grant access without needing the other\.
+Alternatively, in step 2, you could grant permission to the Amazon Resource Name \(ARN\) of user Bob directly\. This restricts the cross\-account access permission to Bob alone\. However, step 3 is still required for Bob to actually gain the cross\-account access\. For cross\-account access, *both* the resource policy in the resource account *and* an IAM policy in the user's account are required for access to work\. This is different from the same\-account access in Example 1, where either the resource policy or the IAM policy can grant access without needing the other\.

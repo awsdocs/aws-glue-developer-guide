@@ -107,7 +107,7 @@ A classifier for `JSON` content\.
   The version of this classifier\.
 + `JsonPath` – *Required:* UTF\-8 string\.
 
-  A `JsonPath` string defining the JSON data for the classifier to classify\. AWS Glue supports a subset of `JsonPath`, as described in [Writing JsonPath Custom Classifiers](https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json)\.
+  A `JsonPath` string defining the JSON data for the classifier to classify\. AWS Glue supports a subset of JsonPath, as described in [Writing JsonPath Custom Classifiers](https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json)\.
 
 ## CsvClassifier Structure<a name="aws-glue-api-crawler-classifiers-CsvClassifier"></a>
 
@@ -221,7 +221,7 @@ Specifies a JSON classifier for `CreateClassifier` to create\.
   The name of the classifier\.
 + `JsonPath` – *Required:* UTF\-8 string\.
 
-  A `JsonPath` string defining the JSON data for the classifier to classify\. AWS Glue supports a subset of `JsonPath`, as described in [Writing JsonPath Custom Classifiers](https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json)\.
+  A `JsonPath` string defining the JSON data for the classifier to classify\. AWS Glue supports a subset of JsonPath, as described in [Writing JsonPath Custom Classifiers](https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json)\.
 
 ## UpdateJsonClassifierRequest Structure<a name="aws-glue-api-crawler-classifiers-UpdateJsonClassifierRequest"></a>
 
@@ -233,7 +233,7 @@ Specifies a JSON classifier to be updated\.
   The name of the classifier\.
 + `JsonPath` – UTF\-8 string\.
 
-  A `JsonPath` string defining the JSON data for the classifier to classify\. AWS Glue supports a subset of `JsonPath`, as described in [Writing JsonPath Custom Classifiers](https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json)\.
+  A `JsonPath` string defining the JSON data for the classifier to classify\. AWS Glue supports a subset of JsonPath, as described in [Writing JsonPath Custom Classifiers](https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json)\.
 
 ## CreateCsvClassifierRequest Structure<a name="aws-glue-api-crawler-classifiers-CreateCsvClassifierRequest"></a>
 

@@ -6,13 +6,13 @@ When a crawler runs, it might encounter changes to your data store that result i
 + [Configuring a Crawler on the AWS Glue Console](#crawler-configure-changes-console)
 + [Configuring a Crawler Using the API](#crawler-configure-changes-api)
 + [How to Prevent the Crawler from Changing an Existing Schema](#crawler-schema-changes-prevent)
-+ [How to Create a Single Schema For Each Amazon S3 Include Path](#crawler-grouping-policy)
++ [How to Create a Single Schema for Each Amazon S3 Include Path](#crawler-grouping-policy)
 
 ## Configuring a Crawler on the AWS Glue Console<a name="crawler-configure-changes-console"></a>
 
 When you define a crawler using the AWS Glue console, you have several options for configuring the behavior of your crawler\. For more information about using the AWS Glue console to add a crawler, see [Working with Crawlers on the AWS Glue Console](console-crawlers.md)\.
 
-When a crawler runs against a previously crawled data store, it might discover that a schema has changed or that some objects in the data store have been deleted\. The crawler logs changes to a schema\. New tables and partitions are always created regardless of the schema change policy\.
+When a crawler runs against a previously crawled data store, it might discover that a schema has changed or that some objects in the data store have been deleted\. The crawler logs changes to a schema\. Depending on the source type for the crawler, new tables and partitions might be created regardless of the schema change policy\.
 
 To specify what the crawler does when it finds changes in the schema, you can choose one of the following actions on the console:
 + **Update the table definition in the Data Catalog** – Add new columns, remove missing columns, and modify the definitions of existing columns in the AWS Glue Data Catalog\. Remove any metadata that is not set by the crawler\. This is the default setting\.
@@ -74,7 +74,7 @@ The crawler API `Configuration` field can set multiple configuration options\. F
 
 You can choose one of the following actions to determine what the crawler does when it finds a deleted object in the data store\. The `DeleteBehavior` field in the `SchemaChangePolicy` structure in the crawler API sets the behavior of the crawler when it discovers a deleted object\. 
 + `DELETE_FROM_DATABASE` – Delete tables and partitions from the Data Catalog\.
-+ `LOG` – Ignore the change and don't update the table in the Data Catalog\.
++ `LOG` – Ignore the change\. Don't update the Data Catalog\. Write a log message instead\.
 + `DEPRECATE_IN_DATABASE` – Mark the table as deprecated in the Data Catalog\. This is the default setting\.
 
 ## How to Prevent the Crawler from Changing an Existing Schema<a name="crawler-schema-changes-prevent"></a>
@@ -100,9 +100,9 @@ When you configure the crawler using the API, set the following parameters:
   }
   ```
 
-## How to Create a Single Schema For Each Amazon S3 Include Path<a name="crawler-grouping-policy"></a>
+## How to Create a Single Schema for Each Amazon S3 Include Path<a name="crawler-grouping-policy"></a>
 
-By default, when a crawler defines tables for data stored in Amazon S3, it considers both data compatibility and schema similarity\. Data compatibility factors taken into account include whether the data is of the same format \(for example, JSON\), the same compression type \(for example, GZIP\), the structure of the Amazon S3 path, and other data attributes\. Schema similarity is a measure of how closely the schemas of separate Amazon S3 objects are similar\.
+By default, when a crawler defines tables for data stored in Amazon S3, it considers both data compatibility and schema similarity\. Data compatibility factors that it considers include whether the data is of the same format \(for example, JSON\), the same compression type \(for example, GZIP\), the structure of the Amazon S3 path, and other data attributes\. Schema similarity is a measure of how closely the schemas of separate Amazon S3 objects are similar\.
 
 You can configure a crawler to `CombineCompatibleSchemas` into a common table definition when possible\. With this option, the crawler still considers data compatibility, but ignores the similarity of the specific schemas when evaluating Amazon S3 objects in the specified include path\.
 
@@ -119,7 +119,7 @@ When you configure the crawler using the API, set the following configuration op
   }
   ```
 
-To help illustrate this option, suppose you define a crawler with an include path `s3://bucket/table1/`\. When the crawler runs, it finds two JSON files with the following characteristics:
+To help illustrate this option, suppose that you define a crawler with an include path `s3://bucket/table1/`\. When the crawler runs, it finds two JSON files with the following characteristics:
 + **File 1** – `S3://bucket/table1/year=2017/data1.json`
 + *File content* – `{“A”: 1, “B”: 2}`
 + *Schema* – `A:int, B:int`

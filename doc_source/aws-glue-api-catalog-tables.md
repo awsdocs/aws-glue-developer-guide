@@ -75,6 +75,9 @@ Represents a collection of related data organized in columns and rows\.
 + `CreatedBy` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The person or entity who created the table\.
++ `IsRegisteredWithLakeFormation` – Boolean\.
+
+  Indicates whether the table has been registered with AWS Lake Formation\.
 
 ## TableInput Structure<a name="aws-glue-api-catalog-tables-TableInput"></a>
 
@@ -136,10 +139,17 @@ A column in a `Table`\.
   The name of the `Column`\.
 + `Type` – UTF\-8 string, not more than 131072 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  The data type of the data in the `Column`\.
+  The data type of the `Column`\.
 + `Comment` – Comment string, not more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   A free\-form text comment\.
++ `Parameters` – A map array of key\-value pairs\.
+
+  Each key is a Key string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  Each value is a UTF\-8 string, not more than 512000 bytes long\.
+
+  These key\-value pairs define properties associated with the column\.
 
 ## StorageDescriptor Structure<a name="aws-glue-api-catalog-tables-StorageDescriptor"></a>
 

@@ -1,4 +1,4 @@
-# AWS Glue Identity\-Based \(IAM\) Access\-Control Policy With Tags Examples<a name="glue-policy-examples-iam-tags"></a>
+# AWS Glue Identity\-Based \(IAM\) Access Control Policy with Tags Examples<a name="glue-policy-examples-iam-tags"></a>
 
 This section contains example AWS Identity and Access Management \(IAM\) policies with tags to control permissions for various AWS Glue actions and resources\. You can copy these examples and edit them on the IAM console\. Then you can attach them to IAM identities such as users, roles, and groups\.
 
@@ -6,7 +6,7 @@ You can control access to crawlers, jobs, triggers, and development endpoints by
 
 ## Example Access Control Using Tags<a name="tags-control-access-example-triggers-allow"></a>
 
- For example, suppose you want to limit access to a trigger `t2` to a specific user named `Tom` in your account\. All other users, including `Sam`, have access to trigger `t1`\. The triggers `t1` and `t2` have the following properties\. 
+ For example, suppose that you want to limit access to a trigger `t2` to a specific user named `Tom` in your account\. All other users, including `Sam`, have access to trigger `t1`\. The triggers `t1` and `t2` have the following properties\. 
 
 ```
 aws glue get-triggers
@@ -58,7 +58,7 @@ The AWS Glue administrator attached a tag value `Tom` \(`glue:resourceTag/Name":
 }
 ```
 
-When Tom tries to access the trigger `t1` he receives an access denied message\. Meanwhile, he can successfully retrieve trigger `t2`\. 
+When Tom tries to access the trigger `t1`, he receives an access denied message\. Meanwhile, he can successfully retrieve trigger `t2`\. 
 
 ```
 aws glue get-trigger --name t1
@@ -81,9 +81,9 @@ aws glue get-trigger --name t2
 }
 ```
 
-Tom cannot use the plural `GetTriggers` API to list triggers as this API operation doesn't support filtering on tags\. 
+Tom can't use the plural `GetTriggers` API to list triggers because this API operation doesn't support filtering on tags\.
 
-To give Tom access to `GetTriggers`, the AWS Glue administrator creates a policy which splits the permissions into two sections\. One section allows Tom access to all triggers with the `GetTriggers` API operation\. The second section allows Tom access to API operations that are tagged with the value `Tom`\. With this policy, Tom is allowed both `GetTriggers` and `GetTrigger` access to trigger `t2`\. 
+To give Tom access to `GetTriggers`, the AWS Glue administrator creates a policy that splits the permissions into two sections\. One section allows Tom access to all triggers with the `GetTriggers` API operation\. The second section allows Tom access to API operations that are tagged with the value `Tom`\. With this policy, Tom is allowed both `GetTriggers` and `GetTrigger` access to trigger `t2`\. 
 
 ```
 {
@@ -108,7 +108,7 @@ To give Tom access to `GetTriggers`, the AWS Glue administrator creates a policy
 }
 ```
 
-## Example Access Control Using Tags With Deny<a name="tags-control-access-example-triggers-deny"></a>
+## Example Access Control Using Tags with Deny<a name="tags-control-access-example-triggers-deny"></a>
 
 Another approach to write a resource policy is to explicitly deny access to resources instead of granting access to a user\. For example, if Tom is considered a special user of a team, the administrator can deny access to Tom's resources to Sam and everyone else on the team\. As a result, Sam can access almost every resource except those tagged with the tag value `Tom`\. Here is the resource policy that AWS Glue administrator grants to Sam\. In the first section of the policy, all AWS Glue API operations are allowed for all resources\. However, in the second section, those resources tagged with `Tom` are denied access\. 
 
@@ -139,7 +139,7 @@ Another approach to write a resource policy is to explicitly deny access to reso
 }
 ```
 
-Using the same triggers as the prior example, Sam can access trigger `t1`, but not trigger `t2`\. The following example shows the results when Sam tries to access `t1` and `t2`\. 
+Using the same triggers as the previous example, Sam can access trigger `t1`, but not trigger `t2`\. The following example shows the results when Sam tries to access `t1` and `t2`\. 
 
 ```
 aws glue get-trigger --name t1
@@ -163,7 +163,7 @@ An error occurred (AccessDeniedException) when calling the GetTrigger operation:
 ```
 
 **Important**  
-An explicit denial policy does not work for plural APIs\. Even with the attachment of tag value `Tom` to trigger `t2`, Sam is still able to call `GetTriggers` to view trigger `t2`\. Because of this, the administrator might not want to allow access to the `GetTriggers` API operations\. The following example shows the results when Sam runs the `GetTriggers` API\.
+An explicit denial policy does not work for plural APIs\. Even with the attachment of tag value `Tom` to trigger `t2`, Sam can still call `GetTriggers` to view trigger `t2`\. Because of this, the administrator might not want to allow access to the `GetTriggers` API operations\. The following example shows the results when Sam runs the `GetTriggers` API\.
 
 ```
 aws glue get-triggers
@@ -195,9 +195,9 @@ aws glue get-triggers
 }
 ```
 
-## Example Access Control Using Tags With List and Batch API Operations<a name="tags-control-access-example-triggers-list-batch"></a>
+## Example Access Control Using Tags with List and Batch API Operations<a name="tags-control-access-example-triggers-list-batch"></a>
 
-A third approach to write a resource policy is to allow access to resources using a `List` API operation to list out resources for a tag value\. Then, use the corresponding `Batch` API operation to allow access to details of specific resources\. With this approach, the adminsitrator doesn't need to allow access to the plural `GetCrawlers`, `GetDevEndpoints`, `GetJobs`, or `GetTriggers` API operations\. Instead, you can allow the ability to list the resources with the following API operations:
+A third approach to writing a resource policy is to allow access to resources using a `List` API operation to list out resources for a tag value\. Then, use the corresponding `Batch` API operation to allow access to details of specific resources\. With this approach, the administrator doesn't need to allow access to the plural `GetCrawlers`, `GetDevEndpoints`, `GetJobs`, or `GetTriggers` API operations\. Instead, you can allow the ability to list the resources with the following API operations:
 + `ListCrawlers`
 + `ListDevEndpoints`
 + `ListJobs`
@@ -209,7 +209,7 @@ And, you can allow the ability to get details about individual resources with th
 + `BatchGetJobs`
 + `BatchGetTriggers`
 
-As an administrator, to make use of this approach you can:
+As an administrator, to use this approach, you can do the following:
 
 1. Add tags to your crawlers, development endpoints, jobs, and triggers\.
 
@@ -221,9 +221,9 @@ As an administrator, to make use of this approach you can:
 
 1. Allow user access to resource details with `BatchGet` API operations such as `BatchGetCrawlers`, `BatchGetDevEndponts`, `BatchGetJobs`, and `BatchGetTriggers`\.
 
-For example, when calling the `ListCrawlers` operation, provide a tag value to match the user name, then the result is a list of crawlers matching the provided tag values\. Provide the list of names to the `BatchGetCrawlers` to get details about each crawler with the given tag\.
+For example, when calling the `ListCrawlers` operation, provide a tag value to match the user name\. Then the result is a list of crawlers that match the provided tag values\. Provide the list of names to the `BatchGetCrawlers` to get details about each crawler with the given tag\.
 
-For example, if Tom should only be able to retrieve details of triggers that are tagged with `Tom`, the administrator can add tags to triggers for `Tom`, deny access to the `GetTriggers` API operation to all users and allow access to all users to `ListTriggers` and `BatchGetTriggers`\. Here is the resource policy that the AWS Glue administrator grants to Tom\. In the first section of the policy, AWS Glue API operations are denied for `GetTriggers`\. In the second section of the policy, `ListTriggers` is allowed for all resources\. However, in the third section, those resources tagged with `Tom` are allowed access with the `BatchGetTriggers` access\. 
+For example, if Tom should only be able to retrieve details of triggers that are tagged with `Tom`, the administrator can add tags to triggers for `Tom`, deny access to the `GetTriggers` API operation to all users and allow access to all users to `ListTriggers` and `BatchGetTriggers`\. The following is the resource policy that the AWS Glue administrator grants to Tom\. In the first section of the policy, AWS Glue API operations are denied for `GetTriggers`\. In the second section of the policy, `ListTriggers` is allowed for all resources\. However, in the third section, those resources tagged with `Tom` are allowed access with the `BatchGetTriggers` access\. 
 
 ```
 {
@@ -261,7 +261,7 @@ For example, if Tom should only be able to retrieve details of triggers that are
 }
 ```
 
-Using the same triggers as the prior example, Tom can access trigger `t2`, but not trigger `t1`\. The following example shows the results when Tom tries to access `t1` and `t2` with `BatchGetTriggers`\. 
+Using the same triggers as the previous example, Tom can access trigger `t2`, but not trigger `t1`\. The following example shows the results when Tom tries to access `t1` and `t2` with `BatchGetTriggers`\. 
 
 ```
 aws glue batch-get-triggers --trigger-names t2

@@ -29,7 +29,7 @@ Adds tags to a resource\. A tag is a label you can assign to an AWS resource\. I
 **Request**
 + `ResourceArn` – *Required:* UTF\-8 string, not less than 1 or more than 10240 bytes long, matching the [AWS Glue ARN string pattern](aws-glue-api-common.md#aws-glue-api-regex-aws-glue-arn-id)\.
 
-  The Amazon Resource Name \(ARN\) of the AWS Glue resource to which to add the tags\. For more information, see the [AWS Glue ARN string pattern](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id)\.
+  The ARN of the AWS Glue resource to which to add the tags\. For more information about AWS Glue resource ARNs, see the [AWS Glue ARN string pattern](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id)\.
 + `TagsToAdd` – *Required:* A map array of key\-value pairs, not more than 50 pairs\.
 
   Each key is a UTF\-8 string, not less than 1 or more than 128 bytes long\.

@@ -1,8 +1,10 @@
 # Granting Cross\-Account Access<a name="cross-account-access"></a>
 
 There are two ways in AWS to grant cross\-account access to a resource:
++ Use a resource policy
++ Use an IAM role
 
-**Use a resource policy to grant cross\-account access**
+**To use a resource policy to grant cross\-account access**
 
 1. An administrator \(or other authorized identity\) in Account A attaches a resource policy to the Data Catalog in Account A\. This policy grants Account B specific cross\-account permissions to perform operations on a resource in Account A's catalog\.
 
@@ -10,9 +12,9 @@ There are two ways in AWS to grant cross\-account access to a resource:
 
 1. The user or other identity in Account B now has access to the specified resource in Account A\.
 
-   The user needs permission from **both** the resource owner \(Account A\) **and** their parent account \(Account B\) to be able to access the resource\.
+   The user needs permission from *both* the resource owner \(Account A\) *and* their parent account \(Account B\) to be able to access the resource\.
 
-**Use an IAM role to grant cross\-account access**
+**To use an IAM role to grant cross\-account access**
 
 1. An administrator \(or other authorized identity\) in the account that owns the resource \(Account A\) creates an IAM role\.
 
@@ -24,11 +26,11 @@ There are two ways in AWS to grant cross\-account access to a resource:
 
 1. An administrator in Account B now delegates permissions to one or more IAM identities in Account B so that they can assume that role\. Doing so gives those identities in Account B access to the resource in account A\.
 
-   For more information about using IAM to delegate permissions, see [Access Management](https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html) in the *IAM User Guide*\. For more information about users, groups, roles, and permissions, see [Identities \(Users, Groups, and Roles\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html), also in the *IAM User Guide*\.
+   For more information about using IAM to delegate permissions, see [Access Management](https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html) in the *IAM User Guide*\. For more information about users, groups, roles, and permissions, see [Identities \(Users, Groups, and Roles\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html) in the *IAM User Guide*\.
 
 For a comparison of these two approaches, see [How IAM Roles Differ from Resource\-based Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_compare-resource-policies.html) in the *IAM User Guide*\. AWS Glue supports both options, with the restriction that a resource policy can grant access only to Data Catalog resources\.
 
-For example, to give user Bob in Account B access to database `db1` in Account A, attach the following resource policy to the catalog in Account A:
+For example, to give user Bob in Account B access to database `db1` in Account A, attach the following resource policy to the catalog in Account A\.
 
 ```
 {
@@ -51,7 +53,7 @@ For example, to give user Bob in Account B access to database `db1` in Account A
 }
 ```
 
-In addition, Account B would have to attach the following IAM policy to Bob before he would actually get access to `db1` in Account A:
+In addition, Account B would have to attach the following IAM policy to Bob before he would actually get access to `db1` in Account A\.
 
 ```
 {
@@ -71,21 +73,21 @@ In addition, Account B would have to attach the following IAM policy to Bob befo
 }
 ```
 
-## How to Make a Cross\-Account API Call<a name="cross-account-calling"></a>
+## Making a Cross\-Account API Call<a name="cross-account-calling"></a>
 
-All AWS Glue Data Catalog operations have a `CatalogId` field\. If all the required permissions have been granted to enable cross\-account access, a caller can make AWS Glue Data Catalog API calls across accounts by passing the target AWS account ID in `CatalogId` so as to access the resource in that target account\.
+All AWS Glue Data Catalog operations have a `CatalogId` field\. If the required permissions have been granted to enable cross\-account access, a caller can make Data Catalog API calls across accounts\. The caller does this by passing the target AWS account ID in `CatalogId` so as to access the resource in that target account\.
 
 If no `CatalogId` value is provided, AWS Glue uses the caller's own account ID by default, and the call is not cross\-account\.
 
-## How to Make a Cross\-Account ETL Call<a name="cross-account-calling-etl"></a>
+## Making a Cross\-Account ETL Call<a name="cross-account-calling-etl"></a>
 
 Some AWS Glue PySpark and Scala APIs have a catalog ID field\. If all the required permissions have been granted to enable cross\-account access, an ETL job can make PySpark and Scala calls to API operations across accounts by passing the target AWS account ID in the catalog ID field to access Data Catalog resources in a target account\.
 
 If no catalog ID value is provided, AWS Glue uses the caller's own account ID by default, and the call is not cross\-account\.
 
-See [GlueContext Class](aws-glue-api-crawler-pyspark-extensions-glue-context.md) for PySpark APIs which support `catalog_id`\. And see [AWS Glue Scala GlueContext APIs](glue-etl-scala-apis-glue-gluecontext.md) for Scala APIs which support `catalogId`\.
+For PySpark APIs that support `catalog_id`, see [GlueContext Class](aws-glue-api-crawler-pyspark-extensions-glue-context.md)\. For Scala APIs that support `catalogId`, see [AWS Glue Scala GlueContext APIs](glue-etl-scala-apis-glue-gluecontext.md)\.
 
-The following example shows the permissions required by the grantee to run an ETL job\. In this example, *grantee\-account\-id* is the catalog\-id of the client running the job and *grantor\-account\-id* is the owner of the resource\. This example grants permission to all catalog resources in the grantor's account\. To limit the scope of resources granted, you can provide specific ARNs for the catalog, database, table, and connection\.
+The following example shows the permissions required by the grantee to run an ETL job\. In this example, *grantee\-account\-id* is the `catalog-id` of the client running the job and *grantor\-account\-id* is the owner of the resource\. This example grants permission to all catalog resources in the grantor's account\. To limit the scope of resources granted, you can provide specific ARNs for the catalog, database, table, and connection\.
 
 ```
 {
@@ -109,9 +111,9 @@ The following example shows the permissions required by the grantee to run an ET
 ```
 
 **Note**  
-If a table in the grantor's account points to an Amazon S3 location, that is also in the grantor's account, the IAM role used to run an ETL job in the grantee's account must have permission to list and get objects from the grantor's account\.
+If a table in the grantor's account points to an Amazon S3 location that is also in the grantor's account, the IAM role used to run an ETL job in the grantee's account must have permission to list and get objects from the grantor's account\.
 
-Given that the client in Account A already has permission to create and run ETL jobs, the basic steps to setup an ETL job for cross\-account access are:
+Given that the client in Account A already has permission to create and run ETL jobs, the following are the basic steps to set up an ETL job for cross\-account access:
 
 1. Allow cross\-account data access \(skip this step if Amazon S3 cross\-account access is already set up\)\.
 
@@ -127,8 +129,8 @@ Given that the client in Account A already has permission to create and run ETL 
 
 ## AWS Glue Resource Ownership and Operations<a name="access-control-resource-ownership"></a>
 
-Your AWS account owns the AWS Glue Data Catalog resources that are created in that account, regardless of who created them\. Specifically, the owner of a resource is the AWS account of the [principal entity](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html) \(that is, the root account, the IAM user, or the IAM role\) that **authenticated** the creation request for that resource; for example:
-+ If you use the root account credentials of your AWS account to create a table in your Data Catalog, your AWS account is the owner of the resource\.
+Your AWS account owns the AWS Glue Data Catalog resources that are created in that account, regardless of who created them\. Specifically, the owner of a resource is the AWS account of the [principal entity](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html) \(that is, the AWS account root user, the IAM user, or the IAM role\) that *authenticated* the creation request for that resource; for example:
++ If you use your AWS account root user credentials to create a table in your Data Catalog, your AWS account is the owner of the resource\.
 + If you create an IAM user in your AWS account and grant permissions to that user to create a table, every table that the user creates is owned by your AWS account, to which the user belongs\.
 + If you create an IAM role in your AWS account with permissions to create a table, anyone who can assume the role can create a table\. But again, your AWS account owns the table resources that are created using that role\.
 
@@ -142,9 +144,9 @@ Storage costs and other costs that are directly associated with the new resource
 
  For more information about AWS Glue billing and pricing, see [How AWS Pricing Works](https://d0.awsstatic.com/whitepapers/aws_pricing_overview.pdf)\.
 
-## Cross\-Account Access Limitations<a name="cross-account-calling"></a>
+## Cross\-Account Access Limitations<a name="cross-account-limitations"></a>
 
 AWS Glue cross\-account access has the following limitations:
 + Cross\-account access to AWS Glue is not allowed if the resource owner account has not migrated the Amazon Athena data catalog to AWS Glue\. You can find the current migration status using the [GetCatalogImportStatus \(get\_catalog\_import\_status\)](aws-glue-api-catalog-migration.md#aws-glue-api-catalog-migration-GetCatalogImportStatus)\. For more details on how to migrate an Athena catalog to AWS Glue, see [Upgrading to the AWS Glue Data Catalog Step\-by\-Step](https://docs.aws.amazon.com/athena/latest/ug/glue-upgrade.html) in the *Amazon Athena User Guide*\.
-+ Cross\-account access is **only** supported for Data Catalog resources, including databases, tables, user\-defined functions, and connections\.
++ Cross\-account access is *only* supported for Data Catalog resources, including databases, tables, user\-defined functions, and connections\.
 + Cross\-account access to the Data Catalog is not supported when using an AWS Glue crawler, or Amazon Athena\.

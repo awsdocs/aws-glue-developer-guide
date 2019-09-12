@@ -38,6 +38,19 @@ A development endpoint where a developer can remotely debug extract, transform, 
 + `Status` – UTF\-8 string\.
 
   The current status of this `DevEndpoint`\.
++ `WorkerType` – UTF\-8 string \(valid values: `Standard=""` \| `G.1X=""` \| `G.2X=""`\)\.
+
+  The type of predefined worker that is allocated to the development endpoint\. Accepts a value of Standard, G\.1X, or G\.2X\.
+  + For the `Standard` worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker\.
+  + For the `G.1X` worker type, each worker maps to 1 DPU \(4 vCPU, 16 GB of memory, 64 GB disk\), and provides 1 executor per worker\. We recommend this worker type for memory\-intensive jobs\.
+  + For the `G.2X` worker type, each worker maps to 2 DPU \(8 vCPU, 32 GB of memory, 128 GB disk\), and provides 1 executor per worker\. We recommend this worker type for memory\-intensive jobs\.
+
+  Known issue: when a development endpoint is created with the `G.2X` `WorkerType` configuration, the Spark drivers for the development endpoint will run on 4 vCPU, 16 GB of memory, and a 64 GB disk\. 
++ `NumberOfWorkers` – Number \(integer\)\.
+
+  The number of workers of a defined `workerType` that are allocated to the development endpoint\.
+
+  The maximum number of workers you can define are 299 for `G.1X`, and 149 for `G.2X`\. 
 + `NumberOfNodes` – Number \(integer\)\.
 
   The number of AWS Glue Data Processing Units \(DPUs\) allocated to this `DevEndpoint`\.
@@ -143,6 +156,19 @@ If you previously created an endpoint with a public key, you must remove that ke
 + `NumberOfNodes` – Number \(integer\)\.
 
   The number of AWS Glue Data Processing Units \(DPUs\) to allocate to this `DevEndpoint`\.
++ `WorkerType` – UTF\-8 string \(valid values: `Standard=""` \| `G.1X=""` \| `G.2X=""`\)\.
+
+  The type of predefined worker that is allocated to the development endpoint\. Accepts a value of Standard, G\.1X, or G\.2X\.
+  + For the `Standard` worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker\.
+  + For the `G.1X` worker type, each worker maps to 1 DPU \(4 vCPU, 16 GB of memory, 64 GB disk\), and provides 1 executor per worker\. We recommend this worker type for memory\-intensive jobs\.
+  + For the `G.2X` worker type, each worker maps to 2 DPU \(8 vCPU, 32 GB of memory, 128 GB disk\), and provides 1 executor per worker\. We recommend this worker type for memory\-intensive jobs\.
+
+  Known issue: when a development endpoint is created with the `G.2X` `WorkerType` configuration, the Spark drivers for the development endpoint will run on 4 vCPU, 16 GB of memory, and a 64 GB disk\. 
++ `NumberOfWorkers` – Number \(integer\)\.
+
+  The number of workers of a defined `workerType` that are allocated to the development endpoint\.
+
+  The maximum number of workers you can define are 299 for `G.1X`, and 149 for `G.2X`\. 
 + `ExtraPythonLibsS3Path` – UTF\-8 string\.
 
   The paths to one or more Python libraries in an Amazon S3 bucket that should be loaded in your `DevEndpoint`\. Multiple values must be complete paths separated by a comma\.
@@ -160,7 +186,7 @@ You can only use pure Python libraries with a `DevEndpoint`\. Libraries that rel
 
   Each value is a UTF\-8 string, not more than 256 bytes long\.
 
-  The tags to use with this `DevEndpoint`\. You can use tags to limit access to the `DevEndpoint`\. For more information, see [AWS Tags in AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the *AWS Glue Developer Guide*\.
+  The tags to use with this DevEndpoint\. You may use tags to limit access to the DevEndpoint\. For more information about tags in AWS Glue, see [AWS Tags in AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the developer guide\.
 + `Arguments` – A map array of key\-value pairs, not more than 100 pairs\.
 
   Each key is a UTF\-8 string\.
@@ -194,6 +220,12 @@ You can only use pure Python libraries with a `DevEndpoint`\. Libraries that rel
 + `NumberOfNodes` – Number \(integer\)\.
 
   The number of AWS Glue Data Processing Units \(DPUs\) allocated to this DevEndpoint\.
++ `WorkerType` – UTF\-8 string \(valid values: `Standard=""` \| `G.1X=""` \| `G.2X=""`\)\.
+
+  The type of predefined worker that is allocated to the development endpoint\. May be a value of Standard, G\.1X, or G\.2X\.
++ `NumberOfWorkers` – Number \(integer\)\.
+
+  The number of workers of a defined `workerType` that are allocated to the development endpoint\.
 + `AvailabilityZone` – UTF\-8 string\.
 
   The AWS Availability Zone where this `DevEndpoint` is located\.

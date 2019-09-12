@@ -79,7 +79,7 @@ Specifies how Amazon Simple Storage Service \(Amazon S3\) data should be encrypt
 + `S3EncryptionMode` – UTF\-8 string \(valid values: `DISABLED` \| `SSE-KMS="SSEKMS"` \| `SSE-S3="SSES3"`\)\.
 
   The encryption mode to use for Amazon S3 data\.
-+ `KmsKeyArn` – UTF\-8 string, matching the [Custom string pattern #11](aws-glue-api-common.md#regex_11)\.
++ `KmsKeyArn` – UTF\-8 string, matching the [Custom string pattern #14](aws-glue-api-common.md#regex_14)\.
 
   The Amazon Resource Name \(ARN\) of the KMS key to be used to encrypt the data\.
 
@@ -91,7 +91,7 @@ Specifies how Amazon CloudWatch data should be encrypted\.
 + `CloudWatchEncryptionMode` – UTF\-8 string \(valid values: `DISABLED` \| `SSE-KMS="SSEKMS"`\)\.
 
   The encryption mode to use for CloudWatch data\.
-+ `KmsKeyArn` – UTF\-8 string, matching the [Custom string pattern #11](aws-glue-api-common.md#regex_11)\.
++ `KmsKeyArn` – UTF\-8 string, matching the [Custom string pattern #14](aws-glue-api-common.md#regex_14)\.
 
   The Amazon Resource Name \(ARN\) of the KMS key to be used to encrypt the data\.
 
@@ -103,7 +103,7 @@ Specifies how job bookmark data should be encrypted\.
 + `JobBookmarksEncryptionMode` – UTF\-8 string \(valid values: `DISABLED` \| `CSE-KMS="CSEKMS"`\)\.
 
   The encryption mode to use for job bookmarks data\.
-+ `KmsKeyArn` – UTF\-8 string, matching the [Custom string pattern #11](aws-glue-api-common.md#regex_11)\.
++ `KmsKeyArn` – UTF\-8 string, matching the [Custom string pattern #14](aws-glue-api-common.md#regex_14)\.
 
   The Amazon Resource Name \(ARN\) of the KMS key to be used to encrypt the data\.
 
@@ -247,7 +247,7 @@ Deletes a specified policy\.
 
 ## CreateSecurityConfiguration Action \(Python: create\_security\_configuration\)<a name="aws-glue-api-jobs-security-CreateSecurityConfiguration"></a>
 
-Creates a new security configuration\.
+Creates a new security configuration\. A security configuration is a set of security properties that can be used by AWS Glue\. You can use a security configuration to encrypt data at rest\. For information about using security configurations in AWS Glue, see [Encrypting Data Written by Crawlers, Jobs, and Development Endpoints](https://docs.aws.amazon.com/glue/latest/dg/encryption-security-configuration.html)\.
 
 **Request**
 + `Name` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.

@@ -12,7 +12,7 @@ A scheduling object using a `cron` statement to schedule an event\.
 **Fields**
 + `ScheduleExpression` – UTF\-8 string\.
 
-  A `cron` expression used to specify the schedule\. For more information, see [Time\-Based Schedules for Jobs and Crawlers](https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)\. For example, to run something every day at 12:15 UTC, specify `cron(15 12 * * ? *)`\.
+  A `cron` expression used to specify the schedule \(see [Time\-Based Schedules for Jobs and Crawlers](https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)\. For example, to run something every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`\.
 + `State` – UTF\-8 string \(valid values: `SCHEDULED` \| `NOT_SCHEDULED` \| `TRANSITIONING`\)\.
 
   The state of the schedule\.
@@ -32,7 +32,7 @@ Updates the schedule of a crawler using a `cron` expression\.
   The name of the crawler whose schedule to update\.
 + `Schedule` – UTF\-8 string\.
 
-  The updated `cron` expression used to specify the schedule\. For more information, see [Time\-Based Schedules for Jobs and Crawlers](https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)\. For example, to run something every day at 12:15 UTC, specify `cron(15 12 * * ? *)`\.
+  The updated `cron` expression used to specify the schedule \(see [Time\-Based Schedules for Jobs and Crawlers](https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)\. For example, to run something every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`\.
 
 **Response**
 + *No Response parameters\.*

@@ -84,17 +84,16 @@ The following JDBC URL examples show the syntax for several database engines\.
   + `jdbc:oracle:thin://@host:port:SID`
 + To connect to an Amazon RDS for Microsoft SQL Server data store with an `employee` database:
 
-   `jdbc:sqlserver://xxx-cluster.cluster-xxx.us-east-1.rds.amazonaws.com:1433;database=employee` 
+   `jdbc:sqlserver://xxx-cluster.cluster-xxx.us-east-1.rds.amazonaws.com:1433;databaseName=employee` 
 
   The syntax for Amazon RDS for SQL Server can follow the following patterns:
   + `jdbc:sqlserver://server_name:port;database=db_name`
   + `jdbc:sqlserver://server_name:port;databaseName=db_name`
++ To connect to a Microsoft SQL Server data store with an `employee` database:
 
-+ To connect to an Microsoft SQL Server data store with an `employee` database:
-
-   `jdbc:sqlserver://server_name\instance:1433;databaseName=employee` 
-
-  **Important** When connecting to a Microsoft SQL database, the port number for the server needs to be set to 0 in case the SQL server is running the SQL browser.
+  `jdbc:sqlserver://server_name\instance:1433;databaseName=employee`
+**Important**  
+When connecting to a Microsoft SQL database, the port number for the server needs to be set to 0 in case the SQL server is running the SQL browser\.
 
 **Username**  
 Provide a user name that has permission to access the JDBC data store\.

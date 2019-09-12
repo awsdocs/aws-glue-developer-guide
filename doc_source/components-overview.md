@@ -33,7 +33,7 @@ Other AWS services and open source projects can use the AWS Glue Data Catalog:
 
 AWS Glue also lets you set up crawlers that can scan data in all kinds of repositories, classify it, extract schema information from it, and store the metadata automatically in the AWS Glue Data Catalog\. From there it can be used to guide ETL operations\.
 
-For information about how to set up crawlers and classifiers, see [Cataloging Tables with a Crawler](add-crawler.md)\. For information about how to program crawlers and classifiers using the AWS Glue API, see [Crawlers and Classifiers API](aws-glue-api-crawler.md)\.
+For information about how to set up crawlers and classifiers, see [Defining Crawlers](add-crawler.md)\. For information about how to program crawlers and classifiers using the AWS Glue API, see [Crawlers and Classifiers API](aws-glue-api-crawler.md)\.
 
 ## AWS Glue ETL Operations<a name="etl-script-intro"></a>
 

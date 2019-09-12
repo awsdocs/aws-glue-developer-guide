@@ -17,6 +17,9 @@ Information about a specific trigger\.
 + `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the trigger\.
++ `WorkflowName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the workflow associated with the trigger\.
 + `Id` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   Reserved for future use\.
@@ -31,7 +34,7 @@ Information about a specific trigger\.
   A description of this trigger\.
 + `Schedule` – UTF\-8 string\.
 
-  A `cron` expression used to specify the schedule\. For more information, see [Time\-Based Schedules for Jobs and Crawlers](https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html) in the *AWS Glue Developer Guide*\. For example, to run something every day at 12:15 UTC, specify `cron(15 12 * * ? *)`\.
+  A `cron` expression used to specify the schedule \(see [Time\-Based Schedules for Jobs and Crawlers](https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)\. For example, to run something every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`\.
 + `Actions` – An array of [Action](#aws-glue-api-jobs-trigger-Action) objects\.
 
   The actions initiated by this trigger\.
@@ -52,7 +55,7 @@ A structure used to provide information used to update a trigger\. This object u
   A description of this trigger\.
 + `Schedule` – UTF\-8 string\.
 
-  A `cron` expression used to specify the schedule\. For example, see [Time\-Based Schedules for Jobs and Crawlers](https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html) in the *AWS Glue Developer Guide*\. For example, to run something every day at 12:15 UTC, specify: `cron(15 12 * * ? *)`\.
+  A `cron` expression used to specify the schedule \(see [Time\-Based Schedules for Jobs and Crawlers](https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)\. For example, to run something every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`\.
 + `Actions` – An array of [Action](#aws-glue-api-jobs-trigger-Action) objects\.
 
   The actions initiated by this trigger\.
@@ -86,6 +89,12 @@ Defines a condition under which a trigger fires\.
 + `State` – UTF\-8 string \(valid values: `STARTING` \| `RUNNING` \| `STOPPING` \| `STOPPED` \| `SUCCEEDED` \| `FAILED` \| `TIMEOUT`\)\.
 
   The condition state\. Currently, the values supported are `SUCCEEDED`, `STOPPED`, `TIMEOUT`, and `FAILED`\.
++ `CrawlerName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the crawler to which this condition applies\.
++ `CrawlState` – UTF\-8 string \(valid values: `RUNNING` \| `SUCCEEDED` \| `CANCELLED` \| `FAILED`\)\.
+
+  The state of the crawler to which this condition applies\.
 
 ## Action Structure<a name="aws-glue-api-jobs-trigger-Action"></a>
 
@@ -103,20 +112,23 @@ Defines an action to be initiated by a trigger\.
 
   The job arguments used when this trigger fires\. For this job run, they replace the default arguments set in the job definition itself\.
 
-  You can specify arguments here that your own job\-execution script consumes, in addition to arguments that AWS Glue itself consumes\.
+  You can specify arguments here that your own job\-execution script consumes, as well as arguments that AWS Glue itself consumes\.
 
-  For information about how to specify and consume your own job arguments, see [Calling AWS Glue APIs in Python](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html) in the *AWS Glue Developer Guide*\.
+  For information about how to specify and consume your own Job arguments, see the [Calling AWS Glue APIs in Python](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html) topic in the developer guide\.
 
   For information about the key\-value pairs that AWS Glue consumes to set up your job, see the [Special Parameters Used by AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html) topic in the developer guide\.
 + `Timeout` – Number \(integer\), at least 1\.
 
   The `JobRun` timeout in minutes\. This is the maximum time that a job run can consume resources before it is terminated and enters `TIMEOUT` status\. The default is 2,880 minutes \(48 hours\)\. This overrides the timeout value set in the parent job\.
-+ `NotificationProperty` – A [NotificationProperty](aws-glue-api-jobs-job.md#aws-glue-api-jobs-job-NotificationProperty) object\.
-
-  Specifies configuration properties of a job run notification\.
 + `SecurityConfiguration` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the `SecurityConfiguration` structure to be used with this action\.
++ `NotificationProperty` – A [NotificationProperty](aws-glue-api-jobs-job.md#aws-glue-api-jobs-job-NotificationProperty) object\.
+
+  Specifies configuration properties of a job run notification\.
++ `CrawlerName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the crawler to be used with this action\.
 
 ## Operations<a name="aws-glue-api-jobs-trigger-actions"></a>
 + [CreateTrigger Action \(Python: create\_trigger\)](#aws-glue-api-jobs-trigger-CreateTrigger)
@@ -137,14 +149,17 @@ Creates a new trigger\.
 + `Name` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the trigger\.
++ `WorkflowName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the workflow associated with the trigger\.
 + `Type` – *Required:* UTF\-8 string \(valid values: `SCHEDULED` \| `CONDITIONAL` \| `ON_DEMAND`\)\.
 
   The type of the new trigger\.
 + `Schedule` – UTF\-8 string\.
 
-  A `cron` expression used to specify the schedule\. For more information, see [Time\-Based Schedules for Jobs and Crawlers](https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html) in the *AWS Glue Developer Guide*\. For example, to run something every day at 12:15 UTC, specify: `cron(15 12 * * ? *)`\.
+  A `cron` expression used to specify the schedule \(see [Time\-Based Schedules for Jobs and Crawlers](https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)\. For example, to run something every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`\.
 
-  This field is required when the trigger type is `SCHEDULED`\.
+  This field is required when the trigger type is SCHEDULED\.
 + `Predicate` – A [Predicate](#aws-glue-api-jobs-trigger-Predicate) object\.
 
   A predicate to specify when the new trigger should fire\.
@@ -165,7 +180,7 @@ Creates a new trigger\.
 
   Each value is a UTF\-8 string, not more than 256 bytes long\.
 
-  The tags to use with this trigger\. You can use tags to limit access to the trigger\. For more information, see [AWS Tags in AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the *AWS Glue Developer Guide*\. 
+  The tags to use with this trigger\. You may use tags to limit access to the trigger\. For more information about tags in AWS Glue, see [AWS Tags in AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the developer guide\. 
 
 **Response**
 + `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
@@ -174,6 +189,7 @@ Creates a new trigger\.
 
 **Errors**
 + `AlreadyExistsException`
++ `EntityNotFoundException`
 + `InvalidInputException`
 + `IdempotentParameterMismatchException`
 + `InternalServiceException`
@@ -183,7 +199,7 @@ Creates a new trigger\.
 
 ## StartTrigger Action \(Python: start\_trigger\)<a name="aws-glue-api-jobs-trigger-StartTrigger"></a>
 
-Starts an existing trigger\. For information about how different types of triggers are started, see [Triggering Jobs](https://docs.aws.amazon.com/glue/latest/dg/trigger-job.html) *AWS Glue Developer Guide*\.
+Starts an existing trigger\. See [Triggering Jobs](https://docs.aws.amazon.com/glue/latest/dg/trigger-job.html) for information about how different types of trigger are started\.
 
 **Request**
 + `Name` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.

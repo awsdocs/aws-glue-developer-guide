@@ -12,4 +12,4 @@ If you plan to access the database from Amazon Athena, then provide a name with 
 + To delete a database, select the check box next to the database name and choose **Action**, **Delete database**\.
 + To display the list of tables contained in the database, select the check box next to the database name and choose **View tables**\.
 
-To change the database that a crawler writes to, you must change the crawler definition\. For more information, see [Cataloging Tables with a Crawler](add-crawler.md)\.
+To change the database that a crawler writes to, you must change the crawler definition\. For more information, see [Defining Crawlers](add-crawler.md)\.
