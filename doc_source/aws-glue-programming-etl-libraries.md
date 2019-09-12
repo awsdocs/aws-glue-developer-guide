@@ -30,7 +30,7 @@ Complete these steps to prepare for local Python development:
 
 1. Download the AWS Glue Python library from github \([https://github.com/awslabs/aws-glue-libs](https://github.com/awslabs/aws-glue-libs)\)\.
 
-1. Install Apache Maven from the following location: [http://apache.mirrors.tds.net/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz](http://apache.mirrors.tds.net/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz)\.
+1. Install Apache Maven from the following location: [https://archive.apache.org/dist/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz](https://archive.apache.org/dist/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz)\.
 
 1. Install the Apache Spark distribution from the following location: [ https://archive.apache.org/dist/spark/spark-2.2.1/spark-2.2.1-bin-hadoop2.7.tgz]( https://archive.apache.org/dist/spark/spark-2.2.1/spark-2.2.1-bin-hadoop2.7.tgz)\.
 
