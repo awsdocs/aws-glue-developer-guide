@@ -37,7 +37,11 @@ The tutorial assumes that you have already taken the steps outlined in [Tutorial
       main()
    ```
 
-1. Download the AWS Glue Python library file, `PyGlue.zip`, from `https://s3.amazonaws.com/aws-glue-jes-prod-us-east-1-assets/etl/python/PyGlue.zip` to a convenient location on your local machine\.
+1. For Glue Version 0.9 
+Download the AWS Glue Python library file, `PyGlue.zip`, from `https://s3.amazonaws.com/aws-glue-jes-prod-us-east-1-assets/etl/python/PyGlue.zip` to a convenient location on your local machine\.
+
+ For Glue Version 1.0
+ Download the AWS Glue Python library file, `PyGlue.zip`, from `https://s3.amazonaws.com/aws-glue-jes-prod-us-east-1-assets/etl-1.0/python/PyGlue.zip` to a convenient location on your local machine\.
 
 1. Add `PyGlue.zip` as a content root for your project in PyCharm:
    + In PyCharm, choose **File**, **Settings** to open the **Settings** dialog box\. \(You can also use the gear\-and\-wrench icon on the toolbar, or press `Ctrl+Alt+S`\.\)
