@@ -21,7 +21,7 @@ You use a policy document written in JSON format to create or modify a resource 
   ```
 
   For example, both `arn:aws:glue:us-west-2:account-id:*` and `arn:aws:glue:us-west-2:account-id:database/default` are allowed, but `*` is not allowed\.
-+ Unlike IAM policies, an AWS Glue resource policy must only contain Amazon Resource Names \(ARNs\) of resources belonging to the catalog to which the policy is attached\. Such ARNs always start with `arn:aws:glue:`\.
++ Unlike identity\-based policies, an AWS Glue resource policy must only contain Amazon Resource Names \(ARNs\) of resources belonging to the catalog to which the policy is attached\. Such ARNs always start with `arn:aws:glue:`\.
 + A policy cannot cause the identity creating it to be locked out of further policy creation or modification\.
 + A resource\-policy JSON document cannot exceed 10 KB in size\.
 

@@ -4,7 +4,7 @@ The dataset that is used in this example consists of Medicare Provider payment d
 
 You can find the source code for this example in the `data_cleaning_and_lambda.py` file in the [AWS Glue examples](https://github.com/awslabs/aws-glue-samples) GitHub repository\.
 
-The easiest way to debug Python or PySpark scripts is to create a development endpoint and run your code there\. We recommend that you start by setting up a development endpoint to work in\. For more information, see [Working with Development Endpoints on the AWS Glue Console](console-development-endpoint.md)\.
+The easiest way to debug Python or PySpark scripts is to create a development endpoint and run your code there\. We recommend that you start by setting up a development endpoint to work in\. For more information, see [Viewing Development Endpoint Properties](console-development-endpoint.md)\.
 
 ## Step 1: Crawl the Data in the Amazon S3 Bucket<a name="aws-glue-programming-python-samples-medicaid-crawling"></a>
 

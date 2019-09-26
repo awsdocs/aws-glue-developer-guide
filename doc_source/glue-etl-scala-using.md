@@ -6,7 +6,7 @@ To ensure that your program compiles without errors and runs as expected, it's i
 
 ## Testing a Scala ETL Program in a Zeppelin Notebook on a Development Endpoint<a name="aws-glue-programming-scala-using-notebook"></a>
 
-To test a Scala program on an AWS Glue development endpoint, set up the development endpoint as described in [Using Development EndpointsManaging Notebooks](dev-endpoint.md)\.
+To test a Scala program on an AWS Glue development endpoint, set up the development endpoint as described in [Managing Notebooks](dev-endpoint.md)\.
 
 Next, connect it to an Apache Zeppelin Notebook that is either running locally on your machine or remotely on an Amazon EC2 notebook server\. To install a local version of a Zeppelin Notebook, follow the instructions in [Tutorial: Local Zeppelin Notebook](dev-endpoint-tutorial-local-notebook.md)\.
 

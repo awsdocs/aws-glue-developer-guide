@@ -112,4 +112,7 @@ Source and target are not listed under the console **Details** tab for a job\. R
 **Use Glue Data Catalog as the Hive metastore**  
 Enables you to use the AWS Glue Data Catalog as a Spark Hive metastore\.
 
+**Spark UI**  
+Enable the use of Spark UI for monitoring this job\. For more information, see [Enabling the Apache Spark Web UI for AWS Glue Jobs](monitor-spark-ui-jobs.md)\. 
+
  For more information about adding a job using the AWS Glue console, see [Working with Jobs on the AWS Glue Console](console-jobs.md)\. 

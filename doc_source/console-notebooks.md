@@ -2,7 +2,7 @@
 
 A *development endpoint* is an environment that you can use to develop and test your AWS Glue scripts\. A *notebook* enables interactive development and testing of your ETL \(extract, transform, and load\) scripts on a development endpoint\. 
 
-AWS Glue provides an interface to Amazon SageMaker notebooks and Apache Zeppelin notebook servers\. On the AWS Glue notebooks page, you can create Amazon SageMaker notebooks and attach them to a development endpoint\. You can also manage Zeppelin notebook servers that you created and attached to a development endpoint\. To create a Zeppelin notebook server, see [Creating a Notebook Server Hosted on Amazon EC2](console-development-endpoint.md#console-ec2-notebook-create)\. 
+AWS Glue provides an interface to Amazon SageMaker notebooks and Apache Zeppelin notebook servers\. On the AWS Glue notebooks page, you can create Amazon SageMaker notebooks and attach them to a development endpoint\. You can also manage Zeppelin notebook servers that you created and attached to a development endpoint\. To create a Zeppelin notebook server, see [Creating a Notebook Server Hosted on Amazon EC2](console-ec2-notebook-create.md)\. 
 
 The **Notebooks** page on the AWS Glue console lists all the Amazon SageMaker notebooks and Zeppelin notebook servers in your AWS Glue environment\. You can use the console to perform several actions on your notebooks\. To display details for a notebook or notebook server, choose the notebook in the list\. Notebook details include the information that you defined when you created it using the **Create SageMaker notebook** or **Create Zeppelin Notebook server** wizard\. 
 

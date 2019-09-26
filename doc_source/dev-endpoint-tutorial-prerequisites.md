@@ -2,9 +2,6 @@
 
 Development endpoints create an environment where you can interactively test and debug ETL scripts in various ways before you run them as AWS Glue jobs\. The tutorials in this section show you how to do this using different IDEs\. All of them assume that you have set up a development endpoint and crawled sample data to create tables in your AWS Glue Data Catalog using the steps in the following sections\.
 
-**Note**  
-Your Python scripts must target Python 2\.7, because AWS Glue development endpoints do not support Python 3 yet\.
-
 Because you're using only Amazon Simple Storage Service \(Amazon S3\) data in some cases, and a mix of JDBC and Amazon S3 data in others, you will set up one development endpoint that is not in a virtual private cloud \(VPC\) and one that is\.
 
 ## Crawling the Sample Data Used in the Tutorials<a name="dev-endpoint-tutorial-prerequisites-crawl-data"></a>
@@ -17,9 +14,15 @@ The first step is to create a crawler that can crawl some sample data and record
 
 1. Choose **Crawlers**, and then choose **Add crawler**\. Name the crawler `legislator_crawler`, and then choose **Next**\.
 
-1. Leave Amazon S3 as the data store\. Under **Crawl data in**, choose **Specified path in another account**\. Then in the **Include path** box, type `s3://awsglue-datasets/examples/us-legislators/all`\. Choose **Next**, and then choose **Next** again to confirm that you don't want to add another data store\. 
+1. Accept the default crawler source type \(**Data stores**\) and click **Next**\.
 
-1. Provide an IAM role for the crawler to assume when it runs, choose **Next**\. Then choose **Next** to confirm that this crawler will be run on demand\.
+1. Leave **S3** as the data store\. Under **Crawl data in**, choose **Specified path in another account**\. Then in the **Include path** box, enter **s3://awsglue\-datasets/examples/us\-legislators/all**\. Choose **Next**, and then choose **Next** again to confirm that you don't want to add another data store\. 
+
+1. Provide an IAM role for the crawler to assume when it runs\.
+
+   Provide a role that can access `s3://awsglue-datasets/examples/us-legislators/all`, or choose **Create an IAM role** and enter a name to create a role that has access to that location\.
+
+1. Choose **Next**, and then choose **Next** again to confirm that this crawler will be run on demand\.
 
 1. For **Database**, choose the `legislators` database\. Choose **Next**, and then choose **Finish** to complete the creation of the new crawler\.
 

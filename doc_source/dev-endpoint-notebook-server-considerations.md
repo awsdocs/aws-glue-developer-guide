@@ -10,7 +10,7 @@ The following sections explain some of the choices to make and the actions to ta
 
 ## Choices on the AWS Glue Console<a name="dev-endpoint-notebook-server-console-actions"></a>
 
- For more information about managing development endpoints using the AWS Glue console, see [Working with Development Endpoints on the AWS Glue Console](console-development-endpoint.md)\. 
+ For more information about managing development endpoints using the AWS Glue console, see [Viewing Development Endpoint Properties](console-development-endpoint.md)\. 
 
 **To create the development endpoint and notebook server**
 
@@ -22,7 +22,7 @@ The following sections explain some of the choices to make and the actions to ta
 
    In the **Add SSH public key \(optional\)** step, leave the public key empty\. In a later step, you generate and push a public key to the development endpoint and a corresponding private key to the Amazon EC2 instance that is running the notebook server\. 
 
-1. When the development endpoint is provisioned, continue with the steps to create a notebook server on Amazon EC2\. On the development endpoints list page, choose the development endpoint that you just created\. Choose **Action**, **Create Zeppelin notebook server**, and fill in the information about your notebook server\. \(For more information, see [Working with Development Endpoints on the AWS Glue Console](console-development-endpoint.md)\.\)
+1. When the development endpoint is provisioned, continue with the steps to create a notebook server on Amazon EC2\. On the development endpoints list page, choose the development endpoint that you just created\. Choose **Action**, **Create Zeppelin notebook server**, and fill in the information about your notebook server\. \(For more information, see [Viewing Development Endpoint Properties](console-development-endpoint.md)\.\)
 
 1. Choose **Finish**\. The notebook server is created with an AWS CloudFormation stack\. The AWS Glue console provides you with the information you need to access the Amazon EC2 instance\.
 

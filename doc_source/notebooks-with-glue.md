@@ -8,7 +8,7 @@ A notebook enables interactive development and testing of your ETL \(extract, tr
 
  For more information about creating and accessing your notebooks using the AWS Glue console, see [Working with Notebooks on the AWS Glue Console](console-notebooks.md)\. 
 
- For more information about creating development endpoints, see [Working with Development Endpoints on the AWS Glue Console](console-development-endpoint.md)\. 
+ For more information about creating development endpoints, see [Viewing Development Endpoint Properties](console-development-endpoint.md)\. 
 
 
 | Region | Code | 

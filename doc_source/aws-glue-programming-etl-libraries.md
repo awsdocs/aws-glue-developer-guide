@@ -2,6 +2,8 @@
 
 The AWS Glue Scala library is available in a public Amazon S3 bucket, and can be consumed by the Apache Maven build system\. This enables you to develop and test your Python and Scala extract, transform, and load \(ETL\) scripts locally, without the need for a network connection\.
 
+Local development is available for AWS Glue versions 0\.9 and 1\.0\. For information about the versions of Python and Apache Spark that are available with AWS Glue, see the [Glue version job property](add-job.md#glue-version-table)\.
+
 The library is released with the Amazon Software license \([https://aws.amazon.com/asl](https://aws.amazon.com/asl)\)\.
 
 **Topics**
@@ -12,7 +14,6 @@ The library is released with the Amazon Software license \([https://aws.amazon.c
 ## Local Development Restrictions<a name="local-dev-restrictions"></a>
 
 Keep the following restrictions in mind when using the AWS Glue Scala library to develop locally\.
-+ Local development is available for AWS Glue version 0\.9 only\. For information about the versions of Python and Apache Spark that are available with AWS Glue 0\.9, see the [Glue version job property](add-job.md#glue-version-table)\.
 + Avoid creating an assembly jar \("fat jar" or "uber jar"\) with the AWS Glue library, as this will cause the following features to be disabled:
   + [Job bookmarks](https://docs.aws.amazon.com/glue/latest/dg/monitor-continuations.html)
   + Glue Parquet writer \([format="glueparquet"](aws-glue-programming-etl-format.md#aws-glue-programming-etl-format-glue-parquet)\)
@@ -30,15 +31,19 @@ Complete these steps to prepare for local Python development:
 
 1. Download the AWS Glue Python library from github \([https://github.com/awslabs/aws-glue-libs](https://github.com/awslabs/aws-glue-libs)\)\.
 
-1. Install Apache Maven from the following location: [http://apache.mirrors.tds.net/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz](http://apache.mirrors.tds.net/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz)\.
+1. Do one of the following:
+   + For Glue version 0\.9, stay on the `master` branch\.
+   + For Glue version 1\.0, checkout branch `glue-1.0`\. This version supports Python 3\.
 
-1. Install the Apache Spark distribution from the following location: [ https://archive.apache.org/dist/spark/spark-2.2.1/spark-2.2.1-bin-hadoop2.7.tgz]( https://archive.apache.org/dist/spark/spark-2.2.1/spark-2.2.1-bin-hadoop2.7.tgz)\.
+1. Install Apache Maven from the following location: [https://aws-glue-etl-artifacts.s3.amazonaws.com/glue-common/apache-maven-3.6.0-bin.tar.gz](https://aws-glue-etl-artifacts.s3.amazonaws.com/glue-common/apache-maven-3.6.0-bin.tar.gz)\.
+
+1. Install the Apache Spark distribution from one of the following locations:
+   + For Glue version 0\.9: [https://aws-glue-etl-artifacts.s3.amazonaws.com/glue-0.9/spark-2.2.1-bin-hadoop2.7.tgz](https://aws-glue-etl-artifacts.s3.amazonaws.com/glue-0.9/spark-2.2.1-bin-hadoop2.7.tgz)
+   + For Glue version 1\.0: [https://aws-glue-etl-artifacts.s3.amazonaws.com/glue-1.0/spark-2.4.3-bin-hadoop2.8.tgz](https://aws-glue-etl-artifacts.s3.amazonaws.com/glue-1.0/spark-2.4.3-bin-hadoop2.8.tgz)
 
 1. Export the `SPARK_HOME` environment variable, setting it to the root location extracted from the Spark archive\. For example:
-
-   ```
-   export SPARK_HOME=/home/$USER/spark-2.2.1-bin-hadoop2.7
-   ```
+   + For Glue version 0\.9: `export SPARK_HOME=/home/$USER/spark-2.2.1-bin-hadoop2.7`
+   + For Glue version 1\.0: `export SPARK_HOME=/home/$USER/spark-2.4.3-bin-spark-2.4.3-bin-hadoop2.8`
 
 ### Running Your Python ETL Script<a name="local-run-python-job"></a>
 
@@ -65,19 +70,19 @@ Complete these tasks to prepare for local Scala development\.
 
 In this task you install software and set the required environment variable\.
 
-1. Install Apache Maven from the following location: [http://apache.mirrors.tds.net/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz](http://apache.mirrors.tds.net/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz)\.
+1. Install Apache Maven from the following location: [https://aws-glue-etl-artifacts.s3.amazonaws.com/glue-common/apache-maven-3.6.0-bin.tar.gz](https://aws-glue-etl-artifacts.s3.amazonaws.com/glue-common/apache-maven-3.6.0-bin.tar.gz)\.
 
-1. Install the Apache Spark distribution from the following location: [ https://archive.apache.org/dist/spark/spark-2.2.1/spark-2.2.1-bin-hadoop2.7.tgz]( https://archive.apache.org/dist/spark/spark-2.2.1/spark-2.2.1-bin-hadoop2.7.tgz)\.
+1. Install the Apache Spark distribution from one of the following locations:
+   + For Glue version 0\.9: [https://aws-glue-etl-artifacts.s3.amazonaws.com/glue-0.9/spark-2.2.1-bin-hadoop2.7.tgz](https://aws-glue-etl-artifacts.s3.amazonaws.com/glue-0.9/spark-2.2.1-bin-hadoop2.7.tgz)
+   + For Glue version 1\.0: [https://aws-glue-etl-artifacts.s3.amazonaws.com/glue-1.0/spark-2.4.3-bin-hadoop2.8.tgz](https://aws-glue-etl-artifacts.s3.amazonaws.com/glue-1.0/spark-2.4.3-bin-hadoop2.8.tgz)
 
 1. Export the `SPARK_HOME` environment variable, setting it to the root location extracted from the Spark archive\. For example:
-
-   ```
-   export SPARK_HOME=/home/$USER/spark-2.2.1-bin-hadoop2.7
-   ```
+   + For Glue version 0\.9: `export SPARK_HOME=/home/$USER/spark-2.2.1-bin-hadoop2.7`
+   + For Glue version 1\.0: `export SPARK_HOME=/home/$USER/spark-2.4.3-bin-spark-2.4.3-bin-hadoop2.8`
 
 #### Task 2: Configure Your Maven Project<a name="local-scala-prereqs-task2"></a>
 
-Use the following `pom.xml` file as a template for your AWS Glue Scala applications\. It contains the required `dependencies`, `repositories`, and `plugins` elements\.
+Use the following `pom.xml` file as a template for your AWS Glue Scala applications\. It contains the required `dependencies`, `repositories`, and `plugins` elements\. Replace the `Glue version` string with `1.0.0` for Glue version 1\.0 or `0.9.0` for Glue version 0\.9\.
 
 ```
   <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
@@ -101,7 +106,9 @@ Use the following `pom.xml` file as a template for your AWS Glue Scala applicati
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>AWSGlueETL</artifactId>
-            <version>0.9.0</version>
+			
+            <version>Glue version</version>
+			
         </dependency>
     </dependencies>
 

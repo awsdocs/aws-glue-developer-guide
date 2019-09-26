@@ -11,7 +11,7 @@ The following diagram summarizes the basic workflow and steps involved in author
 + [Adding Jobs in AWS Glue](add-job.md)
 + [Editing Scripts in AWS Glue](edit-script.md)
 + [Triggering Jobs in AWS Glue](trigger-job.md)
-+ [Using Development Endpoints for Developing Scripts](dev-endpoint.md)
++ [Developing Scripts Using Development Endpoints](dev-endpoint.md)
 + [Managing Notebooks](notebooks-with-glue.md)
 
 ## Workflow Overview<a name="author-job-workflow"></a>

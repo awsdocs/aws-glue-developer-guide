@@ -1,11 +1,15 @@
 # Document History for AWS Glue<a name="doc-history"></a>
 
 The following table describes important changes to the documentation for AWS Glue\.
-+ **Latest API version:** 2019\-08\-08
-+ **Latest documentation update:** August 29, 2019
++ **Latest API version:** 2019\-09\-19
++ **Latest documentation update:** September 26, 2019
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Support for Python Wheel](#doc-history) | Added information about AWS Glue support of wheel files \(along with egg files\) as dependencies for Python shell jobs\. For more information, see [Providing Your Own Python Library\.](https://docs.aws.amazon.com/glue/latest/dg/add-job-python.html#create-python-extra-library) | September 26, 2019 | 
+| [Support for versioning of development endpoints in AWS Glue](#doc-history) | Added information about defining the Glue version in development endpoints\. Glue version determines the versions of Apache Spark and Python that AWS Glue supports\. For more information, see [Adding a Development Endpoint](https://docs.aws.amazon.com/glue/latest/dg/add-dev-endpoint.html)\. | September 19, 2019 | 
+| [Support for monitoring AWS Glue using Spark UI](#doc-history) | Added information about using Spark UI to monitor and debug AWS Glue ETL jobs running on the AWS Glue job system, and Spark applications on AWS Glue development endpoints\. For more information, see [ Monitoring AWS Glue Using Spark UI](https://docs.aws.amazon.com/glue/latest/dg/monitor-spark-ui.html)\. | September 19, 2019 | 
+| [Enhancement of support for local ETL script development using the public AWS Glue ETL library](#doc-history) | Updated the AWS Glue ETL library content to reflect that Glue version 1\.0 is now supported\. For more information, see [Developing and Testing ETL Scripts Locally Using the AWS Glue ETL Library](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-libraries.html)\. | September 18, 2019 | 
 | [Support for excluding Amazon S3 storage classes when running jobs](#doc-history) | Added information about excluding Amazon S3 storage classes when running AWS Glue ETL jobs that read files or partitions from Amazon S3\. For more information, see [Excluding Amazon S3 Storage Classes](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-storage-classes.html)\. | August 29, 2019 | 
 | [Support for local ETL script development using the public AWS Glue ETL library](#doc-history) | Added information about how to develop and test Python and Scala ETL scripts locally without the need for a network connection\. For more information, see [Developing and Testing ETL Scripts Locally Using the AWS Glue ETL Library](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-libraries.html)\. | August 28, 2019 | 
 | [Known Issues](#doc-history) | Added information about known issues in AWS Glue\. For more information, see [Known Issues for AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/glue-known-issues.html)\. | August 28, 2019 | 
