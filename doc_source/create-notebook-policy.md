@@ -125,4 +125,4 @@ In this step, you create a policy that is similar to `AWSGlueServiceNotebookRole
    The following table describes the permissions granted by this policy\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/glue/latest/dg/create-notebook-policy.html)
 
-1. On the **Review Policy** screen, type your **Policy Name**, for example **GlueServiceNotebookPolicyDefault**\. Type an optional description, and when you're satisfied with the policy, then **Create policy**\.
+1. On the **Review Policy** screen, enter your **Policy Name**, for example **GlueServiceNotebookPolicyDefault**\. Enter an optional description, and when you're satisfied with the policy, choose **Create policy**\.

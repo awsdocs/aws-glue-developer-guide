@@ -203,7 +203,7 @@ In this step, you create a policy that is similar to `AWSGlueConsoleFullAccess`\
    The following table describes the permissions granted by this policy\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/glue/latest/dg/attach-policy-iam-user.html)
 
-1. On the **Review policy** screen, type a name for the policy, for example **GlueConsoleAccessPolicy**\. When you're satisfied with the policy, then choose **Create policy**\. Ensure that no errors appear in a red box at the top of the screen\. Correct any that are reported\.
+1. On the **Review policy** screen, enter a name for the policy, for example **GlueConsoleAccessPolicy**\. When you're satisfied with the policy, choose **Create policy**\. Ensure that no errors appear in a red box at the top of the screen\. Correct any that are reported\.
 **Note**  
 If **Use autoformatting** is selected, the policy is reformatted whenever you open a policy or choose **Validate Policy**\.
 

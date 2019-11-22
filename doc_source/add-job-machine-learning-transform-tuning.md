@@ -2,7 +2,7 @@
 
 You can tune your machine learning transforms in AWS Glue to improve the results of your data\-cleansing jobs to meet your objectives\. To improve your transform, you can teach it by generating a labeling set, adding labels, and then repeating these steps several times until you get your desired results\. You can also tune by changing some machine learning parameters\.  
 
-For more information about machine learning transforms, see [Machine Learning Transforms in AWS Glue](machine-learning.md)\.
+For more information about machine learning transforms, see [Matching Records with AWS Lake Formation FindMatches](machine-learning.md)\.
 
 **Topics**
 + [Machine Learning Measurements](#machine-learning-terminology)

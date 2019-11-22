@@ -4,9 +4,10 @@ You can enable continuous logging using the AWS Glue console or through the AWS 
 
 You can enable continuous logging with either a standard filter or no filter when you create a new job, edit an existing job, or enable it through the AWS CLI\. Choosing the **Standard filter** prunes out non\-useful Apache Spark driver/executor and Apache Hadoop YARN heartbeat log messages\. Choosing **No filter** gives you all the log messages\.
 
+You can also specify custom configuration options such as the AWS CloudWatch log group name, CloudWatch log stream prefix before the AWS Glue job run ID driver/executor ID, and log conversion pattern for log messages\. These configurations help you to set aggregate logs in custom CloudWatch log groups with different expiration policies, and analyze them further with custom log stream prefixes and conversions patterns\. 
+
 **Topics**
 + [Using the AWS Management Console](#monitor-continuous-logging-enable-console)
-+ [Using the AWS CLI](#monitor-continuous-logging-cli)
 + [Logging Application\-Specific Messages Using the Custom Script Logger](#monitor-continuous-logging-script)
 + [Enabling the Progress Bar to Show Job Progress](#monitor-continuous-logging-progress)
 
@@ -60,7 +61,7 @@ Follow these steps to use the console to enable continuous logging when creating
 
 These user preferences are applied to all new jobs unless you override them explicitly when creating an AWS Glue job or by editing an existing job as described previously\.
 
-## Using the AWS CLI<a name="monitor-continuous-logging-cli"></a>
+### Using the AWS CLI<a name="monitor-continuous-logging-cli"></a>
 
 To enable continuous logging, you pass in job parameters to an AWS Glue job\. When you want to use the standard filter, pass the following special job parameters similar to other AWS Glue job parameters\. For more information, see [Special Parameters Used by AWS Glue](aws-glue-programming-etl-glue-arguments.md)\.
 
@@ -73,6 +74,24 @@ When you want no filter, use the following\.
 ```
 '--enable-continuous-cloudwatch-log': 'true',
 '--enable-continuous-log-filter': 'false'
+```
+
+You can specify a custom AWS CloudWatch log group name\. If not specified, the default log group name is `/aws-glue/jobs/logs-v2/`\.
+
+```
+'--continuous-log-logGroup': 'custom_log_group_name'
+```
+
+You can specify a custom AWS CloudWatch log stream prefix\. If not specified, the default log stream prefix is the job run ID\.
+
+```
+'--continuous-log-logStreamPrefix': 'custom_log_stream_prefix'
+```
+
+You can specify a custom continuous logging conversion pattern\. If not specified, the default conversion pattern is `%d{yy/MM/dd HH:mm:ss} %p %c{1}: %m%n`\. Note that the conversion pattern only applies to driver logs and executor logs\. It does not affect the Glue progress bar\.
+
+```
+'--continuous-log-conversionPattern': 'custom_log_conversion_pattern'
 ```
 
 ## Logging Application\-Specific Messages Using the Custom Script Logger<a name="monitor-continuous-logging-script"></a>

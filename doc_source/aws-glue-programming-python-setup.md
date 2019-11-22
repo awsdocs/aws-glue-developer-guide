@@ -1,6 +1,6 @@
 # Setting Up to Use Python with AWS Glue<a name="aws-glue-programming-python-setup"></a>
 
-Use Python to develop your ETL scripts for Spark jobs\. The supported Python versions for ETL jobs depend on the Glue version of the job\. For more information on Glue versions, see [Adding Jobs in AWS Glue](add-job.html)\. The AWS Glue development endpoints that provide interactive testing and development support only Python 2\.7\. 
+Use Python to develop your ETL scripts for Spark jobs\. The supported Python versions for ETL jobs depend on the Glue version of the job\. For more information on Glue versions, see the [Glue version job property](add-job.md#glue-version-table)\.
 
 **To set up your system for using Python with AWS Glue**
 

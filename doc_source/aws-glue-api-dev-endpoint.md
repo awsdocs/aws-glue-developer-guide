@@ -112,8 +112,6 @@ If you previously created an endpoint with a public key, you must remove that ke
 
   Valid arguments are:
   + `"--enable-glue-datacatalog": ""`
-  + `"GLUE_PYTHON_VERSION": "3"`
-  + `"GLUE_PYTHON_VERSION": "2"`
 
   You can specify a version of Python support for development endpoints by using the `Arguments` parameter in the `CreateDevEndpoint` or `UpdateDevEndpoint` APIs\. If no arguments are provided, the version defaults to Python 2\.
 
@@ -249,6 +247,8 @@ You can only use pure Python libraries with a `DevEndpoint`\. Libraries that rel
 + `GlueVersion` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Custom string pattern #13](aws-glue-api-common.md#regex_13)\.
 
   Glue version determines the versions of Apache Spark and Python that AWS Glue supports\. The Python version indicates the version supported for running your ETL scripts on development endpoints\. 
+
+  For more information about the available AWS Glue versions and corresponding Spark and Python versions, see [Glue version](https://docs.aws.amazon.com/glue/latest/dg/add-job.html) in the developer guide\.
 + `NumberOfWorkers` – Number \(integer\)\.
 
   The number of workers of a defined `workerType` that are allocated to the development endpoint\.
@@ -283,8 +283,6 @@ You can only use pure Python libraries with a `DevEndpoint`\. Libraries that rel
 
   Valid arguments are:
   + `"--enable-glue-datacatalog": ""`
-  + `"GLUE_PYTHON_VERSION": "3"`
-  + `"GLUE_PYTHON_VERSION": "2"`
 
   You can specify a version of Python support for development endpoints by using the `Arguments` parameter in the `CreateDevEndpoint` or `UpdateDevEndpoint` APIs\. If no arguments are provided, the version defaults to Python 2\.
 
@@ -334,8 +332,6 @@ Updates a specified development endpoint\.
 
   Valid arguments are:
   + `"--enable-glue-datacatalog": ""`
-  + `"GLUE_PYTHON_VERSION": "3"`
-  + `"GLUE_PYTHON_VERSION": "2"`
 
   You can specify a version of Python support for development endpoints by using the `Arguments` parameter in the `CreateDevEndpoint` or `UpdateDevEndpoint` APIs\. If no arguments are provided, the version defaults to Python 2\.
 

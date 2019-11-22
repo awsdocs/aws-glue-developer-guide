@@ -25,6 +25,11 @@ There are a number of argument names that are recognized and used by AWS Glue, t
   ```
 + `--enable-metrics`  —  Enables the collection of metrics for job profiling for this job run\. These metrics are available on the AWS Glue console and CloudWatch console\. To enable metrics, only specify the key, no value is needed\.
 + `--enable-glue-datacatalog`  —  Enables you to use the AWS Glue Data Catalog as a Spark Hive metastore\.
++ `--enable-continuous-cloudwatch-log`  —  Enables real\-time, continuous logging for AWS Glue jobs\. You can view real\-time Apache Spark job logs in Amazon CloudWatch\.
++ `--enable-continuous-log-filter`  —  Specifies a standard filter \(`true`\) or no filter \(`false`\) when you create or edit a job enabled for continuous logging\. Choosing the standard filter prunes out non\-useful Apache Spark driver/executor and Apache Hadoop YARN heartbeat log messages\. Choosing no filter gives you all the log messages\.
++ `--continuous-log-logGroup`  —  Specifies a custom AWS CloudWatch log group name for a job enabled for continuous logging\.
++ `--continuous-log-logStreamPrefix`  —  Specifies a custom AWS CloudWatch log stream prefix for a job enabled for continuous logging\.
++ `--continuous-log-conversionPattern`  —  Specifies a custom conversion log pattern for a job enabled for continuous logging\. The conversion pattern only applies to driver logs and executor logs\. It does not affect the Glue progress bar\.
 
 For example, the following is the syntax for running a job with a `--`argument and a special parameter:
 

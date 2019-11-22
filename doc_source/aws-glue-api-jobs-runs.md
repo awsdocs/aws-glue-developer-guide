@@ -179,6 +179,8 @@ Records an error that occurred when attempting to stop a specified job run\.
 + [BatchStopJobRun Action \(Python: batch\_stop\_job\_run\)](#aws-glue-api-jobs-runs-BatchStopJobRun)
 + [GetJobRun Action \(Python: get\_job\_run\)](#aws-glue-api-jobs-runs-GetJobRun)
 + [GetJobRuns Action \(Python: get\_job\_runs\)](#aws-glue-api-jobs-runs-GetJobRuns)
++ [GetJobBookmark Action \(Python: get\_job\_bookmark\)](#aws-glue-api-jobs-runs-GetJobBookmark)
++ [GetJobBookmarks Action \(Python: get\_job\_bookmarks\)](#aws-glue-api-jobs-runs-GetJobBookmarks)
 + [ResetJobBookmark Action \(Python: reset\_job\_bookmark\)](#aws-glue-api-jobs-runs-ResetJobBookmark)
 
 ## StartJobRun Action \(Python: start\_job\_run\)<a name="aws-glue-api-jobs-runs-StartJobRun"></a>
@@ -326,6 +328,62 @@ Retrieves metadata for all runs of a given job definition\.
 + `NextToken` – UTF\-8 string\.
 
   A continuation token, if not all requested job runs have been returned\.
+
+**Errors**
++ `InvalidInputException`
++ `EntityNotFoundException`
++ `InternalServiceException`
++ `OperationTimeoutException`
+
+## GetJobBookmark Action \(Python: get\_job\_bookmark\)<a name="aws-glue-api-jobs-runs-GetJobBookmark"></a>
+
+Returns information on a job bookmark entry\.
+
+**Request**
++ `JobName` – *Required:* UTF\-8 string\.
+
+  The name of the job in question\.
++ `Version` – Number \(integer\)\.
+
+  The version of the job\.
++ `RunId` – UTF\-8 string\.
+
+  The unique run identifier associated with this job run\.
+
+**Response**
++ `JobBookmarkEntry` – A [JobBookmarkEntry](#aws-glue-api-jobs-runs-JobBookmarkEntry) object\.
+
+  A structure that defines a point that a job can resume processing\.
+
+**Errors**
++ `EntityNotFoundException`
++ `InvalidInputException`
++ `InternalServiceException`
++ `OperationTimeoutException`
++ `ValidationException`
+
+## GetJobBookmarks Action \(Python: get\_job\_bookmarks\)<a name="aws-glue-api-jobs-runs-GetJobBookmarks"></a>
+
+Returns information on the job bookmark entries\. The list is ordered on decreasing version numbers\.
+
+**Request**
++ `JobName` – *Required:* UTF\-8 string\.
+
+  The name of the job in question\.
++ `MaxResults` – Number \(integer\)\.
+
+  The maximum size of the response\.
++ `NextToken` – Number \(integer\)\.
+
+  A continuation token, if this is a continuation call\.
+
+**Response**
++ `JobBookmarkEntries` – An array of [JobBookmarkEntry](#aws-glue-api-jobs-runs-JobBookmarkEntry) objects\.
+
+  A list of job bookmark entries that defines a point that a job can resume processing\.
++ `NextToken` – Number \(integer\)\.
+
+  A continuation token, which has a value of 1 if all the entries are returned, or > 1 if not all requested job runs have been returned\.
 
 **Errors**
 + `InvalidInputException`

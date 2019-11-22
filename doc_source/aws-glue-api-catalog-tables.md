@@ -13,6 +13,7 @@ The Table API describes data types and operations associated with tables\.
 + [TableVersion Structure](#aws-glue-api-catalog-tables-TableVersion)
 + [TableError Structure](#aws-glue-api-catalog-tables-TableError)
 + [TableVersionError Structure](#aws-glue-api-catalog-tables-TableVersionError)
++ [SortCriterion Structure](#aws-glue-api-catalog-tables-SortCriterion)
 
 ## Table Structure<a name="aws-glue-api-catalog-tables-Table"></a>
 
@@ -286,6 +287,18 @@ An error record for table\-version operations\.
 
   The details about the error\.
 
+## SortCriterion Structure<a name="aws-glue-api-catalog-tables-SortCriterion"></a>
+
+Specifies a field to sort by and a sort order\.
+
+**Fields**
++ `FieldName` – Value string, not more than 1024 bytes long\.
+
+  The name of the field on which to sort\.
++ `Sort` – UTF\-8 string \(valid values: `ASC="ASCENDING"` \| `DESC="DESCENDING"`\)\.
+
+  An ascending or descending sort\.
+
 ## Operations<a name="aws-glue-api-catalog-tables-actions"></a>
 + [CreateTable Action \(Python: create\_table\)](#aws-glue-api-catalog-tables-CreateTable)
 + [UpdateTable Action \(Python: update\_table\)](#aws-glue-api-catalog-tables-UpdateTable)
@@ -297,6 +310,7 @@ An error record for table\-version operations\.
 + [GetTableVersions Action \(Python: get\_table\_versions\)](#aws-glue-api-catalog-tables-GetTableVersions)
 + [DeleteTableVersion Action \(Python: delete\_table\_version\)](#aws-glue-api-catalog-tables-DeleteTableVersion)
 + [BatchDeleteTableVersion Action \(Python: batch\_delete\_table\_version\)](#aws-glue-api-catalog-tables-BatchDeleteTableVersion)
++ [SearchTables Action \(Python: search\_tables\)](#aws-glue-api-catalog-tables-SearchTables)
 
 ## CreateTable Action \(Python: create\_table\)<a name="aws-glue-api-catalog-tables-CreateTable"></a>
 
@@ -596,4 +610,45 @@ Deletes a specified batch of versions of a table\.
 + `EntityNotFoundException`
 + `InvalidInputException`
 + `InternalServiceException`
++ `OperationTimeoutException`
+
+## SearchTables Action \(Python: search\_tables\)<a name="aws-glue-api-catalog-tables-SearchTables"></a>
+
+Searches a set of tables based on properties in the table metadata as well as on the parent database\. You can search against text or filter conditions\. 
+
+You can only get tables that you have access to based on the security policies defined in Lake Formation\. You need at least a read\-only access to the table for it to be returned\. If you do not have access to all the columns in the table, these columns will not be searched against when returning the list of tables back to you\. If you have access to the columns but not the data in the columns, those columns and the associated metadata for those columns will be included in the search\. 
+
+**Request**
++ `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  A unique identifier, consisting of `account_id/datalake`\.
++ `NextToken` – UTF\-8 string\.
+
+  A continuation token, included if this is a continuation call\.
++ `Filters` – An array of [PropertyPredicate](aws-glue-api-common.md#aws-glue-api-common-PropertyPredicate) objects\.
+
+  A list of key\-value pairs, and a comparator used to filter the search results\. Returns all entities matching the predicate\.
++ `SearchText` – Value string, not more than 1024 bytes long\.
+
+  A string used for a text search\.
+
+  Specifying a value in quotes filters based on an exact match to the value\.
++ `SortCriteria` – An array of [SortCriterion](#aws-glue-api-catalog-tables-SortCriterion) objects, not more than 1 structures\.
+
+  A list of criteria for sorting the results by a field name, in an ascending or descending order\.
++ `MaxResults` – Number \(integer\), not less than 1 or more than 1000\.
+
+  The maximum number of tables to return in a single response\.
+
+**Response**
++ `NextToken` – UTF\-8 string\.
+
+  A continuation token, present if the current list segment is not the last\.
++ `TableList` – An array of [Table](#aws-glue-api-catalog-tables-Table) objects\.
+
+  A list of the requested `Table` objects\. The `SearchTables` response returns only the tables that you have access to\.
+
+**Errors**
++ `InternalServiceException`
++ `InvalidInputException`
 + `OperationTimeoutException`

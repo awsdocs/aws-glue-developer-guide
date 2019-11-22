@@ -10,7 +10,7 @@ If you plan to use Amazon SageMaker notebooks with development endpoints, you mu
 
 1. Choose **Create Policy**\.
 
-1. On the **Create Policy** page, navigate to a tab to edit the JSON\. Create a policy document with the following JSON statements\. Edit *bucket\-name*, *region\-code*, *account\-id*, and *development\-endpoint\-name* for your environment\. The *development\-endpoint\-name* must already exist before you use this policy in an IAM role used to create an Amazon SageMaker notebook\.
+1. On the **Create Policy** page, navigate to a tab to edit the JSON\. Create a policy document with the following JSON statements\. Edit *bucket\-name*, *region\-code*, and *account\-id* for your environment\.
 
    ```
    {
@@ -55,9 +55,18 @@ If you plan to use Amazon SageMaker notebooks with development endpoints, you mu
                ],
                "Effect": "Allow",
                "Resource": [
-                   "arn:aws:glue:region-code:account-id:devEndpoint/development-endpoint-name*"
+                   "arn:aws:glue:region-code:account-id:devEndpoint/*"
                ]
-           }
+           },
+           {
+               "Action": [
+                   "sagemaker:ListTags"
+               ],
+               "Effect": "Allow",
+               "Resource": [
+                   "arn:aws:sagemaker:region-code:account-id:notebook-instance/*"
+               ]
+            }
        ]
    }
    ```

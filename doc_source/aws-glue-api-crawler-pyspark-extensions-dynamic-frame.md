@@ -52,9 +52,8 @@ A `DynamicRecord` represents a logical record in a `DynamicFrame`\. It is simila
 + [schema](#aws-glue-api-crawler-pyspark-extensions-dynamic-frame-schema)
 + [printSchema](#aws-glue-api-crawler-pyspark-extensions-dynamic-frame-printSchema)
 + [show](#aws-glue-api-crawler-pyspark-extensions-dynamic-frame-show)
-+ [show](#aws-glue-api-crawler-pyspark-extensions-dynamic-frame-repartition)
-+ [show](#aws-glue-api-crawler-pyspark-extensions-dynamic-frame-coalesce)
-
++ [repartition](#aws-glue-api-crawler-pyspark-extensions-dynamic-frame-repartition)
++ [coalesce](#aws-glue-api-crawler-pyspark-extensions-dynamic-frame-coalesce)
 
 ## count<a name="aws-glue-api-crawler-pyspark-extensions-dynamic-frame-count"></a>
 
@@ -74,12 +73,11 @@ A `DynamicRecord` represents a logical record in a `DynamicFrame`\. It is simila
 
 ## repartition<a name="aws-glue-api-crawler-pyspark-extensions-dynamic-frame-repartition"></a>
 
-`repartition(numPartitions)` – Returns a new DynamicFrame with numPartitions partitions.\.
+`repartition(numPartitions)` – Returns a new DynamicFrame with `numPartitions` partitions\.
 
 ## coalesce<a name="aws-glue-api-crawler-pyspark-extensions-dynamic-frame-coalesce"></a>
 
-`coalesce(numPartitions)` – Returns a new DynamicFrame with numPartitions partitions.\.
-
+`coalesce(numPartitions)` – Returns a new DynamicFrame with `numPartitions` partitions\.
 
 ##  — Transforms —<a name="aws-glue-api-crawler-pyspark-extensions-dynamic-frame-_transforms"></a>
 + [apply\_mapping](#aws-glue-api-crawler-pyspark-extensions-dynamic-frame-apply_mapping)

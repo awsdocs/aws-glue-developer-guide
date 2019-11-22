@@ -30,11 +30,13 @@ On the AWS Glue console, a job bookmark option is passed as a parameter when the
 | --- | --- | 
 | Enable | Causes the job to update the state after a run to keep track of previously processed data\. If your job has a source with job bookmark support, it will keep track of processed data, and when a job runs, it processes new data since the last checkpoint\. | 
 | Disable | Job bookmarks are not used, and the job always processes the entire dataset\. You are responsible for managing the output from previous job runs\. This is the default\. | 
-| Pause | Process incremental data since the last run\. The job will read the state information form the last run, but will not update it\. This can be used so that every subsequent run processes data since the last bookmark\. You are responsible for managing the output from previous job runs\. | 
+| Pause | Process incremental data since the last successful run or the data in the range identified by the following sub\-options, without updating the state of last bookmark\. You are responsible for managing the output from previous job runs\. The two sub\-options are: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/glue/latest/dg/monitor-continuations.html) The job bookmark state is not updated when this option set is specified\. The sub\-options are optional, however when used both the sub\-options needs to be provided\.  | 
 
 For details about the parameters passed to a job, and specifically for a job bookmark, see [Special Parameters Used by AWS Glue](aws-glue-programming-etl-glue-arguments.md)\.
 
 For Amazon S3 input sources, AWS Glue job bookmarks check the last modified time of the objects to verify which objects need to be reprocessed\. If your input source data has been modified since your last job run, the files are reprocessed when you run the job again\.
+
+You can rewind your job bookmarks for your Glue Spark ETL jobs to any previous job run\. You can support data backfilling scenarios better by rewinding your job bookmarks to any previous job run, resulting in the subsequent job run reprocessing data only from the bookmarked job run\.
 
 If you intend to reprocess all the data using the same job, reset the job bookmark\. To reset the job bookmark state, use the AWS Glue console, the [ResetJobBookmark Action \(Python: reset\_job\_bookmark\)](aws-glue-api-jobs-runs.md#aws-glue-api-jobs-runs-ResetJobBookmark) API operation, or the AWS CLI\. For example, enter the following command using the AWS CLI:
 

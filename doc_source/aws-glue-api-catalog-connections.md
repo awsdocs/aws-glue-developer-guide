@@ -27,7 +27,7 @@ Defines a connection to a data source\.
   A list of criteria that can be used in selecting this connection\.
 + `ConnectionProperties` – A map array of key\-value pairs, not more than 100 pairs\.
 
-  Each key is a UTF\-8 string \(valid values: `HOST` \| `PORT` \| `USERNAME="USER_NAME"` \| `PASSWORD` \| `ENCRYPTED_PASSWORD` \| `JDBC_DRIVER_JAR_URI` \| `JDBC_DRIVER_CLASS_NAME` \| `JDBC_ENGINE` \| `JDBC_ENGINE_VERSION` \| `CONFIG_FILES` \| `INSTANCE_ID` \| `JDBC_CONNECTION_URL` \| `JDBC_ENFORCE_SSL`\)\.
+  Each key is a UTF\-8 string \(valid values: `HOST` \| `PORT` \| `USERNAME="USER_NAME"` \| `PASSWORD` \| `ENCRYPTED_PASSWORD` \| `JDBC_DRIVER_JAR_URI` \| `JDBC_DRIVER_CLASS_NAME` \| `JDBC_ENGINE` \| `JDBC_ENGINE_VERSION` \| `CONFIG_FILES` \| `INSTANCE_ID` \| `JDBC_CONNECTION_URL` \| `JDBC_ENFORCE_SSL` \| `CUSTOM_JDBC_CERT` \| `SKIP_CUSTOM_JDBC_CERT_VALIDATION` \| `CUSTOM_JDBC_CERT_STRING`\)\.
 
   Each value is a Value string, not more than 1024 bytes long\.
 
@@ -45,6 +45,9 @@ Defines a connection to a data source\.
   + `INSTANCE_ID` \- The instance ID to use\.
   + `JDBC_CONNECTION_URL` \- The URL for the JDBC connection\.
   + `JDBC_ENFORCE_SSL` \- A Boolean string \(true, false\) specifying whether Secure Sockets Layer \(SSL\) with hostname matching is enforced for the JDBC connection on the client\. The default is false\.
+  + `CUSTOM_JDBC_CERT` \- An Amazon S3 location specifying the customer's root certificate\. AWS Glue uses this root certificate to validate the customer's certificate when connecting to the customer database\. AWS Glue only handles X\.509 certificates\. The certificate provided must be DER\-encoded and supplied in Base64 encoding PEM format\.
+  + `SKIP_CUSTOM_JDBC_CERT_VALIDATION` \- By default, this is `false`\. AWS Glue validates the Signature algorithm and Subject Public Key Algorithm for the customer certificate\. The only permitted algorithms for the Signature algorithm are SHA256withRSA, SHA384withRSA or SHA512withRSA\. For the Subject Public Key Algorithm, the key length must be at least 2048\. You can set the value of this property to `true` to skip AWS Glue's validation of the customer certificate\.
+  + `CUSTOM_JDBC_CERT_STRING` \- A custom JDBC certificate string which is used for domain match or distinguished name match to prevent a man\-in\-the\-middle attack\. In Oracle database, this is used as the `SSL_SERVER_CERT_DN`; in Microsoft SQL Server, this is used as the `hostNameInCertificate`\.
 + `PhysicalConnectionRequirements` – A [PhysicalConnectionRequirements](#aws-glue-api-catalog-connections-PhysicalConnectionRequirements) object\.
 
   A map of physical connection requirements, such as virtual private cloud \(VPC\) and `SecurityGroup`, that are needed to make this connection successfully\.
@@ -77,7 +80,7 @@ A structure that is used to specify a connection to create or update\.
   A list of criteria that can be used in selecting this connection\.
 + `ConnectionProperties` – *Required:* A map array of key\-value pairs, not more than 100 pairs\.
 
-  Each key is a UTF\-8 string \(valid values: `HOST` \| `PORT` \| `USERNAME="USER_NAME"` \| `PASSWORD` \| `ENCRYPTED_PASSWORD` \| `JDBC_DRIVER_JAR_URI` \| `JDBC_DRIVER_CLASS_NAME` \| `JDBC_ENGINE` \| `JDBC_ENGINE_VERSION` \| `CONFIG_FILES` \| `INSTANCE_ID` \| `JDBC_CONNECTION_URL` \| `JDBC_ENFORCE_SSL`\)\.
+  Each key is a UTF\-8 string \(valid values: `HOST` \| `PORT` \| `USERNAME="USER_NAME"` \| `PASSWORD` \| `ENCRYPTED_PASSWORD` \| `JDBC_DRIVER_JAR_URI` \| `JDBC_DRIVER_CLASS_NAME` \| `JDBC_ENGINE` \| `JDBC_ENGINE_VERSION` \| `CONFIG_FILES` \| `INSTANCE_ID` \| `JDBC_CONNECTION_URL` \| `JDBC_ENFORCE_SSL` \| `CUSTOM_JDBC_CERT` \| `SKIP_CUSTOM_JDBC_CERT_VALIDATION` \| `CUSTOM_JDBC_CERT_STRING`\)\.
 
   Each value is a Value string, not more than 1024 bytes long\.
 

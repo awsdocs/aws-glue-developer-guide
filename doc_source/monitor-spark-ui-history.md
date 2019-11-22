@@ -1,4 +1,12 @@
-# Launching the Spark History Server and Viewing the Spark UI Using AWS CloudFormation<a name="monitor-spark-ui-history"></a>
+# Launching the Spark History Server<a name="monitor-spark-ui-history"></a>
+
+You can launch the Spark history server using a AWS CloudFormation template that hosts the server on an EC2 instance, or launch locally using Docker\.
+
+**Topics**
++ [Launching the Spark History Server and Viewing the Spark UI Using AWS CloudFormation](#monitor-spark-ui-history-cfn)
++ [Launching the Spark History Server and Viewing the Spark UI Using Docker](#monitor-spark-ui-history-local)
+
+## Launching the Spark History Server and Viewing the Spark UI Using AWS CloudFormation<a name="monitor-spark-ui-history-cfn"></a>
 
 You can use an AWS CloudFormation template to start the Apache Spark history server and view the Spark web UI\. These templates are samples that you should modify to meet your requirements\.
 
@@ -48,3 +56,30 @@ With a self\-signed certificate based keystore, each local machine that connects
    1. Copy the URL of **SparkUiPrivateUrl** if you are using a private subnet\.
 
 1. Open a web browser, and paste in the URL\. This lets you access the server using HTTPS on the specified port\. Your browser may not recognize the server's certificate, in which case you have to override its protection and proceed anyway\. 
+
+## Launching the Spark History Server and Viewing the Spark UI Using Docker<a name="monitor-spark-ui-history-local"></a>
+
+If you prefer local access \(not to have an EC2 instance for the Apache Spark history server\), you can also use Docker to start the Apache Spark history server and view the Spark UI locally\. This Dockerfile is a sample that you should modify to meet your requirements\. 
+
+**Prerequisites**
+
+For information about how to install Docker on your laptop see the [Docker Engine community](https://docs.docker.com/install/)\.
+
+**To start the Spark history server and view the Spark UI locally using Docker**
+
+1. Download files from GitHub\.
+
+   1. Download the Dockerfile and pom\.xml from [AWS Glue code samples](https://github.com/aws-samples/aws-glue-samples/tree/master/utilities/Spark_UI/)\.
+
+1. Run the following commands:
+
+   1. Replace the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` with your valid AWS credentials\.
+
+   1. Replace the `s3a://path_to_eventlog` with your event log directory\.
+
+      ```
+      $ docker build -t glue/sparkui:latest . 
+      $ docker run -itd -e SPARK_HISTORY_OPTS="$SPARK_HISTORY_OPTS -Dspark.history.fs.logDirectory=s3a://path_to_eventlog -Dspark.hadoop.fs.s3a.access.key=AWS_ACCESS_KEY_ID -Dspark.hadoop.fs.s3a.secret.key=AWS_SECRET_ACCESS_KEY" -p 18080:18080 glue/sparkui:latest "/opt/spark/bin/spark-class org.apache.spark.deploy.history.HistoryServer"
+      ```
+
+1. Open http://localhost:18080 in your browser to view the Spark UI locally\.

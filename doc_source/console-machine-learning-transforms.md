@@ -2,7 +2,7 @@
 
 You can use AWS Glue to create custom machine learning transforms that can be used to cleanse your data\. You can use these transforms when you create a job on the AWS Glue console\. 
 
-For information about how to create a machine learning transform, see [Machine Learning Transforms in AWS Glue](machine-learning.md)\.
+For information about how to create a machine learning transform, see [Matching Records with AWS Lake Formation FindMatches](machine-learning.md)\.
 
 **Topics**
 + [Transform Properties](#console-machine-learning-properties)
@@ -24,6 +24,9 @@ A unique identifier of the transform\.
 **Type**  
 The type of machine learning transform; for example, **Find matching records**\.
 
+**Glue version**  
+This value determines which version of AWS Glue this machine learning transform is compatible with\. Glue 1\.0 is recommended for most customers\. If the value is not set, the Glue compatibility defaults to Glue 0\.9\. For more information, see [AWS Glue Versions](https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions)\.
+
 **Status**  
 Indicates whether the transform is **Ready** or **Needs teaching**\. To run a machine learning transform successfully in a job, it must be `Ready`\. 
 
@@ -42,7 +45,7 @@ Indicates whether the transform is to remove duplicates in the target\. The reco
 
 You can view, delete, set up and teach, or tune a transform on the AWS Glue console\. Select the check box next to the transform in the list, choose **Action**, and then choose the action that you want to take\.
 
-To add a new machine learning transform, choose the **Jobs** tab, and then choose **Add job**\. Follow the instructions in the **Add job** wizard to add a job with a machine learning transform such as `FindMatches`\. For more information, see [Machine Learning Transforms in AWS Glue](machine-learning.md)\.
+To add a new machine learning transform, choose the **Jobs** tab, and then choose **Add job**\. Follow the instructions in the **Add job** wizard to add a job with a machine learning transform such as `FindMatches`\. For more information, see [Matching Records with AWS Lake Formation FindMatches](machine-learning.md)\.
 
 ## Viewing Transform Details<a name="console-machine-learning-transforms-details"></a>
 

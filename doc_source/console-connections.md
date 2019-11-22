@@ -60,6 +60,22 @@ To enable an **Amazon RDS Oracle** data store to use **Require SSL connection**,
 
 1. On the AWS Glue console, create a connection to the Amazon RDS Oracle instance\. In the connection definition, select **Require SSL connection**, and when requested, enter the **Port** you used in the Amazon RDS Oracle SSL option\. 
 
+**Custom certificate fields \(optional\)**  
+If you have a certificate that you are currently using for SSL communication with your on\-premise or cloud databases, you can use that certificate for SSL connections to AWS Glue data sources or targets\. The following optional fields are available when you select **Require SSL connection**:    
+**Custom JDBC certificate**  
+Enter an Amazon S3 location containing a custom root certificate\. AWS Glue uses this certificate to establish an SSL connection to the database\. AWS Glue handles only X\.509 certificates\. The certificate must be DER\-encoded and supplied in Base64 encoding PEM format\.  
+If this field is left blank, the default certificate is used\.  
+**Skip certificate validation**  
+Select this check box to skip validation of the custom certificate by AWS Glue\. If you choose to validate, AWS Glue validates the signature algorithm and subject public key algorithm for the certificate\. If the certificate fails validation, any ETL job or crawler that uses the connection fails\.  
+The only permitted signature algorithms are SHA256withRSA, SHA384withRSA, or SHA512withRSA\. For the subject public key algorithm, the key length must be at least 2048\.  
+**Custom JDBC certificate string**  
+Enter database\-specific certificate information\. This is a string that is used for domain matching or distinguished name \(DN\) matching\. For Oracle Database, this maps to the `SSL_SERVER_CERT_DN` parameter in the security section of the `tnsnames.ora` file\. For Microsoft SQL Server, this is used as `hostNameInCertificate`\.  
+The following is an example for the Oracle Database `SSL_SERVER_CERT_DN` parameter\.  
+
+```
+cn=sales,cn=OracleContext,dc=us,dc=example,dc=com
+```
+
 **JDBC URL**  
 Type the URL for your JDBC data store\. For most database engines, this field is in the following format\.  
  ` jdbc:protocol://host:port/db_name `   

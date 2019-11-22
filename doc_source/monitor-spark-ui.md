@@ -60,4 +60,4 @@ You can still use AWS Glue continuous logging to view the Spark application log 
 **Topics**
 + [Enabling the Apache Spark Web UI for AWS Glue Jobs](monitor-spark-ui-jobs.md)
 + [Enabling the Apache Spark Web UI for Development Endpoints](monitor-spark-ui-dev-endpoints.md)
-+ [Launching the Spark History Server and Viewing the Spark UI Using AWS CloudFormation](monitor-spark-ui-history.md)
++ [Launching the Spark History Server](monitor-spark-ui-history.md)

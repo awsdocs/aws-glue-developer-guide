@@ -10,9 +10,10 @@ The tutorial assumes that you have already taken the steps outlined in [Tutorial
 
    If you are running on Microsoft Windows, make sure that the `JAVA_HOME` environment variable points to the right Java directory\. It's possible to update Java without updating this variable, and if it points to a folder that no longer exists, Zeppelin fails to start\.
 
-1. Download Apache Zeppelin \(the version with all interpreters\) from [the Zeppelin download page](http://zeppelin.apache.org/download.html) onto your local machine\. 
+1. Download the version of Apache Zeppelin with all interpreters from [the Zeppelin download page](http://zeppelin.apache.org/download.html) onto your local machine\. Choose the file to download according to the following compatibility table, and follow the download instructions\.    
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/glue/latest/dg/dev-endpoint-tutorial-local-notebook.html)
 
-   The latest release of Apache Zeppelin, 0\.8\.x, is not supported\. Download the older release named **zeppelin\-0\.7\.3\-bin\-all\.tgz** from the download page and follow the installation instructions\. Start Zeppelin in the way that's appropriate for your operating system\. Leave the terminal window that starts the notebook server open while you are using Zeppelin\. When the server has started successfully, you can see a line in the console that ends with "Done, zeppelin server started\." 
+   Start Zeppelin in the way that's appropriate for your operating system\. Leave the terminal window that starts the notebook server open while you are using Zeppelin\. When the server has started successfully, you can see a line in the console that ends with "Done, zeppelin server started\." 
 
 1. Open Zeppelin in your browser by navigating to `http://localhost:8080`\.
 

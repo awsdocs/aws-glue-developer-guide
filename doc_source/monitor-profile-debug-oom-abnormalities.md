@@ -48,7 +48,7 @@ datasink = glueContext.write_dynamic_frame.from_options(frame = df, connection_t
 
 You can monitor the memory profile and the ETL data movement in the AWS Glue job profile\.
 
-The driver executes below the safe threshold of 50 percent memory usage over the entire duration of the AWS Glue job\. The executors stream the data from Amazon S3, process it, and write it out to Amazon S3\. As a result, they consume less than 5 percent memory at any point in time\.
+The driver executes below the threshold of 50 percent memory usage over the entire duration of the AWS Glue job\. The executors stream the data from Amazon S3, process it, and write it out to Amazon S3\. As a result, they consume less than 5 percent memory at any point in time\.
 
 ![\[The memory profile showing the issue is fixed.\]](http://docs.aws.amazon.com/glue/latest/dg/images/monitor-debug-oom-memoryprofile-fixed.png)
 
@@ -72,7 +72,7 @@ dfSpark.write.format("parquet").save(output_path)
 
 ### Visualize the Profiled Metrics on the AWS Glue Console<a name="monitor-debug-oom-visualize-2"></a>
 
-The following graph shows that within a minute of execution, the [average memory usage](monitoring-awsglue-with-cloudwatch-metrics.md#glue.ALL.jvm.heap.usage) across all executors spikes up quickly above the safe threshold of 50 percent\. The usage reaches up to 92 percent and the container running the executor is terminated \("killed"\) by Apache Hadoop YARN\.
+If the slope of the memory usage graph is positive and crosses 50 percent, then if the job fails before the next metric is emitted, then memory exhaustion is a good candidate for the cause\. The following graph shows that within a minute of execution, the [average memory usage](monitoring-awsglue-with-cloudwatch-metrics.md#glue.ALL.jvm.heap.usage) across all executors spikes up quickly above 50 percent\. The usage reaches up to 92 percent and the container running the executor is terminated \("killed"\) by Apache Hadoop YARN\. 
 
 ![\[The average memory usage across all executors.\]](http://docs.aws.amazon.com/glue/latest/dg/images/monitor-debug-oom-2-memoryprofile.png)
 

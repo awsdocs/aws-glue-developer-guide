@@ -17,7 +17,8 @@ You provide those permissions by using AWS Identity and Access Management \(IAM\
 1. On the **Attach permissions policy** page, choose the policies that contain the required permissions; for example, the AWS managed policy **AWSGlueServiceRole** for general AWS Glue permissions and the AWS managed policy **AmazonS3FullAccess** for access to Amazon S3 resources\. Then choose **Next: Review**\.
 **Note**  
 Ensure that one of the policies in this role grants permissions to your Amazon S3 sources and targets\. You might want to provide your own policy for access to specific Amazon S3 resources\. Data sources require `s3:ListBucket` and `s3:GetObject` permissions\. Data targets require `s3:ListBucket`, `s3:PutObject`, and `s3:DeleteObject` permissions\. For more information about creating an Amazon S3 policy for your resources, see [Specifying Resources in a Policy](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)\. For an example Amazon S3 policy, see [ Writing IAM Policies: How to Grant Access to an Amazon S3 Bucket](https://aws.amazon.com/blogs/security/writing-iam-policies-how-to-grant-access-to-an-amazon-s3-bucket/)\.   
-If you plan to access Amazon S3 sources and targets that are encrypted with SSE\-KMS, then attach a policy that allows AWS Glue crawlers, jobs, and development endpoints to decrypt the data\. For more information, see [Protecting Data Using Server\-Side Encryption with AWS KMS\-Managed Keys \(SSE\-KMS\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html)\. The following is an example:   
+If you plan to access Amazon S3 sources and targets that are encrypted with SSE\-KMS, attach a policy that allows AWS Glue crawlers, jobs, and development endpoints to decrypt the data\. For more information, see [Protecting Data Using Server\-Side Encryption with AWS KMS\-Managed Keys \(SSE\-KMS\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html)\.   
+The following is an example\.  
 
    ```
    {  
@@ -36,4 +37,4 @@ If you plan to access Amazon S3 sources and targets that are encrypted with SSE\
    }
    ```
 
-1. For **Role name**, type a name for your role; for example, **AWSGlueServiceRoleDefault**\. Create the role with the name prefixed with the string **AWSGlueServiceRole** to allow the role to be passed from console users to the service\. AWS Glue provided policies expect IAM service roles to begin with **AWSGlueServiceRole**\. Otherwise, you must add a policy to allow your users the `iam:PassRole` permission for IAM roles to match your naming convention\.   Choose **Create Role**\.
+1. For **Role name**, enter a name for your role; for example, **AWSGlueServiceRoleDefault**\. Create the role with the name prefixed with the string **AWSGlueServiceRole** to allow the role to be passed from console users to the service\. AWS Glue provided policies expect IAM service roles to begin with **AWSGlueServiceRole**\. Otherwise, you must add a policy to allow your users the `iam:PassRole` permission for IAM roles to match your naming convention\.   Choose **Create Role**\.

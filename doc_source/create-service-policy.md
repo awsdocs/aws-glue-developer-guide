@@ -119,4 +119,4 @@ Add any permissions needed for Amazon S3 resources\. You might want to scope the
    The following table describes the permissions granted by this policy\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/glue/latest/dg/create-service-policy.html)
 
-1. On the **Review Policy** screen, type your **Policy Name**, for example **GlueServiceRolePolicy**\. Type an optional description, and when you're satisfied with the policy, then **Create policy**\.
+1. On the **Review Policy** screen, enter your **Policy Name**, for example **GlueServiceRolePolicy**\. Enter an optional description, and when you're satisfied with the policy, choose **Create policy**\.
