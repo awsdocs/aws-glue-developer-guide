@@ -16,10 +16,10 @@ You can use the following `format_options` values with `format="csv"`:
 + `separator`: Specifies the delimiter character\. The default is a comma: `','`, but any other character can be specified\.
 + `escaper`: Specifies a character to use for escaping\. The default value is `"none"`\. If enabled, the character which immediately follows is used as\-is, except for a small set of well\-known escapes \(`\n`, `\r`, `\t`, and `\0`\)\.
 + `quoteChar`: Specifies the character to use for quoting\. The default is a double quote: `'"'`\. Set this to `'-1'` to disable quoting entirely\.
-+ `multiline`: A Boolean value that specifies whether a single record can span multiple lines\. This can occur when a field contains a quoted new\-line character\. You must set this option to "true" if any record spans multiple lines\. The default value is `"false"`, which allows for more aggressive file\-splitting during parsing\.
-+ `withHeader`: A Boolean value that specifies whether to treat the first line as a header\. The default value is `"false"`\. This option can be used in the `DynamicFrameReader` class\.
-+ `writeHeader`: A Boolean value that specifies whether to write the header to output\. The default value is `"true"`\. This option can be used in the `DynamicFrameWriter` class\.
-+ `skipFirst`: A Boolean value that specifies whether to skip the first data line\. The default value is `"false"`\.
++ `multiline`: A Boolean value that specifies whether a single record can span multiple lines\. This can occur when a field contains a quoted new\-line character\. You must set this option to "true" if any record spans multiple lines\. The default value is `False`, which allows for more aggressive file\-splitting during parsing\.
++ `withHeader`: A Boolean value that specifies whether to treat the first line as a header\. The default value is `False`\. This option can be used in the `DynamicFrameReader` class\.
++ `writeHeader`: A Boolean value that specifies whether to write the header to output\. The default value is `True`\. This option can be used in the `DynamicFrameWriter` class\.
++ `skipFirst`: A Boolean value that specifies whether to skip the first data line\. The default value is `False`\.
 
 ## format="ion"<a name="aws-glue-programming-etl-format-ion"></a>
 
