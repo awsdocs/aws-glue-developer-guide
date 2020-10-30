@@ -8,6 +8,7 @@ The library is released with the Amazon Software license \([https://aws.amazon.c
 
 **Topics**
 + [Local Development Restrictions](#local-dev-restrictions)
++ [Developing Locally using Docker image](#develop-local-docker-image)
 + [Developing Locally with Python](#develop-local-python)
 + [Developing Locally with Scala](#develop-local-scala)
 
@@ -20,6 +21,10 @@ Keep the following restrictions in mind when using the AWS Glue Scala library to
   + [FindMatches transform](https://docs.aws.amazon.com/glue/latest/dg/machine-learning.html#find-matches-transform)
 
   These feature are available only within the AWS Glue job system\.
+
+## Developing Locally using Docker image<a name="develop-local-docker-image"></a>
+
+Docker image gives you a 2 step process to set up a container with AWS glue binaries and Jupyter/Zeppelin notebook server. Check [this blog](https://aws.amazon.com/blogs/big-data/developing-aws-glue-etl-jobs-locally-using-a-container/) for details.
 
 ## Developing Locally with Python<a name="develop-local-python"></a>
 
