@@ -1,6 +1,6 @@
 ## AWS Glue Developer Guide
 
-The open source version of the AWS Glue docs. You can submit feedback & requests for changes by submitting issues in this repo or by making proposed changes & submitting a pull request.
+The open source version of the AWS Glue docs. You can submit feedback and requests for changes by submitting issues in this repo or by making proposed changes and submitting a pull request.
 
 ## License Summary
 
