@@ -1,6 +1,111 @@
 # GlueContext Class<a name="aws-glue-api-crawler-pyspark-extensions-glue-context"></a>
 
-Wraps the Apache SparkSQL [SQLContext](https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.SQLContext) object, and thereby provides mechanisms for interacting with the Apache Spark platform\.
+Wraps the Apache Spark [SparkContext](https://spark.apache.org/docs/latest/api/java/org/apache/spark/SparkContext.html) object, and thereby provides mechanisms for interacting with the Apache Spark platform\.
+
+## Working with Datasets in Amazon S3<a name="aws-glue-api-crawler-pyspark-extensions-glue-context-_storage_layer"></a>
++ [purge\_table](#aws-glue-api-crawler-pyspark-extensions-glue-context-purge_table)
++ [purge\_s3\_path](#aws-glue-api-crawler-pyspark-extensions-glue-context-purge_s3_path)
++ [transition\_table](#aws-glue-api-crawler-pyspark-extensions-glue-context-transition_table)
++ [transition\_s3\_path](#aws-glue-api-crawler-pyspark-extensions-glue-context-transition_s3_path)
+
+## purge\_table<a name="aws-glue-api-crawler-pyspark-extensions-glue-context-purge_table"></a>
+
+**`purge_table(database, table_name, options={}, transformation_ctx="", catalog_id=None)`**
+
+Deletes files from Amazon S3 for the specified catalog's database and table\. If all files in a partition are deleted, that partition is also deleted from the catalog\.
+
+If you want to be able to recover deleted objects, you can enable [object versioning](https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectVersioning.html) on the Amazon S3 bucket\. When an object is deleted from a bucket that doesn't have object versioning enabled, the object can't be recovered\. For more information about how to recover deleted objects in a version\-enabled bucket, see [How can I retrieve an Amazon S3 object that was deleted?](https://aws.amazon.com/premiumsupport/knowledge-center/s3-undelete-configuration/) in the AWS Support Knowledge Center\.
++ `database` – The database to use\.
++ `table_name` – The name of the table to use\.
++ `options` – Options to filter files to be deleted and for manifest file generation\.
+  + `retentionPeriod` – Specifies a period in number of hours to retain files\. Files newer than the retention period are retained\. Set to 168 hours \(7 days\) by default\.
+  + `partitionPredicate` – Partitions satisfying this predicate are deleted\. Files within the retention period in these partitions are not deleted\. Set to `""` – empty by default\.
+  + `excludeStorageClasses` – Files with storage class in the `excludeStorageClasses` set are not deleted\. The default is `Set()` – an empty set\.
+  + `manifestFilePath` – An optional path for manifest file generation\. All files that were successfully purged are recorded in `Success.csv`, and those that failed in `Failed.csv`
++ `transformation_ctx` – The transformation context to use \(optional\)\. Used in the manifest file path\.
++ `catalog_id` – The catalog ID of the Data Catalog being accessed \(the account ID of the Data Catalog\)\. Set to `None` by default\. `None` defaults to the catalog ID of the calling account in the service\.
+
+**Example**  
+
+```
+glueContext.purge_table("database", "table", {"partitionPredicate": "(month=='march')", "retentionPeriod": 1, "excludeStorageClasses": ["STANDARD_IA"], "manifestFilePath": "s3://bucketmanifest/"})
+```
+
+## purge\_s3\_path<a name="aws-glue-api-crawler-pyspark-extensions-glue-context-purge_s3_path"></a>
+
+**`purge_s3_path(s3_path, options={}, transformation_ctx="")`**
+
+Deletes files from the specified Amazon S3 path recursively\.
+
+If you want to be able to recover deleted objects, you can enable [object versioning](https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectVersioning.html) on the Amazon S3 bucket\. When an object is deleted from a bucket that doesn't have object versioning enabled, the object can't be recovered\. For more information about how to recover deleted objects in a version\-enabled bucket, see [How can I retrieve an Amazon S3 object that was deleted?](https://aws.amazon.com/premiumsupport/knowledge-center/s3-undelete-configuration/) in the AWS Support Knowledge Center\.
++ `s3_path` – The path in Amazon S3 of the files to be deleted in the format `s3://<bucket>/<prefix>/`
++ `options` – Options to filter files to be deleted and for manifest file generation\.
+  + `retentionPeriod` – Specifies a period in number of hours to retain files\. Files newer than the retention period are retained\. Set to 168 hours \(7 days\) by default\.
+  + `partitionPredicate` – Partitions satisfying this predicate are deleted\. Files within the retention period in these partitions are not deleted\. Set to `""` – empty by default\.
+  + `excludeStorageClasses` – Files with storage class in the `excludeStorageClasses` set are not deleted\. The default is `Set()` – an empty set\.
+  + `manifestFilePath` – An optional path for manifest file generation\. All files that were successfully purged are recorded in `Success.csv`, and those that failed in `Failed.csv`
++ `transformation_ctx` – The transformation context to use \(optional\)\. Used in the manifest file path\.
++ `catalog_id` – The catalog ID of the Data Catalog being accessed \(the account ID of the Data Catalog\)\. Set to `None` by default\. `None` defaults to the catalog ID of the calling account in the service\.
+
+**Example**  
+
+```
+glueContext.purge_s3_path("s3://bucket/path/", {"retentionPeriod": 1, "excludeStorageClasses": ["STANDARD_IA"], "manifestFilePath": "s3://bucketmanifest/"})
+```
+
+## transition\_table<a name="aws-glue-api-crawler-pyspark-extensions-glue-context-transition_table"></a>
+
+**`transition_table(database, table_name, transition_to, options={}, transformation_ctx="", catalog_id=None)`**
+
+Transitions the storage class of the files stored on Amazon S3 for the specified catalog's database and table\.
+
+You can transition between any two storage classes\. For the `GLACIER` and `DEEP_ARCHIVE` storage classes, you can transition to these classes\. However, you would use an `S3 RESTORE` to transition from `GLACIER` and `DEEP_ARCHIVE` storage classes\.
+
+If you're running AWS Glue ETL jobs that read files or partitions from Amazon S3, you can exclude some Amazon S3 storage class types\. For more information, see [Excluding Amazon S3 Storage Classes](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-storage-classes.html)\.
++ `database` – The database to use\.
++ `table_name` – The name of the table to use\.
++ `transition_to` – The [Amazon S3 storage class](https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/s3/model/StorageClass.html) to transition to\.
++ `options` – Options to filter files to be deleted and for manifest file generation\.
+  + `retentionPeriod` – Specifies a period in number of hours to retain files\. Files newer than the retention period are retained\. Set to 168 hours \(7 days\) by default\.
+  + `partitionPredicate` – Partitions satisfying this predicate are transitioned\. Files within the retention period in these partitions are not transitioned\. Set to `""` – empty by default\.
+  + `excludeStorageClasses` – Files with storage class in the `excludeStorageClasses` set are not transitioned\. The default is `Set()` – an empty set\.
+  + `manifestFilePath` – An optional path for manifest file generation\. All files that were successfully transitioned are recorded in `Success.csv`, and those that failed in `Failed.csv`
+  + `accountId` – The AWS account ID to run the transition transform\. Mandatory for this transform\.
+  + `roleArn` – The AWS role to run the transition transform\. Mandatory for this transform\.
++ `transformation_ctx` – The transformation context to use \(optional\)\. Used in the manifest file path\.
++ `catalog_id` – The catalog ID of the Data Catalog being accessed \(the account ID of the Data Catalog\)\. Set to `None` by default\. `None` defaults to the catalog ID of the calling account in the service\.
+
+**Example**  
+
+```
+glueContext.transition_table("database", "table", "STANDARD_IA", {"retentionPeriod": 1, "excludeStorageClasses": ["STANDARD_IA"], "manifestFilePath": "s3://bucketmanifest/", "accountId": "12345678901", "roleArn": "arn:aws:iam::123456789012:user/example-username"})
+```
+
+## transition\_s3\_path<a name="aws-glue-api-crawler-pyspark-extensions-glue-context-transition_s3_path"></a>
+
+**`transition_s3_path(s3_path, transition_to, options={}, transformation_ctx="")`**
+
+Transitions the storage class of the files in the specified Amazon S3 path recursively\.
+
+You can transition between any two storage classes\. For the `GLACIER` and `DEEP_ARCHIVE` storage classes, you can transition to these classes\. However, you would use an `S3 RESTORE` to transition from `GLACIER` and `DEEP_ARCHIVE` storage classes\.
+
+If you're running AWS Glue ETL jobs that read files or partitions from Amazon S3, you can exclude some Amazon S3 storage class types\. For more information, see [Excluding Amazon S3 Storage Classes](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-storage-classes.html)\.
++ `s3_path` – The path in Amazon S3 of the files to be transitioned in the format `s3://<bucket>/<prefix>/`
++ `transition_to` – The [Amazon S3 storage class](https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/s3/model/StorageClass.html) to transition to\.
++ `options` – Options to filter files to be deleted and for manifest file generation\.
+  + `retentionPeriod` – Specifies a period in number of hours to retain files\. Files newer than the retention period are retained\. Set to 168 hours \(7 days\) by default\.
+  + `partitionPredicate` – Partitions satisfying this predicate are transitioned\. Files within the retention period in these partitions are not transitioned\. Set to `""` – empty by default\.
+  + `excludeStorageClasses` – Files with storage class in the `excludeStorageClasses` set are not transitioned\. The default is `Set()` – an empty set\.
+  + `manifestFilePath` – An optional path for manifest file generation\. All files that were successfully transitioned are recorded in `Success.csv`, and those that failed in `Failed.csv`
+  + `accountId` – The AWS account ID to run the transition transform\. Mandatory for this transform\.
+  + `roleArn` – The AWS role to run the transition transform\. Mandatory for this transform\.
++ `transformation_ctx` – The transformation context to use \(optional\)\. Used in the manifest file path\.
+
+**Example**  
+
+```
+glueContext.transition_s3_path("s3://bucket/prefix/", "STANDARD_IA", {"retentionPeriod": 1, "excludeStorageClasses": ["STANDARD_IA"], "manifestFilePath": "s3://bucketmanifest/", "accountId": "12345678901", "roleArn": "arn:aws:iam::123456789012:user/example-username"})
+```
 
 ## Creating<a name="aws-glue-api-crawler-pyspark-extensions-glue-context-_creating"></a>
 + [\_\_init\_\_](#aws-glue-api-crawler-pyspark-extensions-glue-context-__init__)
@@ -8,6 +113,7 @@ Wraps the Apache SparkSQL [SQLContext](https://spark.apache.org/docs/latest/api/
 + [create\_dynamic\_frame\_from\_rdd](#aws-glue-api-crawler-pyspark-extensions-glue-context-create_dynamic_frame_from_rdd)
 + [create\_dynamic\_frame\_from\_catalog](#aws-glue-api-crawler-pyspark-extensions-glue-context-create_dynamic_frame_from_catalog)
 + [create\_dynamic\_frame\_from\_options](#aws-glue-api-crawler-pyspark-extensions-glue-context-create_dynamic_frame_from_options)
++ [add\_ingestion\_time\_columns](#aws-glue-api-crawler-pyspark-extensions-glue-context-add-ingestion-time-columns)
 
 ## \_\_init\_\_<a name="aws-glue-api-crawler-pyspark-extensions-glue-context-__init__"></a>
 
@@ -19,11 +125,11 @@ Wraps the Apache SparkSQL [SQLContext](https://spark.apache.org/docs/latest/api/
 **`getSource(connection_type, transformation_ctx = "", **options)`**
 
 Creates a `DataSource` object that can be used to read `DynamicFrames` from external sources\.
-+ `connection_type` – The connection type to use, such as Amazon S3, Amazon Redshift, and JDBC\. Valid values include `s3`, `mysql`, `postgresql`, `redshift`, `sqlserver`, `oracle`, and `dynamodb`\.
++ `connection_type` – The connection type to use, such as Amazon Simple Storage Service \(Amazon S3\), Amazon Redshift, and JDBC\. Valid values include `s3`, `mysql`, `postgresql`, `redshift`, `sqlserver`, `oracle`, and `dynamodb`\.
 + `transformation_ctx` – The transformation context to use \(optional\)\.
 + `options` – A collection of optional name\-value pairs\. For more information, see [Connection Types and Options for ETL in AWS Glue](aws-glue-programming-etl-connect.md)\.
 
-The following is an example of using `getSource`:
+The following is an example of using `getSource`\.
 
 ```
 >>> data_source = context.getSource("file", paths=["/in/path"])
@@ -52,12 +158,12 @@ Returns a `DynamicFrame` that is created using a catalog database and table name
 + `redshift_tmp_dir` – An Amazon Redshift temporary directory to use \(optional\)\.
 + `transformation_ctx` – The transformation context to use \(optional\)\.
 + `push_down_predicate` – Filters partitions without having to list and read all the files in your dataset\. For more information, see [Pre\-Filtering Using Pushdown Predicates](aws-glue-programming-etl-partitions.md#aws-glue-programming-etl-partitions-pushdowns)\.
-+ `additional_options` – Additional options provided to AWS Glue\.
++ `additional_options` – A collection of optional name\-value pairs\. The possible options include those listed in [Connection Types and Options for ETL in AWS Glue](aws-glue-programming-etl-connect.md) except for `endpointUrl`, `streamName`, `bootstrap.servers`, `security.protocol`, `topicName`, `classification`, and `delimiter`\.
 + `catalog_id` — The catalog ID \(account ID\) of the Data Catalog being accessed\. When None, the default account ID of the caller is used\. 
 
 ## create\_dynamic\_frame\_from\_options<a name="aws-glue-api-crawler-pyspark-extensions-glue-context-create_dynamic_frame_from_options"></a>
 
-**`create_dynamic_frame_from_options(connection_type, connection_options={}, format=None, format_options={}, transformation_ctx = "", push_down_predicate= "")`**
+**`create_dynamic_frame_from_options(connection_type, connection_options={}, format=None, format_options={}, transformation_ctx = "")`**
 
 Returns a `DynamicFrame` created with the specified connection and format\.
 + `connection_type` – The connection type, such as Amazon S3, Amazon Redshift, and JDBC\. Valid values include `s3`, `mysql`, `postgresql`, `redshift`, `sqlserver`, `oracle`, and `dynamodb`\.
@@ -76,10 +182,25 @@ Returns a `DynamicFrame` created with the specified connection and format\.
   The `dbtable` property is the name of the JDBC table\. For JDBC data stores that support schemas within a database, specify `schema.table-name`\. If a schema is not provided, then the default "public" schema is used\.
 
   For more information, see [Connection Types and Options for ETL in AWS Glue](aws-glue-programming-etl-connect.md)\.
-+ `format` – A format specification \(optional\)\. This is used for an Amazon Simple Storage Service \(Amazon S3\) or an AWS Glue connection that supports multiple formats\. See [Format Options for ETL Inputs and Outputs in AWS Glue](aws-glue-programming-etl-format.md) for the formats that are supported\.
++ `format` – A format specification \(optional\)\. This is used for an Amazon S3 or an AWS Glue connection that supports multiple formats\. See [Format Options for ETL Inputs and Outputs in AWS Glue](aws-glue-programming-etl-format.md) for the formats that are supported\.
 + `format_options` – Format options for the specified format\. See [Format Options for ETL Inputs and Outputs in AWS Glue](aws-glue-programming-etl-format.md) for the formats that are supported\.
 + `transformation_ctx` – The transformation context to use \(optional\)\.
-+ `push_down_predicate` – Filters partitions without having to list and read all the files in your dataset\. AWS Glue supports predicate pushdown only for Amazon S3 sources; and does not support JDBC sources\. For more information, see [Pre\-Filtering Using Pushdown Predicates](aws-glue-programming-etl-partitions.md#aws-glue-programming-etl-partitions-pushdowns)\.
+
+## add\_ingestion\_time\_columns<a name="aws-glue-api-crawler-pyspark-extensions-glue-context-add-ingestion-time-columns"></a>
+
+**`add_ingestion_time_columns(dataFrame, timeGranularity = "")`**
+
+Appends ingestion time columns like `ingest_year`, `ingest_month`, `ingest_day`, `ingest_hour`, `ingest_minute` to the input `DataFrame`\. This function is automatically generated in the script generated by the AWS Glue when you specify a Data Catalog table with Amazon S3 as the target\. This function automatically updates the partition with ingestion time columns on the output table\. This allows the output data to be automatically partitioned on ingestion time without requiring explicit ingestion time columns in the input data\.
++ `dataFrame` – The `dataFrame` to append the ingestion time columns to\.
++ `timeGranularity` – The granularity of the time columns\. Valid values are "`day`", "`hour`" and "`minute`"\. For example, if "`hour`" is passed in to the function, the original `dataFrame` will have "`ingest_year`", "`ingest_month`", "`ingest_day`", and "`ingest_hour`" time columns appended\.
+
+Returns the data frame after appending the time granularity columns\.
+
+Example:
+
+```
+dynamic_frame = DynamicFrame.fromDF(glueContext.add_ingestion_time_columns(dataFrame, "hour"))
+```
 
 ## Writing<a name="aws-glue-api-crawler-pyspark-extensions-glue-context-_writing"></a>
 + [getSink](#aws-glue-api-crawler-pyspark-extensions-glue-context-get-sink)
@@ -98,6 +219,8 @@ Gets a `DataSink` object that can be used to write `DynamicFrames` to external s
 + `format` – The SparkSQL format to use \(optional\)\.
 + `transformation_ctx` – The transformation context to use \(optional\)\.
 + `options` – A collection of option name\-value pairs\.
+
+
 
 For example:
 
@@ -129,7 +252,7 @@ Writes and returns a `DynamicFrame` using the specified connection and format\.
   The `dbtable` property is the name of the JDBC table\. For JDBC data stores that support schemas within a database, specify `schema.table-name`\. If a schema is not provided, then the default "public" schema is used\.
 
   For more information, see [Connection Types and Options for ETL in AWS Glue](aws-glue-programming-etl-connect.md)\.
-+ `format` – A format specification \(optional\)\. This is used for an Amazon Simple Storage Service \(Amazon S3\) or an AWS Glue connection that supports multiple formats\. See [Format Options for ETL Inputs and Outputs in AWS Glue](aws-glue-programming-etl-format.md) for the formats that are supported\.
++ `format` – A format specification \(optional\)\. This is used for an Amazon S3 or an AWS Glue connection that supports multiple formats\. See [Format Options for ETL Inputs and Outputs in AWS Glue](aws-glue-programming-etl-format.md) for the formats that are supported\.
 + `format_options` – Format options for the specified format\. See [Format Options for ETL Inputs and Outputs in AWS Glue](aws-glue-programming-etl-format.md) for the formats that are supported\.
 + `transformation_ctx` – A transformation context to use \(optional\)\.
 
@@ -155,7 +278,7 @@ Writes and returns a `DynamicFrame` or `DynamicFrameCollection` that is created 
   The `dbtable` property is the name of the JDBC table\. For JDBC data stores that support schemas within a database, specify `schema.table-name`\. If a schema is not provided, then the default "public" schema is used\.
 
   For more information, see [Connection Types and Options for ETL in AWS Glue](aws-glue-programming-etl-connect.md)\.
-+ `format` – A format specification \(optional\)\. This is used for an Amazon Simple Storage Service \(Amazon S3\) or an AWS Glue connection that supports multiple formats\. See [Format Options for ETL Inputs and Outputs in AWS Glue](aws-glue-programming-etl-format.md) for the formats that are supported\.
++ `format` – A format specification \(optional\)\. This is used for an Amazon S3 or an AWS Glue connection that supports multiple formats\. See [Format Options for ETL Inputs and Outputs in AWS Glue](aws-glue-programming-etl-format.md) for the formats that are supported\.
 + `format_options` – Format options for the specified format\. See [Format Options for ETL Inputs and Outputs in AWS Glue](aws-glue-programming-etl-format.md) for the formats that are supported\.
 + `transformation_ctx` – A transformation context to use \(optional\)\.
 

@@ -28,6 +28,7 @@ If you encounter errors in AWS Glue, use the following solutions to help you fin
 + [Error: Local Notebook Fails to Start](#error-local-notebook-fails-to-start)
 + [Error: Notebook Usage Errors](#error-notebook-usage-errors)
 + [Error: Running Crawler Failed](#error-running-crawler-failed)
++ [Error: Partitions Were Not Updated](#error-update-from-job-partitions)
 + [Error: Upgrading Athena Data Catalog](#error-running-athena-upgrade)
 + [Error: A Job is Reprocessing Data When Job Bookmarks Are Enabled](#error-job-bookmarks-reprocess-data)
 
@@ -194,6 +195,17 @@ When using an Apache Zeppelin notebook, you might encounter errors due to your s
 
 If AWS Glue fails to successfully run a crawler to catalog your data, it might be because of one of the following reasons\. First check if an error is listed in the AWS Glue console crawlers list\. Check if there is an exclamation  icon next to the crawler name and hover over the icon to see any associated messages\. 
 + Check the logs for the crawler run in CloudWatch Logs under `/aws-glue/crawlers`\.  
+
+## Error: Partitions Were Not Updated<a name="error-update-from-job-partitions"></a>
+
+In case your partitions were not updated in the Data Catalog when you ran an ETL job, these log statements from the `DataSink` class in the CloudWatch logs may be helpful:
++ "`Attempting to fast-forward updates to the Catalog - nameSpace:`"  —  Shows which database, table, and catalogId are attempted to be modified by this job\. If this statement is not here, check if `enableUpdateCatalog` is set to true and properly passed as a `getSink()` parameter or in `additional_options`\.
++ "`Schema change policy behavior:`"  —  Shows which schema `updateBehavior` value you passed in\.
++ "`Schemas qualify (schema compare):`"  —  Will be true or false\.
++ "`Schemas qualify (case-insensitive compare):`"  —  Will be true or false\.
++ If both are false and your `updateBehavior` is not set to `UPDATE_IN_DATABASE`, then your DynamicFrame schema needs to be identical or contain a subset of the columns seen in the Data Catalog table schema\. 
+
+For more information on updating partitions, see [Updating the Schema and Partitions in the Data Catalog](https://docs.aws.amazon.com/glue/latest/dg/update-from-job.html)\.
 
 ## Error: Upgrading Athena Data Catalog<a name="error-running-athena-upgrade"></a>
 

@@ -92,11 +92,15 @@ Set the `Error` to `scala.None.None` \.
 override def write( out : DataOutput ) : Unit 
 ```
 
+
+
 ## def readFields<a name="glue-etl-scala-apis-glue-dynamicrecord-class-defs-readFields"></a>
 
 ```
 override def readFields( in : DataInput ) : Unit 
 ```
+
+
 
 ## def clone<a name="glue-etl-scala-apis-glue-dynamicrecord-class-defs-clone"></a>
 
@@ -156,11 +160,15 @@ Returns `scala.Some Some` \(value\)\.
 override def hashCode : Int 
 ```
 
+
+
 ## def equals<a name="glue-etl-scala-apis-glue-dynamicrecord-class-defs-equals"></a>
 
 ```
 override def equals( other : Any )
 ```
+
+
 
 ## DynamicRecord Object<a name="glue-etl-scala-apis-glue-dynamicrecord-object"></a>
 

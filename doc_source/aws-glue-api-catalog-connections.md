@@ -19,15 +19,15 @@ Defines a connection to a data source\.
 + `Description` – Description string, not more than 2048 bytes long, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
 
   The description of the connection\.
-+ `ConnectionType` – UTF\-8 string \(valid values: `JDBC` \| `SFTP`\)\.
++ `ConnectionType` – UTF\-8 string \(valid values: `JDBC` \| `SFTP` \| `MONGODB` \| `KAFKA` \| `NETWORK` \| `MARKETPLACE` \| `CUSTOM`\)\.
 
-  The type of the connection\. Currently, only JDBC is supported; SFTP is not supported\.
+  The type of the connection\. Currently, SFTP is not supported\.
 + `MatchCriteria` – An array of UTF\-8 strings, not more than 10 strings\.
 
   A list of criteria that can be used in selecting this connection\.
 + `ConnectionProperties` – A map array of key\-value pairs, not more than 100 pairs\.
 
-  Each key is a UTF\-8 string \(valid values: `HOST` \| `PORT` \| `USERNAME="USER_NAME"` \| `PASSWORD` \| `ENCRYPTED_PASSWORD` \| `JDBC_DRIVER_JAR_URI` \| `JDBC_DRIVER_CLASS_NAME` \| `JDBC_ENGINE` \| `JDBC_ENGINE_VERSION` \| `CONFIG_FILES` \| `INSTANCE_ID` \| `JDBC_CONNECTION_URL` \| `JDBC_ENFORCE_SSL` \| `CUSTOM_JDBC_CERT` \| `SKIP_CUSTOM_JDBC_CERT_VALIDATION` \| `CUSTOM_JDBC_CERT_STRING`\)\.
+  Each key is a UTF\-8 string \(valid values: `HOST` \| `PORT` \| `USERNAME="USER_NAME"` \| `PASSWORD` \| `ENCRYPTED_PASSWORD` \| `JDBC_DRIVER_JAR_URI` \| `JDBC_DRIVER_CLASS_NAME` \| `JDBC_ENGINE` \| `JDBC_ENGINE_VERSION` \| `CONFIG_FILES` \| `INSTANCE_ID` \| `JDBC_CONNECTION_URL` \| `JDBC_ENFORCE_SSL` \| `CUSTOM_JDBC_CERT` \| `SKIP_CUSTOM_JDBC_CERT_VALIDATION` \| `CUSTOM_JDBC_CERT_STRING` \| `CONNECTION_URL` \| `KAFKA_BOOTSTRAP_SERVERS` \| `KAFKA_SSL_ENABLED` \| `KAFKA_CUSTOM_CERT` \| `KAFKA_SKIP_CUSTOM_CERT_VALIDATION` \| `SECRET_ID` \| `CONNECTOR_URL` \| `CONNECTOR_TYPE` \| `CONNECTOR_CLASS_NAME`\)\.
 
   Each value is a Value string, not more than 1024 bytes long\.
 
@@ -43,11 +43,20 @@ Defines a connection to a data source\.
   + `JDBC_ENGINE_VERSION` \- The version of the JDBC engine to use\.
   + `CONFIG_FILES` \- \(Reserved for future use\.\)
   + `INSTANCE_ID` \- The instance ID to use\.
-  + `JDBC_CONNECTION_URL` \- The URL for the JDBC connection\.
+  + `JDBC_CONNECTION_URL` \- The URL for connecting to a JDBC data source\.
   + `JDBC_ENFORCE_SSL` \- A Boolean string \(true, false\) specifying whether Secure Sockets Layer \(SSL\) with hostname matching is enforced for the JDBC connection on the client\. The default is false\.
   + `CUSTOM_JDBC_CERT` \- An Amazon S3 location specifying the customer's root certificate\. AWS Glue uses this root certificate to validate the customer's certificate when connecting to the customer database\. AWS Glue only handles X\.509 certificates\. The certificate provided must be DER\-encoded and supplied in Base64 encoding PEM format\.
   + `SKIP_CUSTOM_JDBC_CERT_VALIDATION` \- By default, this is `false`\. AWS Glue validates the Signature algorithm and Subject Public Key Algorithm for the customer certificate\. The only permitted algorithms for the Signature algorithm are SHA256withRSA, SHA384withRSA or SHA512withRSA\. For the Subject Public Key Algorithm, the key length must be at least 2048\. You can set the value of this property to `true` to skip AWS Glue's validation of the customer certificate\.
   + `CUSTOM_JDBC_CERT_STRING` \- A custom JDBC certificate string which is used for domain match or distinguished name match to prevent a man\-in\-the\-middle attack\. In Oracle database, this is used as the `SSL_SERVER_CERT_DN`; in Microsoft SQL Server, this is used as the `hostNameInCertificate`\.
+  + `CONNECTION_URL` \- The URL for connecting to a general \(non\-JDBC\) data source\.
+  + `KAFKA_BOOTSTRAP_SERVERS` \- A comma\-separated list of host and port pairs that are the addresses of the Apache Kafka brokers in a Kafka cluster to which a Kafka client will connect to and bootstrap itself\.
+  + `KAFKA_SSL_ENABLED` \- Whether to enable or disable SSL on an Apache Kafka connection\. Default value is "true"\.
+  + `KAFKA_CUSTOM_CERT` \- The Amazon S3 URL for the private CA cert file \(\.pem format\)\. The default is an empty string\.
+  + `KAFKA_SKIP_CUSTOM_CERT_VALIDATION` \- Whether to skip the validation of the CA cert file or not\. AWS Glue validates for three algorithms: SHA256withRSA, SHA384withRSA and SHA512withRSA\. Default value is "false"\.
+  + `SECRET_ID` \- The secret ID used for the secret manager of credentials\.
+  + `CONNECTOR_URL` \- The connector URL for a MARKETPLACE or CUSTOM connection\.
+  + `CONNECTOR_TYPE` \- The connector type for a MARKETPLACE or CUSTOM connection\.
+  + `CONNECTOR_CLASS_NAME` \- The connector class name for a MARKETPLACE or CUSTOM connection\.
 + `PhysicalConnectionRequirements` – A [PhysicalConnectionRequirements](#aws-glue-api-catalog-connections-PhysicalConnectionRequirements) object\.
 
   A map of physical connection requirements, such as virtual private cloud \(VPC\) and `SecurityGroup`, that are needed to make this connection successfully\.
@@ -72,15 +81,23 @@ A structure that is used to specify a connection to create or update\.
 + `Description` – Description string, not more than 2048 bytes long, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
 
   The description of the connection\.
-+ `ConnectionType` – *Required:* UTF\-8 string \(valid values: `JDBC` \| `SFTP`\)\.
++ `ConnectionType` – *Required:* UTF\-8 string \(valid values: `JDBC` \| `SFTP` \| `MONGODB` \| `KAFKA` \| `NETWORK` \| `MARKETPLACE` \| `CUSTOM`\)\.
 
-  The type of the connection\. Currently, only JDBC is supported; SFTP is not supported\.
+  The type of the connection\. Currently, these types are supported:
+  + `JDBC` \- Designates a connection to a database through Java Database Connectivity \(JDBC\)\.
+  + `KAFKA` \- Designates a connection to an Apache Kafka streaming platform\.
+  + `MONGODB` \- Designates a connection to a MongoDB document database\.
+  + `NETWORK` \- Designates a network connection to a data source within an Amazon Virtual Private Cloud environment \(Amazon VPC\)\.
+  + `MARKETPLACE` \- Uses configuration settings contained in a connector purchased from AWS Marketplace to read from and write to data stores that are not natively supported by AWS Glue\.
+  + `CUSTOM` \- Uses configuration settings contained in a custom connector to read from and write to data stores that are not natively supported by AWS Glue\.
+
+  SFTP is not supported\.
 + `MatchCriteria` – An array of UTF\-8 strings, not more than 10 strings\.
 
   A list of criteria that can be used in selecting this connection\.
 + `ConnectionProperties` – *Required:* A map array of key\-value pairs, not more than 100 pairs\.
 
-  Each key is a UTF\-8 string \(valid values: `HOST` \| `PORT` \| `USERNAME="USER_NAME"` \| `PASSWORD` \| `ENCRYPTED_PASSWORD` \| `JDBC_DRIVER_JAR_URI` \| `JDBC_DRIVER_CLASS_NAME` \| `JDBC_ENGINE` \| `JDBC_ENGINE_VERSION` \| `CONFIG_FILES` \| `INSTANCE_ID` \| `JDBC_CONNECTION_URL` \| `JDBC_ENFORCE_SSL` \| `CUSTOM_JDBC_CERT` \| `SKIP_CUSTOM_JDBC_CERT_VALIDATION` \| `CUSTOM_JDBC_CERT_STRING`\)\.
+  Each key is a UTF\-8 string \(valid values: `HOST` \| `PORT` \| `USERNAME="USER_NAME"` \| `PASSWORD` \| `ENCRYPTED_PASSWORD` \| `JDBC_DRIVER_JAR_URI` \| `JDBC_DRIVER_CLASS_NAME` \| `JDBC_ENGINE` \| `JDBC_ENGINE_VERSION` \| `CONFIG_FILES` \| `INSTANCE_ID` \| `JDBC_CONNECTION_URL` \| `JDBC_ENFORCE_SSL` \| `CUSTOM_JDBC_CERT` \| `SKIP_CUSTOM_JDBC_CERT_VALIDATION` \| `CUSTOM_JDBC_CERT_STRING` \| `CONNECTION_URL` \| `KAFKA_BOOTSTRAP_SERVERS` \| `KAFKA_SSL_ENABLED` \| `KAFKA_CUSTOM_CERT` \| `KAFKA_SKIP_CUSTOM_CERT_VALIDATION` \| `SECRET_ID` \| `CONNECTOR_URL` \| `CONNECTOR_TYPE` \| `CONNECTOR_CLASS_NAME`\)\.
 
   Each value is a Value string, not more than 1024 bytes long\.
 
@@ -112,9 +129,9 @@ Filters the connection definitions that are returned by the `GetConnections` API
 + `MatchCriteria` – An array of UTF\-8 strings, not more than 10 strings\.
 
   A criteria string that must match the criteria recorded in the connection definition for that connection definition to be returned\.
-+ `ConnectionType` – UTF\-8 string \(valid values: `JDBC` \| `SFTP`\)\.
++ `ConnectionType` – UTF\-8 string \(valid values: `JDBC` \| `SFTP` \| `MONGODB` \| `KAFKA` \| `NETWORK` \| `MARKETPLACE` \| `CUSTOM`\)\.
 
-  The type of connections to return\. Currently, only JDBC is supported; SFTP is not supported\.
+  The type of connections to return\. Currently, SFTP is not supported\.
 
 ## Operations<a name="aws-glue-api-catalog-connections-actions"></a>
 + [CreateConnection Action \(Python: create\_connection\)](#aws-glue-api-catalog-connections-CreateConnection)

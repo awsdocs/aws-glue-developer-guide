@@ -15,7 +15,8 @@ You can attach an AWS managed policy or an inline policy to an IAM user to acces
 **Note**  
 You can skip this step if you use the AWS managed policy **AWSGlueConsoleFullAccess**\.
 **Important**  
-AWS Glue needs permission to assume a role that is used to perform work on your behalf\. **To accomplish this, you add the `iam:PassRole` permissions to your AWS Glue users\.** This policy grants permission to roles that begin with `AWSGlueServiceRole` for AWS Glue service roles, and `AWSGlueServiceNotebookRole` for roles that are required when you create a notebook server\. You can also create your own policy for `iam:PassRole` permissions that follows your naming convention\.
+AWS Glue needs permission to assume a role that is used to perform work on your behalf\. **To accomplish this, you add the `iam:PassRole` permissions to your AWS Glue users\.** This policy grants permission to roles that begin with `AWSGlueServiceRole` for AWS Glue service roles, and `AWSGlueServiceNotebookRole` for roles that are required when you create a notebook server\. You can also create your own policy for `iam:PassRole` permissions that follows your naming convention\.  
+Per security best practices, it is recommended to restrict access by tightening policies to further restrict access to Amazon S3 bucket and Amazon CloudWatch log groups\. For an example Amazon S3 policy, see [Writing IAM Policies: How to Grant Access to an Amazon S3 Bucket](https://aws.amazon.com/blogs/security/writing-iam-policies-how-to-grant-access-to-an-amazon-s3-bucket/)\. 
 
 In this step, you create a policy that is similar to `AWSGlueConsoleFullAccess`\. You can find the most current version of `AWSGlueConsoleFullAccess` on the IAM console\.
 
@@ -225,7 +226,7 @@ You can skip this step if you created your own policy for AWS Glue console acces
 
 **To attach the AWSGlueConsoleSageMakerNotebookFullAccess managed policy**
 
-You can attach the **AWSGlueConsoleSageMakerNotebookFullAccess** policy to a user to manage Amazon SageMaker notebooks created on the AWS Glue console\. In addition to other required AWS Glue console permissions, this policy grants access to resources needed to manage Amazon SageMaker notebooks\. 
+You can attach the **AWSGlueConsoleSageMakerNotebookFullAccess** policy to a user to manage SageMaker notebooks created on the AWS Glue console\. In addition to other required AWS Glue console permissions, this policy grants access to resources needed to manage SageMaker notebooks\. 
 
 1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 

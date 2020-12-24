@@ -125,6 +125,9 @@ A policy is not valid if it contains a resource ARN for a resource that is not a
 }
 ```
 
+**See Also:**  
+[Adding or Updating the Data Catalog Resource Policy](cross-account-access.md#cross-account-adding-resource-policy)
+
 ## AWS Glue Resource Policy APIs<a name="resource-policy-apis"></a>
 
 You can use the following AWS Glue Data Catalog APIs to create, retrieve, modify, and delete an AWS Glue resource policy:

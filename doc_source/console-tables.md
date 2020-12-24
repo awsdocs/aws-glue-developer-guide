@@ -66,42 +66,43 @@ The table details include properties of your table and its schema\.   This view 
 
 ```
 {
-"StorageDescriptor": {
-"cols": {
-	"FieldSchema": [
-	{
-	"name": "primary-1",
-	"type": "CHAR",
-	"comment": ""
-	},
-	{
-	"name": "second ",
-	"type": "STRING",
-	"comment": ""
-	}
-	]
-},
-"location": "s3://aws-logs-111122223333-us-east-1",
-"inputFormat": "",
-"outputFormat": "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat",
-"compressed": "false",
-"numBuckets": "0",
-"SerDeInfo": {
-	"name": "",
-	"serializationLib": "org.apache.hadoop.hive.serde2.OpenCSVSerde",
-	"parameters": {
-		"separatorChar": "|"
-	}
-},
-"bucketCols": [],
-"sortCols": [],
-"parameters": {},
-"SkewedInfo": {},
-"storedAsSubDirectories": "false"
-},
-"parameters": {
-"classification": "csv"
-}
+"StorageDescriptor": 
+    {
+      "cols": {
+         "FieldSchema": [
+           {
+             "name": "primary-1",
+             "type": "CHAR",
+             "comment": ""
+           },
+           {
+             "name": "second ",
+             "type": "STRING",
+             "comment": ""
+           }
+         ]
+      },
+      "location": "s3://aws-logs-111122223333-us-east-1",
+      "inputFormat": "",
+      "outputFormat": "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat",
+      "compressed": "false", 
+      "numBuckets": "0",
+      "SerDeInfo": {
+           "name": "",
+           "serializationLib": "org.apache.hadoop.hive.serde2.OpenCSVSerde",
+           "parameters": {
+               "separatorChar": "|"
+            }
+      },
+      "bucketCols": [],
+      "sortCols": [],
+      "parameters": {},
+      "SkewedInfo": {},
+      "storedAsSubDirectories": "false"
+    },
+    "parameters": {
+       "classification": "csv"
+    }
 }
 ```
 

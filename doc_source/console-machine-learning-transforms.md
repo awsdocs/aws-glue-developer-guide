@@ -24,8 +24,8 @@ A unique identifier of the transform\.
 **Type**  
 The type of machine learning transform; for example, **Find matching records**\.
 
-**Glue version**  
-This value determines which version of AWS Glue this machine learning transform is compatible with\. Glue 1\.0 is recommended for most customers\. If the value is not set, the Glue compatibility defaults to Glue 0\.9\. For more information, see [AWS Glue Versions](https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions)\.
+**AWS Glue version**  
+This value determines which version of AWS Glue this machine learning transform is compatible with\. AWS Glue 1\.0 is recommended for most customers\. If the value is not set, the AWS Glue compatibility defaults to AWS Glue 0\.9\. For more information, see [AWS Glue Versions](https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions)\.
 
 **Status**  
 Indicates whether the transform is **Ready** or **Needs teaching**\. To run a machine learning transform successfully in a job, it must be `Ready`\. 

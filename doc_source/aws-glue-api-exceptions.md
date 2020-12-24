@@ -1,6 +1,6 @@
 # Exceptions<a name="aws-glue-api-exceptions"></a>
 
-This section describes AWS Glue exceptions that you can use to find the source of problems and fix them\.
+This section describes AWS Glue exceptions that you can use to find the source of problems and fix them\. For more information on HTTP error codes and strings for exceptions related to machine learning, see [AWS Glue Machine Learning Exceptions](exceptions-machine-learning.md)\.
 
 ## AccessDeniedException Structure<a name="aws-glue-api-exceptions-AccessDeniedException"></a>
 
@@ -86,6 +86,15 @@ An encryption operation failed\.
 ## IdempotentParameterMismatchException Structure<a name="aws-glue-api-exceptions-IdempotentParameterMismatchException"></a>
 
 The same unique identifier was associated with two different records\.
+
+**Fields**
++ `Message` – UTF\-8 string\.
+
+  A message describing the problem\.
+
+## IllegalWorkflowStateException Structure<a name="aws-glue-api-exceptions-IllegalWorkflowStateException"></a>
+
+The workflow is in an invalid state to perform a requested operation\.
 
 **Fields**
 + `Message` – UTF\-8 string\.

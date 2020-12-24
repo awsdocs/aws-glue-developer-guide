@@ -1,12 +1,12 @@
-# Creating and Running Workflows<a name="creating_running_workflows"></a>
+# Creating and Running Workflows in AWS Glue<a name="creating_running_workflows"></a>
 
 You can use the AWS Glue console to create, visualize, and run workflows\. For information about managing workflows using the AWS Glue API, see [Workflows](aws-glue-api-workflow.md)\.
 
 **Topics**
-+ [Creating and Building Out a Workflow Using the Console](#creating_workflow)
++ [Creating and Building Out a Workflow Using the AWS Glue Console](#creating_workflow)
 + [Running a Workflow](#running_workflow)
 
-## Creating and Building Out a Workflow Using the Console<a name="creating_workflow"></a>
+## Creating and Building Out a Workflow Using the AWS Glue Console<a name="creating_workflow"></a>
 
 A workflow contains jobs, crawlers, and triggers\. Before creating a workflow, create the jobs and crawlers that the workflow is to include\. It is best to specify run\-on\-demand crawlers for workflows\. You can create new triggers while you are building out your workflow, or you can *clone* existing triggers into the workflow\. When you clone a trigger, all the catalog objects associated with the trigger—the jobs or crawlers that fire it and the jobs or crawlers that it starts—are added to the workflow\.
 
@@ -18,9 +18,21 @@ You build out your workflow by adding triggers to the workflow graph, and defini
 
 1. In the navigation pane, under **ETL**, choose **Workflows**\.
 
-1. Choose **Add workflow** and complete the **Add a new ETL workflow** form\.
+1. Choose **Add workflow**\.
 
-   Any optional default run properties that you add are made available as arguments to all jobs in the workflow\. For more information, see [Getting and Setting Workflow Run Properties](workflow-run-properties-code.md)\.
+1. On the **Add a new ETL workflow** page, enter a workflow name and optional description\.
+
+1. \(Optional\) Choose **Add property** and add default workflow run properties\.
+
+   Default run properties are made available as arguments to all jobs in the workflow\. For more information, see [Getting and Setting Workflow Run Properties](workflow-run-properties-code.md)\.
+
+1. \(Optional\) For **Max concurrency**, enter the maximum number of concurrent workflow runs to allow for this workflow\.
+
+   You can use this parameter to prevent unwanted multiple updates to data, to control costs, and in some cases, to prevent exceeding the maximum number of concurrent runs of any of the component jobs\. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs\.
+
+1. \(Optional\) Add tags to the workflow\. Each tag must have a key\. The key value is optional\.
+
+   For more information, see [AWS Tags in AWS Glue](monitor-tags.md)\.
 
 1. Choose **Add workflow**\.
 
@@ -90,12 +102,31 @@ Continue to build out your workflow by adding more triggers\. To zoom in or out 
 
 ## Running a Workflow<a name="running_workflow"></a>
 
-If the start trigger for a workflow is an on\-demand trigger, you can start the workflow from the AWS Glue console\.
+If the start trigger for a workflow is an on\-demand trigger, you can run the workflow from the AWS Glue console, the AWS Command Line Interface \(AWS CLI\), or the AWS Glue API\.
 
-**To run a workflow**
+**To run a workflow \(console\)**
 
 1. Open the AWS Glue console at [https://console\.aws\.amazon\.com/glue/](https://console.aws.amazon.com/glue/)\.
 
 1. In the navigation pane, under **ETL**, choose **Workflows**\.
 
-1. Select a workflow\. On the **Actions** menu, choose **Run**\.
+1. Choose a workflow\. On the **Actions** menu, choose **Run**\.
+
+   You can monitor the workflow run status on the AWS Glue console, under the **Last run status** column\.
+
+   If the workflow fails, do the following:
+
+   1. Ensure that the workflow is selected, and choose the **History** tab\.
+
+   1. Under **History**, select the most recent run and choose **View run details**\.
+
+   1. Select a failed job or crawler in the dynamic \(runtime\) graph, and review the **Job details** or **Crawler details** pane at the right\. Failed nodes are either red or yellow\. For descriptions of the **Status** values, see [AWS Glue Job Run Statuses](job-run-statuses.md)\.
+
+**To run a workflow \(AWS CLI\)**
++ Enter the following command\. Replace *<workflow\-name>* with the workflow to run\.
+
+  ```
+  aws glue start-workflow-run --name <workflow-name>
+  ```
+
+  If the workflow is successfully started, the command returns the run ID\.

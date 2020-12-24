@@ -44,7 +44,7 @@ When you update a development endpoint, you can also update the libraries it loa
 If you are using a Zeppelin Notebook with your development endpoint, you will need to call the following PySpark function before importing a package or packages from your `.zip` file:
 
 ```
-sc.addPyFile(“/home/glue/downloads/python/yourZipFileName.zip”)
+sc.addPyFile("/home/glue/downloads/python/yourZipFileName.zip")
 ```
 
 ## Using Python Libraries in a Job or JobRun<a name="aws-glue-programming-python-libraries-job"></a>
@@ -71,3 +71,9 @@ Then when you are starting a JobRun, you can override the default library settin
 runId = glue.start_job_run(JobName='sampleJob',
                            Arguments={'--extra-py-files': 's3://bucket/prefix/lib_B.zip'})
 ```
+
+## Specifying Additional Python Modules with AWS Glue Version 2\.0<a name="aws-glue-programming-python-libraries-glue-20"></a>
+
+AWS Glue Version 2\.0 also lets you provide additional Python modules or different versions at the job level\. You can use the `--additional-python-modules` option with a list of comma\-separated Python modules to add a new module or change the version of an existing module\.
+
+For more information, see [Running Spark ETL Jobs with Reduced Startup Times](reduced-start-times-spark-etl-jobs.md)\.

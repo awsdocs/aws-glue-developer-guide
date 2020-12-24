@@ -46,7 +46,7 @@ The details of a Trigger node present in the workflow\.
 The details of a crawl in the workflow\.
 
 **Fields**
-+ `State` – UTF\-8 string \(valid values: `RUNNING` \| `SUCCEEDED` \| `CANCELLED` \| `FAILED`\)\.
++ `State` – UTF\-8 string \(valid values: `RUNNING` \| `CANCELLING` \| `CANCELLED` \| `SUCCEEDED` \| `FAILED`\)\.
 
   The state of the crawler\.
 + `StartedOn` – Timestamp\.
@@ -67,7 +67,7 @@ The details of a crawl in the workflow\.
 
 ## Node Structure<a name="aws-glue-api-workflow-Node"></a>
 
-A node represents an AWS Glue component like Trigger, Job etc\. which is part of a workflow\.
+A node represents an AWS Glue component such as a trigger, or job, etc\., that is part of a workflow\.
 
 **Fields**
 + `Type` – UTF\-8 string \(valid values: `CRAWLER` \| `JOB` \| `TRIGGER`\)\.
@@ -91,7 +91,7 @@ A node represents an AWS Glue component like Trigger, Job etc\. which is part of
 
 ## Edge Structure<a name="aws-glue-api-workflow-Edge"></a>
 
-An edge represents a directed connection between two AWS Glue components which are part of the workflow the edge belongs to\.
+An edge represents a directed connection between two AWS Glue components that are part of the workflow the edge belongs to\.
 
 **Fields**
 + `SourceId` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
@@ -120,10 +120,13 @@ A workflow run is an execution of a workflow providing all the runtime informati
 **Fields**
 + `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  Name of the workflow which was executed\.
+  Name of the workflow that was executed\.
 + `WorkflowRunId` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The ID of this workflow run\.
++ `PreviousRunId` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The ID of the previous workflow run\.
 + `WorkflowRunProperties` – A map array of key\-value pairs\.
 
   Each key is a UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
@@ -137,9 +140,12 @@ A workflow run is an execution of a workflow providing all the runtime informati
 + `CompletedOn` – Timestamp\.
 
   The date and time when the workflow run completed\.
-+ `Status` – UTF\-8 string \(valid values: `RUNNING` \| `COMPLETED`\)\.
++ `Status` – UTF\-8 string \(valid values: `RUNNING` \| `COMPLETED` \| `STOPPING` \| `STOPPED` \| `ERROR`\)\.
 
   The status of the workflow run\.
++ `ErrorMessage` – UTF\-8 string\.
+
+  This error message describes any error that may have occurred in starting the workflow run\. Currently the only error message is "Concurrent runs exceeded for workflow: `foo`\."
 + `Statistics` – A [WorkflowRunStatistics](#aws-glue-api-workflow-WorkflowRunStatistics) object\.
 
   The statistics of the run\.
@@ -157,16 +163,16 @@ Workflow run statistics provides statistics about the workflow run\.
   Total number of Actions in the workflow run\.
 + `TimeoutActions` – Number \(integer\)\.
 
-  Total number of Actions which timed out\.
+  Total number of Actions that timed out\.
 + `FailedActions` – Number \(integer\)\.
 
-  Total number of Actions which have failed\.
+  Total number of Actions that have failed\.
 + `StoppedActions` – Number \(integer\)\.
 
-  Total number of Actions which have stopped\.
+  Total number of Actions that have stopped\.
 + `SucceededActions` – Number \(integer\)\.
 
-  Total number of Actions which have succeeded\.
+  Total number of Actions that have succeeded\.
 + `RunningActions` – Number \(integer\)\.
 
   Total number Actions in running state\.
@@ -204,17 +210,24 @@ A workflow represents a flow in which AWS Glue components should be executed to 
 + `CreationStatus` – UTF\-8 string \(valid values: `CREATING` \| `CREATED` \| `CREATION_FAILED`\)\.
 
   The creation status of the workflow\.
++ `MaxConcurrentRuns` – Number \(integer\)\.
+
+  You can use this parameter to prevent unwanted multiple updates to data, to control costs, or in some cases, to prevent exceeding the maximum number of concurrent runs of any of the component jobs\. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs\.
 
 ## Operations<a name="aws-glue-api-workflow-actions"></a>
 + [CreateWorkflow Action \(Python: create\_workflow\)](#aws-glue-api-workflow-CreateWorkflow)
 + [UpdateWorkflow Action \(Python: update\_workflow\)](#aws-glue-api-workflow-UpdateWorkflow)
 + [DeleteWorkflow Action \(Python: delete\_workflow\)](#aws-glue-api-workflow-DeleteWorkflow)
++ [GetWorkflow Action \(Python: get\_workflow\)](#aws-glue-api-workflow-GetWorkflow)
 + [ListWorkflows Action \(Python: list\_workflows\)](#aws-glue-api-workflow-ListWorkflows)
 + [BatchGetWorkflows Action \(Python: batch\_get\_workflows\)](#aws-glue-api-workflow-BatchGetWorkflows)
 + [GetWorkflowRun Action \(Python: get\_workflow\_run\)](#aws-glue-api-workflow-GetWorkflowRun)
 + [GetWorkflowRuns Action \(Python: get\_workflow\_runs\)](#aws-glue-api-workflow-GetWorkflowRuns)
 + [GetWorkflowRunProperties Action \(Python: get\_workflow\_run\_properties\)](#aws-glue-api-workflow-GetWorkflowRunProperties)
 + [PutWorkflowRunProperties Action \(Python: put\_workflow\_run\_properties\)](#aws-glue-api-workflow-PutWorkflowRunProperties)
++ [StartWorkflowRun Action \(Python: start\_workflow\_run\)](#aws-glue-api-workflow-StartWorkflowRun)
++ [StopWorkflowRun Action \(Python: stop\_workflow\_run\)](#aws-glue-api-workflow-StopWorkflowRun)
++ [ResumeWorkflowRun Action \(Python: resume\_workflow\_run\)](#aws-glue-api-workflow-ResumeWorkflowRun)
 
 ## CreateWorkflow Action \(Python: create\_workflow\)<a name="aws-glue-api-workflow-CreateWorkflow"></a>
 
@@ -241,6 +254,9 @@ Creates a new workflow\.
   Each value is a UTF\-8 string, not more than 256 bytes long\.
 
   The tags to be used with this workflow\.
++ `MaxConcurrentRuns` – Number \(integer\)\.
+
+  You can use this parameter to prevent unwanted multiple updates to data, to control costs, or in some cases, to prevent exceeding the maximum number of concurrent runs of any of the component jobs\. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs\.
 
 **Response**
 + `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
@@ -273,6 +289,9 @@ Updates an existing workflow\.
   Each value is a UTF\-8 string\.
 
   A collection of properties to be used as part of each execution of the workflow\.
++ `MaxConcurrentRuns` – Number \(integer\)\.
+
+  You can use this parameter to prevent unwanted multiple updates to data, to control costs, or in some cases, to prevent exceeding the maximum number of concurrent runs of any of the component jobs\. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs\.
 
 **Response**
 + `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
@@ -305,6 +324,29 @@ Deletes a workflow\.
 + `InternalServiceException`
 + `OperationTimeoutException`
 + `ConcurrentModificationException`
+
+## GetWorkflow Action \(Python: get\_workflow\)<a name="aws-glue-api-workflow-GetWorkflow"></a>
+
+Retrieves resource metadata for a workflow\.
+
+**Request**
++ `Name` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the workflow to retrieve\.
++ `IncludeGraph` – Boolean\.
+
+  Specifies whether to include a graph when returning the workflow resource metadata\.
+
+**Response**
++ `Workflow` – A [Workflow](#aws-glue-api-workflow-Workflow) object\.
+
+  The resource metadata for the workflow\.
+
+**Errors**
++ `InvalidInputException`
++ `EntityNotFoundException`
++ `InternalServiceException`
++ `OperationTimeoutException`
 
 ## ListWorkflows Action \(Python: list\_workflows\)<a name="aws-glue-api-workflow-ListWorkflows"></a>
 
@@ -471,3 +513,78 @@ Puts the specified workflow run properties for the given workflow run\. If a pro
 + `OperationTimeoutException`
 + `ResourceNumberLimitExceededException`
 + `ConcurrentModificationException`
+
+## StartWorkflowRun Action \(Python: start\_workflow\_run\)<a name="aws-glue-api-workflow-StartWorkflowRun"></a>
+
+Starts a new run of the specified workflow\.
+
+**Request**
++ `Name` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the workflow to start\.
+
+**Response**
++ `RunId` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  An Id for the new run\.
+
+**Errors**
++ `InvalidInputException`
++ `EntityNotFoundException`
++ `InternalServiceException`
++ `OperationTimeoutException`
++ `ResourceNumberLimitExceededException`
++ `ConcurrentRunsExceededException`
+
+## StopWorkflowRun Action \(Python: stop\_workflow\_run\)<a name="aws-glue-api-workflow-StopWorkflowRun"></a>
+
+Stops the execution of the specified workflow run\.
+
+**Request**
++ `Name` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the workflow to stop\.
++ `RunId` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The ID of the workflow run to stop\.
+
+**Response**
++ *No Response parameters\.*
+
+**Errors**
++ `InvalidInputException`
++ `EntityNotFoundException`
++ `InternalServiceException`
++ `OperationTimeoutException`
++ `IllegalWorkflowStateException`
+
+## ResumeWorkflowRun Action \(Python: resume\_workflow\_run\)<a name="aws-glue-api-workflow-ResumeWorkflowRun"></a>
+
+Restarts selected nodes of a previous partially completed workflow run and resumes the workflow run\. The selected nodes and all nodes that are downstream from the selected nodes are run\.
+
+**Request**
++ `Name` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the workflow to resume\.
++ `RunId` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The ID of the workflow run to resume\.
++ `NodeIds` – *Required:* An array of UTF\-8 strings\.
+
+  A list of the node IDs for the nodes you want to restart\. The nodes that are to be restarted must have a run attempt in the original run\.
+
+**Response**
++ `RunId` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The new ID assigned to the resumed workflow run\. Each resume of a workflow run will have a new run ID\.
++ `NodeIds` – An array of UTF\-8 strings\.
+
+  A list of the node IDs for the nodes that were actually restarted\.
+
+**Errors**
++ `InvalidInputException`
++ `EntityNotFoundException`
++ `InternalServiceException`
++ `OperationTimeoutException`
++ `ConcurrentRunsExceededException`
++ `IllegalWorkflowStateException`

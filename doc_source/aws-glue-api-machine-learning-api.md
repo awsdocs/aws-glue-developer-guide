@@ -21,6 +21,8 @@ The Machine Learning API describes the machine learning data types, and includes
 + [ExportLabelsTaskRunProperties Structure](#aws-glue-api-machine-learning-api-ExportLabelsTaskRunProperties)
 + [LabelingSetGenerationTaskRunProperties Structure](#aws-glue-api-machine-learning-api-LabelingSetGenerationTaskRunProperties)
 + [SchemaColumn Structure](#aws-glue-api-machine-learning-api-SchemaColumn)
++ [TransformEncryption Structure](#aws-glue-api-machine-learning-api-TransformEncryption)
++ [MLUserDataEncryption Structure](#aws-glue-api-machine-learning-api-MLUserDataEncryption)
 
 ## TransformParameters Structure<a name="aws-glue-api-machine-learning-api-TransformParameters"></a>
 
@@ -91,7 +93,7 @@ A structure for a machine learning transform\.
   The name or Amazon Resource Name \(ARN\) of the IAM role with the required permissions\. The required permissions include both AWS Glue service role permissions to AWS Glue resources, and Amazon S3 permissions required by the transform\. 
   + This role needs AWS Glue service role permissions to allow access to resources in AWS Glue\. See [Attach a Policy to IAM Users That Access AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/attach-policy-iam-user.html)\.
   + This role needs permission to your Amazon Simple Storage Service \(Amazon S3\) sources, targets, temporary directory, scripts, and any libraries used by the task run for this transform\.
-+ `GlueVersion` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Custom string pattern #13](aws-glue-api-common.md#regex_13)\.
++ `GlueVersion` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Custom string pattern #15](aws-glue-api-common.md#regex_15)\.
 
   This value determines which version of AWS Glue this machine learning transform is compatible with\. Glue 1\.0 is recommended for most customers\. If the value is not set, the Glue compatibility defaults to Glue 0\.9\. For more information, see [AWS Glue Versions](https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions) in the developer guide\.
 + `MaxCapacity` – Number \(double\)\.
@@ -128,6 +130,9 @@ A structure for a machine learning transform\.
 + `MaxRetries` – Number \(integer\)\.
 
   The maximum number of times to retry after an `MLTaskRun` of the machine learning transform fails\.
++ `TransformEncryption` – A [TransformEncryption](#aws-glue-api-machine-learning-api-TransformEncryption) object\.
+
+  The encryption\-at\-rest settings of the transform that apply to accessing user data\. Machine learning transforms can access user data encrypted in Amazon S3 using KMS\.
 
 ## FindMatchesParameters Structure<a name="aws-glue-api-machine-learning-api-FindMatchesParameters"></a>
 
@@ -276,7 +281,7 @@ The criteria used to filter the machine learning transforms\.
 + `Status` – UTF\-8 string \(valid values: `NOT_READY` \| `READY` \| `DELETING`\)\.
 
   Filters the list of machine learning transforms by the last known status of the transforms \(to indicate whether a transform can be used or not\)\. One of "NOT\_READY", "READY", or "DELETING"\.
-+ `GlueVersion` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Custom string pattern #13](aws-glue-api-common.md#regex_13)\.
++ `GlueVersion` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Custom string pattern #15](aws-glue-api-common.md#regex_15)\.
 
   This value determines which version of AWS Glue this machine learning transform is compatible with\. Glue 1\.0 is recommended for most customers\. If the value is not set, the Glue compatibility defaults to Glue 0\.9\. For more information, see [AWS Glue Versions](https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions) in the developer guide\.
 + `CreatedBefore` – Timestamp\.
@@ -415,12 +420,41 @@ A key\-value pair representing a column and data type that this transform can ru
 
   The type of data in the column\.
 
+## TransformEncryption Structure<a name="aws-glue-api-machine-learning-api-TransformEncryption"></a>
+
+The encryption\-at\-rest settings of the transform that apply to accessing user data\. Machine learning transforms can access user data encrypted in Amazon S3 using KMS\.
+
+Additionally, imported labels and trained transforms can now be encrypted using a customer provided KMS key\.
+
+**Fields**
++ `MlUserDataEncryption` – A [MLUserDataEncryption](#aws-glue-api-machine-learning-api-MLUserDataEncryption) object\.
+
+  An `MLUserDataEncryption` object containing the encryption mode and customer\-provided KMS key ID\.
++ `TaskRunSecurityConfigurationName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the security configuration\.
+
+## MLUserDataEncryption Structure<a name="aws-glue-api-machine-learning-api-MLUserDataEncryption"></a>
+
+The encryption\-at\-rest settings of the transform that apply to accessing user data\.
+
+**Fields**
++ `MlUserDataEncryptionMode` – *Required:* UTF\-8 string \(valid values: `DISABLED` \| `SSE-KMS="SSEKMS"`\)\.
+
+  The encryption mode applied to user data\. Valid values are:
+  + DISABLED: encryption is disabled
+  + SSEKMS: use of server\-side encryption with AWS Key Management Service \(SSE\-KMS\) for user data stored in Amazon S3\.
++ `KmsKeyId` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The ID for the customer\-provided KMS key\.
+
 ## Operations<a name="aws-glue-api-machine-learning-api-actions"></a>
 + [CreateMLTransform Action \(Python: create\_ml\_transform\)](#aws-glue-api-machine-learning-api-CreateMLTransform)
 + [UpdateMLTransform Action \(Python: update\_ml\_transform\)](#aws-glue-api-machine-learning-api-UpdateMLTransform)
 + [DeleteMLTransform Action \(Python: delete\_ml\_transform\)](#aws-glue-api-machine-learning-api-DeleteMLTransform)
 + [GetMLTransform Action \(Python: get\_ml\_transform\)](#aws-glue-api-machine-learning-api-GetMLTransform)
 + [GetMLTransforms Action \(Python: get\_ml\_transforms\)](#aws-glue-api-machine-learning-api-GetMLTransforms)
++ [ListMLTransforms Action \(Python: list\_ml\_transforms\)](#aws-glue-api-machine-learning-api-ListMLTransforms)
 + [StartMLEvaluationTaskRun Action \(Python: start\_ml\_evaluation\_task\_run\)](#aws-glue-api-machine-learning-api-StartMLEvaluationTaskRun)
 + [StartMLLabelingSetGenerationTaskRun Action \(Python: start\_ml\_labeling\_set\_generation\_task\_run\)](#aws-glue-api-machine-learning-api-StartMLLabelingSetGenerationTaskRun)
 + [GetMLTaskRun Action \(Python: get\_ml\_task\_run\)](#aws-glue-api-machine-learning-api-GetMLTaskRun)
@@ -455,7 +489,7 @@ You must also specify certain parameters for the tasks that AWS Glue runs on you
   The name or Amazon Resource Name \(ARN\) of the IAM role with the required permissions\. The required permissions include both AWS Glue service role permissions to AWS Glue resources, and Amazon S3 permissions required by the transform\. 
   + This role needs AWS Glue service role permissions to allow access to resources in AWS Glue\. See [Attach a Policy to IAM Users That Access AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/attach-policy-iam-user.html)\.
   + This role needs permission to your Amazon Simple Storage Service \(Amazon S3\) sources, targets, temporary directory, scripts, and any libraries used by the task run for this transform\.
-+ `GlueVersion` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Custom string pattern #13](aws-glue-api-common.md#regex_13)\.
++ `GlueVersion` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Custom string pattern #15](aws-glue-api-common.md#regex_15)\.
 
   This value determines which version of AWS Glue this machine learning transform is compatible with\. Glue 1\.0 is recommended for most customers\. If the value is not set, the Glue compatibility defaults to Glue 0\.9\. For more information, see [AWS Glue Versions](https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions) in the developer guide\.
 + `MaxCapacity` – Number \(double\)\.
@@ -494,6 +528,16 @@ You must also specify certain parameters for the tasks that AWS Glue runs on you
 + `MaxRetries` – Number \(integer\)\.
 
   The maximum number of times to retry a task for this transform after a task run fails\.
++ `Tags` – A map array of key\-value pairs, not more than 50 pairs\.
+
+  Each key is a UTF\-8 string, not less than 1 or more than 128 bytes long\.
+
+  Each value is a UTF\-8 string, not more than 256 bytes long\.
+
+  The tags to use with this machine learning transform\. You may use tags to limit access to the machine learning transform\. For more information about tags in AWS Glue, see [AWS Tags in AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the developer guide\.
++ `TransformEncryption` – A [TransformEncryption](#aws-glue-api-machine-learning-api-TransformEncryption) object\.
+
+  The encryption\-at\-rest settings of the transform that apply to accessing user data\. Machine learning transforms can access user data encrypted in Amazon S3 using KMS\.
 
 **Response**
 + `TransformId` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
@@ -531,7 +575,7 @@ After calling this operation, you can call the `StartMLEvaluationTaskRun` operat
 + `Role` – UTF\-8 string\.
 
   The name or Amazon Resource Name \(ARN\) of the IAM role with the required permissions\.
-+ `GlueVersion` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Custom string pattern #13](aws-glue-api-common.md#regex_13)\.
++ `GlueVersion` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Custom string pattern #15](aws-glue-api-common.md#regex_15)\.
 
   This value determines which version of AWS Glue this machine learning transform is compatible with\. Glue 1\.0 is recommended for most customers\. If the value is not set, the Glue compatibility defaults to Glue 0\.9\. For more information, see [AWS Glue Versions](https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions) in the developer guide\.
 + `MaxCapacity` – Number \(double\)\.
@@ -633,7 +677,7 @@ Gets an AWS Glue machine learning transform artifact and all its corresponding m
 + `Role` – UTF\-8 string\.
 
   The name or Amazon Resource Name \(ARN\) of the IAM role with the required permissions\.
-+ `GlueVersion` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Custom string pattern #13](aws-glue-api-common.md#regex_13)\.
++ `GlueVersion` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Custom string pattern #15](aws-glue-api-common.md#regex_15)\.
 
   This value determines which version of AWS Glue this machine learning transform is compatible with\. Glue 1\.0 is recommended for most customers\. If the value is not set, the Glue compatibility defaults to Glue 0\.9\. For more information, see [AWS Glue Versions](https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions) in the developer guide\.
 + `MaxCapacity` – Number \(double\)\.
@@ -656,6 +700,9 @@ Gets an AWS Glue machine learning transform artifact and all its corresponding m
 + `MaxRetries` – Number \(integer\)\.
 
   The maximum number of times to retry a task for this transform after a task run fails\.
++ `TransformEncryption` – A [TransformEncryption](#aws-glue-api-machine-learning-api-TransformEncryption) object\.
+
+  The encryption\-at\-rest settings of the transform that apply to accessing user data\. Machine learning transforms can access user data encrypted in Amazon S3 using KMS\.
 
 **Errors**
 + `EntityNotFoundException`
@@ -688,6 +735,45 @@ Gets a sortable, filterable list of existing AWS Glue machine learning transform
 + `NextToken` – UTF\-8 string\.
 
   A pagination token, if more results are available\.
+
+**Errors**
++ `EntityNotFoundException`
++ `InvalidInputException`
++ `OperationTimeoutException`
++ `InternalServiceException`
+
+## ListMLTransforms Action \(Python: list\_ml\_transforms\)<a name="aws-glue-api-machine-learning-api-ListMLTransforms"></a>
+
+ Retrieves a sortable, filterable list of existing AWS Glue machine learning transforms in this AWS account, or the resources with the specified tag\. This operation takes the optional `Tags` field, which you can use as a filter of the responses so that tagged resources can be retrieved as a group\. If you choose to use tag filtering, only resources with the tags are retrieved\. 
+
+**Request**
++ `NextToken` – UTF\-8 string\.
+
+  A continuation token, if this is a continuation request\.
++ `MaxResults` – Number \(integer\), not less than 1 or more than 1000\.
+
+  The maximum size of a list to return\.
++ `Filter` – A [TransformFilterCriteria](#aws-glue-api-machine-learning-api-TransformFilterCriteria) object\.
+
+  A `TransformFilterCriteria` used to filter the machine learning transforms\.
++ `Sort` – A [TransformSortCriteria](#aws-glue-api-machine-learning-api-TransformSortCriteria) object\.
+
+  A `TransformSortCriteria` used to sort the machine learning transforms\.
++ `Tags` – A map array of key\-value pairs, not more than 50 pairs\.
+
+  Each key is a UTF\-8 string, not less than 1 or more than 128 bytes long\.
+
+  Each value is a UTF\-8 string, not more than 256 bytes long\.
+
+  Specifies to return only these tagged resources\.
+
+**Response**
++ `TransformIds` – *Required:* An array of UTF\-8 strings\.
+
+  The identifiers of all the machine learning transforms in the account, or the machine learning transforms with the specified tags\.
++ `NextToken` – UTF\-8 string\.
+
+  A continuation token, if the returned list does not contain the last metric available\.
 
 **Errors**
 + `EntityNotFoundException`

@@ -8,21 +8,83 @@ Settings include tags, security configuration, and custom classifiers\. You defi
 + [Adding Classifiers to a Crawler](add-classifier.md)
 
 **Crawler source type**  
-The crawler can access data stores directly as the source of the crawl, or it can use existing catalog tables as the source\. If the crawler uses existing catalog tables, it crawls the data stores that are specified by those catalog tables\. For more information, see [Crawler Source Type](#crawler-source-type)\.
+The crawler can access data stores directly as the source of the crawl, or it can use existing tables in the Data Catalog as the source\. If the crawler uses existing catalog tables, it crawls the data stores that are specified by those catalog tables\. For more information, see [Crawler Source Type](#crawler-source-type)\.
 
-**Crawler sources \(Choose one of the following two types\.\)**  
+**Crawl only new folders for S3 data sources**  
+If turned on, only Amazon S3 folders that were added since the last crawler run will be crawled\. For more information, see [Incremental Crawls in AWS Glue](incremental-crawls.md)\.
+
+**Crawler sources: data stores or catalog tables**  
+Choose from among the following:  
 + One or more data stores
 
-  A crawler can crawl multiple data stores of different types \(Amazon S3, Amazon DynamoDB, and JDBC\) in a single run\.
+  A crawler can crawl multiple data stores of different types \(Amazon S3, JDBC, and so on\)\. 
 + List of Data Catalog tables
 
   The catalog tables specify the data stores to crawl\. The crawler can crawl only catalog tables in a single run; it can't mix in other source types\. 
+You can configure only one data store at a time\. After you have provided the connection information and include paths and exclude patterns, you then have the option of adding another data store\.  
+For more information, see [Crawler Source Type](#crawler-source-type)\.
 
+**Additional crawler source parameters**  
+Each source type requires a different set of additional parameters\. The following is an incomplete list:    
+**Connection**  
+Select or add an AWS Glue connection\. For information about connections, see [Defining Connections in the AWS Glue Data Catalog](populate-add-connection.md)\.  
+**Enable data sampling \(for Amazon DynamoDB, MongoDB, and Amazon DocumentDB data stores only\)**  
+Select whether to crawl a data sample only\. If not selected the entire table is crawled\. Scanning all the records can take a long time when the table is not a high throughput table\.  
+**Scanning rate \(for DynamoDB data stores only\)**  
+Specify the percentage of the configured read capacity units to use by the AWS Glue crawler\. Read capacity units is a term defined by DynamoDB, and is a numeric value that acts as rate limiter for the number of reads that can be performed on that table per second\. Enter a value between 0\.1 and 1\.5\. If not specified, defaults to 0\.5% for provisioned tables and 1/4 of maximum configured capacity for on\-demand tables\.  
+**Include path**    
+For an Amazon S3 data store  
+Choose whether to specify a path in your account or another account, and then browse to choose an Amazon S3 path\.  
+For a JDBC data store  
+Enter *<database>*/*<schema>*/*<table>* or *<database>*/*<table>*, depending on the database product\. Oracle Database and MySQL don’t support schema in the path\. You can substitute the percent \(%\) character for *<schema>* or *<table>*\. For example, for an Oracle database with a system identifier \(SID\) of `orcl`, enter `orcl/%` to import all tables to which the user named in the connection has access\.  
+This field is case\-sensitive\.  
+For a MongoDB or Amazon DocumentDB data store  
+Enter *database*/*collection*\.
+For more information, see [Include and Exclude Patterns](#crawler-data-stores-exclude)\.  
 **Exclude patterns**  
 These enable you to exclude certain files or tables from the crawl\. For more information, see [Include and Exclude Patterns](#crawler-data-stores-exclude)\.
 
-**IAM role or JDBC credentials for accessing the data stores**  
-For more information, see [Managing Access Permissions for AWS Glue Resources](access-control-overview.md)
+**IAM role**  
+The crawler assumes this role\. It must have permissions similar to the AWS managed policy `AWSGlueServiceRole`\. For Amazon S3 and DynamoDB sources, it must also have permissions to access the data store\. If the crawler reads Amazon S3 data encrypted with AWS Key Management Service \(AWS KMS\), then the role must have decrypt permissions on the AWS KMS key\.   
+For an Amazon S3 data store, additional permissions attached to the role would be similar to the following:   
+
+```
+{
+   "Version": "2012-10-17",
+    "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+              "s3:GetObject",
+              "s3:PutObject"
+          ],
+          "Resource": [
+              "arn:aws:s3:::bucket/object*"
+          ]
+        }
+    ]
+}
+```
+For an Amazon DynamoDB data store, additional permissions attached to the role would be similar to the following:   
+
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "dynamodb:DescribeTable",
+        "dynamodb:Scan"
+      ],
+      "Resource": [
+        "arn:aws:dynamodb:region:account-id:table/table-name*"
+      ]
+    }
+  ]
+}
+```
+For more information, see [Step 2: Create an IAM Role for AWS Glue](create-an-iam-role.md) and [Managing Access Permissions for AWS Glue Resources](access-control-overview.md)\.
 
 **Crawler schedule**  
 You can run a crawler on demand or define a schedule for automatic running of the crawler\. For more information, see [Scheduling an AWS Glue Crawler](schedule-crawler.md)\.
@@ -30,16 +92,17 @@ You can run a crawler on demand or define a schedule for automatic running of th
 **Destination database within the Data Catalog for the created catalog tables**  
 For more information, see [Defining a Database in Your Data Catalog](define-database.md)\.
 
-**Crawler configuration options**  
-Options include how the crawler should handle detected schema changes, deleted objects in the data store, and more\. For more information, see [Configuring a Crawler](crawler-configuration.md)\.
+**Output configuration options**  
+Options include how the crawler should handle detected schema changes, deleted objects in the data store, and more\. For more information, see [Setting Crawler Configuration Options](crawler-configuration.md)\.
 
-When you define a crawler, you choose one or more classifiers that evaluate the format of your data to infer a schema\. When the crawler runs, the first classifier in your list to successfully recognize your data store is used to create a schema for your table\. You can use built\-in classifiers or define your own\. You define your custom classifiers in a separate operation, before you define the crawlers\. AWS Glue provides built\-in classifiers to infer schemas from common files with formats that include JSON, CSV, and Apache Avro\. For the current list of built\-in classifiers in AWS Glue, see [Built\-In Classifiers in AWS Glue ](add-classifier.md#classifier-built-in)\.  
+**Recrawl Policy**  
+When crawling an Amazon S3 data source after the first crawl is complete, choose whether to crawl the entire dataset again or to crawl only folders that were added since the last crawler run\. For more information, see [Incremental Crawls in AWS Glue](incremental-crawls.md)\.
 
 ## Crawler Source Type<a name="crawler-source-type"></a>
 
 A crawler can access data stores directly as the source of the crawl or use existing catalog tables as the source\. If the crawler uses existing catalog tables, it crawls the data stores specified by those catalog tables\.
 
-A common reason to specify a catalog table as the source is that you created the table manually \(because you already knew the structure of the data store\) and you want a crawler to keep the table updated, including adding new partitions\. For a discussion of other reasons, see [Updating Manually Created Data Catalog Tables Using Crawlers](tables-described.md#update-manual-tables)\.
+A common reason to specify a catalog table as the source is when you create the table manually \(because you already know the structure of the data store\) and you want a crawler to keep the table updated, including adding new partitions\. For a discussion of other reasons, see [Updating Manually Created Data Catalog Tables Using Crawlers](tables-described.md#update-manual-tables)\.
 
 When you specify existing tables as the crawler source type, the following conditions apply:
 + Database name is optional\.
@@ -51,11 +114,13 @@ When you specify existing tables as the crawler source type, the following condi
 
 ## Include and Exclude Patterns<a name="crawler-data-stores-exclude"></a>
 
-When evaluating what to include or exclude in a crawl, a crawler starts by evaluating the required include path for Amazon S3 and relational data stores\. For every data store that you want to crawl, you must specify a single include path\. 
+When evaluating what to include or exclude in a crawl, a crawler starts by evaluating the required include path\. For Amazon S3, MongoDB, Amazon DocumentDB \(with MongoDB compatibility\), and relational data stores, you must specify an include path\.
 
-For Amazon S3 data stores, the syntax is `bucket-name/folder-name/file-name.ext`\. To crawl all objects in a bucket, you specify just the bucket name in the include path\.
+For Amazon S3 data stores, include path syntax is `bucket-name/folder-name/file-name.ext`\. To crawl all objects in a bucket, you specify just the bucket name in the include path\. The exclude pattern is relative to the include path
 
-For JDBC data stores, the syntax is either `database-name/schema-name/table-name` or `database-name/table-name`\. The syntax depends on whether the database engine supports schemas within a database\. For example, for database engines such as MySQL or Oracle, don't specify a `schema-name` in your include path\. You can substitute the percent sign \(`%`\) for a schema or table in the include path to represent all schemas or all tables in a database\. You cannot substitute the percent sign \(`%`\) for database in the include path\.  
+For MongoDB and Amazon DocumentDB \(with MongoDB compatibility\), the syntax is `database/collection`\.
+
+For JDBC data stores, the syntax is either `database-name/schema-name/table-name` or `database-name/table-name`\. The syntax depends on whether the database engine supports schemas within a database\. For example, for database engines such as MySQL or Oracle, don't specify a `schema-name` in your include path\. You can substitute the percent sign \(`%`\) for a schema or table in the include path to represent all schemas or all tables in a database\. You cannot substitute the percent sign \(`%`\) for database in the include path\. The exclude path is relative to the include path\. For example, to exclude a table in your JDBC data store, type the table name in the exclude path\. 
 
 A crawler connects to a JDBC data store using an AWS Glue connection that contains a JDBC URI connection string\. The crawler only has access to objects in the database engine using the JDBC user name and password in the AWS Glue connection\. *The crawler can only create tables that it can access through the JDBC connection\.* After the crawler accesses the database engine with the JDBC URI, the include path is used to determine which tables in the database engine are created in the Data Catalog\. For example, with MySQL, if you specify an include path of `MyDatabase/%`, then all tables within `MyDatabase` are created in the Data Catalog\. When accessing Amazon Redshift, if you specify an include path of `MyDatabase/%`, then all tables within all schemas for database `MyDatabase` are created in the Data Catalog\. If you specify an include path of `MyDatabase/MySchema/%`, then all tables in database `MyDatabase` and schema `MySchema` are created\. 
 

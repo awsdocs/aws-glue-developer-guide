@@ -9,6 +9,10 @@ An *account administrator* \(or administrator user\) is a user who has administr
 
 When granting permissions, you decide who is getting the permissions, the resources they get permissions for, and the specific actions that you want to allow on those resources\.
 
+**Note**  
+You can grant access to your data by using AWS Glue methods or by using AWS Lake Formation grants\. The AWS Glue methods use AWS Identity and Access Management \(IAM\) policies to achieve fine\-grained access control\. Lake Formation uses a simpler `GRANT/REVOKE` permissions model similar to the `GRANT/REVOKE` commands in a relational database system\.  
+This section describes using the AWS Glue methods\. For information about using Lake Formation grants, see [Granting Lake Formation Permissions](https://docs.aws.amazon.com/lake-formation/latest/dg/lake-formation-permissions.html) in the *AWS Lake Formation Developer Guide*\.
+
 **Topics**
 + [Using Permissions Policies to Manage Access to Resources](#access-control-permissions)
 + [AWS Glue Resources and Operations](#access-control-resources)
@@ -39,6 +43,8 @@ By supporting both identity\-based and resource policies, AWS Glue gives you fin
 For more examples, see [AWS Glue Resource\-Based Access Control Policy Examples](glue-policy-examples-resource-policies.md)\.
 
 ## AWS Glue Resources and Operations<a name="access-control-resources"></a>
+
+
 
 AWS Glue provides a set of operations to work with AWS Glue resources\. For a list of available operations, see [AWS Glue API](aws-glue-api.md)\.
 

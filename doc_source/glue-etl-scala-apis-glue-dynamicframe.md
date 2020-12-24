@@ -20,6 +20,7 @@
   + [def javaToPython](glue-etl-scala-apis-glue-dynamicframe-class.md#glue-etl-scala-apis-glue-dynamicframe-class-defs-javaToPython)
   + [def join](glue-etl-scala-apis-glue-dynamicframe-class.md#glue-etl-scala-apis-glue-dynamicframe-class-defs-join)
   + [def map](glue-etl-scala-apis-glue-dynamicframe-class.md#glue-etl-scala-apis-glue-dynamicframe-class-defs-map)
+  + [def mergeDynamicFrames](glue-etl-scala-apis-glue-dynamicframe-class.md#glue-etl-scala-apis-glue-dynamicframe-class-defs-merge)
   + [def printSchema](glue-etl-scala-apis-glue-dynamicframe-class.md#glue-etl-scala-apis-glue-dynamicframe-class-defs-printSchema)
   + [def recomputeSchema](glue-etl-scala-apis-glue-dynamicframe-class.md#glue-etl-scala-apis-glue-dynamicframe-class-defs-recomputeSchema)
   + [def relationalize](glue-etl-scala-apis-glue-dynamicframe-class.md#glue-etl-scala-apis-glue-dynamicframe-class-defs-relationalize)

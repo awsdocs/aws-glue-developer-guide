@@ -1,6 +1,8 @@
-# Overview of Workflows<a name="workflows_overview"></a>
+# Overview of Workflows in AWS Glue<a name="workflows_overview"></a>
 
 In AWS Glue, you can use workflows to create and visualize complex extract, transform, and load \(ETL\) activities involving multiple crawlers, jobs, and triggers\. Each workflow manages the execution and monitoring of all its components\. As a workflow runs each component, it records execution progress and status, providing you with an overview of the larger task and the details of each step\. The AWS Glue console provides a visual representation of a workflow as a graph\.
+
+Event triggers within workflows can be fired by both jobs or crawlers, and can start both jobs and crawlers\. Thus you can create large chains of interdependent jobs and crawlers\.
 
 To share and manage state throughout a workflow run, you can define default workflow run properties\. These properties, which are name/value pairs, are available to all the jobs in the workflow\. Using the AWS Glue API, jobs can retrieve the workflow run properties and modify them for jobs that come later in the workflow\.
 
@@ -21,3 +23,5 @@ When a workflow is running, the console displays the dynamic view, graphically i
 Keep the following workflow restrictions in mind:
 + A trigger can be associated with only one workflow\.
 + Only one starting trigger \(on\-demand or schedule\) is permitted\.
++ If a job or crawler in a workflow is started by a trigger that is outside the workflow, any triggers inside the workflow that depend on job or crawler completion \(succeeded or otherwise\) do not fire\.
++ Similarly, if a job or crawler in a workflow has triggers that depend on job or crawler completion \(succeeded or otherwise\) both within the workflow and outside the workflow, if the job or crawler is started from within a workflow, only the triggers inside the workflow fire upon job or crawler completion\.

@@ -21,17 +21,22 @@ Each AWS account has one AWS Glue Data Catalog per AWS region\. It provides a un
 
 You can use AWS Identity and Access Management \(IAM\) policies to control access to the data sources managed by the AWS Glue Data Catalog\. These policies allow different groups in your enterprise to safely publish data to the wider organization while protecting sensitive information\. IAM policies let you clearly and consistently define which users have access to which data, regardless of its location\.
 
+The Data Catalog also provides comprehensive audit and governance capabilities, with schema change tracking and data access controls\. You can audit changes to data schemas\. This helps ensure that data is not inappropriately modified or inadvertently shared\.
+
 For information about how to use the AWS Glue Data Catalog, see [Populating the AWS Glue Data Catalog](populate-data-catalog.md)\. For information about how to program using the Data Catalog API, see [Catalog API](aws-glue-api-catalog.md)\.
 
-Other AWS services and open source projects can use the AWS Glue Data Catalog:
-+ Amazon Athena – for more information, see [Understanding Tables, Databases, and the Data Catalog](https://docs.aws.amazon.com/athena/latest/ug/understanding-tables-databases-and-the-data-catalog.html) in the Amazon Athena User Guide\.
-+ Amazon Redshift Spectrum – for more information, see [Using Amazon Redshift Spectrum to Query External Data](https://docs.aws.amazon.com/redshift/latest/dg/c-using-spectrum.html) in the Amazon Redshift Database Developer Guide\.
-+ Amazon EMR – for more information, see [Use Resource\-Based Policies for Amazon EMR Access to AWS Glue Data Catalog](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-iam-roles-glue.html) in the Amazon EMR Management Guide\.
-+ AWS Glue Data Catalog Client for Apache Hive Metastore – for more information about this GitHub project, see [AWS Glue Data Catalog Client for Apache Hive Metastore](https://github.com/awslabs/aws-glue-data-catalog-client-for-apache-hive-metastore)\.
+The following are other AWS services and open source projects that use the AWS Glue Data Catalog:
++ **AWS Lake Formation** – for more information, see [What Is AWS Lake Formation?](https://docs.aws.amazon.com/lake-formation/latest/dg/what-is-lake-formation.html) in the *AWS Lake Formation Developer Guide*\.
++ **Amazon Athena** – for more information, see [Understanding Tables, Databases, and the Data Catalog](https://docs.aws.amazon.com/athena/latest/ug/understanding-tables-databases-and-the-data-catalog.html) in the *Amazon Athena User Guide*\.
++ **Amazon Redshift Spectrum** – for more information, see [Using Amazon Redshift Spectrum to Query External Data](https://docs.aws.amazon.com/redshift/latest/dg/c-using-spectrum.html) in the *Amazon Redshift Database Developer Guide*\.
++ **Amazon EMR** – for more information, see [Use Resource\-Based Policies for Amazon EMR Access to AWS Glue Data Catalog](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-iam-roles-glue.html) in the *Amazon EMR Management Guide*\.
++ **AWS Glue Data Catalog Client for Apache Hive Metastore** – for more information about this GitHub project, see [AWS Glue Data Catalog Client for Apache Hive Metastore](https://github.com/awslabs/aws-glue-data-catalog-client-for-apache-hive-metastore)\.
+
+
 
 ## AWS Glue Crawlers and Classifiers<a name="crawling-intro"></a>
 
-AWS Glue also lets you set up crawlers that can scan data in all kinds of repositories, classify it, extract schema information from it, and store the metadata automatically in the AWS Glue Data Catalog\. From there it can be used to guide ETL operations\.
+AWS Glue also lets you set up crawlers that can scan data in all kinds of repositories, classify it, extract schema information from it, and store the metadata automatically in the AWS Glue Data Catalog\. The AWS Glue Data Catalog can then be used to guide ETL operations\.
 
 For information about how to set up crawlers and classifiers, see [Defining Crawlers](add-crawler.md)\. For information about how to program crawlers and classifiers using the AWS Glue API, see [Crawlers and Classifiers API](aws-glue-api-crawler.md)\.
 
@@ -40,6 +45,16 @@ For information about how to set up crawlers and classifiers, see [Defining Craw
 Using the metadata in the Data Catalog, AWS Glue can autogenerate Scala or PySpark \(the Python API for Apache Spark\) scripts with AWS Glue extensions that you can use and modify to perform various ETL operations\. For example, you can extract, clean, and transform raw data, and then store the result in a different repository, where it can be queried and analyzed\. Such a script might convert a CSV file into a relational form and save it in Amazon Redshift\.
 
 For more information about how to use AWS Glue ETL capabilities, see [Programming ETL Scripts](aws-glue-programming.md)\.
+
+## Streaming ETL in AWS Glue<a name="streaming-etl-intro"></a>
+
+AWS Glue enables you to perform ETL operations on streaming data using continuously\-running jobs\. AWS Glue streaming ETL is built on the Apache Spark Structured Streaming engine, and can ingest streams from Amazon Kinesis Data Streams, Apache Kafka, and Amazon Managed Streaming for Apache Kafka \(Amazon MSK\)\. Streaming ETL can clean and transform streaming data and load it into Amazon S3 or JDBC data stores\. Use Streaming ETL in AWS Glue to process event data like IoT streams, clickstreams, and network logs\.
+
+If you know the schema of the streaming data source, you can specify it in a Data Catalog table\. If not, you can enable schema detection in the streaming ETL job\. The job then automatically determines the schema from the incoming data\.
+
+The streaming ETL job can use both AWS Glue built\-in transforms and transforms that are native to Apache Spark Structured Streaming\. For more information, see [Operations on streaming DataFrames/Datasets](https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html#operations-on-streaming-dataframesdatasets) on the Apache Spark website\. 
+
+For more information, see [Adding Streaming ETL Jobs in AWS Glue](add-job-streaming.md)\.
 
 ## The AWS Glue Jobs System<a name="job-orchestration-intro"></a>
 

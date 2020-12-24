@@ -1,8 +1,8 @@
-# Step 6: Create an IAM Policy for Amazon SageMaker Notebooks<a name="create-sagemaker-notebook-policy"></a>
+# Step 6: Create an IAM Policy for SageMaker Notebooks<a name="create-sagemaker-notebook-policy"></a>
 
-If you plan to use Amazon SageMaker notebooks with development endpoints, you must specify permissions when you create the notebook\. You provide those permissions by using AWS Identity and Access Management \(IAM\)\.
+If you plan to use SageMaker notebooks with development endpoints, you must specify permissions when you create the notebook\. You provide those permissions by using AWS Identity and Access Management \(IAM\)\.
 
-**To create an IAM policy for Amazon SageMaker notebooks**
+**To create an IAM policy for SageMaker notebooks**
 
 1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 

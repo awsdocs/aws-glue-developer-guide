@@ -14,53 +14,14 @@ To get step\-by\-step guidance for adding a crawler, choose **Add crawler** unde
 
    Optionally, you can add a security configuration to a crawler to specify at\-rest encryption options\. 
 
-When a crawler runs, the provided IAM role must have permission to access the data store that is crawled\. For an Amazon S3 data store, you can use the AWS Glue console to create a policy or add a policy similar to the following: 
+When a crawler runs, the provided IAM role must have permission to access the data store that is crawled\.
 
-```
-{
-   "Version": "2012-10-17",
-    "Statement": [
-        {
-          "Effect": "Allow",
-          "Action": [
-              "s3:GetObject",
-              "s3:PutObject"
-          ],
-          "Resource": [
-              "arn:aws:s3:::bucket/object*"
-          ]
-        }
-    ]
-}
-```
-
-If the crawler reads KMS encrypted Amazon S3 data, then the **IAM role** must have decrypt permission on the KMS key\. For more information, see [Step 2: Create an IAM Role for AWS Glue](create-an-iam-role.md)\.
-
-For an Amazon DynamoDB data store, you can use the AWS Glue console to create a policy or add a policy similar to the following: 
-
-```
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "dynamodb:DescribeTable",
-        "dynamodb:Scan"
-      ],
-      "Resource": [
-        "arn:aws:dynamodb:region:account-id:table/table-name*"
-      ]
-    }
-  ]
-}
-```
-
-For Amazon S3 data stores, an exclude pattern is relative to the include path\. For more information about glob patterns, see [Which Data Stores Can I Crawl?](add-crawler.md#crawler-data-stores)\.
-
-When you crawl a JDBC data store, a connection is required\. For more information, see [Working with Connections on the AWS Glue Console](console-connections.md)\. An exclude path is relative to the include path\. For example, to exclude a table in your JDBC data store, type the table name in the exclude path\.
+When you crawl a JDBC data store, a connection is required\. For more information, see [Adding an AWS Glue Connection](console-connections.md)\. An exclude path is relative to the include path\. For example, to exclude a table in your JDBC data store, type the table name in the exclude path\.
 
 When you crawl DynamoDB tables, you can choose one table name from the list of DynamoDB tables in your account\.
+
+**See Also**  
+[Crawler Properties](define-crawler.md)
 
 ## Viewing Crawler Results<a name="console-crawlers-details"></a>
 

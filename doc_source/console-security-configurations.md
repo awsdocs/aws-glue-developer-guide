@@ -27,7 +27,7 @@ You can add or delete configurations in the **Security configurations** section 
 
 To add a security configuration using the AWS Glue console, on the **Security configurations** page, choose **Add security configuration**\. The wizard guides you through setting the required properties\.
 
-To set up encryption of data and metadata with AWS Key Management Service \(AWS KMS\) keys on the AWS Glue console, add a policy to the console user\. This policy must specify the allowed resources as key ARNs that are used to encrypt Amazon S3 data stores, as in the following example:
+To set up encryption of data and metadata with AWS Key Management Service \(AWS KMS\) keys on the AWS Glue console, add a policy to the console user\. This policy must specify the allowed resources as key Amazon Resource Names \(ARNs\) that are used to encrypt Amazon S3 data stores, as in the following example\.
 
 ```
 {
@@ -48,7 +48,8 @@ When a security configuration is attached to a crawler or job, the IAM role that
 When you define a configuration, you can provide values for the following properties:
 
 **S3 encryption**  
-When you are writing Amazon S3 data, you use either server\-side encryption with Amazon S3 managed keys \(SSE\-S3\) or server\-side encryption with AWS KMS managed keys \(SSE\-KMS\)\. This field is optional\. To enable access to Amazon S3, choose an AWS KMS key, or choose **Enter a key ARN** and provide the Amazon Resource Name \(ARN\) for the key\. Enter the ARN in the form `arn:aws:kms:region:account-id:key/key-id`\. You can also provide the ARN as a key alias, such as `arn:aws:kms:region:account-id:alias/alias-name`\. 
+When you are writing Amazon S3 data, you use either server\-side encryption with Amazon S3 managed keys \(SSE\-S3\) or server\-side encryption with AWS KMS managed keys \(SSE\-KMS\)\. This field is optional\. To enable access to Amazon S3, choose an AWS KMS key, or choose **Enter a key ARN** and provide the ARN for the key\. Enter the ARN in the form `arn:aws:kms:region:account-id:key/key-id`\. You can also provide the ARN as a key alias, such as `arn:aws:kms:region:account-id:alias/alias-name`\.   
+AWS Glue supports only symmetric customer master keys \(CMKs\)\. The **AWS KMS key** list displays only symmetric keys\. However, if you select **Choose a KMS key ARN**, the console lets you enter an ARN for any key type\. Ensure that you enter only ARNs for symmetric keys\.
 
 **CloudWatch Logs encryption**  
 Server\-side \(SSE\-KMS\) encryption is used to encrypt CloudWatch Logs\. This field is optional\. To enable it, choose an AWS KMS key, or choose **Enter a key ARN** and provide the ARN for the key\. Enter the ARN in the form `arn:aws:kms:region:account-id:key/key-id`\. You can also provide the ARN as a key alias, such as `arn:aws:kms:region:account-id:alias/alias-name`\. 

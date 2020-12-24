@@ -40,7 +40,7 @@ Contains information about a job run\.
   The date and time that this job run completed\.
 + `JobRunState` – UTF\-8 string \(valid values: `STARTING` \| `RUNNING` \| `STOPPING` \| `STOPPED` \| `SUCCEEDED` \| `FAILED` \| `TIMEOUT`\)\.
 
-  The current state of the job run\.
+  The current state of the job run\. For more information about the statuses of jobs that have terminated abnormally, see [AWS Glue Job Run Statuses](https://docs.aws.amazon.com/glue/latest/dg/job-run-statuses.html)\.
 + `Arguments` – A map array of key\-value pairs\.
 
   Each key is a UTF\-8 string\.
@@ -100,7 +100,7 @@ Contains information about a job run\.
 + `NotificationProperty` – A [NotificationProperty](aws-glue-api-jobs-job.md#aws-glue-api-jobs-job-NotificationProperty) object\.
 
   Specifies configuration properties of a job run notification\.
-+ `GlueVersion` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Custom string pattern #13](aws-glue-api-common.md#regex_13)\.
++ `GlueVersion` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Custom string pattern #15](aws-glue-api-common.md#regex_15)\.
 
   Glue version determines the versions of Apache Spark and Python that AWS Glue supports\. The Python version indicates the version supported for jobs of type Spark\. 
 

@@ -14,6 +14,13 @@ The **com\.amazonaws\.services\.glue** package in the AWS Glue Scala library con
 + [MappingSpec](#glue-etl-scala-apis-glue-mappingspec)
 + [ResolveSpec](glue-etl-scala-apis-glue-resolvespec.md)
 
+## com\.amazonaws\.services\.glue\.ml<a name="glue-etl-scala-apis-glue-ml"></a>
+
+The **com\.amazonaws\.services\.glue\.ml** package in the AWS Glue Scala library contains the following APIs:
++ [FillMissingValues](glue-etl-scala-apis-glue-ml-fillmissingvalues.md)
++ [FindIncrementalMatches](glue-etl-scala-apis-glue-ml-findincrementalmatches.md)
++ [FindMatches](glue-etl-scala-apis-glue-ml-findmatches.md)
+
 ## com\.amazonaws\.services\.glue\.types<a name="glue-etl-scala-apis-glue-types"></a>
 
 The **com\.amazonaws\.services\.glue\.types** package in the AWS Glue Scala library contains the following APIs:
@@ -83,6 +90,8 @@ The `MappingSpec` object has the following members:
 ```
 val orderingByTarget: Ordering[MappingSpec]
 ```
+
+
 
 ### def apply<a name="glue-etl-scala-apis-glue-mappingspec-object-defs-apply-1"></a>
 

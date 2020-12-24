@@ -1,14 +1,14 @@
-# Configuring a Crawler<a name="crawler-configuration"></a>
+# Setting Crawler Configuration Options<a name="crawler-configuration"></a>
 
 When a crawler runs, it might encounter changes to your data store that result in a schema or partition that is different from a previous crawl\. You can use the AWS Management Console or the AWS Glue API to configure how your crawler processes certain types of changes\. 
 
 **Topics**
-+ [Configuring a Crawler on the AWS Glue Console](#crawler-configure-changes-console)
-+ [Configuring a Crawler Using the API](#crawler-configure-changes-api)
++ [Setting Crawler Configuration Options on the AWS Glue Console](#crawler-configure-changes-console)
++ [Setting Crawler Configuration Options Using the API](#crawler-configure-changes-api)
 + [How to Prevent the Crawler from Changing an Existing Schema](#crawler-schema-changes-prevent)
 + [How to Create a Single Schema for Each Amazon S3 Include Path](#crawler-grouping-policy)
 
-## Configuring a Crawler on the AWS Glue Console<a name="crawler-configure-changes-console"></a>
+## Setting Crawler Configuration Options on the AWS Glue Console<a name="crawler-configure-changes-console"></a>
 
 When you define a crawler using the AWS Glue console, you have several options for configuring the behavior of your crawler\. For more information about using the AWS Glue console to add a crawler, see [Working with Crawlers on the AWS Glue Console](console-crawlers.md)\.
 
@@ -19,20 +19,26 @@ To specify what the crawler does when it finds changes in the schema, you can ch
 + **Add new columns only** – For tables that map to an Amazon S3 data store, add new columns as they are discovered, but don't remove or change the type of existing columns in the Data Catalog\. Choose this option when the current columns in the Data Catalog are correct and you don't want the crawler to remove or change the type of the existing columns\. If a fundamental Amazon S3 table attribute changes, such as classification, compression type, or CSV delimiter, mark the table as deprecated\. Maintain input format and output format as they exist in the Data Catalog\. Update SerDe parameters only if the parameter is one that is set by the crawler\. *For all other data stores, modify existing column definitions\.*
 + **Ignore the change and don't update the table in the Data Catalog** – Only new tables and partitions are created\.
 
+  This is the default setting for incremental crawls\.
+
 A crawler might also discover new or changed partitions\. By default, new partitions are added and existing partitions are updated if they have changed\. In addition, you can set a crawler configuration option to **Update all new and existing partitions with metadata from the table** on the AWS Glue console\. When this option is set, partitions inherit metadata properties—such as their classification, input format, output format, SerDe information, and schema—from their parent table\. Any changes to these properties in a table are propagated to its partitions\. When this configuration option is set on an existing crawler, existing partitions are updated to match the properties of their parent table the next time the crawler runs\. 
 
 To specify what the crawler does when it finds a deleted object in the data store, choose one of the following actions:
 + **Delete tables and partitions from the Data Catalog**
 + **Ignore the change and don't update the table in the Data Catalog**
+
+  This is the default setting for incremental crawls\.
 + **Mark the table as deprecated in the Data Catalog** – This is the default setting\.
 
-## Configuring a Crawler Using the API<a name="crawler-configure-changes-api"></a>
+## Setting Crawler Configuration Options Using the API<a name="crawler-configure-changes-api"></a>
 
 When you define a crawler using the AWS Glue API, you can choose from several fields to configure your crawler\. The `SchemaChangePolicy` in the crawler API determines what the crawler does when it discovers a changed schema or a deleted object\. The crawler logs schema changes as it runs\.
 
 When a crawler runs, new tables and partitions are always created regardless of the schema change policy\. You can choose one of the following actions in the `UpdateBehavior` field in the `SchemaChangePolicy` structure to determine what the crawler does when it finds a changed table schema:
 + `UPDATE_IN_DATABASE` – Update the table in the AWS Glue Data Catalog\. Add new columns, remove missing columns, and modify the definitions of existing columns\. Remove any metadata that is not set by the crawler\. 
 + `LOG` – Ignore the changes, and don't update the table in the Data Catalog\.
+
+  This is the default setting for incremental crawls\.
 
 You can also override the `SchemaChangePolicy` structure using a JSON object supplied in the crawler API `Configuration` field\. This JSON object can contain a key\-value pair to set the policy to not update existing columns and only add new columns\. For example, provide the following JSON object as a string:
 
@@ -76,6 +82,8 @@ You can choose one of the following actions to determine what the crawler does w
 + `DELETE_FROM_DATABASE` – Delete tables and partitions from the Data Catalog\.
 + `LOG` – Ignore the change\. Don't update the Data Catalog\. Write a log message instead\.
 + `DEPRECATE_IN_DATABASE` – Mark the table as deprecated in the Data Catalog\. This is the default setting\.
+
+
 
 ## How to Prevent the Crawler from Changing an Existing Schema<a name="crawler-schema-changes-prevent"></a>
 

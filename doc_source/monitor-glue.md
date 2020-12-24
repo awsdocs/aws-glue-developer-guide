@@ -22,12 +22,14 @@ The following diagram shows the ETL workflow containing these five steps\.
 + [Automated Monitoring Tools](#monitoring-automated_tools)
 + [Time\-Based Schedules for Jobs and Crawlers](monitor-data-warehouse-schedule.md)
 + [Tracking Processed Data Using Job Bookmarks](monitor-continuations.md)
++ [Workload Partitioning with Bounded Execution](bounded-execution.md)
 + [AWS Tags in AWS Glue](monitor-tags.md)
 + [Automating AWS Glue with CloudWatch Events](automating-awsglue-with-cloudwatch-events.md)
 + [Monitoring Jobs Using the Apache Spark Web UI](monitor-spark-ui.md)
 + [Monitoring with Amazon CloudWatch](monitor-cloudwatch.md)
 + [Job Monitoring and Debugging](monitor-profile-glue-job-cloudwatch-metrics.md)
 + [Logging AWS Glue API Calls with AWS CloudTrail](monitor-cloudtrail.md)
++ [AWS Glue Job Run Statuses](job-run-statuses.md)
 
 ## Automated Monitoring Tools<a name="monitoring-automated_tools"></a>
 

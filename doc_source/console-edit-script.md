@@ -12,6 +12,8 @@ You can edit a script in the AWS Glue console\. When you edit a script, you can 
 
    You can also access the script editor from the job details page\. Choose the  **Script** tab, and then choose **Edit script**\.
 
+   
+
 ## Script Editor<a name="console-edit-script-editor"></a>
 
 The AWS Glue script editor lets you insert, modify, and delete sources, targets, and transforms in your script\. The script editor displays both the script and a diagram to help you visualize the flow of data\.

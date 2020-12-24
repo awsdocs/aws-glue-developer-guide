@@ -6,4 +6,6 @@ AWS Glue is integrated with AWS CloudTrail, a service that provides a record of 
 
 Use Amazon CloudWatch Events to automate your AWS services and respond automatically to system events such as application availability issues or resource changes\. Events from AWS services are delivered to CloudWatch Events in near\-real time\. You can write simple rules to indicate which events are of interest and what automated actions to take when an event matches a rule\. 
 
-For more information, see [Automating AWS Glue with CloudWatch Events](automating-awsglue-with-cloudwatch-events.md)\.
+**See Also**  
+[Automating AWS Glue with CloudWatch Events](automating-awsglue-with-cloudwatch-events.md)
+[Cross\-Account CloudTrail Logging](cross-account-access.md#cross-account-ct-logs)

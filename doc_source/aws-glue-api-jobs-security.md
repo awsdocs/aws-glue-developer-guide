@@ -11,6 +11,7 @@ The Security API describes the security data types, and the API related to secur
 + [CloudWatchEncryption Structure](#aws-glue-api-jobs-security-CloudWatchEncryption)
 + [JobBookmarksEncryption Structure](#aws-glue-api-jobs-security-JobBookmarksEncryption)
 + [SecurityConfiguration Structure](#aws-glue-api-jobs-security-SecurityConfiguration)
++ [GluePolicy Structure](#aws-glue-api-jobs-security-GluePolicy)
 
 ## DataCatalogEncryptionSettings Structure<a name="aws-glue-api-jobs-security-DataCatalogEncryptionSettings"></a>
 
@@ -79,7 +80,7 @@ Specifies how Amazon Simple Storage Service \(Amazon S3\) data should be encrypt
 + `S3EncryptionMode` – UTF\-8 string \(valid values: `DISABLED` \| `SSE-KMS="SSEKMS"` \| `SSE-S3="SSES3"`\)\.
 
   The encryption mode to use for Amazon S3 data\.
-+ `KmsKeyArn` – UTF\-8 string, matching the [Custom string pattern #14](aws-glue-api-common.md#regex_14)\.
++ `KmsKeyArn` – UTF\-8 string, matching the [Custom string pattern #16](aws-glue-api-common.md#regex_16)\.
 
   The Amazon Resource Name \(ARN\) of the KMS key to be used to encrypt the data\.
 
@@ -91,7 +92,7 @@ Specifies how Amazon CloudWatch data should be encrypted\.
 + `CloudWatchEncryptionMode` – UTF\-8 string \(valid values: `DISABLED` \| `SSE-KMS="SSEKMS"`\)\.
 
   The encryption mode to use for CloudWatch data\.
-+ `KmsKeyArn` – UTF\-8 string, matching the [Custom string pattern #14](aws-glue-api-common.md#regex_14)\.
++ `KmsKeyArn` – UTF\-8 string, matching the [Custom string pattern #16](aws-glue-api-common.md#regex_16)\.
 
   The Amazon Resource Name \(ARN\) of the KMS key to be used to encrypt the data\.
 
@@ -103,7 +104,7 @@ Specifies how job bookmark data should be encrypted\.
 + `JobBookmarksEncryptionMode` – UTF\-8 string \(valid values: `DISABLED` \| `CSE-KMS="CSEKMS"`\)\.
 
   The encryption mode to use for job bookmarks data\.
-+ `KmsKeyArn` – UTF\-8 string, matching the [Custom string pattern #14](aws-glue-api-common.md#regex_14)\.
++ `KmsKeyArn` – UTF\-8 string, matching the [Custom string pattern #16](aws-glue-api-common.md#regex_16)\.
 
   The Amazon Resource Name \(ARN\) of the KMS key to be used to encrypt the data\.
 
@@ -122,6 +123,24 @@ Specifies a security configuration\.
 
   The encryption configuration associated with this security configuration\.
 
+## GluePolicy Structure<a name="aws-glue-api-jobs-security-GluePolicy"></a>
+
+A structure for returning a resource policy\.
+
+**Fields**
++ `PolicyInJson` – UTF\-8 string, not less than 2 or more than 10240 bytes long\.
+
+  Contains the requested policy document, in JSON format\.
++ `PolicyHash` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  Contains the hash value associated with this policy\.
++ `CreateTime` – Timestamp\.
+
+  The date and time at which the policy was created\.
++ `UpdateTime` – Timestamp\.
+
+  The date and time at which the policy was last updated\.
+
 ## Operations<a name="aws-glue-api-jobs-security-actions"></a>
 + [GetDataCatalogEncryptionSettings Action \(Python: get\_data\_catalog\_encryption\_settings\)](#aws-glue-api-jobs-security-GetDataCatalogEncryptionSettings)
 + [PutDataCatalogEncryptionSettings Action \(Python: put\_data\_catalog\_encryption\_settings\)](#aws-glue-api-jobs-security-PutDataCatalogEncryptionSettings)
@@ -132,6 +151,7 @@ Specifies a security configuration\.
 + [DeleteSecurityConfiguration Action \(Python: delete\_security\_configuration\)](#aws-glue-api-jobs-security-DeleteSecurityConfiguration)
 + [GetSecurityConfiguration Action \(Python: get\_security\_configuration\)](#aws-glue-api-jobs-security-GetSecurityConfiguration)
 + [GetSecurityConfigurations Action \(Python: get\_security\_configurations\)](#aws-glue-api-jobs-security-GetSecurityConfigurations)
++ [GetResourcePolicies Action \(Python: get\_resource\_policies\)](#aws-glue-api-jobs-security-GetResourcePolicies)
 
 ## GetDataCatalogEncryptionSettings Action \(Python: get\_data\_catalog\_encryption\_settings\)<a name="aws-glue-api-jobs-security-GetDataCatalogEncryptionSettings"></a>
 
@@ -180,12 +200,20 @@ Sets the Data Catalog resource policy for access control\.
 + `PolicyInJson` – *Required:* UTF\-8 string, not less than 2 or more than 10240 bytes long\.
 
   Contains the policy document to set, in JSON format\.
++ `ResourceArn` – UTF\-8 string, not less than 1 or more than 10240 bytes long, matching the [AWS Glue ARN string pattern](aws-glue-api-common.md#aws-glue-api-regex-aws-glue-arn-id)\.
+
+  The ARN of the AWS Glue resource for the resource policy to be set\. For more information about AWS Glue resource ARNs, see the [AWS Glue ARN string pattern](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id)
 + `PolicyHashCondition` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The hash value returned when the previous policy was set using `PutResourcePolicy`\. Its purpose is to prevent concurrent modifications of a policy\. Do not use this parameter if no previous policy has been set\.
 + `PolicyExistsCondition` – UTF\-8 string \(valid values: `MUST_EXIST` \| `NOT_EXIST` \| `NONE`\)\.
 
   A value of `MUST_EXIST` is used to update a policy\. A value of `NOT_EXIST` is used to create a new policy\. If a value of `NONE` or a null value is used, the call will not depend on the existence of a policy\.
++ `EnableHybrid` – UTF\-8 string \(valid values: `TRUE` \| `FALSE`\)\.
+
+  Allows you to specify if you want to use both resource\-level and account/catalog\-level resource policies\. A resource\-level policy is a policy attached to an individual resource such as a database or a table\.
+
+  The default value of `NO` indicates that resource\-level policies cannot co\-exist with an account\-level policy\. A value of `YES` means the use of both resource\-level and account/catalog\-level resource policies is allowed\.
 
 **Response**
 + `PolicyHash` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
@@ -204,7 +232,9 @@ Sets the Data Catalog resource policy for access control\.
 Retrieves a specified resource policy\.
 
 **Request**
-+ *No Request parameters\.*
++ `ResourceArn` – UTF\-8 string, not less than 1 or more than 10240 bytes long, matching the [AWS Glue ARN string pattern](aws-glue-api-common.md#aws-glue-api-regex-aws-glue-arn-id)\.
+
+  The ARN of the AWS Glue resource for the resource policy to be retrieved\. For more information about AWS Glue resource ARNs, see the [AWS Glue ARN string pattern](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id)
 
 **Response**
 + `PolicyInJson` – UTF\-8 string, not less than 2 or more than 10240 bytes long\.
@@ -234,6 +264,9 @@ Deletes a specified policy\.
 + `PolicyHashCondition` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The hash value returned when this policy was set\.
++ `ResourceArn` – UTF\-8 string, not less than 1 or more than 10240 bytes long, matching the [AWS Glue ARN string pattern](aws-glue-api-common.md#aws-glue-api-regex-aws-glue-arn-id)\.
+
+  The ARN of the AWS Glue resource for the resource policy to be deleted\.
 
 **Response**
 + *No Response parameters\.*
@@ -335,3 +368,31 @@ Retrieves a list of all security configurations\.
 + `InvalidInputException`
 + `InternalServiceException`
 + `OperationTimeoutException`
+
+## GetResourcePolicies Action \(Python: get\_resource\_policies\)<a name="aws-glue-api-jobs-security-GetResourcePolicies"></a>
+
+Retrieves the security configurations for the resource policies set on individual resources, and also the account\-level policy\.
+
+This operation also returns the Data Catalog resource policy\. However, if you enabled metadata encryption in Data Catalog settings, and you do not have permission on the AWS KMS key, the operation can't return the Data Catalog resource policy\.
+
+**Request**
++ `NextToken` – UTF\-8 string\.
+
+  A continuation token, if this is a continuation request\.
++ `MaxResults` – Number \(integer\), not less than 1 or more than 1000\.
+
+  The maximum size of a list to return\.
+
+**Response**
++ `GetResourcePoliciesResponseList` – An array of [GluePolicy](#aws-glue-api-jobs-security-GluePolicy) objects\.
+
+  A list of the individual resource policies and the account\-level resource policy\.
++ `NextToken` – UTF\-8 string\.
+
+  A continuation token, if the returned list does not contain the last resource policy available\.
+
+**Errors**
++ `InternalServiceException`
++ `OperationTimeoutException`
++ `InvalidInputException`
++ `GlueEncryptionException`

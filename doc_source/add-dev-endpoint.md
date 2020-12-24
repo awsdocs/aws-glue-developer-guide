@@ -34,13 +34,13 @@ You can use only pure Python libraries\. Libraries that rely on C extensions, su
 **Dependent jars path**  
 Comma\-separated Amazon S3 paths to JAR files that are required by the script\.  
 Currently, you can use only pure Java or Scala \(2\.11\) libraries\.  
-**Glue Version**  
+**AWS Glue Version**  
 Specifies the versions of Python and Apache Spark to use\. Defaults to AWS Glue version 1\.0 \(Python version 3 and Spark version 2\.4\)\. For more information, see the [Glue version job property](add-job.md#glue-version-table)\.  
 **Tags**  
 Tag your development endpoint with a **Tag key** and optional **Tag value**\. After tag keys are created, they are read\-only\. Use tags on some resources to help you organize and identify them\. For more information, see [AWS Tags in AWS Glue](monitor-tags.md)\.   
 **Spark UI**  
-Enable the use of Spark UI for monitoring Spark applications runnning on this development endpoint\. For more information, see [Enabling the Apache Spark Web UI for Development Endpoints](monitor-spark-ui-dev-endpoints.md)\.   
-**Use Glue Data Catalog as the Hive metastore \(under Catalog Options\)**  
+Enable the use of Spark UI for monitoring Spark applications running on this development endpoint\. For more information, see [Enabling the Apache Spark Web UI for Development Endpoints](monitor-spark-ui-dev-endpoints.md)\.   
+**Use AWS Glue Data Catalog as the Hive metastore \(under Catalog Options\)**  
 Enables you to use the AWS Glue Data Catalog as a Spark Hive metastore\.
 
 **To add a development endpoint \(AWS CLI\)**

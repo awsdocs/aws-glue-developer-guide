@@ -5,7 +5,7 @@ The following diagram shows the architecture of an AWS Glue environment\.
 ![\[The basic concepts populating your Data Catalog and processing ETL dataflow in AWS Glue.\]](http://docs.aws.amazon.com/glue/latest/dg/images/HowItWorks-overview.png)
 
 You define *jobs* in AWS Glue to accomplish the work that's required to extract, transform, and load \(ETL\) data from a data source to a data target\. You typically perform the following actions:
-+ You define a *crawler* to populate your AWS Glue Data Catalog with metadata table definitions\. You point your crawler at a data store, and the crawler creates table definitions in the Data Catalog\.
++ For data store sources, you define a *crawler* to populate your AWS Glue Data Catalog with metadata table definitions\. You point your crawler at a data store, and the crawler creates table definitions in the Data Catalog\. For streaming sources, you manually define Data Catalog tables and specify data stream properties\.
 
   In addition to table definitions, the AWS Glue Data Catalog contains other metadata that is required to define ETL jobs\. You use this metadata when you define a job to transform your data\.
 + AWS Glue can generate a script to transform your data\. Or, you can provide the script in the AWS Glue console or API\.
@@ -23,7 +23,7 @@ Tables and databases in AWS Glue are objects in the AWS Glue Data Catalog\. They
 
 ## AWS Glue Terminology<a name="components-major"></a>
 
-AWS Glue relies on the interaction of several components to create and manage your data warehouse workflow\.
+AWS Glue relies on the interaction of several components to create and manage your extract, transfer, and load \(ETL\) workflow\.
 
 ### AWS Glue Data Catalog<a name="components-data-catalog"></a>
 
@@ -35,7 +35,7 @@ Determines the schema of your data\. AWS Glue provides classifiers for common fi
 
 ### Connection<a name="components-connection"></a>
 
-Contains the properties that are required to connect to your data store\.
+A Data Catalog object that contains the properties that are required to connect to a particular data store\.
 
 ### Crawler<a name="components-crawler"></a>
 
@@ -43,7 +43,7 @@ A program that connects to a data store \(source or target\), progresses through
 
 ### Database<a name="components-database"></a>
 
-A set of associated Data Catalog table definitions organized into a logical group in AWS Glue\.
+A set of associated Data Catalog table definitions organized into a logical group\.
 
 ### Data store, data source, data target<a name="components-data-store"></a>
 
@@ -52,6 +52,10 @@ A *data store* is a repository for persistently storing your data\. Examples inc
 ### Development endpoint<a name="components-development-endpoint"></a>
 
 An environment that you can use to develop and test your AWS Glue ETL scripts\.
+
+### Dynamic Frame<a name="components-dynamic-frame"></a>
+
+A distributed table that supports nested data such as structures and arrays\. Each record is self\-describing, designed for schema flexibility with semi\-structured data\. Each record contains both data and the schema that describes that data\. You can use both dynamic frames and Apache Spark dataframes in your ETL scripts, and convert between them\. Dynamic frames provide a set of advanced transformations for data cleaning and ETL\.
 
 ### Job<a name="components-job"></a>
 

@@ -4,7 +4,6 @@ Note the following known issues for AWS Glue\.
 
 **Topics**
 + [Preventing Cross\-Job Data Access](#cross-job-access)
-+ [Issues with Development Endpoints Created with AWS Glue Version 1\.0](#glue-spark-shell-with-1.0)
 
 ## Preventing Cross\-Job Data Access<a name="cross-job-access"></a>
 
@@ -31,25 +30,3 @@ For information about security configurations, see [Encrypting Data Written by C
 1. On the **Configure the job properties** page for the job, expand the **Security configuration, script libraries, and job parameters** section\.
 
 1. Select a security configuration in the list\.
-
-## Issues with Development Endpoints Created with AWS Glue Version 1\.0<a name="glue-spark-shell-with-1.0"></a>
-
-The following are known issues with development endpoints created with AWS Glue version 1\.0\.
-
-**Scala REPL Fails in AWS Glue 1\.0 Development Endpoints**  
-If you specify AWS Glue 1\.0 when creating a development endpoint and then attempt to use the AWS Glue Scala REPL \(the glue\-spark\-shell command\), the REPL fails with the following error:
-
-```
-Exception in thread "main" java.lang.NoSuchMethodError: org.apache.spark.repl.SparkILoop.mumly(Lscala/Function0;)Ljava/lang/Object;
-```
-
-You can use the PySpark REPL with AWS Glue 1\.0, or for your Scala scripts, you can create a development endpoint specifying AWS Glue 0\.9\.
-
-**gluepython Command Fails in AWS Glue 1\.0 Development Endpoints**  
-If you specify AWS Glue 1\.0 when creating a development endpoint and then attempt to use the gluepython command to test your script, you might encounter the following error:
-
-```
-ImportError: No module named py4j.protocol
-```
-
-As an alternative, you can test your script with the AWS Glue PySpark REPL\. For more information, see [Tutorial: Use a REPL Shell with Your Development Endpoint](dev-endpoint-tutorial-repl.md)\.

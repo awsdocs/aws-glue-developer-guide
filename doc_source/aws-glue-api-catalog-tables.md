@@ -7,6 +7,7 @@ The Table API describes data types and operations associated with tables\.
 + [TableInput Structure](#aws-glue-api-catalog-tables-TableInput)
 + [Column Structure](#aws-glue-api-catalog-tables-Column)
 + [StorageDescriptor Structure](#aws-glue-api-catalog-tables-StorageDescriptor)
++ [SchemaReference Structure](#aws-glue-api-catalog-tables-SchemaReference)
 + [SerDeInfo Structure](#aws-glue-api-catalog-tables-SerDeInfo)
 + [Order Structure](#aws-glue-api-catalog-tables-Order)
 + [SkewedInfo Structure](#aws-glue-api-catalog-tables-SkewedInfo)
@@ -14,6 +15,11 @@ The Table API describes data types and operations associated with tables\.
 + [TableError Structure](#aws-glue-api-catalog-tables-TableError)
 + [TableVersionError Structure](#aws-glue-api-catalog-tables-TableVersionError)
 + [SortCriterion Structure](#aws-glue-api-catalog-tables-SortCriterion)
++ [TableIdentifier Structure](#aws-glue-api-catalog-tables-TableIdentifier)
++ [KeySchemaElement Structure](#aws-glue-api-catalog-tables-KeySchemaElement)
++ [PartitionIndex Structure](#aws-glue-api-catalog-tables-PartitionIndex)
++ [PartitionIndexDescriptor Structure](#aws-glue-api-catalog-tables-PartitionIndexDescriptor)
++ [BackfillError Structure](#aws-glue-api-catalog-tables-BackfillError)
 
 ## Table Structure<a name="aws-glue-api-catalog-tables-Table"></a>
 
@@ -79,6 +85,12 @@ Represents a collection of related data organized in columns and rows\.
 + `IsRegisteredWithLakeFormation` – Boolean\.
 
   Indicates whether the table has been registered with AWS Lake Formation\.
++ `TargetTable` – A [TableIdentifier](#aws-glue-api-catalog-tables-TableIdentifier) object\.
+
+  A `TableIdentifier` structure that describes a target table for resource linking\.
++ `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The ID of the Data Catalog in which the table resides\.
 
 ## TableInput Structure<a name="aws-glue-api-catalog-tables-TableInput"></a>
 
@@ -129,6 +141,9 @@ A structure used to define a table\.
   Each value is a UTF\-8 string, not more than 512000 bytes long\.
 
   These key\-value pairs define properties associated with the table\.
++ `TargetTable` – A [TableIdentifier](#aws-glue-api-catalog-tables-TableIdentifier) object\.
+
+  A `TableIdentifier` structure that describes a target table for resource linking\.
 
 ## Column Structure<a name="aws-glue-api-catalog-tables-Column"></a>
 
@@ -197,6 +212,26 @@ Describes the physical storage of table data\.
 + `StoredAsSubDirectories` – Boolean\.
 
   `True` if the table data is stored in subdirectories, or `False` if not\.
++ `SchemaReference` – A [SchemaReference](#aws-glue-api-catalog-tables-SchemaReference) object\.
+
+  An object that references a schema stored in the AWS Glue Schema Registry\.
+
+  When creating a table, you can pass an empty list of columns for the schema, and instead use a schema reference\.
+
+## SchemaReference Structure<a name="aws-glue-api-catalog-tables-SchemaReference"></a>
+
+An object that references a schema stored in the AWS Glue Schema Registry\.
+
+**Fields**
++ `SchemaId` – A [SchemaId](aws-glue-api-schema-registry-api.md#aws-glue-api-schema-registry-api-SchemaId) object\.
+
+  A structure that contains schema identity fields\. Either this or the `SchemaVersionId` has to be provided\.
++ `SchemaVersionId` – UTF\-8 string, not less than 36 or more than 36 bytes long, matching the [Custom string pattern #11](aws-glue-api-common.md#regex_11)\.
+
+  The unique ID assigned to a version of the schema\. Either this or the `SchemaId` has to be provided\.
++ `SchemaVersionNumber` – Number \(long\), not less than 1 or more than 100000\.
+
+  The version number of the schema\.
 
 ## SerDeInfo Structure<a name="aws-glue-api-catalog-tables-SerDeInfo"></a>
 
@@ -299,6 +334,88 @@ Specifies a field to sort by and a sort order\.
 
   An ascending or descending sort\.
 
+## TableIdentifier Structure<a name="aws-glue-api-catalog-tables-TableIdentifier"></a>
+
+A structure that describes a target table for resource linking\.
+
+**Fields**
++ `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The ID of the Data Catalog in which the table resides\.
++ `DatabaseName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the catalog database that contains the target table\.
++ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the target table\.
+
+## KeySchemaElement Structure<a name="aws-glue-api-catalog-tables-KeySchemaElement"></a>
+
+A partition key pair consisting of a name and a type\.
+
+**Fields**
++ `Name` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of a partition key\.
++ `Type` – *Required:* UTF\-8 string, not more than 131072 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The type of a partition key\.
+
+## PartitionIndex Structure<a name="aws-glue-api-catalog-tables-PartitionIndex"></a>
+
+A structure for a partition index\.
+
+**Fields**
++ `Keys` – *Required:* An array of UTF\-8 strings, at least 1 string\.
+
+  The keys for the partition index\.
++ `IndexName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the partition index\.
+
+## PartitionIndexDescriptor Structure<a name="aws-glue-api-catalog-tables-PartitionIndexDescriptor"></a>
+
+A descriptor for a partition index in a table\.
+
+**Fields**
++ `IndexName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the partition index\.
++ `Keys` – *Required:* An array of [KeySchemaElement](#aws-glue-api-catalog-tables-KeySchemaElement) objects, at least 1 structure\.
+
+  A list of one or more keys, as `KeySchemaElement` structures, for the partition index\.
++ `IndexStatus` – *Required:* UTF\-8 string \(valid values: `CREATING` \| `ACTIVE` \| `DELETING` \| `FAILED`\)\.
+
+  The status of the partition index\. 
+
+  The possible statuses are:
+  + CREATING: The index is being created\. When an index is in a CREATING state, the index or its table cannot be deleted\.
+  + ACTIVE: The index creation succeeds\.
+  + FAILED: The index creation fails\. 
+  + DELETING: The index is deleted from the list of indexes\.
++ `BackfillErrors` – An array of [BackfillError](#aws-glue-api-catalog-tables-BackfillError) objects\.
+
+  A list of errors that can occur when registering partition indexes for an existing table\.
+
+## BackfillError Structure<a name="aws-glue-api-catalog-tables-BackfillError"></a>
+
+A list of errors that can occur when registering partition indexes for an existing table\.
+
+These errors give the details about why an index registration failed and provide a limited number of partitions in the response, so that you can fix the partitions at fault and try registering the index again\. The most common set of errors that can occur are categorized as follows:
++ EncryptedPartitionError: The partitions are encrypted\.
++ InvalidPartitionTypeDataError: The partition value doesn't match the data type for that partition column\.
++ MissingPartitionValueError: The partitions are encrypted\.
++ UnsupportedPartitionCharacterError: Characters inside the partition value are not supported\. For example: U\+0000 , U\+0001, U\+0002\.
++ InternalError: Any error which does not belong to other error codes\.
+
+**Fields**
++ `Code` – UTF\-8 string \(valid values: `ENCRYPTED_PARTITION_ERROR` \| `INTERNAL_ERROR` \| `INVALID_PARTITION_TYPE_DATA_ERROR` \| `MISSING_PARTITION_VALUE_ERROR` \| `UNSUPPORTED_PARTITION_CHARACTER_ERROR`\)\.
+
+  The error code for an error that occurred when registering partition indexes for an existing table\.
++ `Partitions` – An array of [PartitionValueList](aws-glue-api-catalog-partitions.md#aws-glue-api-catalog-partitions-PartitionValueList) objects\.
+
+  A list of a limited number of partitions in the response\.
+
 ## Operations<a name="aws-glue-api-catalog-tables-actions"></a>
 + [CreateTable Action \(Python: create\_table\)](#aws-glue-api-catalog-tables-CreateTable)
 + [UpdateTable Action \(Python: update\_table\)](#aws-glue-api-catalog-tables-UpdateTable)
@@ -311,6 +428,12 @@ Specifies a field to sort by and a sort order\.
 + [DeleteTableVersion Action \(Python: delete\_table\_version\)](#aws-glue-api-catalog-tables-DeleteTableVersion)
 + [BatchDeleteTableVersion Action \(Python: batch\_delete\_table\_version\)](#aws-glue-api-catalog-tables-BatchDeleteTableVersion)
 + [SearchTables Action \(Python: search\_tables\)](#aws-glue-api-catalog-tables-SearchTables)
++ [GetPartitionIndexes Action \(Python: get\_partition\_indexes\)](#aws-glue-api-catalog-tables-GetPartitionIndexes)
++ [CreatePartitionIndex Action \(Python: create\_partition\_index\)](#aws-glue-api-catalog-tables-CreatePartitionIndex)
++ [DeletePartitionIndex Action \(Python: delete\_partition\_index\)](#aws-glue-api-catalog-tables-DeletePartitionIndex)
++ [GetColumnStatisticsForTable Action \(Python: get\_column\_statistics\_for\_table\)](#aws-glue-api-catalog-tables-GetColumnStatisticsForTable)
++ [UpdateColumnStatisticsForTable Action \(Python: update\_column\_statistics\_for\_table\)](#aws-glue-api-catalog-tables-UpdateColumnStatisticsForTable)
++ [DeleteColumnStatisticsForTable Action \(Python: delete\_column\_statistics\_for\_table\)](#aws-glue-api-catalog-tables-DeleteColumnStatisticsForTable)
 
 ## CreateTable Action \(Python: create\_table\)<a name="aws-glue-api-catalog-tables-CreateTable"></a>
 
@@ -326,6 +449,9 @@ Creates a new table definition in the Data Catalog\.
 + `TableInput` – *Required:* A [TableInput](#aws-glue-api-catalog-tables-TableInput) object\.
 
   The `TableInput` object that defines the metadata table to create in the catalog\.
++ `PartitionIndexes` – An array of [PartitionIndex](#aws-glue-api-catalog-tables-PartitionIndex) objects, not more than 3 structures\.
+
+  A list of partition indexes, `PartitionIndex` structures, to create in the table\.
 
 **Response**
 + *No Response parameters\.*
@@ -621,13 +747,15 @@ You can only get tables that you have access to based on the security policies d
 **Request**
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  A unique identifier, consisting of `account_id/datalake`\.
+  A unique identifier, consisting of `account_id`\.
 + `NextToken` – UTF\-8 string\.
 
   A continuation token, included if this is a continuation call\.
 + `Filters` – An array of [PropertyPredicate](aws-glue-api-common.md#aws-glue-api-common-PropertyPredicate) objects\.
 
   A list of key\-value pairs, and a comparator used to filter the search results\. Returns all entities matching the predicate\.
+
+  The `Comparator` member of the `PropertyPredicate` struct is used only for time fields, and can be omitted for other field types\. Also, when comparing string values, such as when `Key=Name`, a fuzzy match algorithm is used\. The `Key` field \(for example, the value of the `Name` field\) is split on certain punctuation characters, for example, \-, :, \#, etc\. into tokens\. Then each token is exact\-match compared with the `Value` member of `PropertyPredicate`\. For example, if `Key=Name` and `Value=link`, tables named `customer-link` and `xx-link-yy` are returned, but `xxlinkyy` is not returned\.
 + `SearchText` – Value string, not more than 1024 bytes long\.
 
   A string used for a text search\.
@@ -639,6 +767,11 @@ You can only get tables that you have access to based on the security policies d
 + `MaxResults` – Number \(integer\), not less than 1 or more than 1000\.
 
   The maximum number of tables to return in a single response\.
++ `ResourceShareType` – UTF\-8 string \(valid values: `FOREIGN` \| `ALL`\)\.
+
+  Allows you to specify that you want to search the tables shared with your account\. The allowable values are `FOREIGN` or `ALL`\. 
+  + If set to `FOREIGN`, will search the tables shared with your account\. 
+  + If set to `ALL`, will search the tables shared with your account, as well as the tables in yor local account\. 
 
 **Response**
 + `NextToken` – UTF\-8 string\.
@@ -652,3 +785,192 @@ You can only get tables that you have access to based on the security policies d
 + `InternalServiceException`
 + `InvalidInputException`
 + `OperationTimeoutException`
+
+## GetPartitionIndexes Action \(Python: get\_partition\_indexes\)<a name="aws-glue-api-catalog-tables-GetPartitionIndexes"></a>
+
+Retrieves the partition indexes associated with a table\.
+
+**Request**
++ `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The catalog ID where the table resides\.
++ `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  Specifies the name of a database from which you want to retrieve partition indexes\.
++ `TableName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  Specifies the name of a table for which you want to retrieve the partition indexes\.
++ `NextToken` – UTF\-8 string\.
+
+  A continuation token, included if this is a continuation call\.
+
+**Response**
++ `PartitionIndexDescriptorList` – An array of [PartitionIndexDescriptor](#aws-glue-api-catalog-tables-PartitionIndexDescriptor) objects\.
+
+  A list of index descriptors\.
++ `NextToken` – UTF\-8 string\.
+
+  A continuation token, present if the current list segment is not the last\.
+
+**Errors**
++ `InternalServiceException`
++ `OperationTimeoutException`
++ `InvalidInputException`
++ `EntityNotFoundException`
++ `ConflictException`
+
+## CreatePartitionIndex Action \(Python: create\_partition\_index\)<a name="aws-glue-api-catalog-tables-CreatePartitionIndex"></a>
+
+Creates a specified partition index in an existing table\.
+
+**Request**
++ `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The catalog ID where the table resides\.
++ `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  Specifies the name of a database in which you want to create a partition index\.
++ `TableName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  Specifies the name of a table in which you want to create a partition index\.
++ `PartitionIndex` – *Required:* A [PartitionIndex](#aws-glue-api-catalog-tables-PartitionIndex) object\.
+
+  Specifies a `PartitionIndex` structure to create a partition index in an existing table\.
+
+**Response**
++ *No Response parameters\.*
+
+**Errors**
++ `AlreadyExistsException`
++ `InvalidInputException`
++ `EntityNotFoundException`
++ `ResourceNumberLimitExceededException`
++ `InternalServiceException`
++ `OperationTimeoutException`
++ `GlueEncryptionException`
+
+## DeletePartitionIndex Action \(Python: delete\_partition\_index\)<a name="aws-glue-api-catalog-tables-DeletePartitionIndex"></a>
+
+Deletes a specified partition index from an existing table\.
+
+**Request**
++ `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The catalog ID where the table resides\.
++ `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  Specifies the name of a database from which you want to delete a partition index\.
++ `TableName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  Specifies the name of a table from which you want to delete a partition index\.
++ `IndexName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the partition index to be deleted\.
+
+**Response**
++ *No Response parameters\.*
+
+**Errors**
++ `InternalServiceException`
++ `OperationTimeoutException`
++ `InvalidInputException`
++ `EntityNotFoundException`
++ `ConflictException`
++ `GlueEncryptionException`
+
+## GetColumnStatisticsForTable Action \(Python: get\_column\_statistics\_for\_table\)<a name="aws-glue-api-catalog-tables-GetColumnStatisticsForTable"></a>
+
+Retrieves table statistics of columns\.
+
+The Identity and Access Management \(IAM\) permission required for this operation is `GetTable`\.
+
+**Request**
++ `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The ID of the Data Catalog where the partitions in question reside\. If none is supplied, the AWS account ID is used by default\.
++ `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the catalog database where the partitions reside\.
++ `TableName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the partitions' table\.
++ `ColumnNames` – *Required:* An array of UTF\-8 strings, not more than 100 strings\.
+
+  A list of the column names\.
+
+**Response**
++ `ColumnStatisticsList` – An array of [ColumnStatistics](aws-glue-api-common.md#aws-glue-api-common-ColumnStatistics) objects\.
+
+  List of ColumnStatistics that failed to be retrieved\.
++ `Errors` – An array of [ColumnError](aws-glue-api-common.md#aws-glue-api-common-ColumnError) objects\.
+
+  List of ColumnStatistics that failed to be retrieved\.
+
+**Errors**
++ `EntityNotFoundException`
++ `InvalidInputException`
++ `InternalServiceException`
++ `OperationTimeoutException`
++ `GlueEncryptionException`
+
+## UpdateColumnStatisticsForTable Action \(Python: update\_column\_statistics\_for\_table\)<a name="aws-glue-api-catalog-tables-UpdateColumnStatisticsForTable"></a>
+
+Creates or updates table statistics of columns\.
+
+The Identity and Access Management \(IAM\) permission required for this operation is `UpdateTable`\.
+
+**Request**
++ `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The ID of the Data Catalog where the partitions in question reside\. If none is supplied, the AWS account ID is used by default\.
++ `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the catalog database where the partitions reside\.
++ `TableName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the partitions' table\.
++ `ColumnStatisticsList` – *Required:* An array of [ColumnStatistics](aws-glue-api-common.md#aws-glue-api-common-ColumnStatistics) objects, not more than 25 structures\.
+
+  A list of the column statistics\.
+
+**Response**
++ `Errors` – An array of [ColumnStatisticsError](aws-glue-api-common.md#aws-glue-api-common-ColumnStatisticsError) objects\.
+
+  List of ColumnStatisticsErrors\.
+
+**Errors**
++ `EntityNotFoundException`
++ `InvalidInputException`
++ `InternalServiceException`
++ `OperationTimeoutException`
++ `GlueEncryptionException`
+
+## DeleteColumnStatisticsForTable Action \(Python: delete\_column\_statistics\_for\_table\)<a name="aws-glue-api-catalog-tables-DeleteColumnStatisticsForTable"></a>
+
+Retrieves table statistics of columns\.
+
+The Identity and Access Management \(IAM\) permission required for this operation is `DeleteTable`\.
+
+**Request**
++ `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The ID of the Data Catalog where the partitions in question reside\. If none is supplied, the AWS account ID is used by default\.
++ `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the catalog database where the partitions reside\.
++ `TableName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the partitions' table\.
++ `ColumnName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the column\.
+
+**Response**
++ *No Response parameters\.*
+
+**Errors**
++ `EntityNotFoundException`
++ `InvalidInputException`
++ `InternalServiceException`
++ `OperationTimeoutException`
++ `GlueEncryptionException`

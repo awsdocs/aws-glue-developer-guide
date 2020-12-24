@@ -11,6 +11,8 @@ The Partition API describes data types and operations used to work with partitio
 + [PartitionValueList Structure](#aws-glue-api-catalog-partitions-PartitionValueList)
 + [Segment Structure](#aws-glue-api-catalog-partitions-Segment)
 + [PartitionError Structure](#aws-glue-api-catalog-partitions-PartitionError)
++ [BatchUpdatePartitionFailureEntry Structure](#aws-glue-api-catalog-partitions-BatchUpdatePartitionFailureEntry)
++ [BatchUpdatePartitionRequestEntry Structure](#aws-glue-api-catalog-partitions-BatchUpdatePartitionRequestEntry)
 
 ## Partition Structure<a name="aws-glue-api-catalog-partitions-Partition"></a>
 
@@ -45,6 +47,9 @@ Represents a slice of table data\.
 + `LastAnalyzedTime` – Timestamp\.
 
   The last time at which column statistics were computed for this partition\.
++ `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The ID of the Data Catalog in which the partition resides\.
 
 ## PartitionInput Structure<a name="aws-glue-api-catalog-partitions-PartitionInput"></a>
 
@@ -148,6 +153,30 @@ Contains information about a partition error\.
 
   The details about the partition error\.
 
+## BatchUpdatePartitionFailureEntry Structure<a name="aws-glue-api-catalog-partitions-BatchUpdatePartitionFailureEntry"></a>
+
+Contains information about a batch update partition error\.
+
+**Fields**
++ `PartitionValueList` – An array of UTF\-8 strings, not more than 100 strings\.
+
+  A list of values defining the partitions\.
++ `ErrorDetail` – An [ErrorDetail](aws-glue-api-common.md#aws-glue-api-common-ErrorDetail) object\.
+
+  The details about the batch update partition error\.
+
+## BatchUpdatePartitionRequestEntry Structure<a name="aws-glue-api-catalog-partitions-BatchUpdatePartitionRequestEntry"></a>
+
+A structure that contains the values and structure used to update a partition\.
+
+**Fields**
++ `PartitionValueList` – *Required:* An array of UTF\-8 strings, not more than 100 strings\.
+
+  A list of values defining the partitions\.
++ `PartitionInput` – *Required:* A [PartitionInput](#aws-glue-api-catalog-partitions-PartitionInput) object\.
+
+  The structure used to update a partition\.
+
 ## Operations<a name="aws-glue-api-catalog-partitions-actions"></a>
 + [CreatePartition Action \(Python: create\_partition\)](#aws-glue-api-catalog-partitions-CreatePartition)
 + [BatchCreatePartition Action \(Python: batch\_create\_partition\)](#aws-glue-api-catalog-partitions-BatchCreatePartition)
@@ -157,6 +186,10 @@ Contains information about a partition error\.
 + [GetPartition Action \(Python: get\_partition\)](#aws-glue-api-catalog-partitions-GetPartition)
 + [GetPartitions Action \(Python: get\_partitions\)](#aws-glue-api-catalog-partitions-GetPartitions)
 + [BatchGetPartition Action \(Python: batch\_get\_partition\)](#aws-glue-api-catalog-partitions-BatchGetPartition)
++ [BatchUpdatePartition Action \(Python: batch\_update\_partition\)](#aws-glue-api-catalog-partitions-BatchUpdatePartition)
++ [GetColumnStatisticsForPartition Action \(Python: get\_column\_statistics\_for\_partition\)](#aws-glue-api-catalog-partitions-GetColumnStatisticsForPartition)
++ [UpdateColumnStatisticsForPartition Action \(Python: update\_column\_statistics\_for\_partition\)](#aws-glue-api-catalog-partitions-UpdateColumnStatisticsForPartition)
++ [DeleteColumnStatisticsForPartition Action \(Python: delete\_column\_statistics\_for\_partition\)](#aws-glue-api-catalog-partitions-DeleteColumnStatisticsForPartition)
 
 ## CreatePartition Action \(Python: create\_partition\)<a name="aws-glue-api-catalog-partitions-CreatePartition"></a>
 
@@ -236,10 +269,12 @@ Updates a partition\.
   The name of the table in which the partition to be updated is located\.
 + `PartitionValueList` – *Required:* An array of UTF\-8 strings, not more than 100 strings\.
 
-  A list of the values defining the partition\.
+  List of partition key values that define the partition to update\.
 + `PartitionInput` – *Required:* A [PartitionInput](#aws-glue-api-catalog-partitions-PartitionInput) object\.
 
   The new partition object to update the partition to\.
+
+  The `Values` property can't be changed\. If you want to change the partition key values for a partition, delete and recreate the partition\.
 
 **Response**
 + *No Response parameters\.*
@@ -499,4 +534,140 @@ Retrieves partitions in a batch request\.
 + `EntityNotFoundException`
 + `OperationTimeoutException`
 + `InternalServiceException`
++ `GlueEncryptionException`
+
+## BatchUpdatePartition Action \(Python: batch\_update\_partition\)<a name="aws-glue-api-catalog-partitions-BatchUpdatePartition"></a>
+
+Updates one or more partitions in a batch operation\.
+
+**Request**
++ `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The ID of the catalog in which the partition is to be updated\. Currently, this should be the AWS account ID\.
++ `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the metadata database in which the partition is to be updated\.
++ `TableName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the metadata table in which the partition is to be updated\.
++ `Entries` – *Required:* An array of [BatchUpdatePartitionRequestEntry](#aws-glue-api-catalog-partitions-BatchUpdatePartitionRequestEntry) objects, not less than 1 or more than 100 structures\.
+
+  A list of up to 100 `BatchUpdatePartitionRequestEntry` objects to update\.
+
+**Response**
++ `Errors` – An array of [BatchUpdatePartitionFailureEntry](#aws-glue-api-catalog-partitions-BatchUpdatePartitionFailureEntry) objects\.
+
+  The errors encountered when trying to update the requested partitions\. A list of `BatchUpdatePartitionFailureEntry` objects\.
+
+**Errors**
++ `InvalidInputException`
++ `EntityNotFoundException`
++ `OperationTimeoutException`
++ `InternalServiceException`
++ `GlueEncryptionException`
+
+## GetColumnStatisticsForPartition Action \(Python: get\_column\_statistics\_for\_partition\)<a name="aws-glue-api-catalog-partitions-GetColumnStatisticsForPartition"></a>
+
+Retrieves partition statistics of columns\.
+
+The Identity and Access Management \(IAM\) permission required for this operation is `GetPartition`\.
+
+**Request**
++ `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The ID of the Data Catalog where the partitions in question reside\. If none is supplied, the AWS account ID is used by default\.
++ `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the catalog database where the partitions reside\.
++ `TableName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the partitions' table\.
++ `PartitionValues` – *Required:* An array of UTF\-8 strings\.
+
+  A list of partition values identifying the partition\.
++ `ColumnNames` – *Required:* An array of UTF\-8 strings, not more than 100 strings\.
+
+  A list of the column names\.
+
+**Response**
++ `ColumnStatisticsList` – An array of [ColumnStatistics](aws-glue-api-common.md#aws-glue-api-common-ColumnStatistics) objects\.
+
+  List of ColumnStatistics that failed to be retrieved\.
++ `Errors` – An array of [ColumnError](aws-glue-api-common.md#aws-glue-api-common-ColumnError) objects\.
+
+  Error occurred during retrieving column statistics data\.
+
+**Errors**
++ `EntityNotFoundException`
++ `InvalidInputException`
++ `InternalServiceException`
++ `OperationTimeoutException`
++ `GlueEncryptionException`
+
+## UpdateColumnStatisticsForPartition Action \(Python: update\_column\_statistics\_for\_partition\)<a name="aws-glue-api-catalog-partitions-UpdateColumnStatisticsForPartition"></a>
+
+Creates or updates partition statistics of columns\.
+
+The Identity and Access Management \(IAM\) permission required for this operation is `UpdatePartition`\.
+
+**Request**
++ `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The ID of the Data Catalog where the partitions in question reside\. If none is supplied, the AWS account ID is used by default\.
++ `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the catalog database where the partitions reside\.
++ `TableName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the partitions' table\.
++ `PartitionValues` – *Required:* An array of UTF\-8 strings\.
+
+  A list of partition values identifying the partition\.
++ `ColumnStatisticsList` – *Required:* An array of [ColumnStatistics](aws-glue-api-common.md#aws-glue-api-common-ColumnStatistics) objects, not more than 25 structures\.
+
+  A list of the column statistics\.
+
+**Response**
++ `Errors` – An array of [ColumnStatisticsError](aws-glue-api-common.md#aws-glue-api-common-ColumnStatisticsError) objects\.
+
+  Error occurred during updating column statistics data\.
+
+**Errors**
++ `EntityNotFoundException`
++ `InvalidInputException`
++ `InternalServiceException`
++ `OperationTimeoutException`
++ `GlueEncryptionException`
+
+## DeleteColumnStatisticsForPartition Action \(Python: delete\_column\_statistics\_for\_partition\)<a name="aws-glue-api-catalog-partitions-DeleteColumnStatisticsForPartition"></a>
+
+Delete the partition column statistics of a column\.
+
+The Identity and Access Management \(IAM\) permission required for this operation is `DeletePartition`\.
+
+**Request**
++ `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The ID of the Data Catalog where the partitions in question reside\. If none is supplied, the AWS account ID is used by default\.
++ `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the catalog database where the partitions reside\.
++ `TableName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the partitions' table\.
++ `PartitionValues` – *Required:* An array of UTF\-8 strings\.
+
+  A list of partition values identifying the partition\.
++ `ColumnName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  Name of the column\.
+
+**Response**
++ *No Response parameters\.*
+
+**Errors**
++ `EntityNotFoundException`
++ `InvalidInputException`
++ `InternalServiceException`
++ `OperationTimeoutException`
 + `GlueEncryptionException`

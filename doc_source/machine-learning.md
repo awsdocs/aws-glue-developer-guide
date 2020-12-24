@@ -10,6 +10,9 @@ AWS Lake Formation provides machine learning capabilities to create custom trans
 
 After the transform is created, it is stored in AWS Glue\. On the AWS Glue console, you can manage the transforms that you create\. On the AWS Glue **ML transforms** tab, you can edit and continue to teach your machine learning transform\. For more information about managing transforms on the console, see [Working with Machine Learning Transforms on the AWS Glue Console](console-machine-learning-transforms.md)\.
 
+**Note**  
+AWS Glue version 2\.0 jobs do not support machine learning transforms\. For more information, see [Running Spark ETL Jobs with Reduced Startup Times](https://docs.aws.amazon.com/glue/latest/dg/reduced-start-times-spark-etl-jobs.html)\.
+
 ## Types of Machine Learning Transforms<a name="machine-learning-transforms"></a>
 
 You can create machine learning transforms to cleanse your data\. You can call these transforms from your ETL script\. Your data passes from transform to transform in a data structure called a *DynamicFrame*, which is an extension to an Apache Spark SQL `DataFrame`\. The `DynamicFrame` contains your data, and you reference its schema to process your data\.

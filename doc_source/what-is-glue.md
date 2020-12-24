@@ -1,22 +1,24 @@
 # What Is AWS Glue?<a name="what-is-glue"></a>
 
-AWS Glue is a fully managed ETL \(extract, transform, and load\) service that makes it simple and cost\-effective to categorize your data, clean it, enrich it, and move it reliably between various data stores\. AWS Glue consists of a central metadata repository known as the AWS Glue Data Catalog, an ETL engine that automatically generates Python or Scala code, and a flexible scheduler that handles dependency resolution, job monitoring, and retries\. AWS Glue is serverless, so there’s no infrastructure to set up or manage\.
+AWS Glue is a fully managed ETL \(extract, transform, and load\) service that makes it simple and cost\-effective to categorize your data, clean it, enrich it, and move it reliably between various data stores and data streams\. AWS Glue consists of a central metadata repository known as the AWS Glue Data Catalog, an ETL engine that automatically generates Python or Scala code, and a flexible scheduler that handles dependency resolution, job monitoring, and retries\. AWS Glue is serverless, so there’s no infrastructure to set up or manage\.
 
-Use the AWS Glue console to discover data, transform it, and make it available for search and querying\. The console calls the underlying services to orchestrate the work required to transform your data\. You can also use the AWS Glue API operations to interface with AWS Glue services\. Edit, debug, and test your Python or Scala Apache Spark ETL code using a familiar development environment\.
+AWS Glue is designed to work with semi\-structured data\. It introduces a component called a *dynamic frame*, which you can use in your ETL scripts\. A dynamic frame is similar to an Apache Spark dataframe, which is a data abstraction used to organize data into rows and columns, except that each record is self\-describing so no schema is required initially\. With dynamic frames, you get schema flexibility and a set of advanced transformations specifically designed for dynamic frames\. You can convert between dynamic frames and Spark dataframes, so that you can take advantage of both AWS Glue and Spark transformations to do the kinds of analysis that you want\.
+
+You can use the AWS Glue console to discover data, transform it, and make it available for search and querying\. The console calls the underlying services to orchestrate the work required to transform your data\. You can also use the AWS Glue API operations to interface with AWS Glue services\. Edit, debug, and test your Python or Scala Apache Spark ETL code using a familiar development environment\.
 
 For pricing information, see  [AWS Glue Pricing](https://aws.amazon.com/glue/pricing)\.
 
 ## When Should I Use AWS Glue?<a name="when-to-use-glue"></a>
 
-**You can use AWS Glue to build a data warehouse to organize, cleanse, validate, and format data\.** You can transform and move AWS Cloud data  into your data store\. You can also load data from disparate sources into your data warehouse for regular reporting and analysis\. By storing it in a data warehouse, you integrate information from different parts of your business and provide a common source of data for decision making\. 
+**You can use AWS Glue to organize, cleanse, validate, and format data for storage in a data warehouse or data lake\.** You can transform and move AWS Cloud data  into your data store\. You can also load data from disparate static or streaming data sources into your data warehouse or data lake for regular reporting and analysis\. By storing data in a data warehouse or data lake, you integrate information from different parts of your business and provide a common source of data for decision making\. 
 
-AWS Glue simplifies many tasks when you are building a data warehouse:
+AWS Glue simplifies many tasks when you are building a data warehouse or data lake:
 + Discovers and catalogs metadata about your data stores into a central catalog\. You can process semi\-structured data, such as clickstream or process logs\.
 + Populates the AWS Glue Data Catalog with table definitions from scheduled crawler programs\. Crawlers call classifier logic to infer the schema, format, and data types of your data\. This metadata is stored as tables in the AWS Glue Data Catalog and used in the authoring process of your ETL jobs\.
 + Generates ETL scripts to transform, flatten, and enrich your data from source to target\.
 + Detects schema changes and adapts based on your preferences\.
-+ Triggers your ETL jobs based on a schedule or event\. You can initiate jobs automatically to move your data into your data warehouse\. Triggers can be used to create a dependency flow between jobs\.
-+ Gathers runtime metrics to monitor the activities of your data warehouse\.
++ Triggers your ETL jobs based on a schedule or event\. You can initiate jobs automatically to move your data into your data warehouse or data lake\. Triggers can be used to create a dependency flow between jobs\.
++ Gathers runtime metrics to monitor the activities of your data warehouse or data lake\.
 + Handles errors and retries automatically\.
 + Scales resources, as needed, to run your jobs\.
 

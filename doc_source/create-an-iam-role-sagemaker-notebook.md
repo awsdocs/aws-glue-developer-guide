@@ -1,8 +1,8 @@
-# Step 7: Create an IAM Role for Amazon SageMaker Notebooks<a name="create-an-iam-role-sagemaker-notebook"></a>
+# Step 7: Create an IAM Role for SageMaker Notebooks<a name="create-an-iam-role-sagemaker-notebook"></a>
 
-If you plan to use Amazon SageMaker notebooks with development endpoints, you need to grant the IAM role permissions\. You provide those permissions by using AWS Identity and Access Management \(IAM\), through an IAM role\.
+If you plan to use SageMaker notebooks with development endpoints, you need to grant the IAM role permissions\. You provide those permissions by using AWS Identity and Access Management \(IAM\), through an IAM role\.
 
-**To create an IAM role for Amazon SageMaker notebooks**
+**To create an IAM role for SageMaker notebooks**
 
 1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 
@@ -33,10 +33,10 @@ If you plan to use Amazon SageMaker notebooks with development endpoints, you ne
    }
    ```
 
-1. For **Role name**, enter a name for your role\. To allow the role to be passed from console users to Amazon SageMaker, use a name that is prefixed with the string **AWSGlueServiceSageMakerNotebookRole**\. AWS Glue provided policies expect IAM roles to begin with **AWSGlueServiceSageMakerNotebookRole**\. Otherwise you must add a policy to your users to allow the `iam:PassRole` permission for IAM roles to match your naming convention\. 
+1. For **Role name**, enter a name for your role\. To allow the role to be passed from console users to SageMaker, use a name that is prefixed with the string **AWSGlueServiceSageMakerNotebookRole**\. AWS Glue provided policies expect IAM roles to begin with **AWSGlueServiceSageMakerNotebookRole**\. Otherwise you must add a policy to your users to allow the `iam:PassRole` permission for IAM roles to match your naming convention\. 
 
    For example, enter **AWSGlueServiceSageMakerNotebookRole\-Default**, and then choose **Create role**\. 
 
-1. After you create the role, attach the policy that allows additional permissions required to create Amazon SageMaker notebooks from AWS Glue\.
+1. After you create the role, attach the policy that allows additional permissions required to create SageMaker notebooks from AWS Glue\.
 
    Open the role that you just created, **AWSGlueServiceSageMakerNotebookRole\-Default**, and choose **Attach policies**\. Attach the policy that you created named **AWSGlueSageMakerNotebook** to the role\. 

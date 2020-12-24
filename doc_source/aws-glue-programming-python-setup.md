@@ -1,6 +1,6 @@
 # Setting Up to Use Python with AWS Glue<a name="aws-glue-programming-python-setup"></a>
 
-Use Python to develop your ETL scripts for Spark jobs\. The supported Python versions for ETL jobs depend on the Glue version of the job\. For more information on Glue versions, see the [Glue version job property](add-job.md#glue-version-table)\.
+Use Python to develop your ETL scripts for Spark jobs\. The supported Python versions for ETL jobs depend on the AWS Glue version of the job\. For more information on AWS Glue versions, see the [Glue version job property](add-job.md#glue-version-table)\.
 
 **To set up your system for using Python with AWS Glue**
 
@@ -16,6 +16,6 @@ Follow these steps to install Python and to be able to invoke the AWS Glue APIs\
 
    Boto 3 resource APIs are not yet available for AWS Glue\. Currently, only the Boto 3 client APIs can be used\.
 
-   For more information about Boto 3, see [AWS SDK for Python \(Boto 3\) Getting Started](http://boto3.amazonaws.com/v1/documentation/api/latest/index.html)\.
+   For more information about Boto 3, see [AWS SDK for Python \(Boto3\) Getting Started](http://boto3.amazonaws.com/v1/documentation/api/latest/index.html)\.
 
 You can find Python code examples and utilities for AWS Glue in the [AWS Glue samples repository](https://github.com/awslabs/aws-glue-samples) on the GitHub website\.

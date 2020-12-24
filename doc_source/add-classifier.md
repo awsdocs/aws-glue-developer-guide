@@ -60,7 +60,7 @@ Files in the following compressed formats can be classified:
 + BZIP
 + GZIP
 + LZ4
-+ Snappy \(as standard Snappy format, not as Hadoop native Snappy format\)
++ Snappy \(supported for both standard and Hadoop native Snappy formats\)
 
 ### Built\-In CSV Classifier<a name="classifier-builtin-rules"></a>
 

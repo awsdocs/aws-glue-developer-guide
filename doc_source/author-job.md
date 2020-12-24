@@ -10,7 +10,7 @@ The following diagram summarizes the basic workflow and steps involved in author
 + [Workflow Overview](#author-job-workflow)
 + [Adding Jobs in AWS Glue](add-job.md)
 + [Editing Scripts in AWS Glue](edit-script.md)
-+ [Triggering Jobs in AWS Glue](trigger-job.md)
++ [Working with MongoDB Connections in ETL Jobs](integrate-with-mongo-db.md)
 + [Developing Scripts Using Development Endpoints](dev-endpoint.md)
 + [Managing Notebooks](notebooks-with-glue.md)
 
@@ -28,6 +28,6 @@ The following describes an overall process of authoring jobs in the AWS Glue con
 
 1. Initially, AWS Glue generates a script, but you can also edit this script to add sources, targets, and transforms\. For more information about transforms, see [Built\-In Transforms](built-in-transforms.md)\.
 
-1. You specify how your job is invoked, either on demand, by a time\-based schedule, or by an event\. For more information, see [Triggering Jobs in AWS Glue](trigger-job.md)\.
+1. You specify how your job is invoked, either on demand, by a time\-based schedule, or by an event\. For more information, see [Starting Jobs and Crawlers Using Triggers](trigger-job.md)\.
 
 1. Based on your input, AWS Glue generates a PySpark or Scala script\. You can tailor the script based on your business needs\. For more information, see [Editing Scripts in AWS Glue](edit-script.md)\.

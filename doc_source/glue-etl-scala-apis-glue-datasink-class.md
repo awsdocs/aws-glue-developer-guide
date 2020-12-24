@@ -3,6 +3,7 @@
 **Topics**
 + [def writeDynamicFrame](#glue-etl-scala-apis-glue-datasink-class-defs-writeDynamicFrame)
 + [def pyWriteDynamicFrame](#glue-etl-scala-apis-glue-datasink-class-defs-pyWriteDynamicFrame)
++ [def setCatalogInfo](#glue-etl-scala-apis-glue-datasink-class-defs-setCatalogInfo)
 + [def supportsFormat](#glue-etl-scala-apis-glue-datasink-class-defs-supportsFormat)
 + [def setFormat](#glue-etl-scala-apis-glue-datasink-class-defs-setFormat)
 + [def withFormat](#glue-etl-scala-apis-glue-datasink-class-defs-withFormat)
@@ -27,6 +28,8 @@ def writeDynamicFrame( frame : DynamicFrame,
                      ) : DynamicFrame
 ```
 
+
+
 ## def pyWriteDynamicFrame<a name="glue-etl-scala-apis-glue-datasink-class-defs-pyWriteDynamicFrame"></a>
 
 ```
@@ -35,11 +38,25 @@ def pyWriteDynamicFrame( frame : DynamicFrame,
                          info : String = "" )
 ```
 
+
+
+## def setCatalogInfo<a name="glue-etl-scala-apis-glue-datasink-class-defs-setCatalogInfo"></a>
+
+```
+def setCatalogInfo(catalogDatabase: String, 
+                   catalogTableName : String, 
+                   catalogId : String = "")
+```
+
+
+
 ## def supportsFormat<a name="glue-etl-scala-apis-glue-datasink-class-defs-supportsFormat"></a>
 
 ```
 def supportsFormat( format : String ) : Boolean
 ```
+
+
 
 ## def setFormat<a name="glue-etl-scala-apis-glue-datasink-class-defs-setFormat"></a>
 
@@ -49,6 +66,8 @@ def setFormat( format : String,
              ) : Unit
 ```
 
+
+
 ## def withFormat<a name="glue-etl-scala-apis-glue-datasink-class-defs-withFormat"></a>
 
 ```
@@ -57,11 +76,15 @@ def withFormat( format : String,
               ) : DataSink
 ```
 
+
+
 ## def setAccumulableSize<a name="glue-etl-scala-apis-glue-datasink-class-defs-setAccumulableSize"></a>
 
 ```
 def setAccumulableSize( size : Int ) : Unit
 ```
+
+
 
 ## def getOutputErrorRecordsAccumulable<a name="glue-etl-scala-apis-glue-datasink-class-defs-getOutputErrorRecordsAccumulable"></a>
 
@@ -69,11 +92,15 @@ def setAccumulableSize( size : Int ) : Unit
 def getOutputErrorRecordsAccumulable : Accumulable[List[OutputError], OutputError]
 ```
 
+
+
 ## def errorsAsDynamicFrame<a name="glue-etl-scala-apis-glue-datasink-class-defs-errorsAsDynamicFrame"></a>
 
 ```
 def errorsAsDynamicFrame : DynamicFrame
 ```
+
+
 
 ## DataSink Object<a name="glue-etl-scala-apis-glue-datasink-object"></a>
 
@@ -88,3 +115,4 @@ def recordMetrics( frame : DynamicFrame,
                    ctxt : String
                  ) : DynamicFrame
 ```
+

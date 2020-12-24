@@ -8,7 +8,7 @@ AWS Glue ETL scripts can be coded in Python or Scala\. Python scripts use a lang
 
 ## Defining a Script<a name="script-defining"></a>
 
-Given a source and target, AWS Glue can generate a script to transform the data\. This proposed script is an initial version that fills in your sources and targets, and suggests transformations in PySpark\. You can verify and modify the script to fit your business needs\. Use the script editor in AWS Glue to add arguments that specify the source and target, and any other arguments that are required to run\. Scripts are run by jobs, and jobs are started by triggers, which can be based on a schedule or an event\. For more information about triggers, see [Triggering Jobs in AWS Glue](trigger-job.md)\.
+Given a source and target, AWS Glue can generate a script to transform the data\. This proposed script is an initial version that fills in your sources and targets, and suggests transformations in PySpark\. You can verify and modify the script to fit your business needs\. Use the script editor in AWS Glue to add arguments that specify the source and target, and any other arguments that are required to run\. Scripts are run by jobs, and jobs are started by triggers, which can be based on a schedule or an event\. For more information about triggers, see [Starting Jobs and Crawlers Using Triggers](trigger-job.md)\.
 
 In the AWS Glue console, the script is represented as code\. You can also view the script as a diagram that uses annotations \(\#\#\) embedded in the script\.  These annotations describe the parameters, transform types, arguments, inputs, and other characteristics of the script that are used to generate a diagram in the AWS Glue console\.
 

@@ -1,8 +1,8 @@
 # Tracking Processed Data Using Job Bookmarks<a name="monitor-continuations"></a>
 
-AWS Glue tracks data that has already been processed during a previous run of an ETL job by persisting state information from the job run\. This persisted state information is called a *job bookmark*\. Job bookmarks help AWS Glue maintain state information and prevent the reprocessing of old data\. With job bookmarks, you can process new data when rerunning on a scheduled interval\.  A job bookmark is composed of the states for various elements of jobs, such as sources, transformations, and targets\. For example, your ETL job might read new partitions in an Amazon S3 file\. AWS Glue tracks which partitions the job has processed successfully to prevent duplicate processing and duplicate data in the job's target data store\.
+AWS Glue tracks data that has already been processed during a previous run of an ETL job by persisting state information from the job run\. This persisted state information is called a *job bookmark*\. Job bookmarks help AWS Glue maintain state information and prevent the reprocessing of old data\. With job bookmarks, you can process new data when rerunning on a scheduled interval\. A job bookmark is composed of the states for various elements of jobs, such as sources, transformations, and targets\. For example, your ETL job might read new partitions in an Amazon S3 file\. AWS Glue tracks which partitions the job has processed successfully to prevent duplicate processing and duplicate data in the job's target data store\.
 
-Job bookmarks are implemented for some Amazon Simple Storage Service \(Amazon S3\) sources and the Relationalize transform\. The following table lists the Amazon S3 source formats that AWS Glue supports for job bookmarks\.
+Job bookmarks are implemented for JDBC data sources, the Relationalize transform, and some Amazon Simple Storage Service \(Amazon S3\) sources\. The following table lists the Amazon S3 source formats that AWS Glue supports for job bookmarks\.
 
 
 | AWS Glue version | Amazon S3 source formats | 
@@ -10,9 +10,12 @@ Job bookmarks are implemented for some Amazon Simple Storage Service \(Amazon S3
 | Version 0\.9 | JSON, CSV, Apache Avro, XML | 
 | Version 1\.0 and later | JSON, CSV, Apache Avro, XML, Parquet, ORC | 
 
-For information about Glue versions, see [Defining Job Properties](add-job.md#create-job)\.
+For information about AWS Glue versions, see [Defining Job Properties](add-job.md#create-job)\.
 
-Job bookmarks are implemented for a limited use case for a relational database \(JDBC connection\) input source\. For this input source, job bookmarks are supported only if the table's primary keys are in sequential order\. Also, job bookmarks search for new rows, but not updated rows\. This is because bookmarks look for the primary keys, which already exist\. 
+For JDBC sources, the following rules apply:
++ For each table, AWS Glue uses one or more columns as bookmark keys to determine new and processed data\. The bookmark keys combine to form a single compound key\.
++ You can specify the columns to use as bookmark keys\. If you don't specify bookmark keys, AWS Glue by default uses the primary key as the bookmark key, provided that it is sequentially increasing or decreasing \(with no gaps\)\.
++ If user\-defined bookmarks keys are used, they must be strictly monotonically increasing or decreasing\. Gaps are permitted\.
 
 **Topics**
 + [Using Job Bookmarks in AWS Glue](#monitor-continuations-implement)
@@ -21,7 +24,7 @@ Job bookmarks are implemented for a limited use case for a relational database \
 
 ## Using Job Bookmarks in AWS Glue<a name="monitor-continuations-implement"></a>
 
-On the AWS Glue console, a job bookmark option is passed as a parameter when the job is started\. The following table describes the options for setting job bookmarks in AWS Glue\. 
+The job bookmark option is passed as a parameter when the job is started\. The following table describes the options for setting job bookmarks on the AWS Glue console\.
 
 
 ****  
@@ -30,19 +33,21 @@ On the AWS Glue console, a job bookmark option is passed as a parameter when the
 | --- | --- | 
 | Enable | Causes the job to update the state after a run to keep track of previously processed data\. If your job has a source with job bookmark support, it will keep track of processed data, and when a job runs, it processes new data since the last checkpoint\. | 
 | Disable | Job bookmarks are not used, and the job always processes the entire dataset\. You are responsible for managing the output from previous job runs\. This is the default\. | 
-| Pause | Process incremental data since the last successful run or the data in the range identified by the following sub\-options, without updating the state of last bookmark\. You are responsible for managing the output from previous job runs\. The two sub\-options are: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/glue/latest/dg/monitor-continuations.html) The job bookmark state is not updated when this option set is specified\. The sub\-options are optional, however when used both the sub\-options needs to be provided\.  | 
+| Pause |  Process incremental data since the last successful run or the data in the range identified by the following sub\-options, without updating the state of last bookmark\. You are responsible for managing the output from previous job runs\. The two sub\-options are: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/glue/latest/dg/monitor-continuations.html) The job bookmark state is not updated when this option set is specified\. The sub\-options are optional, however when used both the sub\-options needs to be provided\.  | 
 
-For details about the parameters passed to a job, and specifically for a job bookmark, see [Special Parameters Used by AWS Glue](aws-glue-programming-etl-glue-arguments.md)\.
+For details about the parameters passed to a job on the command line, and specifically for job bookmarks, see [Special Parameters Used by AWS Glue](aws-glue-programming-etl-glue-arguments.md)\.
 
 For Amazon S3 input sources, AWS Glue job bookmarks check the last modified time of the objects to verify which objects need to be reprocessed\. If your input source data has been modified since your last job run, the files are reprocessed when you run the job again\.
 
-You can rewind your job bookmarks for your Glue Spark ETL jobs to any previous job run\. You can support data backfilling scenarios better by rewinding your job bookmarks to any previous job run, resulting in the subsequent job run reprocessing data only from the bookmarked job run\.
+You can rewind your job bookmarks for your AWS Glue Spark ETL jobs to any previous job run\. You can support data backfilling scenarios better by rewinding your job bookmarks to any previous job run, resulting in the subsequent job run reprocessing data only from the bookmarked job run\.
 
 If you intend to reprocess all the data using the same job, reset the job bookmark\. To reset the job bookmark state, use the AWS Glue console, the [ResetJobBookmark Action \(Python: reset\_job\_bookmark\)](aws-glue-api-jobs-runs.md#aws-glue-api-jobs-runs-ResetJobBookmark) API operation, or the AWS CLI\. For example, enter the following command using the AWS CLI:
 
 ```
     aws glue reset-job-bookmark --job-name my-job-name
 ```
+
+When you rewind or reset a bookmark, AWS Glue does not clean the target files because there could be multiple targets and targets are not tracked with job bookmarks\. Only source files are tracked with job bookmarks\. You can create different output targets when rewinding and reprocessing the source files to avoid duplicate data in your output\.
 
 AWS Glue keeps track of job bookmarks by job\. If you delete a job, the job bookmark is deleted\.
 
@@ -66,7 +71,8 @@ The state elements in the job bookmark are source, transformation, or sink\-spec
 
 In addition to the state elements, job bookmarks have a *run number*, an *attempt number*, and a *version number*\. The run number tracks the run of the job, and the attempt number records the attempts for a job run\. The job run number is a monotonically increasing number that is incremented for every successful run\. The attempt number tracks the attempts for each run, and is only incremented when there is a run after a failed attempt\. The version number increases monotonically and tracks the updates to a job bookmark\.
 
-The following is an example of the generated script\. The script and its associated arguments illustrate the various elements that are required for using job bookmarks\. For more information about these elements see the [GlueContext Class](aws-glue-api-crawler-pyspark-extensions-glue-context.md) API, and the [DynamicFrameWriter Class](aws-glue-api-crawler-pyspark-extensions-dynamic-frame-writer.md) API\.
+**Example**  
+The following is an example of a generated script for an Amazon S3 data source\. The portions of the script that are required for using job bookmarks are shown in bold and italics\. For more information about these elements see the [GlueContext Class](aws-glue-api-crawler-pyspark-extensions-glue-context.md) API, and the [DynamicFrameWriter Class](aws-glue-api-crawler-pyspark-extensions-dynamic-frame-writer.md) API\.  
 
 ```
 # Sample Script
@@ -82,31 +88,65 @@ args = getResolvedOptions(sys.argv, ['JOB_NAME'])
 sc = SparkContext()
 glueContext = GlueContext(sc)
 spark = glueContext.spark_session
-*job = Job(glueContext)*
-*job.init(args['JOB_NAME'], args)*
+job = Job(glueContext)
+job.init(args['JOB_NAME'], args)
 ## @type: DataSource
 ## @args: [database = "database", table_name = "relatedqueries_csv", transformation_ctx = "datasource0"]
 ## @return: datasource0
 ## @inputs: []
-datasource0 = glueContext.create_dynamic_frame.from_catalog(database = "database", table_name = "relatedqueries_csv", *transformation_ctx = "datasource0")*
+datasource0 = glueContext.create_dynamic_frame.from_catalog(database = "database", table_name = "relatedqueries_csv", transformation_ctx = "datasource0")
 ## @type: ApplyMapping
 ## @args: [mapping = [("col0", "string", "name", "string"), ("col1", "string", "number", "string")], transformation_ctx = "applymapping1"]
 ## @return: applymapping1
 ## @inputs: [frame = datasource0]
-applymapping1 = ApplyMapping.apply(frame = datasource0, mappings = [("col0", "string", "name", "string"), ("col1", "string", "number", "string")], *transformation_ctx = "applymapping1"*)
+applymapping1 = ApplyMapping.apply(frame = datasource0, mappings = [("col0", "string", "name", "string"), ("col1", "string", "number", "string")], transformation_ctx = "applymapping1")
 ## @type: DataSink
 ## @args: [connection_type = "s3", connection_options = {"path": "s3://input_path"}, format = "json", transformation_ctx = "datasink2"]
 ## @return: datasink2
 ## @inputs: [frame = applymapping1]
-datasink2 = glueContext.write_dynamic_frame.from_options(frame = applymapping1, connection_type = "s3", connection_options = {"path": "s3://input_path"}, format = "json", *transformation_ctx = "datasink2"*)
+datasink2 = glueContext.write_dynamic_frame.from_options(frame = applymapping1, connection_type = "s3", connection_options = {"path": "s3://input_path"}, format = "json", transformation_ctx = "datasink2")
 
-*job.commit()*
-
-Job Arguments :
-
-*--job-bookmark-option, job-bookmark-enable*
-*--JOB_NAME, name-1-s3-2-s3-encrypted*
+job.commit()
 ```
+
+**Example**  
+The following is an example of a generated script for a JDBC source\. The source table is an employee table with the `empno` column as the primary key\. Although by default the job uses a sequential primary key as the bookmark key if no bookmark key is specified, because `empno` is not necessarily sequential—there could be gaps in the values—it does not qualify as a default bookmark key\. Therefore, the script explicitly designates `empno` as the bookmark key\. That portion of the code is shown in bold and italics\.  
+
+```
+import sys
+from awsglue.transforms import *
+from awsglue.utils import getResolvedOptions
+from pyspark.context import SparkContext
+from awsglue.context import GlueContext
+from awsglue.job import Job
+
+## @params: [JOB_NAME]
+args = getResolvedOptions(sys.argv, ['JOB_NAME'])
+
+sc = SparkContext()
+glueContext = GlueContext(sc)
+spark = glueContext.spark_session
+job = Job(glueContext)
+job.init(args['JOB_NAME'], args)
+## @type: DataSource
+## @args: [database = "hr", table_name = "emp", transformation_ctx = "datasource0"]
+## @return: datasource0
+## @inputs: []
+datasource0 = glueContext.create_dynamic_frame.from_catalog(database = "hr", table_name = "emp", transformation_ctx = "datasource0", additional_options = {"jobBookmarkKeys":["empno"],"jobBookmarksKeysSortOrder":"asc"})
+## @type: ApplyMapping
+## @args: [mapping = [("ename", "string", "ename", "string"), ("hrly_rate", "decimal(38,0)", "hrly_rate", "decimal(38,0)"), ("comm", "decimal(7,2)", "comm", "decimal(7,2)"), ("hiredate", "timestamp", "hiredate", "timestamp"), ("empno", "decimal(5,0)", "empno", "decimal(5,0)"), ("mgr", "decimal(5,0)", "mgr", "decimal(5,0)"), ("photo", "string", "photo", "string"), ("job", "string", "job", "string"), ("deptno", "decimal(3,0)", "deptno", "decimal(3,0)"), ("ssn", "decimal(9,0)", "ssn", "decimal(9,0)"), ("sal", "decimal(7,2)", "sal", "decimal(7,2)")], transformation_ctx = "applymapping1"]
+## @return: applymapping1
+## @inputs: [frame = datasource0]
+applymapping1 = ApplyMapping.apply(frame = datasource0, mappings = [("ename", "string", "ename", "string"), ("hrly_rate", "decimal(38,0)", "hrly_rate", "decimal(38,0)"), ("comm", "decimal(7,2)", "comm", "decimal(7,2)"), ("hiredate", "timestamp", "hiredate", "timestamp"), ("empno", "decimal(5,0)", "empno", "decimal(5,0)"), ("mgr", "decimal(5,0)", "mgr", "decimal(5,0)"), ("photo", "string", "photo", "string"), ("job", "string", "job", "string"), ("deptno", "decimal(3,0)", "deptno", "decimal(3,0)"), ("ssn", "decimal(9,0)", "ssn", "decimal(9,0)"), ("sal", "decimal(7,2)", "sal", "decimal(7,2)")], transformation_ctx = "applymapping1")
+## @type: DataSink
+## @args: [connection_type = "s3", connection_options = {"path": "s3://hr/employees"}, format = "csv", transformation_ctx = "datasink2"]
+## @return: datasink2
+## @inputs: [frame = applymapping1]
+datasink2 = glueContext.write_dynamic_frame.from_options(frame = applymapping1, connection_type = "s3", connection_options = {"path": "s3://hr/employees"}, format = "csv", transformation_ctx = "datasink2")
+job.commit()
+```
+
+For more information about connection options related to job bookmarks, see [JDBC connectionType Values](aws-glue-programming-etl-connect.md#aws-glue-programming-etl-connect-jdbc)\.
 
 ## Tracking Files Using Modification Timestamps<a name="monitor-continuations-timestamps"></a>
 
@@ -137,6 +177,6 @@ For more information about Amazon S3 eventual consistency, see [Introduction to 
 
 ### Job Run Failures<a name="monitor-continuations-timestamps-failures"></a>
 
-A job run version increments when a job fails\. For example, if a job run at timestamp 1 \(T1\) fails, and it is rerun at T2, it advances the high timestamp to T2\. Then, when the job is run at a later point T3, it advances the high timestamp to Amazon S3\.
+A job run version increments when a job fails\. For example, if a job run at timestamp 1 \(T1\) fails, and it is rerun at T2, it advances the high timestamp to T2\. Then, when the job is run at a later point T3, it advances the high timestamp to T3\.
 
 If a job run fails before the `job.commit()` \(at T1\), the files are processed in a subsequent run, in which AWS Glue processes the files from T0 to T2\.

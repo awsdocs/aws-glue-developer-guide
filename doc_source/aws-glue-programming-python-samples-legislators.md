@@ -47,9 +47,9 @@ from awsglue.job import Job
 glueContext = GlueContext(SparkContext.getOrCreate())
 ```
 
-## Step 3: Examine the Schemas in the Data Catalog<a name="aws-glue-programming-python-samples-legislators-schemas"></a>
+## Step 3: Examine the Schemas from the Data in the Data Catalog<a name="aws-glue-programming-python-samples-legislators-schemas"></a>
 
-Next, you can easily examine the schemas that the crawler recorded in the AWS Glue Data Catalog\. For example, to see the schema of the `persons_json` table, add the following in your notebook:
+Next, you can easily create examine a DynamicFrame from the AWS Glue Data Catalog, and examine the schemas of the data\. For example, to see the schema of the `persons_json` table, add the following in your notebook:
 
 ```
 persons = glueContext.create_dynamic_frame.from_catalog(
@@ -381,7 +381,7 @@ So, joining the `hist_root` table with the auxiliary tables lets you do the foll
 + Load data into databases without array support\.
 + Query each individual item in an array using SQL\.
 
-You already have a connection set up named `redshift3`\. For information about how to create your own connection, see [Adding a Connection to Your Data Store](populate-add-connection.md)\. 
+You already have a connection set up named `redshift3`\. For information about how to create your own connection, see [Defining Connections in the AWS Glue Data Catalog](populate-add-connection.md)\. 
 
 Next, write this collection into Amazon Redshift by cycling through the `DynamicFrames` one at a time:
 

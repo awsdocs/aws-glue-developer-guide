@@ -8,11 +8,14 @@ The Crawler API describes AWS Glue crawler data types, along with the API for cr
 + [CrawlerTargets Structure](#aws-glue-api-crawler-crawling-CrawlerTargets)
 + [S3Target Structure](#aws-glue-api-crawler-crawling-S3Target)
 + [JdbcTarget Structure](#aws-glue-api-crawler-crawling-JdbcTarget)
++ [MongoDBTarget Structure](#aws-glue-api-crawler-crawling-MongoDBTarget)
 + [DynamoDBTarget Structure](#aws-glue-api-crawler-crawling-DynamoDBTarget)
 + [CatalogTarget Structure](#aws-glue-api-crawler-crawling-CatalogTarget)
 + [CrawlerMetrics Structure](#aws-glue-api-crawler-crawling-CrawlerMetrics)
 + [SchemaChangePolicy Structure](#aws-glue-api-crawler-crawling-SchemaChangePolicy)
 + [LastCrawlInfo Structure](#aws-glue-api-crawler-crawling-LastCrawlInfo)
++ [RecrawlPolicy Structure](#aws-glue-api-crawler-crawling-RecrawlPolicy)
++ [LineageConfiguration Structure](#aws-glue-api-crawler-crawling-LineageConfiguration)
 
 ## Crawler Structure<a name="aws-glue-api-crawler-crawling-Crawler"></a>
 
@@ -37,9 +40,15 @@ Specifies a crawler program that examines a data source and uses classifiers to 
 + `Classifiers` – An array of UTF\-8 strings\.
 
   A list of UTF\-8 strings that specify the custom classifiers that are associated with the crawler\.
++ `RecrawlPolicy` – A [RecrawlPolicy](#aws-glue-api-crawler-crawling-RecrawlPolicy) object\.
+
+  A policy that specifies whether to crawl the entire dataset again, or to crawl only folders that were added since the last crawler run\.
 + `SchemaChangePolicy` – A [SchemaChangePolicy](#aws-glue-api-crawler-crawling-SchemaChangePolicy) object\.
 
   The policy that specifies update and delete behaviors for the crawler\.
++ `LineageConfiguration` – A [LineageConfiguration](#aws-glue-api-crawler-crawling-LineageConfiguration) object\.
+
+  A configuration that specifies whether data lineage is enabled for the crawler\.
 + `State` – UTF\-8 string \(valid values: `READY` \| `RUNNING` \| `STOPPING`\)\.
 
   Indicates whether the crawler is running, or whether a run is pending\.
@@ -94,6 +103,9 @@ Specifies data stores to crawl\.
 + `JdbcTargets` – An array of [JdbcTarget](#aws-glue-api-crawler-crawling-JdbcTarget) objects\.
 
   Specifies JDBC targets\.
++ `MongoDBTargets` – An array of [MongoDBTarget](#aws-glue-api-crawler-crawling-MongoDBTarget) objects\.
+
+  Specifies Amazon DocumentDB or MongoDB targets\.
 + `DynamoDBTargets` – An array of [DynamoDBTarget](#aws-glue-api-crawler-crawling-DynamoDBTarget) objects\.
 
   Specifies Amazon DynamoDB targets\.
@@ -112,6 +124,9 @@ Specifies a data store in Amazon Simple Storage Service \(Amazon S3\)\.
 + `Exclusions` – An array of UTF\-8 strings\.
 
   A list of glob patterns used to exclude from the crawl\. For more information, see [Catalog Tables with a Crawler](https://docs.aws.amazon.com/glue/latest/dg/add-crawler.html)\.
++ `ConnectionName` – UTF\-8 string\.
+
+  The name of a connection which allows a job or crawler to access data in Amazon S3 within an Amazon Virtual Private Cloud environment \(Amazon VPC\)\.
 
 ## JdbcTarget Structure<a name="aws-glue-api-crawler-crawling-JdbcTarget"></a>
 
@@ -128,6 +143,23 @@ Specifies a JDBC data store to crawl\.
 
   A list of glob patterns used to exclude from the crawl\. For more information, see [Catalog Tables with a Crawler](https://docs.aws.amazon.com/glue/latest/dg/add-crawler.html)\.
 
+## MongoDBTarget Structure<a name="aws-glue-api-crawler-crawling-MongoDBTarget"></a>
+
+Specifies an Amazon DocumentDB or MongoDB data store to crawl\.
+
+**Fields**
++ `ConnectionName` – UTF\-8 string\.
+
+  The name of the connection to use to connect to the Amazon DocumentDB or MongoDB target\.
++ `Path` – UTF\-8 string\.
+
+  The path of the Amazon DocumentDB or MongoDB target \(database/collection\)\.
++ `ScanAll` – Boolean\.
+
+  Indicates whether to scan all the records, or to sample rows from the table\. Scanning all the records can take a long time when the table is not a high throughput table\.
+
+  A value of `true` means to scan all records, while a value of `false` means to sample the records\. If no value is specified, the value defaults to `true`\.
+
 ## DynamoDBTarget Structure<a name="aws-glue-api-crawler-crawling-DynamoDBTarget"></a>
 
 Specifies an Amazon DynamoDB table to crawl\.
@@ -136,6 +168,16 @@ Specifies an Amazon DynamoDB table to crawl\.
 + `Path` – UTF\-8 string\.
 
   The name of the DynamoDB table to crawl\.
++ `scanAll` – Boolean\.
+
+  Indicates whether to scan all the records, or to sample rows from the table\. Scanning all the records can take a long time when the table is not a high throughput table\.
+
+  A value of `true` means to scan all records, while a value of `false` means to sample the records\. If no value is specified, the value defaults to `true`\.
++ `scanRate` – Number \(double\)\.
+
+  The percentage of the configured read capacity units to use by the AWS Glue crawler\. Read capacity units is a term defined by DynamoDB, and is a numeric value that acts as rate limiter for the number of reads that can be performed on that table per second\.
+
+  The valid values are null or a value between 0\.1 to 1\.5\. A null value is used when user does not provide a value, and defaults to 0\.5 of the configured Read Capacity Unit \(for provisioned tables\), or 0\.25 of the max configured Read Capacity Unit \(for tables using on\-demand mode\)\.
 
 ## CatalogTarget Structure<a name="aws-glue-api-crawler-crawling-CatalogTarget"></a>
 
@@ -215,6 +257,30 @@ Status and error information about the most recent crawl\.
 
   The time at which the crawl started\.
 
+## RecrawlPolicy Structure<a name="aws-glue-api-crawler-crawling-RecrawlPolicy"></a>
+
+When crawling an Amazon S3 data source after the first crawl is complete, specifies whether to crawl the entire dataset again or to crawl only folders that were added since the last crawler run\. For more information, see [Incremental Crawls in AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/incremental-crawls.html) in the developer guide\.
+
+**Fields**
++ `RecrawlBehavior` – UTF\-8 string \(valid values: `CRAWL_EVERYTHING` \| `CRAWL_NEW_FOLDERS_ONLY`\)\.
+
+  Specifies whether to crawl the entire dataset again or to crawl only folders that were added since the last crawler run\.
+
+  A value of `CRAWL_EVERYTHING` specifies crawling the entire dataset again\.
+
+  A value of `CRAWL_NEW_FOLDERS_ONLY` specifies crawling only folders that were added since the last crawler run\.
+
+## LineageConfiguration Structure<a name="aws-glue-api-crawler-crawling-LineageConfiguration"></a>
+
+Specifies data lineage configuration settings for the crawler\.
+
+**Fields**
++ `CrawlerLineageSettings` – UTF\-8 string \(valid values: `ENABLE` \| `DISABLE`\)\.
+
+  Specifies whether data lineage is enabled for the crawler\. Valid values are:
+  + ENABLE: enables data lineage for the crawler
+  + DISABLE: disables data lineage for the crawler
+
 ## Operations<a name="aws-glue-api-crawler-crawling-actions"></a>
 + [CreateCrawler Action \(Python: create\_crawler\)](#aws-glue-api-crawler-crawling-CreateCrawler)
 + [DeleteCrawler Action \(Python: delete\_crawler\)](#aws-glue-api-crawler-crawling-DeleteCrawler)
@@ -259,6 +325,12 @@ Creates a new crawler with specified targets, role, configuration, and optional 
 + `SchemaChangePolicy` – A [SchemaChangePolicy](#aws-glue-api-crawler-crawling-SchemaChangePolicy) object\.
 
   The policy for the crawler's update and deletion behavior\.
++ `RecrawlPolicy` – A [RecrawlPolicy](#aws-glue-api-crawler-crawling-RecrawlPolicy) object\.
+
+  A policy that specifies whether to crawl the entire dataset again, or to crawl only folders that were added since the last crawler run\.
++ `LineageConfiguration` – A [LineageConfiguration](#aws-glue-api-crawler-crawling-LineageConfiguration) object\.
+
+  Specifies data lineage configuration settings for the crawler\.
 + `Configuration` – UTF\-8 string\.
 
   Crawler configuration information\. This versioned JSON string allows users to specify aspects of a crawler's behavior\. For more information, see [Configuring a Crawler](https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html)\.
@@ -399,6 +471,12 @@ Updates a crawler\. If a crawler is running, you must stop it using `StopCrawler
 + `SchemaChangePolicy` – A [SchemaChangePolicy](#aws-glue-api-crawler-crawling-SchemaChangePolicy) object\.
 
   The policy for the crawler's update and deletion behavior\.
++ `RecrawlPolicy` – A [RecrawlPolicy](#aws-glue-api-crawler-crawling-RecrawlPolicy) object\.
+
+  A policy that specifies whether to crawl the entire dataset again, or to crawl only folders that were added since the last crawler run\.
++ `LineageConfiguration` – A [LineageConfiguration](#aws-glue-api-crawler-crawling-LineageConfiguration) object\.
+
+  Specifies data lineage configuration settings for the crawler\.
 + `Configuration` – UTF\-8 string\.
 
   Crawler configuration information\. This versioned JSON string allows users to specify aspects of a crawler's behavior\. For more information, see [Configuring a Crawler](https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html)\.

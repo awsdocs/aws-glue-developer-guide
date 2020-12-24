@@ -14,6 +14,9 @@ Represents the equivalent of a Hive user\-defined function \(`UDF`\) definition\
 + `FunctionName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the function\.
++ `DatabaseName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the catalog database that contains the function\.
 + `ClassName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The Java class that contains the function code\.
@@ -29,6 +32,9 @@ Represents the equivalent of a Hive user\-defined function \(`UDF`\) definition\
 + `ResourceUris` – An array of [ResourceUri](aws-glue-api-common.md#aws-glue-api-common-ResourceUri) objects, not more than 1000 structures\.
 
   The resource URIs for the function\.
++ `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The ID of the Data Catalog in which the function resides\.
 
 ## UserDefinedFunctionInput Structure<a name="aws-glue-api-catalog-functions-UserDefinedFunctionInput"></a>
 
@@ -172,9 +178,9 @@ Retrieves multiple function definitions from the Data Catalog\.
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The ID of the Data Catalog where the functions to be retrieved are located\. If none is provided, the AWS account ID is used by default\.
-+ `DatabaseName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
++ `DatabaseName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  The name of the catalog database where the functions are located\.
+  The name of the catalog database where the functions are located\. If none is provided, functions from all the databases across the catalog will be returned\.
 + `Pattern` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   An optional function\-name pattern string that filters the function definitions returned\.

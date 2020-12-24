@@ -1,5 +1,7 @@
 # DynamicFrameWriter Class<a name="aws-glue-api-crawler-pyspark-extensions-dynamic-frame-writer"></a>
 
+
+
 ##  Methods<a name="aws-glue-api-crawler-pyspark-extensions-dynamic-frame-writer-_methods"></a>
 + [\_\_init\_\_](#aws-glue-api-crawler-pyspark-extensions-dynamic-frame-writer-__init__)
 + [from\_options](#aws-glue-api-crawler-pyspark-extensions-dynamic-frame-writer-from_options)

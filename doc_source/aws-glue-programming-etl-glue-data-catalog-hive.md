@@ -4,16 +4,16 @@ The AWS Glue Data Catalog is an Apache Hive metastore\-compatible catalog\. You 
 
 You can configure AWS Glue jobs and development endpoints by adding the `"--enable-glue-datacatalog": ""` argument to job arguments and development endpoint arguments respectively\. Passing this argument sets certain configurations in Spark that enable it to access the Data Catalog as an external Hive metastore\. It also [enables Hive support](https://spark.apache.org/docs/latest/api/java/org/apache/spark/sql/SparkSession.Builder.html#enableHiveSupport--) in the `SparkSession` object created in the AWS Glue job or development endpoint\. 
 
-To enable the Data Catalog access, check the **Use Glue Data Catalog as the Hive metastore** check box in the **Catalog options** group on the **Add job** or **Add endpoint** page on the console\. Note that the IAM role used for the job or development endpoint should have `glue:CreateDatabase` permissions\. A database called "`default`" is created in the Data Catalog if it does not exist\. 
+To enable the Data Catalog access, check the **Use AWS Glue Data Catalog as the Hive metastore** check box in the **Catalog options** group on the **Add job** or **Add endpoint** page on the console\. Note that the IAM role used for the job or development endpoint should have `glue:CreateDatabase` permissions\. A database called "`default`" is created in the Data Catalog if it does not exist\. 
 
 Lets look at an example of how you can use this feature in your Spark SQL jobs\. The following example assumes that you have crawled the US legislators dataset available at `s3://awsglue-datasets/examples/us-legislators`\.
 
-To serialize/deserialize data from the tables defined in the Glue Data Catalog, Spark SQL needs the [Hive SerDe](https://cwiki.apache.org/confluence/display/Hive/SerDe) class for the format defined in the Glue Data Catalog in the classpath of the spark job\. 
+To serialize/deserialize data from the tables defined in the AWS Glue Data Catalog, Spark SQL needs the [Hive SerDe](https://cwiki.apache.org/confluence/display/Hive/SerDe) class for the format defined in the AWS Glue Data Catalog in the classpath of the spark job\. 
 
 SerDes for certain common formats are distributed by AWS Glue\. The following are the Amazon S3 links for these:
-+ [JSON](https://s3-us-west-2.amazonaws.com/crawler-public/json/serde/json-serde.jar)
-+ [XML](https://s3-us-west-2.amazonaws.com/crawler-public/xml/serde/hivexmlserde-1.0.5.3.jar)
-+ [Grok](https://s3-us-west-2.amazonaws.com/crawler-public/grok/serde/AWSGlueHiveGrokSerDe-1.0-super.jar)
++ [JSON](https://s3.us-west-2.amazonaws.com/crawler-public/json/serde/json-serde.jar)
++ [XML](https://s3.us-west-2.amazonaws.com/crawler-public/xml/serde/hivexmlserde-1.0.5.3.jar)
++ [Grok](https://s3.us-west-2.amazonaws.com/crawler-public/grok/serde/AWSGlueHiveGrokSerDe-1.0-super.jar)
 
 Add the JSON SerDe as an [extra JAR to the development endpoint](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-dev-endpoint.html#aws-glue-api-dev-endpoint-DevEndpointCustomLibraries)\. For jobs, you can add the SerDe using the `--extra-jars` argument in the arguments field\. For more information, see [Special Parameters Used by AWS Glue](aws-glue-programming-etl-glue-arguments.md)\. 
 
@@ -63,7 +63,7 @@ DataFrame[]
 +--------------------+---------+-----------------+
 ```
 
-If the SerDe class for the format is not available in the job's classpath, you will see an error similar to the one shown below\.
+If the SerDe class for the format is not available in the job's classpath, you will see an error similar to the following\.
 
 ```
 >>> spark.sql("describe memberships_json").show()

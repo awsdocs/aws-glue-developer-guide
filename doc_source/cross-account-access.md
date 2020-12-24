@@ -1,20 +1,40 @@
 # Granting Cross\-Account Access<a name="cross-account-access"></a>
 
-There are two ways in AWS to grant cross\-account access to a resource:
-+ Use a resource policy
+Granting access to Data Catalog resources across accounts enables your extract, transform, and load \(ETL\) jobs to query and join data from different accounts\.
+
+**Topics**
++ [Methods for Granting Cross\-Account Access in AWS Glue](#cross-account-how-works)
++ [Adding or Updating the Data Catalog Resource Policy](#cross-account-adding-resource-policy)
++ [Making a Cross\-Account API Call](#cross-account-calling)
++ [Making a Cross\-Account ETL Call](#cross-account-calling-etl)
++ [Cross\-Account CloudTrail Logging](#cross-account-ct-logs)
++ [AWS Glue Resource Ownership and Operations](#access-control-resource-ownership)
++ [Cross\-Account Resource Ownership and Billing](#cross-account-ownership-and-billing)
++ [Cross\-Account Access Limitations](#cross-account-limitations)
+
+## Methods for Granting Cross\-Account Access in AWS Glue<a name="cross-account-how-works"></a>
+
+You can grant access to your data to external AWS accounts by using AWS Glue methods or by using AWS Lake Formation cross\-account grants\. The AWS Glue methods use AWS Identity and Access Management \(IAM\) policies to achieve fine\-grained access control\. Lake Formation uses a simpler `GRANT/REVOKE` permissions model similar to the `GRANT/REVOKE` commands in a relational database system\.
+
+This section describes using the AWS Glue methods\. For information about using Lake Formation cross\-account grants, see [Granting Lake Formation Permissions](https://docs.aws.amazon.com/lake-formation/latest/dg/lake-formation-permissions.html) in the *AWS Lake Formation Developer Guide*\.
+
+There are two AWS Glue methods for granting cross\-account access to a resource:
++ Use a Data Catalog resource policy
 + Use an IAM role
 
-**To use a resource policy to grant cross\-account access**
+**Granting cross\-account access using a resource policy**  
+The following are the general steps for granting cross\-account access using a Data Catalog resource policy:
 
 1. An administrator \(or other authorized identity\) in Account A attaches a resource policy to the Data Catalog in Account A\. This policy grants Account B specific cross\-account permissions to perform operations on a resource in Account A's catalog\.
 
 1. An administrator in Account B attaches an IAM policy to a user or other IAM identity in Account B that delegates the permissions received from Account A\.
 
-1. The user or other identity in Account B now has access to the specified resource in Account A\.
+   The user or other identity in Account B now has access to the specified resource in Account A\.
 
    The user needs permission from *both* the resource owner \(Account A\) *and* their parent account \(Account B\) to be able to access the resource\.
 
-**To use an IAM role to grant cross\-account access**
+**Granting cross\-account access using an IAM role**  
+The following are the general steps for granting cross\-account access using an IAM role:
 
 1. An administrator \(or other authorized identity\) in the account that owns the resource \(Account A\) creates an IAM role\.
 
@@ -26,7 +46,7 @@ There are two ways in AWS to grant cross\-account access to a resource:
 
 1. An administrator in Account B now delegates permissions to one or more IAM identities in Account B so that they can assume that role\. Doing so gives those identities in Account B access to the resource in account A\.
 
-   For more information about using IAM to delegate permissions, see [Access Management](https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html) in the *IAM User Guide*\. For more information about users, groups, roles, and permissions, see [Identities \(Users, Groups, and Roles\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html) in the *IAM User Guide*\.
+For more information about using IAM to delegate permissions, see [Access Management](https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html) in the *IAM User Guide*\. For more information about users, groups, roles, and permissions, see [Identities \(Users, Groups, and Roles\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html) in the *IAM User Guide*\.
 
 For a comparison of these two approaches, see [How IAM Roles Differ from Resource\-based Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_compare-resource-policies.html) in the *IAM User Guide*\. AWS Glue supports both options, with the restriction that a resource policy can grant access only to Data Catalog resources\.
 
@@ -72,6 +92,31 @@ In addition, Account B would have to attach the following IAM policy to Bob befo
   ]
 }
 ```
+
+## Adding or Updating the Data Catalog Resource Policy<a name="cross-account-adding-resource-policy"></a>
+
+You can add or update the AWS Glue Data Catalog resource policy using the console, API, or AWS Command Line Interface \(AWS CLI\)\.
+
+**Important**  
+If you have already made cross\-account permission grants from your account with AWS Lake Formation, adding or updating the Data Catalog resource policy requires an extra step\. For more information, see [Managing Cross\-Account Permissions Using Both AWS Glue and Lake Formation](https://docs.aws.amazon.com/lake-formation/latest/dg/hybrid-cross-account.html) in the *AWS Lake Formation Developer Guide*\.  
+To determine if Lake Formation cross\-account grants exist, use the `glue:GetResourcePolicies` API or AWS CLI\. If the API returns any policies other than an already existing Data Catalog policy, then Lake Formation grants exist\. For more information, see [Viewing All Cross\-Account Grants Using the GetResourcePolicies API](https://docs.aws.amazon.com/lake-formation/latest/dg/cross-account-getresourcepolicies.html) in the *AWS Lake Formation Developer Guide*\.
+
+**To add or update the Data Catalog resource policy \(console\)**
+
+1. Open the AWS Glue console at [https://console\.aws\.amazon\.com/glue/](https://console.aws.amazon.com/glue/)\.
+
+   Sign in as an AWS Identity and Access Management \(IAM\) administrative user or as a user who has the `glue:PutResourcePolicy` permission\.
+
+1. In the navigation pane, choose **Settings**\.
+
+1. On the **Data catalog settings** page, under **Permissions**, paste a resource policy into the text area\. Then choose **Save**\.
+
+   If the console displays a alert stating that the permissions in the policy will be in addition to any permissions granted using Lake Formation, choose **Proceed**\.
+
+**To add or update the Data Catalog resource policy \(AWS CLI\)**
++ Submit an `aws glue put-resource-policy` command\. If Lake Formation grants already exist, ensure that you include the `--enable-hybrid` option with the value `'TRUE'`\.
+
+  For examples of using this command, see [AWS Glue Resource\-Based Access Control Policy Examples](glue-policy-examples-resource-policies.md)\.
 
 ## Making a Cross\-Account API Call<a name="cross-account-calling"></a>
 
@@ -126,6 +171,17 @@ Given that the client in Account A already has permission to create and run ETL 
    1. Create or update the resource policy attached to the Data Catalog in Account B to allow access from Account A\.
 
    1. Update the IAM policy in Account A to allow access to the Data Catalog in Account B\.
+
+## Cross\-Account CloudTrail Logging<a name="cross-account-ct-logs"></a>
+
+When an AWS Glue extract, transform, and load \(ETL\) job accesses the underlying data of a Data Catalog table shared through AWS Lake Formation cross\-account grants, there is additional AWS CloudTrail logging behavior\.
+
+For purposes of this discussion, the AWS account that shared the table is the owner account, and the account that the table was shared with is the recipient account\. When an ETL job in the recipient account accesses data in the table in the owner account, the data\-access CloudTrail event that is added to the logs for the recipient account gets copied to the owner account’s CloudTrail logs\. This is so owner accounts can track data accesses by the various recipient accounts\. By default, the CloudTrail events do not include a human\-readable principal identifier \(principal ARN\)\. An administrator in the recipient account can opt in to include the principal ARN in the logs\.
+
+For more information, see [Cross\-Account CloudTrail Logging](https://docs.aws.amazon.com/lake-formation/latest/dg/cross-account-logging.html) in the *AWS Lake Formation Developer Guide*\.
+
+**See Also**  
+[Logging and Monitoring in AWS Glue](logging-and-monitoring.md)
 
 ## AWS Glue Resource Ownership and Operations<a name="access-control-resource-ownership"></a>
 

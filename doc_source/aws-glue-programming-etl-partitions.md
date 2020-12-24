@@ -6,7 +6,7 @@ For example, you might decide to partition your application logs in Amazon Simpl
 
 Crawlers not only infer file types and schemas, they also automatically identify the partition structure of your dataset when they populate the AWS Glue Data Catalog\. The resulting partition columns are available for querying in AWS Glue ETL jobs or query engines like Amazon Athena\.
 
-After you crawl a table, you can view the partitions that the crawler created by navigating to the table in the AWS Glue console and choosing **View Partitions**\.
+After you crawl a table, you can view the partitions that the crawler created by navigating to the table on the AWS Glue console and choosing **View Partitions**\.
 
 For Apache Hive\-style partitioned paths in `key=val` style, crawlers automatically populate the column name using the key name\. Otherwise, it uses default names like `partition_0`, `partition_1`, and so on\. To change the default names on the console, navigate to the table, choose **Edit Schema**, and modify the names of the partition columns there\.
 
@@ -16,7 +16,7 @@ In your ETL scripts, you can then filter on the partition columns\.
 
 In many cases, you can use a pushdown predicate to filter on partitions without having to list and read all the files in your dataset\. Instead of reading the entire dataset and then filtering in a DynamicFrame, you can apply the filter directly on the partition metadata in the Data Catalog\. Then you only list and read what you actually need into a DynamicFrame\.
 
-For example, in Python you could write the following:
+For example, in Python, you could write the following\.
 
 ```
 glue_context.create_dynamic_frame.from_catalog(

@@ -1,4 +1,3 @@
-# AWS Glue Limits<a name="troubleshooting-service-limits"></a>
+# AWS Glue Quotas<a name="troubleshooting-service-limits"></a>
 
-**Note**  
- You can contact AWS Support to  [request a limit increase](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html) for the service limits listed in the AWS General Reference\. Unless otherwise noted, each limit is region\-specific\. For more information, see [AWS Glue Limits](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_glue)\. 
+You can contact AWS Support to  [request a quota increase](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html) for the service quotas listed in the *AWS General Reference*\. Unless otherwise noted, each quota is Region\-specific\. For more information, see [AWS Glue Endpoints and Quotas](https://docs.aws.amazon.com/general/latest/gr/glue.html)\. 

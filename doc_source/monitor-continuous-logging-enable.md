@@ -4,12 +4,13 @@ You can enable continuous logging using the AWS Glue console or through the AWS 
 
 You can enable continuous logging with either a standard filter or no filter when you create a new job, edit an existing job, or enable it through the AWS CLI\. Choosing the **Standard filter** prunes out non\-useful Apache Spark driver/executor and Apache Hadoop YARN heartbeat log messages\. Choosing **No filter** gives you all the log messages\.
 
-You can also specify custom configuration options such as the AWS CloudWatch log group name, CloudWatch log stream prefix before the AWS Glue job run ID driver/executor ID, and log conversion pattern for log messages\. These configurations help you to set aggregate logs in custom CloudWatch log groups with different expiration policies, and analyze them further with custom log stream prefixes and conversions patterns\. 
+You can also specify custom configuration options such as the Amazon CloudWatch log group name, CloudWatch log stream prefix before the AWS Glue job run ID driver/executor ID, and log conversion pattern for log messages\. These configurations help you to set aggregate logs in custom CloudWatch log groups with different expiration policies, and analyze them further with custom log stream prefixes and conversions patterns\. 
 
 **Topics**
 + [Using the AWS Management Console](#monitor-continuous-logging-enable-console)
 + [Logging Application\-Specific Messages Using the Custom Script Logger](#monitor-continuous-logging-script)
 + [Enabling the Progress Bar to Show Job Progress](#monitor-continuous-logging-progress)
++ [Security Configuration with Continuous Logging](#monitor-continuous-logging-encrypt-log-data)
 
 ## Using the AWS Management Console<a name="monitor-continuous-logging-enable-console"></a>
 
@@ -88,7 +89,7 @@ You can specify a custom AWS CloudWatch log stream prefix\. If not specified, th
 '--continuous-log-logStreamPrefix': 'custom_log_stream_prefix'
 ```
 
-You can specify a custom continuous logging conversion pattern\. If not specified, the default conversion pattern is `%d{yy/MM/dd HH:mm:ss} %p %c{1}: %m%n`\. Note that the conversion pattern only applies to driver logs and executor logs\. It does not affect the Glue progress bar\.
+You can specify a custom continuous logging conversion pattern\. If not specified, the default conversion pattern is `%d{yy/MM/dd HH:mm:ss} %p %c{1}: %m%n`\. Note that the conversion pattern only applies to driver logs and executor logs\. It does not affect the AWS Glue progress bar\.
 
 ```
 '--continuous-log-conversionPattern': 'custom_log_conversion_pattern'
@@ -136,3 +137,19 @@ The progress bar shows the following progress update every 5 seconds\.
 ```
 Stage Number (Stage Name): > (numCompletedTasks + numActiveTasks) / totalNumOfTasksInThisStage]
 ```
+
+## Security Configuration with Continuous Logging<a name="monitor-continuous-logging-encrypt-log-data"></a>
+
+If a security configuration is enabled for CloudWatch logs, AWS Glue will create a log group named as follows for continuous logs:
+
+```
+<Log-Group-Name>-<Security-Configuration-Name>
+```
+
+The default and custom log groups will be as follows:
++ The default continuous log group will be `/aws-glue/jobs/logs-v2-<Security-Configuration-Name>`
++ The custom continuous log group will be `<custom-log-group-name>-<Security-Configuration-Name>`
+
+You also need to include the `logs:AssociateKmsKey` to your IAM role permissions, if you enable a security configuration with CloudWatch Logs\. If that is not included, continuous logging will be disabled\.
+
+For more information on creating security configurations, see [Working with Security Configurations on the AWS Glue Console](console-security-configurations.md)\.

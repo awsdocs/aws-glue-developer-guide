@@ -55,7 +55,7 @@ Each mapping is made up of a source column and type and a target column and type
 
 In addition to using mappings for simple projections and casting, you can use them to nest or unnest fields by separating components of the path with '`.`' \(period\)\. 
 
-For example, suppose that you have a `DynamicFrame` with the following schema:
+For example, suppose that you have a `DynamicFrame` with the following schema\.
 
 ```
  {{{
@@ -68,7 +68,7 @@ For example, suppose that you have a `DynamicFrame` with the following schema:
  }}}
 ```
 
-You can make the following call to unnest the `state` and `zip` fields:
+You can make the following call to unnest the `state` and `zip` fields\.
 
 ```
  {{{
@@ -80,7 +80,7 @@ You can make the following call to unnest the `state` and `zip` fields:
  }}}
 ```
 
-The resulting schema is as follows:
+The resulting schema is as follows\.
 
 ```
  {{{
@@ -92,7 +92,7 @@ The resulting schema is as follows:
  }}}
 ```
 
-You can also use `applyMapping` to re\-nest columns\. For example, the following inverts the previous transformation and creates a struct named `address` in the target:
+You can also use `applyMapping` to re\-nest columns\. For example, the following inverts the previous transformation and creates a struct named `address` in the target\.
 
 ```
  {{{
@@ -104,7 +104,7 @@ You can also use `applyMapping` to re\-nest columns\. For example, the following
  }}}
 ```
 
-Field names that contain '`.`' \(period\) characters can be quoted by using backticks \(`''`\)\.
+Field names that contain '`.`' \(period\) characters can be quoted by using backticks \(````\)\.
 
 **Note**  
 Currently, you can't use the `applyMapping` method to map columns that are nested under arrays\.
@@ -228,6 +228,8 @@ Returns `true` if the schema has been computed for this `DynamicFrame`, or `fals
 def javaToPython : JavaRDD[Array[Byte]] 
 ```
 
+
+
 ## def join<a name="glue-etl-scala-apis-glue-dynamicframe-class-defs-join"></a>
 
 ```
@@ -262,6 +264,37 @@ Returns a new `DynamicFrame` constructed by applying the specified function '`f`
 
 This method copies each record before applying the specified function, so it is safe to mutate the records\. If the mapping function throws an exception on a given record, that record is marked as an error, and the stack trace is saved as a column in the error record\.
 
+## def mergeDynamicFrames<a name="glue-etl-scala-apis-glue-dynamicframe-class-defs-merge"></a>
+
+```
+def mergeDynamicFrames( stageDynamicFrame: DynamicFrame,  primaryKeys: Seq[String], transformationContext: String = "",
+                         options: JsonOptions = JsonOptions.empty, callSite: CallSite = CallSite("Not provided"),
+                         stageThreshold: Long = 0, totalThreshold: Long = 0): DynamicFrame
+```
++ `stageDynamicFrame` — The staging `DynamicFrame` to merge\.
++ `primaryKeys` — The list of primary key fields to match records from the source and staging `DynamicFrame`s\.
++ `transformationContext` — A unique string that is used to retrieve metadata about the current transformation \(optional\)\.
++ `options` — A string of JSON name\-value pairs that provide additional information for this transformation\.
++ `callSite` — Used to provide context information for error reporting\.
++ `stageThreshold` — A `Long`\. The number of errors in the given transformation for which the processing needs to error out\.
++ `totalThreshold` — A `Long`\. The total number of errors up to and including in this transformation for which the processing needs to error out\.
+
+Merges this `DynamicFrame` with a staging `DynamicFrame` based on the specified primary keys to identify records\. Duplicate records \(records with the same primary keys\) are not de\-duplicated\. If there is no matching record in the staging frame, all records \(including duplicates\) are retained from the source\. If the staging frame has matching records, the records from the staging frame overwrite the records in the source in AWS Glue\.
+
+The returned `DynamicFrame` contains record A in the following cases:
+
+1. If `A` exists in both the source frame and the staging frame, then `A` in the staging frame is returned\.
+
+1. If `A` is in the source table and `A.primaryKeys` is not in the `stagingDynamicFrame` \(that means `A` is not updated in the staging table\)\.
+
+The source frame and staging frame do not need to have the same schema\.
+
+**Example**  
+
+```
+val mergedFrame: DynamicFrame = srcFrame.mergeDynamicFrames(stageFrame, Seq("id1", "id2"))
+```
+
 ## def printSchema<a name="glue-etl-scala-apis-glue-dynamicframe-class-defs-printSchema"></a>
 
 ```
@@ -276,7 +309,7 @@ Prints the schema of this `DynamicFrame` to `stdout` in a human\-readable format
 def recomputeSchema : Schema 
 ```
 
-Forces a schema recomputation\. This requires a scan over the data, but it may "tighten" the schema if there are some fields in the current schema that are not present in the data\.
+Forces a schema recomputation\. This requires a scan over the data, but it might "tighten" the schema if there are some fields in the current schema that are not present in the data\.
 
 Returns the recomputed schema\.
 
@@ -298,7 +331,7 @@ def relationalize( rootTableName : String,
 
 Flattens all nested structures and pivots arrays into separate tables\.
 
-You can use this operation to prepare deeply nested data for ingestion into a relational database\. Nested structs are flattened in the same manner as the [unnest](#glue-etl-scala-apis-glue-dynamicframe-class-defs-unnest) transform\. Additionally, arrays are pivoted into separate tables with each array element becoming a row\. For example, suppose that you have a `DynamicFrame` with the following data:
+You can use this operation to prepare deeply nested data for ingestion into a relational database\. Nested structs are flattened in the same manner as the [unnest](#glue-etl-scala-apis-glue-dynamicframe-class-defs-unnest) transform\. Additionally, arrays are pivoted into separate tables with each array element becoming a row\. For example, suppose that you have a `DynamicFrame` with the following data\.
 
 ```
  {"name": "Nancy", "age": 47, "friends": ["Fred", "Lakshmi"]}
@@ -306,7 +339,7 @@ You can use this operation to prepare deeply nested data for ingestion into a re
  {"name": "Nathan", "age": 54, "friends": ["Nicolai", "Karen"]}
 ```
 
-Execute the following code:
+Execute the following code\.
 
 ```
 {{{
@@ -314,7 +347,7 @@ Execute the following code:
 }}}
 ```
 
-This produces two tables\. The first table is named "people" and contains the following:
+This produces two tables\. The first table is named "people" and contains the following\.
 
 ```
 {{{
@@ -324,7 +357,7 @@ This produces two tables\. The first table is named "people" and contains the fo
 }}}
 ```
 
-Here, the friends array has been replaced with an auto\-generated join key\. A separate table named `people.friends` is created with the following content:
+Here, the friends array has been replaced with an auto\-generated join key\. A separate table named `people.friends` is created with the following content\.
 
 ```
 {{{
@@ -361,7 +394,7 @@ def renameField( oldName : String,
 
 Returns a new `DynamicFrame` with the specified field renamed\.
 
-You can use this method to rename nested fields\. For example, the following code would rename `state` to `state_code` inside the address struct:
+You can use this method to rename nested fields\. For example, the following code would rename `state` to `state_code` inside the address struct\.
 
 ```
 {{{
@@ -414,7 +447,7 @@ The other mode for `resolveChoice` is to specify a single resolution for all `Ch
 
 **Examples:**
 
-Resolve the `user.id` column by casting to an int, and make the `address` field retain only structs:
+Resolve the `user.id` column by casting to an int, and make the `address` field retain only structs\.
 
 ```
 {{{
@@ -422,7 +455,7 @@ Resolve the `user.id` column by casting to an int, and make the `address` field 
 }}}
 ```
 
-Resolve all `ChoiceType`s by converting each choice to a separate column:
+Resolve all `ChoiceType`s by converting each choice to a separate column\.
 
 ```
 {{{
@@ -430,7 +463,7 @@ Resolve all `ChoiceType`s by converting each choice to a separate column:
 }}}
 ```
 
-Resolve all `ChoiceType`s by casting to the types in the specified catalog table:
+Resolve all `ChoiceType`s by casting to the types in the specified catalog table\.
 
 ```
 {{{
@@ -511,7 +544,7 @@ By default, writes 100 arbitrary records to the location specified by `path`\. Y
 + `topk` — Specifies the total number of records written out\. The default is 100\.
 + `prob` — Specifies the probability \(as a decimal\) that an individual record is included\. Default is 1\.
 
-For example, the following call would sample the dataset by selecting each record with a 20 percent probability and stopping after 200 records have been written:
+For example, the following call would sample the dataset by selecting each record with a 20 percent probability and stopping after 200 records have been written\.
 
 ```
 {{{
@@ -557,7 +590,7 @@ Predicates are specified using three sequences: '`paths`' contains the \(possibl
 
 Each operator must be one of "`!=`", "`=`", "`&lt;=`", "`&lt;`", "`&gt;=`", or "`&gt;`"\.
 
-As an example, the following call would split a `DynamicFrame` so that the first output frame would contain records of people over 65 from the United States, and the second would contain all other records:
+As an example, the following call would split a `DynamicFrame` so that the first output frame would contain records of people over 65 from the United States, and the second would contain all other records\.
 
 ```
 {{{
@@ -602,7 +635,7 @@ def unbox( path : String,
 
 Parses an embedded string or binary column according to the specified format\. Parsed columns are nested under a struct with the original column name\.
 
-For example, suppose that you have a CSV file with an embedded JSON column:
+For example, suppose that you have a CSV file with an embedded JSON column\.
 
 ```
 name, age, address
@@ -610,7 +643,7 @@ Sally, 36, {"state": "NE", "city": "Omaha"}
 ...
 ```
 
-After an initial parse, you would get a `DynamicFrame` with the following schema:
+After an initial parse, you would get a `DynamicFrame` with the following schema\.
 
 ```
 {{{
@@ -621,7 +654,7 @@ After an initial parse, you would get a `DynamicFrame` with the following schema
 }}}
 ```
 
-You can call `unbox` on the address column to parse the specific components:
+You can call `unbox` on the address column to parse the specific components\.
 
 ```
 {{{
@@ -629,7 +662,7 @@ You can call `unbox` on the address column to parse the specific components:
 }}}
 ```
 
-This gives us a `DynamicFrame` with the following schema:
+This gives us a `DynamicFrame` with the following schema\.
 
 ```
 {{{
@@ -654,7 +687,7 @@ def unnest( transformationContext : String = "",
 
 Returns a new `DynamicFrame` with all nested structures flattened\. Names are constructed using the '`.`' \(period\) character\.
 
-For example, suppose that you have a `DynamicFrame` with the following schema:
+For example, suppose that you have a `DynamicFrame` with the following schema\.
 
 ```
 {{{
@@ -667,7 +700,7 @@ For example, suppose that you have a `DynamicFrame` with the following schema:
 }}}
 ```
 
-The following call unnests the address struct:
+The following call unnests the address struct\.
 
 ```
 {{{
@@ -675,7 +708,7 @@ The following call unnests the address struct:
 }}}
 ```
 
-The resulting schema is as follows:
+The resulting schema is as follows\.
 
 ```
 {{{

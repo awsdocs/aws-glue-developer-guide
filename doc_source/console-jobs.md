@@ -27,7 +27,7 @@ To get step\-by\-step guidance for adding a job with a generated script, see the
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/glue/latest/dg/console-jobs.html)
 
 **Note**  
-The job assumes the permissions of the **IAM role** that you specify when you create it\. This IAM role must have permission to extract data from your data store and write to your target\. The AWS Glue console only lists IAM roles that have attached a trust policy for the AWS Glue principal service\. For more information about providing roles for AWS Glue, see [Identity\-Based Policies](using-identity-based-policies.md)\.  
+The job assumes the permissions of the **IAM role** that you specify when you create it\. This IAM role must have permission to extract data from your data source and write to your target\. The AWS Glue console only lists IAM roles that have attached a trust policy for the AWS Glue principal service\. For more information about providing roles for AWS Glue, see [Identity\-Based Policies](using-identity-based-policies.md)\.  
 If the job reads AWS KMS encrypted Amazon Simple Storage Service \(Amazon S3\) data, then the **IAM role** must have decrypt permission on the KMS key\. For more information, see [Step 2: Create an IAM Role for AWS Glue](create-an-iam-role.md)\.
 
 **Important**  

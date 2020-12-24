@@ -8,7 +8,7 @@ To address these limitations, AWS Glue introduces the `DynamicFrame`\. A `Dynami
 
 Similarly, a `DynamicRecord` represents a logical record within a `DynamicFrame`\. It is like a row in a Spark `DataFrame`, except that it is self\-describing and can be used for data that does not conform to a fixed schema\.
 
-You can convert `DynamicFrames` to and from `DataFrames` once you resolve any schema inconsistencies\. 
+You can convert `DynamicFrames` to and from `DataFrames` after you resolve any schema inconsistencies\. 
 
 ##  — Construction —<a name="aws-glue-api-crawler-pyspark-extensions-dynamic-frame-_constructing"></a>
 + [\_\_init\_\_](#aws-glue-api-crawler-pyspark-extensions-dynamic-frame-__init__)
@@ -40,7 +40,7 @@ A `DynamicRecord` represents a logical record in a `DynamicFrame`\. It is simila
 Converts a `DynamicFrame` to an Apache Spark `DataFrame` by converting `DynamicRecords` into `DataFrame` fields\. Returns the new `DataFrame`\.
 
 A `DynamicRecord` represents a logical record in a `DynamicFrame`\. It is similar to a row in a Spark `DataFrame`, except that it is self\-describing and can be used for data that does not conform to a fixed schema\.
-+ `options` – A list of options\. Specify the target type if you choose the `Project` and `Cast` action type\. Examples include the following:
++ `options` – A list of options\. Specify the target type if you choose the `Project` and `Cast` action type\. Examples include the following\.
 
   ```
   >>>toDF([ResolveOption("a.b.c", "KeepAsStruct")])
@@ -73,11 +73,11 @@ A `DynamicRecord` represents a logical record in a `DynamicFrame`\. It is simila
 
 ## repartition<a name="aws-glue-api-crawler-pyspark-extensions-dynamic-frame-repartition"></a>
 
-`repartition(numPartitions)` – Returns a new DynamicFrame with `numPartitions` partitions\.
+`repartition(numPartitions)` – Returns a new `DynamicFrame` with `numPartitions` partitions\.
 
 ## coalesce<a name="aws-glue-api-crawler-pyspark-extensions-dynamic-frame-coalesce"></a>
 
-`coalesce(numPartitions)` – Returns a new DynamicFrame with `numPartitions` partitions\.
+`coalesce(numPartitions)` – Returns a new `DynamicFrame` with `numPartitions` partitions\.
 
 ##  — Transforms —<a name="aws-glue-api-crawler-pyspark-extensions-dynamic-frame-_transforms"></a>
 + [apply\_mapping](#aws-glue-api-crawler-pyspark-extensions-dynamic-frame-apply_mapping)
@@ -85,6 +85,7 @@ A `DynamicRecord` represents a logical record in a `DynamicFrame`\. It is simila
 + [filter](#aws-glue-api-crawler-pyspark-extensions-dynamic-frame-filter)
 + [join](#aws-glue-api-crawler-pyspark-extensions-dynamic-frame-join)
 + [map](#aws-glue-api-crawler-pyspark-extensions-dynamic-frame-map)
++ [mergeDynamicFrame](#aws-glue-api-crawler-pyspark-extensions-dynamic-frame-merge)
 + [relationalize](#aws-glue-api-crawler-pyspark-extensions-dynamic-frame-relationalize)
 + [rename\_field](#aws-glue-api-crawler-pyspark-extensions-dynamic-frame-rename_field)
 + [resolveChoice](#aws-glue-api-crawler-pyspark-extensions-dynamic-frame-resolveChoice)
@@ -161,6 +162,35 @@ Returns a new `DynamicFrame` that results from applying the specified mapping fu
 
 For an example of how to use the `map` transform, see [Map Class](aws-glue-api-crawler-pyspark-transforms-map.md)\.
 
+## mergeDynamicFrame<a name="aws-glue-api-crawler-pyspark-extensions-dynamic-frame-merge"></a>
+
+**`mergeDynamicFrame(stage_dynamic_frame, primary_keys, transformation_ctx = "", options = {}, info = "", stageThreshold = 0, totalThreshold = 0)`**
+
+Merges this `DynamicFrame` with a staging `DynamicFrame` based on the specified primary keys to identify records\. Duplicate records \(records with the same primary keys\) are not de\-duplicated\. If there is no matching record in the staging frame, all records \(including duplicates\) are retained from the source\. If the staging frame has matching records, the records from the staging frame overwrite the records in the source in AWS Glue\.
++ `stage_dynamic_frame` – The staging `DynamicFrame` to merge\.
++ `primary_keys` – The list of primary key fields to match records from the source and staging dynamic frames\.
++ `transformation_ctx` – A unique string that is used to retrieve metadata about the current transformation \(optional\)\.
++ `options` – A string of JSON name\-value pairs that provide additional information for this transformation\.
++ `info` – A `String`\. Any string to be associated with errors in this transformation\.
++ `stageThreshold` – A `Long`\. The number of errors in the given transformation for which the processing needs to error out\.
++ `totalThreshold` – A `Long`\. The total number of errors up to and including in this transformation for which the processing needs to error out\.
+
+Returns a new `DynamicFrame` obtained by merging this `DynamicFrame` with the staging `DynamicFrame`\.
+
+The returned `DynamicFrame` contains record A in these cases:
+
+1. If `A` exists in both the source frame and the staging frame, then `A` in the staging frame is returned\.
+
+1. If `A` is in the source table and `A.primaryKeys` is not in the `stagingDynamicFrame` \(that means `A` is not updated in the staging table\)\.
+
+The source frame and staging frame do not need to have the same schema\.
+
+**Example**  
+
+```
+merged_frame = source_frame.mergeDynamicFrame(stage_frame, ["id"]) 
+```
+
 ## relationalize<a name="aws-glue-api-crawler-pyspark-extensions-dynamic-frame-relationalize"></a>
 
 **`relationalize(root_table_name, staging_path, options, transformation_ctx="", info="", stageThreshold=0, totalThreshold=0)`**
@@ -181,7 +211,7 @@ Relationalizes a `DynamicFrame` by producing a list of frames that are generated
 Renames a field in this `DynamicFrame` and returns a new `DynamicFrame` with the field renamed\.
 + `oldName` – The full path to the node you want to rename\.
 
-  If the old name has dots in it, RenameField will not work unless you place back\-ticks around it \(```\)\. For example, to replace `this.old.name` with `thisNewName`, you would call rename\_field as follows:
+  If the old name has dots in it, `RenameField` doesn't work unless you place back\-ticks around it \(```\)\. For example, to replace `this.old.name` with `thisNewName`, you would call rename\_field as follows\.
 
   ```
   newDyF = oldDyF.rename_field("`this.old.name`", "thisNewName")

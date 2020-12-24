@@ -35,14 +35,19 @@ A general strategy to resolve choice applicable to all `ChoiceType` nodes in a `
 def apply(choice: String): ChoiceOption
 ```
 
+
+
 ## case class ChoiceOptionWithResolver<a name="glue-etl-scala-apis-glue-choiceoptionwithresolver-case-class"></a>
 
 ```
 case class ChoiceOptionWithResolver(name: String, choiceResolver: ChoiceResolver) extends ChoiceOption {}
 ```
 
+
+
 ## case class MatchCatalogSchemaChoiceOption<a name="glue-etl-scala-apis-glue-matchcatalogschemachoiceoption-case-class"></a>
 
 ```
 case class MatchCatalogSchemaChoiceOption() extends ChoiceOption {}
 ```
+

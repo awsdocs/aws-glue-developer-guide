@@ -88,11 +88,11 @@ Defines a condition under which a trigger fires\.
   The name of the job whose `JobRuns` this condition applies to, and on which this trigger waits\.
 + `State` – UTF\-8 string \(valid values: `STARTING` \| `RUNNING` \| `STOPPING` \| `STOPPED` \| `SUCCEEDED` \| `FAILED` \| `TIMEOUT`\)\.
 
-  The condition state\. Currently, the values supported are `SUCCEEDED`, `STOPPED`, `TIMEOUT`, and `FAILED`\.
+  The condition state\. Currently, the only job states that a trigger can listen for are `SUCCEEDED`, `STOPPED`, `FAILED`, and `TIMEOUT`\. The only crawler states that a trigger can listen for are `SUCCEEDED`, `FAILED`, and `CANCELLED`\.
 + `CrawlerName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The name of the crawler to which this condition applies\.
-+ `CrawlState` – UTF\-8 string \(valid values: `RUNNING` \| `SUCCEEDED` \| `CANCELLED` \| `FAILED`\)\.
++ `CrawlState` – UTF\-8 string \(valid values: `RUNNING` \| `CANCELLING` \| `CANCELLED` \| `SUCCEEDED` \| `FAILED`\)\.
 
   The state of the crawler to which this condition applies\.
 

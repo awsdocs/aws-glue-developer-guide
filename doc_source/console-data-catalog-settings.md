@@ -2,7 +2,7 @@
 
 The Data Catalog settings page contains options to set properties for the Data Catalog in your account\. 
 
-To change the fine\-grained access control of the Data Catalog:
+**To change the fine\-grained access control of the Data Catalog**
 
 1. Sign in to the AWS Management Console and open the AWS Glue console at [https://console\.aws\.amazon\.com/glue/](https://console.aws.amazon.com/glue/)\.
 
@@ -15,10 +15,11 @@ You can also use AWS Glue API operations to put, get, and delete resource polici
 The **Settings** page displays the following options:
 
 **Metadata encryption**  
-Select this check box to encrypt the metadata in your Data Catalog\. Metadata is encrypted at rest using the AWS Key Management Service \(AWS KMS\) key that you specify\. 
+Select this check box to encrypt the metadata in your Data Catalog\. Metadata is encrypted at rest using the AWS Key Management Service \(AWS KMS\) key that you specify\.  
+AWS Glue supports only symmetric customer master keys \(CMKs\)\. The **AWS KMS key** list displays only symmetric keys\. However, if you select **Choose a KMS key ARN**, the console lets you enter an ARN for any key type\. Ensure that you enter only ARNs for symmetric keys\.
 
 **Encrypt connection passwords**  
-Select this check box to encrypt passwords in the AWS Glue connection object when the connection is created or updated\. Passwords are encrypted using the AWS KMS key that you specify\. When passwords are returned, they are encrypted\. This option is a global setting for all AWS Glue connections in the Data Catalog\. If you clear this check box, previously encrypted passwords remain encrypted using the key that was used when they were created or updated\. For more information about AWS Glue connections, see [Adding a Connection to Your Data Store](populate-add-connection.md)\.   
+Select this check box to encrypt passwords in the AWS Glue connection object when the connection is created or updated\. Passwords are encrypted using the AWS KMS key that you specify\. When passwords are returned, they are encrypted\. This option is a global setting for all AWS Glue connections in the Data Catalog\. If you clear this check box, previously encrypted passwords remain encrypted using the key that was used when they were created or updated\. For more information about AWS Glue connections, see [Defining Connections in the AWS Glue Data Catalog](populate-add-connection.md)\.   
 When you enable this option, choose an AWS KMS key, or choose **Enter a key ARN** and provide the Amazon Resource Name \(ARN\) for the key\. Enter the ARN in the form `arn:aws:kms:region:account-id:key/key-id`\. You can also provide the ARN as a key alias, such as `arn:aws:kms:region:account-id:alias/alias-name`\.   
 If this option is selected, any user or role that creates or updates a connection must have `kms:Encrypt` permission on the specified KMS key\.
 

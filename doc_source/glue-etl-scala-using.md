@@ -20,6 +20,6 @@ This prevents the Notebook server from defaulting to the PySpark flavor of the S
 
 ## Testing a Scala ETL Program in a Scala REPL<a name="aws-glue-programming-scala-using-repl"></a>
 
-You can test a Scala program on a development endpoint using the AWS Glue Scala REPL\. Follow the instructions in [Tutorial: Use a REPL Shell](dev-endpoint-tutorial-repl.md), except at the end of the SSH\-to\-REPL command, replace `-t gluepyspark` with `-t glue-spark-shell`\. This invokes the AWS Glue Scala REPL\.
+You can test a Scala program on a development endpoint using the AWS Glue Scala REPL\. Follow the instructions in [Tutorial: Use a SageMaker NotebookTutorial: Use a REPL Shell](dev-endpoint-tutorial-repl.md), except at the end of the SSH\-to\-REPL command, replace `-t gluepyspark` with `-t glue-spark-shell`\. This invokes the AWS Glue Scala REPL\.
 
 To close the REPL when you are finished, type `sys.exit`\.

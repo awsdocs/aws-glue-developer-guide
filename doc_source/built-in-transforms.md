@@ -51,3 +51,5 @@ Splits rows in a `DynamicFrame` based on a predicate\. The output is a collectio
 
 *Unbox*  
 Unboxes a string field from a `DynamicFrame`\. The output is a `DynamicFrame` with the selected string field reformatted\. The string field can be parsed and replaced with several fields\. You provide a path in the schema for the string field to reformat and its current format type\. For example, you might have a CSV file that has one field that is in JSON format `{"a": 3, "b": "foo", "c": 1.2}`\. This transform can reformat the JSON into three fields: an `int`, a `string`, and a `double`\.
+
+For examples of using these transforms in a job script, see the AWS blog [Building an AWS Glue ETL pipeline locally without an AWS account](http://aws.amazon.com/blogs/big-data/building-an-aws-glue-etl-pipeline-locally-without-an-aws-account/)\.

@@ -87,6 +87,7 @@ Some AWS Glue resources allow resource\-level permissions to control access usin
 | Job |  `arn:aws:glue:region:account-id:job/job-name` For example: `arn:aws:glue:us-east-1:123456789012:job/testjob`  | 
 | Trigger |  `arn:aws:glue:region:account-id:trigger/trigger-name` For example: `arn:aws:glue:us-east-1:123456789012:trigger/sampletrigger`  | 
 | Development endpoint |  `arn:aws:glue:region:account-id:devEndpoint/development-endpoint-name` For example: `arn:aws:glue:us-east-1:123456789012:devEndpoint/temporarydevendpoint`  | 
+| Machine learning transform |  `arn:aws:glue:region:account-id:mlTransform/transform-id` For example: `arn:aws:glue:us-east-1:123456789012:mlTransform/tfm-1234567890`  | 
 
 ## Access Control for AWS Glue Non\-Catalog Singular API Operations<a name="non-catalog-singular-apis"></a>
 

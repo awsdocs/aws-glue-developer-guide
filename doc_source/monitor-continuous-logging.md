@@ -10,6 +10,8 @@ The continuous logging feature includes the following capabilities:
 + A custom script logger to log application\-specific messages
 + A console progress bar to track the running status of the current AWS Glue job
 
+For information about how continuous logging is supported in AWS Glue version 2\.0, see [Running Spark ETL Jobs with Reduced Startup Times](https://docs.aws.amazon.com/glue/latest/dg/reduced-start-times-spark-etl-jobs.html)\.
+
 **Topics**
 + [Enabling Continuous Logging for AWS Glue Jobs](monitor-continuous-logging-enable.md)
 + [Viewing Continuous Logging for AWS Glue Jobs](monitor-continuous-logging-view.md)

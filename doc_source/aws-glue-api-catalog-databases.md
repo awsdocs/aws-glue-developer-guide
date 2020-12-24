@@ -7,6 +7,7 @@ The Database API describes database data types, and includes the API for creatin
 + [DatabaseInput Structure](#aws-glue-api-catalog-databases-DatabaseInput)
 + [PrincipalPermissions Structure](#aws-glue-api-catalog-databases-PrincipalPermissions)
 + [DataLakePrincipal Structure](#aws-glue-api-catalog-databases-DataLakePrincipal)
++ [DatabaseIdentifier Structure](#aws-glue-api-catalog-databases-DatabaseIdentifier)
 
 ## Database Structure<a name="aws-glue-api-catalog-databases-Database"></a>
 
@@ -35,6 +36,12 @@ The `Database` object represents a logical grouping of tables that might reside 
 + `CreateTableDefaultPermissions` – An array of [PrincipalPermissions](#aws-glue-api-catalog-databases-PrincipalPermissions) objects\.
 
   Creates a set of default permissions on the table for principals\. 
++ `TargetDatabase` – A [DatabaseIdentifier](#aws-glue-api-catalog-databases-DatabaseIdentifier) object\.
+
+  A `DatabaseIdentifier` structure that describes a target database for resource linking\.
++ `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The ID of the Data Catalog in which the database resides\.
 
 ## DatabaseInput Structure<a name="aws-glue-api-catalog-databases-DatabaseInput"></a>
 
@@ -62,6 +69,9 @@ The structure used to create or update a database\.
 + `CreateTableDefaultPermissions` – An array of [PrincipalPermissions](#aws-glue-api-catalog-databases-PrincipalPermissions) objects\.
 
   Creates a set of default permissions on the table for principals\. 
++ `TargetDatabase` – A [DatabaseIdentifier](#aws-glue-api-catalog-databases-DatabaseIdentifier) object\.
+
+  A `DatabaseIdentifier` structure that describes a target database for resource linking\.
 
 ## PrincipalPermissions Structure<a name="aws-glue-api-catalog-databases-PrincipalPermissions"></a>
 
@@ -83,6 +93,18 @@ The AWS Lake Formation principal\.
 + `DataLakePrincipalIdentifier` – UTF\-8 string, not less than 1 or more than 255 bytes long\.
 
   An identifier for the AWS Lake Formation principal\.
+
+## DatabaseIdentifier Structure<a name="aws-glue-api-catalog-databases-DatabaseIdentifier"></a>
+
+A structure that describes a target database for resource linking\.
+
+**Fields**
++ `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The ID of the Data Catalog in which the database resides\.
++ `DatabaseName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the catalog database\.
 
 ## Operations<a name="aws-glue-api-catalog-databases-actions"></a>
 + [CreateDatabase Action \(Python: create\_database\)](#aws-glue-api-catalog-databases-CreateDatabase)
@@ -202,6 +224,11 @@ Retrieves all databases defined in a given Data Catalog\.
 + `MaxResults` – Number \(integer\), not less than 1 or more than 1000\.
 
   The maximum number of databases to return in one response\.
++ `ResourceShareType` – UTF\-8 string \(valid values: `FOREIGN` \| `ALL`\)\.
+
+  Allows you to specify that you want to list the databases shared with your account\. The allowable values are `FOREIGN` or `ALL`\. 
+  + If set to `FOREIGN`, will list the databases shared with your account\. 
+  + If set to `ALL`, will list the databases shared with your account, as well as the databases in yor local account\. 
 
 **Response**
 + `DatabaseList` – *Required:* An array of [Database](#aws-glue-api-catalog-databases-Database) objects\.

@@ -6,7 +6,9 @@ In AWS Glue, you can tag the following resources:
 + Crawler
 + Job
 + Trigger
++ Workflow
 + Development endpoint
++ Machine learning transform
 
 **Note**  
 As a best practice, to allow tagging of these AWS Glue resources, always include the `glue:TagResource` action in your policies\.
@@ -91,7 +93,8 @@ aws glue create-job --name job-test-tags --role MyJobRole --command Name=glueetl
         "Role": {
           "Ref": "MyJobRole",
 		"Tags": {
-          "key1": "value1", "key2":"value2"
+          "key1": "value1", 
+		  "key2": "value2"
         } 
         }
       }
