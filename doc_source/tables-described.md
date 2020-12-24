@@ -2,7 +2,8 @@
 
 You can add table definitions to the Data Catalog in the following ways:
 + Run a crawler that connects to one or more data stores, determines the data structures, and writes tables into the Data Catalog\. The crawler uses built\-in or custom classifiers to recognize the structure of the data\. You can run your crawler on a schedule\. For more information, see [Defining Crawlers](add-crawler.md)\.
-+ Use the AWS Glue console to manually create a table in the AWS Glue Data Catalog\. For more information, see [Working with Tables on the AWS Glue Console](console-tables.md)\.
++ You can run create new tables directly from Glue ETL job using setCatalogInfo API. For more information see https://docs.aws.amazon.com/glue/latest/dg/update-from-job.html
++ Use the AWS Glue console to manually create a table in the AWS Glue Data Catalog\. For more information, see Creating New Tables section here [Working with Tables on the AWS Glue Console](console-tables.md)\.
 + Use the `CreateTable` operation in the [AWS Glue API](aws-glue-api.md) to create a table in the AWS Glue Data Catalog\. For more information, see [CreateTable Action \(Python: create\_table\)](aws-glue-api-catalog-tables.md#aws-glue-api-catalog-tables-CreateTable)\.
 + Use AWS CloudFormation templates\. For more information, see [Populating the Data Catalog Using AWS CloudFormation Templates](populate-with-cloudformation-templates.md)\.
 + Migrate an Apache Hive metastore\. For more information, see [Migration between the Hive Metastore and the AWS Glue Data Catalog](https://github.com/aws-samples/aws-glue-samples/tree/master/utilities/Hive_metastore_migration) on GitHub\.
