@@ -7,6 +7,7 @@ AWS Glue has created the following transform Classes to use in PySpark ETL opera
 + [DropNullFields Class](aws-glue-api-crawler-pyspark-transforms-DropNullFields.md)
 + [ErrorsAsDynamicFrame Class](aws-glue-api-crawler-pyspark-transforms-ErrorsAsDynamicFrame.md)
 + [Filter Class](aws-glue-api-crawler-pyspark-transforms-filter.md)
++ [FlatMap Class](aws-glue-api-crawler-pyspark-transforms-flat-map.md)
 + [Join Class](aws-glue-api-crawler-pyspark-transforms-join.md)
 + [Map Class](aws-glue-api-crawler-pyspark-transforms-map.md)
 + [MapToCollection Class](aws-glue-api-crawler-pyspark-transforms-MapToCollection.md)
