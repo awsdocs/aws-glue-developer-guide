@@ -86,7 +86,7 @@ Specifies a job definition\.
   + When you specify an Apache Spark ETL job \(`JobCommand.Name`="glueetl"\) or Apache Spark streaming ETL job \(`JobCommand.Name`="gluestreaming"\), you can allocate from 2 to 100 DPUs\. The default is 10 DPUs\. This job type cannot have a fractional DPU allocation\.
 
   For Glue version 2\.0 jobs, you cannot instead specify a `Maximum capacity`\. Instead, you should specify a `Worker type` and the `Number of workers`\.
-+ `WorkerType` – UTF\-8 string \(valid values: `Standard=""` \| `G.1X=""` \| `G.2X=""`\)\.
++ `WorkerType` – UTF\-8 string \(valid values: `="Standard"` \| `="G.1X"` \| `="G.2X"`\)\.
 
   The type of predefined worker that is allocated when a job runs\. Accepts a value of Standard, G\.1X, or G\.2X\.
   + For the `Standard` worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker\.
@@ -218,7 +218,7 @@ Specifies information used to update an existing job definition\. The previous j
   + When you specify an Apache Spark ETL job \(`JobCommand.Name`="glueetl"\) or Apache Spark streaming ETL job \(`JobCommand.Name`="gluestreaming"\), you can allocate from 2 to 100 DPUs\. The default is 10 DPUs\. This job type cannot have a fractional DPU allocation\.
 
   For Glue version 2\.0 jobs, you cannot instead specify a `Maximum capacity`\. Instead, you should specify a `Worker type` and the `Number of workers`\.
-+ `WorkerType` – UTF\-8 string \(valid values: `Standard=""` \| `G.1X=""` \| `G.2X=""`\)\.
++ `WorkerType` – UTF\-8 string \(valid values: `="Standard"` \| `="G.1X"` \| `="G.2X"`\)\.
 
   The type of predefined worker that is allocated when a job runs\. Accepts a value of Standard, G\.1X, or G\.2X\.
   + For the `Standard` worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker\.
@@ -343,7 +343,7 @@ Creates a new job definition\.
   The number of workers of a defined `workerType` that are allocated when a job runs\.
 
   The maximum number of workers you can define are 299 for `G.1X`, and 149 for `G.2X`\. 
-+ `WorkerType` – UTF\-8 string \(valid values: `Standard=""` \| `G.1X=""` \| `G.2X=""`\)\.
++ `WorkerType` – UTF\-8 string \(valid values: `="Standard"` \| `="G.1X"` \| `="G.2X"`\)\.
 
   The type of predefined worker that is allocated when a job runs\. Accepts a value of Standard, G\.1X, or G\.2X\.
   + For the `Standard` worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker\.
