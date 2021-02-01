@@ -19,7 +19,7 @@ If you want to be able to recover deleted objects, you can enable [object versio
 + `table_name` – The name of the table to use\.
 + `options` – Options to filter files to be deleted and for manifest file generation\.
   + `retentionPeriod` – Specifies a period in number of hours to retain files\. Files newer than the retention period are retained\. Set to 168 hours \(7 days\) by default\.
-  + `partitionPredicate` – Partitions satisfying this predicate are deleted\. Files within the retention period in these partitions are not deleted\. Set to `""` – empty by default\.
+  + `partition_predicate` – Partitions satisfying this predicate are deleted\. Files within the retention period in these partitions are not deleted\. Set to `""` – empty by default\.
   + `excludeStorageClasses` – Files with storage class in the `excludeStorageClasses` set are not deleted\. The default is `Set()` – an empty set\.
   + `manifestFilePath` – An optional path for manifest file generation\. All files that were successfully purged are recorded in `Success.csv`, and those that failed in `Failed.csv`
 + `transformation_ctx` – The transformation context to use \(optional\)\. Used in the manifest file path\.
