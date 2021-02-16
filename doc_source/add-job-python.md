@@ -100,6 +100,7 @@ Note the following limitations on packaging your Python libraries:
 
 ## Providing Your Own Python Library<a name="create-python-extra-library"></a>
 
+Python shell jobs do not support `.zip` archives for extra libraries. They must be provided either as `.egg` or `.whl`.
 You might already have one or more Python libraries packaged as an `.egg` or a `.whl` file\. If so, you can specify them to your job using the AWS Command Line Interface \(AWS CLI\) under the "`—extra-py-files`" flag, as in the following example\.
 
 ```
