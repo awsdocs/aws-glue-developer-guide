@@ -20,3 +20,5 @@ Additionally, if you want to access Amazon S3 data sources located in your virtu
 In your connection information, you also must consider whether data is accessed through a VPC and then set up network parameters accordingly\.  AWS Glue requires a private IP for JDBC endpoints\. Connections to databases can be over a VPN and AWS Direct Connect because they provide private IP access to on\-premises databases\.
 
 For information about how to connect to on\-premises databases, see [How to access and analyze on\-premises data stores using AWS Glue](http://aws.amazon.com/blogs/big-data/how-to-access-and-analyze-on-premises-data-stores-using-aws-glue/) at the AWS Big Data Blog website\.
+
+##Looks like Glue connection does not support S3 interface endpoint, use S3 gateway endpoints instead
