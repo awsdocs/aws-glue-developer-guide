@@ -30,7 +30,6 @@ AWS Glue uses the Python Package Installer \(pip3\) to install the additional mo
 ### Python Modules Already Provided in AWS Glue Version 2\.0<a name="reduced-start-times-python-modules"></a>
 
 AWS Glue version 2\.0 supports the following python modules out of the box:
-+ setuptools—45\.2\.0
 + setuptools—45\.2\.0 
 + subprocess32—3\.5\.4
 + ptvsd—4\.3\.2
