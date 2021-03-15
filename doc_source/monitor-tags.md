@@ -92,9 +92,9 @@ aws glue create-job --name job-test-tags --role MyJobRole --command Name=glueetl
         "Name": "cf-job1",
         "Role": {
           "Ref": "MyJobRole",
-		"Tags": {
-          "key1": "value1", 
-		  "key2": "value2"
+	  "Tags": {
+            "key1": "value1", 
+	    "key2": "value2"
         } 
         }
       }
