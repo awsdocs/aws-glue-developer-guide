@@ -52,7 +52,7 @@ In this example schema for Avro, the format and structure are defined by the lay
                     },
                     {
                         "name": "zipcode",
-                        "type": "integer"
+                        "type": "int"
                     }
                 ]
             }
