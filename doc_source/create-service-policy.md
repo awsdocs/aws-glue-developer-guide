@@ -90,7 +90,7 @@ Add any permissions needed for Amazon S3 resources\. You might want to scope the
                    "logs:AssociateKmsKey"                
                ],
                "Resource": [
-                   "arn:aws:logs:*:*:/aws-glue/*"
+                   "arn:aws:logs:*:*:log-group:/aws-glue/*"
                ]
            },
            {
