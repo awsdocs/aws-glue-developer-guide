@@ -37,6 +37,8 @@ AWS Glue recognizes several argument names that you can use to set up the script
 + `--continuous-log-logGroup` — Specifies a custom Amazon CloudWatch log group name for a job enabled for continuous logging\.
 + `--continuous-log-logStreamPrefix` — Specifies a custom CloudWatch log stream prefix for a job enabled for continuous logging\.
 + `--continuous-log-conversionPattern` — Specifies a custom conversion log pattern for a job enabled for continuous logging\. The conversion pattern applies only to driver logs and executor logs\. It does not affect the AWS Glue progress bar\.
++ `--enable-spark-ui` - Enables \(`true`\) or disables \(`false`\) the Apache Spark web UI\. See [Monitoring Jobs Using the Apache Spark Web UI](https://docs.aws.amazon.com/glue/latest/dg/monitor-spark-ui.html)\.
++ `--spark-event-logs-path` - For use with `--enable-spark-ui`; specifies the location of the UI files in S3 \(`s3://bucket/folder`\)\.
 
 For example, the following is the syntax for running a job with a `--`argument and a special parameter\.
 
