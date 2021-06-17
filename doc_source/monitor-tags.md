@@ -92,15 +92,60 @@ aws glue create-job --name job-test-tags --role MyJobRole --command Name=glueetl
         "Name": "cf-job1",
         "Role": {
           "Ref": "MyJobRole",
-		"Tags": {
-          "key1": "value1", 
-		  "key2": "value2"
-        } 
+          "Tags": {
+            "key1": "value1", 
+            "key2": "value2"
+          }
         }
       }
     }
   }
 }
+```
+
+**AWS CloudFormation YAML**
+
+```
+Description: AWS Glue Job Test Tags
+Resources:
+  MyJobRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - glue.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Path: "/"
+      Policies:
+        - PolicyName: root
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: "*"
+                Resource: "*"
+  MyJob:
+    Type: AWS::Glue::Job
+    Properties:
+      Command:
+        Name: glueetl
+        ScriptLocation: s3://aws-glue-scripts//prod-job1
+      DefaultArguments:
+        "--job-bookmark-option": job-bookmark-enable
+      ExecutionProperty:
+        MaxConcurrentRuns: 2
+      MaxRetries: 0
+      Name: cf-job1
+      Role:
+        Ref: MyJobRole
+      Tags:
+        key1: value1
+        key2: value2
 ```
 
 For more information, see [AWS Tagging Strategies](https://aws.amazon.com/answers/account-management/aws-tagging-strategies/)\. 
