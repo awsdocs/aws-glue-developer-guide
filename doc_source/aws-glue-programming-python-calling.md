@@ -57,6 +57,34 @@ print "The day partition key is: ", args['day_partition_key']
 print "and the day partition value is: ", args['day_partition_value']
 ```
 
+If you want to pass an argument that is a nested JSON string, to preserve the parameter value as it gets passed to your AWS Glue ETL job, you must encode the parameter string before starting the job run, and then decode the parameter string before referencing it your job script\. For example, consider the following argument string:
+
+```
+glue_client.start_job_run(JobName = "gluejobname", Arguments={
+"--my_curly_braces_string": '{"a": {"b": {"c": [{"d": {"e": 42}}]}}}'
+})
+```
+
+To pass this parameter correctly, you should encode the argument as a Base64 encoded string\.
+
+```
+import base64
+...
+sample_string='{"a": {"b": {"c": [{"d": {"e": 42}}]}}}'
+sample_string_bytes = sample_string.encode("ascii")
+
+base64_bytes = base64.b64encode(sample_string_bytes) 
+base64_string = base64_bytes.decode("ascii") 
+...
+glue_client.start_job_run(JobName = "gluejobname", Arguments={
+"--my_curly_braces_string": base64_bytes})
+...
+sample_string_bytes = base64.b64decode(base64_bytes) 
+sample_string = sample_string_bytes.decode("ascii") 
+print(f"Decoded string: {sample_string}") 
+...
+```
+
 ## Example: Create and Run a Job<a name="aws-glue-programming-python-calling-example"></a>
 
 The following example shows how call the AWS Glue APIs using Python, to create and run an ETL job\.

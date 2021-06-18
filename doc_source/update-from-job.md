@@ -22,25 +22,35 @@ sink = glueContext.write_dynamic_frame_from_catalog(frame=last_transform, databa
 ```
 
 ```
-val options = JsonOptions(Map("path" -> <S3_output_path>, "partitionKeys" -> Seq("region", "year", "month", "day"), "enableUpdateCatalog" -> true))
-val sink = glueContext.getCatalogSink(database = <target_db_name>, tableName = <target_table_name>, additionalOptions = options)
-sink.writeDynamicFrame(df)
+val options = JsonOptions(Map(
+    "path" -> <S3_output_path>, 
+    "partitionKeys" -> Seq("region", "year", "month", "day"), 
+    "enableUpdateCatalog" -> true))
+val sink = glueContext.getCatalogSink(
+    database = <target_db_name>, 
+    tableName = <target_table_name>, 
+    additionalOptions = options)sink.writeDynamicFrame(df)
 ```
 
 **Method 2**  
 Pass `enableUpdateCatalog` and `partitionKeys` in `getSink()`, and call `setCatalogInfo()` on the `DataSink` object\.  
 
 ```
-sink = glueContext.getSink(connection_type="s3", path="<S3_output_path>",
-                           enableUpdateCatalog=True,
-                           partitionKeys=["region", "year", "month", "day"])
+sink = glueContext.getSink(
+    connection_type="s3", 
+    path="<S3_output_path>",
+    enableUpdateCatalog=True,
+    partitionKeys=["region", "year", "month", "day"]
 sink.setFormat("json")
 sink.setCatalogInfo(catalogDatabase=<target_db_name>, catalogTableName=<target_table_name>)
 sink.writeFrame(last_transform)
 ```
 
 ```
-val options = JsonOptions(Map("path" -> <S3_output_path>, "partitionKeys" -> Seq("region", "year", "month", "day"), "enableUpdateCatalog" -> true))
+val options = JsonOptions(
+   Map("path" -> <S3_output_path>, 
+       "partitionKeys" -> Seq("region", "year", "month", "day"), 
+       "enableUpdateCatalog" -> true))
 val sink = glueContext.getSink("s3", options).withFormat("json")
 sink.setCatalogInfo(<target_db_name>, <target_table_name>)
 sink.writeDynamicFrame(df)
@@ -58,12 +68,14 @@ If you want to overwrite the Data Catalog table’s schema you can do one of the
 #### [ Python ]
 
 ```
-additionalOptions = {"enableUpdateCatalog": True, "updateBehavior": "UPDATE_IN_DATABASE"}
+additionalOptions = {
+    "enableUpdateCatalog": True, 
+    "updateBehavior": "UPDATE_IN_DATABASE"}
 additionalOptions["partitionKeys"] = ["partition_key0", "partition_key1"]
 
 sink = glueContext.write_dynamic_frame_from_catalog(frame=last_transform, database=<dst_db_name>,
-                                                    table_name=<dst_tbl_name>, transformation_ctx="write_sink",
-                                                    additional_options=additionalOptions)
+    table_name=<dst_tbl_name>, transformation_ctx="write_sink",
+    additional_options=additionalOptions)
 job.commit()
 ```
 
@@ -71,7 +83,10 @@ job.commit()
 #### [ Scala ]
 
 ```
-val options = JsonOptions(Map("path" -> outputPath, "partitionKeys" -> Seq("partition_0", "partition_1"), "enableUpdateCatalog" -> true))
+val options = JsonOptions(Map(
+    "path" -> outputPath, 
+    "partitionKeys" -> Seq("partition_0", "partition_1"), 
+    "enableUpdateCatalog" -> true))
 val sink = glueContext.getCatalogSink(database = nameSpace, tableName = tableName, additionalOptions = options)
 sink.writeDynamicFrame(df)
 ```
@@ -91,8 +106,8 @@ You can also use the same options to create a new table in the Data Catalog\. Yo
 
 ```
 sink = glueContext.getSink(connection_type="s3", path="s3://path/to/data",
-                           enableUpdateCatalog=True, updateBehavior="UPDATE_IN_DATABASE",
-                           partitionKeys=["partition_key0", "partition_key1"])
+    enableUpdateCatalog=True, updateBehavior="UPDATE_IN_DATABASE",
+    partitionKeys=["partition_key0", "partition_key1"])
 sink.setFormat("<format>")
 sink.setCatalogInfo(catalogDatabase=<dst_db_name>, catalogTableName=<dst_tbl_name>)
 sink.writeFrame(last_transform)
@@ -102,8 +117,12 @@ sink.writeFrame(last_transform)
 #### [ Scala ]
 
 ```
-val options = JsonOptions(Map("path" -> outputPath, "partitionKeys" -> Seq("<partition_1>", "<partition_2>"), "enableUpdateCatalog" -> true, "updateBehavior" -> "UPDATE_IN_DATABASE"))
-val sink = glueContext.getSink(connectionType = "s3", options = options).withFormat("<format>")
+val options = JsonOptions(Map(
+    "path" -> outputPath, 
+    "partitionKeys" -> Seq("<partition_1>", "<partition_2>"), 
+    "enableUpdateCatalog" -> true, 
+    "updateBehavior" -> "UPDATE_IN_DATABASE"))
+val sink = glueContext.getSink(connectionType = "s3", connectionOptions = options).withFormat("<format>")
 sink.setCatalogInfo(catalogDatabase = “<dst_db_name>”, catalogTableName = “<dst_tbl_name>”)
 sink.writeDynamicFrame(df)
 ```
@@ -114,8 +133,11 @@ sink.writeDynamicFrame(df)
 
 Take note of the following restrictions:
 + Only Amazon Simple Storage Service \(Amazon S3\) targets are supported\.
-+ Only the following formats are supported: `json`, `csv`, `avro`, and `glueparquet`\.
-+ Created or updated tables with the `glueparquet` classification cannot be used as data sources for other jobs\.
++ Only the following formats are supported: `json`, `csv`, `avro`, and `parquet`\.
++ To create or update tables with the `parquet` classification, you must utilize the AWS Glue optimized parquet writer for DynamicFrames\. This can be achieved in one of three ways:
+  + Call `write_dynamic_frame_from_catalog()`, then set a `useGlueParquetWriter` table property to true in the table you are updating\.
+  + Call `getSink()` in your script with connection\_type="`s3`", then set your format to `glueparquet`\.
+  + Call `getSink()` in your script with connection\_type="`s3`", then set your format to `parquet` and pass a `useGlueParquetWriter` property as true in your `format_options`, this is especially useful for creating new parquet tables\.
 + When the `updateBehavior` is set to `LOG`, new partitions will be added only if the `DynamicFrame` schema is equivalent to or contains a subset of the columns defined in the Data Catalog table's schema\.
 + Your partitionKeys must be equivalent, and in the same order, between your parameter passed in your ETL script and the partitionKeys in your Data Catalog table schema\.
 + This feature currently does not yet support updating/creating tables in which the updating schemas are nested \(for example, arrays inside of structs\)\.

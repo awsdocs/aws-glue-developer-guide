@@ -6,6 +6,7 @@ The Schema Registry API describes the data types and API related to working with
 + [RegistryId Structure](#aws-glue-api-schema-registry-api-RegistryId)
 + [RegistryListItem Structure](#aws-glue-api-schema-registry-api-RegistryListItem)
 + [MetadataInfo Structure](#aws-glue-api-schema-registry-api-MetadataInfo)
++ [OtherMetadataValueListItem Structure](#aws-glue-api-schema-registry-api-OtherMetadataValueListItem)
 + [SchemaListItem Structure](#aws-glue-api-schema-registry-api-SchemaListItem)
 + [SchemaVersionListItem Structure](#aws-glue-api-schema-registry-api-SchemaVersionListItem)
 + [MetadataKeyValuePair Structure](#aws-glue-api-schema-registry-api-MetadataKeyValuePair)
@@ -55,9 +56,24 @@ A structure containing the details for a registry\.
 A structure containing metadata information for a schema version\.
 
 **Fields**
-+ `MetadataValue` – UTF\-8 string, not less than 1 or more than 256 bytes long, matching the [Custom string pattern #18](aws-glue-api-common.md#regex_18)\.
++ `MetadataValue` – UTF\-8 string, not less than 1 or more than 256 bytes long, matching the [Custom string pattern #21](aws-glue-api-common.md#regex_21)\.
 
   The metadata key's corresponding value\.
++ `CreatedTime` – UTF\-8 string\.
+
+  The time at which the entry was created\.
++ `OtherMetadataValueList` – An array of [OtherMetadataValueListItem](#aws-glue-api-schema-registry-api-OtherMetadataValueListItem) objects\.
+
+  Other metadata belonging to the same metadata key\.
+
+## OtherMetadataValueListItem Structure<a name="aws-glue-api-schema-registry-api-OtherMetadataValueListItem"></a>
+
+A structure containing other metadata for a schema version belonging to the same metadata key\.
+
+**Fields**
++ `MetadataValue` – UTF\-8 string, not less than 1 or more than 256 bytes long, matching the [Custom string pattern #21](aws-glue-api-common.md#regex_21)\.
+
+  The metadata key's corresponding value for the other metadata belonging to the same metadata key\.
 + `CreatedTime` – UTF\-8 string\.
 
   The time at which the entry was created\.
@@ -115,10 +131,10 @@ An object containing the details about a schema version\.
 A structure containing a key value pair for metadata\.
 
 **Fields**
-+ `MetadataKey` – UTF\-8 string, not less than 1 or more than 128 bytes long, matching the [Custom string pattern #18](aws-glue-api-common.md#regex_18)\.
++ `MetadataKey` – UTF\-8 string, not less than 1 or more than 128 bytes long, matching the [Custom string pattern #21](aws-glue-api-common.md#regex_21)\.
 
   A metadata key\.
-+ `MetadataValue` – UTF\-8 string, not less than 1 or more than 256 bytes long, matching the [Custom string pattern #18](aws-glue-api-common.md#regex_18)\.
++ `MetadataValue` – UTF\-8 string, not less than 1 or more than 256 bytes long, matching the [Custom string pattern #21](aws-glue-api-common.md#regex_21)\.
 
   A metadata key's corresponding value\.
 
@@ -175,25 +191,25 @@ The unique ID of the schema in the AWS Glue schema registry\.
 
 ## Operations<a name="aws-glue-api-schema-registry-api-actions"></a>
 + [CreateRegistry Action \(Python: create\_registry\)](#aws-glue-api-schema-registry-api-CreateRegistry)
-+ [CreateSchema Action](#aws-glue-api-schema-registry-api-CreateSchema)
-+ [GetSchema Action](#aws-glue-api-schema-registry-api-GetSchema)
-+ [ListSchemaVersions Action](#aws-glue-api-schema-registry-api-ListSchemaVersions)
-+ [GetSchemaVersion Action](#aws-glue-api-schema-registry-api-GetSchemaVersion)
-+ [GetSchemaVersionsDiff Action](#aws-glue-api-schema-registry-api-GetSchemaVersionsDiff)
-+ [ListRegistries Action](#aws-glue-api-schema-registry-api-ListRegistries)
-+ [ListSchemas Action](#aws-glue-api-schema-registry-api-ListSchemas)
-+ [RegisterSchemaVersion Action](#aws-glue-api-schema-registry-api-RegisterSchemaVersion)
-+ [UpdateSchema Action](#aws-glue-api-schema-registry-api-UpdateSchema)
-+ [CheckSchemaVersionValidity Action](#aws-glue-api-schema-registry-api-CheckSchemaVersionValidity)
-+ [UpdateRegistry Action](#aws-glue-api-schema-registry-api-UpdateRegistry)
-+ [GetSchemaByDefinition Action](#aws-glue-api-schema-registry-api-GetSchemaByDefinition)
-+ [GetRegistry Action](#aws-glue-api-schema-registry-api-GetRegistry)
-+ [PutSchemaVersionMetadata Action](#aws-glue-api-schema-registry-api-PutSchemaVersionMetadata)
-+ [QuerySchemaVersionMetadata Action](#aws-glue-api-schema-registry-api-QuerySchemaVersionMetadata)
-+ [RemoveSchemaVersionMetadata Action](#aws-glue-api-schema-registry-api-RemoveSchemaVersionMetadata)
-+ [DeleteRegistry Action](#aws-glue-api-schema-registry-api-DeleteRegistry)
-+ [DeleteSchema Action](#aws-glue-api-schema-registry-api-DeleteSchema)
-+ [DeleteSchemaVersions Action](#aws-glue-api-schema-registry-api-DeleteSchemaVersions)
++ [CreateSchema Action \(Python: create\_schema\)](#aws-glue-api-schema-registry-api-CreateSchema)
++ [GetSchema Action \(Python: get\_schema\)](#aws-glue-api-schema-registry-api-GetSchema)
++ [ListSchemaVersions Action \(Python: list\_schema\_versions\)](#aws-glue-api-schema-registry-api-ListSchemaVersions)
++ [GetSchemaVersion Action \(Python: get\_schema\_version\)](#aws-glue-api-schema-registry-api-GetSchemaVersion)
++ [GetSchemaVersionsDiff Action \(Python: get\_schema\_versions\_diff\)](#aws-glue-api-schema-registry-api-GetSchemaVersionsDiff)
++ [ListRegistries Action \(Python: list\_registries\)](#aws-glue-api-schema-registry-api-ListRegistries)
++ [ListSchemas Action \(Python: list\_schemas\)](#aws-glue-api-schema-registry-api-ListSchemas)
++ [RegisterSchemaVersion Action \(Python: register\_schema\_version\)](#aws-glue-api-schema-registry-api-RegisterSchemaVersion)
++ [UpdateSchema Action \(Python: update\_schema\)](#aws-glue-api-schema-registry-api-UpdateSchema)
++ [CheckSchemaVersionValidity Action \(Python: check\_schema\_version\_validity\)](#aws-glue-api-schema-registry-api-CheckSchemaVersionValidity)
++ [UpdateRegistry Action \(Python: update\_registry\)](#aws-glue-api-schema-registry-api-UpdateRegistry)
++ [GetSchemaByDefinition Action \(Python: get\_schema\_by\_definition\)](#aws-glue-api-schema-registry-api-GetSchemaByDefinition)
++ [GetRegistry Action \(Python: get\_registry\)](#aws-glue-api-schema-registry-api-GetRegistry)
++ [PutSchemaVersionMetadata Action \(Python: put\_schema\_version\_metadata\)](#aws-glue-api-schema-registry-api-PutSchemaVersionMetadata)
++ [QuerySchemaVersionMetadata Action \(Python: query\_schema\_version\_metadata\)](#aws-glue-api-schema-registry-api-QuerySchemaVersionMetadata)
++ [RemoveSchemaVersionMetadata Action \(Python: remove\_schema\_version\_metadata\)](#aws-glue-api-schema-registry-api-RemoveSchemaVersionMetadata)
++ [DeleteRegistry Action \(Python: delete\_registry\)](#aws-glue-api-schema-registry-api-DeleteRegistry)
++ [DeleteSchema Action \(Python: delete\_schema\)](#aws-glue-api-schema-registry-api-DeleteSchema)
++ [DeleteSchemaVersions Action \(Python: delete\_schema\_versions\)](#aws-glue-api-schema-registry-api-DeleteSchemaVersions)
 
 ## CreateRegistry Action \(Python: create\_registry\)<a name="aws-glue-api-schema-registry-api-CreateRegistry"></a>
 
@@ -237,9 +253,10 @@ Creates a new registry which may be used to hold a collection of schemas\.
 + `AccessDeniedException`
 + `AlreadyExistsException`
 + `ResourceNumberLimitExceededException`
++ `ConcurrentModificationException`
 + `InternalServiceException`
 
-## CreateSchema Action<a name="aws-glue-api-schema-registry-api-CreateSchema"></a>
+## CreateSchema Action \(Python: create\_schema\)<a name="aws-glue-api-schema-registry-api-CreateSchema"></a>
 
 Creates a new schema set and registers the schema definition\. Returns an error if the schema set already exists without actually registering the version\.
 
@@ -254,7 +271,7 @@ When this API is called without a `RegistryId`, this will create an entry for a 
 + `SchemaName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Custom string pattern #12](aws-glue-api-common.md#regex_12)\.
 
   Name of the schema to be created of max length of 255, and may only contain letters, numbers, hyphen, underscore, dollar sign, or hash mark\. No whitespace\.
-+ `DataFormat` – *Required:* UTF\-8 string \(valid values: `AVRO`\)\.
++ `DataFormat` – *Required:* UTF\-8 string \(valid values: `AVRO` \| `JSON`\)\.
 
   The data format of the schema definition\. Currently only `AVRO` is supported\.
 + `Compatibility` – UTF\-8 string \(valid values: `NONE` \| `DISABLED` \| `BACKWARD` \| `BACKWARD_ALL` \| `FORWARD` \| `FORWARD_ALL` \| `FULL` \| `FULL_ALL`\)\.
@@ -278,7 +295,7 @@ When this API is called without a `RegistryId`, this will create an entry for a 
   Each value is a UTF\-8 string, not more than 256 bytes long\.
 
   AWS tags that contain a key value pair and may be searched by console, command line, or API\. If specified, follows the AWS tags\-on\-create pattern\.
-+ `SchemaDefinition` – UTF\-8 string, not less than 1 or more than 170000 bytes long, matching the [Custom string pattern #17](aws-glue-api-common.md#regex_17)\.
++ `SchemaDefinition` – UTF\-8 string, not less than 1 or more than 170000 bytes long, matching the [Custom string pattern #20](aws-glue-api-common.md#regex_20)\.
 
   The schema definition using the `DataFormat` setting for `SchemaName`\.
 
@@ -298,7 +315,7 @@ When this API is called without a `RegistryId`, this will create an entry for a 
 + `Description` – Description string, not more than 2048 bytes long, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
 
   A description of the schema if specified when created\.
-+ `DataFormat` – UTF\-8 string \(valid values: `AVRO`\)\.
++ `DataFormat` – UTF\-8 string \(valid values: `AVRO` \| `JSON`\)\.
 
   The data format of the schema definition\. Currently only `AVRO` is supported\.
 + `Compatibility` – UTF\-8 string \(valid values: `NONE` \| `DISABLED` \| `BACKWARD` \| `BACKWARD_ALL` \| `FORWARD` \| `FORWARD_ALL` \| `FULL` \| `FULL_ALL`\)\.
@@ -336,9 +353,10 @@ When this API is called without a `RegistryId`, this will create an entry for a 
 + `EntityNotFoundException`
 + `AlreadyExistsException`
 + `ResourceNumberLimitExceededException`
++ `ConcurrentModificationException`
 + `InternalServiceException`
 
-## GetSchema Action<a name="aws-glue-api-schema-registry-api-GetSchema"></a>
+## GetSchema Action \(Python: get\_schema\)<a name="aws-glue-api-schema-registry-api-GetSchema"></a>
 
 Describes the specified schema in detail\.
 
@@ -365,7 +383,7 @@ Describes the specified schema in detail\.
 + `Description` – Description string, not more than 2048 bytes long, matching the [URI address multi-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-uri)\.
 
   A description of schema if specified when created
-+ `DataFormat` – UTF\-8 string \(valid values: `AVRO`\)\.
++ `DataFormat` – UTF\-8 string \(valid values: `AVRO` \| `JSON`\)\.
 
   The data format of the schema definition\. Currently only `AVRO` is supported\.
 + `Compatibility` – UTF\-8 string \(valid values: `NONE` \| `DISABLED` \| `BACKWARD` \| `BACKWARD_ALL` \| `FORWARD` \| `FORWARD_ALL` \| `FULL` \| `FULL_ALL`\)\.
@@ -396,7 +414,7 @@ Describes the specified schema in detail\.
 + `EntityNotFoundException`
 + `InternalServiceException`
 
-## ListSchemaVersions Action<a name="aws-glue-api-schema-registry-api-ListSchemaVersions"></a>
+## ListSchemaVersions Action \(Python: list\_schema\_versions\)<a name="aws-glue-api-schema-registry-api-ListSchemaVersions"></a>
 
 Returns a list of schema versions that you have created, with minimal information\. Schema versions in Deleted status will not be included in the results\. Empty results will be returned if there are no schema versions available\.
 
@@ -427,7 +445,7 @@ Returns a list of schema versions that you have created, with minimal informatio
 + `EntityNotFoundException`
 + `InternalServiceException`
 
-## GetSchemaVersion Action<a name="aws-glue-api-schema-registry-api-GetSchemaVersion"></a>
+## GetSchemaVersion Action \(Python: get\_schema\_version\)<a name="aws-glue-api-schema-registry-api-GetSchemaVersion"></a>
 
 Get the specified schema by its unique ID assigned when a version of the schema is created or registered\. Schema versions in Deleted status will not be included in the results\.
 
@@ -448,10 +466,10 @@ Get the specified schema by its unique ID assigned when a version of the schema 
 + `SchemaVersionId` – UTF\-8 string, not less than 36 or more than 36 bytes long, matching the [Custom string pattern #11](aws-glue-api-common.md#regex_11)\.
 
   The `SchemaVersionId` of the schema version\.
-+ `SchemaDefinition` – UTF\-8 string, not less than 1 or more than 170000 bytes long, matching the [Custom string pattern #17](aws-glue-api-common.md#regex_17)\.
++ `SchemaDefinition` – UTF\-8 string, not less than 1 or more than 170000 bytes long, matching the [Custom string pattern #20](aws-glue-api-common.md#regex_20)\.
 
   The schema definition for the schema ID\.
-+ `DataFormat` – UTF\-8 string \(valid values: `AVRO`\)\.
++ `DataFormat` – UTF\-8 string \(valid values: `AVRO` \| `JSON`\)\.
 
   The data format of the schema definition\. Currently only `AVRO` is supported\.
 + `SchemaArn` – UTF\-8 string, not less than 1 or more than 10240 bytes long, matching the [AWS Glue ARN string pattern](aws-glue-api-common.md#aws-glue-api-regex-aws-glue-arn-id)\.
@@ -473,7 +491,7 @@ Get the specified schema by its unique ID assigned when a version of the schema 
 + `EntityNotFoundException`
 + `InternalServiceException`
 
-## GetSchemaVersionsDiff Action<a name="aws-glue-api-schema-registry-api-GetSchemaVersionsDiff"></a>
+## GetSchemaVersionsDiff Action \(Python: get\_schema\_versions\_diff\)<a name="aws-glue-api-schema-registry-api-GetSchemaVersionsDiff"></a>
 
 Fetches the schema version difference in the specified difference type between two stored schema versions in the Schema Registry\.
 
@@ -496,7 +514,7 @@ This API allows you to compare two schema versions between two schema definition
   Refers to `SYNTAX_DIFF`, which is the currently supported diff type\.
 
 **Response**
-+ `Diff` – UTF\-8 string, not less than 1 or more than 340000 bytes long, matching the [Custom string pattern #17](aws-glue-api-common.md#regex_17)\.
++ `Diff` – UTF\-8 string, not less than 1 or more than 340000 bytes long, matching the [Custom string pattern #20](aws-glue-api-common.md#regex_20)\.
 
   The difference between schemas as a string in JsonPatch format\.
 
@@ -506,7 +524,7 @@ This API allows you to compare two schema versions between two schema definition
 + `AccessDeniedException`
 + `InternalServiceException`
 
-## ListRegistries Action<a name="aws-glue-api-schema-registry-api-ListRegistries"></a>
+## ListRegistries Action \(Python: list\_registries\)<a name="aws-glue-api-schema-registry-api-ListRegistries"></a>
 
 Returns a list of registries that you have created, with minimal registry information\. Registries in the `Deleting` status will not be included in the results\. Empty results will be returned if there are no registries available\.
 
@@ -531,7 +549,7 @@ Returns a list of registries that you have created, with minimal registry inform
 + `AccessDeniedException`
 + `InternalServiceException`
 
-## ListSchemas Action<a name="aws-glue-api-schema-registry-api-ListSchemas"></a>
+## ListSchemas Action \(Python: list\_schemas\)<a name="aws-glue-api-schema-registry-api-ListSchemas"></a>
 
 Returns a list of schemas with minimal details\. Schemas in Deleting status will not be included in the results\. Empty results will be returned if there are no schemas available\.
 
@@ -562,7 +580,7 @@ When the `RegistryId` is not provided, all the schemas across registries will be
 + `EntityNotFoundException`
 + `InternalServiceException`
 
-## RegisterSchemaVersion Action<a name="aws-glue-api-schema-registry-api-RegisterSchemaVersion"></a>
+## RegisterSchemaVersion Action \(Python: register\_schema\_version\)<a name="aws-glue-api-schema-registry-api-RegisterSchemaVersion"></a>
 
 Adds a new version to the existing schema\. Returns an error if new version of schema does not meet the compatibility requirements of the schema set\. This API will not create a new schema set and will return a 404 error if the schema set is not already present in the Schema Registry\.
 
@@ -576,7 +594,7 @@ If the same schema definition is already stored in Schema Registry as a version,
   This is a wrapper structure to contain schema identity fields\. The structure contains:
   + SchemaId$SchemaArn: The Amazon Resource Name \(ARN\) of the schema\. Either `SchemaArn` or `SchemaName` and `RegistryName` has to be provided\.
   + SchemaId$SchemaName: The name of the schema\. Either `SchemaArn` or `SchemaName` and `RegistryName` has to be provided\.
-+ `SchemaDefinition` – *Required:* UTF\-8 string, not less than 1 or more than 170000 bytes long, matching the [Custom string pattern #17](aws-glue-api-common.md#regex_17)\.
++ `SchemaDefinition` – *Required:* UTF\-8 string, not less than 1 or more than 170000 bytes long, matching the [Custom string pattern #20](aws-glue-api-common.md#regex_20)\.
 
   The schema definition using the `DataFormat` setting for the `SchemaName`\.
 
@@ -599,7 +617,7 @@ If the same schema definition is already stored in Schema Registry as a version,
 + `ConcurrentModificationException`
 + `InternalServiceException`
 
-## UpdateSchema Action<a name="aws-glue-api-schema-registry-api-UpdateSchema"></a>
+## UpdateSchema Action \(Python: update\_schema\)<a name="aws-glue-api-schema-registry-api-UpdateSchema"></a>
 
 Updates the description, compatibility setting, or version checkpoint for a schema set\.
 
@@ -643,15 +661,15 @@ This update will happen only if the schema is in the AVAILABLE state\.
 + `ConcurrentModificationException`
 + `InternalServiceException`
 
-## CheckSchemaVersionValidity Action<a name="aws-glue-api-schema-registry-api-CheckSchemaVersionValidity"></a>
+## CheckSchemaVersionValidity Action \(Python: check\_schema\_version\_validity\)<a name="aws-glue-api-schema-registry-api-CheckSchemaVersionValidity"></a>
 
 Validates the supplied schema\. This call has no side effects, it simply validates using the supplied schema using `DataFormat` as the format\. Since it does not take a schema set name, no compatibility checks are performed\.
 
 **Request**
-+ `DataFormat` – *Required:* UTF\-8 string \(valid values: `AVRO`\)\.
++ `DataFormat` – *Required:* UTF\-8 string \(valid values: `AVRO` \| `JSON`\)\.
 
   The data format of the schema definition\. Currently only `AVRO` is supported\.
-+ `SchemaDefinition` – *Required:* UTF\-8 string, not less than 1 or more than 170000 bytes long, matching the [Custom string pattern #17](aws-glue-api-common.md#regex_17)\.
++ `SchemaDefinition` – *Required:* UTF\-8 string, not less than 1 or more than 170000 bytes long, matching the [Custom string pattern #20](aws-glue-api-common.md#regex_20)\.
 
   The definition of the schema that has to be validated\.
 
@@ -668,7 +686,7 @@ Validates the supplied schema\. This call has no side effects, it simply validat
 + `AccessDeniedException`
 + `InternalServiceException`
 
-## UpdateRegistry Action<a name="aws-glue-api-schema-registry-api-UpdateRegistry"></a>
+## UpdateRegistry Action \(Python: update\_registry\)<a name="aws-glue-api-schema-registry-api-UpdateRegistry"></a>
 
 Updates an existing registry which is used to hold a collection of schemas\. The updated properties relate to the registry, and do not modify any of the schemas within the registry\. 
 
@@ -695,7 +713,7 @@ Updates an existing registry which is used to hold a collection of schemas\. The
 + `ConcurrentModificationException`
 + `InternalServiceException`
 
-## GetSchemaByDefinition Action<a name="aws-glue-api-schema-registry-api-GetSchemaByDefinition"></a>
+## GetSchemaByDefinition Action \(Python: get\_schema\_by\_definition\)<a name="aws-glue-api-schema-registry-api-GetSchemaByDefinition"></a>
 
 Retrieves a schema by the `SchemaDefinition`\. The schema definition is sent to the Schema Registry, canonicalized, and hashed\. If the hash is matched within the scope of the `SchemaName` or ARN \(or the default registry, if none is supplied\), that schema's metadata is returned\. Otherwise, a 404 or NotFound error is returned\. Schema versions in `Deleted` statuses will not be included in the results\.
 
@@ -705,7 +723,7 @@ Retrieves a schema by the `SchemaDefinition`\. The schema definition is sent to 
   This is a wrapper structure to contain schema identity fields\. The structure contains:
   + SchemaId$SchemaArn: The Amazon Resource Name \(ARN\) of the schema\. One of `SchemaArn` or `SchemaName` has to be provided\.
   + SchemaId$SchemaName: The name of the schema\. One of `SchemaArn` or `SchemaName` has to be provided\.
-+ `SchemaDefinition` – *Required:* UTF\-8 string, not less than 1 or more than 170000 bytes long, matching the [Custom string pattern #17](aws-glue-api-common.md#regex_17)\.
++ `SchemaDefinition` – *Required:* UTF\-8 string, not less than 1 or more than 170000 bytes long, matching the [Custom string pattern #20](aws-glue-api-common.md#regex_20)\.
 
   The definition of the schema for which schema details are required\.
 
@@ -716,7 +734,7 @@ Retrieves a schema by the `SchemaDefinition`\. The schema definition is sent to 
 + `SchemaArn` – UTF\-8 string, not less than 1 or more than 10240 bytes long, matching the [AWS Glue ARN string pattern](aws-glue-api-common.md#aws-glue-api-regex-aws-glue-arn-id)\.
 
   The Amazon Resource Name \(ARN\) of the schema\.
-+ `DataFormat` – UTF\-8 string \(valid values: `AVRO`\)\.
++ `DataFormat` – UTF\-8 string \(valid values: `AVRO` \| `JSON`\)\.
 
   The data format of the schema definition\. Currently only `AVRO` is supported\.
 + `Status` – UTF\-8 string \(valid values: `AVAILABLE` \| `PENDING` \| `FAILURE` \| `DELETING`\)\.
@@ -732,7 +750,7 @@ Retrieves a schema by the `SchemaDefinition`\. The schema definition is sent to 
 + `EntityNotFoundException`
 + `InternalServiceException`
 
-## GetRegistry Action<a name="aws-glue-api-schema-registry-api-GetRegistry"></a>
+## GetRegistry Action \(Python: get\_registry\)<a name="aws-glue-api-schema-registry-api-GetRegistry"></a>
 
 Describes the specified registry in detail\.
 
@@ -767,7 +785,7 @@ Describes the specified registry in detail\.
 + `EntityNotFoundException`
 + `InternalServiceException`
 
-## PutSchemaVersionMetadata Action<a name="aws-glue-api-schema-registry-api-PutSchemaVersionMetadata"></a>
+## PutSchemaVersionMetadata Action \(Python: put\_schema\_version\_metadata\)<a name="aws-glue-api-schema-registry-api-PutSchemaVersionMetadata"></a>
 
 Puts the metadata key value pair for a specified schema version ID\. A maximum of 10 key value pairs will be allowed per schema version\. They can be added over one or more calls\.
 
@@ -804,10 +822,10 @@ Puts the metadata key value pair for a specified schema version ID\. A maximum o
 + `SchemaVersionId` – UTF\-8 string, not less than 36 or more than 36 bytes long, matching the [Custom string pattern #11](aws-glue-api-common.md#regex_11)\.
 
   The unique version ID of the schema version\.
-+ `MetadataKey` – UTF\-8 string, not less than 1 or more than 128 bytes long, matching the [Custom string pattern #18](aws-glue-api-common.md#regex_18)\.
++ `MetadataKey` – UTF\-8 string, not less than 1 or more than 128 bytes long, matching the [Custom string pattern #21](aws-glue-api-common.md#regex_21)\.
 
   The metadata key\.
-+ `MetadataValue` – UTF\-8 string, not less than 1 or more than 256 bytes long, matching the [Custom string pattern #18](aws-glue-api-common.md#regex_18)\.
++ `MetadataValue` – UTF\-8 string, not less than 1 or more than 256 bytes long, matching the [Custom string pattern #21](aws-glue-api-common.md#regex_21)\.
 
   The value of the metadata key\.
 
@@ -818,7 +836,7 @@ Puts the metadata key value pair for a specified schema version ID\. A maximum o
 + `EntityNotFoundException`
 + `ResourceNumberLimitExceededException`
 
-## QuerySchemaVersionMetadata Action<a name="aws-glue-api-schema-registry-api-QuerySchemaVersionMetadata"></a>
+## QuerySchemaVersionMetadata Action \(Python: query\_schema\_version\_metadata\)<a name="aws-glue-api-schema-registry-api-QuerySchemaVersionMetadata"></a>
 
 Queries for the schema version metadata information\. 
 
@@ -845,7 +863,7 @@ Queries for the schema version metadata information\.
 **Response**
 + `MetadataInfoMap` – A map array of key\-value pairs\.
 
-  Each key is a UTF\-8 string, not less than 1 or more than 128 bytes long, matching the [Custom string pattern #18](aws-glue-api-common.md#regex_18)\.
+  Each key is a UTF\-8 string, not less than 1 or more than 128 bytes long, matching the [Custom string pattern #21](aws-glue-api-common.md#regex_21)\.
 
   Each value is a A [MetadataInfo](#aws-glue-api-schema-registry-api-MetadataInfo) object\.
 
@@ -862,7 +880,7 @@ Queries for the schema version metadata information\.
 + `AccessDeniedException`
 + `EntityNotFoundException`
 
-## RemoveSchemaVersionMetadata Action<a name="aws-glue-api-schema-registry-api-RemoveSchemaVersionMetadata"></a>
+## RemoveSchemaVersionMetadata Action \(Python: remove\_schema\_version\_metadata\)<a name="aws-glue-api-schema-registry-api-RemoveSchemaVersionMetadata"></a>
 
 Removes a key value pair from the schema version metadata for the specified schema version ID\.
 
@@ -899,10 +917,10 @@ Removes a key value pair from the schema version metadata for the specified sche
 + `SchemaVersionId` – UTF\-8 string, not less than 36 or more than 36 bytes long, matching the [Custom string pattern #11](aws-glue-api-common.md#regex_11)\.
 
   The version ID for the schema version\.
-+ `MetadataKey` – UTF\-8 string, not less than 1 or more than 128 bytes long, matching the [Custom string pattern #18](aws-glue-api-common.md#regex_18)\.
++ `MetadataKey` – UTF\-8 string, not less than 1 or more than 128 bytes long, matching the [Custom string pattern #21](aws-glue-api-common.md#regex_21)\.
 
   The metadata key\.
-+ `MetadataValue` – UTF\-8 string, not less than 1 or more than 256 bytes long, matching the [Custom string pattern #18](aws-glue-api-common.md#regex_18)\.
++ `MetadataValue` – UTF\-8 string, not less than 1 or more than 256 bytes long, matching the [Custom string pattern #21](aws-glue-api-common.md#regex_21)\.
 
   The value of the metadata key\.
 
@@ -911,9 +929,9 @@ Removes a key value pair from the schema version metadata for the specified sche
 + `AccessDeniedException`
 + `EntityNotFoundException`
 
-## DeleteRegistry Action<a name="aws-glue-api-schema-registry-api-DeleteRegistry"></a>
+## DeleteRegistry Action \(Python: delete\_registry\)<a name="aws-glue-api-schema-registry-api-DeleteRegistry"></a>
 
-Delete the entire registry including schema and all of its versions\. To get the status of the delete operation, you can call the `GetRegistry` API after the asynchronous call\. Deleting a registry will disable all online operations for the registry such as the `UpdateRegistry`, `CreateSchema`, `UpdateSchema`, and `RegisterSchemaVersion` APIs\. 
+Delete the entire registry including schema and all of its versions\. To get the status of the delete operation, you can call the `GetRegistry` API after the asynchronous call\. Deleting a registry will deactivate all online operations for the registry such as the `UpdateRegistry`, `CreateSchema`, `UpdateSchema`, and `RegisterSchemaVersion` APIs\. 
 
 **Request**
 + `RegistryId` – *Required:* A [RegistryId](#aws-glue-api-schema-registry-api-RegistryId) object\.
@@ -937,9 +955,9 @@ Delete the entire registry including schema and all of its versions\. To get the
 + `AccessDeniedException`
 + `ConcurrentModificationException`
 
-## DeleteSchema Action<a name="aws-glue-api-schema-registry-api-DeleteSchema"></a>
+## DeleteSchema Action \(Python: delete\_schema\)<a name="aws-glue-api-schema-registry-api-DeleteSchema"></a>
 
-Deletes the entire schema set, including the schema set and all of its versions\. To get the status of the delete operation, you can call `GetSchema` API after the asynchronous call\. Deleting a registry will disable all online operations for the schema, such as the `GetSchemaByDefinition`, and `RegisterSchemaVersion` APIs\.
+Deletes the entire schema set, including the schema set and all of its versions\. To get the status of the delete operation, you can call `GetSchema` API after the asynchronous call\. Deleting a registry will deactivate all online operations for the schema, such as the `GetSchemaByDefinition`, and `RegisterSchemaVersion` APIs\.
 
 **Request**
 + `SchemaId` – *Required:* A [SchemaId](#aws-glue-api-schema-registry-api-SchemaId) object\.
@@ -963,7 +981,7 @@ Deletes the entire schema set, including the schema set and all of its versions\
 + `AccessDeniedException`
 + `ConcurrentModificationException`
 
-## DeleteSchemaVersions Action<a name="aws-glue-api-schema-registry-api-DeleteSchemaVersions"></a>
+## DeleteSchemaVersions Action \(Python: delete\_schema\_versions\)<a name="aws-glue-api-schema-registry-api-DeleteSchemaVersions"></a>
 
 Remove versions from the specified schema\. A version number or range may be supplied\. If the compatibility mode forbids deleting of a version that is necessary, such as BACKWARDS\_FULL, an error is returned\. Calling the `GetSchemaVersions` API after this call will list the status of the deleted versions\.
 
@@ -977,7 +995,7 @@ If the compatibility mode forbids deleting of a version that is necessary, such 
 + `SchemaId` – *Required:* A [SchemaId](#aws-glue-api-schema-registry-api-SchemaId) object\.
 
   This is a wrapper structure that may contain the schema name and Amazon Resource Name \(ARN\)\.
-+ `Versions` – *Required:* UTF\-8 string, not less than 1 or more than 100000 bytes long, matching the [Custom string pattern #19](aws-glue-api-common.md#regex_19)\.
++ `Versions` – *Required:* UTF\-8 string, not less than 1 or more than 100000 bytes long, matching the [Custom string pattern #22](aws-glue-api-common.md#regex_22)\.
 
   A version range may be supplied which may be of the format:
   + a single version number, 5

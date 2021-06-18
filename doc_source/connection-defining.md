@@ -15,6 +15,12 @@ Depending on the type that you choose, the AWS Glue console displays other requi
 When you select this option, AWS Glue must verify that the connection to the data store is connected over a trusted Secure Sockets Layer \(SSL\)\.  
 For more information, including additional options that are available when you select this option, see [AWS Glue Connection SSL Properties](#connection-properties-SSL)\.
 
+**Select MSK cluster \(Amazon managed streaming for Apache Kafka \(MSK\) only\)**  
+Specifies an MSK cluster from another AWS account\.
+
+**Kafka bootstrap server URLs \(Kafka only\)**  
+Specifies a comma\-separated list of bootstrap server URLs\. Include the port number\. For example: b\-1\.vpc\-test\-2\.o4q88o\.c6\.kafka\.us\-east\-1\.amazonaws\.com:9094, b\-2\.vpc\-test\-2\.o4q88o\.c6\.kafka\.us\-east\-1\.amazonaws\.com:9094, b\-3\.vpc\-test\-2\.o4q88o\.c6\.kafka\.us\-east\-1\.amazonaws\.com:9094
+
 ## AWS Glue JDBC Connection Properties<a name="connection-properties-jdbc"></a>
 
 AWS Glue can connect to the following data stores through a JDBC connection:
@@ -59,6 +65,9 @@ The following JDBC URL examples show the syntax for several database engines\.
   The syntax for Amazon RDS for SQL Server can follow the following patterns\. In these patterns, replace *server\_name*, *port*, and *db\_name* with your own information\. 
   + `jdbc:sqlserver://server_name:port;database=db_name`
   + `jdbc:sqlserver://server_name:port;databaseName=db_name`
++ To connect to an Amazon Aurora PostgreSQL instance of the `employee` database, specify the endpoint for the database instance, the port, and the database name:
+
+  `jdbc:postgresql://employee_instance_1.xxxxxxxxxxxx.us-east-2.rds.amazonaws.com:5432/employee`
 
 **Username**  
 Provide a user name that has permission to access the JDBC data store\.
@@ -90,8 +99,8 @@ This option is validated on the AWS Glue client side\. For JDBC connections, AWS
 + PostgreSQL
 + Amazon Redshift
 + MySQL \(Amazon RDS instances only\)
-+ Aurora MySQL \(Amazon RDS instances only\)
-+ Aurora Postgres \(Amazon RDS instances only\)
++ Amazon Aurora MySQL \(Amazon RDS instances only\)
++ Amazon Aurora PostgreSQL \(Amazon RDS instances only\)
 + Kafka, which includes Amazon Managed Streaming for Apache Kafka
 
 **Note**  
@@ -115,9 +124,18 @@ The following is an example for the Oracle Database `SSL_SERVER_CERT_DN` paramet
 cn=sales,cn=OracleContext,dc=us,dc=example,dc=com
 ```
 
-**Custom Kafka certificate in S3**  
+**Kafka private CA certificate location**  
 If you have a certificate that you are currently using for SSL communication with your Kafka data store, you can use that certificate with your AWS Glue connection\. This option is required for Kafka data stores, and optional for Amazon Managed Streaming for Apache Kafka data stores\. Enter an Amazon Simple Storage Service \(Amazon S3\) location that contains a custom root certificate\. AWS Glue uses this certificate to establish an SSL connection to the Kafka data store\. AWS Glue handles only X\.509 certificates\. The certificate must be DER\-encoded and supplied in base64 encoding PEM format\. 
 
 **Skip certificate validation**  
 Select the **Skip certificate validation** check box to skip validation of the custom certificate by AWS Glue\. If you choose to validate, AWS Glue validates the signature algorithm and subject public key algorithm for the certificate\. If the certificate fails validation, any ETL job or crawler that uses the connection fails\.  
 The only permitted signature algorithms are SHA256withRSA, SHA384withRSA, or SHA512withRSA\. For the subject public key algorithm, the key length must be at least 2048\.
+
+**Kafka client keystore location**  
+The Amazon S3 location of the client keystore file for Kafka client side authentication\. Path must be in the form s3://bucket/prefix/filename\.jks\. It must end with the file name and \.jks extension\.
+
+**Kafka client keystore password \(optional\)**  
+The password to access the provided keystore\.
+
+**Kafka client key password \(optional\)**  
+A keystore can consist of multiple keys, so this is the password to access the client key to be used with the Kafka server side key\.

@@ -21,8 +21,7 @@ To specify at\-rest encryption options, add a security configuration to the deve
 The type of predefined worker that is allocated to the development endpoint\. Accepts a value of `Standard`, `G.1X`, or `G.2X`\.  
    + For the `Standard` worker type, each worker provides 4 vCPU, 16 GB of memory, a 50 GB disk, and 2 executors per worker\.
    + For the `G.1X` worker type, each worker maps to 1 DPU \(4 vCPU, 16 GB of memory, and a 64 GB disk\), and provides 1 executor per worker\. We recommend this worker type for memory\-intensive jobs\.
-   + For the `G.2X` worker type, each worker maps to 2 DPU \(8 vCPU, 32 GB of memory, and a 128 GB disk\), and provides 1 executor per worker\. We recommend this worker type for memory\-intensive jobs\.
-**Known issue:** When you create a development endpoint with the `G.2X` `WorkerType` configuration, the Spark drivers for the development endpoint run on 4 vCPU, 16 GB of memory, and a 64 GB disk\.   
+   + For the `G.2X` worker type, each worker maps to 2 DPU \(8 vCPU, 32 GB of memory, and a 128 GB disk\), and provides 1 executor per worker\. We recommend this worker type for memory\-intensive jobs\.  
 **Number of workers**  
 The number of workers of a defined `workerType` that are allocated to the development endpoint\. This field is available only when you choose worker type G\.1X or G\.2X\.  
 The maximum number of workers you can define is 299 for `G.1X`, and 149 for `G.2X`\.   
@@ -39,9 +38,9 @@ Specifies the versions of Python and Apache Spark to use\. Defaults to AWS Glue 
 **Tags**  
 Tag your development endpoint with a **Tag key** and optional **Tag value**\. After tag keys are created, they are read\-only\. Use tags on some resources to help you organize and identify them\. For more information, see [AWS Tags in AWS Glue](monitor-tags.md)\.   
 **Spark UI**  
-Enable the use of Spark UI for monitoring Spark applications running on this development endpoint\. For more information, see [Enabling the Apache Spark Web UI for Development Endpoints](monitor-spark-ui-dev-endpoints.md)\.   
+Turns on the use of Spark UI for monitoring Spark applications running on this development endpoint\. For more information, see [Enabling the Apache Spark Web UI for Development Endpoints](monitor-spark-ui-dev-endpoints.md)\.   
 **Use AWS Glue Data Catalog as the Hive metastore \(under Catalog Options\)**  
-Enables you to use the AWS Glue Data Catalog as a Spark Hive metastore\.
+Allows you to use the AWS Glue Data Catalog as a Spark Hive metastore\.
 
 **To add a development endpoint \(AWS CLI\)**
 

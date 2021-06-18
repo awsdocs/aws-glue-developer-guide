@@ -202,18 +202,20 @@ Sets the Data Catalog resource policy for access control\.
   Contains the policy document to set, in JSON format\.
 + `ResourceArn` – UTF\-8 string, not less than 1 or more than 10240 bytes long, matching the [AWS Glue ARN string pattern](aws-glue-api-common.md#aws-glue-api-regex-aws-glue-arn-id)\.
 
-  The ARN of the AWS Glue resource for the resource policy to be set\. For more information about AWS Glue resource ARNs, see the [AWS Glue ARN string pattern](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id)
+  Do not use\. For internal use only\.
 + `PolicyHashCondition` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The hash value returned when the previous policy was set using `PutResourcePolicy`\. Its purpose is to prevent concurrent modifications of a policy\. Do not use this parameter if no previous policy has been set\.
 + `PolicyExistsCondition` – UTF\-8 string \(valid values: `MUST_EXIST` \| `NOT_EXIST` \| `NONE`\)\.
 
-  A value of `MUST_EXIST` is used to update a policy\. A value of `NOT_EXIST` is used to create a new policy\. If a value of `NONE` or a null value is used, the call will not depend on the existence of a policy\.
+  A value of `MUST_EXIST` is used to update a policy\. A value of `NOT_EXIST` is used to create a new policy\. If a value of `NONE` or a null value is used, the call does not depend on the existence of a policy\.
 + `EnableHybrid` – UTF\-8 string \(valid values: `TRUE` \| `FALSE`\)\.
 
-  Allows you to specify if you want to use both resource\-level and account/catalog\-level resource policies\. A resource\-level policy is a policy attached to an individual resource such as a database or a table\.
+  If `'TRUE'`, indicates that you are using both methods to grant cross\-account access to Data Catalog resources:
+  + By directly updating the resource policy with `PutResourePolicy`
+  + By using the **Grant permissions** command on the AWS Management Console\.
 
-  The default value of `NO` indicates that resource\-level policies cannot co\-exist with an account\-level policy\. A value of `YES` means the use of both resource\-level and account/catalog\-level resource policies is allowed\.
+  Must be set to `'TRUE'` if you have already used the Management Console to grant cross\-account access, otherwise the call fails\. Default is 'FALSE'\.
 
 **Response**
 + `PolicyHash` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
@@ -234,7 +236,7 @@ Retrieves a specified resource policy\.
 **Request**
 + `ResourceArn` – UTF\-8 string, not less than 1 or more than 10240 bytes long, matching the [AWS Glue ARN string pattern](aws-glue-api-common.md#aws-glue-api-regex-aws-glue-arn-id)\.
 
-  The ARN of the AWS Glue resource for the resource policy to be retrieved\. For more information about AWS Glue resource ARNs, see the [AWS Glue ARN string pattern](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id)
+  The ARN of the AWS Glue resource for which to retrieve the resource policy\. If not supplied, the Data Catalog resource policy is returned\. Use `GetResourcePolicies` to view all existing resource policies\. For more information see [Specifying AWS Glue Resource ARNs](https://docs.aws.amazon.com/glue/latest/dg/glue-specifying-resource-arns.html)\. 
 
 **Response**
 + `PolicyInJson` – UTF\-8 string, not less than 2 or more than 10240 bytes long\.
@@ -371,9 +373,9 @@ Retrieves a list of all security configurations\.
 
 ## GetResourcePolicies Action \(Python: get\_resource\_policies\)<a name="aws-glue-api-jobs-security-GetResourcePolicies"></a>
 
-Retrieves the security configurations for the resource policies set on individual resources, and also the account\-level policy\.
+Retrieves the resource policies set on individual resources by AWS Resource Access Manager during cross\-account permission grants\. Also retrieves the Data Catalog resource policy\.
 
-This operation also returns the Data Catalog resource policy\. However, if you enabled metadata encryption in Data Catalog settings, and you do not have permission on the AWS KMS key, the operation can't return the Data Catalog resource policy\.
+If you enabled metadata encryption in Data Catalog settings, and you do not have permission on the AWS KMS key, the operation can't return the Data Catalog resource policy\.
 
 **Request**
 + `NextToken` – UTF\-8 string\.

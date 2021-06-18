@@ -74,7 +74,7 @@ Caused by: MetaException(message:java.lang.ClassNotFoundException Class org.open
     ... 64 more
 ```
 
-To view only the distinct `organization_id`s from the `memberships` table, execute the following SQL query\.
+To view only the distinct `organization_id`s from the `memberships` table, run the following SQL query\.
 
 ```
 >>> spark.sql("select distinct organization_id from memberships_json").show()
@@ -86,7 +86,7 @@ To view only the distinct `organization_id`s from the `memberships` table, execu
 +--------------------+
 ```
 
-If you need to do the same with dynamic frames, execute the following\.
+If you need to do the same with dynamic frames, run the following\.
 
 ```
 >>> memberships = glueContext.create_dynamic_frame.from_catalog(database="legislators", table_name="memberships_json")
@@ -100,4 +100,4 @@ If you need to do the same with dynamic frames, execute the following\.
 +--------------------+
 ```
 
-While DynamicFrames are optimized for ETL operations, enabling Spark SQL to access the Data Catalog directly provides a concise way to execute complex SQL statements or port existing applications\.
+While DynamicFrames are optimized for ETL operations, enabling Spark SQL to access the Data Catalog directly provides a concise way to run complex SQL statements or port existing applications\.

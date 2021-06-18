@@ -63,8 +63,10 @@ Begin by creating a `DynamicFrame` for the data:
 
 ```
 %pyspark
+import sys
 from awsglue.context import GlueContext
 from awsglue.transforms import *
+from awsglue.utils import getResolvedOptions
 from pyspark.context import SparkContext
 
 glueContext = GlueContext(SparkContext.getOrCreate())
@@ -75,7 +77,7 @@ dyF = glueContext.create_dynamic_frame.from_options(
         'csv',
         {'withHeader': True})
 
-print "Full record count:  ", dyF.count()
+print ("Full record count:  ", dyF.count())
 dyF.printSchema()
 ```
 

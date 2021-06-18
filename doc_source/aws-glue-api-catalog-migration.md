@@ -26,7 +26,7 @@ A structure containing migration status information\.
 
 ## ImportCatalogToGlue Action \(Python: import\_catalog\_to\_glue\)<a name="aws-glue-api-catalog-migration-ImportCatalogToGlue"></a>
 
-Imports an existing Amazon Athena Data Catalog to AWS Glue
+Imports an existing Amazon Athena Data Catalog to AWS Glue\.
 
 **Request**
 + `CatalogId` – Catalog id string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.

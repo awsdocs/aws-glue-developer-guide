@@ -1,6 +1,6 @@
-# Getting and Setting Workflow Run Properties<a name="workflow-run-properties-code"></a>
+# Getting and Setting Workflow Run Properties in AWS Glue<a name="workflow-run-properties-code"></a>
 
-Use workflow run properties to share and manage state among the jobs in your AWS Glue workflow\. You can set default run properties when you create the workflow\. Then, as your jobs run, they can retrieve the run property values and optionally modify them for input to jobs that are later in the workflow\. When a job modifies a run property, the new value exists only for the workflow run; the default run properties are not affected\.
+Use workflow run properties to share and manage state among the jobs in your AWS Glue workflow\. You can set default run properties when you create the workflow\. Then, as your jobs run, they can retrieve the run property values and optionally modify them for input to jobs that are later in the workflow\. When a job modifies a run property, the new value exists only for the workflow run\. The default run properties aren't affected\.
 
 The following sample Python code from an extract, transform, and load \(ETL\) job demonstrates how to get the workflow run properties\.
 

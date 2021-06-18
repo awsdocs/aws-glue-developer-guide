@@ -42,13 +42,30 @@ For the writer: this table shows the conversion between AWS Glue `DynamicFrame` 
 This value designates `comma-separated-values` as the data format \(for example, see [RFC 4180](https://tools.ietf.org/html/rfc4180) and [RFC 7111](https://tools.ietf.org/html/rfc7111)\)\.
 
 You can use the following `format_options` values with `format="csv"`:
-+ `separator` — Specifies the delimiter character\. The default is a comma: `','`, but any other character can be specified\.
-+ `escaper` — Specifies a character to use for escaping\. The default value is `"none"`\. If enabled, the character which immediately follows is used as\-is, except for a small set of well\-known escapes \(`\n`, `\r`, `\t`, and `\0`\)\.
-+ `quoteChar` — Specifies the character to use for quoting\. The default is a double quote: `'"'`\. Set this to `'-1'` to disable quoting entirely\.
-+ `multiline` — A Boolean value that specifies whether a single record can span multiple lines\. This can occur when a field contains a quoted new\-line character\. You must set this option to `True` if any record spans multiple lines\. The default value is `False`, which allows for more aggressive file\-splitting during parsing\.
++ `separator` — Specifies the delimiter character\. The default is a comma: `","`, but any other character can be specified\.
++ `escaper` — Specifies a character to use for escaping\. This option is used only when reading CSV files\. The default value is `none`\. If enabled, the character which immediately follows is used as\-is, except for a small set of well\-known escapes \(`\n`, `\r`, `\t`, and `\0`\)\.
++ `quoteChar` — Specifies the character to use for quoting\. The default is a double quote: `'"'`\. Set this to `-1` to turn off quoting entirely\.
++ `multiLine` — A Boolean value that specifies whether a single record can span multiple lines\. This can occur when a field contains a quoted new\-line character\. You must set this option to `True` if any record spans multiple lines\. The default value is `False`, which allows for more aggressive file\-splitting during parsing\.
 + `withHeader` — A Boolean value that specifies whether to treat the first line as a header\. The default value is `False`\. This option can be used in the `DynamicFrameReader` class\.
 + `writeHeader` — A Boolean value that specifies whether to write the header to output\. The default value is `True`\. This option can be used in the `DynamicFrameWriter` class\.
 + `skipFirst` — A Boolean value that specifies whether to skip the first data line\. The default value is `False`\.
+
+The following example shows how to specify the format options within an AWS Glue ETL job script\.
+
+```
+glueContext.write_dynamic_frame.from_options(
+    frame = datasource1,
+    connection_type = "s3", 
+    connection_options = {
+        "path": "s3://s3path"
+        }, 
+    format = "csv", 
+    format_options={
+        "quoteChar": -1, 
+        "separator": "|"
+        }, 
+    transformation_ctx = "datasink2")
+```
 
 ## format="ion"<a name="aws-glue-programming-etl-format-ion"></a>
 
@@ -69,7 +86,7 @@ You can use the following `format_options` values with `format="grokLog"`:
 + `customPatterns` — Specifies additional Grok patterns used here\.
 + `MISSING` — Specifies the signal to use in identifying missing values\. The default is `'-'`\.
 + `LineCount` — Specifies the number of lines in each log record\. The default is `'1'`, and currently only single\-line records are supported\.
-+ `StrictMode` — A Boolean value that specifies whether strict mode is enabled\. In strict mode, the reader doesn't do automatic type conversion or recovery\. The default value is `"false"`\.
++ `StrictMode` — A Boolean value that specifies whether strict mode is turned on\. In strict mode, the reader doesn't do automatic type conversion or recovery\. The default value is `"false"`\.
 
 ## format="json"<a name="aws-glue-programming-etl-format-json"></a>
 
@@ -81,7 +98,7 @@ You can use the following `format_options` values with `format="json"`:
   ```
   format="json", format_options={"jsonPath": "$.id"}
   ```
-+ `multiline` — A Boolean value that specifies whether a single record can span multiple lines\. This can occur when a field contains a quoted new\-line character\. You must set this option to `"true"` if any record spans multiple lines\. The default value is `"false"`, which allows for more aggressive file\-splitting during parsing\.
++ `multiLine` — A Boolean value that specifies whether a single record can span multiple lines\. This can occur when a field contains a quoted new\-line character\. You must set this option to `"true"` if any record spans multiple lines\. The default value is `"false"`, which allows for more aggressive file\-splitting during parsing\.
 
 ## format="orc"<a name="aws-glue-programming-etl-format-orc"></a>
 
@@ -97,12 +114,12 @@ There are no `format_options` values for `format="parquet"`\. However, any optio
 
 ## format="glueparquet"<a name="aws-glue-programming-etl-format-glue-parquet"></a>
 
-This value designates a custom Parquet writer type that is optimized for Dynamic Frames as the data format\. A precomputed schema is not required before writing\. As data comes in, `glueparquet` computes and modifies the schema dynamically\. 
+This value designates [Apache Parquet](https://parquet.apache.org/documentation/latest/) as the data format, but also designates a custom Parquet writer type that is optimized for Dynamic Frames as the data format\. A pre\-computed schema is not required before writing\. As data comes in, `glueparquet` computes and modifies the schema dynamically\. You can either set `format="glueparquet"`, or alternatively, set `format="parquet"` paired with a `format_option` of `useGlueParquetWriter` set to `true`\.
 
-You can use the following `format_options` values with `format="glueparquet"`:
+You can use the following `format_options` values:
 + `compression` — Specifies the compression codec used when writing Parquet files\. The compression codec used with the `glueparquet` format is fully compatible with `org.apache.parquet.hadoop.metadata.CompressionCodecName *`, which includes support for `"uncompressed"`, `"snappy"`, `"gzip"` and `"lzo"`\. The default value is `"snappy"`\. 
-+ `blockSize` — Specifies the size of a row group being buffered in memory\. The default value is `"128MB"`\.
-+ `pageSize` — Specifies the size of the smallest unit that must be read fully to access a single record\. The default value is `"1MB"`\.
++ `blockSize` — Specifies the size in bytes of a row group being buffered in memory in megabytes\. The default value is `134217728`, or 128 MB\.
++ `pageSize` — Specifies the size in bytes of the smallest unit that must be read fully to access a single record\. The default value is `1048576`, or 1 MB\.
 
 
 
@@ -125,3 +142,28 @@ You can use the following `format_options` values with `format="xml"`:
 + `attributePrefix` — A prefix for attributes to differentiate them from elements\. This prefix is used for field names\. The default value is `"_"`\.
 + `valueTag` — The tag used for a value when there are attributes in the element that have no child\. The default is `"_VALUE"`\.
 + `ignoreSurroundingSpaces` — A Boolean value that specifies whether the white space that surrounds values should be ignored\. The default value is `"false"`\.
++ `withSchema` — A string value that contains the expected schema\. If you do not use this option, AWS Glue infers the schema from the XML data\.
+
+**Example**
+
+This is an example of using the `withSchema` format option to specify the schema for XML data\.
+
+```
+schema = StructType([ 
+  Field("id", IntegerType()),
+  Field("name", StringType()),
+  Field("nested", StructType([
+    Field("x", IntegerType()),
+    Field("y", StringType()),
+    Field("z", ChoiceType([IntegerType(), StringType()]))
+  ]))
+])
+
+datasource0 = create_dynamic_frame_from_options(
+    connection_type, 
+    connection_options={"paths": ["s3://xml_bucket/someprefix"]},
+    format="xml", 
+    format_options={"withSchema": json.dumps(schema.jsonValue())},
+    transformation_ctx = ""
+)
+```

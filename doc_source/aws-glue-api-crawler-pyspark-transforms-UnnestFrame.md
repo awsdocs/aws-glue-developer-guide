@@ -50,3 +50,33 @@ Inherited from `GlueTransform` [describeErrors](aws-glue-api-crawler-pyspark-tra
 ## describe\(cls\)<a name="aws-glue-api-crawler-pyspark-transforms-UnnestFrame-describe"></a>
 
 Inherited from `GlueTransform` [describe](aws-glue-api-crawler-pyspark-transforms-GlueTransform.md#aws-glue-api-crawler-pyspark-transforms-GlueTransform-describe)\.
+
+## Example for UnnestFrame<a name="pyspark-UnnestFrame-example"></a>
+
+The following command shows the schema of the `dyf_unbox` DynamicFrame that is used in this example\.
+
+```
+dyf_unbox.printSchema()
+
+root
+|-- warehouse_loc: string
+|-- data: struct
+| |-- strawberry: int
+| |-- pineapple: int
+| |-- mango: int
+| |-- pears: null
+```
+
+The Unnest function in the following example flattens the nested structure `data` into a more relational table format\.
+
+```
+dyf_unnest = UnnestFrame.apply(frame = dyf_unbox) 
+
+dyf_unnest.printSchema() 
+
+|-- warehouse_loc: string
+|-- data.strawberry: int
+|-- data.pineapple: int
+|-- data.mango: int
+|-- data.pears: null
+```

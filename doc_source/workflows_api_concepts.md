@@ -8,13 +8,15 @@ AWS Glue provides a rich API for managing workflows\. You can retrieve a static 
 
 ## Querying Static Views<a name="workflows_api_concepts_static"></a>
 
-Use the `GetWorkflow` API operation to get a static view that indicates the design of a workflow\. This operation returns a directed graph consisting of nodes and edges, where a node represents a trigger, a job, or a crawler\. Edges define the relationships between nodes\. They are represented by connectors \(arrows\) on the graph in the AWS Glue console\. You can also use this operation with popular graph\-processing libraries such as NetworkX, igraph, JGraphT, and the Java Universal Network/Graph \(JUNG\) Framework\. Because all these libraries represent graphs similarly, minimal transformations are needed\.
+Use the `GetWorkflow` API operation to get a static view that indicates the design of a workflow\. This operation returns a directed graph consisting of nodes and edges, where a node represents a trigger, a job, or a crawler\. Edges define the relationships between nodes\. They are represented by connectors \(arrows\) on the graph in the AWS Glue console\. 
+
+You can also use this operation with popular graph\-processing libraries such as NetworkX, igraph, JGraphT, and the Java Universal Network/Graph \(JUNG\) Framework\. Because all these libraries represent graphs similarly, minimal transformations are needed\.
 
 The static view returned by this API is the most up\-to\-date view according to the latest definition of triggers associated with the workflow\.
 
 ### Graph Definition<a name="workflows_api_concepts_static_graph"></a>
 
-A workflow graph G is an ordered pair \(N, E\), where N is a set of nodes and E a set of edges\. *Node* is a vertex in the graph identified by a unique number\. A node can be of type trigger, job, or crawler; for example: `{name:T1, type:Trigger, uniqueId:1}, {name:J1, type:Job, uniqueId:2}`
+A workflow graph G is an ordered pair \(N, E\), where N is a set of nodes and E a set of edges\. *Node* is a vertex in the graph identified by a unique number\. A node can be of type trigger, job, or crawler\. For example: `{name:T1, type:Trigger, uniqueId:1}, {name:J1, type:Job, uniqueId:2}`\.
 
 *Edge* is a 2\-tuple of the form \(`src, dest`\), where `src` and `dest` are nodes and there is a directed edge from `src` to `dest`\. 
 
@@ -34,11 +36,11 @@ Edges: \(J1, T\), \(T, J2\)
 
 Use the `GetWorkflowRun` API operation to get a dynamic view of a running workflow\. This operation returns the same static view of the graph along with metadata related to the workflow run\.
 
-For instance, nodes representing jobs in the `GetWorkflowRun` call have a list of job runs initiated as part of the latest run of the workflow\. You can use this list to display the run status of each job in the graph itself\. For downstream dependencies that are not yet executed, this field is set to `null`\. The graphed information makes you aware of the current state of any workflow at any point of time\.
+For run, nodes representing jobs in the `GetWorkflowRun` call have a list of job runs initiated as part of the latest run of the workflow\. You can use this list to display the run status of each job in the graph itself\. For downstream dependencies that are not yet run, this field is set to `null`\. The graphed information makes you aware of the current state of any workflow at any point of time\.
 
-The dynamic view returned by this API is as per the static view that was present when the workflow run was started\.
+The dynamic view returned by this API is based on the static view that was present when the workflow run was started\.
 
-*Run\-time nodes example:* `{name:T1, type: Trigger, uniqueId:1}`, `{name:J1, type:Job, uniqueId:2, jobDetails:{jobRuns}}`, `{name:C1, type:Crawler, uniqueId:3, crawlerDetails:{crawls}}` 
+*Runtime nodes example:* `{name:T1, type: Trigger, uniqueId:1}`, `{name:J1, type:Job, uniqueId:2, jobDetails:{jobRuns}}`, `{name:C1, type:Crawler, uniqueId:3, crawlerDetails:{crawls}}` 
 
 ### Example 1: Dynamic View<a name="workflows_api_concepts_dynamic_examples"></a>
 

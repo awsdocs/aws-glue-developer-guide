@@ -7,7 +7,7 @@ Note the following known issues for AWS Glue\.
 
 ## Preventing Cross\-Job Data Access<a name="cross-job-access"></a>
 
-Consider the situation where you have two AWS Glue Spark jobs in a single AWS account, each running in a separate AWS Glue Spark cluster\. The jobs are using AWS Glue connections to access resources in the same virtual private cloud \(VPC\)\. In this situation, a job running in one cluster might be able to access the data from the job running in the other cluster\. 
+Consider the situation where you have two AWS Glue Spark jobs in a single AWS Account, each running in a separate AWS Glue Spark cluster\. The jobs are using AWS Glue connections to access resources in the same virtual private cloud \(VPC\)\. In this situation, a job running in one cluster might be able to access the data from the job running in the other cluster\. 
 
 The following diagram illustrates an example of this situation\.
 

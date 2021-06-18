@@ -6,6 +6,10 @@ Local development is available for all AWS Glue versions, including AWS Glue ver
 
 The library is released with the Amazon Software license \([https://aws.amazon.com/asl](https://aws.amazon.com/asl)\)\.
 
+**Note**  
+The instructions in this section have not been tested on Microsoft Windows operating systems\.  
+For local development and testing on Windows platforms, see the blog [Building an AWS Glue ETL pipeline locally without an AWS account](https://aws.amazon.com/blogs/big-data/building-an-aws-glue-etl-pipeline-locally-without-an-aws-account/)
+
 **Topics**
 + [Local Development Restrictions](#local-dev-restrictions)
 + [Developing Locally using Docker image](#develop-local-docker-image)
@@ -20,6 +24,7 @@ Keep the following restrictions in mind when using the AWS Glue Scala library to
   + [Job bookmarks](https://docs.aws.amazon.com/glue/latest/dg/monitor-continuations.html)
   + AWS Glue Parquet writer \([format="glueparquet"](aws-glue-programming-etl-format.md#aws-glue-programming-etl-format-glue-parquet)\)
   + [FindMatches transform](https://docs.aws.amazon.com/glue/latest/dg/machine-learning.html#find-matches-transform)
+  + FillMissingValues transform \([Scala](https://docs.aws.amazon.com/glue/latest/dg/glue-etl-scala-apis-glue-ml-fillmissingvalues.html) or [Python](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-crawler-pyspark-transforms-fillmissingvalues.html)\)
 
   These feature are available only within the AWS Glue job system\.
 
@@ -35,7 +40,7 @@ Complete some prerequisite steps and then use AWS Glue utilities to test and sub
 
 Complete these steps to prepare for local Python development:
 
-1. Download the AWS Glue Python library from github \([https://github.com/awslabs/aws-glue-libs](https://github.com/awslabs/aws-glue-libs)\)\.
+1. Clone the AWS Glue Python repository from GitHub \([https://github.com/awslabs/aws-glue-libs](https://github.com/awslabs/aws-glue-libs)\)\.
 
 1. Do one of the following:
    + For AWS Glue version 0\.9, stay on the `master` branch\.
@@ -97,7 +102,7 @@ Use the following `pom.xml` file as a template for your AWS Glue Scala applicati
     <artifactId>AWSGlueApp</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>${project.artifactId}</name>
-    <description>AWS Glue ETL application</description>
+    <description>AWS ETL application</description>
 
         <properties>
         <scala.version>2.11.1</scala.version>
@@ -196,7 +201,7 @@ Use the following `pom.xml` file as a template for your AWS Glue Scala applicati
 
 ### Running Your Scala ETL Script<a name="local-run-scala-job"></a>
 
-Run the following command from the Maven project root directory to execute your Scala ETL script\.
+Run the following command from the Maven project root directory to run your Scala ETL script\.
 
 ```
 mvn exec:java -Dexec.mainClass="mainClass" -Dexec.args="--JOB-NAME jobName"

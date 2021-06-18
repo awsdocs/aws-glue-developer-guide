@@ -9,7 +9,7 @@ You can use job metrics in AWS Glue to estimate the number of data processing un
 
 ## Profiled Code<a name="monitor-debug-capacity-profile"></a>
 
-The following script reads an Amazon Simple Storage Service \(Amazon S3\) partition containing 428 gzipped JSON files\. The script applies a mapping to change the field names, and converts and writes them to Amazon S3 in Apache Parquet format\. You provision 10 DPUs as per the default and execute this job\. 
+The following script reads an Amazon Simple Storage Service \(Amazon S3\) partition containing 428 gzipped JSON files\. The script applies a mapping to change the field names, and converts and writes them to Amazon S3 in Apache Parquet format\. You provision 10 DPUs as per the default and run this job\. 
 
 ```
 datasource0 = glueContext.create_dynamic_frame.from_options(connection_type="s3", connection_options = {"paths": [input_path], "useS3ListImplementation":True,"recurse":True}, format="json")
@@ -25,7 +25,7 @@ The number of maximum needed executors is computed by adding the total number of
 
 In contrast, the number of actively running executors measures how many executors are running active Apache Spark tasks\. As the job progresses, the maximum needed executors can change and typically goes down towards the end of the job as the pending task queue diminishes\.
 
-The horizontal red line in the following graph shows the number of maximum allocated executors, which depends on the number of DPUs that you allocate for the job\. In this case, you allocate 10 DPUs for the job run\. One DPU is reserved for the master\. Nine DPUs run two executors each and one executor is reserved for the Spark driver\. The Spark driver runs inside the application master\. So, the number of maximum allocated executors is 2\*9 \- 1 = 17 executors\.
+The horizontal red line in the following graph shows the number of maximum allocated executors, which depends on the number of DPUs that you allocate for the job\. In this case, you allocate 10 DPUs for the job run\. One DPU is reserved for management\. Nine DPUs run two executors each and one executor is reserved for the Spark driver\. The Spark driver runs inside the primary application\. So, the number of maximum allocated executors is 2\*9 \- 1 = 17 executors\.
 
 ![\[The job metrics showing active executors and maximum needed executors.\]](http://docs.aws.amazon.com/glue/latest/dg/images/monitor-debug-capacity-1.png)
 

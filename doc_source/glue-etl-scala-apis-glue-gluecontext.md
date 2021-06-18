@@ -32,16 +32,55 @@ Example:
 glueContext.addIngestionColumns(dataFrame, "hour")
 ```
 
+## forEachBatch<a name="glue-etl-scala-apis-glue-gluecontext-defs-forEachBatch"></a>
+
+**`forEachBatch(frame, batch_function, options)`**
+
+Applies the `batch_function` passed in to every micro batch that is read from the Streaming source\.
++ `frame` – The DataFrame containing the current micro batch\.
++ `batch_function` – A function that will be applied for every micro batch\.
++ `options` – A collection of key\-value pairs that holds information about how to process micro batches\. The following options are required:
+  + `windowSize` – The amount of time to spend processing each batch\.
+  + `checkpointLocation` – The location where checkpoints are stored for the streaming ETL job\.
+
+**Example:**
+
+```
+glueContext.forEachBatch(data_frame_datasource0, (dataFrame: Dataset[Row], batchId: Long) => 
+   {
+      if (dataFrame.count() > 0) 
+        {
+          val datasource0 = DynamicFrame(glueContext.addIngestionTimeColumns(dataFrame, "hour"), glueContext)
+          // @type: DataSink
+          // @args: [database = "tempdb", table_name = "fromoptionsoutput", stream_batch_time = "100 seconds", 
+          //      stream_checkpoint_location = "s3://from-options-testing-eu-central-1/fromOptionsOutput/checkpoint/", 
+          //      transformation_ctx = "datasink1"]
+          // @return: datasink1
+          // @inputs: [frame = datasource0]
+          val options_datasink1 = JsonOptions(
+             Map("partitionKeys" -> Seq("ingest_year", "ingest_month","ingest_day", "ingest_hour"), 
+             "enableUpdateCatalog" -> true))
+          val datasink1 = glueContext.getCatalogSink(
+             database = "tempdb", 
+             tableName = "fromoptionsoutput", 
+             redshiftTmpDir = "", 
+             transformationContext = "datasink1", 
+             additionalOptions = options_datasink1).writeDynamicFrame(datasource0)
+        }
+   }, JsonOptions("""{"windowSize" : "100 seconds", 
+         "checkpointLocation" : "s3://from-options-testing-eu-central-1/fromOptionsOutput/checkpoint/"}"""))
+```
+
 ## def getCatalogSink<a name="glue-etl-scala-apis-glue-gluecontext-defs-getCatalogSink"></a>
 
 ```
 def getCatalogSink( database : String,
-                    tableName : String,
-                    redshiftTmpDir : String = "",
-                    transformationContext : String = ""
-                    additionalOptions: JsonOptions = JsonOptions.empty,
-                    catalogId: String = null                                
-                  ) : DataSink
+        tableName : String,
+        redshiftTmpDir : String = "",
+        transformationContext : String = ""
+        additionalOptions: JsonOptions = JsonOptions.empty,
+        catalogId: String = null   
+) : DataSink
 ```
 
 Creates a [DataSink](glue-etl-scala-apis-glue-datasink-class.md) that writes to a location specified in a table that is defined in the Data Catalog\.
@@ -77,6 +116,19 @@ Creates a [DataSource trait](glue-etl-scala-apis-glue-datasource-trait.md) that 
 + `catalogId` — The catalog ID \(account ID\) of the Data Catalog being accessed\. When null, the default account ID of the caller is used\. 
 
 Returns the `DataSource`\.
+
+**Example for streaming source**
+
+```
+val data_frame_datasource0 = glueContext.getCatalogSource(
+    database = "tempdb",
+    tableName = "test-stream-input", 
+    redshiftTmpDir = "", 
+    transformationContext = "datasource0", 
+    additionalOptions = JsonOptions("""{
+        "startingPosition": "TRIM_HORIZON", "inferSchema": "false"}""")
+    ).getDataFrame()
+```
 
 ## def getJDBCSink<a name="glue-etl-scala-apis-glue-gluecontext-defs-getJDBCSink"></a>
 
@@ -115,14 +167,14 @@ Returns the `DataSink`\.
 
 ```
 def getSink( connectionType : String,
-             options : JsonOptions,
+             connectionOptions : JsonOptions,
              transformationContext : String = ""
            ) : DataSink
 ```
 
 Creates a [DataSink](glue-etl-scala-apis-glue-datasink-class.md) that writes data to a destination like Amazon Simple Storage Service \(Amazon S3\), JDBC, or the AWS Glue Data Catalog\.
 + `connectionType` — The type of the connection\. See [Connection Types and Options for ETL in AWS Glue](aws-glue-programming-etl-connect.md)\.
-+ `options` — A string of JSON name\-value pairs that provide additional information to establish the connection with the data sink\. See [Connection Types and Options for ETL in AWS Glue](aws-glue-programming-etl-connect.md)\.
++ `connectionOptions` — A string of JSON name\-value pairs that provide additional information to establish the connection with the data sink\. See [Connection Types and Options for ETL in AWS Glue](aws-glue-programming-etl-connect.md)\.
 + `transformationContext` — The transformation context that is associated with the sink to be used by job bookmarks\. Set to empty by default\.
 
 Returns the `DataSink`\.
@@ -157,13 +209,48 @@ def getSource( connectionType : String,
              ) : DataSource
 ```
 
-Creates a [DataSource trait](glue-etl-scala-apis-glue-datasource-trait.md) that reads data from a source like Amazon S3, JDBC, or the AWS Glue Data Catalog\.
+Creates a [DataSource trait](glue-etl-scala-apis-glue-datasource-trait.md) that reads data from a source like Amazon S3, JDBC, or the AWS Glue Data Catalog\. Also supports Kafka and Kinesis streaming data sources\.
 + `connectionType` — The type of the data source\. See [Connection Types and Options for ETL in AWS Glue](aws-glue-programming-etl-connect.md)\.
-+ `connectionOptions` — A string of JSON name\-value pairs that provide additional information for establishing a connection with the data source\. See [Connection Types and Options for ETL in AWS Glue](aws-glue-programming-etl-connect.md)\.
++ `connectionOptions` — A string of JSON name\-value pairs that provide additional information for establishing a connection with the data source\. For more information, see [Connection Types and Options for ETL in AWS Glue](aws-glue-programming-etl-connect.md)\.
+
+  A Kinesis streaming source requires the following connection options: `streamARN`, `startingPosition`, `inferSchema`, and `classification`\.
+
+  A Kafka streaming source requires the following connection options: `connectionName`, `topicName`, `startingOffsets`, `inferSchema`, and `classification`\.
 + `transformationContext` — The transformation context that is associated with the sink to be used by job bookmarks\. Set to empty by default\.
 + `pushDownPredicate` — Predicate on partition columns\.
 
 Returns the `DataSource`\.
+
+Example for Amazon Kinesis streaming source:
+
+```
+val kinesisOptions = jsonOptions()
+data_frame_datasource0 = glueContext.getSource("kinesis", kinesisOptions).getDataFrame()
+
+private def jsonOptions(): JsonOptions = {
+    new JsonOptions(
+      s"""{"streamARN": "arn:aws:kinesis:eu-central-1:123456789012:stream/fromOptionsStream",
+         |"startingPosition": "TRIM_HORIZON",
+         |"inferSchema": "true",
+         |"classification": "json"}""".stripMargin)
+}
+```
+
+Example for Kafka streaming source:
+
+```
+val kafkaOptions = jsonOptions()
+val data_frame_datasource0 = glueContext.getSource("kafka", kafkaOptions).getDataFrame()
+
+private def jsonOptions(): JsonOptions = {
+    new JsonOptions(
+      s"""{"connectionName": "ConfluentKafka",
+         |"topicName": "kafka-auth-topic",
+         |"startingOffsets": "earliest",
+         |"inferSchema": "true",
+         |"classification": "json"}""".stripMargin)
+ }
+```
 
 ## def getSourceWithFormat<a name="glue-etl-scala-apis-glue-gluecontext-defs-getSourceWithFormat"></a>
 
@@ -177,13 +264,57 @@ def getSourceWithFormat( connectionType : String,
 ```
 
 Creates a [DataSource trait](glue-etl-scala-apis-glue-datasource-trait.md) that reads data from a source like Amazon S3, JDBC, or the AWS Glue Data Catalog, and also sets the format of data stored in the source\.
-+ `connectionType` — The type of the data source\. See [Connection Types and Options for ETL in AWS Glue](aws-glue-programming-etl-connect.md)\.
-+ `options` — A string of JSON name\-value pairs that provide additional information for establishing a connection with the data source\. See [Connection Types and Options for ETL in AWS Glue](aws-glue-programming-etl-connect.md)\.
-+ `transformationContext` — The transformation context that is associated with the sink to be used by job bookmarks\. Set to empty by default\.
-+ `format` — The format of the data that is stored at the source\. When the `connectionType` is "s3", you can also specify `format`\. Can be one of “avro”, “csv”, “grokLog”, “ion”, “json”, “xml”, “parquet”, or “orc”\. 
-+ `formatOptions` — A string of JSON name\-value pairs that provide additional options for parsing data at the source\. See [Format Options](aws-glue-programming-etl-format.md)\.
++ `connectionType` – The type of the data source\. See [Connection Types and Options for ETL in AWS Glue](aws-glue-programming-etl-connect.md)\.
++ `options` – A string of JSON name\-value pairs that provide additional information for establishing a connection with the data source\. See [Connection Types and Options for ETL in AWS Glue](aws-glue-programming-etl-connect.md)\.
++ `transformationContext` – The transformation context that is associated with the sink to be used by job bookmarks\. Set to empty by default\.
++ `format` – The format of the data that is stored at the source\. When the `connectionType` is "s3", you can also specify `format`\. Can be one of “avro”, “csv”, “grokLog”, “ion”, “json”, “xml”, “parquet”, or “orc”\. 
++ `formatOptions` – A string of JSON name\-value pairs that provide additional options for parsing data at the source\. See [Format Options](aws-glue-programming-etl-format.md)\.
 
 Returns the `DataSource`\.
+
+**Examples**
+
+Create a DynamicFrame from a data source that is a comma\-separated values \(CSV\) file on Amazon S3:
+
+```
+val datasource0 = glueContext.getSourceWithFormat(
+    connectionType="s3",
+    options =JsonOptions(s"""{"paths": [ "s3://csv/nycflights.csv"]}"""),
+    transformationContext = "datasource0", 
+    format = "csv",
+    formatOptions=JsonOptions(s"""{"withHeader":"true","separator": ","}""")
+    ).getDynamicFrame()
+```
+
+Create a DynamicFrame from a data source that is a PostgreSQL using a JDBC connection:
+
+```
+val datasource0 = glueContext.getSourceWithFormat(
+    connectionType="postgresql",
+    options =JsonOptions(s"""{
+      "url":"jdbc:postgresql://databasePostgres-1.rds.amazonaws.com:5432/testdb",
+      "dbtable": "public.company",
+      "redshiftTmpDir":"", 
+      "user":"username", 
+      "password":"password123"
+    }"""),
+    transformationContext = "datasource0").getDynamicFrame()
+```
+
+Create a DynamicFrame from a data source that is a MySQL using a JDBC connection:
+
+```
+ val datasource0 = glueContext.getSourceWithFormat(
+    connectionType="mysql",
+    options =JsonOptions(s"""{
+      "url":"jdbc:mysql://databaseMysql-1.rds.amazonaws.com:3306/testdb",
+      "dbtable": "athenatest_nycflights13_csv",
+      "redshiftTmpDir":"", 
+      "user":"username", 
+      "password":"password123"
+    }"""),
+    transformationContext = "datasource0").getDynamicFrame()
+```
 
 ## def getSparkSession<a name="glue-etl-scala-apis-glue-gluecontext-defs-getSparkSession"></a>
 

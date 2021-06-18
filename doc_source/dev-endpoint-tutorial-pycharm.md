@@ -7,7 +7,7 @@ To connect to a development endpoint interactively, you must have PyCharm Profes
 The tutorial assumes that you have already taken the steps outlined in [Tutorial Prerequisites](dev-endpoint-tutorial-prerequisites.md)\.
 
 **Note**  
-The tutorial uses Amazon S3 as a data source\. If you want to use a JDBC data source instead, you must run your development endpoint in a virtual private cloud \(VPC\)\. To connect with SSH to a development endpoint in a VPC, you must create an SSH tunnel\. This tutorial does not include instructions for creating an SSH tunnel\. For information on using SSH to connect to a development endpoint in a VPC, see [Securely Connect to Linux Instances Running in a Private Amazon VPC](https://aws.amazon.com/blogs/security/securely-connect-to-linux-instances-running-in-a-private-amazon-vpc/) in the AWS security blog\.
+The tutorial uses Amazon S3 as a data source\. If you want to use a JDBC data source instead, you must run your development endpoint in a virtual private cloud \(VPC\)\. To connect with SSH to a development endpoint in a VPC, you must create an SSH tunnel\. This tutorial does not include instructions for creating an SSH tunnel\. For information on using SSH to connect to a development endpoint in a VPC, see [Securely Connect to Linux Instances Running in a Private Amazon VPC](http://aws.amazon.com/blogs/security/securely-connect-to-linux-instances-running-in-a-private-amazon-vpc/) in the AWS security blog\.
 
 **Topics**
 + [Connecting PyCharm Professional to a Development Endpoint](#dev-endpoint-tutorial-pycharm-connect)

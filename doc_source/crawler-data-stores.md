@@ -6,7 +6,7 @@ Crawlers can crawl the following file\-based and table\-based data stores\.
 | Access type that crawler uses | Data stores | 
 | --- | --- | 
 | Native client |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/glue/latest/dg/crawler-data-stores.html)  | 
-| JDBC |  Within Amazon Relational Database Service \(Amazon RDS\) or external to Amazon RDS: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/glue/latest/dg/crawler-data-stores.html)  | 
+| JDBC |  Amazon Redshift Within Amazon Relational Database Service \(Amazon RDS\) or external to Amazon RDS: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/glue/latest/dg/crawler-data-stores.html)  | 
 | MongoDB client |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/glue/latest/dg/crawler-data-stores.html)  | 
 
 **Note**  

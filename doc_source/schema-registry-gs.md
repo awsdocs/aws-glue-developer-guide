@@ -12,12 +12,12 @@ The following sections provide an overview and walk you through setting up and u
 + [IAM Examples for Serializers](#schema-registry-gs1)
 + [IAM Examples for Deserializers](#schema-registry-gs1b)
 + [Private Connectivity using AWS PrivateLink](#schema-registry-gs-private)
-+ [Accessing AWS CloudWatch Metrics](#schema-registry-gs-monitoring)
++ [Accessing Amazon CloudWatch Metrics](#schema-registry-gs-monitoring)
 
 ## Installing SerDe Libraries<a name="schema-registry-gs-serde"></a>
 
 **Note**  
-Prerequisites: Before completing the following steps, you will need to have a Managed Streaming for Apache Kafka \(MSK\) or Apache Kafka cluster running\. Your producers and consumers need to be running on Java 8 or above\.
+Prerequisites: Before completing the following steps, you will need to have a Amazon Managed Streaming for Apache Kafka \(Amazon MSK\) or Apache Kafka cluster running\. Your producers and consumers need to be running on Java 8 or above\.
 
 The SerDe libraries provide a framework for serializing and deserializing data\. 
 
@@ -94,7 +94,7 @@ You can use these steps to perform this task using the AWS Glue APIs\.
 
 To add a new registry, use the [CreateRegistry Action \(Python: create\_registry\)](aws-glue-api-schema-registry-api.md#aws-glue-api-schema-registry-api-CreateRegistry) API\. Specify `RegistryName` as the name of the registry to be created, with a max length of 255, containing only letters, numbers, hyphens, underscores, dollar signs, or hash marks\. 
 
-Specify a `Description` as a string not more than 2048 bytes long, matching the [URI address multi\-line string pattern](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-uri)\.
+Specify a `Description` as a string not more than 2048 bytes long, matching the [URI address multi\-line string pattern](https://docs.aws.amazon.com/glue/latest/dg/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-uri)\.
 
 Optionally, specify one or more `Tags` for your registry, as a map array of key\-value pairs\.
 
@@ -107,7 +107,7 @@ When your registry is created it is assigned an Amazon Resource Name \(ARN\), wh
 **AWS Glue console**  
 To add a new registry in the AWS Glue console:
 
-1. Sign in to the AWS Management Console and open the AWS Glue console at https://console\.aws\.amazon\.com/glue/\.
+1. Sign in to the AWS Management Console and open the AWS Glue console at [https://console\.aws\.amazon\.com/glue/](https://console.aws.amazon.com/glue\)\.
 
 1. In the navigation pane, under **Data catalog**, choose **Schema registries**\.
 
@@ -132,7 +132,7 @@ You can create a schema using the AWS Glue APIs or the AWS Glue console\.
 **AWS Glue APIs**  
 You can use these steps to perform this task using the AWS Glue APIs\.
 
-To add a new schema, use the [CreateSchema Action](aws-glue-api-schema-registry-api.md#aws-glue-api-schema-registry-api-CreateSchema) API\.
+To add a new schema, use the [CreateSchema Action \(Python: create\_schema\)](aws-glue-api-schema-registry-api.md#aws-glue-api-schema-registry-api-CreateSchema) API\.
 
 Specify a `RegistryId` structure to indicate a registry for the schema\. Or, omit the `RegistryId` to use the default registry\.
 
@@ -163,7 +163,7 @@ aws glue create-schema --registry-id RegistryArn="arn:aws:glue:us-east-2:9012345
 **AWS Glue console**  
 To add a new schema using the AWS Glue console:
 
-1. Sign in to the AWS Management Console and open the AWS Glue console at https://console\.aws\.amazon\.com/glue/\.
+1. Sign in to the AWS Management Console and open the AWS Glue console at [https://console\.aws\.amazon\.com/glue/](https://console.aws.amazon.com/glue\)\.
 
 1. In the navigation pane, under **Data catalog**, choose **Schemas**\.
 
@@ -215,7 +215,7 @@ Once created you can edit your schemas, schema versions, or registry\.
 You can update a registry using the AWS Glue APIs or the AWS Glue console\. The name of an existing registry cannot be edited\. You can edit the description  for a registry\.
 
 **AWS Glue APIs**  
-To update an existing registry, use the [UpdateRegistry Action](aws-glue-api-schema-registry-api.md#aws-glue-api-schema-registry-api-UpdateRegistry) API\.
+To update an existing registry, use the [UpdateRegistry Action \(Python: update\_registry\)](aws-glue-api-schema-registry-api.md#aws-glue-api-schema-registry-api-UpdateRegistry) API\.
 
 Specify a `RegistryId` structure to indicate the registry that you want to update\. Pass a `Description` to change the description for a registry\.
 
@@ -226,7 +226,7 @@ aws glue update-registry --description updatedDescription --registry-id Registry
 **AWS Glue console**  
 To update a registry using the AWS Glue console:
 
-1. Sign in to the AWS Management Console and open the AWS Glue console at https://console\.aws\.amazon\.com/glue/\.
+1. Sign in to the AWS Management Console and open the AWS Glue console at [https://console\.aws\.amazon\.com/glue/](https://console.aws.amazon.com/glue\)\.
 
 1. In the navigation pane, under **Data catalog**, choose **Schema registries**\.
 
@@ -238,7 +238,7 @@ To update a registry using the AWS Glue console:
 
 You can update the description or compatibility setting for a schema\.
 
-To update an existing schema, use the [UpdateSchema Action](aws-glue-api-schema-registry-api.md#aws-glue-api-schema-registry-api-UpdateSchema) API\.
+To update an existing schema, use the [UpdateSchema Action \(Python: update\_schema\)](aws-glue-api-schema-registry-api.md#aws-glue-api-schema-registry-api-UpdateSchema) API\.
 
 Specify a `SchemaId` structure to indicate the schema that you want to update\. One of `VersionNumber` or `Compatibility` has to be provided\.
 
@@ -256,7 +256,7 @@ aws glue update-schema --description testDescription --schema-id SchemaArn="arn:
 
 When you add a schema version, you will need to compare the versions to make sure the new schema will be accepted\.
 
-To add a new version to an existing schema, use the [RegisterSchemaVersion Action](aws-glue-api-schema-registry-api.md#aws-glue-api-schema-registry-api-RegisterSchemaVersion) API\.
+To add a new version to an existing schema, use the [RegisterSchemaVersion Action \(Python: register\_schema\_version\)](aws-glue-api-schema-registry-api.md#aws-glue-api-schema-registry-api-RegisterSchemaVersion) API\.
 
 Specify a `SchemaId` structure to indicate the schema for which you want to add a version, and a `SchemaDefinition` to define the schema in Avro data format\.
 
@@ -270,7 +270,7 @@ aws glue register-schema-version --schema-definition "{\"type\": \"record\", \"n
 aws glue register-schema-version --schema-definition "{\"type\": \"record\", \"name\": \"r1\", \"fields\": [ {\"name\": \"f1\", \"type\": \"int\"}, {\"name\": \"f2\", \"type\": \"string\"} ]}" --schema-id SchemaName="testschema",RegistryName="testregistry"
 ```
 
-1. Sign in to the AWS Management Console and open the AWS Glue console at https://console\.aws\.amazon\.com/glue/\.
+1. Sign in to the AWS Management Console and open the AWS Glue console at [https://console\.aws\.amazon\.com/glue/](https://console.aws.amazon.com/glue\)\.
 
 1. In the navigation pane, under **Data catalog**, choose **Schemas**\.
 
@@ -309,11 +309,11 @@ Deleting a schema, a schema version, or a registry are permanent actions that ca
 
 ### Deleting a Schema<a name="schema-registry-gs7a"></a>
 
-You may want to delete a schema when it will no longer be used within a registry, using the AWS management console, or the [DeleteSchema Action](aws-glue-api-schema-registry-api.md#aws-glue-api-schema-registry-api-DeleteSchema) API\.
+You may want to delete a schema when it will no longer be used within a registry, using the AWS Management Console, or the [DeleteSchema Action \(Python: delete\_schema\)](aws-glue-api-schema-registry-api.md#aws-glue-api-schema-registry-api-DeleteSchema) API\.
 
 Deleting one or more schemas is a permanent action that cannot be undone\. Make sure that the schema or schemas are no longer needed\.
 
-To delete a schema from the registry, call the [DeleteSchema Action](aws-glue-api-schema-registry-api.md#aws-glue-api-schema-registry-api-DeleteSchema) API, specifying the `SchemaId` structure to identify the schema\.
+To delete a schema from the registry, call the [DeleteSchema Action \(Python: delete\_schema\)](aws-glue-api-schema-registry-api.md#aws-glue-api-schema-registry-api-DeleteSchema) API, specifying the `SchemaId` structure to identify the schema\.
 
 For example:
 
@@ -328,7 +328,7 @@ aws glue delete-schema --schema-id SchemaName="TestSchema6-deleteschemabyname",R
 **AWS Glue console**  
 To delete a schema from the AWS Glue console:
 
-1. Sign in to the AWS Management Console and open the AWS Glue console at https://console\.aws\.amazon\.com/glue/\.
+1. Sign in to the AWS Management Console and open the AWS Glue console at [https://console\.aws\.amazon\.com/glue/](https://console.aws.amazon.com/glue\)\.
 
 1. In the navigation pane, under **Data catalog**, choose **Schema registries**\.
 
@@ -346,16 +346,16 @@ The schema\(s\) you specified are deleted from the registry\.
 
 ### Deleting a Schema Version<a name="schema-registry-gs7b"></a>
 
-As schemas accumulate in the registry, you may want to delete unwanted schema versions using the AWS management console, or the [DeleteSchemaVersions Action](aws-glue-api-schema-registry-api.md#aws-glue-api-schema-registry-api-DeleteSchemaVersions) API\. Deleting one or more schema versions is a permanent action that cannot be undone\. Make sure that the schema versions are no longer needed\.
+As schemas accumulate in the registry, you may want to delete unwanted schema versions using the AWS Management Console, or the [DeleteSchemaVersions Action \(Python: delete\_schema\_versions\)](aws-glue-api-schema-registry-api.md#aws-glue-api-schema-registry-api-DeleteSchemaVersions) API\. Deleting one or more schema versions is a permanent action that cannot be undone\. Make sure that the schema versions are no longer needed\.
 
 When deleting schema versions, take note of the following constraints:
 + You cannot delete a check\-pointed version\.
 + The range of contiguous versions cannot be more than 25\.
 + The latest schema version must not be in a pending state\.
 
-Specify the `SchemaId` structure to identify the schema, and specify `Versions` as a range of versions to delete\. For more information on specifying a version or range of versions, see [DeleteRegistry Action](aws-glue-api-schema-registry-api.md#aws-glue-api-schema-registry-api-DeleteRegistry)\. The schema versions you specified are deleted from the registry\.
+Specify the `SchemaId` structure to identify the schema, and specify `Versions` as a range of versions to delete\. For more information on specifying a version or range of versions, see [DeleteRegistry Action \(Python: delete\_registry\)](aws-glue-api-schema-registry-api.md#aws-glue-api-schema-registry-api-DeleteRegistry)\. The schema versions you specified are deleted from the registry\.
 
-Calling the [ListSchemaVersions Action](aws-glue-api-schema-registry-api.md#aws-glue-api-schema-registry-api-ListSchemaVersions) API after this call will list the status of the deleted versions\.
+Calling the [ListSchemaVersions Action \(Python: list\_schema\_versions\)](aws-glue-api-schema-registry-api.md#aws-glue-api-schema-registry-api-ListSchemaVersions) API after this call will list the status of the deleted versions\.
 
 For example:
 
@@ -367,7 +367,7 @@ aws glue delete-schema-versions --schema-id SchemaName="TestSchema6",RegistryNam
 aws glue delete-schema-versions --schema-id SchemaArn="arn:aws:glue:us-east-2:901234567890:schema/default-registry/TestSchema6-NON-Existent" --versions "1-1"
 ```
 
-1. Sign in to the AWS Management Console and open the AWS Glue console at https://console\.aws\.amazon\.com/glue/\.
+1. Sign in to the AWS Management Console and open the AWS Glue console at [https://console\.aws\.amazon\.com/glue/](https://console.aws.amazon.com/glue\)\.
 
 1. In the navigation pane, under **Data catalog**, choose **Schema registries**\.
 
@@ -392,7 +392,7 @@ Deleting one or more registries is a permanent action that cannot be undone\. Ma
 The default registry can be deleted using the AWS CLI\.
 
 **AWS Glue API**  
-To delete the entire registry including the schema and all of its versions, call the [DeleteRegistry Action](aws-glue-api-schema-registry-api.md#aws-glue-api-schema-registry-api-DeleteRegistry) API\. Specify a `RegistryId` structure to identify the registry\.
+To delete the entire registry including the schema and all of its versions, call the [DeleteRegistry Action \(Python: delete\_registry\)](aws-glue-api-schema-registry-api.md#aws-glue-api-schema-registry-api-DeleteRegistry) API\. Specify a `RegistryId` structure to identify the registry\.
 
 For example:
 
@@ -409,7 +409,7 @@ To get the status of the delete operation, you can call the `GetRegistry` API af
 **AWS Glue console**  
 To delete a registry from the AWS Glue console:
 
-1. Sign in to the AWS Management Console and open the AWS Glue console at https://console\.aws\.amazon\.com/glue/\.
+1. Sign in to the AWS Management Console and open the AWS Glue console at [https://console\.aws\.amazon\.com/glue/](https://console.aws.amazon.com/glue\)\.
 
 1. In the navigation pane, under **Data catalog**, choose **Schema registries**\.
 
@@ -424,6 +424,9 @@ To delete a registry from the AWS Glue console:
 The registries you selected are deleted from AWS Glue\.
 
 ## IAM Examples for Serializers<a name="schema-registry-gs1"></a>
+
+**Note**  
+AWS managed policies grant necessary permissions for common use cases\. For information on using managed policies to manage the schema registry, see [AWS Managed \(Predefined\) Policies for AWS Glue](using-identity-based-policies.md#access-policy-examples-aws-managed)\. 
 
 For serializers, you should create a minimal policy similar to that below to give you the ability to find the `schemaVersionId` for a given schema definition\. Note, you should have read permissions on the registry in order to read the schemas in the registry\. You can limit the registries that can be read by using the `Resource` clause\.
 
@@ -459,9 +462,9 @@ Code example 14:
         "glue:RegisterSchemaVersion",
         "glue:PutSchemaVersionMetadata",
     ],
-    "Resource" : ["arn:aws:glue:us-east-2:012345678:registry/registryname-1",
-                  "arn:aws:glue:us-east-2:012345678:schema/registryname-1/schemaname-1",
-                  "arn:aws:glue:us-east-2:012345678:schema/registryname-1/schemaname-2"
+    "Resource" : ["arn:aws:glue:aws-region:123456789012:registry/registryname-1",
+                  "arn:aws:glue:aws-region:123456789012:schema/registryname-1/schemaname-1",
+                  "arn:aws:glue:aws-region:123456789012:schema/registryname-1/schemaname-2"
                  ]  
 }
 ```
@@ -488,6 +491,6 @@ Code example 15:
 
 You can use AWS PrivateLink to connect your data producer’s VPC to AWS Glue by defining an interface VPC endpoint for AWS Glue\. When you use a VPC interface endpoint, communication between your VPC and AWS Glue is conducted entirely within the AWS network\. For more information, see [Using AWS Glue with VPC Endpoints](https://docs.aws.amazon.com/glue/latest/dg/vpc-endpoint.html)\.
 
-## Accessing AWS CloudWatch Metrics<a name="schema-registry-gs-monitoring"></a>
+## Accessing Amazon CloudWatch Metrics<a name="schema-registry-gs-monitoring"></a>
 
-AWS CloudWatch metrics are available as part of CloudWatch’s free tier\. You can access these metrics in the CloudWatch Console\. API\-Level metrics include CreateSchema \(Success and Latency\), GetSchemaByDefinition, \(Success and Latency\), GetSchemaVersion \(Success and Latency\), RegisterSchemaVersion \(Success and Latency\), PutSchemaVersionMetadata \(Success and Latency\)\. Resource\-level metrics include Registry\.ThrottledByLimit, SchemaVersion\.ThrottledByLimit, SchemaVersion\.Size\.
+Amazon CloudWatch metrics are available as part of CloudWatch’s free tier\. You can access these metrics in the CloudWatch Console\. API\-Level metrics include CreateSchema \(Success and Latency\), GetSchemaByDefinition, \(Success and Latency\), GetSchemaVersion \(Success and Latency\), RegisterSchemaVersion \(Success and Latency\), PutSchemaVersionMetadata \(Success and Latency\)\. Resource\-level metrics include Registry\.ThrottledByLimit, SchemaVersion\.ThrottledByLimit, SchemaVersion\.Size\.

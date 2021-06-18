@@ -43,3 +43,11 @@ Returns a new `DynamicFrame` with no null fields\.
 
 ## describe\(cls\)<a name="aws-glue-api-crawler-pyspark-transforms-DropNullFields-describe"></a>
 + `cls` – cls
+
+## Example for DropNullFields<a name="pyspark-DropNullFields-examples"></a>
+
+The DropNullFields function automatically identifies the columns with `null` values and drops them from the resulting DynamicFrame\.
+
+```
+dyf_dropNullfields = DropNullFields.apply(frame = dyf_unnest)
+```

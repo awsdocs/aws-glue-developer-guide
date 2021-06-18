@@ -53,3 +53,55 @@ Inherited from `GlueTransform` [describeErrors](aws-glue-api-crawler-pyspark-tra
 ## describe\(cls\)<a name="aws-glue-api-crawler-pyspark-transforms-SplitFields-describe"></a>
 
 Inherited from `GlueTransform` [describe](aws-glue-api-crawler-pyspark-transforms-GlueTransform.md#aws-glue-api-crawler-pyspark-transforms-GlueTransform-describe)\.
+
+## Example for SplitFields<a name="pyspark-SplitFields-examples"></a>
+
+This example uses the following DynamicFrame as input, and splits it into two DynamicFrames\.
+
+```
+dyf_dropNullfields.toDF().show() 
+
++-------------+---------------+--------------+----------+
+|warehouse_loc|data.strawberry|data.pineapple|data.mango|
++-------------+---------------+--------------+----------+
+| TX_WAREHOUSE| 220| 560| 350|
+| CA_WAREHOUSE| 34| 123| 42|
+| CO_WAREHOUSE| 340| 180| 2|
++-------------+---------------+--------------+----------+
+```
+
+```
+dyf_splitFields = SplitFields.apply(frame = dyf_dropNullfields, paths = ["`data.strawberry`", 
+"`data.pineapple`"], name1 = "a", name2 = "b")
+```
+
+You can view the first DynamicFrame result using the following commands\.
+
+```
+dyf_retrieve_a = SelectFromCollection.apply(dyf_splitFields, "a")
+
+dyf_retrieve_a.toDF().show()
++---------------+--------------+
+|data.strawberry|data.pineapple|
++---------------+--------------+
+| 220| 560|
+| 34| 123|
+| 340| 180|
++---------------+--------------+
+```
+
+You can view the second DynamicFrame result using the following commands\.
+
+```
+dyf_retrieve_b = SelectFromCollection.apply(dyf_splitFields, "b")
+
+dyf_retrieve_b.toDF().show()
+
++-------------+----------+
+|warehouse_loc|data.mango|
++-------------+----------+
+| TX_WAREHOUSE| 350|
+| CA_WAREHOUSE| 42|
+| CO_WAREHOUSE| 2|
++-------------+----------+
+```

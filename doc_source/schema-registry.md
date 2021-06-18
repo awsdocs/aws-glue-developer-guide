@@ -2,7 +2,7 @@
 
 The AWS Glue Schema Registry is a new feature that allows you to centrally discover, control, and evolve data stream schemas\. A *schema* defines the structure and format of a data record\. With AWS Glue Schema Registry, you can manage and enforce schemas on your data streaming applications using convenient integrations with Apache Kafka, [Amazon Managed Streaming for Apache Kafka](https://aws.amazon.com/msk/), [Amazon Kinesis Data Streams](https://aws.amazon.com/kinesis/data-streams/), [Amazon Kinesis Data Analytics for Apache Flink](https://aws.amazon.com/kinesis/data-analytics/), and [AWS Lambda](https://aws.amazon.com/lambda/)\.
 
-The AWS Glue Schema Registry supports AVRO data format and Java language support, with other data formats and languages to come\. Supported features include compatibility, schema sourcing via metadata, auto\-registration of schemas, IAM compatibility, and optional ZLIB compression to reduce storage and data transfer\. AWS Glue Schema Registry is serverless and free to use\.
+The AWS Glue Schema Registry supports AVRO \(v1\.10\.2\) data format and Java language support, with other data formats and languages to come\. Supported features include compatibility, schema sourcing via metadata, auto\-registration of schemas, IAM compatibility, and optional ZLIB compression to reduce storage and data transfer\. AWS Glue Schema Registry is serverless and free to use\.
 
 Using a schema as a data format contract between producers and consumers leads to improved data governance, higher quality data, and enables data consumers to be resilient to compatible upstream changes\.
 
@@ -52,7 +52,7 @@ In this example schema for Avro, the format and structure are defined by the lay
                     },
                     {
                         "name": "zipcode",
-                        "type": "int"
+                        "type": "int" 
                     }
                 ]
             }
@@ -118,14 +118,14 @@ For more details on how the Serde libraries work, see [How the Schema Registry W
 Quotas, also referred to as limits in AWS, are the maximum values for the resources, actions, and items in your AWS account\. The following are soft limits for the Schema Registry in AWS Glue\.
 
 **Registries**  
-You can have up to 10 registries per AWS account per AWS region\.
+You can have up to 10 registries per AWS account per AWS Region\.
 
 **SchemaVersion**  
-You can have up to 1000 schema versions per AWS account per AWS region\.
+You can have up to 1000 schema versions per AWS account per AWS Region\.
 
 Each new schema creates a new schema version, so you can theoretically have up to 1000 schemas per account per region, if each schema has only one version\.
 
 **Schema version metadata key\-value pairs**  
-You can have up to 10 key\-value pairs per SchemaVersion per AWS region\.
+You can have up to 10 key\-value pairs per SchemaVersion per AWS Region\.
 
-You can view or set the key\-value metadata pairs using the [QuerySchemaVersionMetadata Action](aws-glue-api-schema-registry-api.md#aws-glue-api-schema-registry-api-QuerySchemaVersionMetadata) or [PutSchemaVersionMetadata Action](aws-glue-api-schema-registry-api.md#aws-glue-api-schema-registry-api-PutSchemaVersionMetadata) APIs\.
+You can view or set the key\-value metadata pairs using the [QuerySchemaVersionMetadata Action \(Python: query\_schema\_version\_metadata\)](aws-glue-api-schema-registry-api.md#aws-glue-api-schema-registry-api-QuerySchemaVersionMetadata) or [PutSchemaVersionMetadata Action \(Python: put\_schema\_version\_metadata\)](aws-glue-api-schema-registry-api.md#aws-glue-api-schema-registry-api-PutSchemaVersionMetadata) APIs\.

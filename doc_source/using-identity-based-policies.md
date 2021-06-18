@@ -160,12 +160,28 @@ You don't need to allow minimum console permissions for users that are making ca
 AWS addresses many common use cases by providing standalone IAM policies that are created and administered by AWS\. These AWS managed policies grant necessary permissions for common use cases so that you can avoid having to investigate what permissions are needed\. For more information, see [AWS Managed Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#aws-managed-policies) in the *IAM User Guide*\. 
 
 The following AWS managed policies, which you can attach to users in your account, are specific to AWS Glue and are grouped by use case scenario:
-+ **AWSGlueConsoleFullAccess** – Grants full access to AWS Glue resources when using the AWS Management Console\. If you follow the naming convention for resources specified in this policy, users have full console capabilities\. This policy is typically attached to users of the AWS Glue console\.
++ [AWSGlueConsoleFullAccess](https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/AWSGlueConsoleFullAccess) – Grants full access to AWS Glue resources when using the AWS Management Console\. If you follow the naming convention for resources specified in this policy, users have full console capabilities\. This policy is typically attached to users of the AWS Glue console\.
 + **AWSGlueServiceRole** – Grants access to resources that various AWS Glue processes require to run on your behalf\. These resources include AWS Glue, Amazon S3, IAM, CloudWatch Logs, and Amazon EC2\. If you follow the naming convention for resources specified in this policy, AWS Glue processes have the required permissions\. This policy is typically attached to roles specified when defining crawlers, jobs, and development endpoints\.
 + **AWSGlueServiceNotebookRole** – Grants access to resources required when creating a notebook server\. These resources include AWS Glue, Amazon S3, and Amazon EC2\. If you follow the naming convention for resources specified in this policy, AWS Glue processes have the required permissions\. This policy is typically attached to roles specified when creating a notebook server on a development endpoint\.
 + **AWSGlueConsoleSageMakerNotebookFullAccess** – Grants full access to AWS Glue and SageMaker resources when using the AWS Management Console\. If you follow the naming convention for resources specified in this policy, users have full console capabilities\. This policy is typically attached to users of the AWS Glue console who manage SageMaker notebooks\.
++ **AWSGlueSchemaRegistryFullAccess** – Grants full access to AWS Glue Schema Registry resources when using the AWS Management Console or AWS CLI\. If you follow the naming convention for resources specified in this policy, users have full console capabilities\. This policy is typically attached to users of the AWS Glue console or AWS CLI who manage Schema Registry\.
++ **AWSGlueSchemaRegistryReadonlyAccess** – Grants read\-only access to AWS Glue Schema Registry resources when using the AWS Management Console or AWS CLI\. If you follow the naming convention for resources specified in this policy, users have full console capabilities\. This policy is typically attached to users of the AWS Glue console or AWS CLI who use Schema Registry\.
 
 **Note**  
 You can review these permissions policies by signing in to the IAM console and searching for specific policies there\.
 
 You can also create your own custom IAM policies to allow permissions for AWS Glue actions and resources\. You can attach these custom policies to the IAM users or groups that require those permissions\. 
+
+## AWS Glue Updates to AWS Managed Policies<a name="security-iam-awsmanpol-updates"></a>
+
+
+
+View details about updates to AWS managed policies for AWS Glue since this service began tracking these changes\. For automatic alerts about these updates, subscribe to the RSS feed on the AWS Glue [Document history](doc-history.md) page\.
+
+
+
+
+| Change | Description | Date | 
+| --- | --- | --- | 
+|  AWSGlueConsoleFullAccess – Update to an existing policy  | Removed a redundant resource ARN \(arn:aws:s3:::aws\-glue\-\*/\*\) for the action that grants read/write permissions on Amazon S3 buckets that AWS Glue uses to store scripts and temporary files\. | TBD | 
+|  AWS Glue started tracking changes  |  AWS Glue started tracking changes for its AWS managed policies\.  | JUN 10, 2021 | 

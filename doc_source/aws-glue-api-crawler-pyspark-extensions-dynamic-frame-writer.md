@@ -60,3 +60,15 @@ Writes a `DynamicFrame` using the specified JDBC connection information\.
 + `connection_options` – Connection options, such as path and database table \(optional\)\.
 + `redshift_tmp_dir` – An Amazon Redshift temporary directory to use \(optional\)\.
 + `transformation_ctx` – A transformation context to use \(optional\)\.
+
+## Example for write\_dynamic\_frame<a name="pyspark-WriteDynamicFrame-examples"></a>
+
+This example writes the output locally using a `connection_type` of S3 with a POSIX path argument in `connection_options`, which allows writing to local storage\.
+
+```
+glueContext.write_dynamic_frame.from_options(\
+frame = dyf_splitFields,\
+connection_options = {'path': '/home/glue/GlueLocalOutput/'},\
+connection_type = 's3',\
+format = 'json')
+```

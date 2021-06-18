@@ -597,7 +597,7 @@ Retrieves the definitions of some or all of the tables in a given `Database`\.
 + `NextToken` – UTF\-8 string\.
 
   A continuation token, included if this is a continuation call\.
-+ `MaxResults` – Number \(integer\), not less than 1 or more than 1000\.
++ `MaxResults` – Number \(integer\), not less than 1 or more than 100\.
 
   The maximum number of tables to return in a single response\.
 
@@ -663,7 +663,7 @@ Retrieves a list of strings that identify available versions of a specified tabl
 + `NextToken` – UTF\-8 string\.
 
   A continuation token, if this is not the first call\.
-+ `MaxResults` – Number \(integer\), not less than 1 or more than 1000\.
++ `MaxResults` – Number \(integer\), not less than 1 or more than 100\.
 
   The maximum number of table versions to return in one response\.
 

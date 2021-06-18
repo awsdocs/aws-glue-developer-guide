@@ -187,7 +187,7 @@ Retrieves multiple function definitions from the Data Catalog\.
 + `NextToken` – UTF\-8 string\.
 
   A continuation token, if this is a continuation call\.
-+ `MaxResults` – Number \(integer\), not less than 1 or more than 1000\.
++ `MaxResults` – Number \(integer\), not less than 1 or more than 100\.
 
   The maximum number of functions to return in one response\.
 

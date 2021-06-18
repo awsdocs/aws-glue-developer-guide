@@ -57,3 +57,50 @@ Inherited from `GlueTransform` [describeErrors](aws-glue-api-crawler-pyspark-tra
 ## describe\(cls\)<a name="aws-glue-api-crawler-pyspark-transforms-Unbox-describe"></a>
 
 Inherited from `GlueTransform` [describe](aws-glue-api-crawler-pyspark-transforms-GlueTransform.md#aws-glue-api-crawler-pyspark-transforms-GlueTransform-describe)\.
+
+## Example for Unbox<a name="pyspark-Unbox-example"></a>
+
+The following commands create the `dyf_warehouse` DynamicFrame that is used in this example\.
+
+```
+warehouse_inventory_list = [ ['TX_WAREHOUSE', '{\ "strawberry":"220",\ "pineapple":"560",\ "mango":"350",\
+ "pears":null}' ],\ ['CA_WAREHOUSE', '{\ "strawberry":"34",\ "pineapple":"123",\ "mango":"42",\ "pears":null}\ '], 
+['CO_WAREHOUSE', '{\ "strawberry":"340",\ "pineapple":"180",\ "mango":"2",\ "pears":null}' ] ] 
+
+warehouse_schema = StructType([StructField("warehouse_loc", StringType())\ ,StructField("data", StringType())]) 
+
+df_warehouse = spark.createDataFrame(warehouse_inventory_list, schema = warehouse_schema)
+
+dyf_warehouse = DynamicFrame.fromDF(df_warehouse, glueContext, "dyf_warehouse")
+```
+
+The Unbox function in the following example converts the lists within the `String` datatype into a structure\.
+
+```
+dyf_warehouse.printSchema()
+
+root
+|-- warehouse_location: string
+|-- data: string
+
+dyf_unbox = Unbox.apply(frame = dyf_warehouse, path = "data", format="json")
+dyf_unbox.printSchema()
+
+root
+|-- warehouse_loc: string
+|-- data: struct
+| |-- strawberry: int
+| |-- pineapple: int
+| |-- mango: int
+| |-- pears: null 
+
+dyf_unbox.toDF().show() 
+
++-------------+----------------+
+|warehouse_loc| data|
++-------------+----------------+
+| TX_WAREHOUSE|[220, 560, 350,]|
+| CA_WAREHOUSE| [34, 123, 42,]|
+| CO_WAREHOUSE| [340, 180, 2,]|
++-------------+----------------+
+```

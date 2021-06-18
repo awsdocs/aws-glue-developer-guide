@@ -4,7 +4,7 @@ A crawler accesses your data store, extracts metadata, and creates table definit
 
 **To add a crawler using the console**
 
-1. Sign in to the AWS Management Console and open the AWS Glue console at [https://console\.aws\.amazon\.com/glue/](https://console.aws.amazon.com/glue/)\. Choose **Crawlers** in the navigation pane\.
+1. Sign in to the AWS Management Console and open the AWS Glue console at [https://console\.aws\.amazon\.com/glue/](https://console.aws.amazon.com/glue\)\. Choose **Crawlers** in the navigation pane\.
 
 1. Choose **Add crawler**, and follow the instructions in the **Add crawler** wizard\.
 **Note**  
@@ -20,40 +20,19 @@ When you crawl a JDBC data store, a connection is required\. For more informatio
 
 When you crawl DynamoDB tables, you can choose one table name from the list of DynamoDB tables in your account\.
 
-**See Also**  
-[Crawler Properties](define-crawler.md)
+**Tip**  
+For more information about configuring crawlers, see [Crawler Properties](define-crawler.md)\.
 
-## Viewing Crawler Results<a name="console-crawlers-details"></a>
+## Viewing Crawler Results and Details<a name="console-crawlers-details"></a>
 
-To view the results of a crawler, find the crawler name in the list and choose the **Logs** link\. This link takes you to the CloudWatch Logs, where you can see details about which tables were created in the AWS Glue Data Catalog and any errors that were encountered\. You can manage your log retention period in the CloudWatch console\. The default log retention is `Never Expire`\. For more information about how to change the retention period, see [Change Log Data Retention in CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SettingLogRetention.html)\.
+After the crawler runs successfully, it creates table definitions in the Data Catalog\. Choose **Tables** in the navigation pane to see the tables that were created by your crawler in the database that you specified\.
 
-To see details of a crawler, choose the crawler name in the list\. Crawler details include the information you defined when you created the crawler with the **Add crawler** wizard\. When a crawler run completes, choose **Tables** in the navigation pane to see the tables that were created by your crawler in the database that you specified\.
+You can view information related to the crawler itself as follows:
++ The **Crawlers** page on the AWS Glue console displays the following properties for a crawler:    
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/glue/latest/dg/console-crawlers.html)
++ To view the actions and log messages for a crawler, choose **Crawlers** in the navigation pane to see the crawlers you created\. Find the crawler name in the list and choose the **Logs** link\. This link takes you to the CloudWatch Logs, where you can see details about which tables were created in the AWS Glue Data Catalog and any errors that were encountered\.
 
-**Note**  
-The crawler assumes the permissions of the **IAM role** that you specify when you define it\. This IAM role must have permissions to extract data from your data store and write to the Data Catalog\. The AWS Glue console lists only IAM roles that have attached a trust policy for the AWS Glue principal service\. From the console, you can also create an IAM role with an IAM policy to access Amazon S3 data stores accessed by the crawler\. For more information about providing roles for AWS Glue, see [Identity\-Based Policies](using-identity-based-policies.md)\.
+  You can manage your log retention period in the CloudWatch console\. The default log retention is `Never Expire`\. For more information about how to change the retention period, see [Change Log Data Retention in CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SettingLogRetention.html)\.
 
-The following are some important properties and metrics about the last run of a crawler:
-
-**Name**  
-When you create a crawler, you must give it a unique name\.
-
-**Schedule**  
-You can choose to run your crawler on demand or choose a frequency with a schedule\. For more information about scheduling a crawler, see [Scheduling a Crawler](schedule-crawler.md)\.
-
-**Status**  
-A crawler can be ready, starting, stopping, scheduled, or schedule paused\. A running crawler progresses from starting to stopping\. You can resume or pause a schedule attached to a crawler\.
-
-**Logs**  
-Links to any available logs from the last run of the crawler\.
-
-**Last runtime**  
-The amount of time it took the crawler to run when it last ran\.
-
-**Median runtime**  
-The median amount of time it took the crawler to run since it was created\.
-
-**Tables updated**  
-The number of tables in the AWS Glue Data Catalog that were updated by the latest run of the crawler\.
-
-**Tables added**  
-The number of tables that were added into the AWS Glue Data Catalog by the latest run of the crawler\.
+  For more information about viewing the log information, see [Automated Monitoring Tools](monitor-glue.md#monitoring-automated_tools) in this guide and [Querying AWS CloudTrail Logs](https://docs.aws.amazon.com/athena/latest/ug/cloudtrail-logs.html) in the *Amazon Athena User Guide*\. Also, see the blog [Easily query AWS service logs using Athena](http://aws.amazon.com/blogs/big-data/easily-query-aws-service-logs-using-amazon-athena/) for information about how to use the Athena Glue Service Logs \(AGSlogger\) Python library in conjunction with AWS Glue ETL jobs to allow a common framework for processing log data\.
++ To see detailed information for a crawler, choose the crawler name in the list\. Crawler details include the information you defined when you created the crawler with the **Add crawler** wizard\.

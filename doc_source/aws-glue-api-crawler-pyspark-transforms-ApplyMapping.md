@@ -57,3 +57,20 @@ Inherited from `GlueTransform` [describeErrors](aws-glue-api-crawler-pyspark-tra
 ## describe\(cls\)<a name="aws-glue-api-crawler-pyspark-transforms-ApplyMapping-describe"></a>
 
 Inherited from `GlueTransform` [describe](aws-glue-api-crawler-pyspark-transforms-GlueTransform.md#aws-glue-api-crawler-pyspark-transforms-GlueTransform-describe)\.
+
+## Example for ApplyMapping<a name="pyspark-ApplyMapping-example"></a>
+
+This example calls ApplyMapping for a DynamicFrame that uses the following schema:
+
+```
+order_schema = StructType([ StructField("order_id", StringType()), StructField("customer_id", StringType()), 
+StructField("essential_item", StringType()), StructField("timestamp", StringType()), StructField("zipcode", StringType()) ])
+```
+
+This example changes some of the `String` columns to `Long` format to save storage space\. It also shortens the name of the column `zipcode` to `zip`\.
+
+```
+dyf_applyMapping = ApplyMapping.apply( frame = dyf_orders, mappings = [ ("order_id","String","order_id","Long"), 
+("customer_id","String","customer_id","Long"), ("essential_item","String","essential_item","String"), ("timestamp","String",
+"timestamp","Long"), ("zipcode","String","zip","Long") ])
+```

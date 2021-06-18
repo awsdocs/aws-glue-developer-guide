@@ -1,4 +1,4 @@
-# Populating the Data Catalog Using AWS CloudFormation Templates<a name="populate-with-cloudformation-templates"></a>
+# Creating AWS Glue resources using AWS CloudFormation templates<a name="populate-with-cloudformation-templates"></a>
 
 AWS CloudFormation is a service that can create many AWS resources\. AWS Glue provides API operations to create objects in the AWS Glue Data Catalog\. However, it might be more convenient to define and create AWS Glue objects and other related AWS resource objects in an AWS CloudFormation template file\. Then you can automate the process of creating the objects\. 
 

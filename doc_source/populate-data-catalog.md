@@ -28,4 +28,3 @@ The following is the general workflow for how a crawler populates the AWS Glue D
 + [Adding Classifiers to a Crawler](add-classifier.md)
 + [Working with Data Catalog Settings on the AWS Glue Console](console-data-catalog-settings.md)
 + [Creating Tables, Updating Schema, and Adding New Partitions in the Data Catalog from AWS Glue ETL Jobs](update-from-job.md)
-+ [Populating the Data Catalog Using AWS CloudFormation Templates](populate-with-cloudformation-templates.md)

@@ -33,7 +33,7 @@ If the job reads AWS KMS encrypted Amazon Simple Storage Service \(Amazon S3\) d
 **Important**  
 Check [Troubleshooting Errors in AWS Glue](glue-troubleshooting-errors.md) for known problems when a job runs\.
 
-To learn about the properties that are required for each job, see [Defining Job Properties](add-job.md#create-job)\.
+To learn about the properties that are required for each job, see [Defining Job Properties for Spark Jobs](add-job.md#create-job)\.
 
 To get step\-by\-step guidance for adding a job with a generated script, see the **Add job** tutorial in the AWS Glue console\.
 
@@ -65,7 +65,7 @@ The **History** tab shows your job run history and how successful a job has been
 + **Start time** shows the date and time \(local time\) that the job started\.
 + **End time** shows the date and time \(local time\) that the job ended\.
 
-For a specific job run, you can **View run metrics**, which displays graphs of metrics for the selected job run\. For more information about how to enable metrics and interpret the graphs, see [Job Monitoring and Debugging](monitor-profile-glue-job-cloudwatch-metrics.md)\.
+For a specific job run, you can **View run metrics**, which displays graphs of metrics for the selected job run\. For more information about how to turn on metrics and interpret the graphs, see [Job Monitoring and Debugging](monitor-profile-glue-job-cloudwatch-metrics.md)\.
 
 ### Details<a name="console-jobs-details-details"></a>
 
@@ -85,7 +85,7 @@ The **Script** tab shows the script that runs when your job is started\. You can
 
 ### Metrics<a name="console-jobs-details-metrics"></a>
 
-The **Metrics** tab shows metrics collected when a job runs and profiling is enabled\. The following graphs are shown: 
+The **Metrics** tab shows metrics collected when a job runs and profiling is turned on\. The following graphs are shown: 
 + ETL Data Movement
 + Memory Profile: Driver and Executors
 
@@ -96,7 +96,7 @@ Choose **View additional metrics** to show the following graphs:
 + CPU Load: Driver and Executors
 + Job Execution: Active Executors, Completed Stages & Maximum Needed Executors
 
-Data for these graphs is pushed to CloudWatch metrics if the job is enabled to collect metrics\. For more information about how to enable metrics and interpret the graphs, see [Job Monitoring and Debugging](monitor-profile-glue-job-cloudwatch-metrics.md)\. 
+Data for these graphs is pushed to CloudWatch metrics if the job is configured to collect metrics\. For more information about how to turn on metrics and interpret the graphs, see [Job Monitoring and Debugging](monitor-profile-glue-job-cloudwatch-metrics.md)\. 
 
 **Example of ETL Data Movement Graph**  
 The ETL Data Movement graph shows the following metrics:  

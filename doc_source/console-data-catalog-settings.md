@@ -16,7 +16,7 @@ The **Settings** page displays the following options:
 
 **Metadata encryption**  
 Select this check box to encrypt the metadata in your Data Catalog\. Metadata is encrypted at rest using the AWS Key Management Service \(AWS KMS\) key that you specify\.  
-AWS Glue supports only symmetric customer master keys \(CMKs\)\. The **AWS KMS key** list displays only symmetric keys\. However, if you select **Choose a KMS key ARN**, the console lets you enter an ARN for any key type\. Ensure that you enter only ARNs for symmetric keys\.
+AWS Glue supports only symmetric customer master keys \(CMKs\)\. The **AWS KMS key** list displays only symmetric keys\. However, if you select **Choose a AWS KMS key ARN**, the console lets you enter an ARN for any key type\. Ensure that you enter only ARNs for symmetric keys\.
 
 **Encrypt connection passwords**  
 Select this check box to encrypt passwords in the AWS Glue connection object when the connection is created or updated\. Passwords are encrypted using the AWS KMS key that you specify\. When passwords are returned, they are encrypted\. This option is a global setting for all AWS Glue connections in the Data Catalog\. If you clear this check box, previously encrypted passwords remain encrypted using the key that was used when they were created or updated\. For more information about AWS Glue connections, see [Defining Connections in the AWS Glue Data Catalog](populate-add-connection.md)\.   

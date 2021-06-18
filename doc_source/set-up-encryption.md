@@ -102,7 +102,7 @@ The following example workflow highlights the options to configure when you use 
 
    1.  For **AWS KMS key**, choose **aws/glue**\. You can also choose a customer master key \(CMK\) that you created\.
 **Important**  
-AWS Glue supports only symmetric customer master keys \(CMKs\)\. The **AWS KMS key** list displays only symmetric keys\. However, if you select **Choose a KMS key ARN**, the console lets you enter an ARN for any key type\. Ensure that you enter only ARNs for symmetric keys\.
+AWS Glue supports only symmetric customer master keys \(CMKs\)\. The **AWS KMS key** list displays only symmetric keys\. However, if you select **Choose a AWS KMS key ARN**, the console lets you enter an ARN for any key type\. Ensure that you enter only ARNs for symmetric keys\.
 
    When encryption is enabled, the client that is accessing the Data Catalog must have AWS KMS permissions\. 
 
@@ -112,7 +112,7 @@ AWS Glue supports only symmetric customer master keys \(CMKs\)\. The **AWS KMS k
 
    1. Select **CloudWatch logs encryption**, and choose a CMK\. \(Ensure that the user has permission to use this key\)\. For more information, see [Encrypt Log Data in CloudWatch Logs Using AWS KMS](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/encrypt-log-data-kms.html) in the *AWS Key Management Service Developer Guide*\.
 **Important**  
-AWS Glue supports only symmetric customer master keys \(CMKs\)\. The **AWS KMS key** list displays only symmetric keys\. However, if you select **Choose a KMS key ARN**, the console lets you enter an ARN for any key type\. Ensure that you enter only ARNs for symmetric keys\.
+AWS Glue supports only symmetric customer master keys \(CMKs\)\. The **AWS KMS key** list displays only symmetric keys\. However, if you select **Choose a AWS KMS key ARN**, the console lets you enter an ARN for any key type\. Ensure that you enter only ARNs for symmetric keys\.
 
    1. Choose **Advanced properties**, and select **Job bookmark encryption**\. For the **AWS KMS key**, choose **aws/glue** \(ensure that the user has permission to use this key\)\. This enables encryption of job bookmarks written to Amazon S3 with the AWS Glue AWS KMS key\.
 

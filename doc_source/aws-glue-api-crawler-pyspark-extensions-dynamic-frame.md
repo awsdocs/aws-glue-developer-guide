@@ -224,18 +224,20 @@ Renames a field in this `DynamicFrame` and returns a new `DynamicFrame` with the
 
 ## resolveChoice<a name="aws-glue-api-crawler-pyspark-extensions-dynamic-frame-resolveChoice"></a>
 
-**`resolveChoice(specs = None, option="", transformation_ctx="", info="", stageThreshold=0, totalThreshold=0)`**
+**`resolveChoice(specs = None, choice = "" , database = None , table_name = None , transformation_ctx="", info="", stageThreshold=0, totalThreshold=0, catalog_id = None)`**
 
 Resolves a choice type within this `DynamicFrame` and returns the new `DynamicFrame`\.
-+ `specs` – A list of specific ambiguities to resolve, each in the form of a tuple: `(path, action)`\. The `path` value identifies a specific ambiguous element, and the `action` value identifies the corresponding resolution\. Only one of the `specs` and `option` parameters can be used\. If the `spec` parameter is not `None`, then the `option` parameter must be an empty string\. Conversely if the `option` is not an empty string, then the `spec` parameter must be `None`\. If neither parameter is provided, AWS Glue tries to parse the schema and use it to resolve ambiguities\. 
++ `specs` – A list of specific ambiguities to resolve, each in the form of a tuple: `(field_path, action)`\. 
 
-  The `action` portion of a `specs` tuple can specify one of four resolution strategies:
-  + `cast`:   Allows you to specify a type to cast to \(for example, `cast:int`\)\.
-  + `make_cols`:   Resolves a potential ambiguity by flattening the data\. For example, if `columnA` could be an `int` or a `string`, the resolution would be to produce two columns named `columnA_int` and `columnA_string` in the resulting `DynamicFrame`\.
-  + `make_struct`:   Resolves a potential ambiguity by using a struct to represent the data\. For example, if data in a column could be an `int` or a `string`, using the `make_struct` action produces a column of structures in the resulting `DynamicFrame` that each contains both an `int` and a `string`\.
-  + `project`:   Resolves a potential ambiguity by projecting all the data to one of the possible data types\. For example, if data in a column could be an `int` or a `string`, using a `project:string` action produces a column in the resulting `DynamicFrame` where all the `int` values have been converted to strings\.
+  There are two ways to use `resolveChoice`\. The first is to use the `specs` argument to specify a sequence of specific fields and how to resolve them\. The other mode for `resolveChoice` is use the `choice` argument to specify a single resolution for all `ChoiceTypes`\.
 
-  If the `path` identifies an array, place empty square brackets after the name of the array to avoid ambiguity\. For example, suppose you are working with data structured as follows:
+  Values for `specs` are specified as tuples made up of `(field_path, action)` pairs\. The `field_path` value identifies a specific ambiguous element, and the `action` value identifies the corresponding resolution\. The following are the possible actions: 
+  + `cast:type` – Attempts to cast all values to the specified type\. For example, `cast:int`\.
+  + `make_cols` – Converts each distinct type to a column with the name `columnName_type`\. Resolves a potential ambiguity by flattening the data\. For example, if `columnA` could be an `int` or a `string`, the resolution would be to produce two columns named `columnA_int` and `columnA_string` in the resulting `DynamicFrame`\.
+  + `make_struct` – Resolves a potential ambiguity by using a `struct` to represent the data\. For example, if data in a column could be an `int` or a `string`, using the `make_struct` action produces a column of structures in the resulting `DynamicFrame` that each contains both an `int` and a `string`\.
+  + `project:type` – Resolves a potential ambiguity by projecting all the data to one of the possible data types\. For example, if data in a column could be an `int` or a `string`, using a `project:string` action produces a column in the resulting `DynamicFrame` where all the `int` values have been converted to strings\.
+
+  If the `field_path` identifies an array, place empty square brackets after the name of the array to avoid ambiguity\. For example, suppose you are working with data structured as follows:
 
   ```
   "myList": [
@@ -244,18 +246,24 @@ Resolves a choice type within this `DynamicFrame` and returns the new `DynamicFr
   ]
   ```
 
-  You can select the numeric rather than the string version of the price by setting the `path` to `"myList[].price"`, and the `action` to `"cast:double"`\.
-+ `option` – The default resolution action if the `specs` parameter is `None`\. If the `specs` parameter is not `None`, then this must not be set to anything but an empty string\.
+  You can select the numeric rather than the string version of the price by setting the `field_path` to `"myList[].price"`, and the `action` to `"cast:double"`\.
+**Note**  
+Only one of the `specs` and `choice` parameters can be used\. If the `specs` parameter is not `None`, then the `choice` parameter must be an empty string\. Conversely if the `choice` is not an empty string, then the `specs` parameter must be `None`\. 
++ `choice` – Specifies a single resolution for all `ChoiceTypes`\. You can use this in cases where the complete list of `ChoiceTypes` is unknown before execution\. In addition to the actions listed previously for `specs`, this argument also supports the following action:
+  + `match_catalog` – Attempts to cast each `ChoiceType` to the corresponding type in the specified Data Catalog table\. 
++ `database` – The Data Catalog database to use with the `match_catalog` action\.
++ `table_name` – The Data Catalog table to use with the `match_catalog` action\.
 + `transformation_ctx` – A unique string that is used to identify state information \(optional\)\.
 + `info` – A string to be associated with error reporting for this transformation \(optional\)\.
 + `stageThreshold` – The number of errors encountered during this transformation at which the process should error out \(optional: zero by default, indicating that the process should not error out\)\.
 + `totalThreshold` – The number of errors encountered up to and including this transformation at which the process should error out \(optional: zero by default, indicating that the process should not error out\)\.
++ `catalog_id` – The catalog ID of the Data Catalog being accessed \(the account ID of the Data Catalog\)\. When set to `None` \(default value\), it uses the catalog ID of the calling account\. 
 
 **Example**  
 
 ```
-df1 = df.resolveChoice(option = "make_cols")
-df2 = df.resolveChoice(specs = [("a.b", "make_struct"), ("c.d", "cast:double")])
+df1 = df.resolveChoice(choice = "make_cols")
+df2 = df.resolveChoice(specs = [("myList[].price", "make_struct"), ("columnA", "cast:double")])
 ```
 
 ## select\_fields<a name="aws-glue-api-crawler-pyspark-extensions-dynamic-frame-select_fields"></a>

@@ -131,7 +131,7 @@ Contains a list of values defining partitions\.
 
 ## Segment Structure<a name="aws-glue-api-catalog-partitions-Segment"></a>
 
-Defines a non\-overlapping region of a table's partitions, allowing multiple requests to be executed in parallel\.
+Defines a non\-overlapping region of a table's partitions, allowing multiple requests to be run in parallel\.
 
 **Fields**
 + `SegmentNumber` – *Required:* Number \(integer\), not more than None\.
@@ -426,7 +426,7 @@ Logical operators\.
   + `smallint`
   + `decimal`
 
-  If an invalid type is encountered, an exception is thrown\. 
+  If an type is encountered that is not valid, an exception is thrown\. 
 
   The following list shows the valid operators on each type\. When you define a crawler, the `partitionKey` type is created as a `STRING`, to be compatible with the catalog partitions\. 
 

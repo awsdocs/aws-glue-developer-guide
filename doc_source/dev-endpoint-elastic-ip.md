@@ -44,4 +44,4 @@ If you want to use Elastic IP addresses, the subnet that is being used requires 
    ssh -i dev-endpoint-private-key.pem glue@elastic-ip
    ```
 
-   For information about using a bastion host to get SSH access to the development endpoint’s private address, see the AWS Security Blog post [Securely Connect to Linux Instances Running in a Private Amazon VPC](https://aws.amazon.com/blogs/security/securely-connect-to-linux-instances-running-in-a-private-amazon-vpc/)\.
+   For information about using a bastion host to get SSH access to the development endpoint’s private address, see the AWS Security Blog post [Securely Connect to Linux Instances Running in a Private Amazon VPC](http://aws.amazon.com/blogs/security/securely-connect-to-linux-instances-running-in-a-private-amazon-vpc/)\.

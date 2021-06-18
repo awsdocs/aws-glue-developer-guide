@@ -10,17 +10,17 @@ Job bookmarks are implemented for JDBC data sources, the Relationalize transform
 | Version 0\.9 | JSON, CSV, Apache Avro, XML | 
 | Version 1\.0 and later | JSON, CSV, Apache Avro, XML, Parquet, ORC | 
 
-For information about AWS Glue versions, see [Defining Job Properties](add-job.md#create-job)\.
+For information about AWS Glue versions, see [Defining Job Properties for Spark Jobs](add-job.md#create-job)\.
 
 For JDBC sources, the following rules apply:
 + For each table, AWS Glue uses one or more columns as bookmark keys to determine new and processed data\. The bookmark keys combine to form a single compound key\.
 + You can specify the columns to use as bookmark keys\. If you don't specify bookmark keys, AWS Glue by default uses the primary key as the bookmark key, provided that it is sequentially increasing or decreasing \(with no gaps\)\.
 + If user\-defined bookmarks keys are used, they must be strictly monotonically increasing or decreasing\. Gaps are permitted\.
++ AWS Glue doesn't support using case\-sensitive columns as job bookmark keys\.
 
 **Topics**
 + [Using Job Bookmarks in AWS Glue](#monitor-continuations-implement)
 + [Using Job Bookmarks with the AWS Glue Generated Script](#monitor-continuations-script)
-+ [Tracking Files Using Modification Timestamps](#monitor-continuations-timestamps)
 
 ## Using Job Bookmarks in AWS Glue<a name="monitor-continuations-implement"></a>
 
@@ -132,7 +132,7 @@ job.init(args['JOB_NAME'], args)
 ## @args: [database = "hr", table_name = "emp", transformation_ctx = "datasource0"]
 ## @return: datasource0
 ## @inputs: []
-datasource0 = glueContext.create_dynamic_frame.from_catalog(database = "hr", table_name = "emp", transformation_ctx = "datasource0", additional_options = {"jobBookmarkKeys":["empno"],"jobBookmarksKeysSortOrder":"asc"})
+datasource0 = glueContext.create_dynamic_frame.from_catalog(database = "hr", table_name = "emp", transformation_ctx = "datasource0", additional_options = {"jobBookmarkKeys":["empno"],"jobBookmarkKeysSortOrder":"asc"})
 ## @type: ApplyMapping
 ## @args: [mapping = [("ename", "string", "ename", "string"), ("hrly_rate", "decimal(38,0)", "hrly_rate", "decimal(38,0)"), ("comm", "decimal(7,2)", "comm", "decimal(7,2)"), ("hiredate", "timestamp", "hiredate", "timestamp"), ("empno", "decimal(5,0)", "empno", "decimal(5,0)"), ("mgr", "decimal(5,0)", "mgr", "decimal(5,0)"), ("photo", "string", "photo", "string"), ("job", "string", "job", "string"), ("deptno", "decimal(3,0)", "deptno", "decimal(3,0)"), ("ssn", "decimal(9,0)", "ssn", "decimal(9,0)"), ("sal", "decimal(7,2)", "sal", "decimal(7,2)")], transformation_ctx = "applymapping1"]
 ## @return: applymapping1
@@ -147,36 +147,3 @@ job.commit()
 ```
 
 For more information about connection options related to job bookmarks, see [JDBC connectionType Values](aws-glue-programming-etl-connect.md#aws-glue-programming-etl-connect-jdbc)\.
-
-## Tracking Files Using Modification Timestamps<a name="monitor-continuations-timestamps"></a>
-
-For Amazon S3 input sources, AWS Glue job bookmarks check the last modified time of the files to verify which objects need to be reprocessed\. 
-
-Consider the following example\. In the diagram, the X axis is a time axis, from left to right, with the left\-most point being T0\. The Y axis is list of files observed at time T\. The elements representing the list are placed in the graph based on their modification time\.
-
-![\[The list of files observed at time T based on their modification time.\]](http://docs.aws.amazon.com/glue/latest/dg/images/monitor-continuations-timestamp.png)
-
-In this example, when a job starts at modification timestamp 1 \(T1\), it looks for files that have a modification time greater than T0 and less than or equal to T1\. Those files are F2, F3, F4, and F5\. The job bookmark stores the timestamps T0 and T1 as the low and high timestamps respectively\.
-
-When the job reruns at T2, it filters files that have a modification time greater than T1 and less than or equal to T2\. Those files are F7, F8, F9, and F10\. It thereby misses the files F3', F4', and F5'\. The reason that the files F3', F4', and F5', which have a modification time less than or equal to T1, show up after T1 is because of Amazon S3 list consistency\.
-
-To account for Amazon S3 eventual consistency, AWS Glue includes a list of files \(or path hash\) in the job bookmark\. AWS Glue assumes that the Amazon S3 file list is only inconsistent up to a finite period \(dt\) before the current time\. That is, the file list for files with a modification time between T1 \- dt and T1 when listing is done at T1 is inconsistent\. However, the list of files with a modification time less than or equal to T1 \- d1 is consistent at a time greater than or equal to T1\.
-
-You specify the period of time in which AWS Glue will save files \(and where the files are likely to be consistent\) by using the `MaxBand` option in the AWS Glue connection options\. The default value is 900 seconds \(15 minutes\)\. For more information about this property, see [Connection Types and Options for ETL in AWS Glue](aws-glue-programming-etl-connect.md)\.
-
-When the job reruns at timestamp 2 \(T2\), it lists the files in the following ranges:
-+ T1 \- dt \(exclusive\) to T1 \(inclusive\)\. This list includes F4, F5, F4', and F5'\. This list is a consistent range\. However, this range is inconsistent for a listing at T1 and has a list of files F3, F4, and F5 saved\. For getting the files to be processed at T2, the files F3, F4, and F5 will be removed\.
-+ T1 \(exclusive\) to T2 \- dt \(inclusive\)\. This list includes F7 and F8\. This list is a consistent range\.
-+ T2 \- dt \(exclusive\) \- T2 \(inclusive\)\. This list includes F9 and F10\. This list is an inconsistent range\.
-
-The resultant list of files is F3', F4', F5', F7, F8, F9, and F10\.
-
-The new files in the inconsistent list are F9 and F10, which are saved in the filter for the next run\.
-
-For more information about Amazon S3 eventual consistency, see [Introduction to Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/Introduction.html#ConsistencyModel) in the *Amazon Simple Storage Service Developer Guide*\.
-
-### Job Run Failures<a name="monitor-continuations-timestamps-failures"></a>
-
-A job run version increments when a job fails\. For example, if a job run at timestamp 1 \(T1\) fails, and it is rerun at T2, it advances the high timestamp to T2\. Then, when the job is run at a later point T3, it advances the high timestamp to T3\.
-
-If a job run fails before the `job.commit()` \(at T1\), the files are processed in a subsequent run, in which AWS Glue processes the files from T0 to T2\.

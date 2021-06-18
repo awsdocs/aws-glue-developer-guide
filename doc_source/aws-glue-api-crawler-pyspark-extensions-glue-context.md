@@ -10,11 +10,12 @@ Wraps the Apache Spark [SparkContext](https://spark.apache.org/docs/latest/api/j
 
 ## purge\_table<a name="aws-glue-api-crawler-pyspark-extensions-glue-context-purge_table"></a>
 
-**`purge_table(database, table_name, options={}, transformation_ctx="", catalog_id=None)`**
+**`purge_table(catalog_id=None, database="", table_name="", options={}, transformation_ctx="")`**
 
 Deletes files from Amazon S3 for the specified catalog's database and table\. If all files in a partition are deleted, that partition is also deleted from the catalog\.
 
-If you want to be able to recover deleted objects, you can enable [object versioning](https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectVersioning.html) on the Amazon S3 bucket\. When an object is deleted from a bucket that doesn't have object versioning enabled, the object can't be recovered\. For more information about how to recover deleted objects in a version\-enabled bucket, see [How can I retrieve an Amazon S3 object that was deleted?](https://aws.amazon.com/premiumsupport/knowledge-center/s3-undelete-configuration/) in the AWS Support Knowledge Center\.
+If you want to be able to recover deleted objects, you can turn on [object versioning](https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectVersioning.html) on the Amazon S3 bucket\. When an object is deleted from a bucket that doesn't have object versioning enabled, the object can't be recovered\. For more information about how to recover deleted objects in a version\-enabled bucket, see [How can I retrieve an Amazon S3 object that was deleted?](https://aws.amazon.com/premiumsupport/knowledge-center/s3-undelete-configuration/) in the AWS Support Knowledge Center\.
++ `catalog_id` – The catalog ID of the Data Catalog being accessed \(the account ID of the Data Catalog\)\. Set to `None` by default\. `None` defaults to the catalog ID of the calling account in the service\.
 + `database` – The database to use\.
 + `table_name` – The name of the table to use\.
 + `options` – Options to filter files to be deleted and for manifest file generation\.
@@ -23,7 +24,6 @@ If you want to be able to recover deleted objects, you can enable [object versio
   + `excludeStorageClasses` – Files with storage class in the `excludeStorageClasses` set are not deleted\. The default is `Set()` – an empty set\.
   + `manifestFilePath` – An optional path for manifest file generation\. All files that were successfully purged are recorded in `Success.csv`, and those that failed in `Failed.csv`
 + `transformation_ctx` – The transformation context to use \(optional\)\. Used in the manifest file path\.
-+ `catalog_id` – The catalog ID of the Data Catalog being accessed \(the account ID of the Data Catalog\)\. Set to `None` by default\. `None` defaults to the catalog ID of the calling account in the service\.
 
 **Example**  
 
@@ -37,7 +37,7 @@ glueContext.purge_table("database", "table", {"partitionPredicate": "(month=='ma
 
 Deletes files from the specified Amazon S3 path recursively\.
 
-If you want to be able to recover deleted objects, you can enable [object versioning](https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectVersioning.html) on the Amazon S3 bucket\. When an object is deleted from a bucket that doesn't have object versioning enabled, the object can't be recovered\. For more information about how to recover deleted objects in a version\-enabled bucket, see [How can I retrieve an Amazon S3 object that was deleted?](https://aws.amazon.com/premiumsupport/knowledge-center/s3-undelete-configuration/) in the AWS Support Knowledge Center\.
+If you want to be able to recover deleted objects, you can turn on [object versioning](https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectVersioning.html) on the Amazon S3 bucket\. When an object is deleted from a bucket that doesn't have object versioning turned on, the object can't be recovered\. For more information about how to recover deleted objects in a bucket with versioning, see [How can I retrieve an Amazon S3 object that was deleted?](https://aws.amazon.com/premiumsupport/knowledge-center/s3-undelete-configuration/) in the AWS Support Knowledge Center\.
 + `s3_path` – The path in Amazon S3 of the files to be deleted in the format `s3://<bucket>/<prefix>/`
 + `options` – Options to filter files to be deleted and for manifest file generation\.
   + `retentionPeriod` – Specifies a period in number of hours to retain files\. Files newer than the retention period are retained\. Set to 168 hours \(7 days\) by default\.
@@ -45,7 +45,6 @@ If you want to be able to recover deleted objects, you can enable [object versio
   + `excludeStorageClasses` – Files with storage class in the `excludeStorageClasses` set are not deleted\. The default is `Set()` – an empty set\.
   + `manifestFilePath` – An optional path for manifest file generation\. All files that were successfully purged are recorded in `Success.csv`, and those that failed in `Failed.csv`
 + `transformation_ctx` – The transformation context to use \(optional\)\. Used in the manifest file path\.
-+ `catalog_id` – The catalog ID of the Data Catalog being accessed \(the account ID of the Data Catalog\)\. Set to `None` by default\. `None` defaults to the catalog ID of the calling account in the service\.
 
 **Example**  
 
@@ -70,7 +69,7 @@ If you're running AWS Glue ETL jobs that read files or partitions from Amazon S3
   + `partitionPredicate` – Partitions satisfying this predicate are transitioned\. Files within the retention period in these partitions are not transitioned\. Set to `""` – empty by default\.
   + `excludeStorageClasses` – Files with storage class in the `excludeStorageClasses` set are not transitioned\. The default is `Set()` – an empty set\.
   + `manifestFilePath` – An optional path for manifest file generation\. All files that were successfully transitioned are recorded in `Success.csv`, and those that failed in `Failed.csv`
-  + `accountId` – The AWS account ID to run the transition transform\. Mandatory for this transform\.
+  + `accountId` – The Amazon Web Services account ID to run the transition transform\. Mandatory for this transform\.
   + `roleArn` – The AWS role to run the transition transform\. Mandatory for this transform\.
 + `transformation_ctx` – The transformation context to use \(optional\)\. Used in the manifest file path\.
 + `catalog_id` – The catalog ID of the Data Catalog being accessed \(the account ID of the Data Catalog\)\. Set to `None` by default\. `None` defaults to the catalog ID of the calling account in the service\.
@@ -97,7 +96,7 @@ If you're running AWS Glue ETL jobs that read files or partitions from Amazon S3
   + `partitionPredicate` – Partitions satisfying this predicate are transitioned\. Files within the retention period in these partitions are not transitioned\. Set to `""` – empty by default\.
   + `excludeStorageClasses` – Files with storage class in the `excludeStorageClasses` set are not transitioned\. The default is `Set()` – an empty set\.
   + `manifestFilePath` – An optional path for manifest file generation\. All files that were successfully transitioned are recorded in `Success.csv`, and those that failed in `Failed.csv`
-  + `accountId` – The AWS account ID to run the transition transform\. Mandatory for this transform\.
+  + `accountId` – The Amazon Web Services account ID to run the transition transform\. Mandatory for this transform\.
   + `roleArn` – The AWS role to run the transition transform\. Mandatory for this transform\.
 + `transformation_ctx` – The transformation context to use \(optional\)\. Used in the manifest file path\.
 
@@ -114,6 +113,8 @@ glueContext.transition_s3_path("s3://bucket/prefix/", "STANDARD_IA", {"retention
 + [create\_dynamic\_frame\_from\_catalog](#aws-glue-api-crawler-pyspark-extensions-glue-context-create_dynamic_frame_from_catalog)
 + [create\_dynamic\_frame\_from\_options](#aws-glue-api-crawler-pyspark-extensions-glue-context-create_dynamic_frame_from_options)
 + [add\_ingestion\_time\_columns](#aws-glue-api-crawler-pyspark-extensions-glue-context-add-ingestion-time-columns)
++ [create\_data\_frame\_from\_catalog](#aws-glue-api-crawler-pyspark-extensions-glue-context-create-dataframe-from-catalog)
++ [create\_data\_frame\_from\_options](#aws-glue-api-crawler-pyspark-extensions-glue-context-create-dataframe-from-options)
 
 ## \_\_init\_\_<a name="aws-glue-api-crawler-pyspark-extensions-glue-context-__init__"></a>
 
@@ -152,7 +153,7 @@ Returns a `DynamicFrame` that is created from an Apache Spark Resilient Distribu
 
 **`create_dynamic_frame_from_catalog(database, table_name, redshift_tmp_dir, transformation_ctx = "", push_down_predicate= "", additional_options = {}, catalog_id = None)`**
 
-Returns a `DynamicFrame` that is created using a catalog database and table name\.
+Returns a `DynamicFrame` that is created using a Data Catalog database and table name\.
 + `Database` – The database to read from\.
 + `table_name` – The name of the table to read from\.
 + `redshift_tmp_dir` – An Amazon Redshift temporary directory to use \(optional\)\.
@@ -200,6 +201,104 @@ Example:
 
 ```
 dynamic_frame = DynamicFrame.fromDF(glueContext.add_ingestion_time_columns(dataFrame, "hour"))
+```
+
+## create\_data\_frame\_from\_catalog<a name="aws-glue-api-crawler-pyspark-extensions-glue-context-create-dataframe-from-catalog"></a>
+
+**`create_data_frame_from_catalog(database, table_name, transformation_ctx = "", additional_options = {})`**
+
+Returns a `DataFrame` that is created using information from a Data Catalog table\. Use this function only with AWS Glue streaming sources\.
++ `database` – The Data Catalog database to read from\.
++ `table_name` – The name of the Data Catalog table to read from\.
++ `transformation_ctx` – The transformation context to use \(optional\)\.
++ `additional_options` – A collection of optional name\-value pairs\. The possible options include those listed in [Connection Types and Options for ETL in AWS Glue](aws-glue-programming-etl-connect.md) for streaming sources, such as `startingPosition`, `maxFetchTimeInMs`, and `startingOffsets`\.
+
+**Example:**
+
+```
+df = glueContext.create_data_frame.from_catalog( 
+    database = "MyDB", 
+    table_name = "streaming_table", 
+    transformation_ctx = "df", 
+    additional_options = {"startingPosition": "TRIM_HORIZON", "inferSchema": "true"})
+```
+
+## create\_data\_frame\_from\_options<a name="aws-glue-api-crawler-pyspark-extensions-glue-context-create-dataframe-from-options"></a>
+
+**`create_data_frame_from_options(connection_type, connection_options={}, format=None, format_options={}, transformation_ctx = "")`**
+
+Returns a `DataFrame` created with the specified connection and format\. Use this function only with AWS Glue streaming sources\.
++ `connection_type` – The streaming connection type\. Valid values include `kinesis` and `kafka`\.
++ `connection_options` – Connection options, which are different for Kinesis and Kafka\. You can find the list of all connection options for each streaming data source at [Connection Types and Options for ETL in AWS Glue](aws-glue-programming-etl-connect.md)\. Note the following differences in streaming connection options:
+  + Kinesis streaming sources require `streamARN`, `startingPosition`, `inferSchema`, and `classification`\.
+  + Kafka streaming sources require `connectionName`, `topicName`, `startingOffsets`, `inferSchema`, and `classification`\.
++ `format` – A format specification \(optional\)\. This is used for an Amazon S3 or an AWS Glue connection that supports multiple formats\. For information about the supported formats, see [Format Options for ETL Inputs and Outputs in AWS Glue](aws-glue-programming-etl-format.md)\.
++ `format_options` – Format options for the specified format\. For information about the supported format options, see [Format Options for ETL Inputs and Outputs in AWS Glue](aws-glue-programming-etl-format.md)\.
++ `transformation_ctx` – The transformation context to use \(optional\)\.
+
+Example for Amazon Kinesis streaming source:
+
+```
+kinesis_options =
+   { "streamARN": "arn:aws:kinesis:us-east-2:777788889999:stream/fromOptionsStream",
+     "startingPosition": "TRIM_HORIZON", 
+     "inferSchema": "true", 
+     "classification": "json" 
+   }
+data_frame_datasource0 = glueContext.create_data_frame.from_options(connection_type="kinesis", connection_options=kinesis_options)
+```
+
+Example for Kafka streaming source:
+
+```
+kafka_options =
+    { "connectionName": "ConfluentKafka", 
+      "topicName": "kafka-auth-topic", 
+      "startingOffsets": "earliest", 
+      "inferSchema": "true", 
+      "classification": "json" 
+    }
+data_frame_datasource0 = glueContext.create_data_frame.from_options(connection_type="kafka", connection_options=kafka_options)
+```
+
+## forEachBatch<a name="aws-glue-api-crawler-pyspark-extensions-glue-context-forEachBatch"></a>
+
+**`forEachBatch(frame, batch_function, options)`**
+
+Applies the `batch_function` passed in to every micro batch that is read from the Streaming source\.
++ `frame` – The DataFrame containing the current micro batch\.
++ `batch_function` – A function that will be applied for every micro batch\.
++ `options` – A collection of key\-value pairs that holds information about how to process micro batches\. The following options are required:
+  + `windowSize` – The amount of time to spend processing each batch\.
+  + `checkpointLocation` – The location where checkpoints are stored for the streaming ETL job\.
+
+**Example:**
+
+```
+glueContext.forEachBatch(
+    frame = data_frame_datasource0,
+    batch_function = processBatch, 
+    options = {
+        "windowSize": "100 seconds", 
+        "checkpointLocation": "s3://kafka-auth-dataplane/confluent-test/output/checkpoint/"
+    }
+)
+   
+def processBatch(data_frame, batchId):
+    if (data_frame.count() > 0):
+        datasource0 = DynamicFrame.fromDF(
+          glueContext.add_ingestion_time_columns(data_frame, "hour"), 
+          glueContext, "from_data_frame"
+        )
+        additionalOptions_datasink1 = {"enableUpdateCatalog": True}
+        additionalOptions_datasink1["partitionKeys"] = ["ingest_yr", "ingest_mo", "ingest_day"]
+        datasink1 = glueContext.write_dynamic_frame.from_catalog(
+          frame = datasource0, 
+          database = "tempdb", 
+          table_name = "kafka-auth-table-output", 
+          transformation_ctx = "datasink1", 
+          additional_options = additionalOptions_datasink1
+        )
 ```
 
 ## Writing<a name="aws-glue-api-crawler-pyspark-extensions-glue-context-_writing"></a>
@@ -286,12 +385,13 @@ Writes and returns a `DynamicFrame` or `DynamicFrameCollection` that is created 
 
 **`write_dynamic_frame_from_catalog(frame, database, table_name, redshift_tmp_dir, transformation_ctx = "", addtional_options = {}, catalog_id = None)`**
 
-Writes and returns a `DynamicFrame` using a catalog database and a table name\.
+Writes and returns a `DynamicFrame` using information from a Data Catalog database and table\.
 + `frame` – The `DynamicFrame` to write\.
-+ `Database` – The database to read from\.
-+ `table_name` – The name of the table to read from\.
++ `Database` – The Data Catalog database that contains the table\.
++ `table_name` – The name of the Data Catalog table associated with the target\.
 + `redshift_tmp_dir` – An Amazon Redshift temporary directory to use \(optional\)\.
 + `transformation_ctx` – The transformation context to use \(optional\)\.
++ `additional_options` – A collection of optional name\-value pairs\.
 + `catalog_id` — The catalog ID \(account ID\) of the Data Catalog being accessed\. When None, the default account ID of the caller is used\. 
 
 ## write\_dynamic\_frame\_from\_jdbc\_conf<a name="aws-glue-api-crawler-pyspark-extensions-glue-context-write_dynamic_frame_from_jdbc_conf"></a>

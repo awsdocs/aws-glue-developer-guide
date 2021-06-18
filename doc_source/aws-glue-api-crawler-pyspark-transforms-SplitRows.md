@@ -53,3 +53,10 @@ Inherited from `GlueTransform` [describeErrors](aws-glue-api-crawler-pyspark-tra
 ## describe\(cls\)<a name="aws-glue-api-crawler-pyspark-transforms-SplitRows-describe"></a>
 
 Inherited from `GlueTransform` [describe](aws-glue-api-crawler-pyspark-transforms-GlueTransform.md#aws-glue-api-crawler-pyspark-transforms-GlueTransform-describe)\.
+
+## Example for SplitRows<a name="pyspark-SplitRows-examples"></a>
+
+```
+dyf_splitRows = SplitRows.apply(frame = dyf_dropNullfields, comparison_dict = {"`data.pineapple`": {">": "100", 
+"<": "200"}}, name1 = 'pa_200_less', name2 = 'pa_200_more')
+```

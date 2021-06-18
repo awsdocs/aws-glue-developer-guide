@@ -4,16 +4,21 @@ An AWS Glue connection is a Data Catalog object that stores connection informati
 
 The following connection types are available:
 + JDBC
-+ Amazon Relational Database Service \(Amazon RDS\)
-+ Amazon Redshift
+  + Amazon Redshift
+  + Amazon Relational Database Service \(Amazon RDS\)
 + Amazon DocumentDB
-+ MongoDB
++ DynamoDB
 + Kafka
++ Amazon Kinesis
++ MongoDB
 + Network \(designates a connection to a data source within an Amazon Virtual Private Cloud environment \(Amazon VPC\)\)
++ Amazon S3
 
-When you create a crawler or extract, transform, and load \(ETL\) job for any of these data sources, you specify the connection to use\. You can also optionally specify a connection when creating a development endpoint\.
+With AWS Glue Studio, you can also create connections for custom connectors or connectors you purchase from AWS Marketplace\. For more information, see [Using connectors and connections with AWS Glue Studio](https://docs.aws.amazon.com/glue/latest/ug/connectors-chapter.html) 
 
-Typically, a connection is not required for Amazon Simple Storage Service \(Amazon S3\) sources or targets that are on the public Internet\. However, to access Amazon S3 from within your virtual private cloud \(VPC\), an Amazon S3 VPC endpoint is required\. For more information, see [Amazon VPC Endpoints for Amazon S3](vpc-endpoints-s3.md)\. 
+When you create a crawler or extract, transform, and load \(ETL\) job for any of these data sources, you specify the connection to use\. You can also optionally specify a connection when creating a development endpoint or writing data to a target\.
+
+Typically, a connection is not required for Amazon Simple Storage Service \(Amazon S3\) sources or targets that are on the public Internet\. However, to access Amazon S3 from within your virtual private cloud \(VPC\), an Amazon S3 VPC endpoint of type Gateway is required\. For more information, see [Amazon VPC Endpoints for Amazon S3](vpc-endpoints-s3.md)\. 
 
 Additionally, if you want to access Amazon S3 data sources located in your virtual private cloud \(VPC\), you must create a `Network` type connection\. 
 

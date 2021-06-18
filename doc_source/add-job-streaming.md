@@ -15,7 +15,9 @@ Creating a streaming ETL job involves the following steps:
 
 1. Create an ETL job for the streaming data source\. Define streaming\-specific job properties, and supply your own script or optionally modify the generated script\.
 
-When creating a streaming ETL job for Amazon Kinesis Data Streams, you don't have to create an AWS Glue connection\. However, if there is a connection attached to the AWS Glue streaming ETL job that has Kinesis Data Streams as a source, then a virtual private cloud \(VPC\) endpoint to Kinesis is required\. For more information, see [Creating an interface endpoint](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint) in the *Amazon VPC User Guide*\.
+For more information, see [Streaming ETL in AWS Glue](components-overview.md#streaming-etl-intro)\.
+
+When creating a streaming ETL job for Amazon Kinesis Data Streams, you don't have to create an AWS Glue connection\. However, if there is a connection attached to the AWS Glue streaming ETL job that has Kinesis Data Streams as a source, then a virtual private cloud \(VPC\) endpoint to Kinesis is required\. For more information, see [Creating an interface endpoint](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint) in the *Amazon VPC User Guide*\. When specifying a Amazon Kinesis Data Streams stream in another account, you must setup the roles and policies to allow cross\-account access\. For more information, see [ Example: Read From a Kinesis Stream in a Different Account](https://docs.aws.amazon.com/kinesisanalytics/latest/java/examples-cross.html)\.
 
 **Topics**
 + [Creating an AWS Glue Connection for an Apache Kafka Data Stream](#create-conn-streaming)
@@ -66,30 +68,79 @@ For more information about AWS Glue connections, see [AWS Glue Connections](conn
 
 Before creating a streaming ETL job, you must manually create a Data Catalog table that specifies source data stream properties, including the data schema\. This table is used as the data source for the streaming ETL job\. 
 
-If you don't know the schema of the data in the source data stream, you can create the table without a schema\. Then when you create the streaming ETL job, you can enable the AWS Glue schema detection function\. AWS Glue determines the schema from the streaming data\.
+If you don't know the schema of the data in the source data stream, you can create the table without a schema\. Then when you create the streaming ETL job, you can turn on the AWS Glue schema detection function\. AWS Glue determines the schema from the streaming data\.
 
 Use the [AWS Glue console](https://console.aws.amazon.com/glue/), the AWS Command Line Interface \(AWS CLI\), or the AWS Glue API to create the table\. For information about creating a table manually with the AWS Glue console, see [Defining Tables in the AWS Glue Data Catalog](tables-described.md)\.
 
 **Note**  
 You can't use the AWS Lake Formation console to create the table; you must use the AWS Glue console\.
 
-When creating the table, set the following streaming ETL properties\.
+When creating the table, set the following streaming ETL properties \(console\)\.
 
 **Type of Source**  
 **Kinesis** or **Kafka**
 
-**For a Kinesis source:**    
-**Stream name**  
-Stream name as described in [Creating a Stream](https://docs.aws.amazon.com/streams/latest/dev/kinesis-using-sdk-java-create-stream.html) in the* Amazon Kinesis Data Streams Developer Guide*\.  
-**Kinesis source URL**  
-Fully qualified URL of the Amazon Kinesis Data Streams service\.  
-Example: https://kinesis\.us\-east\-1\.amazonaws\.com
+**For a Kinesis source in the same account:**    
+**Region**  
+The AWS Region where the Amazon Kinesis Data Streams service resides\. The Region and Kinesis stream name are together translated to a Stream ARN\.  
+Example: https://kinesis\.us\-east\-1\.amazonaws\.com  
+**Kinesis stream name**  
+Stream name as described in [Creating a Stream](https://docs.aws.amazon.com/streams/latest/dev/kinesis-using-sdk-java-create-stream.html) in the* Amazon Kinesis Data Streams Developer Guide*\.
+
+**For a Kinesis source in another account, refer to [this example](https://docs.aws.amazon.com/kinesisanalytics/latest/java/examples-cross.html) to set up the roles and policies to allow cross\-account access\. Configure these settings:**    
+**Stream ARN**  
+The ARN of the Kinesis data stream that the consumer is registered with\. For more information, see [Amazon Resource Names \(ARNs\) and AWS Service Namespaces](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in the *AWS General Reference*\.  
+**Assumed Role ARN**  
+The Amazon Resource Name \(ARN\) of the role to assume\.  
+**Session name \(optional\)**  
+An identifier for the assumed role session\.  
+Use the role session name to uniquely identify a session when the same role is assumed by different principals or for different reasons\. In cross\-account scenarios, the role session name is visible to, and can be logged by the account that owns the role\. The role session name is also used in the ARN of the assumed role principal\. This means that subsequent cross\-account API requests that use the temporary security credentials will expose the role session name to the external account in their AWS CloudTrail logs\.
 
 **For a Kafka source:**    
 **Topic name**  
 Topic name as specified in Kafka\.  
 **Connection**  
 An AWS Glue connection that references a Kafka source, as described in [Creating an AWS Glue Connection for an Apache Kafka Data Stream](#create-conn-streaming)\.
+
+**To set streaming ETL properties for Amazon Kinesis Data Streams \(AWS Glue API or AWS CLI\)**
++ To set up streaming ETL properties for a Kinesis source in the same account, specify the `streamName` and `endpointUrl` parameters in the `StorageDescriptor` structure of the `CreateTable` API operation or the `create_table` CLI command\.
+
+  ```
+  "StorageDescriptor": {
+  	"Parameters": {
+  		"typeOfData": "kinesis",
+  		"streamName": "sample-stream",
+  		"endpointUrl": "https://kinesis.us-east-1.amazonaws.com"
+  	}
+  	...
+  }
+  ```
+
+  Or, specify the `streamARN`\.  
+**Example**  
+
+  ```
+  "StorageDescriptor": {
+  	"Parameters": {
+  		"typeOfData": "kinesis",
+  		"streamARN": "arn:aws:kinesis:us-east-1:123456789:stream/sample-stream"
+  	}
+  	...
+  }
+  ```
++ To set up streaming ETL properties for a Kinesis source in another account, specify the `streamARN`, `awsSTSRoleARN` and `awsSTSSessionName` \(optional\) parameters in the `StorageDescriptor` structure in the `CreateTable` API operation or the `create_table` CLI command\.
+
+  ```
+  "StorageDescriptor": {
+  	"Parameters": {
+  		"typeOfData": "kinesis",
+  		"streamARN": "arn:aws:kinesis:us-east-1:123456789:stream/sample-stream",
+  		"awsSTSRoleARN": "arn:aws:iam::123456789:role/sample-assume-role-arn",
+  		"awsSTSSessionName": "optional-session"
+  	}
+  	...
+  }
+  ```
 
 Also consider the following information for streaming sources in Avro format or for log data that you can apply Grok patterns to\. 
 + [Notes and Restrictions for Avro Streaming Sources](#streaming-avro-notes)
@@ -98,7 +149,7 @@ Also consider the following information for streaming sources in Avro format or 
 ### Notes and Restrictions for Avro Streaming Sources<a name="streaming-avro-notes"></a>
 
 The following notes and restrictions apply for streaming sources in the Avro format:
-+ When schema detection is enabled, the Avro schema must be included in the payload\. When disabled, the payload should contain only data\.
++ When schema detection is turned on, the Avro schema must be included in the payload\. When turned off, the payload should contain only data\.
 + Some Avro data types are not supported in dynamic frames\. You can't specify these data types when defining the schema with the **Define a schema** page in the create table wizard in the AWS Glue console\. During schema detection, unsupported types in the Avro schema are converted to supported types as follows:
   + `EnumType => StringType`
   + `FixedType => BinaryType`
@@ -166,7 +217,7 @@ For information about Grok patterns and custom pattern string values, see [Writi
 
 ## Defining Job Properties for a Streaming ETL Job<a name="create-job-streaming-properties"></a>
 
-When you define a streaming ETL job on the AWS Glue console, provide the following streams\-specific properties\. For descriptions of additional job properties, see [Defining Job Properties](add-job.md#create-job)\. For more information about adding a job using the AWS Glue console, see [Working with Jobs on the AWS Glue Console](console-jobs.md)\. 
+When you define a streaming ETL job in the AWS Glue console, provide the following streams\-specific properties\. For descriptions of additional job properties, see [Defining Job Properties for Spark Jobs](add-job.md#create-job)\. For more information about adding a job using the AWS Glue console, see [Working with Jobs on the AWS Glue Console](console-jobs.md)\. 
 
 **IAM role**  
 Specify the AWS Identity and Access Management \(IAM\) role that is used for authorization to resources that are used to run the job, access streaming sources, and access target data stores\.  
@@ -177,10 +228,10 @@ For more information about permissions for running jobs in AWS Glue, see [Managi
 Choose **Spark streaming**\.
 
 **AWS Glue version**  
-Glue version determines the versions of Apache Spark, and Python or Scala, that are available to the job\. Choose a selection for Glue Version 1\.0 or Glue Version 2\.0 that specifies the version of Python or Scala available to the job\. AWS Glue Version 2\.0 with Python 3 support is the default for streaming ETL jobs\.
+The AWS Glue version determines the versions of Apache Spark, and Python or Scala, that are available to the job\. Choose a selection for Glue Version 1\.0 or Glue Version 2\.0 that specifies the version of Python or Scala available to the job\. AWS Glue Version 2\.0 with Python 3 support is the default for streaming ETL jobs\.
 
 **Job timeout**  
-Optionally enter a duration in minutes\. If you leave this field blank, the job runs continuously\.
+Optionally enter a duration in minutes\. The default value is blank, which means the job might run indefinitely\. 
 
 **Data source**  
 Specify the table that you created in [Creating a Data Catalog Table for a Streaming Source](#create-table-streaming)\.
@@ -196,7 +247,7 @@ Choose any format\. All are supported for streaming\.
 
 **Output schema definition**  
 Do one of the following:  
-+ Choose **Automatically detect schema of each record** to enable schema detection\. AWS Glue determines the schema from the streaming data\.
++ Choose **Automatically detect schema of each record** to turn on schema detection\. AWS Glue determines the schema from the streaming data\.
 + Choose **Specify output schema for all records** to use the Apply Mapping transform to define the output schema\.
 
 **Script**  
@@ -210,5 +261,4 @@ Keep in mind the following notes and restrictions:
 + AWS Glue streaming ETL jobs use checkpoints to keep track of the data that has been read\. Therefore, a stopped and restarted job picks up where it left off in the stream\. If you want to reprocess data, you can delete the checkpoint folder referenced in the script\.
 + Job bookmarks aren't supported\.
 + You can't change the number of shards of an Amazon Kinesis data stream if an AWS Glue streaming job is running and consuming data from that stream\. Stop the job first, modify the stream shards, and then restart the job\.
-+ Kinesis streams must be in the same account as the AWS Glue job\.
 + You cannot register a job as a consumer for the enhanced fan\-out feature of Kinesis Data Streams\. 

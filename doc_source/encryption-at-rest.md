@@ -4,13 +4,13 @@ AWS Glue supports data encryption at rest for [Authoring Jobs in AWS Glue](autho
 
 You can encrypt metadata objects in your AWS Glue Data Catalog in addition to the data written to Amazon Simple Storage Service \(Amazon S3\) and Amazon CloudWatch Logs by jobs, crawlers, and development endpoints\. When you create jobs, crawlers, and development endpoints in AWS Glue, you can provide encryption settings by attaching a security configuration\. Security configurations contain Amazon S3\-managed server\-side encryption keys \(SSE\-S3\) or customer master keys \(CMKs\) stored in AWS KMS \(SSE\-KMS\)\. You can create security configurations using the AWS Glue console\.
 
-You can also enable encryption of the entire Data Catalog in your account\. You do so by specifying CMKs stored in AWS KMS\.
+You can also turn on encryption of the entire Data Catalog in your account\. You do so by specifying CMKs stored in AWS KMS\.
 
 **Important**  
 AWS Glue supports only symmetric CMKs\. For more information, see [Customer Master Keys \(CMKs\)](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys) in the *AWS Key Management Service Developer Guide*\.  
 
 
-With encryption enabled, when you add Data Catalog objects, run crawlers, run jobs, or start development endpoints, SSE\-S3 or SSE\-KMS keys are used to write data at rest\. In addition, you can configure AWS Glue to only access Java Database Connectivity \(JDBC\) data stores through a trusted Secure Sockets Layer \(SSL\) protocol\. 
+With encryption turned on, when you add Data Catalog objects, run crawlers, run jobs, or start development endpoints, SSE\-S3 or SSE\-KMS keys are used to write data at rest\. In addition, you can configure AWS Glue to only access Java Database Connectivity \(JDBC\) data stores through a trusted Secure Sockets Layer \(SSL\) protocol\. 
 
 In AWS Glue, you control encryption settings in the following places:
 + The settings of your Data Catalog\.

@@ -66,7 +66,7 @@ Use the following connection options with `"connectionType": "documentdb"` as a 
 + `"collection"`: \(Required\) The Amazon DocumentDB collection to write to\.
 + `"username"`: \(Required\) The Amazon DocumentDB user name\.
 + `"password"`: \(Required\) The Amazon DocumentDB password\.
-+ `"extendedBsonTypes"`: \(Optional\) If `true`, enables extended BSON types when writing data to Amazon DocumentDB\. The default is `true`\.
++ `"extendedBsonTypes"`: \(Optional\) If `true`, allows extended BSON types when writing data to Amazon DocumentDB\. The default is `true`\.
 + `"replaceDocument"`: \(Optional\) If `true`, replaces the whole document when saving datasets that contain an `_id` field\. If `false`, only fields in the document that match the fields in the dataset are updated\. The default is `true`\.
 + `"maxBatchSize"`: \(Optional\): The maximum batch size for bulk operations when saving data\. The default is 512\.
 
@@ -249,7 +249,7 @@ You can specify these options using `connectionOptions` with `GetSource`, `optio
 
 Use the following connection options with `"connectionType": "kafka"`:
 + `bootstrap.servers` \(Required\) A list of bootstrap server URLs, for example, as `b-1.vpc-test-2.o4q88o.c6.kafka.us-east-1.amazonaws.com:9094`\. This option must be specified in the API call or defined in the table metadata in the Data Catalog\.
-+ `security.protocol` \(Required\) A Boolean value indicating whether to enable or disable SSL on an Apache Kafka connection\. The default value is "true"\. This option must be specified in the API call or defined in the table metadata in the Data Catalog\.
++ `security.protocol` \(Required\) A Boolean value indicating whether to turn on or turn off SSL on an Apache Kafka connection\. The default value is "true"\. This option must be specified in the API call or defined in the table metadata in the Data Catalog\.
 + `topicName` \(Required\) The topic name as specified in Apache Kafka\. You must specify at least one of `"topicName"`, `"assign"` or `"subscribePattern"`\.
 + `"assign"`: \(Required\) The specific `TopicPartitions` to consume\. You must specify at least one of `"topicName"`, `"assign"` or `"subscribePattern"`\.
 + `"subscribePattern"`: \(Required\) A Java regex string that identifies the topic list to subscribe to\. You must specify at least one of `"topicName"`, `"assign"` or `"subscribePattern"`\.
@@ -287,8 +287,6 @@ Use the following connection options with `"connectionType": "kinesis"`:
 + `"maxFetchTimeInMs"`: \(Optional\) The maximum time spent in the job executor to fetch a record from the Kinesis data stream per shard, specified in milliseconds \(ms\)\. The default value is `1000`\.
 + `"maxFetchRecordsPerShard"`: \(Optional\) The maximum number of records to fetch per shard in the Kinesis data stream\. The default value is `100000`\.
 + `"maxRecordPerRead"`: \(Optional\) The maximum number of records to fetch from the Kinesis data stream in each `getRecords` operation\. The default value is `10000`\.
-+ `"addIdleTimeBetweenReads"`: \(Optional\) Adds a time delay between two consecutive `getRecords` operations\. The default value is `"False"`\. 
-+ `"idleTimeBetweenReadsInMs"`: \(Optional\) The minimum time delay between two consecutive `getRecords` operations, specified in ms\. The default value is `1000`\. 
 + `"describeShardInterval"`: \(Optional\) The minimum time interval between two `ListShards` API calls for your script to consider resharding\. For more information, see [Strategies for Resharding](https://docs.aws.amazon.com/streams/latest/dev/kinesis-using-sdk-java-resharding-strategies.html) in *Amazon Kinesis Data Streams Developer Guide*\. The default value is `1s`\.
 + `"numRetries"`: \(Optional\) The maximum number of retries for Kinesis Data Streams API requests\. The default value is `3`\.
 + `"retryIntervalMs"`: \(Optional\) The cool\-off time period \(specified in ms\) before retrying the Kinesis Data Streams API call\. The default value is `1000`\.
@@ -336,7 +334,7 @@ Use the following connection options with `"connectionType": "mongodb"` as a sin
 + `"password"`: \(Required\) The MongoDB password\.
 + `"ssl"`: \(Optional\) If `true`, initiates an SSL connection\. The default is `false`\.
 + `"ssl.domain_match"`: \(Optional\) If `true` and `ssl` is `true`, domain match check is performed\. The default is `true`\.
-+ `"extendedBsonTypes"`: \(Optional\) If `true`, enables extended BSON types when writing data to MongoDB\. The default is `true`\.
++ `"extendedBsonTypes"`: \(Optional\) If `true`, allows extended BSON types when writing data to MongoDB\. The default is `true`\.
 + `"replaceDocument"`: \(Optional\) If `true`, replaces the whole document when saving datasets that contain an `_id` field\. If `false`, only fields in the document that match the fields in the dataset are updated\. The default is `true`\.
 + `"maxBatchSize"`: \(Optional\): The maximum batch size for bulk operations when saving data\. The default is 512\.
 
@@ -366,11 +364,12 @@ Use the following connection options with `"connectionType": "s3"`:
 + `"paths"`: \(Required\) A list of the Amazon S3 paths to read from\.
 + `"exclusions"`: \(Optional\) A string containing a JSON list of Unix\-style glob patterns to exclude\. For example, `"[\"**.pdf\"]"` excludes all PDF files\. For more information about the glob syntax that AWS Glue supports, see [Include and Exclude Patterns](https://docs.aws.amazon.com/glue/latest/dg/define-crawler.html#crawler-data-stores-exclude)\.
 + `"compressionType"`: or "`compression`": \(Optional\) Specifies how the data is compressed\. Use `"compressionType"` for Amazon S3 sources and `"compression"` for Amazon S3 targets\. This is generally not necessary if the data has a standard file extension\. Possible values are `"gzip"` and `"bzip"`\)\.
-+ `"groupFiles"`: \(Optional\) Grouping files is enabled by default when the input contains more than 50,000 files\. To enable grouping with fewer than 50,000 files, set this parameter to `"inPartition"`\. To disable grouping when there are more than 50,000 files, set this parameter to `"none"`\.
++ `"groupFiles"`: \(Optional\) Grouping files is turned on by default when the input contains more than 50,000 files\. To turn on grouping with fewer than 50,000 files, set this parameter to `"inPartition"`\. To disable grouping when there are more than 50,000 files, set this parameter to `"none"`\.
 + `"groupSize"`: \(Optional\) The target group size in bytes\. The default is computed based on the input data size and the size of your cluster\. When there are fewer than 50,000 input files, `"groupFiles"` must be set to `"inPartition"` for this to take effect\.
 + `"recurse"`: \(Optional\) If set to true, recursively reads files in all subdirectories under the specified paths\.
-+ `"maxBand"`: \(Optional, advanced\) This option controls the duration in seconds after which the `s3` listing is likely to be consistent\. Files with modification timestamps falling within the last `maxBand` seconds are tracked specially when using `JobBookmarks` to account for Amazon S3 eventual consistency\. Most users don't need to set this option\. The default is 900 seconds\.
++ `"maxBand"`: \(Optional, advanced\) This option controls the duration in milliseconds after which the `s3` listing is likely to be consistent\. Files with modification timestamps falling within the last `maxBand` milliseconds are tracked specially when using `JobBookmarks` to account for Amazon S3 eventual consistency\. Most users don't need to set this option\. The default is 900000 milliseconds, or 15 minutes\.
 + `"maxFilesInBand"`: \(Optional, advanced\) This option specifies the maximum number of files to save from the last `maxBand` seconds\. If this number is exceeded, extra files are skipped and only processed in the next job run\. Most users don't need to set this option\.
++ `"isFailFast"`: \(Optional\) This option determines if an AWS Glue ETL job throws reader parsing exceptions\. If set to `true`, jobs fail fast if four retries of the Spark task fail to parse the data correctly\.
 
 ## JDBC connectionType Values<a name="aws-glue-programming-etl-connect-jdbc"></a>
 
@@ -398,7 +397,7 @@ Use these connection options with JDBC connections:
 + `"redshiftTmpDir"`: \(Required for Amazon Redshift, optional for other JDBC types\) The Amazon S3 path where temporary data can be staged when copying out of the database\.
 + `"user"`: \(Required\) The user name to use when connecting\.
 + `"password"`: \(Required\) The password to use when connecting\.
-+ \(Optional\) The following options enable you to supply a custom JDBC driver\. Use these options if you must use a driver that AWS Glue does not natively support\. ETL jobs can use different JDBC driver versions for the data source and target, even if the source and target are the same database product\. This enables you to migrate data between source and target databases with different versions\. To use these options, you must first upload the jar file of the JDBC driver to Amazon S3\.
++ \(Optional\) The following options allow you to supply a custom JDBC driver\. Use these options if you must use a driver that AWS Glue does not natively support\. ETL jobs can use different JDBC driver versions for the data source and target, even if the source and target are the same database product\. This allows you to migrate data between source and target databases with different versions\. To use these options, you must first upload the jar file of the JDBC driver to Amazon S3\.
   + `"customJdbcDriverS3Path"`: Amazon S3 path of the custom JDBC driver\.
   + `"customJdbcDriverClassName"`: Class name of JDBC driver\.
 
@@ -668,7 +667,7 @@ The following Python code example shows how to read from JDBC databases with AWS
 
 For additional options for this connector, see the [Amazon Athena CloudWatch Connector README](https://github.com/awslabs/aws-athena-query-federation/tree/master/athena-cloudwatch) file on GitHub\.
 
-The following Python code example shows how to read from an Athena data store using an AWS Marketplaceconnector\. It demonstrates reading from Athena and writing to an S3 location\. 
+The following Python code example shows how to read from an Athena data store using an AWS Marketplace connector\. It demonstrates reading from Athena and writing to an S3 location\. 
 
 ```
     import sys

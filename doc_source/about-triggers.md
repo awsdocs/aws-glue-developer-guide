@@ -2,6 +2,9 @@
 
 When *fired*, a trigger can start specified jobs and crawlers\. A trigger fires on demand, based on a schedule, or based on a combination of events\.
 
+**Note**  
+Only two crawlers can be activated by a single trigger\. If you want to crawl multiple data stores, use multiple sources for each crawler instead of running multiple crawlers simultaneously\.
+
 A trigger can exist in one of several states\. A trigger is either `CREATED`, `ACTIVATED`, or `DEACTIVATED`\. There are also transitional states, such as `ACTIVATING`\. To temporarily stop a trigger from firing, you can deactivate it\. You can then reactivate it later\.
 
 There are three types of triggers:

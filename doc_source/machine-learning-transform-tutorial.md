@@ -45,8 +45,6 @@ Next, add a machine learning transform that is based on the schema of your data 
 
    1. For **Primary key**, choose the primary key column for the table, **id**\.
 
-   1. For **Predictive columns**, choose the **title**, **authors**, **venue**, **year**, and **source** columns in the data source to act as predictive columns\.
-
 1. In the wizard, choose **Finish** and return to the **ML transforms** list\.
 
 ## Step 3: Teach Your Machine Learning Transform<a name="ml-transform-tutorial-teach"></a>

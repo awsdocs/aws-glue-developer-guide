@@ -12,8 +12,8 @@ Perform the following tasks to run a crawler on the data store:
 ## Prerequisites<a name="connection-S3-VPC-prerequisites"></a>
 
 Check that you have met these prerequisites for setting up your Amazon S3 data store to be accessed through an Amazon Virtual Private Cloud environment \(Amazon VPC\)
-+ A configured VPC\. For example: vpc\-01685961063b0d84b\. For more information, see [Getting started with Amazon VPC](https://docs.aws.amazon.com/https://docs.aws.amazon.com/vpc/latest/userguide/vpc-getting-started.html)\.
-+ An Amazon S3 endpoint attached to the VPC\. For example: vpc\-01685961063b0d84b\. For more information, see [Endpoints for Amazon S3](https://docs.aws.amazon.com/https://docs.aws.amazon.com/vpc/latest/userguide/vpc-getting-started.html)\.  
++ A configured VPC\. For example: vpc\-01685961063b0d84b\. For more information, see [Getting started with Amazon VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-getting-started.html) in the *Amazon VPC User Guide*\.
++ An Amazon S3 endpoint attached to the VPC\. For example: vpc\-01685961063b0d84b\. For more information, see [Endpoints for Amazon S3](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints-s3.html) in the *Amazon VPC User Guide*\.  
 ![\[Example of an Amazon S3 endpoint attached to a VPC.\]](http://docs.aws.amazon.com/glue/latest/dg/images/network_s3_vpc_s3_endpoint_attached.png)
 + A route entry pointing to the VPC endpoint\. For example vpce\-0ec5da4d265227786 in the route table used by the VPC endpoint\(vpce\-0ec5da4d265227786\)\.  
 ![\[Example of a route entry pointing to the VPC endpoint.\]](http://docs.aws.amazon.com/glue/latest/dg/images/network_s3_vpc_route_entry.png)

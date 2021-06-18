@@ -42,7 +42,7 @@ For information about how to set up crawlers and classifiers, see [Defining Craw
 
 ## AWS Glue ETL Operations<a name="etl-script-intro"></a>
 
-Using the metadata in the Data Catalog, AWS Glue can autogenerate Scala or PySpark \(the Python API for Apache Spark\) scripts with AWS Glue extensions that you can use and modify to perform various ETL operations\. For example, you can extract, clean, and transform raw data, and then store the result in a different repository, where it can be queried and analyzed\. Such a script might convert a CSV file into a relational form and save it in Amazon Redshift\.
+Using the metadata in the Data Catalog, AWS Glue can automatically generate Scala or PySpark \(the Python API for Apache Spark\) scripts with AWS Glue extensions that you can use and modify to perform various ETL operations\. For example, you can extract, clean, and transform raw data, and then store the result in a different repository, where it can be queried and analyzed\. Such a script might convert a CSV file into a relational form and save it in Amazon Redshift\.
 
 For more information about how to use AWS Glue ETL capabilities, see [Programming ETL Scripts](aws-glue-programming.md)\.
 

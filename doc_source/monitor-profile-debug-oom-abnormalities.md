@@ -48,7 +48,7 @@ datasink = glueContext.write_dynamic_frame.from_options(frame = df, connection_t
 
 You can monitor the memory profile and the ETL data movement in the AWS Glue job profile\.
 
-The driver executes below the threshold of 50 percent memory usage over the entire duration of the AWS Glue job\. The executors stream the data from Amazon S3, process it, and write it out to Amazon S3\. As a result, they consume less than 5 percent memory at any point in time\.
+The driver runs below the threshold of 50 percent memory usage over the entire duration of the AWS Glue job\. The executors stream the data from Amazon S3, process it, and write it out to Amazon S3\. As a result, they consume less than 5 percent memory at any point in time\.
 
 ![\[The memory profile showing the issue is fixed.\]](http://docs.aws.amazon.com/glue/latest/dg/images/monitor-debug-oom-memoryprofile-fixed.png)
 
@@ -72,11 +72,11 @@ dfSpark.write.format("parquet").save(output_path)
 
 ### Visualize the Profiled Metrics on the AWS Glue Console<a name="monitor-debug-oom-visualize-2"></a>
 
-If the slope of the memory usage graph is positive and crosses 50 percent, then if the job fails before the next metric is emitted, then memory exhaustion is a good candidate for the cause\. The following graph shows that within a minute of execution, the [average memory usage](monitoring-awsglue-with-cloudwatch-metrics.md#glue.ALL.jvm.heap.usage) across all executors spikes up quickly above 50 percent\. The usage reaches up to 92 percent and the container running the executor is terminated \("killed"\) by Apache Hadoop YARN\. 
+If the slope of the memory usage graph is positive and crosses 50 percent, then if the job fails before the next metric is emitted, then memory exhaustion is a good candidate for the cause\. The following graph shows that within a minute of execution, the [average memory usage](monitoring-awsglue-with-cloudwatch-metrics.md#glue.ALL.jvm.heap.usage) across all executors spikes up quickly above 50 percent\. The usage reaches up to 92 percent and the container running the executor is stopped by Apache Hadoop YARN\. 
 
 ![\[The average memory usage across all executors.\]](http://docs.aws.amazon.com/glue/latest/dg/images/monitor-debug-oom-2-memoryprofile.png)
 
-As the following graph shows, there is always a [single executor](monitoring-awsglue-with-cloudwatch-metrics.md#glue.driver.ExecutorAllocationManager.executors.numberAllExecutors) running until the job fails\. This is because a new executor is launched to replace the killed executor\. The JDBC data source reads are not parallelized by default because it would require partitioning the table on a column and opening multiple connections\. As a result, only one executor reads in the complete table sequentially\.
+As the following graph shows, there is always a [single executor](monitoring-awsglue-with-cloudwatch-metrics.md#glue.driver.ExecutorAllocationManager.executors.numberAllExecutors) running until the job fails\. This is because a new executor is launched to replace the stopped executor\. The JDBC data source reads are not parallelized by default because it would require partitioning the table on a column and opening multiple connections\. As a result, only one executor reads in the complete table sequentially\.
 
 ![\[The job execution shows a single executor running until the job fails.\]](http://docs.aws.amazon.com/glue/latest/dg/images/monitor-debug-oom-2-execution.png)
 
@@ -88,7 +88,7 @@ You can confirm from the error string on the AWS Glue console that the job faile
 
 ![\[The error message shown on the AWS Glue console.\]](http://docs.aws.amazon.com/glue/latest/dg/images/monitor-debug-oom-2-errorstring.png)
 
-**Job output logs:** To further confirm your finding of an executor OOM exception, look at the CloudWatch Logs\. When you search for **Error**, you find the four executors being killed in roughly the same time windows as shown on the metrics dashboard\. All are terminated by YARN as they exceed their memory limits\.
+**Job output logs:** To further confirm your finding of an executor OOM exception, look at the CloudWatch Logs\. When you search for **Error**, you find the four executors being stopped in roughly the same time windows as shown on the metrics dashboard\. All are terminated by YARN as they exceed their memory limits\.
 
 Executor 1
 

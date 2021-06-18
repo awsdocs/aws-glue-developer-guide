@@ -50,3 +50,20 @@ Inherited from `GlueTransform` [describeErrors](aws-glue-api-crawler-pyspark-tra
 ## describe\(cls\)<a name="aws-glue-api-crawler-pyspark-transforms-join-describe"></a>
 
 Inherited from `GlueTransform` [describe](aws-glue-api-crawler-pyspark-transforms-GlueTransform.md#aws-glue-api-crawler-pyspark-transforms-GlueTransform-describe)
+
+## Example for Join<a name="pyspark-Join-example"></a>
+
+The Join function manages duplicate columns\. Each dataset has a column named zip\. AWS Glue adds a period \(\.\) to one of the duplicate column names to avoid errors\.
+
+```
+dyf_join = Join.apply(dyf_json, dyf_selectFields, 'zip', 'zip')
+dyf_join.toDF().show() 
+
++--------------------+-----+-----+
+| customers| .zip| zip|
++--------------------+-----+-----+
+|[[108 Park Street...|75091|75091|
+|[[66 P Street, NY...|75023|75023|
+|[[708 Fed Ln, CA,...|90093|90093|
++--------------------+-----+-----+
+```

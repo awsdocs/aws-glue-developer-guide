@@ -7,6 +7,7 @@ When a crawler runs, it might encounter changes to your data store that result i
 + [Setting Crawler Configuration Options Using the API](#crawler-configure-changes-api)
 + [How to Prevent the Crawler from Changing an Existing Schema](#crawler-schema-changes-prevent)
 + [How to Create a Single Schema for Each Amazon S3 Include Path](#crawler-grouping-policy)
++ [How to specify the table location](#crawler-table-level)
 
 ## Setting Crawler Configuration Options on the AWS Glue Console<a name="crawler-configure-changes-console"></a>
 
@@ -136,3 +137,15 @@ To help illustrate this option, suppose that you define a crawler with an includ
 + *Schema* – `C: int, D: int`
 
 By default, the crawler creates two tables, named `year_2017` and `year_2018` because the schemas are not sufficiently similar\. However, if the option **Create a single schema for each S3 path** is selected, and if the data is compatible, the crawler creates one table\. The table has the schema `A:int,B:int,C:int,D:int` and `partitionKey` `year:string`\.
+
+## How to specify the table location<a name="crawler-table-level"></a>
+
+By default, when a crawler defines tables for data stored in Amazon S3 the crawler attempts to merge schemas together and create top\-level tables \(`year=2019`\)\. In some cases, you may expect the crawler to create a table for the folder `month=Jan` but instead the crawler creates a partition since a sibling folder \(`month=Mar`\) was merged into the same table\.
+
+The table level crawler option provides you the flexibility to tell the crawler where the tables are located, and how you want partitions created\. When you specify a **Table level**, the table is created at that absolute level from the Amazon S3 bucket\.
+
+![\[Crawler grouping with table level specified as level 2.\]](http://docs.aws.amazon.com/glue/latest/dg/images/crawler-table-level1.jpg)
+
+When configuring the crawler on the console, you can specify a value for the **Table level** crawler option\. The value must be a positive integer that indicates the table location \(the absolute level in the dataset\)\. The level for the top level folder is 1\. For example, for the path `mydataset/a/b`, if the level is set to 3, the table is created at location `mydataset/a/b`\.
+
+![\[Specifying a table level in the crawler configuration.\]](http://docs.aws.amazon.com/glue/latest/dg/images/crawler-table-level2.png)

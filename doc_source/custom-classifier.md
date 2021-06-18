@@ -86,7 +86,7 @@ AWS Glue provides many common patterns that you can use to build a custom classi
 The following list consists of a line for each pattern\. In each line, the pattern name is followed its definition\. [Regular expression \(regex\)](http://en.wikipedia.org/wiki/Regular_expression) syntax is used in defining the pattern\.
 
 ```
-#AWS Glue Built-in patterns
+#&GLU; Built-in patterns
  USERNAME [a-zA-Z0-9._-]+
  USER %{USERNAME:UNWANTED}
  INT (?:[+-]?(?:[0-9]+))

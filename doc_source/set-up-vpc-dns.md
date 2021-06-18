@@ -7,4 +7,4 @@ To set up DNS in your VPC, ensure that DNS hostnames and DNS resolution are both
 For more information, see [Using DNS with your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html)\. Also, you can use the AWS CLI and call the [modify\-vpc\-attribute](https://docs.aws.amazon.com/cli/latest/reference/ec2/modify-vpc-attribute.html) command to configure the VPC network attributes\.
 
 **Note**  
-If you are using Route 53, confirm that your configuration does not override DNS network attributes\.
+If you are using Route 53, confirm that your configuration does not override DNS network attributes\.

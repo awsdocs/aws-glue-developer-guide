@@ -25,7 +25,7 @@ Follow the tutorials in this section to learn how to use your development endpoi
 + [Tutorial: Set Up a Local Apache Zeppelin Notebook to Test and Debug ETL Scripts](dev-endpoint-tutorial-local-notebook.md)
 + [Tutorial: Set Up an Apache Zeppelin Notebook Server on Amazon EC2](dev-endpoint-tutorial-EC2-notebook.md)
 + [Tutorial: Set Up a Jupyter Notebook in JupyterLab to Test and Debug ETL Scripts](dev-endpoint-tutorial-local-jupyter.md)
-+ [Tutorial: Use an SageMaker Notebook with Your Development Endpoint](dev-endpoint-tutorial-sage.md)
++ [Tutorial: Use a SageMaker Notebook with Your Development Endpoint](dev-endpoint-tutorial-sage.md)
 + [Tutorial: Use a REPL Shell with Your Development Endpoint](dev-endpoint-tutorial-repl.md)
 + [Tutorial: Set Up PyCharm Professional with a Development Endpoint](dev-endpoint-tutorial-pycharm.md)
 + [Advanced Configuration: Sharing Development Endpoints among Multiple Users](dev-endpoint-sharing.md)

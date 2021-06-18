@@ -103,7 +103,7 @@ Defines an action to be initiated by a trigger\.
 **Fields**
 + `JobName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  The name of a job to be executed\.
+  The name of a job to be run\.
 + `Arguments` – A map array of key\-value pairs\.
 
   Each key is a UTF\-8 string\.

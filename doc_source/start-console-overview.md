@@ -3,7 +3,7 @@
 With AWS Glue, you store metadata in the AWS Glue Data Catalog\. You use this metadata to orchestrate ETL jobs that transform data sources and load your data warehouse or data lake\. The following steps describe the general workflow and some of the choices that you make when working with AWS Glue\.
 
 **Note**  
-You can follow the steps below, or you can create a workflow that automatically performs steps 1 through 3\. For more information, see [Performing Complex ETL Activities Using Workflows in AWS Glue](orchestrate-using-workflows.md)\.
+You can follow the steps below, or you can create a workflow that automatically performs steps 1 through 3\. For more information, see [Performing Complex ETL Activities Using Blueprints and Workflows in AWS Glue](orchestrate-using-workflows.md)\.
 
 1. Populate the AWS Glue Data Catalog with table definitions\.
 

@@ -1,6 +1,71 @@
 # Using Python Libraries with AWS Glue<a name="aws-glue-programming-python-libraries"></a>
 
-You can use Python extension modules and libraries with your AWS Glue ETL scripts as long as they are written in pure Python\. C libraries such as `pandas` are not supported at the present time, nor are extensions written in other languages\.
+AWS Glue lets you install additional Python modules and libraries for use with AWS Glue ETL\.
+
+**Topics**
++ [Installing Additional Python Modules in AWS Glue 2\.0 with pip](#addl-python-modules-support)
++ [Python Modules Already Provided in AWS Glue Version 2\.0](#glue20-modules-provided)
++ [Zipping Libraries for Inclusion](#aws-glue-programming-python-libraries-zipping)
++ [Loading Python Libraries in a Development Endpoint](#aws-glue-programming-python-libraries-dev-endpoint)
++ [Using Python Libraries in a Job or JobRun](#aws-glue-programming-python-libraries-job)
+
+## Installing Additional Python Modules in AWS Glue 2\.0 with pip<a name="addl-python-modules-support"></a>
+
+AWS Glue uses the Python Package Installer \(pip3\) to install additional modules to be used by AWS Glue ETL\. You can use the `--additional-python-modules` option with a list of comma\-separated Python modules to add a new module or change the version of an existing module\. You can pass additional options specified by the `python-modules-installer-option` to pip3 for installing the modules\. Any incompatibly or limitations from pip3 will apply\.
+
+For example to update or to add a new `scikit-learn` module use the following key/value: `"--additional-python-modules", "scikit-learn==0.21.3"`\.
+
+Also, within the `--additional-python-modules` option you can specify an Amazon S3 path to a Python wheel module\. For example:
+
+```
+--additional-python-modules s3://aws-glue-native-spark/tests/j4.2/ephem-3.7.7.1-cp37-cp37m-linux_x86_64.whl,s3://aws-glue-native-spark/tests/j4.2/fbprophet-0.6-py3-none-any.whl,scikit-learn==0.21.3
+```
+
+You specify the `--additional-python-modules` option in the `DefaultArguments` or `NonOverridableArguments` job parameters, or in the **Job parameters** field of the AWS Glue console\.
+
+## Python Modules Already Provided in AWS Glue Version 2\.0<a name="glue20-modules-provided"></a>
+
+AWS Glue version 2\.0 supports the following python modules out of the box:
++ boto3==1\.12\.4
++ botocore==1\.15\.4
++ certifi==2019\.11\.28
++ chardet==3\.0\.4
++ cycler==0\.10\.0
++ Cython==0\.29\.15
++ docutils==0\.15\.2
++ enum34==1\.1\.9
++ fsspec==0\.6\.2
++ idna==2\.9
++ jmespath==0\.9\.4
++ joblib==0\.14\.1
++ kiwisolver==1\.1\.0
++ matplotlib==3\.1\.3
++ mpmath==1\.1\.0
++ numpy==1\.18\.1
++ pandas==1\.0\.1
++ patsy==0\.5\.1
++ pmdarima==1\.5\.3
++ ptvsd==4\.3\.2
++ pyarrow==0\.16\.0
++ pydevd==1\.9\.0
++ pyhocon==0\.3\.54
++ PyMySQL==0\.9\.3
++ pyparsing==2\.4\.6
++ python\_dateutil==2\.8\.1
++ pytz==2019\.3
++ requests==2\.23\.0
++ s3fs==0\.4\.0
++ s3transfer==0\.3\.3
++ scikit\-learn==0\.22\.1
++ scipy==1\.4\.1
++ setuptools==45\.2\.0 
++ setuptools==45\.2\.0
++ six==1\.14\.0
++ statsmodels==0\.11\.1
++ subprocess32==3\.5\.4
++ sympy==1\.5\.1
++ tbats==1\.0\.9
++ urllib3==1\.25\.8
 
 ## Zipping Libraries for Inclusion<a name="aws-glue-programming-python-libraries-zipping"></a>
 
@@ -71,9 +136,3 @@ Then when you are starting a JobRun, you can override the default library settin
 runId = glue.start_job_run(JobName='sampleJob',
                            Arguments={'--extra-py-files': 's3://bucket/prefix/lib_B.zip'})
 ```
-
-## Specifying Additional Python Modules with AWS Glue Version 2\.0<a name="aws-glue-programming-python-libraries-glue-20"></a>
-
-AWS Glue Version 2\.0 also lets you provide additional Python modules or different versions at the job level\. You can use the `--additional-python-modules` option with a list of comma\-separated Python modules to add a new module or change the version of an existing module\.
-
-For more information, see [Running Spark ETL Jobs with Reduced Startup Times](reduced-start-times-spark-etl-jobs.md)\.

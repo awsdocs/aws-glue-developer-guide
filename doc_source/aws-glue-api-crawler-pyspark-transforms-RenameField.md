@@ -58,3 +58,25 @@ Inherited from `GlueTransform` [describeErrors](aws-glue-api-crawler-pyspark-tra
 ## describe\(cls\)<a name="aws-glue-api-crawler-pyspark-transforms-RenameField-describe"></a>
 
 Inherited from `GlueTransform` [describe](aws-glue-api-crawler-pyspark-transforms-GlueTransform.md#aws-glue-api-crawler-pyspark-transforms-GlueTransform-describe)\.
+
+## Example for RenameField<a name="pyspark-RenameField-example"></a>
+
+This example simplifies the names of fields in DynamicFrames created by the Relationalize transform, and then drops the added `index` and `id` fields\.
+
+```
+dyf_renameField_1 = RenameField.apply(dyf_flattened, "`customers.val.address`", "address") 
+dyf_renameField_2 = RenameField.apply( dyf_renameField_1, "`customers.val.id`", "cust_id" ) 
+
+dyf_dropfields_rf = DropFields.apply( frame = dyf_renameField_2, paths = ["index", "id"] )
+
+dyf_dropfields_rf.toDF().show()
++-------------------+-------+
+| address|cust_id|
++-------------------+-------+
+| 66 P Street, NY| 343|
+| 708 Fed Ln, CA| 932|
+| 807 Deccan Dr, CA| 102|
+|108 Park Street, TX| 623|
+| 763 Marsh Ln, TX| 231|
++-------------------+-------+
+```

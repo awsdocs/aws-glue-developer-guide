@@ -13,7 +13,7 @@ A notebook enables interactive development and testing of your ETL \(extract, tr
 
 | Region | Code | 
 | --- | --- | 
-|   Managing SageMaker notebooks with AWS Glue development endpoints is available in the following AWS Regions: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/glue/latest/dg/notebooks-with-glue.html)   | 
+|   Managing SageMaker notebooks with AWS Glue development endpoints is available in the following AWS Regions:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/glue/latest/dg/notebooks-with-glue.html)   | 
 | US East \(Ohio\) | `us-east-2` | 
 | US East \(N\. Virginia\) | `us-east-1` | 
 | US West \(N\. California\) | `us-west-1` | 

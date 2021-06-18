@@ -51,3 +51,11 @@ Inherited from `GlueTransform` [describeErrors](aws-glue-api-crawler-pyspark-tra
 ## describe\(cls\)<a name="aws-glue-api-crawler-pyspark-transforms-SelectFields-describe"></a>
 
 Inherited from `GlueTransform` [describe](aws-glue-api-crawler-pyspark-transforms-GlueTransform.md#aws-glue-api-crawler-pyspark-transforms-GlueTransform-describe)\.
+
+## Example for SelectFields<a name="pyspark-SelectFields-example"></a>
+
+This example selects only the zip code column, but you can add more columns because the argument paths accepts a list\.
+
+```
+dyf_selectFields = SelectFields.apply(frame = dyf_filter, paths=['zip'])
+```

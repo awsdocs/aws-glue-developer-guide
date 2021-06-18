@@ -101,6 +101,7 @@ AWS Glue supports an extension of the PySpark Scala dialect for scripting extrac
     + [RecordTraverser trait](glue-etl-scala-apis-glue-dynamicrecord-class.md#glue-etl-scala-apis-glue-recordtraverser-trait)
   + [GlueContext](glue-etl-scala-apis-glue-gluecontext.md)
     + [addIngestionColumns](glue-etl-scala-apis-glue-gluecontext.md#glue-etl-scala-apis-glue-gluecontext-defs-addIngestionColumns)
+    + [forEachBatch](glue-etl-scala-apis-glue-gluecontext.md#glue-etl-scala-apis-glue-gluecontext-defs-forEachBatch)
     + [getCatalogSink](glue-etl-scala-apis-glue-gluecontext.md#glue-etl-scala-apis-glue-gluecontext-defs-getCatalogSink)
     + [getCatalogSource](glue-etl-scala-apis-glue-gluecontext.md#glue-etl-scala-apis-glue-gluecontext-defs-getCatalogSource)
     + [getJDBCSink](glue-etl-scala-apis-glue-gluecontext.md#glue-etl-scala-apis-glue-gluecontext-defs-getJDBCSink)

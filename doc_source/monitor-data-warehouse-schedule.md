@@ -2,6 +2,8 @@
 
 You can define a time\-based schedule for your crawlers and jobs in AWS Glue\. The definition of these schedules uses the Unix\-like  [cron](http://en.wikipedia.org/wiki/Cron) syntax\. You specify time in [Coordinated Universal Time \(UTC\)](http://en.wikipedia.org/wiki/Coordinated_Universal_Time), and the minimum precision for a schedule is 5 minutes\.
 
+To learn more about configuring jobs and crawlers to run using a schedule, see [Starting Jobs and Crawlers Using Triggers](trigger-job.md)\.
+
 ## Cron Expressions<a name="CronExpressions"></a>
 
 Cron expressions have six required fields, which are separated by white space\. 

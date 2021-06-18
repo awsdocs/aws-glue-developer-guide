@@ -29,7 +29,8 @@ The following examples create a job with assigned tags\.
 **AWS CLI**
 
 ```
-aws glue create-job --name job-test-tags --role MyJobRole --command Name=glueetl,ScriptLocation=S3://aws-glue-scripts//prod-job1 --tags '{"key1" : "value1", "key2 : "value2"}' 
+aws glue create-job --name job-test-tags --role MyJobRole --command Name=glueetl,ScriptLocation=S3://aws-glue-scripts//prod-job1 
+--tags key1=value1,key2=value2
 ```
 
 **AWS CloudFormation JSON**
@@ -91,11 +92,11 @@ aws glue create-job --name job-test-tags --role MyJobRole --command Name=glueetl
         "MaxRetries": 0,
         "Name": "cf-job1",
         "Role": {
-          "Ref": "MyJobRole",
-          "Tags": {
-            "key1": "value1", 
-            "key2": "value2"
-          }
+           "Ref": "MyJobRole",
+           "Tags": {
+                "key1": "value1", 
+                "key2": "value2"
+           } 
         }
       }
     }
@@ -143,9 +144,9 @@ Resources:
       Name: cf-job1
       Role:
         Ref: MyJobRole
-      Tags:
-        key1: value1
-        key2: value2
+        Tags:
+           key1: value1
+           key2: value2
 ```
 
 For more information, see [AWS Tagging Strategies](https://aws.amazon.com/answers/account-management/aws-tagging-strategies/)\. 

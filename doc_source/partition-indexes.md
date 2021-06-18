@@ -22,7 +22,7 @@ The Data Catalog will concatenate the partition values in the order provided at 
 
 Indexes on Numeric data types support =, >, >=, <, <= and between operators\. The String data type only supports the equal \(=\) operator\. The indexing solution currently only supports the `AND` logical operator\. Sub\-expressions with the operators "LIKE", "IN", "OR", and "NOT" are ignored in the expression for filtering using an index\. Filtering for the ignored sub\-expression is done on the partitions fetched after applying index filtering\.
 
-For each partition added to a table, there is a corresponding index item created\. For a table with ‘n’ partitions, 1 partition index will result in 'n' partition index items\. 'm' partition index on same table will result into 'm\*n' partition index items\. Each partition index item will be charged according to the current AWS Glue pricing policy for data catalog storage\. For details on storage object pricing, see [AWS Glue pricing](https://aws.amazon.com/glue/pricing/)\.
+For each partition added to a table, there is a corresponding index item created\. For a table with ‘n’ partitions, 1 partition index will result in 'n' partition index items\. 'm' partition index on same table will result into 'm\*n' partition index items\. Each partition index item will be charged according to the current AWS Glue pricing policy for data catalog storage\. For details on storage object pricing, see [AWS Glue pricing](http://aws.amazon.com/glue/pricing/)\.
 
 ## Creating a Table with Partition Indexes<a name="partition-index-creating-table"></a>
 
@@ -65,11 +65,8 @@ After indexes are enabled, the addition of partitions with indexed key values ha
 **Table Updates**  
 Once a partition index is created on a table, you cannot modify the partition key names for existing partition keys, and you cannot change the type, or order, of keys which are registered with the index\.
 
-**Create Table As Select \(CTAS\) Statements in Athena**  
-The [INSERT INTO option](https://docs.aws.amazon.com/athena/latest/ug/ctas-insert-into-etl.html) is not supported on tables with a partition index\. Tables with a partition index cannot use the INSERT INTO command on Athena\. If an index is created on a table, INSERT INTO queries will fail with the message "HIVE\_METASTORE\_ERROR: Partition creation cannot be completed since partition indexes are enabled on table"\. 
-
 **Limited Support**  
-Calls from Athena, Redshift Spectrum and AWS Glue ETL do not currently utilize indexes for fetching partitions\. Currently, catalog requests from EMR are able to utilize indexes for fetching partitions\.
+Catalog requests from EMR, Redshift Spectrum and AWS Glue ETL Spark DataFrames are able to utilize indexes for fetching partitions\. Currently, requests from Athena and AWS Glue ETL DynamicFrames do not utilize indexes for fetching partitions\.
 
 ## Using Indexes for an Optimized GetPartitions Call<a name="partition-index-getpartitions"></a>
 

@@ -339,7 +339,7 @@ You can use this operation to prepare deeply nested data for ingestion into a re
  {"name": "Nathan", "age": 54, "friends": ["Nicolai", "Karen"]}
 ```
 
-Execute the following code\.
+Run the following code\.
 
 ```
 {{{
@@ -588,7 +588,7 @@ Returns a sequence of two `DynamicFrame`s\. The first contains rows for which th
 
 Predicates are specified using three sequences: '`paths`' contains the \(possibly nested\) column names, '`values`' contains the constant values to compare to, and '`operators`' contains the operators to use for comparison\. All three sequences must be the same length: The `n`th operator is used to compare the `n`th column with the `n`th value\.
 
-Each operator must be one of "`!=`", "`=`", "`&lt;=`", "`&lt;`", "`&gt;=`", or "`&gt;`"\.
+Each operator must be one of "`!=`", "`=`", "`<=`", "`<`", "`>=`", or "`>`"\.
 
 As an example, the following call would split a `DynamicFrame` so that the first output frame would contain records of people over 65 from the United States, and the second would contain all other records\.
 

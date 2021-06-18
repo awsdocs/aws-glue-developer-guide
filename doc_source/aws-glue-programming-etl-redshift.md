@@ -56,3 +56,15 @@ glueContext.write_dynamic_frame.from_jdbc_conf(
     connection_options = my_conn_options, 
     redshift_tmp_dir = args["TempDir"])
 ```
+
+By default, the data in the temporary folder used by AWS Glue when reading data from the Amazon Redshift table is encrypted using SSE\-S3 encryption\. To use customer managed keys from AWS Key Management Service \(AWS KMS\) to encrypt your data, you must specify `extraunloadoptions` in `additional_options`, and provide the key ID from AWS KMS, as shown in the following example:
+
+```
+    datasource0 = glueContext.create_dynamic_frame.from_catalog(
+      database = "database-name", 
+      table_name = "table-name", 
+      redshift_tmp_dir = args["TempDir"],
+      additional_options = {"extraunloadoptions":"ENCRYPTED KMS_KEY_ID 'CMK key ID'"}, 
+      transformation_ctx = "datasource0"
+    )
+```

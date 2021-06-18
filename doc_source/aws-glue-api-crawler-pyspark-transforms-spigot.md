@@ -49,3 +49,9 @@ Inherited from `GlueTransform` [describeErrors](aws-glue-api-crawler-pyspark-tra
 ## describe\(cls\)<a name="aws-glue-api-crawler-pyspark-transforms-spigot-describe"></a>
 
 Inherited from `GlueTransform` [describe](aws-glue-api-crawler-pyspark-transforms-GlueTransform.md#aws-glue-api-crawler-pyspark-transforms-GlueTransform-describe)
+
+## Example for Spigot<a name="pyspark-spigot-examples"></a>
+
+```
+dyf_result = Spigot.apply(dyf_input, '/home/glue/GlueLocalOutput/Spigot/', 'top10')
+```

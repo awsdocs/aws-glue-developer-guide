@@ -23,6 +23,7 @@ The Machine Learning API describes the machine learning data types, and includes
 + [SchemaColumn Structure](#aws-glue-api-machine-learning-api-SchemaColumn)
 + [TransformEncryption Structure](#aws-glue-api-machine-learning-api-TransformEncryption)
 + [MLUserDataEncryption Structure](#aws-glue-api-machine-learning-api-MLUserDataEncryption)
++ [ColumnImportance Structure](#aws-glue-api-machine-learning-api-ColumnImportance)
 
 ## TransformParameters Structure<a name="aws-glue-api-machine-learning-api-TransformParameters"></a>
 
@@ -192,6 +193,9 @@ The evaluation metrics for the find matches algorithm\. The quality of your mach
   The confusion matrix shows you what your transform is predicting accurately and what types of errors it is making\.
 
   For more information, see [Confusion matrix](https://en.wikipedia.org/wiki/Confusion_matrix) in Wikipedia\.
++ `ColumnImportances` – An array of [ColumnImportance](#aws-glue-api-machine-learning-api-ColumnImportance) objects, not more than 100 structures\.
+
+  A list of `ColumnImportance` structures containing column importance metrics, sorted in order of descending importance\.
 
 ## ConfusionMatrix Structure<a name="aws-glue-api-machine-learning-api-ConfusionMatrix"></a>
 
@@ -447,6 +451,20 @@ The encryption\-at\-rest settings of the transform that apply to accessing user 
 + `KmsKeyId` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The ID for the customer\-provided KMS key\.
+
+## ColumnImportance Structure<a name="aws-glue-api-machine-learning-api-ColumnImportance"></a>
+
+A structure containing the column name and column importance score for a column\. 
+
+Column importance helps you understand how columns contribute to your model, by identifying which columns in your records are more important than others\.
+
+**Fields**
++ `ColumnName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of a column\.
++ `Importance` – Number \(double\), not more than 1\.0\.
+
+  The column importance score for the column, as a decimal\.
 
 ## Operations<a name="aws-glue-api-machine-learning-api-actions"></a>
 + [CreateMLTransform Action \(Python: create\_ml\_transform\)](#aws-glue-api-machine-learning-api-CreateMLTransform)

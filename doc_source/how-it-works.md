@@ -13,16 +13,17 @@ AWS Glue supports the following data sources:
   + Amazon Relational Database Service \(Amazon RDS\)
   + Third\-party JDBC\-accessible databases
   + Amazon DynamoDB
+  + MongoDB and Amazon DocumentDB \(with MongoDB compatibility\)
 + Data streams
   + Amazon Kinesis Data Streams
   + Apache Kafka
 
 **Data Targets**  
 AWS Glue supports the following data targets:
-+ Data stores
-  + Amazon S3
-  + Amazon Relational Database Service \(Amazon RDS\)
-  + Third\-party JDBC\-accessible databases
++ Amazon S3
++ Amazon Relational Database Service \(Amazon RDS\)
++ Third\-party JDBC\-accessible databases
++ MongoDB and Amazon DocumentDB \(with MongoDB compatibility\)
 
 AWS Glue is available in several AWS Regions\. For more information, see [AWS Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html) in the Amazon Web Services General Reference\.
 
@@ -45,4 +46,4 @@ During provisioning of an ETL job, you provide input data sources and output dat
 
 AWS Glue creates elastic network interfaces in your subnet using private IP addresses\. Spark jobs use these elastic network interfaces to access your data sources and data targets\. Traffic in, out, and within the Spark environment is governed by your VPC and networking policies with one exception: Calls made to AWS Glue libraries can proxy traffic to AWS Glue API operations through the AWS Glue VPC\. All AWS Glue API calls are logged; thus, data owners can audit API access by enabling [AWS CloudTrail](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/), which delivers audit logs to your account\.
 
-AWS Glue managed Spark environments that run your ETL jobs are protected with the same security practices followed by other AWS services\. Those practices are listed in the **AWS Access** section of the [Introduction to AWS Security Processes](https://d1.awsstatic.com/whitepapers/Security/Intro_Security_Practices.pdf) whitepaper\.
+AWS Glue managed Spark environments that run your ETL jobs are protected with the same security practices followed by other AWS services\. For an overview of the practices and shared security responsibilities, see the [Introduction to AWS Security Processes](https://docs.aws.amazon.com/whitepapers/latest/introduction-aws-security/welcome.html) whitepaper\.

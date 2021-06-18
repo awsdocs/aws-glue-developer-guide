@@ -177,7 +177,7 @@ If AWS Glue fails to successfully provision a development endpoint, it might be 
 
 If AWS Glue fails to create the notebook server for a development endpoint, it might be because of one of the following problems: 
 + AWS Glue passes an IAM role to Amazon EC2 when it is setting up the notebook server\. The IAM role must have a trust relationship to Amazon EC2\.
-+ The IAM role must have an instance profile of the same name\. When you create the role for Amazon EC2 with the IAM console, the instance profile with the same name is automatically created\. Check for an error in the log regarding an invalid instance profile name `iamInstanceProfile.name`\. For more information, see [Using Instance Profiles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html)\. 
++ The IAM role must have an instance profile of the same name\. When you create the role for Amazon EC2 with the IAM console, the instance profile with the same name is automatically created\. Check for an error in the log regarding the instance profile name `iamInstanceProfile.name` that is not valid\. For more information, see [Using Instance Profiles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html)\. 
 + Check that your role has permission to access `aws-glue*` buckets in the policy that you pass to create the notebook server\. 
 
 ## Error: Local Notebook Fails to Start<a name="error-local-notebook-fails-to-start"></a>

@@ -10,7 +10,7 @@ Many customers have legitimate privacy and security concerns about sending and r
 
 VPC endpoints for Amazon S3 can alleviate these challenges\. A VPC endpoint for Amazon S3 enables AWS Glue to use private IP addresses to access Amazon S3 with no exposure to the public internet\. AWS Glue does not require public IP addresses, and you don't need an internet gateway, a NAT device, or a virtual private gateway in your VPC\. You use endpoint policies to control access to Amazon S3\. Traffic between your VPC and the AWS service does not leave the Amazon network\.
 
-When you create a VPC endpoint for Amazon S3, any requests to an Amazon S3 endpoint within the Region \(for example, *s3\.us\-west\-2\.amazonaws\.com*\) are routed to a private Amazon S3 endpoint within the Amazon network\. You don't need to modify your applications running on EC2 instances in your VPC—the endpoint name remains the same, but the route to Amazon S3 stays entirely within the Amazon network, and does not access the public internet\.
+When you create a VPC endpoint for Amazon S3, any requests to an Amazon S3 endpoint within the Region \(for example, *s3\.us\-west\-2\.amazonaws\.com*\) are routed to a private Amazon S3 endpoint within the Amazon network\. You don't need to modify your applications running on Amazon EC2 instances in your VPC—the endpoint name remains the same, but the route to Amazon S3 stays entirely within the Amazon network, and does not access the public internet\.
 
 For more information about VPC endpoints, see [VPC Endpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html) in the Amazon VPC User Guide\.
 
@@ -24,4 +24,4 @@ The following diagram shows how AWS Glue can use a VPC endpoint to access Amazon
 
 1. In the left navigation pane, choose **Endpoints**\.
 
-1. Choose **Create Endpoint**, and follow the steps to create an Amazon S3 endpoint in your VPC\.
+1. Choose **Create Endpoint**, and follow the steps to create an Amazon S3 VPC endpoint of type Gateway\. 

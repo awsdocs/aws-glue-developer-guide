@@ -16,7 +16,7 @@ You can attach an AWS managed policy or an inline policy to an IAM user to acces
 You can skip this step if you use the AWS managed policy **AWSGlueConsoleFullAccess**\.
 **Important**  
 AWS Glue needs permission to assume a role that is used to perform work on your behalf\. **To accomplish this, you add the `iam:PassRole` permissions to your AWS Glue users\.** This policy grants permission to roles that begin with `AWSGlueServiceRole` for AWS Glue service roles, and `AWSGlueServiceNotebookRole` for roles that are required when you create a notebook server\. You can also create your own policy for `iam:PassRole` permissions that follows your naming convention\.  
-Per security best practices, it is recommended to restrict access by tightening policies to further restrict access to Amazon S3 bucket and Amazon CloudWatch log groups\. For an example Amazon S3 policy, see [Writing IAM Policies: How to Grant Access to an Amazon S3 Bucket](https://aws.amazon.com/blogs/security/writing-iam-policies-how-to-grant-access-to-an-amazon-s3-bucket/)\. 
+Per security best practices, it is recommended to restrict access by tightening policies to further restrict access to Amazon S3 bucket and Amazon CloudWatch log groups\. For an example Amazon S3 policy, see [Writing IAM Policies: How to Grant Access to an Amazon S3 Bucket](http://aws.amazon.com/blogs/security/writing-iam-policies-how-to-grant-access-to-an-amazon-s3-bucket/)\. 
 
 In this step, you create a policy that is similar to `AWSGlueConsoleFullAccess`\. You can find the most current version of `AWSGlueConsoleFullAccess` on the IAM console\.
 

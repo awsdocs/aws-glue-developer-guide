@@ -123,3 +123,8 @@ The following AWS Glue features are not supported:
 + AWS Glue version 2\.0 does not have a Hadoop Distributed File System \(HDFS\)
 + AWS Glue version 2\.0 does not use dynamic allocation, hence the ExecutorAllocationManager metrics are not available
 + For AWS Glue version 2\.0 jobs, you specify the number of workers and worker type, but do not specify a `maxCapacity`\.
++ AWS Glue version 2\.0 does not support `s3n` out of the box\. We recommend using `s3` or `s3a`\. If jobs need to use `s3n` for any reason, you can pass the following additional argument:
+
+  ```
+  --conf spark.hadoop.fs.s3n.impl=com.amazon.ws.emr.hadoop.fs.EmrFileSystem
+  ```

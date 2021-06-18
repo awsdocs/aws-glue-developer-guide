@@ -27,7 +27,7 @@ This section describes how the serialization and deserialization processes in Sc
 1. The deserializer uses the schema to deserialize the record: When the deserializer retrieves the schema version ID from the Schema Registry, the deserializer decompresses the record \(if record sent by producer is compressed\) and uses the schema to deserialize the record\. The application now processes the record\.
 
 **Note**  
-Encryption: Your clients communicate with the Schema Registry via API calls which encrypt data in\-transit using TLS encryption over HTTPS\. Schemas stored in the Schema Registry are always encrypted at rest using a service\-managed KMS key\.
+Encryption: Your clients communicate with the Schema Registry via API calls which encrypt data in\-transit using TLS encryption over HTTPS\. Schemas stored in the Schema Registry are always encrypted at rest using a service\-managed AWS Key Management Service \(AWS KMS\) key\.
 
 **Note**  
 User Authorization: The Schema Registry supports both resource\-level permissions and identity\-based IAM policies\.

@@ -221,7 +221,7 @@ Retrieves all databases defined in a given Data Catalog\.
 + `NextToken` – UTF\-8 string\.
 
   A continuation token, if this is a continuation call\.
-+ `MaxResults` – Number \(integer\), not less than 1 or more than 1000\.
++ `MaxResults` – Number \(integer\), not less than 1 or more than 100\.
 
   The maximum number of databases to return in one response\.
 + `ResourceShareType` – UTF\-8 string \(valid values: `FOREIGN` \| `ALL`\)\.

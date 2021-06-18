@@ -38,4 +38,4 @@ args = getResolvedOptions(sys.argv,
 print "The day-partition key is: ", args['day_partition_key']
 print "and the day-partition value is: ", args['day_partition_value']
 ```
-Note that each of the arguments are defined as beginning with two hyphens, then referenced in the script without the hyphens\. Your arguments need to follow this convention to be resolved\.
+Note that each of the arguments are defined as beginning with two hyphens, then referenced in the script without the hyphens\. The arguments use only underscores, not hyphens\. Your arguments need to follow this convention to be resolved\.

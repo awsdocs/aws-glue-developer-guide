@@ -1,6 +1,6 @@
-# Tutorial: Use an SageMaker Notebook with Your Development Endpoint<a name="dev-endpoint-tutorial-sage"></a>
+# Tutorial: Use a SageMaker Notebook with Your Development Endpoint<a name="dev-endpoint-tutorial-sage"></a>
 
- In AWS Glue, you can create a development endpoint and then create an SageMaker notebook to help develop your ETL and machine learning scripts\. A SageMaker notebook is a fully managed machine learning compute instance running the Jupyter Notebook application\.
+ In AWS Glue, you can create a development endpoint and then create a SageMaker notebook to help develop your ETL and machine learning scripts\. A SageMaker notebook is a fully managed machine learning compute instance running the Jupyter Notebook application\.
 
 The tutorial assumes that you have already taken the steps outlined in [Tutorial Prerequisites](dev-endpoint-tutorial-prerequisites.md)\.
 

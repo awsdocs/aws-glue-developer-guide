@@ -38,7 +38,7 @@ Specifies a job definition\.
   An `ExecutionProperty` specifying the maximum number of concurrent runs allowed for this job\.
 + `Command` – A [JobCommand](#aws-glue-api-jobs-job-JobCommand) object\.
 
-  The `JobCommand` that executes this job\.
+  The `JobCommand` that runs this job\.
 + `DefaultArguments` – A map array of key\-value pairs\.
 
   Each key is a UTF\-8 string\.
@@ -131,7 +131,7 @@ Specifies configuration properties of a notification\.
 
 ## JobCommand Structure<a name="aws-glue-api-jobs-job-JobCommand"></a>
 
-Specifies code executed when a job is run\.
+Specifies code that runs when a job is run\.
 
 **Fields**
 + `Name` – UTF\-8 string\.
@@ -139,10 +139,10 @@ Specifies code executed when a job is run\.
   The name of the job command\. For an Apache Spark ETL job, this must be `glueetl`\. For a Python shell job, it must be `pythonshell`\. For an Apache Spark streaming ETL job, this must be `gluestreaming`\.
 + `ScriptLocation` – UTF\-8 string\.
 
-  Specifies the Amazon Simple Storage Service \(Amazon S3\) path to a script that executes a job\.
+  Specifies the Amazon Simple Storage Service \(Amazon S3\) path to a script that runs a job\.
 + `PythonVersion` – UTF\-8 string, matching the [Custom string pattern #13](aws-glue-api-common.md#regex_13)\.
 
-  The Python version being used to execute a Python shell job\. Allowed values are 2 or 3\.
+  The Python version being used to run a Python shell job\. Allowed values are 2 or 3\.
 
 ## ConnectionsList Structure<a name="aws-glue-api-jobs-job-ConnectionsList"></a>
 
@@ -172,7 +172,7 @@ Specifies information used to update an existing job definition\. The previous j
   An `ExecutionProperty` specifying the maximum number of concurrent runs allowed for this job\.
 + `Command` – A [JobCommand](#aws-glue-api-jobs-job-JobCommand) object\.
 
-  The `JobCommand` that executes this job \(required\)\.
+  The `JobCommand` that runs this job \(required\)\.
 + `DefaultArguments` – A map array of key\-value pairs\.
 
   Each key is a UTF\-8 string\.
@@ -272,7 +272,7 @@ Creates a new job definition\.
   An `ExecutionProperty` specifying the maximum number of concurrent runs allowed for this job\.
 + `Command` – *Required:* A [JobCommand](#aws-glue-api-jobs-job-JobCommand) object\.
 
-  The `JobCommand` that executes this job\.
+  The `JobCommand` that runs this job\.
 + `DefaultArguments` – A map array of key\-value pairs\.
 
   Each key is a UTF\-8 string\.

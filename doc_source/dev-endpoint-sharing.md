@@ -141,7 +141,7 @@ This section describes techniques for monitoring resources and sessions\.
 
 ### Monitoring and Debugging Cluster Resource Allocation<a name="dev-endpoint-sharing-sharing-debugging-a"></a>
 
-You can watch the Spark UI to monitor how many resources are allocated per Livy session, and what are the effective Spark configurations on the job\. To enable the Spark UI, see [Enabling the Apache Spark Web UI for Development Endpoints](https://docs.aws.amazon.com/glue/latest/dg/monitor-spark-ui-dev-endpoints.html)\.
+You can watch the Spark UI to monitor how many resources are allocated per Livy session, and what are the effective Spark configurations on the job\. To activate the Spark UI, see [Enabling the Apache Spark Web UI for Development Endpoints](https://docs.aws.amazon.com/glue/latest/dg/monitor-spark-ui-dev-endpoints.html)\.
 
 \(Optional\) If you need a real\-time view of the Spark UI, you can configure an SSH tunnel against the Spark history server running on the Spark cluster\.
 

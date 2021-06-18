@@ -24,11 +24,11 @@ Follow these steps to use the console to enable continuous logging when creating
 
 1. Choose **Add job**\.
 
-1. In **Configure the job properties**, choose **Monitoring options**\.
+1. In **Configure the job properties**, expand the **Monitoring options** section\.
 
-1. In the **Continuous logging** tab, choose **Enable**\.
+1. Select **Continuous logging** to use it for this job\.
 
-1. Choose **Standard filter** or **No filter**\.
+1. Under **Log filtering**, choose **Standard filter** or **No filter**\.
 
 **To enable continuous logging for an existing AWS Glue job**
 
@@ -40,11 +40,11 @@ Follow these steps to use the console to enable continuous logging when creating
 
 1. Choose **Action**, **Edit job**\.
 
-1. Choose **Monitoring options**\.
+1. Expand the **Monitoring options** section\.
 
-1. In the **Continuous logging** tab, choose **Enable**\.
+1. Select **Continuous logging** to use it for this job\.
 
-1. Choose **Standard filter** or **No filter**\.
+1. Under **Log filtering**, choose **Standard filter** or **No filter**\.
 
 **To enable continuous logging for all newly created AWS Glue jobs**
 
@@ -54,11 +54,9 @@ Follow these steps to use the console to enable continuous logging when creating
 
 1. In the upper\-right corner, choose **User preferences**\.
 
-1. Choose **Monitoring options**\.
+1. Under the heading **Monitoring options**, choose **Continuous logging**\.
 
-1. In the **Continuous logging** tab, choose **Enable**\.
-
-1. Choose **Standard filter** or **No filter**\.
+1. Under **Log filtering**, choose **Standard filter** or **No filter**\.
 
 These user preferences are applied to all new jobs unless you override them explicitly when creating an AWS Glue job or by editing an existing job as described previously\.
 
@@ -77,13 +75,13 @@ When you want no filter, use the following\.
 '--enable-continuous-log-filter': 'false'
 ```
 
-You can specify a custom AWS CloudWatch log group name\. If not specified, the default log group name is `/aws-glue/jobs/logs-v2/`\.
+You can specify a custom Amazon CloudWatch log group name\. If not specified, the default log group name is `/aws-glue/jobs/logs-v2/`\.
 
 ```
 '--continuous-log-logGroup': 'custom_log_group_name'
 ```
 
-You can specify a custom AWS CloudWatch log stream prefix\. If not specified, the default log stream prefix is the job run ID\.
+You can specify a custom Amazon CloudWatch log stream prefix\. If not specified, the default log stream prefix is the job run ID\.
 
 ```
 '--continuous-log-logStreamPrefix': 'custom_log_stream_prefix'
@@ -150,6 +148,6 @@ The default and custom log groups will be as follows:
 + The default continuous log group will be `/aws-glue/jobs/logs-v2-<Security-Configuration-Name>`
 + The custom continuous log group will be `<custom-log-group-name>-<Security-Configuration-Name>`
 
-You also need to include the `logs:AssociateKmsKey` to your IAM role permissions, if you enable a security configuration with CloudWatch Logs\. If that is not included, continuous logging will be disabled\.
+You need to add the `logs:AssociateKmsKey` to your IAM role permissions, if you enable a security configuration with CloudWatch Logs\. If that permission is not included, continuous logging will be disabled\. Also, to configure the encryption for the CloudWatch Logs, follow the instructions at [Encrypt Log Data in CloudWatch Logs Using AWS Key Management Service](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/encrypt-log-data-kms.html) in the *Amazon CloudWatch Logs User Guide*\.
 
 For more information on creating security configurations, see [Working with Security Configurations on the AWS Glue Console](console-security-configurations.md)\.

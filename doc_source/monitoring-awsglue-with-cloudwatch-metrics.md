@@ -34,7 +34,7 @@ Metrics are grouped first by the service namespace, and then by the various dime
 + At a command prompt, use the following command\.
 
   ```
-  1. aws cloudwatch list-metrics --namespace "Glue"
+  1. aws cloudwatch list-metrics --namespace Glue
   ```
 
 AWS Glue reports metrics to CloudWatch every 30 seconds, and the CloudWatch metrics dashboards are configured to display them every minute\. The AWS Glue metrics represent delta values from the previously reported values\. Where appropriate, metrics dashboards aggregate \(sum\) the 30\-second values to obtain a value for the entire last minute\. AWS Glue metrics are enabled at initialization of a `GlueContext` in a script and are generally updated only at the end of an Apache Spark task\. They represent the aggregate values across all completed Spark tasks so far\.

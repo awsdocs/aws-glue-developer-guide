@@ -17,7 +17,7 @@ These sections describe integrations with AWS Glue Schema Registry\.
 
 Let's assume you are writing data to an Apache Kafka topic, and you can follow these steps to get started\.
 
-1. Create an Amazon MSK or Apache Kafka cluster with at least one topic\. If creating an Amazon MSK cluster, you can use the AWS management console\. Follow these instructions: https://docs\.aws\.amazon\.com/msk/latest/developerguide/getting\-started\.html\.
+1. Create an Amazon Managed Streaming for Apache Kafka \(Amazon MSK\) or Apache Kafka cluster with at least one topic\. If creating an Amazon MSK cluster, you can use the AWS Management Console\. Follow these instructions: [Getting Started Using Amazon MSK](https://docs.aws.amazon.com/msk/latest/developerguide/getting-started.html) in the *Amazon Managed Streaming for Apache Kafka Developer Guide*\.
 
 1. Follow the [Installing SerDe Libraries](schema-registry-gs.md#schema-registry-gs-serde) step above\.
 
@@ -31,11 +31,11 @@ Let's assume you are writing data to an Apache Kafka topic, and you can follow t
 
 ## Use Case: Integrating Amazon Kinesis Data Streams with the AWS Glue Schema Registry<a name="schema-registry-integrations-kds"></a>
 
-This integration requires that you have an existing Amazon Kinesis Data Stream\. For more information, see [Getting Started with Amazon Kinesis Data Streams](https://docs.aws.amazon.com/streams/latest/dev/getting-started.html)\.
+This integration requires that you have an existing Amazon Kinesis data stream\. For more information, see [Getting Started with Amazon Kinesis Data Streams](https://docs.aws.amazon.com/streams/latest/dev/getting-started.html) in the *Amazon Kinesis Data Streams Developer Guide*\.
 
-There are two ways that you can interact with data in a Kinesis Data Stream\.
+There are two ways that you can interact with data in a Kinesis data stream\.
 + Through the Kinesis Producer Library \(KPL\) and Kinesis Client Library \(KCL\) libraries in Java\. Multi\-language support is not provided\.
-+ Through the `PutRecords`, `PutRecord`, and `GetRecords` Kinesis Data Streams APIs available in the AWS Java SDK\.
++ Through the `PutRecords`, `PutRecord`, and `GetRecords` Kinesis Data Streams APIs available in the AWS SDK for Java\.
 
 If you currently use the KPL/KCL libraries, we recommend continuing to use that method\. There are updated KCL and KPL versions with Schema Registry integrated, as shown in the examples\. Otherwise, you can use the sample code to leverage the AWS Glue Schema Registry if using the KDS APIs directly\.
 
@@ -43,7 +43,7 @@ Schema Registry integration is only available with KPL v0\.14\.2 or later and wi
 
 ### Interacting with Data Using the KPL/KCL Libraries<a name="schema-registry-integrations-kds-libraries"></a>
 
-This section describes integrating Kinesis Data Streams with Schema Registry using the KPL/KCL libraries\. For more information on using KPL/KCL, see [Developing Producers Using the Amazon Kinesis Producer Library](https://docs.aws.amazon.com/streams/latest/dev/developing-producers-with-kpl.html)\.
+This section describes integrating Kinesis Data Streams with Schema Registry using the KPL/KCL libraries\. For more information on using KPL/KCL, see [Developing Producers Using the Amazon Kinesis Producer Library](https://docs.aws.amazon.com/streams/latest/dev/developing-producers-with-kpl.html) in the *Amazon Kinesis Data Streams Developer Guide*\.
 
 #### Setting up the Schema Registry in KPL<a name="schema-registry-integrations-kds-libraries-kpl"></a>
 
@@ -108,7 +108,7 @@ This section describes integrating Kinesis Data Streams with Schema Registry usi
 
 #### Setting up the Kinesis Client Library<a name="schema-registry-integrations-kds-libraries-kcl"></a>
 
-You will develop your Kinesis Client Library consumer in Java\. For more information, see [Developing a Kinesis Client Library Consumer in Java](https://docs.aws.amazon.com/streams/latest/dev/kcl2-standard-consumer-java-example.html)\.
+You will develop your Kinesis Client Library consumer in Java\. For more information, see [Developing a Kinesis Client Library Consumer in Java](https://docs.aws.amazon.com/streams/latest/dev/kcl2-standard-consumer-java-example.html) in the *Amazon Kinesis Data Streams Developer Guide*\.
 
 1. Create an instance of `GlueSchemaRegistryDeserializer` by passing a `GlueSchemaRegistryConfiguration` object\.
 
@@ -408,7 +408,7 @@ To set up the integration dependencies to AWS Glue Schema Registry in the Apache
    </dependency>
    ```
 
-#### Integrating Kafka or MSK with Apache Flink<a name="schema-registry-integrations-kda-integrate-msk"></a>
+#### Integrating Kafka or Amazon MSK with Apache Flink<a name="schema-registry-integrations-kda-integrate-msk"></a>
 
 You can use Kinesis Data Analytics for Apache Flink, with Kafka as a source or Kafka as a sink\.
 
@@ -422,7 +422,7 @@ The following diagram shows integrating Kinesis Data Streams with Kinesis Data A
 
 ![\[Kafka as a sink.\]](http://docs.aws.amazon.com/glue/latest/dg/images/gsr-kafka-sink.png)
 
-To integrate Kafka \(or MSK\) with Kinesis Data Analytics for Apache Flink, with Kafka as a source or Kafka as a sink, make the code changes below\. Add the bolded code blocks to your respective code in the analogous sections\.
+To integrate Kafka \(or Amazon MSK\) with Kinesis Data Analytics for Apache Flink, with Kafka as a source or Kafka as a sink, make the code changes below\. Add the bolded code blocks to your respective code in the analogous sections\.
 
 If Kafka is the source, then use the deserializer code \(block 2\)\. If Kafka is the sink, use the serializer code \(block 3\)\.
 
@@ -436,7 +436,7 @@ properties.setProperty("group.id", "test");
 
 // block 1
 Map<String, Object> configs = new HashMap<>();
-configs.put(AWSSchemaRegistryConstants.AWS_REGION, "us-east-1");
+configs.put(AWSSchemaRegistryConstants.AWS_REGION, "aws-region");
 configs.put(AWSSchemaRegistryConstants.SCHEMA_AUTO_REGISTRATION_SETTING, true);
 configs.put(AWSSchemaRegistryConstants.AVRO_RECORD_TYPE, AvroRecordType.GENERIC_RECORD.getName());
 
@@ -480,14 +480,14 @@ StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironm
 
 String streamName = "stream";
 Properties consumerConfig = new Properties();
-consumerConfig.put(AWSConfigConstants.AWS_REGION, "us-east-1");
+consumerConfig.put(AWSConfigConstants.AWS_REGION, "aws-region");
 consumerConfig.put(AWSConfigConstants.AWS_ACCESS_KEY_ID, "aws_access_key_id");
 consumerConfig.put(AWSConfigConstants.AWS_SECRET_ACCESS_KEY, "aws_secret_access_key");
 consumerConfig.put(ConsumerConfigConstants.STREAM_INITIAL_POSITION, "LATEST");
 
 // block 1
 Map<String, Object> configs = new HashMap<>();
-configs.put(AWSSchemaRegistryConstants.AWS_REGION, "us-east-1");
+configs.put(AWSSchemaRegistryConstants.AWS_REGION, "aws-region");
 configs.put(AWSSchemaRegistryConstants.SCHEMA_AUTO_REGISTRATION_SETTING, true);
 configs.put(AWSSchemaRegistryConstants.AVRO_RECORD_TYPE, AvroRecordType.GENERIC_RECORD.getName());
 
@@ -511,7 +511,7 @@ env.execute();
 
 ## Use Case: Integration with AWS Lambda<a name="schema-registry-integrations-aws-lambda"></a>
 
-To use an AWS Lambda function as an Apache Kafka/Amazon MSK consumer and deserialize Avro\-encoded messages using AWS Glue Schema Registry, visit the [MSK Labs page](https://amazonmsk-labs.workshop.aws/en/msklambda/gsrschemareg.html)\.
+To use an AWS Lambdafunction as an Apache Kafka/Amazon MSK consumer and deserialize Avro\-encoded messages using AWS Glue Schema Registry, visit the [MSK Labs page](https://amazonmsk-labs.workshop.aws/en/msklambda/gsrschemareg.html)\.
 
 ## Use Case: AWS Glue Data Catalog<a name="schema-registry-integrations-aws-glue-data-catalog"></a>
 
@@ -537,7 +537,7 @@ When calling the `CreateTable` API, you will pass a `TableInput` that contains a
 **AWS Glue console**  
 To create a table from the AWS Glue console:
 
-1. Sign in to the AWS Management Console and open the AWS Glue console at https://console\.aws\.amazon\.com/glue/\.
+1. Sign in to the AWS Management Console and open the AWS Glue console at [https://console\.aws\.amazon\.com/glue/](https://console.aws.amazon.com/glue\)\.
 
 1. In the navigation pane, under **Data catalog**, choose **Tables**\.
 
@@ -568,7 +568,7 @@ When calling the `UpdateTable` API, you will pass a `TableInput` that contains a
 **AWS Glue console**  
 To update the schema for a table from the AWS Glue console:
 
-1. Sign in to the AWS Management Console and open the AWS Glue console at https://console\.aws\.amazon\.com/glue/\.
+1. Sign in to the AWS Management Console and open the AWS Glue console at [https://console\.aws\.amazon\.com/glue/](https://console.aws.amazon.com/glue\)\.
 
 1. In the navigation pane, under **Data catalog**, choose **Tables**\.
 
@@ -605,7 +605,7 @@ To use the AWS Glue Schema Registry within an Apache Kafka Streams application:
        props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, AWSKafkaAvroSerDe.class.getName());
        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
            
-       props.put(AWSSchemaRegistryConstants.AWS_REGION, "us-east-1");
+       props.put(AWSSchemaRegistryConstants.AWS_REGION, "aws-region");
        props.put(AWSSchemaRegistryConstants.SCHEMA_AUTO_REGISTRATION_SETTING, true);
        props.put(AWSSchemaRegistryConstants.AVRO_RECORD_TYPE, AvroRecordType.GENERIC_RECORD.getName());
    ```
@@ -692,8 +692,8 @@ The integration of Apache Kafka Connect with the AWS Glue Schema Registry enable
    1. Add these properties also to the Apache Kafka connect properties file:
 
       ```
-      key.converter.region=us-east-2
-      value.converter.region=us-east-2
+      key.converter.region=aws-region
+      value.converter.region=aws-region
       key.converter.schemaAutoRegistrationEnabled=true
       value.converter.schemaAutoRegistrationEnabled=true
       key.converter.avroRecordType=GENERIC_RECORD
@@ -703,13 +703,13 @@ The integration of Apache Kafka Connect with the AWS Glue Schema Registry enable
    1. Add the command below to the **Launch mode** section under **kafka\-run\-class\.sh**:
 
       ```
-      -cp $CLASSPATH:"<your AWS Glue Schema Registry base directory>/target/dependency/*"
+      -cp $CLASSPATH:"<your AWS GlueSchema Registry base directory>/target/dependency/*"
       ```
 
 1. Add the command below to the **Launch mode** section under **kafka\-run\-class\.sh**
 
    ```
-   -cp $CLASSPATH:"<your AWS Glue Schema Registry base directory>/target/dependency/*" 
+   -cp $CLASSPATH:"<your AWS GlueSchema Registry base directory>/target/dependency/*" 
    ```
 
    It should look like this:
@@ -815,9 +815,9 @@ To migrate from a third\-party schema registry to the AWS Glue Schema Registry:
       producerProps.setProperty(AWSSchemaRegistryConstants.SCHEMA_AUTO_REGISTRATION_SETTING, "true");
       ```
 
-1. \(Optional\) Manually move existing schemas and schema versions from the current third\-party schema registry to the AWS Glue Schema Registry, either to the default\-registry in AWS Glue Schema Registry or to a specific non\-default registry in AWS Glue Schema Registry\. This can be done by exporting schemas from the third\-party schema registries in JSON format and creating new schemas in AWS Glue Schema Registry using the AWS console or the AWS CLI\.
+1. \(Optional\) Manually move existing schemas and schema versions from the current third\-party schema registry to the AWS Glue Schema Registry, either to the default\-registry in AWS Glue Schema Registry or to a specific non\-default registry in AWS Glue Schema Registry\. This can be done by exporting schemas from the third\-party schema registries in JSON format and creating new schemas in AWS Glue Schema Registry using the AWS Management Console or the AWS CLI\.
 
-    This step may be important if you need to enable compatibility checks with previous schema versions for newly created schema versions using the AWS CLI and the AWS console, or when producers send messages with a new schema with auto\-registration of schema versions turned on\.
+    This step may be important if you need to enable compatibility checks with previous schema versions for newly created schema versions using the AWS CLI and the AWS Management Console, or when producers send messages with a new schema with auto\-registration of schema versions turned on\.
 
 1. Start the producer\.
 

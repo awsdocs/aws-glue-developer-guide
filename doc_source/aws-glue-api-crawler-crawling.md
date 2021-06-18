@@ -75,7 +75,7 @@ Specifies a crawler program that examines a data source and uses classifiers to 
   The version of the crawler\.
 + `Configuration` – UTF\-8 string\.
 
-  Crawler configuration information\. This versioned JSON string allows users to specify aspects of a crawler's behavior\. For more information, see [Configuring a Crawler](https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html)\.
+  Crawler configuration information\. This versioned JSON string allows users to specify aspects of a crawler's behavior\. For more information, see [Include and Exclude Patterns](https://docs.aws.amazon.com/glue/latest/dg/define-crawler.html#crawler-data-stores-exclude)\.
 + `CrawlerSecurityConfiguration` – UTF\-8 string, not more than 128 bytes long\.
 
   The name of the `SecurityConfiguration` structure to be used by this crawler\.
@@ -127,6 +127,9 @@ Specifies a data store in Amazon Simple Storage Service \(Amazon S3\)\.
 + `ConnectionName` – UTF\-8 string\.
 
   The name of a connection which allows a job or crawler to access data in Amazon S3 within an Amazon Virtual Private Cloud environment \(Amazon VPC\)\.
++ `SampleSize` – Number \(integer\)\.
+
+  Sets the number of files in each leaf folder to be crawled when crawling sample files in a dataset\. If not set, all the files are crawled\. A valid value is an integer between 1 and 249\.
 
 ## JdbcTarget Structure<a name="aws-glue-api-crawler-crawling-JdbcTarget"></a>
 

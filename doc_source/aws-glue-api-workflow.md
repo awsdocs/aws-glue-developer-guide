@@ -9,10 +9,14 @@ The Workflows API describes the data types and API related to creating, updating
 + [Crawl Structure](#aws-glue-api-workflow-Crawl)
 + [Node Structure](#aws-glue-api-workflow-Node)
 + [Edge Structure](#aws-glue-api-workflow-Edge)
++ [Workflow Structure](#aws-glue-api-workflow-Workflow)
 + [WorkflowGraph Structure](#aws-glue-api-workflow-WorkflowGraph)
 + [WorkflowRun Structure](#aws-glue-api-workflow-WorkflowRun)
 + [WorkflowRunStatistics Structure](#aws-glue-api-workflow-WorkflowRunStatistics)
-+ [Workflow Structure](#aws-glue-api-workflow-Workflow)
++ [Blueprint Structure](#aws-glue-api-workflow-Blueprint)
++ [BlueprintDetails Structure](#aws-glue-api-workflow-BlueprintDetails)
++ [LastActiveDefinition Structure](#aws-glue-api-workflow-LastActiveDefinition)
++ [BlueprintRun Structure](#aws-glue-api-workflow-BlueprintRun)
 
 ## JobNodeDetails Structure<a name="aws-glue-api-workflow-JobNodeDetails"></a>
 
@@ -101,6 +105,46 @@ An edge represents a directed connection between two AWS Glue components that ar
 
   The unique of the node within the workflow where the edge ends\.
 
+## Workflow Structure<a name="aws-glue-api-workflow-Workflow"></a>
+
+A workflow represents a flow in which AWS Glue components should be run to complete a logical task\.
+
+**Fields**
++ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the workflow representing the flow\.
++ `Description` – UTF\-8 string\.
+
+  A description of the workflow\.
++ `DefaultRunProperties` – A map array of key\-value pairs\.
+
+  Each key is a UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  Each value is a UTF\-8 string\.
+
+  A collection of properties to be used as part of each execution of the workflow\.
++ `CreatedOn` – Timestamp\.
+
+  The date and time when the workflow was created\.
++ `LastModifiedOn` – Timestamp\.
+
+  The date and time when the workflow was last modified\.
++ `LastRun` – A [WorkflowRun](#aws-glue-api-workflow-WorkflowRun) object\.
+
+  The information about the last execution of the workflow\.
++ `Graph` – A [WorkflowGraph](#aws-glue-api-workflow-WorkflowGraph) object\.
+
+  The graph representing all the AWS Glue components that belong to the workflow as nodes and directed connections between them as edges\.
++ `CreationStatus` – UTF\-8 string \(valid values: `CREATING` \| `CREATED` \| `CREATION_FAILED`\)\.
+
+  The creation status of the workflow\.
++ `MaxConcurrentRuns` – Number \(integer\)\.
+
+  You can use this parameter to prevent unwanted multiple updates to data, to control costs, or in some cases, to prevent exceeding the maximum number of concurrent runs of any of the component jobs\. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs\.
++ `BlueprintDetails` – A [BlueprintDetails](#aws-glue-api-workflow-BlueprintDetails) object\.
+
+  This structure indicates the details of a blueprint from which this particular workflow is created from\.
+
 ## WorkflowGraph Structure<a name="aws-glue-api-workflow-WorkflowGraph"></a>
 
 A workflow graph represents the complete workflow containing all the AWS Glue components present in the workflow and all the directed connections between them\.
@@ -120,7 +164,7 @@ A workflow run is an execution of a workflow providing all the runtime informati
 **Fields**
 + `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
-  Name of the workflow that was executed\.
+  Name of the workflow that was run\.
 + `WorkflowRunId` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
 
   The ID of this workflow run\.
@@ -177,42 +221,121 @@ Workflow run statistics provides statistics about the workflow run\.
 
   Total number Actions in running state\.
 
-## Workflow Structure<a name="aws-glue-api-workflow-Workflow"></a>
+## Blueprint Structure<a name="aws-glue-api-workflow-Blueprint"></a>
 
-A workflow represents a flow in which AWS Glue components should be executed to complete a logical task\.
+The details of a blueprint\.
 
 **Fields**
-+ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
++ `Name` – UTF\-8 string, not less than 1 or more than 128 bytes long, matching the [Custom string pattern #18](aws-glue-api-common.md#regex_18)\.
 
-  The name of the workflow representing the flow\.
-+ `Description` – UTF\-8 string\.
+  The name of the blueprint\.
++ `Description` – UTF\-8 string, not less than 1 or more than 512 bytes long\.
 
-  A description of the workflow\.
-+ `DefaultRunProperties` – A map array of key\-value pairs\.
-
-  Each key is a UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
-
-  Each value is a UTF\-8 string\.
-
-  A collection of properties to be used as part of each execution of the workflow\.
+  The description of the blueprint\.
 + `CreatedOn` – Timestamp\.
 
-  The date and time when the workflow was created\.
+  The date and time the blueprint was registered\.
 + `LastModifiedOn` – Timestamp\.
 
-  The date and time when the workflow was last modified\.
-+ `LastRun` – A [WorkflowRun](#aws-glue-api-workflow-WorkflowRun) object\.
+  The date and time the blueprint was last modified\.
++ `ParameterSpec` – UTF\-8 string, not less than 1 or more than 131072 bytes long\.
 
-  The information about the last execution of the workflow\.
-+ `Graph` – A [WorkflowGraph](#aws-glue-api-workflow-WorkflowGraph) object\.
+  A JSON string that indicates the list of parameter specifications for the blueprint\.
++ `BlueprintLocation` – UTF\-8 string\.
 
-  The graph representing all the AWS Glue components that belong to the workflow as nodes and directed connections between them as edges\.
-+ `CreationStatus` – UTF\-8 string \(valid values: `CREATING` \| `CREATED` \| `CREATION_FAILED`\)\.
+  Specifies the path in Amazon S3 where the blueprint is published\.
++ `BlueprintServiceLocation` – UTF\-8 string\.
 
-  The creation status of the workflow\.
-+ `MaxConcurrentRuns` – Number \(integer\)\.
+  Specifies a path in Amazon S3 where the blueprint is copied when you call `CreateBlueprint` to register the blueprint in AWS Glue\.
++ `Status` – UTF\-8 string \(valid values: `CREATING` \| `ACTIVE` \| `UPDATING` \| `FAILED`\)\.
 
-  You can use this parameter to prevent unwanted multiple updates to data, to control costs, or in some cases, to prevent exceeding the maximum number of concurrent runs of any of the component jobs\. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs\.
+  The status of the blueprint registration\.
+  + Creating — The blueprint registration is in progress\.
+  + Active — The blueprint has been successfully registed\.
+  + Updating — An update to the blueprint registration is in progress\.
+  + Failed — The blueprint registration failed\.
++ `ErrorMessage` – UTF\-8 string\.
+
+  An error message\.
++ `LastActiveDefinition` – A [LastActiveDefinition](#aws-glue-api-workflow-LastActiveDefinition) object\.
+
+  When there are multiple versions of a blueprint and the latest version has some errors, this attribute indicates the last successful blueprint definition that is available with the service\.
+
+## BlueprintDetails Structure<a name="aws-glue-api-workflow-BlueprintDetails"></a>
+
+The details of a blueprint\.
+
+**Fields**
++ `BlueprintName` – UTF\-8 string, not less than 1 or more than 128 bytes long, matching the [Custom string pattern #18](aws-glue-api-common.md#regex_18)\.
+
+  The name of the blueprint\.
++ `InstanceName` – UTF\-8 string, not less than 1 or more than 128 bytes long, matching the [Custom string pattern #18](aws-glue-api-common.md#regex_18)\.
+
+  The name of the blueprint instance\.
++ `RunId` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The run ID for this blueprint\.
+
+## LastActiveDefinition Structure<a name="aws-glue-api-workflow-LastActiveDefinition"></a>
+
+When there are multiple versions of a blueprint and the latest version has some errors, this attribute indicates the last successful blueprint definition that is available with the service\.
+
+**Fields**
++ `Description` – UTF\-8 string, not less than 1 or more than 512 bytes long\.
+
+  The description of the blueprint\.
++ `LastModifiedOn` – Timestamp\.
+
+  The date and time the blueprint was last modified\.
++ `ParameterSpec` – UTF\-8 string, not less than 1 or more than 131072 bytes long\.
+
+  A JSON string specifying the parameters for the blueprint\.
++ `BlueprintLocation` – UTF\-8 string\.
+
+  Specifies a path in Amazon S3 where the blueprint is published by the AWS Glue developer\.
++ `BlueprintServiceLocation` – UTF\-8 string\.
+
+  Specifies a path in Amazon S3 where the blueprint is copied when you create or update the blueprint\.
+
+## BlueprintRun Structure<a name="aws-glue-api-workflow-BlueprintRun"></a>
+
+The details of a blueprint run\.
+
+**Fields**
++ `BlueprintName` – UTF\-8 string, not less than 1 or more than 128 bytes long, matching the [Custom string pattern #18](aws-glue-api-common.md#regex_18)\.
+
+  The name of the blueprint\.
++ `RunId` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The run ID for this blueprint run\.
++ `WorkflowName` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of a workflow that is created as a result of a successful blueprint run\. If a blueprint run has an error, there will not be a workflow created\.
++ `State` – UTF\-8 string \(valid values: `RUNNING` \| `SUCCEEDED` \| `FAILED` \| `ROLLING_BACK`\)\.
+
+  The state of the blueprint run\. Possible values are:
+  + Running — The blueprint run is in progress\.
+  + Succeeded — The blueprint run completed successfully\.
+  + Failed — The blueprint run failed and rollback is complete\.
+  + Rolling Back — The blueprint run failed and rollback is in progress\.
++ `StartedOn` – Timestamp\.
+
+  The date and time that the blueprint run started\.
++ `CompletedOn` – Timestamp\.
+
+  The date and time that the blueprint run completed\.
++ `ErrorMessage` – UTF\-8 string\.
+
+  Indicates any errors that are seen while running the blueprint\.
++ `RollbackErrorMessage` – UTF\-8 string\.
+
+  If there are any errors while creating the entities of a workflow, we try to roll back the created entities until that point and delete them\. This attribute indicates the errors seen while trying to delete the entities that are created\.
++ `Parameters` – UTF\-8 string, not less than 1 or more than 131072 bytes long\.
+
+  The blueprint parameters as a string\. You will have to provide a value for each key that is required from the parameter spec that is defined in the `Blueprint$ParameterSpec`\.
++ `RoleArn` – UTF\-8 string, not less than 1 or more than 1024 bytes long, matching the [Custom string pattern #17](aws-glue-api-common.md#regex_17)\.
+
+  The role ARN\. This role will be assumed by the AWS Glue service and will be used to create the workflow and other entities of a workflow\.
 
 ## Operations<a name="aws-glue-api-workflow-actions"></a>
 + [CreateWorkflow Action \(Python: create\_workflow\)](#aws-glue-api-workflow-CreateWorkflow)
@@ -225,6 +348,14 @@ A workflow represents a flow in which AWS Glue components should be executed to 
 + [GetWorkflowRuns Action \(Python: get\_workflow\_runs\)](#aws-glue-api-workflow-GetWorkflowRuns)
 + [GetWorkflowRunProperties Action \(Python: get\_workflow\_run\_properties\)](#aws-glue-api-workflow-GetWorkflowRunProperties)
 + [PutWorkflowRunProperties Action \(Python: put\_workflow\_run\_properties\)](#aws-glue-api-workflow-PutWorkflowRunProperties)
++ [CreateBlueprint Action \(Python: create\_blueprint\)](#aws-glue-api-workflow-CreateBlueprint)
++ [UpdateBlueprint Action \(Python: update\_blueprint\)](#aws-glue-api-workflow-UpdateBlueprint)
++ [DeleteBlueprint Action \(Python: delete\_blueprint\)](#aws-glue-api-workflow-DeleteBlueprint)
++ [ListBlueprints Action \(Python: list\_blueprints\)](#aws-glue-api-workflow-ListBlueprints)
++ [BatchGetBlueprints Action \(Python: batch\_get\_blueprints\)](#aws-glue-api-workflow-BatchGetBlueprints)
++ [StartBlueprintRun Action \(Python: start\_blueprint\_run\)](#aws-glue-api-workflow-StartBlueprintRun)
++ [GetBlueprintRun Action \(Python: get\_blueprint\_run\)](#aws-glue-api-workflow-GetBlueprintRun)
++ [GetBlueprintRuns Action \(Python: get\_blueprint\_runs\)](#aws-glue-api-workflow-GetBlueprintRuns)
 + [StartWorkflowRun Action \(Python: start\_workflow\_run\)](#aws-glue-api-workflow-StartWorkflowRun)
 + [StopWorkflowRun Action \(Python: stop\_workflow\_run\)](#aws-glue-api-workflow-StopWorkflowRun)
 + [ResumeWorkflowRun Action \(Python: resume\_workflow\_run\)](#aws-glue-api-workflow-ResumeWorkflowRun)
@@ -513,6 +644,224 @@ Puts the specified workflow run properties for the given workflow run\. If a pro
 + `OperationTimeoutException`
 + `ResourceNumberLimitExceededException`
 + `ConcurrentModificationException`
+
+## CreateBlueprint Action \(Python: create\_blueprint\)<a name="aws-glue-api-workflow-CreateBlueprint"></a>
+
+Registers a blueprint with AWS Glue\.
+
+**Request**
++ `Name` – *Required:* UTF\-8 string, not less than 1 or more than 128 bytes long, matching the [Custom string pattern #18](aws-glue-api-common.md#regex_18)\.
+
+  The name of the blueprint\.
++ `Description` – UTF\-8 string, not less than 1 or more than 512 bytes long\.
+
+  A description of the blueprint\.
++ `BlueprintLocation` – *Required:* UTF\-8 string, not less than 1 or more than 8192 bytes long, matching the [Custom string pattern #19](aws-glue-api-common.md#regex_19)\.
+
+  Specifies a path in Amazon S3 where the blueprint is published\.
++ `Tags` – A map array of key\-value pairs, not more than 50 pairs\.
+
+  Each key is a UTF\-8 string, not less than 1 or more than 128 bytes long\.
+
+  Each value is a UTF\-8 string, not more than 256 bytes long\.
+
+  The tags to be applied to this blueprint\.
+
+**Response**
++ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  Returns the name of the blueprint that was registered\.
+
+**Errors**
++ `AlreadyExistsException`
++ `InvalidInputException`
++ `OperationTimeoutException`
++ `InternalServiceException`
++ `ResourceNumberLimitExceededException`
+
+## UpdateBlueprint Action \(Python: update\_blueprint\)<a name="aws-glue-api-workflow-UpdateBlueprint"></a>
+
+Updates a registered blueprint\.
+
+**Request**
++ `Name` – *Required:* UTF\-8 string, not less than 1 or more than 128 bytes long, matching the [Custom string pattern #18](aws-glue-api-common.md#regex_18)\.
+
+  The name of the blueprint\.
++ `Description` – UTF\-8 string, not less than 1 or more than 512 bytes long\.
+
+  A description of the blueprint\.
++ `BlueprintLocation` – *Required:* UTF\-8 string, not less than 1 or more than 8192 bytes long, matching the [Custom string pattern #19](aws-glue-api-common.md#regex_19)\.
+
+  Specifies a path in Amazon S3 where the blueprint is published\.
+
+**Response**
++ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  Returns the name of the blueprint that was updated\.
+
+**Errors**
++ `EntityNotFoundException`
++ `ConcurrentModificationException`
++ `InvalidInputException`
++ `OperationTimeoutException`
++ `InternalServiceException`
+
+## DeleteBlueprint Action \(Python: delete\_blueprint\)<a name="aws-glue-api-workflow-DeleteBlueprint"></a>
+
+Deletes an existing blueprint\.
+
+**Request**
++ `Name` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the blueprint to delete\.
+
+**Response**
++ `Name` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  Returns the name of the blueprint that was deleted\.
+
+**Errors**
++ `InvalidInputException`
++ `OperationTimeoutException`
++ `InternalServiceException`
+
+## ListBlueprints Action \(Python: list\_blueprints\)<a name="aws-glue-api-workflow-ListBlueprints"></a>
+
+Lists all the blueprint names in an account\.
+
+**Request**
++ `NextToken` – UTF\-8 string\.
+
+  A continuation token, if this is a continuation request\.
++ `MaxResults` – Number \(integer\), not less than 1 or more than 1000\.
+
+  The maximum size of a list to return\.
++ `Tags` – A map array of key\-value pairs, not more than 50 pairs\.
+
+  Each key is a UTF\-8 string, not less than 1 or more than 128 bytes long\.
+
+  Each value is a UTF\-8 string, not more than 256 bytes long\.
+
+  Filters the list by an AWS resource tag\.
+
+**Response**
++ `Blueprints` – An array of UTF\-8 strings\.
+
+  List of names of blueprints in the account\.
++ `NextToken` – UTF\-8 string\.
+
+  A continuation token, if not all blueprint names have been returned\.
+
+**Errors**
++ `InvalidInputException`
++ `InternalServiceException`
++ `OperationTimeoutException`
+
+## BatchGetBlueprints Action \(Python: batch\_get\_blueprints\)<a name="aws-glue-api-workflow-BatchGetBlueprints"></a>
+
+Retrieves information about a list of blueprints\.
+
+**Request**
++ `Names` – *Required:* An array of UTF\-8 strings, not less than 1 or more than 25 strings\.
+
+  A list of blueprint names\.
++ `IncludeBlueprint` – Boolean\.
+
+  Specifies whether or not to include the blueprint in the response\.
++ `IncludeParameterSpec` – Boolean\.
+
+  Specifies whether or not to include the parameters, as a JSON string, for the blueprint in the response\.
+
+**Response**
++ `Blueprints` – An array of [Blueprint](#aws-glue-api-workflow-Blueprint) objects\.
+
+  Returns a list of blueprint as a `Blueprints` object\.
++ `MissingBlueprints` – An array of UTF\-8 strings\.
+
+  Returns a list of `BlueprintNames` that were not found\.
+
+**Errors**
++ `InternalServiceException`
++ `OperationTimeoutException`
++ `InvalidInputException`
+
+## StartBlueprintRun Action \(Python: start\_blueprint\_run\)<a name="aws-glue-api-workflow-StartBlueprintRun"></a>
+
+Starts a new run of the specified blueprint\.
+
+**Request**
++ `BlueprintName` – *Required:* UTF\-8 string, not less than 1 or more than 128 bytes long, matching the [Custom string pattern #18](aws-glue-api-common.md#regex_18)\.
+
+  The name of the blueprint\.
++ `Parameters` – UTF\-8 string, not less than 1 or more than 131072 bytes long\.
+
+  Specifies the parameters as a `BlueprintParameters` object\.
++ `RoleArn` – *Required:* UTF\-8 string, not less than 1 or more than 1024 bytes long, matching the [Custom string pattern #17](aws-glue-api-common.md#regex_17)\.
+
+  Specifies the IAM role used to create the workflow\.
+
+**Response**
++ `RunId` – UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The run ID for this blueprint run\.
+
+**Errors**
++ `InvalidInputException`
++ `OperationTimeoutException`
++ `InternalServiceException`
++ `ResourceNumberLimitExceededException`
++ `EntityNotFoundException`
+
+## GetBlueprintRun Action \(Python: get\_blueprint\_run\)<a name="aws-glue-api-workflow-GetBlueprintRun"></a>
+
+Retrieves the details of a blueprint run\.
+
+**Request**
++ `BlueprintName` – *Required:* UTF\-8 string, not less than 1 or more than 128 bytes long, matching the [Custom string pattern #18](aws-glue-api-common.md#regex_18)\.
+
+  The name of the blueprint\.
++ `RunId` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The run ID for the blueprint run you want to retrieve\.
+
+**Response**
++ `BlueprintRun` – A [BlueprintRun](#aws-glue-api-workflow-BlueprintRun) object\.
+
+  Returns a `BlueprintRun` object\.
+
+**Errors**
++ `EntityNotFoundException`
++ `InternalServiceException`
++ `OperationTimeoutException`
+
+## GetBlueprintRuns Action \(Python: get\_blueprint\_runs\)<a name="aws-glue-api-workflow-GetBlueprintRuns"></a>
+
+Retrieves the details of blueprint runs for a specified blueprint\.
+
+**Request**
++ `BlueprintName` – *Required:* UTF\-8 string, not less than 1 or more than 255 bytes long, matching the [Single-line string pattern](aws-glue-api-common.md#aws-glue-api-regex-oneLine)\.
+
+  The name of the blueprint\.
++ `NextToken` – UTF\-8 string\.
+
+  A continuation token, if this is a continuation request\.
++ `MaxResults` – Number \(integer\), not less than 1 or more than 1000\.
+
+  The maximum size of a list to return\.
+
+**Response**
++ `BlueprintRuns` – An array of [BlueprintRun](#aws-glue-api-workflow-BlueprintRun) objects\.
+
+  Returns a list of `BlueprintRun` objects\.
++ `NextToken` – UTF\-8 string\.
+
+  A continuation token, if not all blueprint runs have been returned\.
+
+**Errors**
++ `EntityNotFoundException`
++ `InternalServiceException`
++ `OperationTimeoutException`
++ `InvalidInputException`
 
 ## StartWorkflowRun Action \(Python: start\_workflow\_run\)<a name="aws-glue-api-workflow-StartWorkflowRun"></a>
 

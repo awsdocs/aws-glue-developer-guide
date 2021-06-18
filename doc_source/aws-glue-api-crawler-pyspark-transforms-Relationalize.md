@@ -53,3 +53,13 @@ Inherited from `GlueTransform` [describeErrors](aws-glue-api-crawler-pyspark-tra
 ## describe\(cls\)<a name="aws-glue-api-crawler-pyspark-transforms-Relationalize-describe"></a>
 
 Inherited from `GlueTransform` [describe](aws-glue-api-crawler-pyspark-transforms-GlueTransform.md#aws-glue-api-crawler-pyspark-transforms-GlueTransform-describe)\.
+
+## Example for Relationalize<a name="pyspark-Relationalize-example"></a>
+
+The Relationalize function can flatten nested structures and create multiple dynamic frames\. In this example, the customer column is a nested structure, and Relationalize converts it into multiple flattened DynamicFrames\.
+
+```
+dyf_relationize = dyf_orders.relationalize("root", "/home/glue/GlueLocalOutput")
+```
+
+The result is a collection of DynamicFrames\. Use the SelectFromCollection function to retrieve a specific DynamicFrame from the result\.

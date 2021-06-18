@@ -32,6 +32,10 @@ Select or add an AWS Glue connection\. For information about connections, see [D
 Select whether to crawl a data sample only\. If not selected the entire table is crawled\. Scanning all the records can take a long time when the table is not a high throughput table\.  
 **Scanning rate \(for DynamoDB data stores only\)**  
 Specify the percentage of the configured read capacity units to use by the AWS Glue crawler\. Read capacity units is a term defined by DynamoDB, and is a numeric value that acts as rate limiter for the number of reads that can be performed on that table per second\. Enter a value between 0\.1 and 1\.5\. If not specified, defaults to 0\.5% for provisioned tables and 1/4 of maximum configured capacity for on\-demand tables\.  
+**Sample size \(optional\) \(for Amazon S3 data stores only\)**  
+Specify the number of files in each leaf folder to be crawled when crawling sample files in a dataset\. When this feature is turned on, instead of crawling all the files in this dataset, the crawler randomly selects some files in each leaf folder to crawl\.   
+The sampling crawler is best suited for customers who have previous knowledge about their data formats and know that schemas in their folders do not change\. Turning on this feature will significantly reduce crawler runtime\.  
+A valid value is an integer between 1 and 249\. If not specified, all the files are crawled\.  
 **Include path**    
 For an Amazon S3 data store  
 Choose whether to specify a path in your account or another account, and then browse to choose an Amazon S3 path\.  

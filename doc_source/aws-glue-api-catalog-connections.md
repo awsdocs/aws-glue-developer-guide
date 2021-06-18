@@ -27,7 +27,7 @@ Defines a connection to a data source\.
   A list of criteria that can be used in selecting this connection\.
 + `ConnectionProperties` – A map array of key\-value pairs, not more than 100 pairs\.
 
-  Each key is a UTF\-8 string \(valid values: `HOST` \| `PORT` \| `USERNAME="USER_NAME"` \| `PASSWORD` \| `ENCRYPTED_PASSWORD` \| `JDBC_DRIVER_JAR_URI` \| `JDBC_DRIVER_CLASS_NAME` \| `JDBC_ENGINE` \| `JDBC_ENGINE_VERSION` \| `CONFIG_FILES` \| `INSTANCE_ID` \| `JDBC_CONNECTION_URL` \| `JDBC_ENFORCE_SSL` \| `CUSTOM_JDBC_CERT` \| `SKIP_CUSTOM_JDBC_CERT_VALIDATION` \| `CUSTOM_JDBC_CERT_STRING` \| `CONNECTION_URL` \| `KAFKA_BOOTSTRAP_SERVERS` \| `KAFKA_SSL_ENABLED` \| `KAFKA_CUSTOM_CERT` \| `KAFKA_SKIP_CUSTOM_CERT_VALIDATION` \| `SECRET_ID` \| `CONNECTOR_URL` \| `CONNECTOR_TYPE` \| `CONNECTOR_CLASS_NAME`\)\.
+  Each key is a UTF\-8 string \(valid values: `HOST` \| `PORT` \| `USERNAME="USER_NAME"` \| `PASSWORD` \| `ENCRYPTED_PASSWORD` \| `JDBC_DRIVER_JAR_URI` \| `JDBC_DRIVER_CLASS_NAME` \| `JDBC_ENGINE` \| `JDBC_ENGINE_VERSION` \| `CONFIG_FILES` \| `INSTANCE_ID` \| `JDBC_CONNECTION_URL` \| `JDBC_ENFORCE_SSL` \| `CUSTOM_JDBC_CERT` \| `SKIP_CUSTOM_JDBC_CERT_VALIDATION` \| `CUSTOM_JDBC_CERT_STRING` \| `CONNECTION_URL` \| `KAFKA_BOOTSTRAP_SERVERS` \| `KAFKA_SSL_ENABLED` \| `KAFKA_CUSTOM_CERT` \| `KAFKA_SKIP_CUSTOM_CERT_VALIDATION` \| `KAFKA_CLIENT_KEYSTORE` \| `KAFKA_CLIENT_KEYSTORE_PASSWORD` \| `KAFKA_CLIENT_KEY_PASSWORD` \| `ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD` \| `ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD` \| `SECRET_ID` \| `CONNECTOR_URL` \| `CONNECTOR_TYPE` \| `CONNECTOR_CLASS_NAME`\)\.
 
   Each value is a Value string, not more than 1024 bytes long\.
 
@@ -57,6 +57,11 @@ Defines a connection to a data source\.
   + `CONNECTOR_URL` \- The connector URL for a MARKETPLACE or CUSTOM connection\.
   + `CONNECTOR_TYPE` \- The connector type for a MARKETPLACE or CUSTOM connection\.
   + `CONNECTOR_CLASS_NAME` \- The connector class name for a MARKETPLACE or CUSTOM connection\.
+  + `KAFKA_CLIENT_KEYSTORE` \- The Amazon S3 location of the client keystore file for Kafka client side authentication \(Optional\)\.
+  + `KAFKA_CLIENT_KEYSTORE_PASSWORD` \- The password to access the provided keystore \(Optional\)\.
+  + `KAFKA_CLIENT_KEY_PASSWORD` \- A keystore can consist of multiple keys, so this is the password to access the client key to be used with the Kafka server side key \(Optional\)\.
+  + `ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD` \- The encrypted version of the Kafka client keystore password \(if the user has the AWS Glue encrypt passwords setting selected\)\.
+  + `ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD` \- The encrypted version of the Kafka client key password \(if the user has the AWS Glue encrypt passwords setting selected\)\.
 + `PhysicalConnectionRequirements` – A [PhysicalConnectionRequirements](#aws-glue-api-catalog-connections-PhysicalConnectionRequirements) object\.
 
   A map of physical connection requirements, such as virtual private cloud \(VPC\) and `SecurityGroup`, that are needed to make this connection successfully\.
@@ -97,7 +102,7 @@ A structure that is used to specify a connection to create or update\.
   A list of criteria that can be used in selecting this connection\.
 + `ConnectionProperties` – *Required:* A map array of key\-value pairs, not more than 100 pairs\.
 
-  Each key is a UTF\-8 string \(valid values: `HOST` \| `PORT` \| `USERNAME="USER_NAME"` \| `PASSWORD` \| `ENCRYPTED_PASSWORD` \| `JDBC_DRIVER_JAR_URI` \| `JDBC_DRIVER_CLASS_NAME` \| `JDBC_ENGINE` \| `JDBC_ENGINE_VERSION` \| `CONFIG_FILES` \| `INSTANCE_ID` \| `JDBC_CONNECTION_URL` \| `JDBC_ENFORCE_SSL` \| `CUSTOM_JDBC_CERT` \| `SKIP_CUSTOM_JDBC_CERT_VALIDATION` \| `CUSTOM_JDBC_CERT_STRING` \| `CONNECTION_URL` \| `KAFKA_BOOTSTRAP_SERVERS` \| `KAFKA_SSL_ENABLED` \| `KAFKA_CUSTOM_CERT` \| `KAFKA_SKIP_CUSTOM_CERT_VALIDATION` \| `SECRET_ID` \| `CONNECTOR_URL` \| `CONNECTOR_TYPE` \| `CONNECTOR_CLASS_NAME`\)\.
+  Each key is a UTF\-8 string \(valid values: `HOST` \| `PORT` \| `USERNAME="USER_NAME"` \| `PASSWORD` \| `ENCRYPTED_PASSWORD` \| `JDBC_DRIVER_JAR_URI` \| `JDBC_DRIVER_CLASS_NAME` \| `JDBC_ENGINE` \| `JDBC_ENGINE_VERSION` \| `CONFIG_FILES` \| `INSTANCE_ID` \| `JDBC_CONNECTION_URL` \| `JDBC_ENFORCE_SSL` \| `CUSTOM_JDBC_CERT` \| `SKIP_CUSTOM_JDBC_CERT_VALIDATION` \| `CUSTOM_JDBC_CERT_STRING` \| `CONNECTION_URL` \| `KAFKA_BOOTSTRAP_SERVERS` \| `KAFKA_SSL_ENABLED` \| `KAFKA_CUSTOM_CERT` \| `KAFKA_SKIP_CUSTOM_CERT_VALIDATION` \| `KAFKA_CLIENT_KEYSTORE` \| `KAFKA_CLIENT_KEYSTORE_PASSWORD` \| `KAFKA_CLIENT_KEY_PASSWORD` \| `ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD` \| `ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD` \| `SECRET_ID` \| `CONNECTOR_URL` \| `CONNECTOR_TYPE` \| `CONNECTOR_CLASS_NAME`\)\.
 
   Each value is a Value string, not more than 1024 bytes long\.
 

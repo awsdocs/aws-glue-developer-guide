@@ -112,13 +112,13 @@ The output of the script is as follows:
 
 ## Troubleshooting Your Local Notebook Connection<a name="dev-endpoint-tutorial-local-notebook-troubleshooting"></a>
 + If you encounter a *connection refused* error, you might be using a development endpoint that is out of date\. Try creating a new development endpoint and reconnecting\.
-+ If your connection times out or stops working for any reason, you may need to take the following steps to restore it:
++ If your network connection times out or stops working for any reason, you may need to take the following steps to restore it:
 
   1. In Zeppelin, in the drop\-down menu in the upper\-right corner of the page, choose **Interpreters**\. On the interpreters page, search for `spark`\. Choose **edit**, and clear the **Connect to existing process** check box\. Choose **Save** at the bottom of the page\.
 
   1. Initiate SSH port forwarding as described earlier\.
 
-  1. In Zeppelin, re\-enable the `spark` interpreter's **Connect to existing process** settings, and then save again\.
+  1. In Zeppelin, again turn on the `spark` interpreter's **Connect to existing process** settings, and then save again\.
 
-  Resetting the interpreter like this should restore the connection\. Another way to accomplish this is to choose **restart** for the Spark interpreter on the **Interpreters** page\. Then wait for up to 30 seconds to ensure that the remote interpreter has restarted\.
+  Resetting the interpreter like this should restore the network connection\. Another way to accomplish this is to choose **restart** for the Spark interpreter on the **Interpreters** page\. Then wait for up to 30 seconds to ensure that the remote interpreter has restarted\.
 + Ensure your development endpoint has permission to access the remote Zeppelin interpreter\. Without the proper networking permissions you might encounter errors such as open failed: connect failed: Connection refused\.

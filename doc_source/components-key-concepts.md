@@ -55,7 +55,7 @@ An environment that you can use to develop and test your AWS Glue ETL scripts\.
 
 ### Dynamic Frame<a name="components-dynamic-frame"></a>
 
-A distributed table that supports nested data such as structures and arrays\. Each record is self\-describing, designed for schema flexibility with semi\-structured data\. Each record contains both data and the schema that describes that data\. You can use both dynamic frames and Apache Spark dataframes in your ETL scripts, and convert between them\. Dynamic frames provide a set of advanced transformations for data cleaning and ETL\.
+A distributed table that supports nested data such as structures and arrays\. Each record is self\-describing, designed for schema flexibility with semi\-structured data\. Each record contains both data and the schema that describes that data\. You can use both dynamic frames and Apache Spark DataFrames in your ETL scripts, and convert between them\. Dynamic frames provide a set of advanced transformations for data cleaning and ETL\.
 
 ### Job<a name="components-job"></a>
 

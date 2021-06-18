@@ -35,7 +35,7 @@ The code in the script defines your job's procedural logic\. You can code the sc
 The maximum number of AWS Glue data processing units \(DPUs\) that can be allocated when this job runs\. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory\. For more information, see [AWS Glue pricing](https://aws.amazon.com/glue/pricing/)\.     
 You can set the value to 0\.0625 or 1\. The default is 0\.0625\.
 
-For descriptions of additional properties, see [Defining Job Properties](add-job.md#create-job)\. For more information about adding a job using the AWS Glue console, see [Working with Jobs on the AWS Glue Console](console-jobs.md)\. 
+For descriptions of additional properties, see [Defining Job Properties for Spark Jobs](add-job.md#create-job)\. For more information about adding a job using the AWS Glue console, see [Working with Jobs on the AWS Glue Console](console-jobs.md)\. 
 
 You can also create a **Python shell** job using the AWS CLI, as in the following example\.
 
