@@ -30,8 +30,7 @@ import sys
 from awsglue.utils import getResolvedOptions
 
 args = getResolvedOptions(sys.argv,
-                          ['JOB_NAME',
-                           'day_partition_key',
+                          ['day_partition_key',
                            'hour_partition_key',
                            'day_partition_value',
                            'hour_partition_value'])
