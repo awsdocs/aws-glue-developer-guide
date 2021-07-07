@@ -124,7 +124,8 @@ When you configure the crawler using the API, set the following configuration op
   {
      "Version": 1.0,
      "Grouping": {
-        "TableGroupingPolicy": "CombineCompatibleSchemas" }
+        "TableGroupingPolicy": "CombineCompatibleSchemas", "TableLevelConfiguration": 3
+     }
   }
   ```
 
