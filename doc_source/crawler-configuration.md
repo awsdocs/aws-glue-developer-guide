@@ -150,7 +150,7 @@ When configuring the crawler on the console, you can specify a value for the **T
 
 ![\[Specifying a table level in the crawler configuration.\]](http://docs.aws.amazon.com/glue/latest/dg/images/crawler-table-level2.png)
 
-When using CLI, API or SDK, the Table level configuration needs to be specified as a JSON string as below:
+Set the Configuration field with a string representation of the following JSON object in the crawler API; for example:
 
 ```
 {
