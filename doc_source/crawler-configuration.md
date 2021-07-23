@@ -149,3 +149,14 @@ The table level crawler option provides you the flexibility to tell the crawler 
 When configuring the crawler on the console, you can specify a value for the **Table level** crawler option\. The value must be a positive integer that indicates the table location \(the absolute level in the dataset\)\. The level for the top level folder is 1\. For example, for the path `mydataset/a/b`, if the level is set to 3, the table is created at location `mydataset/a/b`\.
 
 ![\[Specifying a table level in the crawler configuration.\]](http://docs.aws.amazon.com/glue/latest/dg/images/crawler-table-level2.png)
+
+When using CLI, API or SDK, the Table level configuration needs to be specified as a JSON string as below:
+
+```
+{
+  "Version": 1.0,
+  "Grouping": {
+    "TableLevelConfiguration": 2
+  }
+}
+```
