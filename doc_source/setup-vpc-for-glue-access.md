@@ -93,12 +93,16 @@ To enable AWS Glue components to communicate, you must set up access to your dat
    The inbound rule looks similar to this:  
    |Type|Protocol|Port Range|Source|
    |--|--|--|--|
-   |MYSQL/Aurora|TCP|3306|**Glue-sg**| 
+   |MYSQL/Aurora|TCP|3306|**Glue-sg**|\
+   
    or
+   
    |Type|Protocol|Port Range|Source|
    |--|--|--|--|
    |PostgreSQL|TCP|5432|**Glue-sg**| 
+   
    or
+   
    |Type|Protocol|Port Range|Source|
    |--|--|--|--|
    |Oracle-RDS|TCP|1521|**Glue-sg**| 
