@@ -27,7 +27,7 @@ To enable AWS Glue components to communicate, you must set up access to your dat
     |--|--|--|--|
     |All Traffic|ALL|ALL|0.0.0.0/0|
 
-   Or create a self\-referencing rule where **Type** `All TCP`, **Protocol** is `TCP`, **Port Range** includes all ports, and whose **Destination** is the same security group name as the **Group ID**\. If using an Amazon S3 VPC endpoint, also add an HTTPS rule for Amazon S3 access\. The *s3\-prefix\-list\-id* is required in the security group rule to allow traffic from the VPC to the Amazon S3 VPC endpoint\.
+   Or create a self\-referencing rule where **Type** `All TCP`, **Protocol** is `TCP`, **Port Range** includes all ports, and whose **Destination** is the same security group name as the **Group ID**\. If using an Amazon S3 VPC endpoint, also add an HTTPS rule for Amazon S3 access\. The *s3\-prefix\-list\-id* is required in the security group rule to allow traffic from the VPC to the Amazon S3 VPC endpoint\. See more [Documentation for Gateway VPC Endpoints](https://docs.aws.amazon.com/vpc/latest/privatelink/vpce-gateway.html)\.
 
    |Type|Protocol|Port Range|Destination|
    |--|--|--|--|
@@ -68,7 +68,7 @@ To enable AWS Glue components to communicate, you must set up access to your dat
     |--|--|--|--|
     |All Traffic|ALL|ALL|0.0.0.0/0|
 
-   Or if using an Amazon S3 VPC endpoint, also add an HTTPS rule for Amazon S3 access\. The s3\-prefix\-list\-id* is required in the security group rule to allow traffic from the VPC to the    Amazon S3 VPC endpoint\.
+   Or if using an Amazon S3 VPC endpoint, also add an HTTPS rule for Amazon S3 access\. The s3\-prefix\-list\-id* is required in the security group rule to allow traffic from the VPC to the    Amazon S3 VPC endpoint\. See more [Documentation for Gateway VPC Endpoints](https://docs.aws.amazon.com/vpc/latest/privatelink/vpce-gateway.html)\.
 
    |Type|Protocol|Port Range|Destination|
    |--|--|--|--|
@@ -113,7 +113,7 @@ To enable AWS Glue components to communicate, you must set up access to your dat
     |--|--|--|--|
     |All Traffic|ALL|ALL|0.0.0.0/0|
     
-   Or if using an Amazon S3 VPC endpoint, also add an HTTPS rule for Amazon S3 access\. The *s3\-prefix\-list\-id* is required in the security group rule to allow traffic from the VPC to the Amazon S3 VPC endpoint\.
+   Or if using an Amazon S3 VPC endpoint, also add an HTTPS rule for Amazon S3 access\. The *s3\-prefix\-list\-id* is required in the security group rule to allow traffic from the VPC to the Amazon S3 VPC endpoint\. See more [Documentation for Gateway VPC Endpoints](https://docs.aws.amazon.com/vpc/latest/privatelink/vpce-gateway.html)\.
    
    |Type|Protocol|Port Range|Destination|
    |--|--|--|--|
