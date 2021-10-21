@@ -1,6 +1,6 @@
 # Setting Up a VPC to Connect to JDBC Data Stores<a name="setup-vpc-for-glue-access"></a>
 
-To enable AWS Glue components to communicate, you must set up access to your data stores, such as Amazon Redshift and Amazon RDS\. In order for VPC Functionality to work AWS Glue needs to communicate between its components, create a security group with a self\-referencing inbound rule for all TCP ports\. By creating a self\-referencing rule, you can restrict the source to the same security group in the VPC, and it's not open to all networks\.
+To enable AWS Glue components to communicate, you must set up access to your data stores, such as Amazon Redshift and Amazon RDS\. In order for VPC Functionality to work AWS Glue needs to communicate between its components, create a security group with a self\-referencing inbound rule for all TCP ports\. By creating a self\-referencing rule, you can restrict the source to the same security group in the VPC, and it's not open to all networks\. See more about [Security Groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-rules.html)\.
 
 ## ****To set up access for AWS Glue****
 
