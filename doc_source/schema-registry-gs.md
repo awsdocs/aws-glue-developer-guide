@@ -31,7 +31,7 @@ To install the libraries on producers and consumers:
    <dependency>
        <groupId>software.amazon.glue</groupId>
        <artifactId>schema-registry-serde</artifactId>
-       <version>1.0.0</version>
+       <version>1.1.5</version>
    </dependency>
    ```
 
