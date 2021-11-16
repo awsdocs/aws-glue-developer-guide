@@ -146,7 +146,7 @@ The following example shows the permissions required by the grantee to run an ET
                 "glue:GetTable",
                 "glue:GetPartition" 
             ],
-            "Principal": {"AWS": ["arn:aws:iam:grantee-account-id:root"]},
+            "Principal": {"AWS": ["arn:aws:iam::grantee-account-id:root"]},
             "Resource": [
                 "arn:aws:glue:us-east-1:grantor-account-id:*"
             ]
