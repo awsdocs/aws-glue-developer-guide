@@ -197,7 +197,7 @@ If you aren't sure how to create an `.egg` or a `.whl` file from a Python librar
 
    ```
    aws glue create-job --name python-redshift-test-cli --role Role --command '{"Name" :  "pythonshell", "ScriptLocation" : "s3://MyBucket/python/library/redshift_test.py"}' 
-        --connections Connections="connection-name" --default-arguments '{"--extra-py-files" : ["s3://MyBucket/python/library/redshift_module-0.1-py2.7.egg", "s3://MyBucket/python/library/redshift_module-0.1-py2.7-none-any.whl"]}'
+        --connections Connections="connection-name" --default-arguments '{"--extra-py-files" : "s3://MyBucket/python/library/redshift_module-0.1-py2.7.egg, s3://MyBucket/python/library/redshift_module-0.1-py2.7-none-any.whl"}'
    ```
 
    When the job runs, the script prints the rows created in the *table\_name* table in the Amazon Redshift cluster\.
