@@ -42,7 +42,7 @@ You can fix the processing of the multiple files by using the *grouping* feature
 To check the memory profile of the AWS Glue job, profile the following code with grouping enabled:
 
 ```
-df = glueContext.create_dynamic_frame_from_options("s3", {'paths': ["s3://input_path"], "recurse":True, 'groupFiles': 'inPartition'}, format="json")
+df = glueContext.create_dynamic_frame.from_options("s3", {'paths': ["s3://input_path"], "recurse":True, 'groupFiles': 'inPartition'}, format="json")
 datasink = glueContext.write_dynamic_frame.from_options(frame = df, connection_type = "s3", connection_options = {"path": output_path}, format = "parquet", transformation_ctx = "datasink")
 ```
 
