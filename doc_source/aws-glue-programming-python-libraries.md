@@ -58,7 +58,6 @@ AWS Glue version 2\.0 supports the following python modules out of the box:
 + s3transfer==0\.3\.3
 + scikit\-learn==0\.22\.1
 + scipy==1\.4\.1
-+ setuptools==45\.2\.0 
 + setuptools==45\.2\.0
 + six==1\.14\.0
 + statsmodels==0\.11\.1
