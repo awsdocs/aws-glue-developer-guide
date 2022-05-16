@@ -65,7 +65,6 @@ The structure used to create or update a database\.
 
   These key\-value pairs define parameters and properties of the database\.
 
-  These key\-value pairs define parameters and properties of the database\.
 + `CreateTableDefaultPermissions` – An array of [PrincipalPermissions](#aws-glue-api-catalog-databases-PrincipalPermissions) objects\.
 
   Creates a set of default permissions on the table for principals\. 
