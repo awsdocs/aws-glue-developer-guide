@@ -5,6 +5,7 @@ AWS Glue lets you install additional Python modules and libraries for use with A
 **Topics**
 + [Installing Additional Python Modules in AWS Glue 2\.0 with pip](#addl-python-modules-support)
 + [Python Modules Already Provided in AWS Glue Version 2\.0](#glue20-modules-provided)
++ [Python Modules Already Provided in AWS Glue Version 3\.0](#glue30-modules-provided)
 + [Zipping Libraries for Inclusion](#aws-glue-programming-python-libraries-zipping)
 + [Loading Python Libraries in a Development Endpoint](#aws-glue-programming-python-libraries-dev-endpoint)
 + [Using Python Libraries in a Job or JobRun](#aws-glue-programming-python-libraries-job)
@@ -66,6 +67,79 @@ AWS Glue version 2\.0 supports the following python modules out of the box:
 + sympy==1\.5\.1
 + tbats==1\.0\.9
 + urllib3==1\.25\.8
+
+## Python Modules Already Provided in AWS Glue Version 3\.0<a name="glue30-modules-provided"></a>
+
+AWS Glue version 3\.0 supports the following python modules out of the box:
++ aiobotocore==1\.4\.2
++ aiohttp==3\.8\.1
++ aioitertools==0\.10\.0
++ aiosignal==1\.2\.0
++ async-timeout==4\.0\.2
++ asynctest==0\.13\.0
++ attrs==21\.4\.0
++ avro-python3==1\.10\.2
++ awsgluecustomconnectorpython==1\.0
++ awsgluedataplanepython==1\.0
++ awsgluemlentitydetectorwrapperpython==1\.0
++ boto3==1\.18\.50
++ botocore==1\.21\.50
++ certifi==2021\.5\.30
++ chardet==3\.0\.4
++ charset-normalizer==2\.1\.0
++ click==8\.1\.3
++ cycler==0\.10\.0
++ cython==0\.29\.4
++ docutils==0\.17\.1
++ enum34==1\.1\.10
++ frozenlist==1\.3\.0
++ fsspec==2021\.8\.1
++ idna==2\.10
++ importlib-metadata==4\.12\.0
++ jmespath==0\.10\.0
++ joblib==1\.0\.1
++ kiwisolver==1\.3\.2
++ matplotlib==3\.4\.3
++ mpmath==1\.2\.1
++ multidict==6\.0\.2
++ nltk==3\.6\.3
++ numpy==1\.19\.5
++ packaging==21\.3
++ pandas==1\.3\.2
++ patsy==0\.5\.1
++ pillow==9\.1\.1
++ pip==22\.1\.2
++ pmdarima==1\.8\.2
++ ptvsd==4\.3\.2
++ pyarrow==5\.0\.0
++ pydevd==2\.5\.0
++ pyhocon==0\.3\.58
++ pymysql==1\.0\.2
++ pyparsing==2\.4\.7
++ python-dateutil==2\.8\.2
++ pytz==2021\.1
++ pyyaml==5\.4\.1
++ regex==2022\.6\.2
++ requests==2\.23\.0
++ s3fs==2021\.8\.1
++ s3transfer==0\.5\.0
++ scikit-learn==0\.24\.2
++ scipy==1\.7\.1
++ setuptools==49\.1\.3
++ six==1\.16\.0
++ spark==1\.0
++ statsmodels==0\.12\.2
++ subprocess32==3\.5\.4
++ sympy==1\.8
++ tbats==1\.1\.0
++ threadpoolctl==3\.1\.0
++ tqdm==4\.64\.0
++ typing-extensions==4\.2\.0
++ urllib3==1\.25\.11
++ wheel==0\.37\.0
++ wrapt==1\.14\.1
++ yarl==1\.7\.2
++ zipp==3\.8\.0
 
 ## Zipping Libraries for Inclusion<a name="aws-glue-programming-python-libraries-zipping"></a>
 
