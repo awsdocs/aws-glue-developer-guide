@@ -77,7 +77,7 @@ base64_bytes = base64.b64encode(sample_string_bytes)
 base64_string = base64_bytes.decode("ascii") 
 ...
 glue_client.start_job_run(JobName = "gluejobname", Arguments={
-"--my_curly_braces_string": base64_bytes})
+"--my_curly_braces_string": base64_string})
 ...
 sample_string_bytes = base64.b64decode(base64_bytes) 
 sample_string = sample_string_bytes.decode("ascii") 
