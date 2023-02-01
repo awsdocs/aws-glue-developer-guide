@@ -26,7 +26,7 @@ You can use an AWS CloudFormation template to start the Apache Spark history ser
       Provide the following information:
       + **IP address range** — The IP address range that can be used to view the Spark UI\. If you want to restrict access from a specific IP address range, you should use a custom value\. 
       + **History server port** — The port for the Spark UI\. You can use the default value\.
-      + **Event log directory** — Choose the location where Spark event logs are stored from the AWS Glue job or development endpoints\. You must use **s3a://** for the event logs path scheme\.
+      + **Event log directory** — Choose the location where Spark event logs are stored from the AWS Glue job or development endpoints\. You must use **s3a://** for the event logs path scheme, without a trailing **/**\.
       + **Spark package location** — You can use the default value\.
       + **Keystore path** — SSL/TLS keystore path for HTTPS\. If you want to use a custom keystore file, you can specify the S3 path `s3://path_to_your_keystore_file` here\. If you leave this parameter empty, a self\-signed certificate based keystore is generated and used\.
 **Note**  
