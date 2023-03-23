@@ -154,7 +154,7 @@ Returns a `DynamicFrame` that is created from an Apache Spark Resilient Distribu
 **`create_dynamic_frame_from_catalog(database, table_name, redshift_tmp_dir, transformation_ctx = "", push_down_predicate= "", additional_options = {}, catalog_id = None)`**
 
 Returns a `DynamicFrame` that is created using a Data Catalog database and table name\.
-+ `Database` – The database to read from\.
++ `database` – The database to read from\.
 + `table_name` – The name of the table to read from\.
 + `redshift_tmp_dir` – An Amazon Redshift temporary directory to use \(optional\)\.
 + `transformation_ctx` – The transformation context to use \(optional\)\.
