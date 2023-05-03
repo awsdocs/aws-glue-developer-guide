@@ -72,7 +72,7 @@ If you're running AWS Glue ETL jobs that read files or partitions from Amazon S3
   + `accountId` – The Amazon Web Services account ID to run the transition transform\. Mandatory for this transform\.
   + `roleArn` – The AWS role to run the transition transform\. Mandatory for this transform\.
 + `transformation_ctx` – The transformation context to use \(optional\)\. Used in the manifest file path\.
-+ `catalog_id` – The catalog ID of the Data Catalog being accessed \(the account ID of the Data Catalog\)\. Set to `None` by default\. `None` defaults to the catalog ID of the calling account in the service\.
++ `catalog_id` – The catalog ID of the Data Catalog being accessed \(the account ID of the Data Catalog\) as string type\. Set to `None` by default\. `None` defaults to the catalog ID of the calling account in the service\.
 
 **Example**  
 
